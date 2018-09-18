@@ -122,7 +122,7 @@ namespace System.Management.Automation
             else
             {
                 var stringExpandableToken = tokenAtCursor as StringExpandableToken;
-                if (stringExpandableToken?.NestedTokens != null)
+                if ((stringExpandableToken == null) ? false : stringExpandableToken.NestedTokens != null)
                 {
                     tokenAtCursor = InterstingTokenAtCursorOrDefault(stringExpandableToken.NestedTokens, _cursorPosition) ?? stringExpandableToken;
                 }

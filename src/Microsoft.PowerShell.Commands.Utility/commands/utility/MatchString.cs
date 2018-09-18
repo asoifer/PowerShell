@@ -61,12 +61,16 @@ namespace Microsoft.PowerShell.Commands
         /// </summary>
         public object Clone()
         {
+            var t1 = (string[])(PreContext == null ? null : PreContext.Clone());
+            var t2 = (string[])(PostContext == null ? null : PostContext.Clone());
+            var t3 = (string[])(DisplayPreContext == null ? null : DisplayPreContext.Clone());
+            var t4 = (string[])(DisplayPostContext == null ? null : DisplayPostContext.Clone());
             return new MatchInfoContext()
             {
-                PreContext = (string[])PreContext?.Clone(),
-                PostContext = (string[])PostContext?.Clone(),
-                DisplayPreContext = (string[])DisplayPreContext?.Clone(),
-                DisplayPostContext = (string[])DisplayPostContext?.Clone()
+                PreContext = t1,
+                PostContext = t2,
+                DisplayPreContext = t3,
+                DisplayPostContext = t4
             };
         }
     }

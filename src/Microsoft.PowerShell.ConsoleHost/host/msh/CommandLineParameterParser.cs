@@ -475,7 +475,7 @@ namespace Microsoft.PowerShell
             // Current user policy takes precedence.
             var consoleSessionSetting = Utils.GetPolicySetting<ConsoleSessionConfiguration>(Utils.CurrentUserThenSystemWideConfig);
 
-            return (consoleSessionSetting?.EnableConsoleSessionConfiguration == true && !string.IsNullOrEmpty(consoleSessionSetting?.ConsoleSessionConfigurationName)) ? 
+            return ((consoleSessionSetting == null ? false : consoleSessionSetting.EnableConsoleSessionConfiguration == true) && !string.IsNullOrEmpty(consoleSessionSetting == null ? null : consoleSessionSetting.ConsoleSessionConfigurationName)) ? 
                     consoleSessionSetting.ConsoleSessionConfigurationName : string.Empty;
         }
 

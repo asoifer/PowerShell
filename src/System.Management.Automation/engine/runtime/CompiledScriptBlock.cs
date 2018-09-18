@@ -1263,13 +1263,13 @@ namespace System.Management.Automation
         internal static void LogScriptBlockCreation(ScriptBlock scriptBlock, bool force)
         {
             ScriptBlockLogging logSetting = GetScriptBlockLoggingSetting();
-            if (force || logSetting?.EnableScriptBlockLogging == true)
+            if (force || (logSetting == null ? false : logSetting.EnableScriptBlockLogging == true))
             {
                 if (!scriptBlock.HasLogged || InternalTestHooks.ForceScriptBlockLogging)
                 {
                     // If script block logging is explicitly disabled, or it's from a trusted
                     // file or internal, skip logging.
-                    if (logSetting?.EnableScriptBlockLogging == false ||
+                    if (((logSetting == null) ? false : logSetting.EnableScriptBlockLogging == false) ||
                         scriptBlock.ScriptBlockData.IsProductCode)
                     {
                         return;
@@ -1819,7 +1819,8 @@ namespace System.Management.Automation
             // properly analyzed the script block's security.
             LogScriptBlockCreation(scriptBlock, forceLogCreation);
 
-            if (GetScriptBlockLoggingSetting()?.EnableScriptBlockInvocationLogging == true)
+            var temp = GetScriptBlockLoggingSetting();
+            if (temp == null ? false : (temp.EnableScriptBlockInvocationLogging == true))
             {
                 PSEtwLog.LogOperationalVerbose(PSEventId.ScriptBlock_Invoke_Start_Detail, PSOpcode.Create, PSTask.CommandStart, PSKeyword.UseAlwaysOperational,
                     scriptBlock.Id.ToString(), runspaceId.ToString());
@@ -1828,7 +1829,8 @@ namespace System.Management.Automation
 
         internal static void LogScriptBlockEnd(ScriptBlock scriptBlock, Guid runspaceId)
         {
-            if (GetScriptBlockLoggingSetting()?.EnableScriptBlockInvocationLogging == true)
+            var temp = GetScriptBlockLoggingSetting();
+            if (temp == null ? false : temp.EnableScriptBlockInvocationLogging == true)
             {
                 PSEtwLog.LogOperationalVerbose(PSEventId.ScriptBlock_Invoke_Complete_Detail, PSOpcode.Create, PSTask.CommandStop, PSKeyword.UseAlwaysOperational,
                     scriptBlock.Id.ToString(), runspaceId.ToString());

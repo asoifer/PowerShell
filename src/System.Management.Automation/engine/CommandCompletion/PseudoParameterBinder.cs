@@ -1228,7 +1228,8 @@ namespace System.Management.Automation.Language
                         var expressionArgument = _commandElements[commandIndex] as ExpressionAst;
                         if (expressionArgument != null)
                         {
-                            argumentsToGetDynamicParameters?.Add(expressionArgument.Extent.Text);
+                            if (argumentsToGetDynamicParameters != null)
+                                argumentsToGetDynamicParameters.Add(expressionArgument.Extent.Text);
 
                             _arguments.Add(new AstPair(null, expressionArgument));
                         }

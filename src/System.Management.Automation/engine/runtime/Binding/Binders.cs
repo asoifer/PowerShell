@@ -465,7 +465,7 @@ namespace System.Management.Automation.Language
                 // Execution context might be null if we're called from a thread with no runspace (e.g. a PSObject
                 // is used in some C# w/ dynamic). This is sometimes fine, we don't always need a runspace to access
                 // properties.
-                Expression test = context?.LanguageMode == PSLanguageMode.ConstrainedLanguage
+                Expression test = (context == null) ? null : context.LanguageMode == PSLanguageMode.ConstrainedLanguage
                     ? Expression.AndAlso(
                           Expression.NotEqual(tmp, ExpressionCache.NullExecutionContext),
                           Expression.Equal(langModeFromContext, constrainedLanguageMode))

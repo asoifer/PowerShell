@@ -119,7 +119,7 @@ namespace Microsoft.PowerShell.Commands
                                 SessionState.Path.CurrentLocation.ProviderPath);
                             // Do not insert './' if result path is not relative
                             if (!adjustedPath.StartsWith(
-                                    currentPath.Drive?.Root ?? currentPath.Path, StringComparison.OrdinalIgnoreCase) &&
+                                    (currentPath.Drive == null ? null : currentPath.Drive.Root) ?? currentPath.Path, StringComparison.OrdinalIgnoreCase) &&
                                 !adjustedPath.StartsWith(".", StringComparison.OrdinalIgnoreCase))
                             {
                                 adjustedPath = SessionState.Path.Combine(".", adjustedPath);

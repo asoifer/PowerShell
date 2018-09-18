@@ -766,7 +766,7 @@ namespace Microsoft.PowerShell.Commands
                                         reply.Address.ToString(),
                                         reply.Buffer.Length,
                                         reply.RoundtripTime,
-                                        reply.Options?.Ttl);
+                                        reply.Options == null ? null : (int?)reply.Options.Ttl);
             }
 
             WriteInformation(msg, s_PSHostTag);

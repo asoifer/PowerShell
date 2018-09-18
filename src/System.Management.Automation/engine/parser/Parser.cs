@@ -7333,7 +7333,8 @@ namespace System.Management.Automation.Language
             bool msgCorrespondsToString = false;
             foreach (Type resxType in resxTypes)
             {
-                string resxErrorBody = resxType.GetProperty(errorId, BindingFlags.Static | BindingFlags.NonPublic)?.GetValue(null) as string;
+                var temp = resxType.GetProperty(errorId, BindingFlags.Static | BindingFlags.NonPublic);
+                string resxErrorBody = temp == null ? null : temp.GetValue(null) as string;
                 if (String.Equals(errorMsg, resxErrorBody, StringComparison.Ordinal))
                 {
                     msgCorrespondsToString = true;

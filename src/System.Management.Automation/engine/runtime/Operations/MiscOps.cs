@@ -410,8 +410,8 @@ namespace System.Management.Automation
                                                   commandRedirection, context);
                 }
 
-                var cmdletInfo = commandProcessor?.CommandInfo as CmdletInfo;
-                if (cmdletInfo?.ImplementingType == typeof(OutNullCommand))
+                var cmdletInfo = (commandProcessor == null) ? null : commandProcessor.CommandInfo as CmdletInfo;
+                if ((cmdletInfo == null) ? false : cmdletInfo.ImplementingType == typeof(OutNullCommand))
                 {
                     var commandsCount = pipelineProcessor.Commands.Count;
                     if (commandsCount == 1)

@@ -4408,7 +4408,8 @@ namespace System.Management.Automation
             else
             {
                 var runningPipe = runningCmd as Pipeline;
-                runningPipe?.ResumeIncomingData();
+                if (runningPipe != null)
+                    runningPipe.ResumeIncomingData();
             }
         }
 

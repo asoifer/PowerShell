@@ -144,7 +144,8 @@ namespace Microsoft.PowerShell.Commands
                 }
                 finally
                 {
-                    openfilestream?.Dispose();
+                    if (openfilestream != null)
+                        openfilestream.Dispose();
                 }
             }
         }

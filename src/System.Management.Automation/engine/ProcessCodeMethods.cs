@@ -41,7 +41,7 @@ namespace Microsoft.PowerShell {
         public static object GetParentProcess(PSObject obj)
         {
             var process = PSObject.Base(obj) as Process;
-            return process?.GetParent();
+            return process == null ? null : process.GetParent();
         }
 
         /// <summary>

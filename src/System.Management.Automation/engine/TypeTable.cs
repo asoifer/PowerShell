@@ -3514,7 +3514,7 @@ namespace System.Management.Automation.Runspaces
                     if (!_extendedMembers.TryGetValue(type, out var typeMembers))
                         continue;
                     PSMemberSet settings = typeMembers[PSStandardMembers] as PSMemberSet;
-                    PSPropertySet typeProperties = settings?.Members[PropertySerializationSet] as PSPropertySet;
+                    PSPropertySet typeProperties = settings == null ? null : settings.Members[PropertySerializationSet] as PSPropertySet;
                     if (typeProperties == null)
                         continue;
                     foreach (string reference in typeProperties.ReferencedPropertyNames)

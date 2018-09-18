@@ -384,7 +384,7 @@ namespace Microsoft.PowerShell.Commands
 
                         // Try to get the response encoding from the ContentType header.
                         Encoding encoding = null;
-                        string charSet = response.Content.Headers.ContentType?.CharSet;
+                        string charSet = response.Content.Headers.ContentType == null ? null : response.Content.Headers.ContentType.CharSet;
                         if (!string.IsNullOrEmpty(charSet))
                         {
                             // NOTE: Don't use ContentHelper.GetEncoding; it returns a

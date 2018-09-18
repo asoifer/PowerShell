@@ -107,18 +107,19 @@ namespace System.Management.Automation
                         // can properly reconstruct the correct command line.
                         bool usedQuotes = false;
                         ArrayLiteralAst arrayLiteralAst = null;
-                        switch (parameter?.ArgumentAst)
-                        {
-                        case StringConstantExpressionAst sce:
-                            usedQuotes = sce.StringConstantType != StringConstantType.BareWord;
-                            break;
-                        case ExpandableStringExpressionAst ese:
-                            usedQuotes = ese.StringConstantType != StringConstantType.BareWord;
-                            break;
-                        case ArrayLiteralAst ala:
-                            arrayLiteralAst = ala;
-                            break;
-                        }
+                        if (parameter != null)
+                            switch (parameter.ArgumentAst)
+                            {
+                            case StringConstantExpressionAst sce:
+                                usedQuotes = sce.StringConstantType != StringConstantType.BareWord;
+                                break;
+                            case ExpandableStringExpressionAst ese:
+                                usedQuotes = ese.StringConstantType != StringConstantType.BareWord;
+                                break;
+                            case ArrayLiteralAst ala:
+                                arrayLiteralAst = ala;
+                                break;
+                            }
 
                         appendOneNativeArgument(Context, argValue,
                             arrayLiteralAst, sawVerbatimArgumentMarker, usedQuotes);
@@ -269,7 +270,7 @@ namespace System.Management.Automation
                     }
 
                     // Expand paths, but only from the file system.
-                    if (paths?.Count > 0 && paths.All(p => p.BaseObject is FileSystemInfo))
+                    if (paths == null ? false : (paths.Count > 0) && paths.All(p => p.BaseObject is FileSystemInfo))
                     {
                         var sep = string.Empty;
                         foreach (var path in paths)

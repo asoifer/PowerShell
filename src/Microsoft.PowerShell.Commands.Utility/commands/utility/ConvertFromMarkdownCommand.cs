@@ -71,7 +71,7 @@ namespace Microsoft.PowerShell.Commands
                 throw new InvalidOperationException();
             }
 
-            bool? supportsVT100 = this.Host?.UI.SupportsVirtualTerminal;
+            bool? supportsVT100 = this.Host == null ? null : (bool?)this.Host.UI.SupportsVirtualTerminal;
 
             // supportsVT100 == null if the host is null.
             // supportsVT100 == false if host does not support VT100.
@@ -98,9 +98,10 @@ namespace Microsoft.PowerShell.Commands
 
                     if (baseObj is FileInfo fileInfo)
                     {
+                        var temp = ReadContentFromFile(fileInfo.FullName);
                         WriteObject(
                             MarkdownConverter.Convert(
-                                ReadContentFromFile(fileInfo.FullName)?.Result,
+                                temp == null ? null : temp.Result,
                                 conversionType,
                                 mdOption));
                     }
@@ -140,9 +141,10 @@ namespace Microsoft.PowerShell.Commands
 
                 foreach (var resolvedPath in resolvedPaths)
                 {
+                    var temp = ReadContentFromFile(resolvedPath);
                     WriteObject(
                             MarkdownConverter.Convert(
-                                ReadContentFromFile(resolvedPath)?.Result,
+                                temp == null ? null : temp.Result,
                                 conversionType,
                                 optionInfo));
                 }

@@ -452,7 +452,8 @@ namespace System.Management.Automation
         [SuppressMessage("Microsoft.Naming", "CA1720:IdentifiersShouldNotContainTypeNames", MessageId = "obj", Justification = "Since V1 code is already shipped, excluding this message.")]
         public static bool IsObjectEnumerable(object obj)
         {
-            return IsTypeEnumerable(PSObject.Base(obj)?.GetType());
+            var temp = PSObject.Base(obj);
+            return IsTypeEnumerable(temp == null ? null : temp.GetType());
         }
 
         /// <summary>

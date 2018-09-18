@@ -144,7 +144,7 @@ namespace Microsoft.PowerShell.Commands
             StringBuilder sb = new StringBuilder();
             foreach (ObjectCommandPropertyValue propValue in propValues)
             {
-                var propValuePropertyValue = propValue?.PropertyValue;
+                var propValuePropertyValue = propValue == null ? null : propValue.PropertyValue;
                 if (propValuePropertyValue != null)
                 {
                     if (propValuePropertyValue is ICollection propertyValueItems)
@@ -444,7 +444,7 @@ namespace Microsoft.PowerShell.Commands
         {
             if (_propertyTypesCandidate == null)
             {
-                _propertyTypesCandidate = currentEntryOrderValues.Select(c => PSObject.Base(c.PropertyValue)?.GetType()).ToArray();
+                _propertyTypesCandidate = currentEntryOrderValues.Select(c => PSObject.Base(c.PropertyValue) == null ? null : PSObject.Base(c.PropertyValue).GetType()).ToArray();
                 return;
             }
 
@@ -460,7 +460,8 @@ namespace Microsoft.PowerShell.Commands
             for (int i = 0; i < _propertyTypesCandidate.Length; i++)
             {
                 var candidateType = _propertyTypesCandidate[i];
-                var propertyType = PSObject.Base(currentEntryOrderValues[i].PropertyValue)?.GetType();
+                var temp = PSObject.Base(currentEntryOrderValues[i].PropertyValue);
+                var propertyType = temp == null ? null : temp.GetType();
                 if (propertyType == null)
                 {
                     // we ignore properties without values. We can always compare against null.

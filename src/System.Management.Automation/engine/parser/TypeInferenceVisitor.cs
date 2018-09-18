@@ -467,7 +467,7 @@ namespace System.Management.Automation
         private static bool IsConstructor(object member)
         {
             var psMethod = member as PSMethod;
-            var methodCacheEntry = psMethod?.adapterData as DotNetAdapter.MethodCacheEntry;
+            var methodCacheEntry = ((psMethod == null) ? null : psMethod.adapterData) as DotNetAdapter.MethodCacheEntry;
             return methodCacheEntry != null && methodCacheEntry.methodInformationStructures[0].method.IsConstructor;
         }
     }
@@ -907,7 +907,7 @@ namespace System.Management.Automation
             PseudoBindingInfo pseudoBinding = new PseudoParameterBinder()
             .DoPseudoParameterBinding(commandAst, null, null, PseudoParameterBinder.BindingType.ParameterCompletion);
 
-            if (pseudoBinding?.CommandInfo == null)
+            if ((pseudoBinding == null) ? false : pseudoBinding.CommandInfo == null)
             {
                 return;
             }
@@ -924,8 +924,9 @@ namespace System.Management.Automation
             // If you specified - Path, the list of OutputType can be refined, but we have to make a copy of the CmdletInfo object this way to get that refinement.
             var commandInfo = pseudoBinding.CommandInfo;
             var pathArgumentPair = pathArgument as AstPair;
-            if (pathArgumentPair?.Argument is StringConstantExpressionAst ast)
+            if ((pathArgumentPair == null) ? false : pathArgumentPair.Argument is StringConstantExpressionAst)
             {
+                var ast = pathArgumentPair.Argument as StringConstantExpressionAst;
                 var pathValue = ast.Value;
                 try
                 {
@@ -1045,7 +1046,7 @@ namespace System.Management.Automation
 
                 foreach (var t in InferTypes(previousPipelineElement))
                 {
-                    var memberName = (((AstPair)argument).Argument as StringConstantExpressionAst)?.Value;
+                    var memberName = (((AstPair)argument).Argument as StringConstantExpressionAst) == null ? null : (((AstPair)argument).Argument as StringConstantExpressionAst).Value;
 
                     if (memberName != null)
                     {
@@ -1115,7 +1116,7 @@ namespace System.Management.Automation
             {
                 foreach (var t in InferTypes(previousPipelineElement))
                 {
-                    var memberName = (((AstPair)expandedPropertyArgument).Argument as StringConstantExpressionAst)?.Value;
+                    var memberName = (((AstPair)expandedPropertyArgument).Argument as StringConstantExpressionAst) == null ? null : (((AstPair)expandedPropertyArgument).Argument as StringConstantExpressionAst).Value;
 
                     if (memberName != null)
                     {
@@ -1136,8 +1137,9 @@ namespace System.Management.Automation
             if (pseudoBinding.BoundArguments.TryGetValue("TypeName", out var typeArgument))
             {
                 var typeArgumentPair = typeArgument as AstPair;
-                if (typeArgumentPair?.Argument is StringConstantExpressionAst stringConstantExpr)
+                if (typeArgumentPair == null ? false : typeArgumentPair.Argument is StringConstantExpressionAst)
                 {
+                    var stringConstantExpr = typeArgumentPair.Argument as StringConstantExpressionAst;
                     return new PSTypeName(stringConstantExpr.Value);
                 }
             }
@@ -1409,7 +1411,7 @@ namespace System.Management.Automation
                 if (type == null)
                 {
                     var typeName = exprAsType.TypeName as TypeName;
-                    if (typeName?._typeDefinitionAst == null)
+                    if ((typeName == null) ? false : typeName._typeDefinitionAst == null)
                     {
                         return null;
                     }
@@ -1572,12 +1574,12 @@ namespace System.Management.Automation
 
             // Look for our variable as a parameter or on the lhs of an assignment - hopefully we'll find either
             // a type constraint or at least we can use the rhs to infer the type.
-            while (parent?.Parent != null)
+            while ((parent == null) ? false : parent.Parent != null)
             {
                 parent = parent.Parent;
             }
 
-            if (parent?.Parent is FunctionDefinitionAst)
+            if ((parent == null) ? false : parent.Parent is FunctionDefinitionAst)
             {
                 parent = parent.Parent;
             }
@@ -1719,7 +1721,7 @@ namespace System.Management.Automation
         private void GetInferredTypeFromScriptBlockParameter(AstParameterArgumentPair argument, List<PSTypeName> inferredTypes)
         {
             var argumentPair = argument as AstPair;
-            var scriptBlockExpressionAst = argumentPair?.Argument as ScriptBlockExpressionAst;
+            var scriptBlockExpressionAst = (argumentPair == null) ? null : argumentPair.Argument as ScriptBlockExpressionAst;
             if (scriptBlockExpressionAst == null)
             {
                 return;

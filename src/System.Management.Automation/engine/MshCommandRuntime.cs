@@ -2252,7 +2252,7 @@ namespace System.Management.Automation
             {
                 // Only generate these exceptions if a pipeline has already been declared as the 'writing' pipeline.
                 // Otherwise, these are probably infrastructure messages and can be ignored.
-                if (this.PipelineProcessor?._permittedToWrite != null)
+                if (this.PipelineProcessor == null ? false : this.PipelineProcessor._permittedToWrite != null)
                 {
                     throw PSTraceSource.NewInvalidOperationException(
                         PipelineStrings.WriteNotPermitted);
@@ -3696,7 +3696,8 @@ namespace System.Management.Automation
                 this.OutputPipe.RemovePipelineVariable();
                 // '_state' could be null when a 'DynamicParam' block runs because the 'DynamicParam' block runs in 'DoPrepare',
                 // before 'PipelineProcessor.SetupParameterVariables' is called, where '_state' is initialized.
-                _state?.PSVariable.Remove(this.PipelineVariable);
+                if (_state != null)
+                    _state.PSVariable.Remove(this.PipelineVariable);
             }
         }
     }

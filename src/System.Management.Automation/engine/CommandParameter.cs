@@ -68,7 +68,7 @@ namespace System.Management.Automation
         /// </summary>
         internal Ast ParameterAst
         {
-            get => _parameter?.ast;
+            get => _parameter == null ? null : _parameter.ast;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace System.Management.Automation
         /// </summary>
         internal IScriptExtent ParameterExtent
         {
-            get => ParameterAst?.Extent ?? PositionUtilities.EmptyExtent;
+            get => (ParameterAst == null ? null : ParameterAst.Extent) ?? PositionUtilities.EmptyExtent;
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace System.Management.Automation
         /// </summary>
         internal Ast ArgumentAst
         {
-            get => _argument?.ast;
+            get => _argument == null ? null : _argument.ast;
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace System.Management.Automation
         /// </summary>
         internal IScriptExtent ArgumentExtent
         {
-            get => ArgumentAst?.Extent ?? PositionUtilities.EmptyExtent;
+            get => (ArgumentAst == null ? null : ArgumentAst.Extent) ?? PositionUtilities.EmptyExtent;
         }
 
         /// <summary>

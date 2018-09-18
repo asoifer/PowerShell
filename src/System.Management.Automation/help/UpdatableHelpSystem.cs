@@ -1665,7 +1665,7 @@ namespace System.Management.Automation.Help
         internal string GetDefaultSourcePath()
         {
             var updatableHelpSetting = Utils.GetPolicySetting<UpdatableHelp>(Utils.SystemWideOnlyConfig);
-            string defaultSourcePath = updatableHelpSetting?.DefaultSourcePath;
+            string defaultSourcePath = updatableHelpSetting == null ? null : updatableHelpSetting.DefaultSourcePath;
             return String.IsNullOrEmpty(defaultSourcePath) ? null : defaultSourcePath;
         }
 
