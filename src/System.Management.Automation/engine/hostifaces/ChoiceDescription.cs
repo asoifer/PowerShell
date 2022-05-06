@@ -5,138 +5,303 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation.Host
 {
-    /// <summary>
-    /// Provides a description of a choice for use by <seealso cref="System.Management.Automation.Host.PSHostUserInterface.PromptForChoice"/>.
-    /// <!--Used by the Msh engine to describe cmdlet parameters.-->
-    /// </summary>
-
     public sealed
-    class ChoiceDescription
+        class ChoiceDescription
     {
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell compatibility with Windows PowerShell
+        private readonly string label;
 
-        private readonly string label = null;
-        private string helpMessage = string.Empty;
-
-        #endregion
-
-        /// <summary>
-        /// Initializes an new instance of ChoiceDescription and defines the Label value.
-        /// </summary>
-        /// <param name="label">
-        /// The label to identify this field description
-        /// </param>
-        /// <exception cref="System.Management.Automation.PSArgumentException">
-        /// <paramref name="label"/> is null or empty.
-        /// </exception>
+        private string helpMessage;
 
         public
-        ChoiceDescription(string label)
+                ChoiceDescription(string label)
         {
-            // the only required parameter is label.
-
-            if (string.IsNullOrEmpty(label))
+            try
             {
-                // "label" is not localizable
-                throw PSTraceSource.NewArgumentException("label", DescriptionsStrings.NullOrEmptyErrorTemplate, "label");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1453, 1220, 1626);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 704, 716);
+                this.label = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 742, 768);
+                this.helpMessage = string.Empty;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 1348, 1580) || true) && (f_1453_1352_1379(label))
+                )
 
-            this.label = label;
-        }
-
-        /// <summary>
-        /// Initializes an new instance of ChoiceDescription and defines the Label and HelpMessage values.
-        /// </summary>
-        /// <param name="label">
-        /// The label to identify this field description.
-        /// </param>
-        /// <param name="helpMessage">
-        /// The help message for this field.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PSArgumentException">
-        /// <paramref name="label"/> is null or empty.
-        /// </exception>
-        /// <exception cref="System.Management.Automation.PSArgumentNullException">
-        /// <paramref name="helpMessage"/> is null.
-        /// </exception>
-
-        public
-        ChoiceDescription(string label, string helpMessage)
-        {
-            // the only required parameter is label.
-
-            if (string.IsNullOrEmpty(label))
-            {
-                // "label" is not localizable
-                throw PSTraceSource.NewArgumentException("label", DescriptionsStrings.NullOrEmptyErrorTemplate, "label");
-            }
-
-            if (helpMessage == null)
-            {
-                // "helpMessage" is not localizable
-                throw PSTraceSource.NewArgumentNullException("helpMessage");
-            }
-
-            this.label = label;
-            this.helpMessage = helpMessage;
-        }
-
-        /// <summary>
-        /// Gets a short, human-presentable message to describe and identify the choice.  Think Button label.
-        /// </summary>
-        /// <remarks>
-        /// Note that the special character &amp; (ampersand) may be embedded in the label string to identify the next character in the label
-        /// as a "hot key" (aka "keyboard accelerator") that the Console.PromptForChoice implementation may use to allow the user to
-        /// quickly set input focus to this choice.  The implementation of <seealso cref="System.Management.Automation.Host.PSHostUserInterface.PromptForChoice"/>
-        /// is responsible for parsing the label string for this special character and rendering it accordingly.
-        ///
-        /// For examples, a choice named "Yes to All" might have "Yes to &amp;All" as it's label.
-        /// </remarks>
-
-        public
-        string
-        Label
-        {
-            get
-            {
-                Dbg.Assert(this.label != null, "label should not be null");
-
-                return this.label;
-            }
-        }
-
-        /// <summary>
-        /// Gets and sets the help message for this field.
-        /// </summary>
-        /// <exception cref="System.Management.Automation.PSArgumentNullException">
-        /// Set to null.
-        /// </exception>
-        /// <remarks>
-        /// This should be a few sentences to describe the field, suitable for presentation as a tool tip.
-        /// Avoid placing including formatting characters such as newline and tab.
-        /// </remarks>
-
-        public
-        string
-        HelpMessage
-        {
-            get
-            {
-                Dbg.Assert(this.helpMessage != null, "helpMessage should not be null");
-
-                return this.helpMessage;
-            }
-
-            set
-            {
-                if (value == null)
                 {
-                    throw PSTraceSource.NewArgumentNullException("value");
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1453, 1348, 1580);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 1460, 1565);
+
+                    throw f_1453_1466_1564("label", f_1453_1510_1554(), "label");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1453, 1348, 1580);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 1596, 1615);
+
+                this.label = label;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1453, 1220, 1626);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1453, 1220, 1626);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1453, 1220, 1626);
+            }
+        }
+
+        public
+                ChoiceDescription(string label, string helpMessage)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1453, 2345, 3017);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 704, 716);
+                this.label = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 742, 768);
+                this.helpMessage = string.Empty;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 2493, 2725) || true) && (f_1453_2497_2524(label))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1453, 2493, 2725);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 2605, 2710);
+
+                    throw f_1453_2611_2709("label", f_1453_2655_2699(), "label");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1453, 2493, 2725);
                 }
 
-                this.helpMessage = value;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 2741, 2926) || true) && (helpMessage == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1453, 2741, 2926);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 2851, 2911);
+
+                    throw f_1453_2857_2910("helpMessage");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1453, 2741, 2926);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 2942, 2961);
+
+                this.label = label;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 2975, 3006);
+
+                this.helpMessage = helpMessage;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1453, 2345, 3017);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1453, 2345, 3017);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1453, 2345, 3017);
             }
         }
+
+        public
+                string
+                Label
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1453, 3965, 4113);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 4001, 4060);
+
+                    f_1453_4001_4059(this.label != null, "label should not be null");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 4080, 4098);
+
+                    return this.label;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1453, 3965, 4113);
+
+                    int
+                    f_1453_4001_4059(bool
+                    condition, string
+                    whyThisShouldNeverHappen)
+                    {
+                        Dbg.Assert(condition, whyThisShouldNeverHappen);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 4001, 4059);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1453, 3903, 4124);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1453, 3903, 4124);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        public
+                string
+                HelpMessage
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1453, 4689, 4855);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 4725, 4796);
+
+                    f_1453_4725_4795(this.helpMessage != null, "helpMessage should not be null");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 4816, 4840);
+
+                    return this.helpMessage;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1453, 4689, 4855);
+
+                    int
+                    f_1453_4725_4795(bool
+                    condition, string
+                    whyThisShouldNeverHappen)
+                    {
+                        Dbg.Assert(condition, whyThisShouldNeverHappen);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 4725, 4795);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1453, 4621, 5110);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1453, 4621, 5110);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1453, 4871, 5099);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 4907, 5039) || true) && (value == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1453, 4907, 5039);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 4966, 5020);
+
+                        throw f_1453_4972_5019("value");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1453, 4907, 5039);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1453, 5059, 5084);
+
+                    this.helpMessage = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1453, 4871, 5099);
+
+                    System.Management.Automation.PSArgumentNullException
+                    f_1453_4972_5019(string
+                    paramName)
+                    {
+                        var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 4972, 5019);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1453, 4621, 5110);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1453, 4621, 5110);
+                }
+            }
+        }
+
+        static ChoiceDescription()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1453, 464, 5117);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1453, 464, 5117);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1453, 464, 5117);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1453, 464, 5117);
+
+        bool
+        f_1453_1352_1379(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 1352, 1379);
+            return return_v;
+        }
+
+
+        string
+        f_1453_1510_1554()
+        {
+            var return_v = DescriptionsStrings.NullOrEmptyErrorTemplate;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1453, 1510, 1554);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1453_1466_1564(string
+        paramName, string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 1466, 1564);
+            return return_v;
+        }
+
+
+        bool
+        f_1453_2497_2524(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 2497, 2524);
+            return return_v;
+        }
+
+
+        string
+        f_1453_2655_2699()
+        {
+            var return_v = DescriptionsStrings.NullOrEmptyErrorTemplate;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1453, 2655, 2699);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1453_2611_2709(string
+        paramName, string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 2611, 2709);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1453_2857_2910(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1453, 2857, 2910);
+            return return_v;
+        }
+
     }
 }
 

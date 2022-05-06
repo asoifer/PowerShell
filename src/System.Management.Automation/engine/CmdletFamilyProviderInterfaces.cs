@@ -7,104 +7,290 @@ using Dbg = System.Management.Automation;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Exposes the Cmdlet Family Providers to the Cmdlet base class. The methods of this class
-    /// use the providers to perform operations.
-    /// </summary>
     public sealed class ProviderIntrinsics
     {
-        #region Constructors
-
-        /// <summary>
-        /// Hide the default constructor since we always require an instance of SessionState.
-        /// </summary>
         private ProviderIntrinsics()
         {
-            Dbg.Diagnostics.Assert(
-                false,
-                "This constructor should never be called. Only the constructor that takes an instance of SessionState should be called.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1241, 655, 906);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2932, 2981);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3137, 3196);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3350, 3405);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3560, 3617);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3782, 3859);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3964, 3971);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 708, 895);
+
+                f_1241_708_894(false, "This constructor should never be called. Only the constructor that takes an instance of SessionState should be called.");
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1241, 655, 906);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1241, 655, 906);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1241, 655, 906);
+            }
         }
 
-        /// <summary>
-        /// Constructs a facade over the "real" session state API.
-        /// </summary>
-        /// <param name="cmdlet">
-        /// An instance of the cmdlet.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="cmdlet"/> is null.
-        /// </exception>
         internal ProviderIntrinsics(Cmdlet cmdlet)
         {
-            if (cmdlet == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("cmdlet");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1241, 1261, 1856);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2932, 2981);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3137, 3196);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3350, 3405);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3560, 3617);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3782, 3859);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3964, 3971);
 
-            _cmdlet = cmdlet;
-            Item = new ItemCmdletProviderIntrinsics(cmdlet);
-            ChildItem = new ChildItemCmdletProviderIntrinsics(cmdlet);
-            Content = new ContentCmdletProviderIntrinsics(cmdlet);
-            Property = new PropertyCmdletProviderIntrinsics(cmdlet);
-            SecurityDescriptor = new SecurityDescriptorCmdletProviderIntrinsics(cmdlet);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1328, 1450) || true) && (cmdlet == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1241, 1328, 1450);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1380, 1435);
+
+                    throw f_1241_1386_1434("cmdlet");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1241, 1328, 1450);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1466, 1483);
+
+                _cmdlet = cmdlet;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1497, 1545);
+
+                Item = f_1241_1504_1544(cmdlet);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1559, 1617);
+
+                ChildItem = f_1241_1571_1616(cmdlet);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1631, 1685);
+
+                Content = f_1241_1641_1684(cmdlet);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1699, 1755);
+
+                Property = f_1241_1710_1754(cmdlet);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 1769, 1845);
+
+                SecurityDescriptor = f_1241_1790_1844(cmdlet);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1241, 1261, 1856);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1241, 1261, 1856);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1241, 1261, 1856);
+            }
         }
 
-        /// <summary>
-        /// Constructs a facade over the "real" session state API.
-        /// </summary>
-        /// <param name="sessionState">
-        /// An instance of the cmdlet.
-        /// </param>
         internal ProviderIntrinsics(SessionStateInternal sessionState)
         {
-            if (sessionState == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("sessionState");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1241, 2086, 2712);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2932, 2981);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3137, 3196);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3350, 3405);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3560, 3617);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3782, 3859);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 3964, 3971);
 
-            Item = new ItemCmdletProviderIntrinsics(sessionState);
-            ChildItem = new ChildItemCmdletProviderIntrinsics(sessionState);
-            Content = new ContentCmdletProviderIntrinsics(sessionState);
-            Property = new PropertyCmdletProviderIntrinsics(sessionState);
-            SecurityDescriptor = new SecurityDescriptorCmdletProviderIntrinsics(sessionState);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2173, 2307) || true) && (sessionState == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1241, 2173, 2307);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2231, 2292);
+
+                    throw f_1241_2237_2291("sessionState");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1241, 2173, 2307);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2323, 2377);
+
+                Item = f_1241_2330_2376(sessionState);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2391, 2455);
+
+                ChildItem = f_1241_2403_2454(sessionState);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2469, 2529);
+
+                Content = f_1241_2479_2528(sessionState);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2543, 2605);
+
+                Property = f_1241_2554_2604(sessionState);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1241, 2619, 2701);
+
+                SecurityDescriptor = f_1241_2640_2700(sessionState);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1241, 2086, 2712);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1241, 2086, 2712);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1241, 2086, 2712);
+            }
         }
 
-        #endregion Constructors
-
-        #region Public members
-
-        /// <summary>
-        /// Gets the object that exposes the verbs for the item noun for Cmdlet Providers.
-        /// </summary>
         public ItemCmdletProviderIntrinsics Item { get; }
 
-        /// <summary>
-        /// Gets the object that exposes the verbs for the childItem noun for Cmdlet Providers.
-        /// </summary>
         public ChildItemCmdletProviderIntrinsics ChildItem { get; }
 
-        /// <summary>
-        /// Gets the object that exposes the verbs for the content noun for Cmdlet Providers.
-        /// </summary>
         public ContentCmdletProviderIntrinsics Content { get; }
 
-        /// <summary>
-        /// Gets the object that exposes the verbs for the property noun for Cmdlet Providers.
-        /// </summary>
         public PropertyCmdletProviderIntrinsics Property { get; }
 
-        /// <summary>
-        /// Gets the object that exposes the verbs for the SecurityDescriptor noun for Cmdlet Providers.
-        /// </summary>
         public SecurityDescriptorCmdletProviderIntrinsics SecurityDescriptor { get; }
-
-        #endregion Public members
-
-        #region private data
 
         private InternalCommand _cmdlet;
 
-        #endregion private data
+        static ProviderIntrinsics()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1241, 426, 4014);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1241, 426, 4014);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1241, 426, 4014);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1241, 426, 4014);
+
+        int
+        f_1241_708_894(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 708, 894);
+            return 0;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1241_1386_1434(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 1386, 1434);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ItemCmdletProviderIntrinsics
+        f_1241_1504_1544(System.Management.Automation.Cmdlet
+        cmdlet)
+        {
+            var return_v = new System.Management.Automation.ItemCmdletProviderIntrinsics(cmdlet);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 1504, 1544);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ChildItemCmdletProviderIntrinsics
+        f_1241_1571_1616(System.Management.Automation.Cmdlet
+        cmdlet)
+        {
+            var return_v = new System.Management.Automation.ChildItemCmdletProviderIntrinsics(cmdlet);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 1571, 1616);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ContentCmdletProviderIntrinsics
+        f_1241_1641_1684(System.Management.Automation.Cmdlet
+        cmdlet)
+        {
+            var return_v = new System.Management.Automation.ContentCmdletProviderIntrinsics(cmdlet);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 1641, 1684);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PropertyCmdletProviderIntrinsics
+        f_1241_1710_1754(System.Management.Automation.Cmdlet
+        cmdlet)
+        {
+            var return_v = new System.Management.Automation.PropertyCmdletProviderIntrinsics(cmdlet);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 1710, 1754);
+            return return_v;
+        }
+
+
+        System.Management.Automation.SecurityDescriptorCmdletProviderIntrinsics
+        f_1241_1790_1844(System.Management.Automation.Cmdlet
+        cmdlet)
+        {
+            var return_v = new System.Management.Automation.SecurityDescriptorCmdletProviderIntrinsics(cmdlet);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 1790, 1844);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1241_2237_2291(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 2237, 2291);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ItemCmdletProviderIntrinsics
+        f_1241_2330_2376(System.Management.Automation.SessionStateInternal
+        sessionState)
+        {
+            var return_v = new System.Management.Automation.ItemCmdletProviderIntrinsics(sessionState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 2330, 2376);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ChildItemCmdletProviderIntrinsics
+        f_1241_2403_2454(System.Management.Automation.SessionStateInternal
+        sessionState)
+        {
+            var return_v = new System.Management.Automation.ChildItemCmdletProviderIntrinsics(sessionState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 2403, 2454);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ContentCmdletProviderIntrinsics
+        f_1241_2479_2528(System.Management.Automation.SessionStateInternal
+        sessionState)
+        {
+            var return_v = new System.Management.Automation.ContentCmdletProviderIntrinsics(sessionState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 2479, 2528);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PropertyCmdletProviderIntrinsics
+        f_1241_2554_2604(System.Management.Automation.SessionStateInternal
+        sessionState)
+        {
+            var return_v = new System.Management.Automation.PropertyCmdletProviderIntrinsics(sessionState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 2554, 2604);
+            return return_v;
+        }
+
+
+        System.Management.Automation.SecurityDescriptorCmdletProviderIntrinsics
+        f_1241_2640_2700(System.Management.Automation.SessionStateInternal
+        sessionState)
+        {
+            var return_v = new System.Management.Automation.SecurityDescriptorCmdletProviderIntrinsics(sessionState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1241, 2640, 2700);
+            return return_v;
+        }
+
     }
 }
 

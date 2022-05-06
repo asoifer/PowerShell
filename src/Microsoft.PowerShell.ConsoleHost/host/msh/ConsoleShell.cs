@@ -7,44 +7,138 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.PowerShell
 {
-    /// <summary>
-    /// This class provides an entry point which is called by minishell's main
-    /// to transfer control to Msh console host implementation.
-    /// </summary>
-
     public static class ConsoleShell
     {
-        /// <summary>Entry point in to ConsoleShell. This method is called by main of minishell.</summary>
-        /// <param name="bannerText">Banner text to be displayed by ConsoleHost.</param>
-        /// <param name="helpText">Help text for minishell. This is displayed on 'minishell -?'.</param>
-        /// <param name="args">Commandline parameters specified by user.</param>
-        /// <returns>An integer value which should be used as exit code for the process.</returns>
         public static int Start(string bannerText, string helpText, string[] args)
         {
-            return Start(InitialSessionState.CreateDefault2(), bannerText, helpText, args);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(119, 986, 1175);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 1085, 1164);
+
+                return f_119_1092_1163(f_119_1098_1134(), bannerText, helpText, args);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(119, 986, 1175);
+
+                System.Management.Automation.Runspaces.InitialSessionState
+                f_119_1098_1134()
+                {
+                    var return_v = InitialSessionState.CreateDefault2();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(119, 1098, 1134);
+                    return return_v;
+                }
+
+
+                int
+                f_119_1092_1163(System.Management.Automation.Runspaces.InitialSessionState
+                initialSessionState, string
+                bannerText, string
+                helpText, string[]
+                args)
+                {
+                    var return_v = Start(initialSessionState, bannerText, helpText, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(119, 1092, 1163);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(119, 986, 1175);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(119, 986, 1175);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>Entry point in to ConsoleShell. Used to create a custom Powershell console application.</summary>
-        /// <param name="initialSessionState">InitialSessionState to be used by the ConsoleHost.</param>
-        /// <param name="bannerText">Banner text to be displayed by ConsoleHost.</param>
-        /// <param name="helpText">Help text for the shell.</param>
-        /// <param name="args">Commandline parameters specified by user.</param>
-        /// <returns>An integer value which should be used as exit code for the process.</returns>
         public static int Start(InitialSessionState initialSessionState, string bannerText, string helpText, string[] args)
         {
-            if (initialSessionState == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException(nameof(initialSessionState));
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(119, 1754, 2345);
 
-            if (args == null)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 1894, 2048) || true) && (initialSessionState == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(119, 1894, 2048);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 1959, 2033);
+
+                    throw f_119_1965_2032(nameof(initialSessionState));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(119, 1894, 2048);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 2064, 2188) || true) && (args == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(119, 2064, 2188);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 2114, 2173);
+
+                    throw f_119_2120_2172(nameof(args));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(119, 2064, 2188);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 2204, 2265);
+
+                ConsoleHost.DefaultInitialSessionState = initialSessionState;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(119, 2281, 2334);
+
+                return f_119_2288_2333(bannerText, helpText, args);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(119, 1754, 2345);
+
+                System.Management.Automation.PSArgumentNullException
+                f_119_1965_2032(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(119, 1965, 2032);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentNullException
+                f_119_2120_2172(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(119, 2120, 2172);
+                    return return_v;
+                }
+
+
+                int
+                f_119_2288_2333(string
+                bannerText, string
+                helpText, string[]
+                args)
+                {
+                    var return_v = ConsoleHost.Start(bannerText, helpText, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(119, 2288, 2333);
+                    return return_v;
+                }
+
+            }
+            catch
             {
-                throw PSTraceSource.NewArgumentNullException(nameof(args));
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(119, 1754, 2345);
+                throw;
             }
-
-            ConsoleHost.DefaultInitialSessionState = initialSessionState;
-
-            return ConsoleHost.Start(bannerText, helpText, args);
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(119, 1754, 2345);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
+
+        static ConsoleShell()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(119, 451, 2352);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(119, 451, 2352);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(119, 451, 2352);
+        }
+
     }
 }

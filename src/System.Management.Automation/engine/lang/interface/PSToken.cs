@@ -15,102 +15,476 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// This is public class for representing a powershell token.
-    /// </summary>
-    /// <remarks>
-    /// There is already an internal class Token for representing the token.
-    ///
-    /// This class wraps the internal Token class for providing limited information
-    /// to syntax editor.
-    /// </remarks>
     public sealed class PSToken
     {
         internal PSToken(Token token)
         {
-            Type = GetPSTokenType(token);
-            _extent = token.Extent;
-            if (token is StringToken)
+            try
             {
-                _content = ((StringToken)token).Value;
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1568, 940, 1348);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2234, 2242);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 3276, 3308);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 14444, 14451);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 994, 1023);
+
+                Type = f_1568_1001_1022(token);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1037, 1060);
+
+                _extent = f_1568_1047_1059(token);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1074, 1337) || true) && (token is StringToken)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 1074, 1337);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1132, 1170);
+
+                    _content = f_1568_1143_1169(((StringToken)token));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 1074, 1337);
+                }
+
+                else
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 1074, 1337);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1204, 1337) || true) && (token is VariableToken)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 1204, 1337);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1264, 1322);
+
+                        _content = f_1568_1275_1321(f_1568_1275_1310(((VariableToken)token)));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 1204, 1337);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 1074, 1337);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1568, 940, 1348);
             }
-            else if (token is VariableToken)
+            catch
             {
-                _content = ((VariableToken)token).VariablePath.ToString();
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 940, 1348);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 940, 1348);
             }
         }
 
         internal PSToken(IScriptExtent extent)
         {
-            Type = PSTokenType.Position;
-            _extent = extent;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1568, 1360, 1493);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2234, 2242);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 3276, 3308);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 14444, 14451);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1423, 1451);
+
+                Type = PSTokenType.Position;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 1465, 1482);
+
+                _extent = extent;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1568, 1360, 1493);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 1360, 1493);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 1360, 1493);
+            }
         }
 
-        /// <summary>
-        /// Resulting text for the token.
-        /// </summary>
-        /// <remarks>
-        /// The text here represents the content of token. It can be the same as
-        /// the text chunk within script resulting into this token, but usually is not
-        /// the case.
-        ///
-        /// For example, -name in following command result into a parameter token.
-        ///
-        ///     get-process -name foo
-        ///
-        /// Text property in this case is 'name' instead of '-name'.
-        /// </remarks>
         public string Content
         {
             get
             {
-                return _content ?? _extent.Text;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 2113, 2196);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2149, 2181);
+
+                    return _content ?? (DynAbs.Tracing.TraceSender.Expression_Null<string>(1568, 2156, 2180) ?? f_1568_2168_2180(_extent));
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 2113, 2196);
+
+                    string
+                    f_1568_2168_2180(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.Text;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 2168, 2180);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 2067, 2207);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 2067, 2207);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         private string _content;
 
-        #region Token Type
-
-        /// <summary>
-        /// Map a V3 token to a V2 PSTokenType.
-        /// </summary>
-        /// <param name="token">The V3 token.</param>
-        /// <returns>The V2 PSTokenType.</returns>
         public static PSTokenType GetPSTokenType(Token token)
         {
-            if ((token.TokenFlags & TokenFlags.CommandName) != 0)
+            try
             {
-                return PSTokenType.Command;
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1568, 2488, 3192);
 
-            if ((token.TokenFlags & TokenFlags.MemberName) != 0)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2566, 2694) || true) && ((f_1568_2571_2587(token) & TokenFlags.CommandName) != 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 2566, 2694);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2652, 2679);
+
+                    return PSTokenType.Command;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 2566, 2694);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2710, 2836) || true) && ((f_1568_2715_2731(token) & TokenFlags.MemberName) != 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 2710, 2836);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2795, 2821);
+
+                    return PSTokenType.Member;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 2710, 2836);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2852, 2984) || true) && ((f_1568_2857_2873(token) & TokenFlags.AttributeName) != 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 2852, 2984);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 2940, 2969);
+
+                    return PSTokenType.Attribute;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 2852, 2984);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 3000, 3122) || true) && ((f_1568_3005_3021(token) & TokenFlags.TypeName) != 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1568, 3000, 3122);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 3083, 3107);
+
+                    return PSTokenType.Type;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1568, 3000, 3122);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 3138, 3181);
+
+                return s_tokenKindMapping[(int)f_1568_3169_3179(token)];
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1568, 2488, 3192);
+
+                System.Management.Automation.Language.TokenFlags
+                f_1568_2571_2587(System.Management.Automation.Language.Token
+                this_param)
+                {
+                    var return_v = this_param.TokenFlags;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 2571, 2587);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Language.TokenFlags
+                f_1568_2715_2731(System.Management.Automation.Language.Token
+                this_param)
+                {
+                    var return_v = this_param.TokenFlags;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 2715, 2731);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Language.TokenFlags
+                f_1568_2857_2873(System.Management.Automation.Language.Token
+                this_param)
+                {
+                    var return_v = this_param.TokenFlags;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 2857, 2873);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Language.TokenFlags
+                f_1568_3005_3021(System.Management.Automation.Language.Token
+                this_param)
+                {
+                    var return_v = this_param.TokenFlags;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 3005, 3021);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Language.TokenKind
+                f_1568_3169_3179(System.Management.Automation.Language.Token
+                this_param)
+                {
+                    var return_v = this_param.Kind;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 3169, 3179);
+                    return return_v;
+                }
+
+            }
+            catch
             {
-                return PSTokenType.Member;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 2488, 3192);
+                throw;
             }
-
-            if ((token.TokenFlags & TokenFlags.AttributeName) != 0)
+            finally
             {
-                return PSTokenType.Attribute;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 2488, 3192);
             }
-
-            if ((token.TokenFlags & TokenFlags.TypeName) != 0)
-            {
-                return PSTokenType.Type;
-            }
-
-            return s_tokenKindMapping[(int)token.Kind];
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Token type.
-        /// </summary>
         public PSTokenType Type { get; }
 
-        private static readonly PSTokenType[] s_tokenKindMapping = new PSTokenType[]
-        {
-            #region Flags for unclassified tokens
+        private static readonly PSTokenType[] s_tokenKindMapping;
 
+        private readonly IScriptExtent _extent;
+
+        public int Start
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 14605, 14640);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 14611, 14638);
+
+                    return f_1568_14618_14637(_extent);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 14605, 14640);
+
+                    int
+                    f_1568_14618_14637(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.StartOffset;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 14618, 14637);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 14564, 14651);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 14564, 14651);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        public int Length
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 14803, 14901);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 14839, 14886);
+
+                    return f_1568_14846_14863(_extent) - f_1568_14866_14885(_extent);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 14803, 14901);
+
+                    int
+                    f_1568_14846_14863(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.EndOffset;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 14846, 14863);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1568_14866_14885(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.StartOffset;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 14866, 14885);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 14761, 14912);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 14761, 14912);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        public int StartLine
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 15269, 15308);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 15275, 15306);
+
+                    return f_1568_15282_15305(_extent);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 15269, 15308);
+
+                    int
+                    f_1568_15282_15305(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.StartLineNumber;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 15282, 15305);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 15246, 15310);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 15246, 15310);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        public int StartColumn
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 15446, 15487);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 15452, 15485);
+
+                    return f_1568_15459_15484(_extent);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 15446, 15487);
+
+                    int
+                    f_1568_15459_15484(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.StartColumnNumber;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 15459, 15484);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 15421, 15489);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 15421, 15489);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        public int EndLine
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 15608, 15645);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 15614, 15643);
+
+                    return f_1568_15621_15642(_extent);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 15608, 15645);
+
+                    int
+                    f_1568_15621_15642(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.EndLineNumber;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 15621, 15642);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 15587, 15647);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 15587, 15647);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        public int EndColumn
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1568, 15777, 15816);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 15783, 15814);
+
+                    return f_1568_15790_15813(_extent);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1568, 15777, 15816);
+
+                    int
+                    f_1568_15790_15813(System.Management.Automation.Language.IScriptExtent
+                    this_param)
+                    {
+                        var return_v = this_param.EndColumnNumber;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 15790, 15813);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1568, 15754, 15818);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 15754, 15818);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        static PSToken()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1568, 896, 15847);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1568, 3358, 14338);
+            s_tokenKindMapping = new PSTokenType[]
+                    {
+            
             /*              Unknown */ PSTokenType.Unknown,
             /*             Variable */ PSTokenType.Variable,
             /*     SplattedVariable */ PSTokenType.Variable,
@@ -125,19 +499,15 @@ namespace System.Management.Automation
             /*              Comment */ PSTokenType.Comment,
             /*           EndOfInput */ PSTokenType.Unknown,
 
-            #endregion Flags for unclassified tokens
-
-            #region Flags for strings
-
+            
+            
             /*        StringLiteral */ PSTokenType.String,
             /*     StringExpandable */ PSTokenType.String,
             /*    HereStringLiteral */ PSTokenType.String,
             /* HereStringExpandable */ PSTokenType.String,
 
-            #endregion Flags for strings
-
-            #region Flags for punctuators
-
+            
+            
             /*               LParen */ PSTokenType.GroupStart,
             /*               RParen */ PSTokenType.GroupEnd,
             /*               LCurly */ PSTokenType.GroupStart,
@@ -149,10 +519,8 @@ namespace System.Management.Automation
             /*          DollarParen */ PSTokenType.GroupStart,
             /*                 Semi */ PSTokenType.StatementSeparator,
 
-            #endregion Flags for punctuators
-
-            #region Flags for operators
-
+            
+            
             /*               AndAnd */ PSTokenType.Operator,
             /*                 OrOr */ PSTokenType.Operator,
             /*            Ampersand */ PSTokenType.Operator,
@@ -247,10 +615,8 @@ namespace System.Management.Automation
             /*    Reserved slot 19  */ PSTokenType.Unknown,
             /*    Reserved slot 20  */ PSTokenType.Unknown,
 
-            #endregion Flags for operators
-
-            #region Flags for keywords
-
+            
+            
             /*                Begin */ PSTokenType.Keyword,
             /*                Break */ PSTokenType.Keyword,
             /*                Catch */ PSTokenType.Keyword,
@@ -301,62 +667,65 @@ namespace System.Management.Automation
             /*              Command */ PSTokenType.Keyword,
             /*                  Def */ PSTokenType.Keyword,
 
-            #endregion Flags for keywords
-
+            
             /*            LastToken */ PSTokenType.Unknown,
-        };
+                    };
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1568, 896, 15847);
 
-        #endregion
-
-        #region Position Information
-
-        private readonly IScriptExtent _extent;
-
-        /// <summary>
-        /// Offset of token start in script buffer.
-        /// </summary>
-        public int Start
-        {
-            get { return _extent.StartOffset; }
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1568, 896, 15847);
         }
 
-        /// <summary>
-        /// Offset of token end in script buffer.
-        /// </summary>
-        public int Length
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1568, 896, 15847);
+
+        System.Management.Automation.PSTokenType
+        f_1568_1001_1022(System.Management.Automation.Language.Token
+        token)
         {
-            get
-            {
-                return _extent.EndOffset - _extent.StartOffset;
-            }
+            var return_v = GetPSTokenType(token);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1568, 1001, 1022);
+            return return_v;
         }
 
-        /// <summary>
-        /// Line number of token start.
-        /// </summary>
-        /// <remarks>
-        /// StartLine, StartColumn, EndLine, and EndColumn are 1-based,
-        /// i.e., first line has a line number 1 and first character in
-        /// a line has column number 1.
-        /// </remarks>
-        public int StartLine { get { return _extent.StartLineNumber; } }
 
-        /// <summary>
-        /// Position of token start in start line.
-        /// </summary>
-        public int StartColumn { get { return _extent.StartColumnNumber; } }
+        System.Management.Automation.Language.IScriptExtent
+        f_1568_1047_1059(System.Management.Automation.Language.Token
+        this_param)
+        {
+            var return_v = this_param.Extent;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 1047, 1059);
+            return return_v;
+        }
 
-        /// <summary>
-        /// Line number of token end.
-        /// </summary>
-        public int EndLine { get { return _extent.EndLineNumber; } }
 
-        /// <summary>
-        /// Position of token end in end line.
-        /// </summary>
-        public int EndColumn { get { return _extent.EndColumnNumber; } }
+        string
+        f_1568_1143_1169(System.Management.Automation.Language.StringToken
+        this_param)
+        {
+            var return_v = this_param.Value;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 1143, 1169);
+            return return_v;
+        }
 
-        #endregion
+
+        System.Management.Automation.VariablePath
+        f_1568_1275_1310(System.Management.Automation.Language.VariableToken
+        this_param)
+        {
+            var return_v = this_param.VariablePath;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1568, 1275, 1310);
+            return return_v;
+        }
+
+
+        string
+        f_1568_1275_1321(System.Management.Automation.VariablePath
+        this_param)
+        {
+            var return_v = this_param.ToString();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1568, 1275, 1321);
+            return return_v;
+        }
+
     }
 
     /// <summary>

@@ -14,1798 +14,3067 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Defines members and overrides used by Cmdlets.
-    /// All Cmdlets must derive from <see cref="System.Management.Automation.Cmdlet"/>.
-    /// </summary>
-    /// <remarks>
-    /// There are two ways to create a Cmdlet: by deriving from the Cmdlet base class, and by
-    /// deriving from the PSCmdlet base class.  The Cmdlet base class is the primary means by
-    /// which users create their own Cmdlets.  Extending this class provides support for the most
-    /// common functionality, including object output and record processing.
-    /// If your Cmdlet requires access to the MSH Runtime (for example, variables in the session state,
-    /// access to the host, or information about the current Cmdlet Providers,) then you should instead
-    /// derive from the PSCmdlet base class.
-    /// In both cases, users should first develop and implement an object model to accomplish their
-    /// task, extending the Cmdlet or PSCmdlet classes only as a thin management layer.
-    /// </remarks>
-    /// <seealso cref="System.Management.Automation.Internal.InternalCommand"/>
     public abstract partial class Cmdlet : InternalCommand
     {
-        #region public_properties
-
-        /// <summary>
-        /// Lists the common parameters that are added by the PowerShell engine to any cmdlet that derives
-        /// from PSCmdlet.
-        /// </summary>
         public static HashSet<string> CommonParameters
         {
             get
             {
-                return s_commonParameters.Value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1240, 1949, 2032);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 1985, 2017);
+
+                    return f_1240_1992_2016(s_commonParameters);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1240, 1949, 2032);
+
+                    System.Collections.Generic.HashSet<string>
+                    f_1240_1992_2016(System.Lazy<System.Collections.Generic.HashSet<string>>
+                    this_param)
+                    {
+                        var return_v = this_param.Value;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 1992, 2016);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 1878, 2043);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 1878, 2043);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        private static Lazy<HashSet<string>> s_commonParameters = new Lazy<HashSet<string>>(
-            () =>
-            {
-                return new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-                    "Verbose", "Debug", "ErrorAction", "WarningAction", "InformationAction",
-                    "ErrorVariable", "WarningVariable", "OutVariable",
-                    "OutBuffer", "PipelineVariable", "InformationVariable" };
-            }
-        );
+        private static Lazy<HashSet<string>> s_commonParameters;
 
-        /// <summary>
-        /// Lists the common parameters that are added by the PowerShell engine when a cmdlet defines
-        /// additional capabilities (SupportsShouldProcess, SupportsTransactions)
-        /// </summary>
         public static HashSet<string> OptionalCommonParameters
         {
             get
             {
-                return s_optionalCommonParameters.Value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1240, 2849, 2940);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 2885, 2925);
+
+                    return f_1240_2892_2924(s_optionalCommonParameters);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1240, 2849, 2940);
+
+                    System.Collections.Generic.HashSet<string>
+                    f_1240_2892_2924(System.Lazy<System.Collections.Generic.HashSet<string>>
+                    this_param)
+                    {
+                        var return_v = this_param.Value;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 2892, 2924);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 2770, 2951);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 2770, 2951);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        private static Lazy<HashSet<string>> s_optionalCommonParameters = new Lazy<HashSet<string>>(
-            () =>
-            {
-                return new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
-                    "WhatIf", "Confirm", "UseTransaction" };
-            }
-        );
+        private static Lazy<HashSet<string>> s_optionalCommonParameters;
 
-        /// <summary>
-        /// Is this command stopping?
-        /// </summary>
-        /// <remarks>
-        /// If Stopping is true, many Cmdlet methods will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>.
-        ///
-        /// In general, if a Cmdlet's override implementation of ProcessRecord etc.
-        /// throws <see cref="System.Management.Automation.PipelineStoppedException"/>, the best thing to do is to
-        /// shut down the operation and return to the caller.
-        /// It is acceptable to not catch <see cref="System.Management.Automation.PipelineStoppedException"/>
-        /// and allow the exception to reach ProcessRecord.
-        /// </remarks>
         public bool Stopping
         {
             get
             {
-                using (PSTransactionManager.GetEngineProtectionScope())
-                {
-                    return this.IsStopping;
-                }
-            }
-        }
-
-        /// <summary>
-        /// The name of the parameter set in effect.
-        /// </summary>
-        /// <value>the parameter set name</value>
-        internal string _ParameterSetName
-        {
-            get { return _parameterSetName; }
-        }
-
-        /// <summary>
-        /// Sets the parameter set.
-        /// </summary>
-        /// <param name="parameterSetName">
-        /// The name of the valid parameter set.
-        /// </param>
-        internal void SetParameterSetName(string parameterSetName)
-        {
-            _parameterSetName = parameterSetName;
-        }
-
-        private string _parameterSetName = string.Empty;
-
-        #region Override Internal
-
-        /// <summary>
-        /// When overridden in the derived class, performs initialization
-        /// of command execution.
-        /// Default implementation in the base class just returns.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual cmdlets, and can throw literally any exception.
-        /// </exception>
-        internal override void DoBeginProcessing()
-        {
-            MshCommandRuntime mshRuntime = this.CommandRuntime as MshCommandRuntime;
-
-            if (mshRuntime != null)
-            {
-                if (mshRuntime.UseTransaction &&
-                   (!this.Context.TransactionManager.HasTransaction))
-                {
-                    string error = TransactionStrings.NoTransactionStarted;
-
-                    if (this.Context.TransactionManager.IsLastTransactionCommitted)
-                    {
-                        error = TransactionStrings.NoTransactionStartedFromCommit;
-                    }
-                    else if (this.Context.TransactionManager.IsLastTransactionRolledBack)
-                    {
-                        error = TransactionStrings.NoTransactionStartedFromRollback;
-                    }
-
-                    throw new InvalidOperationException(error);
-                }
-            }
-
-            this.BeginProcessing();
-        }
-
-        /// <summary>
-        /// When overridden in the derived class, performs execution
-        /// of the command.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual cmdlets, and can throw literally any exception.
-        /// </exception>
-        internal override void DoProcessRecord()
-        {
-            this.ProcessRecord();
-        }
-
-        /// <summary>
-        /// When overridden in the derived class, performs clean-up
-        /// after the command execution.
-        /// Default implementation in the base class just returns.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual cmdlets, and can throw literally any exception.
-        /// </exception>
-        internal override void DoEndProcessing()
-        {
-            this.EndProcessing();
-        }
-
-        /// <summary>
-        /// When overridden in the derived class, interrupts currently
-        /// running code within the command. It should interrupt BeginProcessing,
-        /// ProcessRecord, and EndProcessing.
-        /// Default implementation in the base class just returns.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual cmdlets, and can throw literally any exception.
-        /// </exception>
-        internal override void DoStopProcessing()
-        {
-            this.StopProcessing();
-        }
-
-        #endregion Override Internal
-
-        #endregion internal_members
-
-        #region ctor
-
-        /// <summary>
-        /// Initializes the new instance of Cmdlet class.
-        /// </summary>
-        /// <remarks>
-        /// Only subclasses of <see cref="System.Management.Automation.Cmdlet"/>
-        /// can be created.
-        /// </remarks>
-        protected Cmdlet()
-        {
-        }
-
-        #endregion ctor
-
-        #region public_methods
-
-        #region Cmdlet virtuals
-
-        /// <summary>
-        /// Gets the resource string corresponding to
-        /// baseName and resourceId from the current assembly.
-        /// You should override this if you require a different behavior.
-        /// </summary>
-        /// <param name="baseName">The base resource name.</param>
-        /// <param name="resourceId">The resource id.</param>
-        /// <returns>The resource string corresponding to baseName and resourceId.</returns>
-        /// <exception cref="System.ArgumentException">
-        /// Invalid <paramref name="baseName"/> or <paramref name="resourceId"/>, or
-        /// string not found in resources
-        /// </exception>
-        /// <remarks>
-        /// This behavior may be used when the Cmdlet specifies
-        /// HelpMessageBaseName and HelpMessageResourceId when defining
-        /// <see cref="System.Management.Automation.ParameterAttribute"/>,
-        /// or when it uses the
-        /// <see cref="System.Management.Automation.ErrorDetails"/>
-        /// constructor variants which take baseName and resourceId.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.ParameterAttribute"/>
-        /// <seealso cref="System.Management.Automation.ErrorDetails"/>
-        public virtual string GetResourceString(string baseName, string resourceId)
-        {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                if (string.IsNullOrEmpty(baseName))
-                    throw PSTraceSource.NewArgumentNullException("baseName");
-
-                if (string.IsNullOrEmpty(resourceId))
-                    throw PSTraceSource.NewArgumentNullException("resourceId");
-
-                ResourceManager manager = ResourceManagerCache.GetResourceManager(this.GetType().Assembly, baseName);
-                string retValue = null;
-
                 try
                 {
-                    retValue = manager.GetString(resourceId, CultureInfo.CurrentUICulture);
-                }
-                catch (MissingManifestResourceException)
-                {
-                    throw PSTraceSource.NewArgumentException("baseName", GetErrorText.ResourceBaseNameFailure, baseName);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 4044, 4233);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 4080, 4218);
+                    using (f_1240_4087_4134())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 4176, 4199);
 
-                if (retValue == null)
-                {
-                    throw PSTraceSource.NewArgumentException("resourceId", GetErrorText.ResourceIdFailure, resourceId);
-                }
+                        return f_1240_4183_4198(this);
+                        DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 4080, 4218);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 4044, 4233);
 
-                return retValue;
+                    System.IDisposable
+                    f_1240_4087_4134()
+                    {
+                        var return_v = PSTransactionManager.GetEngineProtectionScope();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 4087, 4134);
+                        return return_v;
+                    }
+
+
+                    bool
+                    f_1240_4183_4198(System.Management.Automation.Cmdlet
+                    this_param)
+                    {
+                        var return_v = this_param.IsStopping;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 4183, 4198);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 3999, 4244);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 3999, 4244);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        #endregion Cmdlet virtuals
+        internal string _ParameterSetName
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 4466, 4499);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 4472, 4497);
 
-        #region Write
+                    return _parameterSetName;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 4466, 4499);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 4408, 4510);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 4408, 4510);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
 
-        /// <summary>
-        /// Holds the command runtime object for this command. This object controls
-        /// what actually happens when a write is called.
-        /// </summary>
+        internal void SetParameterSetName(string parameterSetName)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 4723, 4854);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 4806, 4843);
+
+                _parameterSetName = parameterSetName;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 4723, 4854);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 4723, 4854);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 4723, 4854);
+            }
+        }
+
+        private string _parameterSetName;
+
+        internal override void DoBeginProcessing()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 5392, 6393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 5459, 5531);
+
+                MshCommandRuntime
+                mshRuntime = f_1240_5490_5509(this) as MshCommandRuntime
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 5547, 6343) || true) && (mshRuntime != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 5547, 6343);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 5603, 6328) || true) && (f_1240_5607_5632(mshRuntime) && (DynAbs.Tracing.TraceSender.Expression_True(1240, 5607, 5705) && (f_1240_5657_5704_M(!f_1240_5658_5689(f_1240_5658_5670(this)).HasTransaction))))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 5603, 6328);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 5747, 5802);
+
+                        string
+                        error = f_1240_5762_5801()
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 5826, 6242) || true) && (f_1240_5830_5888(f_1240_5830_5861(f_1240_5830_5842(this))))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 5826, 6242);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 5938, 5996);
+
+                            error = f_1240_5946_5995();
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 5826, 6242);
+                        }
+
+                        else
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 5826, 6242);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 6046, 6242) || true) && (f_1240_6050_6109(f_1240_6050_6081(f_1240_6050_6062(this))))
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 6046, 6242);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 6159, 6219);
+
+                                error = f_1240_6167_6218();
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 6046, 6242);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 5826, 6242);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 6266, 6309);
+
+                        throw f_1240_6272_6308(error);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 5603, 6328);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 5547, 6343);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 6359, 6382);
+
+                f_1240_6359_6381(
+                            this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 5392, 6393);
+
+                System.Management.Automation.ICommandRuntime
+                f_1240_5490_5509(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.CommandRuntime;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5490, 5509);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.SwitchParameter
+                f_1240_5607_5632(System.Management.Automation.MshCommandRuntime
+                this_param)
+                {
+                    var return_v = this_param.UseTransaction;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5607, 5632);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.ExecutionContext
+                f_1240_5658_5670(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.Context;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5658, 5670);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Internal.PSTransactionManager
+                f_1240_5658_5689(System.Management.Automation.ExecutionContext
+                this_param)
+                {
+                    var return_v = this_param.TransactionManager;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5658, 5689);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_5657_5704_M(bool
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5657, 5704);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_5762_5801()
+                {
+                    var return_v = TransactionStrings.NoTransactionStarted;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5762, 5801);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.ExecutionContext
+                f_1240_5830_5842(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.Context;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5830, 5842);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Internal.PSTransactionManager
+                f_1240_5830_5861(System.Management.Automation.ExecutionContext
+                this_param)
+                {
+                    var return_v = this_param.TransactionManager;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5830, 5861);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_5830_5888(System.Management.Automation.Internal.PSTransactionManager
+                this_param)
+                {
+                    var return_v = this_param.IsLastTransactionCommitted;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5830, 5888);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_5946_5995()
+                {
+                    var return_v = TransactionStrings.NoTransactionStartedFromCommit;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 5946, 5995);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.ExecutionContext
+                f_1240_6050_6062(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.Context;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 6050, 6062);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Internal.PSTransactionManager
+                f_1240_6050_6081(System.Management.Automation.ExecutionContext
+                this_param)
+                {
+                    var return_v = this_param.TransactionManager;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 6050, 6081);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_6050_6109(System.Management.Automation.Internal.PSTransactionManager
+                this_param)
+                {
+                    var return_v = this_param.IsLastTransactionRolledBack;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 6050, 6109);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_6167_6218()
+                {
+                    var return_v = TransactionStrings.NoTransactionStartedFromRollback;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 6167, 6218);
+                    return return_v;
+                }
+
+
+                System.InvalidOperationException
+                f_1240_6272_6308(string
+                message)
+                {
+                    var return_v = new System.InvalidOperationException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 6272, 6308);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_6359_6381(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.BeginProcessing();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 6359, 6381);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 5392, 6393);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 5392, 6393);
+            }
+        }
+
+        internal override void DoProcessRecord()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 6755, 6852);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 6820, 6841);
+
+                f_1240_6820_6840(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 6755, 6852);
+
+                int
+                f_1240_6820_6840(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.ProcessRecord();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 6820, 6840);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 6755, 6852);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 6755, 6852);
+            }
+        }
+
+        internal override void DoEndProcessing()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 7294, 7391);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 7359, 7380);
+
+                f_1240_7359_7379(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 7294, 7391);
+
+                int
+                f_1240_7359_7379(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.EndProcessing();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 7359, 7379);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 7294, 7391);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 7294, 7391);
+            }
+        }
+
+        internal override void DoStopProcessing()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 7924, 8023);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 7990, 8012);
+
+                f_1240_7990_8011(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 7924, 8023);
+
+                int
+                f_1240_7990_8011(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.StopProcessing();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 7990, 8011);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 7924, 8023);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 7924, 8023);
+            }
+        }
+
+        protected Cmdlet()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1240, 8402, 8442);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 4881, 4913);
+                this._parameterSetName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1240, 8402, 8442);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 8402, 8442);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 8402, 8442);
+            }
+        }
+
+        public virtual string GetResourceString(string baseName, string resourceId)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 9813, 11050);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 9913, 11039);
+                using (f_1240_9920_9967())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10001, 10115) || true) && (f_1240_10005_10035(baseName))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 10001, 10115);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10058, 10115);
+
+                        throw f_1240_10064_10114("baseName");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 10001, 10115);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10135, 10253) || true) && (f_1240_10139_10171(resourceId))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 10135, 10253);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10194, 10253);
+
+                        throw f_1240_10200_10252("resourceId");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 10135, 10253);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10273, 10374);
+
+                    ResourceManager
+                    manager = f_1240_10299_10373(f_1240_10339_10362(f_1240_10339_10353(this)), baseName)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10392, 10415);
+
+                    string
+                    retValue = null
+                    ;
+
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10479, 10550);
+
+                        retValue = f_1240_10490_10549(manager, resourceId, f_1240_10520_10548());
+                    }
+                    catch (MissingManifestResourceException)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCatch(1240, 10587, 10788);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10668, 10769);
+
+                        throw f_1240_10674_10768("baseName", f_1240_10721_10757(), baseName);
+                        DynAbs.Tracing.TraceSender.TraceExitCatch(1240, 10587, 10788);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10808, 10988) || true) && (retValue == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 10808, 10988);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 10870, 10969);
+
+                        throw f_1240_10876_10968("resourceId", f_1240_10925_10955(), resourceId);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 10808, 10988);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 11008, 11024);
+
+                    return retValue;
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 9913, 11039);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 9813, 11050);
+
+                System.IDisposable
+                f_1240_9920_9967()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 9920, 9967);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_10005_10035(string
+                value)
+                {
+                    var return_v = string.IsNullOrEmpty(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10005, 10035);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentNullException
+                f_1240_10064_10114(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10064, 10114);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_10139_10171(string
+                value)
+                {
+                    var return_v = string.IsNullOrEmpty(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10139, 10171);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentNullException
+                f_1240_10200_10252(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10200, 10252);
+                    return return_v;
+                }
+
+
+                System.Type
+                f_1240_10339_10353(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.GetType();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10339, 10353);
+                    return return_v;
+                }
+
+
+                System.Reflection.Assembly
+                f_1240_10339_10362(System.Type
+                this_param)
+                {
+                    var return_v = this_param.Assembly;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 10339, 10362);
+                    return return_v;
+                }
+
+
+                System.Resources.ResourceManager
+                f_1240_10299_10373(System.Reflection.Assembly
+                assembly, string
+                baseName)
+                {
+                    var return_v = ResourceManagerCache.GetResourceManager(assembly, baseName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10299, 10373);
+                    return return_v;
+                }
+
+
+                System.Globalization.CultureInfo
+                f_1240_10520_10548()
+                {
+                    var return_v = CultureInfo.CurrentUICulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 10520, 10548);
+                    return return_v;
+                }
+
+
+                string?
+                f_1240_10490_10549(System.Resources.ResourceManager
+                this_param, string
+                name, System.Globalization.CultureInfo
+                culture)
+                {
+                    var return_v = this_param.GetString(name, culture);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10490, 10549);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_10721_10757()
+                {
+                    var return_v = GetErrorText.ResourceBaseNameFailure;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 10721, 10757);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentException
+                f_1240_10674_10768(string
+                paramName, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10674, 10768);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_10925_10955()
+                {
+                    var return_v = GetErrorText.ResourceIdFailure;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 10925, 10955);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentException
+                f_1240_10876_10968(string
+                paramName, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 10876, 10968);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 9813, 11050);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 9813, 11050);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         public ICommandRuntime CommandRuntime
         {
             get
             {
-                using (PSTransactionManager.GetEngineProtectionScope())
+                try
                 {
-                    return commandRuntime;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 11378, 11566);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 11414, 11551);
+                    using (f_1240_11421_11468())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 11510, 11532);
 
+                        return commandRuntime;
+                        DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 11414, 11551);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 11378, 11566);
+
+                    System.IDisposable
+                    f_1240_11421_11468()
+                    {
+                        var return_v = PSTransactionManager.GetEngineProtectionScope();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 11421, 11468);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 11316, 11782);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 11316, 11782);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                using (PSTransactionManager.GetEngineProtectionScope())
+                try
                 {
-                    commandRuntime = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 11582, 11771);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 11618, 11756);
+                    using (f_1240_11625_11672())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 11714, 11737);
+
+                        commandRuntime = value;
+                        DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 11618, 11756);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 11582, 11771);
+
+                    System.IDisposable
+                    f_1240_11625_11672()
+                    {
+                        var return_v = PSTransactionManager.GetEngineProtectionScope();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 11625, 11672);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 11316, 11782);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 11316, 11782);
                 }
             }
         }
 
-        /// <summary>
-        /// Internal variant: Writes the specified error to the error pipe.
-        /// </summary>
-        /// <remarks>
-        /// Do not call WriteError(e.ErrorRecord).
-        /// The ErrorRecord contained in the ErrorRecord property of
-        /// an exception which implements IContainsErrorRecord
-        /// should not be passed directly to WriteError, since it contains
-        /// a <see cref="System.Management.Automation.ParentContainsErrorRecordException"/>
-        /// rather than the real exception.
-        /// </remarks>
-        /// <param name="errorRecord">Error.</param>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread
-        /// </exception>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <remarks>
-        /// <see cref="System.Management.Automation.Cmdlet.ThrowTerminatingError"/>
-        /// terminates the command, where
-        /// <see cref="System.Management.Automation.ICommandRuntime.WriteError"/>
-        /// allows the command to continue.
-        ///
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
         public void WriteError(ErrorRecord errorRecord)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteError(errorRecord);
-                else
-                    throw new System.NotImplementedException("WriteError");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 13625, 13998);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 13697, 13987);
+                using (f_1240_13704_13751())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 13785, 13972) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 13785, 13972);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 13834, 13873);
+
+                        f_1240_13834_13872(commandRuntime, errorRecord);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 13785, 13972);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 13785, 13972);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 13917, 13972);
+
+                        throw f_1240_13923_13971("WriteError");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 13785, 13972);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 13697, 13987);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 13625, 13998);
+
+                System.IDisposable
+                f_1240_13704_13751()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 13704, 13751);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_13834_13872(System.Management.Automation.ICommandRuntime
+                this_param, System.Management.Automation.ErrorRecord
+                errorRecord)
+                {
+                    this_param.WriteError(errorRecord);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 13834, 13872);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_13923_13971(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 13923, 13971);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 13625, 13998);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 13625, 13998);
             }
         }
-        /// <summary>
-        /// Writes the object to the output pipe.
-        /// </summary>
-        /// <param name="sendToPipeline">
-        /// The object that needs to be written.  This will be written as
-        /// a single object, even if it is an enumeration.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteObject may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <seealso cref="System.Management.Automation.ICommandRuntime.WriteObject(object,bool)"/>
-        /// <seealso cref="System.Management.Automation.ICommandRuntime.WriteError(ErrorRecord)"/>
+
         public void WriteObject(object sendToPipeline)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteObject(sendToPipeline);
-                else
-                    throw new System.NotImplementedException("WriteObject");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 15231, 15608);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 15302, 15597);
+                using (f_1240_15309_15356())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 15390, 15582) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 15390, 15582);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 15439, 15482);
+
+                        f_1240_15439_15481(commandRuntime, sendToPipeline);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 15390, 15582);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 15390, 15582);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 15526, 15582);
+
+                        throw f_1240_15532_15581("WriteObject");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 15390, 15582);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 15302, 15597);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 15231, 15608);
+
+                System.IDisposable
+                f_1240_15309_15356()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 15309, 15356);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_15439_15481(System.Management.Automation.ICommandRuntime
+                this_param, object
+                sendToPipeline)
+                {
+                    this_param.WriteObject(sendToPipeline);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 15439, 15481);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_15532_15581(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 15532, 15581);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 15231, 15608);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 15231, 15608);
             }
         }
-        /// <summary>
-        /// Writes one or more objects to the output pipe.
-        /// If the object is a collection and the enumerateCollection flag
-        /// is true, the objects in the collection
-        /// will be written individually.
-        /// </summary>
-        /// <param name="sendToPipeline">
-        /// The object that needs to be written to the pipeline.
-        /// </param>
-        /// <param name="enumerateCollection">
-        /// true if the collection should be enumerated
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteObject may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <seealso cref="System.Management.Automation.ICommandRuntime.WriteObject(object)"/>
-        /// <seealso cref="System.Management.Automation.ICommandRuntime.WriteError(ErrorRecord)"/>
+
         public void WriteObject(object sendToPipeline, bool enumerateCollection)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteObject(sendToPipeline, enumerateCollection);
-                else
-                    throw new System.NotImplementedException("WriteObject");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 17074, 17498);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 17171, 17487);
+                using (f_1240_17178_17225())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 17259, 17472) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 17259, 17472);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 17308, 17372);
+
+                        f_1240_17308_17371(commandRuntime, sendToPipeline, enumerateCollection);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 17259, 17472);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 17259, 17472);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 17416, 17472);
+
+                        throw f_1240_17422_17471("WriteObject");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 17259, 17472);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 17171, 17487);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 17074, 17498);
+
+                System.IDisposable
+                f_1240_17178_17225()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 17178, 17225);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_17308_17371(System.Management.Automation.ICommandRuntime
+                this_param, object
+                sendToPipeline, bool
+                enumerateCollection)
+                {
+                    this_param.WriteObject(sendToPipeline, enumerateCollection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 17308, 17371);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_17422_17471(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 17422, 17471);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 17074, 17498);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 17074, 17498);
             }
         }
 
-        /// <summary>
-        /// Display verbose information.
-        /// </summary>
-        /// <param name="text">Verbose output.</param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteVerbose may only be called during a call to this Cmdlets's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteVerbose to display more detailed information about
-        /// the activity of your Cmdlet.  By default, verbose output will
-        /// not be displayed, although this can be configured with the
-        /// VerbosePreference shell variable
-        /// or the -Verbose and -Debug command-line options.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteDebug(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteWarning(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteProgress(ProgressRecord)"/>
         public void WriteVerbose(string text)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteVerbose(text);
-                else
-                    throw new System.NotImplementedException("WriteVerbose");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 19027, 19387);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 19089, 19376);
+                using (f_1240_19096_19143())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 19177, 19361) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 19177, 19361);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 19226, 19260);
+
+                        f_1240_19226_19259(commandRuntime, text);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 19177, 19361);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 19177, 19361);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 19304, 19361);
+
+                        throw f_1240_19310_19360("WriteVerbose");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 19177, 19361);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 19089, 19376);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 19027, 19387);
+
+                System.IDisposable
+                f_1240_19096_19143()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 19096, 19143);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_19226_19259(System.Management.Automation.ICommandRuntime
+                this_param, string
+                text)
+                {
+                    this_param.WriteVerbose(text);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 19226, 19259);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_19310_19360(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 19310, 19360);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 19027, 19387);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 19027, 19387);
             }
         }
 
-        /// <summary>
-        /// Display warning information.
-        /// </summary>
-        /// <param name="text">Warning output.</param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteWarning may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteWarning to display warnings about
-        /// the activity of your Cmdlet.  By default, warning output will
-        /// be displayed, although this can be configured with the
-        /// WarningPreference shell variable
-        /// or the -Verbose and -Debug command-line options.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteDebug(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteVerbose(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteProgress(ProgressRecord)"/>
         public void WriteWarning(string text)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteWarning(text);
-                else
-                    throw new System.NotImplementedException("WriteWarning");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 20894, 21254);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 20956, 21243);
+                using (f_1240_20963_21010())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 21044, 21228) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 21044, 21228);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 21093, 21127);
+
+                        f_1240_21093_21126(commandRuntime, text);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 21044, 21228);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 21044, 21228);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 21171, 21228);
+
+                        throw f_1240_21177_21227("WriteWarning");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 21044, 21228);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 20956, 21243);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 20894, 21254);
+
+                System.IDisposable
+                f_1240_20963_21010()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 20963, 21010);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_21093_21126(System.Management.Automation.ICommandRuntime
+                this_param, string
+                text)
+                {
+                    this_param.WriteWarning(text);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 21093, 21126);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_21177_21227(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 21177, 21227);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 20894, 21254);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 20894, 21254);
             }
         }
 
-        /// <summary>
-        /// Write text into pipeline execution log.
-        /// </summary>
-        /// <param name="text">Text to be written to log.</param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteWarning may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteCommandDetail to write important information about cmdlet execution to
-        /// pipeline execution log.
-        ///
-        /// If LogPipelineExecutionDetail is turned on, this information will be written
-        /// to monad log under log category "Pipeline execution detail"
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteDebug(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteVerbose(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteProgress(ProgressRecord)"/>
         public void WriteCommandDetail(string text)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteCommandDetail(text);
-                else
-                    throw new System.NotImplementedException("WriteCommandDetail");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 22782, 23160);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 22850, 23149);
+                using (f_1240_22857_22904())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 22938, 23134) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 22938, 23134);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 22987, 23027);
+
+                        f_1240_22987_23026(commandRuntime, text);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 22938, 23134);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 22938, 23134);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 23071, 23134);
+
+                        throw f_1240_23077_23133("WriteCommandDetail");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 22938, 23134);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 22850, 23149);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 22782, 23160);
+
+                System.IDisposable
+                f_1240_22857_22904()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 22857, 22904);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_22987_23026(System.Management.Automation.ICommandRuntime
+                this_param, string
+                text)
+                {
+                    this_param.WriteCommandDetail(text);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 22987, 23026);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_23077_23133(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 23077, 23133);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 22782, 23160);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 22782, 23160);
             }
         }
 
-        /// <summary>
-        /// Display progress information.
-        /// </summary>
-        /// <param name="progressRecord">Progress information.</param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteProgress may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteProgress to display progress information about
-        /// the activity of your Cmdlet, when the operation of your Cmdlet
-        /// could potentially take a long time.
-        ///
-        /// By default, progress output will
-        /// be displayed, although this can be configured with the
-        /// ProgressPreference shell variable.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteDebug(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteWarning(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteVerbose(string)"/>
         public void WriteProgress(ProgressRecord progressRecord)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteProgress(progressRecord);
-                else
-                    throw new System.NotImplementedException("WriteProgress");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 24738, 25129);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 24819, 25118);
+                using (f_1240_24826_24873())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 24907, 25103) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 24907, 25103);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 24956, 25001);
+
+                        f_1240_24956_25000(commandRuntime, progressRecord);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 24907, 25103);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 24907, 25103);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 25045, 25103);
+
+                        throw f_1240_25051_25102("WriteProgress");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 24907, 25103);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 24819, 25118);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 24738, 25129);
+
+                System.IDisposable
+                f_1240_24826_24873()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 24826, 24873);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_24956_25000(System.Management.Automation.ICommandRuntime
+                this_param, System.Management.Automation.ProgressRecord
+                progressRecord)
+                {
+                    this_param.WriteProgress(progressRecord);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 24956, 25000);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_25051_25102(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 25051, 25102);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 24738, 25129);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 24738, 25129);
             }
         }
 
-        /// <summary>
-        /// Displays progress output if enabled.
-        /// </summary>
-        /// <param name="sourceId">
-        /// Identifies which command is reporting progress
-        /// </param>
-        /// <param name="progressRecord">
-        /// Progress status to be displayed
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
         internal void WriteProgress(
-            Int64 sourceId,
-            ProgressRecord progressRecord)
+                    Int64 sourceId,
+                    ProgressRecord progressRecord)
         {
-            if (commandRuntime != null)
-                commandRuntime.WriteProgress(sourceId, progressRecord);
-            else
-                throw new System.NotImplementedException("WriteProgress");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 26253, 26584);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 26379, 26573) || true) && (commandRuntime != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 26379, 26573);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 26424, 26479);
+
+                    f_1240_26424_26478(commandRuntime, sourceId, progressRecord);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 26379, 26573);
+                }
+
+                else
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 26379, 26573);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 26515, 26573);
+
+                    throw f_1240_26521_26572("WriteProgress");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 26379, 26573);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 26253, 26584);
+
+                int
+                f_1240_26424_26478(System.Management.Automation.ICommandRuntime
+                this_param, long
+                sourceId, System.Management.Automation.ProgressRecord
+                progressRecord)
+                {
+                    this_param.WriteProgress(sourceId, progressRecord);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 26424, 26478);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_26521_26572(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 26521, 26572);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 26253, 26584);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 26253, 26584);
+            }
         }
 
-        /// <summary>
-        /// Display debug information.
-        /// </summary>
-        /// <param name="text">Debug output.</param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteDebug may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteDebug to display debug information on the inner workings
-        /// of your Cmdlet.  By default, debug output will
-        /// not be displayed, although this can be configured with the
-        /// DebugPreference shell variable or the -Debug command-line option.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteVerbose(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteWarning(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.WriteProgress(ProgressRecord)"/>
         public void WriteDebug(string text)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    commandRuntime.WriteDebug(text);
-                else
-                    throw new System.NotImplementedException("WriteDebug");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 28479, 28833);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 28539, 28822);
+                using (f_1240_28546_28593())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 28627, 28807) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 28627, 28807);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 28676, 28708);
+
+                        f_1240_28676_28707(commandRuntime, text);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 28627, 28807);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 28627, 28807);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 28752, 28807);
+
+                        throw f_1240_28758_28806("WriteDebug");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 28627, 28807);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 28539, 28822);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 28479, 28833);
+
+                System.IDisposable
+                f_1240_28546_28593()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 28546, 28593);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_28676_28707(System.Management.Automation.ICommandRuntime
+                this_param, string
+                text)
+                {
+                    this_param.WriteDebug(text);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 28676, 28707);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_28758_28806(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 28758, 28806);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 28479, 28833);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 28479, 28833);
             }
         }
 
-        /// <summary>
-        /// Route information to the user or host.
-        /// </summary>
-        /// <param name="messageData">The object / message data to transmit to the hosting application.</param>
-        /// <param name="tags">
-        /// Any tags to be associated with the message data. These can later be used to filter
-        /// or separate objects being sent to the host.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteInformation may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteInformation to transmit information to the user about the activity
-        /// of your Cmdlet.  By default, informational output will
-        /// be displayed, although this can be configured with the
-        /// InformationPreference shell variable or the -InformationPreference command-line option.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
         public void WriteInformation(object messageData, string[] tags)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                ICommandRuntime2 commandRuntime2 = commandRuntime as ICommandRuntime2;
-                if (commandRuntime2 != null)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 30776, 31846);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 30864, 31835);
+                using (f_1240_30871_30918())
                 {
-                    string source = this.MyInvocation.PSCommandPath;
-                    if (string.IsNullOrEmpty(source))
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 30952, 31022);
+
+                    ICommandRuntime2
+                    commandRuntime2 = commandRuntime as ICommandRuntime2
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31040, 31820) || true) && (commandRuntime2 != null)
+                    )
+
                     {
-                        source = this.MyInvocation.MyCommand.Name;
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 31040, 31820);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31109, 31157);
+
+                        string
+                        source = f_1240_31125_31156(f_1240_31125_31142(this))
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31179, 31326) || true) && (f_1240_31183_31211(source))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 31179, 31326);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31261, 31303);
+
+                            source = f_1240_31270_31302(f_1240_31270_31297(f_1240_31270_31287(this)));
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 31179, 31326);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31350, 31431);
+
+                        InformationRecord
+                        informationRecord = f_1240_31388_31430(messageData, source)
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31455, 31582) || true) && (tags != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 31455, 31582);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31521, 31559);
+
+                            f_1240_31521_31558(f_1240_31521_31543(informationRecord), tags);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 31455, 31582);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31606, 31658);
+
+                        f_1240_31606_31657(
+                                            commandRuntime2, informationRecord);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 31040, 31820);
                     }
 
-                    InformationRecord informationRecord = new InformationRecord(messageData, source);
+                    else
 
-                    if (tags != null)
                     {
-                        informationRecord.Tags.AddRange(tags);
-                    }
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 31040, 31820);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 31740, 31801);
 
-                    commandRuntime2.WriteInformation(informationRecord);
+                        throw f_1240_31746_31800("WriteInformation");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 31040, 31820);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 30864, 31835);
                 }
-                else
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 30776, 31846);
+
+                System.IDisposable
+                f_1240_30871_30918()
                 {
-                    throw new System.NotImplementedException("WriteInformation");
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 30871, 30918);
+                    return return_v;
                 }
+
+
+                System.Management.Automation.InvocationInfo
+                f_1240_31125_31142(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.MyInvocation;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 31125, 31142);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_31125_31156(System.Management.Automation.InvocationInfo
+                this_param)
+                {
+                    var return_v = this_param.PSCommandPath;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 31125, 31156);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_31183_31211(string
+                value)
+                {
+                    var return_v = string.IsNullOrEmpty(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 31183, 31211);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.InvocationInfo
+                f_1240_31270_31287(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.MyInvocation;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 31270, 31287);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.CommandInfo
+                f_1240_31270_31297(System.Management.Automation.InvocationInfo
+                this_param)
+                {
+                    var return_v = this_param.MyCommand;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 31270, 31297);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_31270_31302(System.Management.Automation.CommandInfo
+                this_param)
+                {
+                    var return_v = this_param.Name;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 31270, 31302);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.InformationRecord
+                f_1240_31388_31430(object
+                messageData, string
+                source)
+                {
+                    var return_v = new System.Management.Automation.InformationRecord(messageData, source);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 31388, 31430);
+                    return return_v;
+                }
+
+
+                System.Collections.Generic.List<string>
+                f_1240_31521_31543(System.Management.Automation.InformationRecord
+                this_param)
+                {
+                    var return_v = this_param.Tags;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 31521, 31543);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_31521_31558(System.Collections.Generic.List<string>
+                this_param, string[]
+                collection)
+                {
+                    this_param.AddRange((System.Collections.Generic.IEnumerable<string>)collection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 31521, 31558);
+                    return 0;
+                }
+
+
+                int
+                f_1240_31606_31657(System.Management.Automation.ICommandRuntime2
+                this_param, System.Management.Automation.InformationRecord
+                informationRecord)
+                {
+                    this_param.WriteInformation(informationRecord);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 31606, 31657);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_31746_31800(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 31746, 31800);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 30776, 31846);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 30776, 31846);
             }
         }
 
-        /// <summary>
-        /// Route information to the user or host.
-        /// </summary>
-        /// <param name="informationRecord">The information record to write.</param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// WriteInformation may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <remarks>
-        /// Use WriteInformation to transmit information to the user about the activity
-        /// of your Cmdlet.  By default, informational output will
-        /// be displayed, although this can be configured with the
-        /// InformationPreference shell variable or the -InformationPreference command-line option.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
         public void WriteInformation(InformationRecord informationRecord)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                ICommandRuntime2 commandRuntime2 = commandRuntime as ICommandRuntime2;
-                if (commandRuntime2 != null)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 33554, 34129);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 33644, 34118);
+                using (f_1240_33651_33698())
                 {
-                    commandRuntime2.WriteInformation(informationRecord);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 33732, 33802);
+
+                    ICommandRuntime2
+                    commandRuntime2 = commandRuntime as ICommandRuntime2
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 33820, 34103) || true) && (commandRuntime2 != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 33820, 34103);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 33889, 33941);
+
+                        f_1240_33889_33940(commandRuntime2, informationRecord);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 33820, 34103);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 33820, 34103);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 34023, 34084);
+
+                        throw f_1240_34029_34083("WriteInformation");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 33820, 34103);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 33644, 34118);
                 }
-                else
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 33554, 34129);
+
+                System.IDisposable
+                f_1240_33651_33698()
                 {
-                    throw new System.NotImplementedException("WriteInformation");
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 33651, 33698);
+                    return return_v;
                 }
+
+
+                int
+                f_1240_33889_33940(System.Management.Automation.ICommandRuntime2
+                this_param, System.Management.Automation.InformationRecord
+                informationRecord)
+                {
+                    this_param.WriteInformation(informationRecord);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 33889, 33940);
+                    return 0;
+                }
+
+
+                System.NotImplementedException
+                f_1240_34029_34083(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 34029, 34083);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 33554, 34129);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 33554, 34129);
             }
         }
 
-        #endregion Write
-
-        #region ShouldProcess
-        /// <summary>
-        /// Confirm the operation with the user.  Cmdlets which make changes
-        /// (e.g. delete files, stop services etc.) should call ShouldProcess
-        /// to give the user the opportunity to confirm that the operation
-        /// should actually be performed.
-        /// </summary>
-        /// <param name="target">
-        /// Name of the target resource being acted upon. This will
-        /// potentially be displayed to the user.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldProcess returns true, the operation should be performed.
-        /// If ShouldProcess returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// A Cmdlet should declare
-        /// [Cmdlet( SupportsShouldProcess = true )]
-        /// if-and-only-if it calls ShouldProcess before making changes.
-        ///
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// ShouldProcess will take into account command-line settings
-        /// and preference variables in determining what it should return
-        /// and whether it should prompt the user.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire,
-        /// <see cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype1")]
-        ///             public class RemoveMyObjectType1 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     if (ShouldProcess(filename))
-        ///                     {
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string,out ShouldProcessReason)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string,ref bool,ref bool)"/>
         public bool ShouldProcess(string target)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    return commandRuntime.ShouldProcess(target);
-                else
-                    return true;
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 38461, 38789);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 38526, 38778);
+                using (f_1240_38533_38580())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 38614, 38763) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 38614, 38763);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 38663, 38707);
+
+                        return f_1240_38670_38706(commandRuntime, target);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 38614, 38763);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 38614, 38763);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 38751, 38763);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 38614, 38763);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 38526, 38778);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 38461, 38789);
+
+                System.IDisposable
+                f_1240_38533_38580()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 38533, 38580);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_38670_38706(System.Management.Automation.ICommandRuntime
+                this_param, string
+                target)
+                {
+                    var return_v = this_param.ShouldProcess(target);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 38670, 38706);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 38461, 38789);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 38461, 38789);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Confirm the operation with the user.  Cmdlets which make changes
-        /// (e.g. delete files, stop services etc.) should call ShouldProcess
-        /// to give the user the opportunity to confirm that the operation
-        /// should actually be performed.
-        ///
-        /// This variant allows the caller to specify text for both the
-        /// target resource and the action.
-        /// </summary>
-        /// <param name="target">
-        /// Name of the target resource being acted upon. This will
-        /// potentially be displayed to the user.
-        /// </param>
-        /// <param name="action">
-        /// Name of the action which is being performed. This will
-        /// potentially be displayed to the user. (default is Cmdlet name)
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldProcess returns true, the operation should be performed.
-        /// If ShouldProcess returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// A Cmdlet should declare
-        /// [Cmdlet( SupportsShouldProcess = true )]
-        /// if-and-only-if it calls ShouldProcess before making changes.
-        ///
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// ShouldProcess will take into account command-line settings
-        /// and preference variables in determining what it should return
-        /// and whether it should prompt the user.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype2")]
-        ///             public class RemoveMyObjectType2 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     if (ShouldProcess(filename, "delete"))
-        ///                     {
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string,out ShouldProcessReason)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string,ref bool,ref bool)"/>
         public bool ShouldProcess(string target, string action)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    return commandRuntime.ShouldProcess(target, action);
-                else
-                    return true;
-            }
-        }
-
-        /// <summary>
-        /// Confirm the operation with the user.  Cmdlets which make changes
-        /// (e.g. delete files, stop services etc.) should call ShouldProcess
-        /// to give the user the opportunity to confirm that the operation
-        /// should actually be performed.
-        ///
-        /// This variant allows the caller to specify the complete text
-        /// describing the operation, rather than just the name and action.
-        /// </summary>
-        /// <param name="verboseDescription">
-        /// Textual description of the action to be performed.
-        /// This is what will be displayed to the user for
-        /// ActionPreference.Continue.
-        /// </param>
-        /// <param name="verboseWarning">
-        /// Textual query of whether the action should be performed,
-        /// usually in the form of a question.
-        /// This is what will be displayed to the user for
-        /// ActionPreference.Inquire.
-        /// </param>
-        /// <param name="caption">
-        /// Caption of the window which may be displayed
-        /// if the user is prompted whether or not to perform the action.
-        /// <paramref name="caption"/> may be displayed by some hosts, but not all.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldProcess returns true, the operation should be performed.
-        /// If ShouldProcess returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// A Cmdlet should declare
-        /// [Cmdlet( SupportsShouldProcess = true )]
-        /// if-and-only-if it calls ShouldProcess before making changes.
-        ///
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// ShouldProcess will take into account command-line settings
-        /// and preference variables in determining what it should return
-        /// and whether it should prompt the user.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype3")]
-        ///             public class RemoveMyObjectType3 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     if (ShouldProcess(
-        ///                         string.Format("Deleting file {0}",filename),
-        ///                         string.Format("Are you sure you want to delete file {0}?", filename),
-        ///                         "Delete file"))
-        ///                     {
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string,out ShouldProcessReason)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string,ref bool,ref bool)"/>
-        public bool ShouldProcess(
-            string verboseDescription,
-            string verboseWarning,
-            string caption)
-        {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                if (commandRuntime != null)
-                    return commandRuntime.ShouldProcess(verboseDescription, verboseWarning, caption);
-                else
-                    return true;
-            }
-        }
-
-        /// <summary>
-        /// Confirm the operation with the user.  Cmdlets which make changes
-        /// (e.g. delete files, stop services etc.) should call ShouldProcess
-        /// to give the user the opportunity to confirm that the operation
-        /// should actually be performed.
-        ///
-        /// This variant allows the caller to specify the complete text
-        /// describing the operation, rather than just the name and action.
-        /// </summary>
-        /// <param name="verboseDescription">
-        /// Textual description of the action to be performed.
-        /// This is what will be displayed to the user for
-        /// ActionPreference.Continue.
-        /// </param>
-        /// <param name="verboseWarning">
-        /// Textual query of whether the action should be performed,
-        /// usually in the form of a question.
-        /// This is what will be displayed to the user for
-        /// ActionPreference.Inquire.
-        /// </param>
-        /// <param name="caption">
-        /// Caption of the window which may be displayed
-        /// if the user is prompted whether or not to perform the action.
-        /// <paramref name="caption"/> may be displayed by some hosts, but not all.
-        /// </param>
-        /// <param name="shouldProcessReason">
-        /// Indicates the reason(s) why ShouldProcess returned what it returned.
-        /// Only the reasons enumerated in
-        /// <see cref="System.Management.Automation.ShouldProcessReason"/>
-        /// are returned.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldProcess returns true, the operation should be performed.
-        /// If ShouldProcess returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// A Cmdlet should declare
-        /// [Cmdlet( SupportsShouldProcess = true )]
-        /// if-and-only-if it calls ShouldProcess before making changes.
-        ///
-        /// ShouldProcess may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// ShouldProcess will take into account command-line settings
-        /// and preference variables in determining what it should return
-        /// and whether it should prompt the user.
-        /// </remarks>
-        /// <remarks>
-        /// If the pipeline is terminated due to ActionPreference.Stop
-        /// or ActionPreference.Inquire, this method will throw
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// but the command failure will ultimately be
-        /// <see cref="System.Management.Automation.ActionPreferenceStopException"/>,
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype3")]
-        ///             public class RemoveMyObjectType3 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     ShouldProcessReason shouldProcessReason;
-        ///                     if (ShouldProcess(
-        ///                         string.Format("Deleting file {0}",filename),
-        ///                         string.Format("Are you sure you want to delete file {0}?", filename),
-        ///                         "Delete file",
-        ///                         out shouldProcessReason))
-        ///                     {
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string,ref bool,ref bool)"/>
-        public bool ShouldProcess(
-            string verboseDescription,
-            string verboseWarning,
-            string caption,
-            out ShouldProcessReason shouldProcessReason)
-        {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                if (commandRuntime != null)
-                    return commandRuntime.ShouldProcess(verboseDescription, verboseWarning, caption, out shouldProcessReason);
-                else
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 43311, 43662);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 43391, 43651);
+                using (f_1240_43398_43445())
                 {
-                    shouldProcessReason = ShouldProcessReason.None;
-                    return true;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 43479, 43636) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 43479, 43636);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 43528, 43580);
+
+                        return f_1240_43535_43579(commandRuntime, target, action);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 43479, 43636);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 43479, 43636);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 43624, 43636);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 43479, 43636);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 43391, 43651);
                 }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 43311, 43662);
+
+                System.IDisposable
+                f_1240_43398_43445()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 43398, 43445);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_43535_43579(System.Management.Automation.ICommandRuntime
+                this_param, string
+                target, string
+                action)
+                {
+                    var return_v = this_param.ShouldProcess(target, action);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 43535, 43579);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 43311, 43662);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 43311, 43662);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion ShouldProcess
+        public bool ShouldProcess(
+                    string verboseDescription,
+                    string verboseWarning,
+                    string caption)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 48844, 49300);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 49000, 49289);
+                using (f_1240_49007_49054())
+                {
 
-        #region ShouldContinue
-        /// <summary>
-        /// Confirm an operation or grouping of operations with the user.
-        /// This differs from ShouldProcess in that it is not affected by
-        /// preference settings or command-line parameters,
-        /// it always does the query.
-        /// This variant only offers Yes/No, not YesToAll/NoToAll.
-        /// </summary>
-        /// <param name="query">
-        /// Textual query of whether the action should be performed,
-        /// usually in the form of a question.
-        /// </param>
-        /// <param name="caption">
-        /// Caption of the window which may be displayed
-        /// when the user is prompted whether or not to perform the action.
-        /// It may be displayed by some hosts, but not all.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldContinue may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldContinue returns true, the operation should be performed.
-        /// If ShouldContinue returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// Cmdlets using ShouldContinue should also offer a "bool Force"
-        /// parameter which bypasses the calls to ShouldContinue
-        /// and ShouldProcess.
-        /// If this is not done, it will be difficult to use the Cmdlet
-        /// from scripts and non-interactive hosts.
-        ///
-        /// Cmdlets using ShouldContinue must still verify operations
-        /// which will make changes using ShouldProcess.
-        /// This will assure that settings such as -WhatIf work properly.
-        /// You may call ShouldContinue either before or after ShouldProcess.
-        ///
-        /// ShouldContinue may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// Cmdlets may have different "classes" of confirmations.  For example,
-        /// "del" confirms whether files in a particular directory should be
-        /// deleted, whether read-only files should be deleted, etc.
-        /// Cmdlets can use ShouldContinue to store YesToAll/NoToAll members
-        /// for each such "class" to keep track of whether the user has
-        /// confirmed "delete all read-only files" etc.
-        /// ShouldProcess offers YesToAll/NoToAll automatically,
-        /// but answering YesToAll or NoToAll applies to all subsequent calls
-        /// to ShouldProcess for the Cmdlet instance.
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype4")]
-        ///             public class RemoveMyObjectType4 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 [Parameter]
-        ///                 public SwitchParameter Force
-        ///                 {
-        ///                     get { return force; }
-        ///                     set { force = value; }
-        ///                 }
-        ///                 private bool force;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     if (ShouldProcess(
-        ///                         string.Format("Deleting file {0}",filename),
-        ///                         string.Format("Are you sure you want to delete file {0}", filename),
-        ///                         "Delete file"))
-        ///                     {
-        ///                         if (IsReadOnly(filename))
-        ///                         {
-        ///                             if (!Force &amp;&amp; !ShouldContinue(
-        ///                                     string.Format("File {0} is read-only.  Are you sure you want to delete read-only file {0}?", filename),
-        ///                                     "Delete file"))
-        ///                                     )
-        ///                             {
-        ///                                 return;
-        ///                             }
-        ///                         }
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string,ref bool,ref bool)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string)"/>
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 49088, 49274) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 49088, 49274);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 49137, 49218);
+
+                        return f_1240_49144_49217(commandRuntime, verboseDescription, verboseWarning, caption);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 49088, 49274);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 49088, 49274);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 49262, 49274);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 49088, 49274);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 49000, 49289);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 48844, 49300);
+
+                System.IDisposable
+                f_1240_49007_49054()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 49007, 49054);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_49144_49217(System.Management.Automation.ICommandRuntime
+                this_param, string
+                verboseDescription, string
+                verboseWarning, string
+                caption)
+                {
+                    var return_v = this_param.ShouldProcess(verboseDescription, verboseWarning, caption);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 49144, 49217);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 48844, 49300);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 48844, 49300);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public bool ShouldProcess(
+                    string verboseDescription,
+                    string verboseWarning,
+                    string caption,
+                    out ShouldProcessReason shouldProcessReason)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 54893, 55539);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 55107, 55528);
+                using (f_1240_55114_55161())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 55195, 55513) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 55195, 55513);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 55244, 55350);
+
+                        return f_1240_55251_55349(commandRuntime, verboseDescription, verboseWarning, caption, out shouldProcessReason);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 55195, 55513);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 55195, 55513);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 55413, 55460);
+
+                        shouldProcessReason = ShouldProcessReason.None;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 55482, 55494);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 55195, 55513);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 55107, 55528);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 54893, 55539);
+
+                System.IDisposable
+                f_1240_55114_55161()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 55114, 55161);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_55251_55349(System.Management.Automation.ICommandRuntime
+                this_param, string
+                verboseDescription, string
+                verboseWarning, string
+                caption, out System.Management.Automation.ShouldProcessReason
+                shouldProcessReason)
+                {
+                    var return_v = this_param.ShouldProcess(verboseDescription, verboseWarning, caption, out shouldProcessReason);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 55251, 55349);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 54893, 55539);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 54893, 55539);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         public bool ShouldContinue(string query, string caption)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    return commandRuntime.ShouldContinue(query, caption);
-                else
-                    return true;
-            }
-        }
-
-        /// <summary>
-        /// Confirm an operation or grouping of operations with the user.
-        /// This differs from ShouldProcess in that it is not affected by
-        /// preference settings or command-line parameters,
-        /// it always does the query.
-        /// This variant offers Yes, No, YesToAll and NoToAll.
-        /// </summary>
-        /// <param name="query">
-        /// Textual query of whether the action should be performed,
-        /// usually in the form of a question.
-        /// </param>
-        /// <param name="caption">
-        /// Caption of the window which may be displayed
-        /// when the user is prompted whether or not to perform the action.
-        /// It may be displayed by some hosts, but not all.
-        /// </param>
-        /// <param name="yesToAll">
-        /// true iff user selects YesToAll.  If this is already true,
-        /// ShouldContinue will bypass the prompt and return true.
-        /// </param>
-        /// <param name="noToAll">
-        /// true iff user selects NoToAll.  If this is already true,
-        /// ShouldContinue will bypass the prompt and return false.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldContinue may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldContinue returns true, the operation should be performed.
-        /// If ShouldContinue returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// Cmdlets using ShouldContinue should also offer a "bool Force"
-        /// parameter which bypasses the calls to ShouldContinue
-        /// and ShouldProcess.
-        /// If this is not done, it will be difficult to use the Cmdlet
-        /// from scripts and non-interactive hosts.
-        ///
-        /// Cmdlets using ShouldContinue must still verify operations
-        /// which will make changes using ShouldProcess.
-        /// This will assure that settings such as -WhatIf work properly.
-        /// You may call ShouldContinue either before or after ShouldProcess.
-        ///
-        /// ShouldContinue may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// Cmdlets may have different "classes" of confirmations.  For example,
-        /// "del" confirms whether files in a particular directory should be
-        /// deleted, whether read-only files should be deleted, etc.
-        /// Cmdlets can use ShouldContinue to store YesToAll/NoToAll members
-        /// for each such "class" to keep track of whether the user has
-        /// confirmed "delete all read-only files" etc.
-        /// ShouldProcess offers YesToAll/NoToAll automatically,
-        /// but answering YesToAll or NoToAll applies to all subsequent calls
-        /// to ShouldProcess for the Cmdlet instance.
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype4")]
-        ///             public class RemoveMyObjectType5 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 [Parameter]
-        ///                 public SwitchParameter Force
-        ///                 {
-        ///                     get { return force; }
-        ///                     set { force = value; }
-        ///                 }
-        ///                 private bool force;
-        ///
-        ///                 private bool yesToAll;
-        ///                 private bool noToAll;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     if (ShouldProcess(
-        ///                         string.Format("Deleting file {0}",filename),
-        ///                         string.Format("Are you sure you want to delete file {0}", filename),
-        ///                         "Delete file"))
-        ///                     {
-        ///                         if (IsReadOnly(filename))
-        ///                         {
-        ///                             if (!Force &amp;&amp; !ShouldContinue(
-        ///                                     string.Format("File {0} is read-only.  Are you sure you want to delete read-only file {0}?", filename),
-        ///                                     "Delete file"),
-        ///                                     ref yesToAll,
-        ///                                     ref noToAll
-        ///                                     )
-        ///                             {
-        ///                                 return;
-        ///                             }
-        ///                         }
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string)"/>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-        public bool ShouldContinue(
-            string query, string caption, ref bool yesToAll, ref bool noToAll)
-        {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                if (commandRuntime != null)
-                    return commandRuntime.ShouldContinue(query, caption, ref yesToAll, ref noToAll);
-                else
-                    return true;
-            }
-        }
-
-        /// <summary>
-        /// Confirm an operation or grouping of operations with the user.
-        /// This differs from ShouldProcess in that it is not affected by
-        /// preference settings or command-line parameters,
-        /// it always does the query.
-        /// This variant offers Yes, No, YesToAll and NoToAll.
-        /// </summary>
-        /// <param name="query">
-        /// Textual query of whether the action should be performed,
-        /// usually in the form of a question.
-        /// </param>
-        /// <param name="caption">
-        /// Caption of the window which may be displayed
-        /// when the user is prompted whether or not to perform the action.
-        /// It may be displayed by some hosts, but not all.
-        /// </param>
-        /// <param name="hasSecurityImpact">
-        /// true if the operation being confirmed has a security impact. If specified,
-        /// the default option selected in the selection menu is 'No'.
-        /// </param>
-        /// <param name="yesToAll">
-        /// true iff user selects YesToAll.  If this is already true,
-        /// ShouldContinue will bypass the prompt and return true.
-        /// </param>
-        /// <param name="noToAll">
-        /// true iff user selects NoToAll.  If this is already true,
-        /// ShouldContinue will bypass the prompt and return false.
-        /// </param>
-        /// <exception cref="System.Management.Automation.PipelineStoppedException">
-        /// The pipeline has already been terminated, or was terminated
-        /// during the execution of this method.
-        /// The Cmdlet should generally just allow PipelineStoppedException
-        /// to percolate up to the caller of ProcessRecord etc.
-        /// </exception>
-        /// <exception cref="System.InvalidOperationException">
-        /// Not permitted at this time or from this thread.
-        /// ShouldContinue may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        /// </exception>
-        /// <returns>
-        /// If ShouldContinue returns true, the operation should be performed.
-        /// If ShouldContinue returns false, the operation should not be
-        /// performed, and the Cmdlet should move on to the next target resource.
-        /// </returns>
-        /// <remarks>
-        /// Cmdlets using ShouldContinue should also offer a "bool Force"
-        /// parameter which bypasses the calls to ShouldContinue
-        /// and ShouldProcess.
-        /// If this is not done, it will be difficult to use the Cmdlet
-        /// from scripts and non-interactive hosts.
-        ///
-        /// Cmdlets using ShouldContinue must still verify operations
-        /// which will make changes using ShouldProcess.
-        /// This will assure that settings such as -WhatIf work properly.
-        /// You may call ShouldContinue either before or after ShouldProcess.
-        ///
-        /// ShouldContinue may only be called during a call to this Cmdlet's
-        /// implementation of ProcessRecord, BeginProcessing or EndProcessing,
-        /// and only from that thread.
-        ///
-        /// Cmdlets may have different "classes" of confirmations.  For example,
-        /// "del" confirms whether files in a particular directory should be
-        /// deleted, whether read-only files should be deleted, etc.
-        /// Cmdlets can use ShouldContinue to store YesToAll/NoToAll members
-        /// for each such "class" to keep track of whether the user has
-        /// confirmed "delete all read-only files" etc.
-        /// ShouldProcess offers YesToAll/NoToAll automatically,
-        /// but answering YesToAll or NoToAll applies to all subsequent calls
-        /// to ShouldProcess for the Cmdlet instance.
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet(VerbsCommon.Remove,"myobjecttype4")]
-        ///             public class RemoveMyObjectType5 : Cmdlet
-        ///             {
-        ///                 [Parameter( Mandatory = true )]
-        ///                 public string Filename
-        ///                 {
-        ///                     get { return filename; }
-        ///                     set { filename = value; }
-        ///                 }
-        ///                 private string filename;
-        ///
-        ///                 [Parameter]
-        ///                 public SwitchParameter Force
-        ///                 {
-        ///                     get { return force; }
-        ///                     set { force = value; }
-        ///                 }
-        ///                 private bool force;
-        ///
-        ///                 private bool yesToAll;
-        ///                 private bool noToAll;
-        ///
-        ///                 public override void ProcessRecord()
-        ///                 {
-        ///                     if (ShouldProcess(
-        ///                         string.Format("Deleting file {0}",filename),
-        ///                         string.Format("Are you sure you want to delete file {0}", filename),
-        ///                         "Delete file"))
-        ///                     {
-        ///                         if (IsReadOnly(filename))
-        ///                         {
-        ///                             if (!Force &amp;&amp; !ShouldContinue(
-        ///                                     string.Format("File {0} is read-only.  Are you sure you want to delete read-only file {0}?", filename),
-        ///                                     "Delete file"),
-        ///                                     ref yesToAll,
-        ///                                     ref noToAll
-        ///                                     )
-        ///                             {
-        ///                                 return;
-        ///                             }
-        ///                         }
-        ///                         // delete the object
-        ///                     }
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldContinue(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string)"/>
-        /// <seealso cref="System.Management.Automation.Cmdlet.ShouldProcess(string,string,string)"/>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-        public bool ShouldContinue(
-            string query, string caption, bool hasSecurityImpact, ref bool yesToAll, ref bool noToAll)
-        {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                if (commandRuntime != null)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 61610, 61963);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 61691, 61952);
+                using (f_1240_61698_61745())
                 {
-                    ICommandRuntime2 runtime2 = commandRuntime as ICommandRuntime2;
-                    if (runtime2 != null)
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 61779, 61937) || true) && (commandRuntime != null)
+                    )
+
                     {
-                        return runtime2.ShouldContinue(query, caption, hasSecurityImpact, ref yesToAll, ref noToAll);
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 61779, 61937);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 61828, 61881);
+
+                        return f_1240_61835_61880(commandRuntime, query, caption);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 61779, 61937);
                     }
+
                     else
+
                     {
-                        return commandRuntime.ShouldContinue(query, caption, ref yesToAll, ref noToAll);
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 61779, 61937);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 61925, 61937);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 61779, 61937);
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 61691, 61952);
                 }
-                else
-                    return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 61610, 61963);
+
+                System.IDisposable
+                f_1240_61698_61745()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 61698, 61745);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_61835_61880(System.Management.Automation.ICommandRuntime
+                this_param, string
+                query, string
+                caption)
+                {
+                    var return_v = this_param.ShouldContinue(query, caption);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 61835, 61880);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 61610, 61963);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 61610, 61963);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Run the cmdlet and get the results as a collection. This is an internal
-        /// routine that is used by Invoke to build the underlying collection of
-        /// results.
-        /// </summary>
-        /// <returns>Returns an list of results.</returns>
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+        public bool ShouldContinue(
+                    string query, string caption, ref bool yesToAll, ref bool noToAll)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 68579, 69093);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 68794, 69082);
+                using (f_1240_68801_68848())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 68882, 69067) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 68882, 69067);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 68931, 69011);
+
+                        return f_1240_68938_69010(commandRuntime, query, caption, ref yesToAll, ref noToAll);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 68882, 69067);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 68882, 69067);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 69055, 69067);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 68882, 69067);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 68794, 69082);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 68579, 69093);
+
+                System.IDisposable
+                f_1240_68801_68848()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 68801, 68848);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_68938_69010(System.Management.Automation.ICommandRuntime
+                this_param, string
+                query, string
+                caption, ref bool
+                yesToAll, ref bool
+                noToAll)
+                {
+                    var return_v = this_param.ShouldContinue(query, caption, ref yesToAll, ref noToAll);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 68938, 69010);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 68579, 69093);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 68579, 69093);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
+        public bool ShouldContinue(
+                    string query, string caption, bool hasSecurityImpact, ref bool yesToAll, ref bool noToAll)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 75937, 76882);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76176, 76871);
+                using (f_1240_76183_76230())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76264, 76856) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 76264, 76856);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76332, 76395);
+
+                        ICommandRuntime2
+                        runtime2 = commandRuntime as ICommandRuntime2
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76417, 76781) || true) && (runtime2 != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 76417, 76781);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76487, 76580);
+
+                            return f_1240_76494_76579(runtime2, query, caption, hasSecurityImpact, ref yesToAll, ref noToAll);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 76417, 76781);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 76417, 76781);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76678, 76758);
+
+                            return f_1240_76685_76757(commandRuntime, query, caption, ref yesToAll, ref noToAll);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 76417, 76781);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 76264, 76856);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 76264, 76856);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 76844, 76856);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 76264, 76856);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 76176, 76871);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 75937, 76882);
+
+                System.IDisposable
+                f_1240_76183_76230()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 76183, 76230);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_76494_76579(System.Management.Automation.ICommandRuntime2
+                this_param, string
+                query, string
+                caption, bool
+                hasSecurityImpact, ref bool
+                yesToAll, ref bool
+                noToAll)
+                {
+                    var return_v = this_param.ShouldContinue(query, caption, hasSecurityImpact, ref yesToAll, ref noToAll);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 76494, 76579);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_76685_76757(System.Management.Automation.ICommandRuntime
+                this_param, string
+                query, string
+                caption, ref bool
+                yesToAll, ref bool
+                noToAll)
+                {
+                    var return_v = this_param.ShouldContinue(query, caption, ref yesToAll, ref noToAll);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 76685, 76757);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 75937, 76882);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 75937, 76882);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         internal List<object> GetResults()
         {
-            // Prevent invocation of things that derive from PSCmdlet.
-            if (this is PSCmdlet)
+            try
             {
-                string msg = CommandBaseStrings.CannotInvokePSCmdletsDirectly;
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 77190, 77868);
 
-                throw new System.InvalidOperationException(msg);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77321, 77520) || true) && (this is PSCmdlet)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 77321, 77520);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77375, 77437);
+
+                    string
+                    msg = f_1240_77388_77436()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77457, 77505);
+
+                    throw f_1240_77463_77504(msg);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 77321, 77520);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77536, 77568);
+
+                var
+                result = f_1240_77549_77567()
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77582, 77718) || true) && (this.commandRuntime == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 77582, 77718);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77647, 77703);
+
+                    this.CommandRuntime = f_1240_77669_77702(result);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 77582, 77718);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77734, 77757);
+
+                f_1240_77734_77756(
+                            this);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77771, 77792);
+
+                f_1240_77771_77791(this);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77806, 77827);
+
+                f_1240_77806_77826(this);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 77843, 77857);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 77190, 77868);
+
+                string
+                f_1240_77388_77436()
+                {
+                    var return_v = CommandBaseStrings.CannotInvokePSCmdletsDirectly;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 77388, 77436);
+                    return return_v;
+                }
+
+
+                System.InvalidOperationException
+                f_1240_77463_77504(string
+                message)
+                {
+                    var return_v = new System.InvalidOperationException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 77463, 77504);
+                    return return_v;
+                }
+
+
+                System.Collections.Generic.List<object>
+                f_1240_77549_77567()
+                {
+                    var return_v = new System.Collections.Generic.List<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 77549, 77567);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.DefaultCommandRuntime
+                f_1240_77669_77702(System.Collections.Generic.List<object>
+                outputList)
+                {
+                    var return_v = new System.Management.Automation.DefaultCommandRuntime(outputList);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 77669, 77702);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_77734_77756(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.BeginProcessing();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 77734, 77756);
+                    return 0;
+                }
+
+
+                int
+                f_1240_77771_77791(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.ProcessRecord();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 77771, 77791);
+                    return 0;
+                }
+
+
+                int
+                f_1240_77806_77826(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    this_param.EndProcessing();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 77806, 77826);
+                    return 0;
+                }
+
             }
-
-            var result = new List<object>();
-            if (this.commandRuntime == null)
+            catch
             {
-                this.CommandRuntime = new DefaultCommandRuntime(result);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 77190, 77868);
+                throw;
             }
-
-            this.BeginProcessing();
-            this.ProcessRecord();
-            this.EndProcessing();
-
-            return result;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 77190, 77868);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-        /// <summary>
-        /// Invoke this cmdlet object returning a collection of results.
-        /// </summary>
-        /// <returns>The results that were produced by this class.</returns>
+
         public IEnumerable Invoke()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                List<object> data = this.GetResults();
-                for (int i = 0; i < data.Count; i++)
-                    yield return data[i];
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 78077, 78378);
+
+                var listYield = new List<object>();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78129, 78367);
+                using (f_1240_78136_78183())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78217, 78255);
+
+                    List<object>
+                    data = f_1240_78237_78254(this)
+                    ;
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78282, 78287);
+                        for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78273, 78352) || true) && (i < f_1240_78293_78303(data))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78305, 78308)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 78273, 78352))
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 78273, 78352);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78331, 78352);
+
+                            listYield.Add(f_1240_78344_78351(data, i));
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1240, 1, 80);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1240, 1, 80);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 78129, 78367);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 78077, 78378);
+
+                return listYield;
+
+                System.IDisposable
+                f_1240_78136_78183()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 78136, 78183);
+                    return return_v;
+                }
+
+
+                System.Collections.Generic.List<object>
+                f_1240_78237_78254(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.GetResults();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 78237, 78254);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_78293_78303(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 78293, 78303);
+                    return return_v;
+                }
+
+
+                object
+                f_1240_78344_78351(System.Collections.Generic.List<object>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 78344, 78351);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 78077, 78378);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 78077, 78378);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Returns a strongly-typed enumerator for the results of this cmdlet.
-        /// </summary>
-        /// <typeparam name="T">The type returned by the enumerator</typeparam>
-        /// <returns>An instance of the appropriate enumerator.</returns>
-        /// <exception cref="InvalidCastException">Thrown when the object returned by the cmdlet cannot be converted to the target type.</exception>
         public IEnumerable<T> Invoke<T>()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                List<object> data = this.GetResults();
-                for (int i = 0; i < data.Count; i++)
-                    yield return (T)data[i];
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 78824, 79134);
+
+                var listYield = new List<T>();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78882, 79123);
+                using (f_1240_78889_78936())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 78970, 79008);
+
+                    List<object>
+                    data = f_1240_78990_79007(this)
+                    ;
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79035, 79040);
+                        for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79026, 79108) || true) && (i < f_1240_79046_79056(data))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79058, 79061)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 79026, 79108))
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 79026, 79108);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79084, 79108);
+
+                            listYield.Add((T)f_1240_79100_79107(data, i));
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1240, 1, 83);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1240, 1, 83);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 78882, 79123);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 78824, 79134);
+
+                return listYield;
+
+                System.IDisposable
+                f_1240_78889_78936()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 78889, 78936);
+                    return return_v;
+                }
+
+
+                System.Collections.Generic.List<object>
+                f_1240_78990_79007(System.Management.Automation.Cmdlet
+                this_param)
+                {
+                    var return_v = this_param.GetResults();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 78990, 79007);
+                    return return_v;
+                }
+
+
+                int
+                f_1240_79046_79056(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 79046, 79056);
+                    return return_v;
+                }
+
+
+                object
+                f_1240_79100_79107(System.Collections.Generic.List<object>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 79100, 79107);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 78824, 79134);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 78824, 79134);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion ShouldContinue
-
-        #region Transaction Support
-
-        /// <summary>
-        /// Returns true if a transaction is available and active.
-        /// </summary>
         public bool TransactionAvailable()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (commandRuntime != null)
-                    return commandRuntime.TransactionAvailable();
-                else
-#pragma warning suppress 56503
-                    throw new System.NotImplementedException("TransactionAvailable");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 79337, 79745);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79396, 79734);
+                using (f_1240_79403_79450())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79484, 79719) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 79484, 79719);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79533, 79578);
+
+                        return f_1240_79540_79577(commandRuntime);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 79484, 79719);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 79484, 79719);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 79654, 79719);
+
+                        throw f_1240_79660_79718("TransactionAvailable");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 79484, 79719);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 79396, 79734);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 79337, 79745);
+
+                System.IDisposable
+                f_1240_79403_79450()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 79403, 79450);
+                    return return_v;
+                }
+
+
+                bool
+                f_1240_79540_79577(System.Management.Automation.ICommandRuntime
+                this_param)
+                {
+                    var return_v = this_param.TransactionAvailable();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 79540, 79577);
+                    return return_v;
+                }
+
+
+                System.NotImplementedException
+                f_1240_79660_79718(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 79660, 79718);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 79337, 79745);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 79337, 79745);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Gets an object that surfaces the current PowerShell transaction.
-        /// When this object is disposed, PowerShell resets the active transaction.
-        /// </summary>
         [SuppressMessage("Microsoft.Design", "CA1065:DoNotRaiseExceptionsInUnexpectedLocations")]
         public PSTransactionContext CurrentPSTransaction
         {
             get
             {
-                if (commandRuntime != null)
-                    return commandRuntime.CurrentPSTransaction;
-                else
-                    // We want to throw in this situation, and want to use a
-                    // property because it mimics the C# using(TransactionScope ...) syntax
-                    throw new System.NotImplementedException("CurrentPSTransaction");
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 80139, 80562);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 80175, 80547) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 80175, 80547);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 80224, 80267);
+
+                        return f_1240_80231_80266(commandRuntime);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 80175, 80547);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 80175, 80547);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 80482, 80547);
+
+                        throw f_1240_80488_80546("CurrentPSTransaction");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 80175, 80547);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 80139, 80562);
+
+                    System.Management.Automation.PSTransactionContext
+                    f_1240_80231_80266(System.Management.Automation.ICommandRuntime
+                    this_param)
+                    {
+                        var return_v = this_param.CurrentPSTransaction;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 80231, 80266);
+                        return return_v;
+                    }
+
+
+                    System.NotImplementedException
+                    f_1240_80488_80546(string
+                    message)
+                    {
+                        var return_v = new System.NotImplementedException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 80488, 80546);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 79967, 80573);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 79967, 80573);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
-        #endregion Transaction Support
 
-        #region ThrowTerminatingError
-        /// <summary>
-        /// Terminate the command and report an error.
-        /// </summary>
-        /// <param name="errorRecord">
-        /// The error which caused the command to be terminated
-        /// </param>
-        /// <exception cref="PipelineStoppedException">
-        /// always
-        /// </exception>
-        /// <remarks>
-        /// <see cref="System.Management.Automation.Cmdlet.ThrowTerminatingError"/>
-        /// terminates the command, where
-        /// <see cref="System.Management.Automation.ICommandRuntime.WriteError"/>
-        /// allows the command to continue.
-        ///
-        /// The cmdlet can also terminate the command by simply throwing
-        /// any exception.  When the cmdlet's implementation of
-        /// <see cref="System.Management.Automation.Cmdlet.ProcessRecord"/>,
-        /// <see cref="System.Management.Automation.Cmdlet.BeginProcessing"/> or
-        /// <see cref="System.Management.Automation.Cmdlet.EndProcessing"/>
-        /// throws an exception, the Engine will always catch the exception
-        /// and report it as a terminating error.
-        /// However, it is preferred for the cmdlet to call
-        /// <see cref="System.Management.Automation.Cmdlet.ThrowTerminatingError"/>,
-        /// so that the additional information in
-        /// <see cref="System.Management.Automation.ErrorRecord"/>
-        /// is available.
-        /// <see cref="System.Management.Automation.Cmdlet.ThrowTerminatingError"/>
-        /// always throws
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>,
-        /// regardless of what error was specified in <paramref name="errorRecord"/>.
-        /// The Cmdlet should generally just allow
-        /// <see cref="System.Management.Automation.PipelineStoppedException"/>.
-        /// to percolate up to the caller of
-        /// <see cref="System.Management.Automation.Cmdlet.ProcessRecord"/>.
-        /// etc.
-        /// </remarks>
         public void ThrowTerminatingError(ErrorRecord errorRecord)
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
-                if (errorRecord == null)
-                    throw new ArgumentNullException("errorRecord");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 82667, 83408);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 82750, 83397);
+                using (f_1240_82757_82804())
+                {
 
-                if (commandRuntime != null)
-                {
-                    commandRuntime.ThrowTerminatingError(errorRecord);
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 82838, 82931) || true) && (errorRecord == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 82838, 82931);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 82884, 82931);
+
+                        throw f_1240_82890_82930("errorRecord");
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 82838, 82931);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 82951, 83382) || true) && (commandRuntime != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 82951, 83382);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 83019, 83069);
+
+                        f_1240_83019_83068(commandRuntime, errorRecord);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 82951, 83382);
+                    }
+
+                    else
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 82951, 83382);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 83111, 83382) || true) && (f_1240_83115_83136(errorRecord) != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 83111, 83382);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 83186, 83214);
+
+                            throw f_1240_83192_83213(errorRecord);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 83111, 83382);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1240, 83111, 83382);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 83296, 83363);
+
+                            throw f_1240_83302_83362(f_1240_83339_83361(errorRecord));
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 83111, 83382);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1240, 82951, 83382);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 82750, 83397);
                 }
-                else if (errorRecord.Exception != null)
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 82667, 83408);
+
+                System.IDisposable
+                f_1240_82757_82804()
                 {
-                    throw errorRecord.Exception;
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 82757, 82804);
+                    return return_v;
                 }
-                else
+
+
+                System.ArgumentNullException
+                f_1240_82890_82930(string
+                paramName)
                 {
-                    throw new System.InvalidOperationException(errorRecord.ToString());
+                    var return_v = new System.ArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 82890, 82930);
+                    return return_v;
                 }
+
+
+                int
+                f_1240_83019_83068(System.Management.Automation.ICommandRuntime
+                this_param, System.Management.Automation.ErrorRecord
+                errorRecord)
+                {
+                    this_param.ThrowTerminatingError(errorRecord);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 83019, 83068);
+                    return 0;
+                }
+
+
+                System.Exception
+                f_1240_83115_83136(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.Exception;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 83115, 83136);
+                    return return_v;
+                }
+
+
+                System.Exception
+                f_1240_83192_83213(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.Exception;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1240, 83192, 83213);
+                    return return_v;
+                }
+
+
+                string
+                f_1240_83339_83361(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.ToString();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 83339, 83361);
+                    return return_v;
+                }
+
+
+                System.InvalidOperationException
+                f_1240_83302_83362(string
+                message)
+                {
+                    var return_v = new System.InvalidOperationException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 83302, 83362);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 82667, 83408);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 82667, 83408);
             }
         }
-        #endregion ThrowTerminatingError
 
-        #region Exposed API Override
-
-        /// <summary>
-        /// When overridden in the derived class, performs initialization
-        /// of command execution.
-        /// Default implementation in the base class just returns.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual Cmdlets, and can throw literally any exception.
-        /// </exception>
         protected virtual void BeginProcessing()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 83931, 84092);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 83996, 84081);
+                using (f_1240_84003_84050())
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 83996, 84081);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 83931, 84092);
+
+                System.IDisposable
+                f_1240_84003_84050()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 84003, 84050);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 83931, 84092);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 83931, 84092);
             }
         }
 
-        /// <summary>
-        /// When overridden in the derived class, performs execution
-        /// of the command.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual Cmdlets, and can throw literally any exception.
-        /// </exception>
         protected virtual void ProcessRecord()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 84454, 84613);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 84517, 84602);
+                using (f_1240_84524_84571())
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 84517, 84602);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 84454, 84613);
+
+                System.IDisposable
+                f_1240_84524_84571()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 84524, 84571);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 84454, 84613);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 84454, 84613);
             }
         }
 
-        /// <summary>
-        /// When overridden in the derived class, performs clean-up
-        /// after the command execution.
-        /// Default implementation in the base class just returns.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual Cmdlets, and can throw literally any exception.
-        /// </exception>
         protected virtual void EndProcessing()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 85055, 85214);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 85118, 85203);
+                using (f_1240_85125_85172())
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 85118, 85203);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 85055, 85214);
+
+                System.IDisposable
+                f_1240_85125_85172()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 85125, 85172);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 85055, 85214);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 85055, 85214);
             }
         }
 
-        /// <summary>
-        /// When overridden in the derived class, interrupts currently
-        /// running code within the command. It should interrupt BeginProcessing,
-        /// ProcessRecord, and EndProcessing.
-        /// Default implementation in the base class just returns.
-        /// </summary>
-        /// <exception cref="Exception">
-        /// This method is overridden in the implementation of
-        /// individual Cmdlets, and can throw literally any exception.
-        /// </exception>
         protected virtual void StopProcessing()
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
+            try
             {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1240, 85747, 85907);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 85811, 85896);
+                using (f_1240_85818_85865())
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1240, 85811, 85896);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1240, 85747, 85907);
+
+                System.IDisposable
+                f_1240_85818_85865()
+                {
+                    var return_v = PSTransactionManager.GetEngineProtectionScope();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 85818, 85865);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1240, 85747, 85907);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 85747, 85907);
             }
         }
 
-        #endregion Exposed API Override
+        static Cmdlet()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1240, 1587, 85994);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 2092, 2524);
+            s_commonParameters = f_1240_2113_2524(() =>
+                        {
+                            return new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+                    "Verbose", "Debug", "ErrorAction", "WarningAction", "InformationAction",
+                    "ErrorVariable", "WarningVariable", "OutVariable",
+                    "OutBuffer", "PipelineVariable", "InformationVariable" };
+                        });
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1240, 3000, 3257);
+            s_optionalCommonParameters = f_1240_3029_3257(() =>
+                        {
+                            return new HashSet<string>(StringComparer.OrdinalIgnoreCase) {
+                    "WhatIf", "Confirm", "UseTransaction" };
+                        });
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1240, 1587, 85994);
 
-        #endregion public_methods
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1240, 1587, 85994);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1240, 1587, 85994);
+
+        static System.Lazy<System.Collections.Generic.HashSet<string>>
+        f_1240_2113_2524(System.Func<System.Collections.Generic.HashSet<string>>
+        valueFactory)
+        {
+            var return_v = new System.Lazy<System.Collections.Generic.HashSet<string>>(valueFactory);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 2113, 2524);
+            return return_v;
+        }
+
+
+        static System.Lazy<System.Collections.Generic.HashSet<string>>
+        f_1240_3029_3257(System.Func<System.Collections.Generic.HashSet<string>>
+        valueFactory)
+        {
+            var return_v = new System.Lazy<System.Collections.Generic.HashSet<string>>(valueFactory);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1240, 3029, 3257);
+            return return_v;
+        }
+
     }
 
     /// <summary>

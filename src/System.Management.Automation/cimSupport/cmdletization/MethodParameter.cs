@@ -26,43 +26,43 @@ namespace Microsoft.PowerShell.Cmdletization
         /// </summary>
         Error = 4,
     }
-
-    /// <summary>
-    /// Parameter of a method in an object model wrapped by <see cref="CmdletAdapter&lt;TObjectInstance&gt;"/>
-    /// </summary>
     public sealed class MethodParameter
     {
-        /// <summary>
-        /// Name of the method parameter.
-        /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// Type of the parameter (as seen in the PowerShell layer on the client)
-        /// </summary>
         public Type ParameterType { get; set; }
 
-        /// <summary>
-        /// Contents of the ETS type attribute in the CDXML file (or <c>null</c> if that attribute was not specified).
-        /// The expectation is that the CmdletAdapter will stamp this value onto PSTypeNames of emitted objects.
-        /// </summary>
         public string ParameterTypeName { get; set; }
 
-        /// <summary>
-        /// Bindings of the method parameter (in/out/error)
-        /// </summary>
         public MethodParameterBindings Bindings { get; set; }
 
-        /// <summary>
-        /// Value of the argument of the method parameter.
-        /// </summary>
         public object Value { get; set; }
 
-        /// <summary>
-        /// Whether the value is 1) an explicit default (*) or 2) has been bound from cmdlet parameter
-        /// (*) explicit default = whatever was in DefaultValue attribute in Cmdletization XML.
-        /// </summary>
         public bool IsValuePresent { get; set; }
-        // TODO/FIXME: this should be renamed to ValueExplicitlySpecified or something like this
+
+        public MethodParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1063, 1096, 2519);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1063, 1238, 1270);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1063, 1412, 1451);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1063, 1744, 1789);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1063, 1909, 1962);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1063, 2081, 2114);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1063, 2374, 2414);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1063, 1096, 2519);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1063, 1096, 2519);
+        }
+
+
+        static MethodParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1063, 1096, 2519);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1063, 1096, 2519);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1063, 1096, 2519);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1063, 1096, 2519);
     }
 }

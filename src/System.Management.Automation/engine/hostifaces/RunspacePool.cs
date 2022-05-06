@@ -11,188 +11,475 @@ using PSHost = System.Management.Automation.Host.PSHost;
 
 namespace System.Management.Automation.Runspaces
 {
-    #region Exceptions
-    /// <summary>
-    /// Exception thrown when state of the runspace pool is different from
-    /// expected state of runspace pool.
-    /// </summary>
     [Serializable]
     public class InvalidRunspacePoolStateException : SystemException
     {
-        /// <summary>
-        /// Creates a new instance of InvalidRunspacePoolStateException class.
-        /// </summary>
         public InvalidRunspacePoolStateException()
-        : base
-        (
-            StringUtil.Format(RunspacePoolStrings.InvalidRunspacePoolStateGeneral)
-        )
+        : base(
+        f_1484_914_984_C(f_1484_914_984(f_1484_932_983())))
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 831, 1017);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6485, 6502);
+                this._currentState = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6701, 6719);
+                this._expectedState = 0;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 831, 1017);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 831, 1017);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 831, 1017);
+            }
         }
 
-        /// <summary>
-        /// Creates a new instance of InvalidRunspacePoolStateException class.
-        /// </summary>
-        /// <param name="message">
-        /// The error message that explains the reason for the exception.
-        /// </param>
         public InvalidRunspacePoolStateException(string message)
-            : base(message)
+        : base(f_1484_1366_1373_C(message))
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 1289, 1396);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6485, 6502);
+                this._currentState = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6701, 6719);
+                this._expectedState = 0;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 1289, 1396);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 1289, 1396);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 1289, 1396);
+            }
         }
 
-        /// <summary>
-        /// Creates a new instance of InvalidRunspacePoolStateException class.
-        /// </summary>
-        /// <param name="message">
-        /// The error message that explains the reason for the exception.
-        /// </param>
-        /// <param name="innerException">
-        /// The exception that is the cause of the current exception.
-        /// </param>
         public InvalidRunspacePoolStateException(string message, Exception innerException)
-            : base(message, innerException)
+        : base(f_1484_1907_1914_C(message), innerException)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 1804, 1953);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6485, 6502);
+                this._currentState = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6701, 6719);
+                this._expectedState = 0;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 1804, 1953);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 1804, 1953);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 1804, 1953);
+            }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the InvalidRunspacePoolStateException
-        /// with a specified error message and current and expected state.
-        /// </summary>
-        /// <param name="message">The message that describes the error.</param>
-        /// <param name="currentState">Current state of runspace pool.</param>
-        /// <param name="expectedState">Expected state of the runspace pool.</param>
         internal InvalidRunspacePoolStateException
-        (
-            string message,
-            RunspacePoolState currentState,
-            RunspacePoolState expectedState
-        )
-            : base(message)
+                (
+                    string message,
+                    RunspacePoolState currentState,
+                    RunspacePoolState expectedState
+                )
+        : base(f_1484_2620_2627_C(message))
         {
-            _expectedState = expectedState;
-            _currentState = currentState;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 2416, 2738);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6485, 6502);
+                this._currentState = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6701, 6719);
+                this._expectedState = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 2653, 2684);
+
+                _expectedState = expectedState;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 2698, 2727);
+
+                _currentState = currentState;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 2416, 2738);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 2416, 2738);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 2416, 2738);
+            }
         }
 
-        #region ISerializable Members
-
-        // No need to implement GetObjectData
-        // if all fields are static or [NonSerialized]
-
-        /// <summary>
-        /// Initializes a new instance of the InvalidRunspacePoolStateException
-        /// class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds
-        /// the serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
         protected
-        InvalidRunspacePoolStateException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+                InvalidRunspacePoolStateException(SerializationInfo info, StreamingContext context)
+        : base(f_1484_3566_3570_C(info), context)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 3443, 3602);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6485, 6502);
+                this._currentState = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6701, 6719);
+                this._expectedState = 0;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 3443, 3602);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 3443, 3602);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 3443, 3602);
+            }
         }
 
-        #endregion
-
-        /// <summary>
-        /// Access CurrentState of the runspace pool.
-        /// </summary>
-        /// <remarks>
-        /// This is the state of the runspace pool when exception was thrown.
-        /// </remarks>
         public RunspacePoolState CurrentState
         {
             get
             {
-                return _currentState;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 3926, 3998);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 3962, 3983);
+
+                    return _currentState;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 3926, 3998);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 3864, 4009);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 3864, 4009);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Expected state of runspace pool by the operation which has thrown
-        /// this exception.
-        /// </summary>
         public RunspacePoolState ExpectedState
         {
             get
             {
-                return _expectedState;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 4239, 4312);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 4275, 4297);
+
+                    return _expectedState;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 4239, 4312);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 4176, 4323);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 4176, 4323);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Converts the current to an InvalidRunspaceStateException.
-        /// </summary>
         internal InvalidRunspaceStateException ToInvalidRunspaceStateException()
         {
-            InvalidRunspaceStateException exception = new InvalidRunspaceStateException(
-                RunspaceStrings.InvalidRunspaceStateGeneral,
-                this);
-            exception.CurrentState = RunspacePoolStateToRunspaceState(this.CurrentState);
-            exception.ExpectedState = RunspacePoolStateToRunspaceState(this.ExpectedState);
-            return exception;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 4453, 4938);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 4550, 4712);
+
+                InvalidRunspaceStateException
+                exception = f_1484_4592_4711(f_1484_4644_4687(), this)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 4726, 4803);
+
+                exception.CurrentState = f_1484_4751_4802(f_1484_4784_4801(this));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 4817, 4896);
+
+                exception.ExpectedState = f_1484_4843_4895(f_1484_4876_4894(this));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 4910, 4927);
+
+                return exception;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 4453, 4938);
+
+                string
+                f_1484_4644_4687()
+                {
+                    var return_v = RunspaceStrings.InvalidRunspaceStateGeneral;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 4644, 4687);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.InvalidRunspaceStateException
+                f_1484_4592_4711(string
+                message, System.Management.Automation.Runspaces.InvalidRunspacePoolStateException
+                innerException)
+                {
+                    var return_v = new System.Management.Automation.Runspaces.InvalidRunspaceStateException(message, (System.Exception)innerException);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 4592, 4711);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspacePoolState
+                f_1484_4784_4801(System.Management.Automation.Runspaces.InvalidRunspacePoolStateException
+                this_param)
+                {
+                    var return_v = this_param.CurrentState;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 4784, 4801);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspaceState
+                f_1484_4751_4802(System.Management.Automation.Runspaces.RunspacePoolState
+                state)
+                {
+                    var return_v = RunspacePoolStateToRunspaceState(state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 4751, 4802);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspacePoolState
+                f_1484_4876_4894(System.Management.Automation.Runspaces.InvalidRunspacePoolStateException
+                this_param)
+                {
+                    var return_v = this_param.ExpectedState;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 4876, 4894);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspaceState
+                f_1484_4843_4895(System.Management.Automation.Runspaces.RunspacePoolState
+                state)
+                {
+                    var return_v = RunspacePoolStateToRunspaceState(state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 4843, 4895);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 4453, 4938);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 4453, 4938);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Converts a RunspacePoolState to a RunspaceState.
-        /// </summary>
         private static RunspaceState RunspacePoolStateToRunspaceState(RunspacePoolState state)
         {
-            switch (state)
+            try
             {
-                case RunspacePoolState.BeforeOpen:
-                    return RunspaceState.BeforeOpen;
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1484, 5059, 6308);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5170, 6297);
 
-                case RunspacePoolState.Opening:
-                    return RunspaceState.Opening;
+                switch (state)
+                {
 
-                case RunspacePoolState.Opened:
-                    return RunspaceState.Opened;
+                    case RunspacePoolState.BeforeOpen:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5273, 5305);
 
-                case RunspacePoolState.Closed:
-                    return RunspaceState.Closed;
+                        return RunspaceState.BeforeOpen;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
 
-                case RunspacePoolState.Closing:
-                    return RunspaceState.Closing;
+                    case RunspacePoolState.Opening:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5378, 5407);
 
-                case RunspacePoolState.Broken:
-                    return RunspaceState.Broken;
+                        return RunspaceState.Opening;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
 
-                case RunspacePoolState.Disconnecting:
-                    return RunspaceState.Disconnecting;
+                    case RunspacePoolState.Opened:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5479, 5507);
 
-                case RunspacePoolState.Disconnected:
-                    return RunspaceState.Disconnected;
+                        return RunspaceState.Opened;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
 
-                case RunspacePoolState.Connecting:
-                    return RunspaceState.Connecting;
+                    case RunspacePoolState.Closed:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5579, 5607);
 
-                default:
-                    Diagnostics.Assert(false, "Unexpected RunspacePoolState");
+                        return RunspaceState.Closed;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+
+                    case RunspacePoolState.Closing:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5680, 5709);
+
+                        return RunspaceState.Closing;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+
+                    case RunspacePoolState.Broken:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5781, 5809);
+
+                        return RunspaceState.Broken;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+
+                    case RunspacePoolState.Disconnecting:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 5888, 5923);
+
+                        return RunspaceState.Disconnecting;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+
+                    case RunspacePoolState.Disconnected:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6001, 6035);
+
+                        return RunspaceState.Disconnected;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+
+                    case RunspacePoolState.Connecting:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6111, 6143);
+
+                        return RunspaceState.Connecting;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+
+                    default:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 5170, 6297);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6193, 6251);
+
+                        f_1484_6193_6250(false, "Unexpected RunspacePoolState");
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 6273, 6282);
+
+                        return 0;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 5170, 6297);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1484, 5059, 6308);
+
+                int
+                f_1484_6193_6250(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 6193, 6250);
                     return 0;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 5059, 6308);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 5059, 6308);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// State of the runspace pool when exception was thrown.
-        /// </summary>
         [NonSerialized]
-        private RunspacePoolState _currentState = 0;
+        private RunspacePoolState _currentState;
 
-        /// <summary>
-        /// State of the runspace pool expected in method which throws this exception.
-        /// </summary>
         [NonSerialized]
-        private RunspacePoolState _expectedState = 0;
+        private RunspacePoolState _expectedState;
+
+        static InvalidRunspacePoolStateException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1484, 603, 6727);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1484, 603, 6727);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 603, 6727);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1484, 603, 6727);
+
+        static string
+        f_1484_932_983()
+        {
+            var return_v = RunspacePoolStrings.InvalidRunspacePoolStateGeneral;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 932, 983);
+            return return_v;
+        }
+
+
+        static string
+        f_1484_914_984(string
+        formatSpec, params object[]
+        o)
+        {
+            var return_v = StringUtil.Format(formatSpec, o);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 914, 984);
+            return return_v;
+        }
+
+
+        static string
+        f_1484_914_984_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 831, 1017);
+            return return_v;
+        }
+
+
+        static string
+        f_1484_1366_1373_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 1289, 1396);
+            return return_v;
+        }
+
+
+        static string
+        f_1484_1907_1914_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 1804, 1953);
+            return return_v;
+        }
+
+
+        static string
+        f_1484_2620_2627_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 2416, 2738);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1484_3566_3570_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 3443, 3602);
+            return return_v;
+        }
+
     }
-    #endregion
 
-    #region State
     /// <summary>
     /// Defines various states of a runspace pool.
     /// </summary>
@@ -238,81 +525,113 @@ namespace System.Management.Automation.Runspaces
         /// </summary>
         Connecting = 8,
     }
-
-    /// <summary>
-    /// Event arguments passed to runspacepool state change handlers
-    /// <see cref="RunspacePool.StateChanged"/> event.
-    /// </summary>
     public sealed class RunspacePoolStateChangedEventArgs : EventArgs
     {
-        #region Constructors
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="state">
-        /// state to raise the event with.
-        /// </param>
         internal RunspacePoolStateChangedEventArgs(RunspacePoolState state)
         {
-            RunspacePoolStateInfo = new RunspacePoolStateInfo(state, null);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 8455, 8621);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 9063, 9122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 8547, 8610);
+
+                RunspacePoolStateInfo = f_1484_8571_8609(state, null);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 8455, 8621);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 8455, 8621);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 8455, 8621);
+            }
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="stateInfo"></param>
         internal RunspacePoolStateChangedEventArgs(RunspacePoolStateInfo stateInfo)
         {
-            RunspacePoolStateInfo = stateInfo;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 8726, 8871);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 9063, 9122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 8826, 8860);
+
+                RunspacePoolStateInfo = stateInfo;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 8726, 8871);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 8726, 8871);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 8726, 8871);
+            }
         }
 
-        #endregion
-
-        #region Public Properties
-
-        /// <summary>
-        /// Gets the stateinfo of RunspacePool when this event occurred.
-        /// </summary>
         public RunspacePoolStateInfo RunspacePoolStateInfo { get; }
 
-        #endregion
-
-        #region Private Data
-
-        #endregion
-    }
-
-    /// <summary>
-    /// Event arguments passed to RunspaceCreated event of RunspacePool.
-    /// </summary>
-    internal sealed class RunspaceCreatedEventArgs : EventArgs
-    {
-        #region Private Data
-
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// </summary>
-        /// <param name="runspace"></param>
-        internal RunspaceCreatedEventArgs(Runspace runspace)
+        static RunspacePoolStateChangedEventArgs()
         {
-            Runspace = runspace;
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1484, 8168, 9205);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1484, 8168, 9205);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 8168, 9205);
         }
 
-        #endregion
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1484, 8168, 9205);
 
-        #region Internal Properties
+        System.Management.Automation.RunspacePoolStateInfo
+        f_1484_8571_8609(System.Management.Automation.Runspaces.RunspacePoolState
+        state, System.Exception
+        reason)
+        {
+            var return_v = new System.Management.Automation.RunspacePoolStateInfo(state, reason);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 8571, 8609);
+            return return_v;
+        }
+
+    }
+    internal sealed class RunspaceCreatedEventArgs : EventArgs
+    {
+        internal RunspaceCreatedEventArgs(Runspace runspace)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 9579, 9687);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 9760, 9795);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 9656, 9676);
+
+                Runspace = runspace;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 9579, 9687);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 9579, 9687);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 9579, 9687);
+            }
+        }
 
         internal Runspace Runspace { get; }
 
-        #endregion
+        static RunspaceCreatedEventArgs()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1484, 9326, 9824);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1484, 9326, 9824);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 9326, 9824);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1484, 9326, 9824);
     }
 
-    #endregion
 
-    #region RunspacePool Availability
 
     /// <summary>
     /// Defines runspace pool availability.
@@ -337,9 +656,7 @@ namespace System.Management.Automation.Runspaces
         Busy = 2
     }
 
-    #endregion
 
-    #region RunspacePool Capabilities
 
     /// <summary>
     /// Defines runspace capabilities.
@@ -356,439 +673,847 @@ namespace System.Management.Automation.Runspaces
         /// </summary>
         SupportsDisconnect = 0x1
     }
-
-    #endregion
-
-    #region AsyncResult
-
-    /// <summary>
-    /// Encapsulated the AsyncResult for pool's Open/Close async operations.
-    /// </summary>
     internal sealed class RunspacePoolAsyncResult : AsyncResult
     {
-        #region Private Data
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="ownerId">
-        /// Instance Id of the pool creating this instance
-        /// </param>
-        /// <param name="callback">
-        /// Callback to call when the async operation completes.
-        /// </param>
-        /// <param name="state">
-        /// A user supplied state to call the "callback" with.
-        /// </param>
-        /// <param name="isCalledFromOpenAsync">
-        /// true if AsyncResult monitors Async Open.
-        /// false otherwise
-        /// </param>
         internal RunspacePoolAsyncResult(Guid ownerId, AsyncCallback callback, object state,
-            bool isCalledFromOpenAsync)
-            : base(ownerId, callback, state)
+                    bool isCalledFromOpenAsync)
+        : base(f_1484_12089_12096_C(ownerId), callback, state)
         {
-            IsAssociatedWithAsyncOpen = isCalledFromOpenAsync;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 11943, 12200);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 12404, 12452);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 12139, 12189);
+
+                IsAssociatedWithAsyncOpen = isCalledFromOpenAsync;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 11943, 12200);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 11943, 12200);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 11943, 12200);
+            }
         }
 
-        #endregion
-
-        #region Internal Properties
-
-        /// <summary>
-        /// True if AsyncResult monitors Async Open.
-        /// false otherwise.
-        /// </summary>
         internal bool IsAssociatedWithAsyncOpen { get; }
 
-        #endregion
-    }
-
-    /// <summary>
-    /// Encapsulated the results of a RunspacePool.BeginGetRunspace method.
-    /// </summary>
-    internal sealed class GetRunspaceAsyncResult : AsyncResult
-    {
-        #region Private Data
-
-        private bool _isActive;
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="ownerId">
-        /// Instance Id of the pool creating this instance
-        /// </param>
-        /// <param name="callback">
-        /// Callback to call when the async operation completes.
-        /// </param>
-        /// <param name="state">
-        /// A user supplied state to call the "callback" with.
-        /// </param>
-        internal GetRunspaceAsyncResult(Guid ownerId, AsyncCallback callback, object state)
-            : base(ownerId, callback, state)
+        static RunspacePoolAsyncResult()
         {
-            _isActive = true;
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1484, 11191, 12481);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1484, 11191, 12481);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 11191, 12481);
         }
 
-        #endregion
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1484, 11191, 12481);
 
-        #region Internal Methods/Properties
+        static System.Guid
+        f_1484_12089_12096_C(System.Guid
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 11943, 12200);
+            return return_v;
+        }
 
-        /// <summary>
-        /// Gets the runspace that is assigned to the async operation.
-        /// </summary>
-        /// <remarks>
-        /// This can be null if the async Get operation is not completed.
-        /// </remarks>
+    }
+    internal sealed class GetRunspaceAsyncResult : AsyncResult
+    {
+        private bool _isActive;
+
+        internal GetRunspaceAsyncResult(Guid ownerId, AsyncCallback callback, object state)
+        : base(f_1484_13340_13347_C(ownerId), callback, state)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 13236, 13418);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 12725, 12734);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 13740, 13780);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 13390, 13407);
+
+                _isActive = true;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 13236, 13418);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 13236, 13418);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 13236, 13418);
+            }
+        }
+
         internal Runspace Runspace { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether this operation
-        /// is active or not.
-        /// </summary>
         internal bool IsActive
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _isActive;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 13985, 14130);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 14027, 14037);
+                    lock (f_1484_14027_14037())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 14079, 14096);
 
+                        return _isActive;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 13985, 14130);
+
+                    object
+                    f_1484_14027_14037()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 14027, 14037);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 13938, 14303);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 13938, 14303);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    _isActive = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 14146, 14292);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 14188, 14198);
+                    lock (f_1484_14188_14198())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 14240, 14258);
+
+                        _isActive = value;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 14146, 14292);
+
+                    object
+                    f_1484_14188_14198()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 14188, 14198);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 13938, 14303);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 13938, 14303);
                 }
             }
         }
 
-        /// <summary>
-        /// Marks the async operation as completed and releases
-        /// waiting threads.
-        /// </summary>
-        /// <param name="state">
-        /// This is not used
-        /// </param>
-        /// <remarks>
-        /// This method is called from a thread pool thread to release
-        /// the async operation.
-        /// </remarks>
         internal void DoComplete(object state)
         {
-            SetAsCompleted(null);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 14696, 14791);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 14759, 14780);
+
+                f_1484_14759_14779(this, null);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 14696, 14791);
+
+                int
+                f_1484_14759_14779(System.Management.Automation.Runspaces.GetRunspaceAsyncResult
+                this_param, System.Exception
+                exception)
+                {
+                    this_param.SetAsCompleted(exception);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 14759, 14779);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 14696, 14791);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 14696, 14791);
+            }
         }
 
-        #endregion
+        static GetRunspaceAsyncResult()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1484, 12605, 14820);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1484, 12605, 14820);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 12605, 14820);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1484, 12605, 14820);
+
+        static System.Guid
+        f_1484_13340_13347_C(System.Guid
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1484, 13236, 13418);
+            return return_v;
+        }
+
     }
-
-    #endregion
-
-    #region RunspacePool
-
-    /// <summary>
-    /// Public interface which supports pooling PowerShell Runspaces.
-    /// </summary>
     public sealed class RunspacePool : IDisposable
     {
-        #region Private Data
-
         private RunspacePoolInternal _internalPool;
-        private object _syncObject = new object();
-        private event EventHandler<RunspacePoolStateChangedEventArgs> InternalStateChanged = null;
-        private event EventHandler<PSEventArgs> InternalForwardEvent = null;
-        private event EventHandler<RunspaceCreatedEventArgs> InternalRunspaceCreated = null;
 
-        #endregion
+        private object _syncObject;
+        private event EventHandler<RunspacePoolStateChangedEventArgs>
+InternalStateChanged = null
+;
+        private event EventHandler<PSEventArgs>
+InternalForwardEvent = null
+;
+        private event EventHandler<RunspaceCreatedEventArgs>
+InternalRunspaceCreated = null
+;
 
-        #region Internal Constructor
-
-        /// <summary>
-        /// Constructor which creates a RunspacePool using the
-        /// supplied <paramref name="configuration"/>,
-        /// <paramref name="minRunspaces"/> and <paramref name="maxRunspaces"/>
-        /// </summary>
-        /// <param name="minRunspaces">
-        /// The minimum number of Runspaces that can exist in this pool.
-        /// Should be greater than or equal to 1.
-        /// </param>
-        /// <param name="maxRunspaces">
-        /// The maximum number of Runspaces that can exist in this pool.
-        /// Should be greater than or equal to 1.
-        /// </param>
-        /// <param name="host">
-        /// The explicit PSHost implementation.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// Host is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Maximum runspaces is less than 1.
-        /// Minimum runspaces is less than 1.
-        /// </exception>
         internal RunspacePool(int minRunspaces, int maxRunspaces, PSHost host)
         {
-            // Currently we support only Local Runspace Pool..
-            // this needs to be changed once remote runspace pool
-            // is implemented
-
-            _internalPool = new RunspacePoolInternal(minRunspaces, maxRunspaces, host);
-        }
-
-        /// <summary>
-        /// Constructor which creates a RunspacePool using the
-        /// supplied <paramref name="initialSessionState"/>,
-        /// <paramref name="minRunspaces"/> and <paramref name="maxRunspaces"/>
-        /// </summary>
-        /// <param name="minRunspaces">
-        /// The minimum number of Runspaces that can exist in this pool.
-        /// Should be greater than or equal to 1.
-        /// </param>
-        /// <param name="maxRunspaces">
-        /// The maximum number of Runspaces that can exist in this pool.
-        /// Should be greater than or equal to 1.
-        /// </param>
-        /// <param name="initialSessionState">
-        /// InitialSessionState object to use when creating a new Runspace.
-        /// </param>
-        /// <param name="host">
-        /// The explicit PSHost implementation.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// initialSessionState is null.
-        /// Host is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// Maximum runspaces is less than 1.
-        /// Minimum runspaces is less than 1.
-        /// </exception>
-        internal RunspacePool(int minRunspaces, int maxRunspaces,
-            InitialSessionState initialSessionState, PSHost host)
-        {
-            // Currently we support only Local Runspace Pool..
-            // this needs to be changed once remote runspace pool
-            // is implemented
-
-            _internalPool = new RunspacePoolInternal(minRunspaces,
-                maxRunspaces, initialSessionState, host);
-        }
-
-        /// <summary>
-        /// Construct a runspace pool object.
-        /// </summary>
-        /// <param name="minRunspaces">Min runspaces.</param>
-        /// <param name="maxRunspaces">Max runspaces.</param>
-        /// <param name="typeTable">TypeTable.</param>
-        /// <param name="host">Host.</param>
-        /// <param name="applicationArguments">App arguments.</param>
-        /// <param name="connectionInfo">Connection information.</param>
-        /// <param name="name">Session name.</param>
-        internal RunspacePool(
-            int minRunspaces,
-            int maxRunspaces,
-            TypeTable typeTable,
-            PSHost host,
-            PSPrimitiveDictionary applicationArguments,
-            RunspaceConnectionInfo connectionInfo,
-            string name = null)
-        {
-            _internalPool = new RemoteRunspacePoolInternal(
-                minRunspaces,
-                maxRunspaces,
-                typeTable,
-                host,
-                applicationArguments,
-                connectionInfo,
-                name);
-
-            IsRemote = true;
-        }
-
-        /// <summary>
-        /// Creates a runspace pool object in a disconnected state that is
-        /// ready to connect to a remote runspace pool session specified by
-        /// the instanceId parameter.
-        /// </summary>
-        /// <param name="isDisconnected">Indicates whether the shell/runspace pool is disconnected.</param>
-        /// <param name="instanceId">Identifies a remote runspace pool session to connect to.</param>
-        /// <param name="name">Friendly name for runspace pool.</param>
-        /// <param name="connectCommands">Runspace pool running commands information.</param>
-        /// <param name="connectionInfo">Connection information of remote server.</param>
-        /// <param name="host">PSHost object.</param>
-        /// <param name="typeTable">TypeTable used for serialization/deserialization of remote objects.</param>
-        internal RunspacePool(
-            bool isDisconnected,
-            Guid instanceId,
-            string name,
-            ConnectCommandInfo[] connectCommands,
-            RunspaceConnectionInfo connectionInfo,
-            PSHost host,
-            TypeTable typeTable)
-        {
-            // Disconnect-Connect semantics are currently only supported in WSMan transport.
-            if (!(connectionInfo is WSManConnectionInfo))
+            try
             {
-                throw new NotSupportedException();
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 16525, 16870);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15108, 15121);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15147, 15173);
+                this._syncObject = f_1484_15161_15173();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 47760, 47800);
+                this.IsRemote = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 16784, 16859);
+
+                _internalPool = f_1484_16800_16858(minRunspaces, maxRunspaces, host);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 16525, 16870);
             }
-
-            _internalPool = new RemoteRunspacePoolInternal(instanceId, name, isDisconnected, connectCommands,
-                connectionInfo, host, typeTable);
-
-            IsRemote = true;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 16525, 16870);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 16525, 16870);
+            }
         }
 
-        #endregion
+        internal RunspacePool(int minRunspaces, int maxRunspaces,
+                    InitialSessionState initialSessionState, PSHost host)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 18082, 18519);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15108, 15121);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15147, 15173);
+                this._syncObject = f_1484_15161_15173();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 47760, 47800);
+                this.IsRemote = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 18395, 18508);
 
-        #region Public Properties
+                _internalPool = f_1484_18411_18507(minRunspaces, maxRunspaces, initialSessionState, host);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 18082, 18519);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 18082, 18519);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 18082, 18519);
+            }
+        }
 
-        /// <summary>
-        /// Get unique id for this instance of runspace pool. It is primarily used
-        /// for logging purposes.
-        /// </summary>
+        internal RunspacePool(
+                    int minRunspaces,
+                    int maxRunspaces,
+                    TypeTable typeTable,
+                    PSHost host,
+                    PSPrimitiveDictionary applicationArguments,
+                    RunspaceConnectionInfo connectionInfo,
+                    string name = null)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 19052, 19662);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15108, 15121);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15147, 15173);
+                this._syncObject = f_1484_15161_15173();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 47760, 47800);
+                this.IsRemote = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 19363, 19619);
+
+                _internalPool = f_1484_19379_19618(minRunspaces, maxRunspaces, typeTable, host, applicationArguments, connectionInfo, name);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 19635, 19651);
+
+                IsRemote = true;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 19052, 19662);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 19052, 19662);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 19052, 19662);
+            }
+        }
+
+        internal RunspacePool(
+                    bool isDisconnected,
+                    Guid instanceId,
+                    string name,
+                    ConnectCommandInfo[] connectCommands,
+                    RunspaceConnectionInfo connectionInfo,
+                    PSHost host,
+                    TypeTable typeTable)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1484, 20552, 21280);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15108, 15121);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 15147, 15173);
+                this._syncObject = f_1484_15161_15173();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 47760, 47800);
+                this.IsRemote = false;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 20946, 21073) || true) && (!(connectionInfo is WSManConnectionInfo))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 20946, 21073);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 21024, 21058);
+
+                    throw f_1484_21030_21057();
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 20946, 21073);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 21089, 21237);
+
+                _internalPool = f_1484_21105_21236(instanceId, name, isDisconnected, connectCommands, connectionInfo, host, typeTable);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 21253, 21269);
+
+                IsRemote = true;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1484, 20552, 21280);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 20552, 21280);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 20552, 21280);
+            }
+        }
+
         public Guid InstanceId
         {
             get
             {
-                return _internalPool.InstanceId;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 21564, 21647);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 21600, 21632);
+
+                    return f_1484_21607_21631(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 21564, 21647);
+
+                    System.Guid
+                    f_1484_21607_21631(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.InstanceId;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 21607, 21631);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 21517, 21658);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 21517, 21658);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets a boolean which describes if the runspace pool is disposed.
-        /// </summary>
         public bool IsDisposed
         {
             get
             {
-                return _internalPool.IsDisposed;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 21842, 21925);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 21878, 21910);
+
+                    return f_1484_21885_21909(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 21842, 21925);
+
+                    bool
+                    f_1484_21885_21909(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.IsDisposed;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 21885, 21909);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 21795, 21936);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 21795, 21936);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets State of the current runspace pool.
-        /// </summary>
         public RunspacePoolStateInfo RunspacePoolStateInfo
         {
             get
             {
-                return _internalPool.RunspacePoolStateInfo;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 22124, 22218);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 22160, 22203);
+
+                    return f_1484_22167_22202(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 22124, 22218);
+
+                    System.Management.Automation.RunspacePoolStateInfo
+                    f_1484_22167_22202(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.RunspacePoolStateInfo;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 22167, 22202);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 22049, 22229);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 22049, 22229);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the InitialSessionState object that this pool uses
-        /// to create the runspaces.
-        /// </summary>
         public InitialSessionState InitialSessionState
         {
             get
             {
-                return _internalPool.InitialSessionState;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 22466, 22558);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 22502, 22543);
+
+                    return f_1484_22509_22542(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 22466, 22558);
+
+                    System.Management.Automation.Runspaces.InitialSessionState
+                    f_1484_22509_22542(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.InitialSessionState;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 22509, 22542);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 22395, 22569);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 22395, 22569);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Connection information for remote RunspacePools, null for local RunspacePools.
-        /// </summary>
         public RunspaceConnectionInfo ConnectionInfo
         {
             get
             {
-                return _internalPool.ConnectionInfo;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 22789, 22876);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 22825, 22861);
+
+                    return f_1484_22832_22860(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 22789, 22876);
+
+                    System.Management.Automation.Runspaces.RunspaceConnectionInfo
+                    f_1484_22832_22860(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.ConnectionInfo;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 22832, 22860);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 22720, 22887);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 22720, 22887);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Specifies how often unused runspaces are disposed.
-        /// </summary>
         public TimeSpan CleanupInterval
         {
-            get { return _internalPool.CleanupInterval; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 23066, 23111);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23072, 23109);
 
-            set { _internalPool.CleanupInterval = value; }
+                    return f_1484_23079_23108(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 23066, 23111);
+
+                    System.TimeSpan
+                    f_1484_23079_23108(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.CleanupInterval;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 23079, 23108);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 23010, 23184);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 23010, 23184);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 23127, 23173);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23133, 23171);
+
+                    _internalPool.CleanupInterval = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 23127, 23173);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 23010, 23184);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 23010, 23184);
+                }
+            }
         }
 
-        /// <summary>
-        /// Returns runspace pool availability.
-        /// </summary>
         public RunspacePoolAvailability RunspacePoolAvailability
         {
-            get { return _internalPool.RunspacePoolAvailability; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 23373, 23427);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23379, 23425);
+
+                    return f_1484_23386_23424(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 23373, 23427);
+
+                    System.Management.Automation.Runspaces.RunspacePoolAvailability
+                    f_1484_23386_23424(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.RunspacePoolAvailability;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 23386, 23424);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 23292, 23438);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 23292, 23438);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
         }
 
-        #endregion
 
-        #region events
 
         /// <summary>
         /// Event raised when RunspacePoolState changes.
         /// </summary>
         public event EventHandler<RunspacePoolStateChangedEventArgs> StateChanged
         {
+
             add
             {
-                lock (_syncObject)
+                try
                 {
-                    bool firstEntry = (InternalStateChanged == null);
-                    InternalStateChanged += value;
-                    if (firstEntry)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 23701, 24383);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23743, 23754);
+                    lock (_syncObject)
                     {
-                        // call any event handlers on this object, replacing the
-                        // internalPool sender with 'this' since receivers
-                        // are expecting a RunspacePool.
-                        _internalPool.StateChanged +=
-                            new EventHandler<RunspacePoolStateChangedEventArgs>(OnStateChanged);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23796, 23845);
+
+                        bool
+                        firstEntry = (InternalStateChanged == null)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23867, 23897);
+
+                        InternalStateChanged += value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 23919, 24349) || true) && (firstEntry)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 23919, 24349);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 24199, 24326);
+
+                            _internalPool.StateChanged +=
+                                                        new EventHandler<RunspacePoolStateChangedEventArgs>(OnStateChanged);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 23919, 24349);
+                        }
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 23701, 24383);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 23701, 24383);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 23701, 24383);
                 }
             }
 
             remove
             {
-                lock (_syncObject)
+                try
                 {
-                    InternalStateChanged -= value;
-                    if (InternalStateChanged == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 24399, 24815);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 24444, 24455);
+                    lock (_syncObject)
                     {
-                        _internalPool.StateChanged -=
-                            new EventHandler<RunspacePoolStateChangedEventArgs>(OnStateChanged);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 24497, 24527);
+
+                        InternalStateChanged -= value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 24549, 24781) || true) && (InternalStateChanged == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 24549, 24781);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 24631, 24758);
+
+                            _internalPool.StateChanged -=
+                                                        new EventHandler<RunspacePoolStateChangedEventArgs>(OnStateChanged);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 24549, 24781);
+                        }
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 24399, 24815);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 24399, 24815);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 24399, 24815);
                 }
             }
         }
 
-        /// <summary>
-        /// Handle internal Pool state changed events.
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="args"></param>
         private void OnStateChanged(object source, RunspacePoolStateChangedEventArgs args)
         {
-            if (ConnectionInfo is NewProcessConnectionInfo)
+            try
             {
-                NewProcessConnectionInfo connectionInfo = ConnectionInfo as NewProcessConnectionInfo;
-                if (connectionInfo.Process != null &&
-                    (args.RunspacePoolStateInfo.State == RunspacePoolState.Opened ||
-                     args.RunspacePoolStateInfo.State == RunspacePoolState.Broken))
-                {
-                    connectionInfo.Process.RunspacePool = this;
-                }
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 25025, 25884);
 
-            // call any event handlers on this, replacing the
-            // internalPool sender with 'this' since receivers
-            // are expecting a RunspacePool
-            InternalStateChanged.SafeInvoke(this, args);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 25132, 25641) || true) && (f_1484_25136_25150() is NewProcessConnectionInfo)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 25132, 25641);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 25212, 25297);
+
+                    NewProcessConnectionInfo
+                    connectionInfo = f_1484_25254_25268() as NewProcessConnectionInfo
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 25315, 25626) || true) && (f_1484_25319_25341(connectionInfo) != null && (DynAbs.Tracing.TraceSender.Expression_True(1484, 25319, 25522) && (f_1484_25375_25407(f_1484_25375_25401(args)) == RunspacePoolState.Opened || (DynAbs.Tracing.TraceSender.Expression_False(1484, 25375, 25521) || f_1484_25461_25493(f_1484_25461_25487(args)) == RunspacePoolState.Broken))))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 25315, 25626);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 25564, 25607);
+
+                        f_1484_25564_25586(connectionInfo).RunspacePool = this;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 25315, 25626);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 25132, 25641);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 25829, 25873);
+
+                f_1484_25829_25872(
+                            // call any event handlers on this, replacing the
+                            // internalPool sender with 'this' since receivers
+                            // are expecting a RunspacePool
+                            InternalStateChanged, this, args);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 25025, 25884);
+
+                System.Management.Automation.Runspaces.RunspaceConnectionInfo
+                f_1484_25136_25150()
+                {
+                    var return_v = ConnectionInfo;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25136, 25150);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspaceConnectionInfo
+                f_1484_25254_25268()
+                {
+                    var return_v = ConnectionInfo;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25254, 25268);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.PowerShellProcessInstance
+                f_1484_25319_25341(System.Management.Automation.Runspaces.NewProcessConnectionInfo
+                this_param)
+                {
+                    var return_v = this_param.Process;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25319, 25341);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.RunspacePoolStateInfo
+                f_1484_25375_25401(System.Management.Automation.Runspaces.RunspacePoolStateChangedEventArgs
+                this_param)
+                {
+                    var return_v = this_param.RunspacePoolStateInfo;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25375, 25401);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspacePoolState
+                f_1484_25375_25407(System.Management.Automation.RunspacePoolStateInfo
+                this_param)
+                {
+                    var return_v = this_param.State;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25375, 25407);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.RunspacePoolStateInfo
+                f_1484_25461_25487(System.Management.Automation.Runspaces.RunspacePoolStateChangedEventArgs
+                this_param)
+                {
+                    var return_v = this_param.RunspacePoolStateInfo;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25461, 25487);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.RunspacePoolState
+                f_1484_25461_25493(System.Management.Automation.RunspacePoolStateInfo
+                this_param)
+                {
+                    var return_v = this_param.State;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25461, 25493);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Runspaces.PowerShellProcessInstance
+                f_1484_25564_25586(System.Management.Automation.Runspaces.NewProcessConnectionInfo
+                this_param)
+                {
+                    var return_v = this_param.Process;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 25564, 25586);
+                    return return_v;
+                }
+
+
+                int
+                f_1484_25829_25872(System.EventHandler<System.Management.Automation.Runspaces.RunspacePoolStateChangedEventArgs>
+                eventHandler, System.Management.Automation.Runspaces.RunspacePool
+                sender, System.Management.Automation.Runspaces.RunspacePoolStateChangedEventArgs
+                eventArgs)
+                {
+                    eventHandler.SafeInvoke<System.Management.Automation.Runspaces.RunspacePoolStateChangedEventArgs>((object)sender, eventArgs);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 25829, 25872);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 25025, 25884);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 25025, 25884);
+            }
         }
 
         /// <summary>
@@ -796,53 +1521,160 @@ namespace System.Management.Automation.Runspaces
         /// </summary>
         internal event EventHandler<PSEventArgs> ForwardEvent
         {
+
             add
             {
-                lock (_syncObject)
+                try
                 {
-                    bool firstEntry = InternalForwardEvent == null;
-
-                    InternalForwardEvent += value;
-
-                    if (firstEntry)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 26121, 26519);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26163, 26174);
+                    lock (_syncObject)
                     {
-                        _internalPool.ForwardEvent += OnInternalPoolForwardEvent;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26216, 26263);
+
+                        bool
+                        firstEntry = InternalForwardEvent == null
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26287, 26317);
+
+                        InternalForwardEvent += value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26341, 26485) || true) && (firstEntry)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 26341, 26485);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26405, 26462);
+
+                            _internalPool.ForwardEvent += OnInternalPoolForwardEvent;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 26341, 26485);
+                        }
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 26121, 26519);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 26121, 26519);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 26121, 26519);
                 }
             }
 
             remove
             {
-                lock (_syncObject)
+                try
                 {
-                    InternalForwardEvent -= value;
-
-                    if (InternalForwardEvent == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 26535, 26883);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26580, 26591);
+                    lock (_syncObject)
                     {
-                        _internalPool.ForwardEvent -= OnInternalPoolForwardEvent;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26633, 26663);
+
+                        InternalForwardEvent -= value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26687, 26849) || true) && (InternalForwardEvent == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 26687, 26849);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 26769, 26826);
+
+                            _internalPool.ForwardEvent -= OnInternalPoolForwardEvent;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 26687, 26849);
+                        }
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 26535, 26883);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 26535, 26883);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 26535, 26883);
                 }
             }
         }
 
-        /// <summary>
-        /// Pass thru of the ForwardEvent event from the internal pool.
-        /// </summary>
         private void OnInternalPoolForwardEvent(object sender, PSEventArgs e)
         {
-            OnEventForwarded(e);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 27026, 27151);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27120, 27140);
+
+                f_1484_27120_27139(this, e);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 27026, 27151);
+
+                int
+                f_1484_27120_27139(System.Management.Automation.Runspaces.RunspacePool
+                this_param, System.Management.Automation.PSEventArgs
+                e)
+                {
+                    this_param.OnEventForwarded(e);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 27120, 27139);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 27026, 27151);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 27026, 27151);
+            }
         }
 
-        /// <summary>
-        /// Raises the ForwardEvent event.
-        /// </summary>
         private void OnEventForwarded(PSEventArgs e)
         {
-            EventHandler<PSEventArgs> eh = InternalForwardEvent;
-
-            if (eh != null)
+            try
             {
-                eh(this, e);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 27254, 27477);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27323, 27375);
+
+                EventHandler<PSEventArgs>
+                eh = InternalForwardEvent
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27391, 27466) || true) && (eh != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 27391, 27466);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27439, 27451);
+
+                    f_1484_27439_27450(eh, this, e);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 27391, 27466);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 27254, 27477);
+
+                int
+                f_1484_27439_27450(System.EventHandler<System.Management.Automation.PSEventArgs>
+                this_param, System.Management.Automation.Runspaces.RunspacePool
+                sender, System.Management.Automation.PSEventArgs
+                e)
+                {
+                    this_param.Invoke((object)sender, e);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 27439, 27450);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 27254, 27477);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 27254, 27477);
             }
         }
 
@@ -851,544 +1683,1417 @@ namespace System.Management.Automation.Runspaces
         /// </summary>
         internal event EventHandler<RunspaceCreatedEventArgs> RunspaceCreated
         {
+
             add
             {
-                lock (_syncObject)
+                try
                 {
-                    bool firstEntry = (InternalRunspaceCreated == null);
-                    InternalRunspaceCreated += value;
-                    if (firstEntry)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 27700, 28312);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27742, 27753);
+                    lock (_syncObject)
                     {
-                        // call any event handlers on this object, replacing the
-                        // internalPool sender with 'this' since receivers
-                        // are expecting a RunspacePool.
-                        _internalPool.RunspaceCreated += OnRunspaceCreated;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27795, 27847);
+
+                        bool
+                        firstEntry = (InternalRunspaceCreated == null)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27869, 27902);
+
+                        InternalRunspaceCreated += value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 27924, 28278) || true) && (firstEntry)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 27924, 28278);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 28204, 28255);
+
+                            _internalPool.RunspaceCreated += OnRunspaceCreated;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 27924, 28278);
+                        }
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 27700, 28312);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 27700, 28312);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 27700, 28312);
                 }
             }
 
             remove
             {
-                lock (_syncObject)
+                try
                 {
-                    InternalRunspaceCreated -= value;
-                    if (InternalRunspaceCreated == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 28328, 28674);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 28373, 28384);
+                    lock (_syncObject)
                     {
-                        _internalPool.RunspaceCreated -= OnRunspaceCreated;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 28426, 28459);
+
+                        InternalRunspaceCreated -= value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 28481, 28640) || true) && (InternalRunspaceCreated == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 28481, 28640);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 28566, 28617);
+
+                            _internalPool.RunspaceCreated -= OnRunspaceCreated;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 28481, 28640);
+                        }
                     }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 28328, 28674);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 28328, 28674);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 28328, 28674);
                 }
             }
         }
 
-        /// <summary>
-        /// Handle internal Pool RunspaceCreated events.
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="args"></param>
         private void OnRunspaceCreated(object source, RunspaceCreatedEventArgs args)
         {
-            // call any event handlers on this, replacing the
-            // internalPool sender with 'this' since receivers
-            // are expecting a RunspacePool
-            InternalRunspaceCreated.SafeInvoke(this, args);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 28886, 29217);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 29159, 29206);
+
+                f_1484_29159_29205(            // call any event handlers on this, replacing the
+                                               // internalPool sender with 'this' since receivers
+                                               // are expecting a RunspacePool
+                            InternalRunspaceCreated, this, args);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 28886, 29217);
+
+                int
+                f_1484_29159_29205(System.EventHandler<System.Management.Automation.Runspaces.RunspaceCreatedEventArgs>
+                eventHandler, System.Management.Automation.Runspaces.RunspacePool
+                sender, System.Management.Automation.Runspaces.RunspaceCreatedEventArgs
+                eventArgs)
+                {
+                    eventHandler.SafeInvoke<System.Management.Automation.Runspaces.RunspaceCreatedEventArgs>((object)sender, eventArgs);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 29159, 29205);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 28886, 29217);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 28886, 29217);
+            }
         }
 
-        #endregion events
-
-        #region Public static methods.
-
-        /// <summary>
-        /// Queries the server for disconnected runspace pools and creates an array of runspace
-        /// pool objects associated with each disconnected runspace pool on the server.  Each
-        /// runspace pool object in the returned array is in the Disconnected state and can be
-        /// connected to the server by calling the Connect() method on the runspace pool.
-        /// </summary>
-        /// <param name="connectionInfo">Connection object for the target server.</param>
-        /// <returns>Array of RunspacePool objects each in the Disconnected state.</returns>
         public static RunspacePool[] GetRunspacePools(RunspaceConnectionInfo connectionInfo)
         {
-            return GetRunspacePools(connectionInfo, null, null);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1484, 29911, 30083);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 30020, 30072);
+
+                return f_1484_30027_30071(connectionInfo, null, null);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1484, 29911, 30083);
+
+                System.Management.Automation.Runspaces.RunspacePool[]
+                f_1484_30027_30071(System.Management.Automation.Runspaces.RunspaceConnectionInfo
+                connectionInfo, System.Management.Automation.Host.PSHost
+                host, System.Management.Automation.Runspaces.TypeTable
+                typeTable)
+                {
+                    var return_v = GetRunspacePools(connectionInfo, host, typeTable);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 30027, 30071);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 29911, 30083);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 29911, 30083);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Queries the server for disconnected runspace pools and creates an array of runspace
-        /// pool objects associated with each disconnected runspace pool on the server.  Each
-        /// runspace pool object in the returned array is in the Disconnected state and can be
-        /// connected to the server by calling the Connect() method on the runspace pool.
-        /// </summary>
-        /// <param name="connectionInfo">Connection object for the target server.</param>
-        /// <param name="host">Client host object.</param>
-        /// <returns>Array of RunspacePool objects each in the Disconnected state.</returns>
         public static RunspacePool[] GetRunspacePools(RunspaceConnectionInfo connectionInfo, PSHost host)
         {
-            return GetRunspacePools(connectionInfo, host, null);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1484, 30766, 30951);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 30888, 30940);
+
+                return f_1484_30895_30939(connectionInfo, host, null);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1484, 30766, 30951);
+
+                System.Management.Automation.Runspaces.RunspacePool[]
+                f_1484_30895_30939(System.Management.Automation.Runspaces.RunspaceConnectionInfo
+                connectionInfo, System.Management.Automation.Host.PSHost
+                host, System.Management.Automation.Runspaces.TypeTable
+                typeTable)
+                {
+                    var return_v = GetRunspacePools(connectionInfo, host, typeTable);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 30895, 30939);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 30766, 30951);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 30766, 30951);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Queries the server for disconnected runspace pools and creates an array of runspace
-        /// pool objects associated with each disconnected runspace pool on the server.  Each
-        /// runspace pool object in the returned array is in the Disconnected state and can be
-        /// connected to the server by calling the Connect() method on the runspace pool.
-        /// </summary>
-        /// <param name="connectionInfo">Connection object for the target server.</param>
-        /// <param name="host">Client host object.</param>
-        /// <param name="typeTable">TypeTable object.</param>
-        /// <returns>Array of RunspacePool objects each in the Disconnected state.</returns>
         public static RunspacePool[] GetRunspacePools(RunspaceConnectionInfo connectionInfo, PSHost host, TypeTable typeTable)
         {
-            return RemoteRunspacePoolInternal.GetRemoteRunspacePools(connectionInfo, host, typeTable);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1484, 31697, 31941);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 31840, 31930);
+
+                return f_1484_31847_31929(connectionInfo, host, typeTable);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1484, 31697, 31941);
+
+                System.Management.Automation.Runspaces.RunspacePool[]
+                f_1484_31847_31929(System.Management.Automation.Runspaces.RunspaceConnectionInfo
+                connectionInfo, System.Management.Automation.Host.PSHost
+                host, System.Management.Automation.Runspaces.TypeTable
+                typeTable)
+                {
+                    var return_v = RemoteRunspacePoolInternal.GetRemoteRunspacePools(connectionInfo, host, typeTable);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 31847, 31929);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 31697, 31941);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 31697, 31941);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Public Disconnect-Connect API
-
-        /// <summary>
-        /// Disconnects the runspace pool synchronously.  Runspace pool must be in Opened state.
-        /// </summary>
         public void Disconnect()
         {
-            _internalPool.Disconnect();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 32169, 32256);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 32218, 32245);
+
+                f_1484_32218_32244(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 32169, 32256);
+
+                int
+                f_1484_32218_32244(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    this_param.Disconnect();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 32218, 32244);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 32169, 32256);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 32169, 32256);
+            }
         }
 
-        /// <summary>
-        /// Disconnects the runspace pool asynchronously.  Runspace pool must be in Opened state.
-        /// </summary>
-        /// <param name="callback">An AsyncCallback to call once the BeginClose completes.</param>
-        /// <param name="state">A user supplied state to call the callback with.</param>
         public IAsyncResult BeginDisconnect(AsyncCallback callback, object state)
         {
-            return _internalPool.BeginDisconnect(callback, state);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 32604, 32767);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 32702, 32756);
+
+                return f_1484_32709_32755(_internalPool, callback, state);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 32604, 32767);
+
+                System.IAsyncResult
+                f_1484_32709_32755(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.AsyncCallback
+                callback, object
+                state)
+                {
+                    var return_v = this_param.BeginDisconnect(callback, state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 32709, 32755);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 32604, 32767);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 32604, 32767);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Waits for the pending asynchronous BeginDisconnect to complete.
-        /// </summary>
-        /// <param name="asyncResult">Asynchronous call result object.</param>
         public void EndDisconnect(IAsyncResult asyncResult)
         {
-            _internalPool.EndDisconnect(asyncResult);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 32983, 33111);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 33059, 33100);
+
+                f_1484_33059_33099(_internalPool, asyncResult);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 32983, 33111);
+
+                int
+                f_1484_33059_33099(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.IAsyncResult
+                asyncResult)
+                {
+                    this_param.EndDisconnect(asyncResult);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 33059, 33099);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 32983, 33111);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 32983, 33111);
+            }
         }
 
-        /// <summary>
-        /// Connects the runspace pool synchronously.  Runspace pool must be in disconnected state.
-        /// </summary>
         public void Connect()
         {
-            _internalPool.Connect();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 33271, 33352);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 33317, 33341);
+
+                f_1484_33317_33340(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 33271, 33352);
+
+                int
+                f_1484_33317_33340(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    this_param.Connect();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 33317, 33340);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 33271, 33352);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 33271, 33352);
+            }
         }
 
-        /// <summary>
-        /// Connects the runspace pool asynchronously.  Runspace pool must be in disconnected state.
-        /// </summary>
-        /// <param name="callback"></param>
-        /// <param name="state"></param>
         public IAsyncResult BeginConnect(AsyncCallback callback, object state)
         {
-            return _internalPool.BeginConnect(callback, state);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 33600, 33757);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 33695, 33746);
+
+                return f_1484_33702_33745(_internalPool, callback, state);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 33600, 33757);
+
+                System.IAsyncResult
+                f_1484_33702_33745(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.AsyncCallback
+                callback, object
+                state)
+                {
+                    var return_v = this_param.BeginConnect(callback, state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 33702, 33745);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 33600, 33757);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 33600, 33757);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Waits for the pending asynchronous BeginConnect to complete.
-        /// </summary>
-        /// <param name="asyncResult">Asynchronous call result object.</param>
         public void EndConnect(IAsyncResult asyncResult)
         {
-            _internalPool.EndConnect(asyncResult);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 33970, 34092);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 34043, 34081);
+
+                f_1484_34043_34080(_internalPool, asyncResult);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 33970, 34092);
+
+                int
+                f_1484_34043_34080(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.IAsyncResult
+                asyncResult)
+                {
+                    this_param.EndConnect(asyncResult);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 34043, 34080);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 33970, 34092);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 33970, 34092);
+            }
         }
 
-        /// <summary>
-        /// Creates an array of PowerShell objects that are in the Disconnected state for
-        /// all currently disconnected running commands associated with this runspace pool.
-        /// </summary>
-        /// <returns></returns>
         public Collection<PowerShell> CreateDisconnectedPowerShells()
         {
-            return _internalPool.CreateDisconnectedPowerShells(this);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 34368, 34522);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 34454, 34511);
+
+                return f_1484_34461_34510(_internalPool, this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 34368, 34522);
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.PowerShell>
+                f_1484_34461_34510(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.Management.Automation.Runspaces.RunspacePool
+                runspacePool)
+                {
+                    var return_v = this_param.CreateDisconnectedPowerShells(runspacePool);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 34461, 34510);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 34368, 34522);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 34368, 34522);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        ///<summary>
-        /// Returns RunspacePool capabilities.
-        /// </summary>
-        /// <returns>RunspacePoolCapability.</returns>
         public RunspacePoolCapability GetCapabilities()
         {
-            return _internalPool.GetCapabilities();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 34684, 34806);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 34756, 34795);
+
+                return f_1484_34763_34794(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 34684, 34806);
+
+                System.Management.Automation.Runspaces.RunspacePoolCapability
+                f_1484_34763_34794(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    var return_v = this_param.GetCapabilities();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 34763, 34794);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 34684, 34806);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 34684, 34806);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Public API
-
-        /// <summary>
-        /// Sets the maximum number of Runspaces that can be active concurrently
-        /// in the pool. All requests above that number remain queued until
-        /// runspaces become available.
-        /// </summary>
-        /// <param name="maxRunspaces">
-        /// The maximum number of runspaces in the pool.
-        /// </param>
-        /// <returns>
-        /// true if the change is successful; otherwise, false.
-        /// </returns>
-        /// <remarks>
-        /// You cannot set the number of runspaces to a number smaller than
-        /// the minimum runspaces.
-        /// </remarks>
         public bool SetMaxRunspaces(int maxRunspaces)
         {
-            return _internalPool.SetMaxRunspaces(maxRunspaces);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 35510, 35642);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 35580, 35631);
+
+                return f_1484_35587_35630(_internalPool, maxRunspaces);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 35510, 35642);
+
+                bool
+                f_1484_35587_35630(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, int
+                maxRunspaces)
+                {
+                    var return_v = this_param.SetMaxRunspaces(maxRunspaces);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 35587, 35630);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 35510, 35642);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 35510, 35642);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Retrieves the maximum number of runspaces the pool maintains.
-        /// </summary>
-        /// <returns>
-        /// The maximum number of runspaces in the pool
-        /// </returns>
         public int GetMaxRunspaces()
         {
-            return _internalPool.GetMaxRunspaces();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 35880, 35983);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 35933, 35972);
+
+                return f_1484_35940_35971(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 35880, 35983);
+
+                int
+                f_1484_35940_35971(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    var return_v = this_param.GetMaxRunspaces();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 35940, 35971);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 35880, 35983);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 35880, 35983);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Sets the minimum number of Runspaces that the pool maintains
-        /// in anticipation of new requests.
-        /// </summary>
-        /// <param name="minRunspaces">
-        /// The minimum number of runspaces in the pool.
-        /// </param>
-        /// <returns>
-        /// true if the change is successful; otherwise, false.
-        /// </returns>
-        /// <remarks>
-        /// You cannot set the number of idle runspaces to a number smaller than
-        /// 1 or greater than maximum number of active runspaces.
-        /// </remarks>
         public bool SetMinRunspaces(int minRunspaces)
         {
-            return _internalPool.SetMinRunspaces(minRunspaces);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 36591, 36723);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 36661, 36712);
+
+                return f_1484_36668_36711(_internalPool, minRunspaces);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 36591, 36723);
+
+                bool
+                f_1484_36668_36711(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, int
+                minRunspaces)
+                {
+                    var return_v = this_param.SetMinRunspaces(minRunspaces);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 36668, 36711);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 36591, 36723);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 36591, 36723);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Retrieves the minimum number of runspaces the pool maintains.
-        /// </summary>
-        /// <returns>
-        /// The minimum number of runspaces in the pool
-        /// </returns>
         public int GetMinRunspaces()
         {
-            return _internalPool.GetMinRunspaces();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 36961, 37064);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 37014, 37053);
+
+                return f_1484_37021_37052(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 36961, 37064);
+
+                int
+                f_1484_37021_37052(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    var return_v = this_param.GetMinRunspaces();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 37021, 37052);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 36961, 37064);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 36961, 37064);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Retrieves the number of runspaces available at the time of calling
-        /// this method.
-        /// </summary>
-        /// <returns>
-        /// The number of available runspace in the pool.
-        /// </returns>
         public int GetAvailableRunspaces()
         {
-            return _internalPool.GetAvailableRunspaces();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 37335, 37450);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 37394, 37439);
+
+                return f_1484_37401_37438(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 37335, 37450);
+
+                int
+                f_1484_37401_37438(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    var return_v = this_param.GetAvailableRunspaces();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 37401, 37438);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 37335, 37450);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 37335, 37450);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Opens the runspacepool synchronously. RunspacePool must
-        /// be opened before it can be used.
-        /// </summary>
-        /// <exception cref="InvalidRunspacePoolStateException">
-        /// RunspacePoolState is not BeforeOpen
-        /// </exception>
         public void Open()
         {
-            _internalPool.Open();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 37765, 37840);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 37808, 37829);
+
+                f_1484_37808_37828(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 37765, 37840);
+
+                int
+                f_1484_37808_37828(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    this_param.Open();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 37808, 37828);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 37765, 37840);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 37765, 37840);
+            }
         }
 
-        /// <summary>
-        /// Opens the RunspacePool asynchronously. RunspacePool must
-        /// be opened before it can be used.
-        /// To get the exceptions that might have occurred, call
-        /// EndOpen.
-        /// </summary>
-        /// <param name="callback">
-        /// A AsyncCallback to call once the BeginOpen completes.
-        /// </param>
-        /// <param name="state">
-        /// A user supplied state to call the <paramref name="callback"/>
-        /// with.
-        /// </param>
-        /// <returns>
-        /// An AsyncResult object to monitor the state of the async
-        /// operation.
-        /// </returns>
         public IAsyncResult BeginOpen(AsyncCallback callback, object state)
         {
-            return _internalPool.BeginOpen(callback, state);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 38519, 38670);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 38611, 38659);
+
+                return f_1484_38618_38658(_internalPool, callback, state);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 38519, 38670);
+
+                System.IAsyncResult
+                f_1484_38618_38658(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.AsyncCallback
+                callback, object
+                state)
+                {
+                    var return_v = this_param.BeginOpen(callback, state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 38618, 38658);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 38519, 38670);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 38519, 38670);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Waits for the pending asynchronous BeginOpen to complete.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">
-        /// asyncResult is a null reference.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// asyncResult object was not created by calling BeginOpen
-        /// on this runspacepool instance.
-        /// </exception>
-        /// <exception cref="InvalidRunspacePoolStateException">
-        /// RunspacePoolState is not BeforeOpen.
-        /// </exception>
-        /// <remarks>
-        /// TODO: Behavior if EndOpen is called multiple times.
-        /// </remarks>
         public void EndOpen(IAsyncResult asyncResult)
         {
-            _internalPool.EndOpen(asyncResult);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 39369, 39485);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 39439, 39474);
+
+                f_1484_39439_39473(_internalPool, asyncResult);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 39369, 39485);
+
+                int
+                f_1484_39439_39473(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.IAsyncResult
+                asyncResult)
+                {
+                    this_param.EndOpen(asyncResult);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 39439, 39473);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 39369, 39485);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 39369, 39485);
+            }
         }
 
-        /// <summary>
-        /// Closes the RunspacePool and cleans all the internal
-        /// resources. This will close all the runspaces in the
-        /// runspacepool and release all the async operations
-        /// waiting for a runspace. If the pool is already closed
-        /// or broken or closing this will just return.
-        /// </summary>
-        /// <exception cref="InvalidRunspacePoolStateException">
-        /// Cannot close the RunspacePool because RunspacePool is
-        /// in Closing state.
-        /// </exception>
         public void Close()
         {
-            _internalPool.Close();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 40051, 40128);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 40095, 40117);
+
+                f_1484_40095_40116(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 40051, 40128);
+
+                int
+                f_1484_40095_40116(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    this_param.Close();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 40095, 40116);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 40051, 40128);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 40051, 40128);
+            }
         }
 
-        /// <summary>
-        /// Closes the RunspacePool asynchronously and cleans all the internal
-        /// resources. This will close all the runspaces in the
-        /// runspacepool and release all the async operations
-        /// waiting for a runspace. If the pool is already closed
-        /// or broken or closing this will just return.
-        /// </summary>
-        /// <param name="callback">
-        /// A AsyncCallback to call once the BeginClose completes.
-        /// </param>
-        /// <param name="state">
-        /// A user supplied state to call the <paramref name="callback"/>
-        /// with.
-        /// </param>
-        /// <returns>
-        /// An AsyncResult object to monitor the state of the async
-        /// operation.
-        /// </returns>
         public IAsyncResult BeginClose(AsyncCallback callback, object state)
         {
-            return _internalPool.BeginClose(callback, state);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 40936, 41089);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 41029, 41078);
+
+                return f_1484_41036_41077(_internalPool, callback, state);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 40936, 41089);
+
+                System.IAsyncResult
+                f_1484_41036_41077(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.AsyncCallback
+                callback, object
+                state)
+                {
+                    var return_v = this_param.BeginClose(callback, state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 41036, 41077);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 40936, 41089);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 40936, 41089);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Waits for the pending asynchronous BeginClose to complete.
-        /// </summary>
-        /// <exception cref="ArgumentNullException">
-        /// asyncResult is a null reference.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// asyncResult object was not created by calling BeginClose
-        /// on this runspacepool instance.
-        /// </exception>
         public void EndClose(IAsyncResult asyncResult)
         {
-            _internalPool.EndClose(asyncResult);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 41536, 41654);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 41607, 41643);
+
+                f_1484_41607_41642(_internalPool, asyncResult);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 41536, 41654);
+
+                int
+                f_1484_41607_41642(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.IAsyncResult
+                asyncResult)
+                {
+                    this_param.EndClose(asyncResult);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 41607, 41642);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 41536, 41654);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 41536, 41654);
+            }
         }
 
-        /// <summary>
-        /// Dispose the current runspacepool.
-        /// </summary>
         public void Dispose()
         {
-            _internalPool.Dispose(true);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 41760, 41887);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 41806, 41834);
 
-            GC.SuppressFinalize(this);
+                f_1484_41806_41833(_internalPool, true);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 41850, 41876);
+
+                f_1484_41850_41875(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 41760, 41887);
+
+                int
+                f_1484_41806_41833(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, bool
+                disposing)
+                {
+                    this_param.Dispose(disposing);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 41806, 41833);
+                    return 0;
+                }
+
+
+                int
+                f_1484_41850_41875(System.Management.Automation.Runspaces.RunspacePool
+                obj)
+                {
+                    GC.SuppressFinalize((object)obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 41850, 41875);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 41760, 41887);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 41760, 41887);
+            }
         }
 
-        /// <summary>
-        /// Private data to be used by applications built on top of PowerShell.
-        ///
-        /// Local runspace pool is created with application private data set to an empty <see cref="PSPrimitiveDictionary"/>.
-        ///
-        /// Remote runspace pool gets its application private data from the server (when creating the remote runspace pool)
-        /// Calling this method on a remote runspace pool will block until the data is received from the server.
-        /// The server will send application private data before reaching <see cref="RunspacePoolState.Opened"/> state.
-        ///
-        /// Runspaces that are part of a <see cref="RunspacePool"/> inherit application private data from the pool.
-        /// </summary>
         public PSPrimitiveDictionary GetApplicationPrivateData()
         {
-            return _internalPool.GetApplicationPrivateData();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 42670, 42811);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 42751, 42800);
+
+                return f_1484_42758_42799(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 42670, 42811);
+
+                System.Management.Automation.PSPrimitiveDictionary
+                f_1484_42758_42799(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    var return_v = this_param.GetApplicationPrivateData();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 42758, 42799);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 42670, 42811);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 42670, 42811);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Internal API
-
-        /// <summary>
-        /// This property determines whether a new thread is created for each invocation.
-        /// </summary>
-        /// <remarks>
-        /// Any updates to the value of this property must be done before the RunspacePool is opened
-        /// </remarks>
-        /// <exception cref="InvalidRunspacePoolStateException">
-        /// An attempt to change this property was made after opening the RunspacePool
-        /// </exception>
         public PSThreadOptions ThreadOptions
         {
             get
             {
-                return _internalPool.ThreadOptions;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 43405, 43491);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 43441, 43476);
 
+                    return f_1484_43448_43475(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 43405, 43491);
+
+                    System.Management.Automation.Runspaces.PSThreadOptions
+                    f_1484_43448_43475(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.ThreadOptions;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 43448, 43475);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 43344, 43843);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 43344, 43843);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                if (this.RunspacePoolStateInfo.State != RunspacePoolState.BeforeOpen)
+                try
                 {
-                    throw new InvalidRunspacePoolStateException(RunspacePoolStrings.ChangePropertyAfterOpen);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 43507, 43832);
 
-                _internalPool.ThreadOptions = value;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 43543, 43761) || true) && (f_1484_43547_43579(f_1484_43547_43573(this)) != RunspacePoolState.BeforeOpen)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 43543, 43761);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 43653, 43742);
+
+                        throw f_1484_43659_43741(f_1484_43697_43740());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 43543, 43761);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 43781, 43817);
+
+                    _internalPool.ThreadOptions = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 43507, 43832);
+
+                    System.Management.Automation.RunspacePoolStateInfo
+                    f_1484_43547_43573(System.Management.Automation.Runspaces.RunspacePool
+                    this_param)
+                    {
+                        var return_v = this_param.RunspacePoolStateInfo;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 43547, 43573);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Runspaces.RunspacePoolState
+                    f_1484_43547_43579(System.Management.Automation.RunspacePoolStateInfo
+                    this_param)
+                    {
+                        var return_v = this_param.State;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 43547, 43579);
+                        return return_v;
+                    }
+
+
+                    string
+                    f_1484_43697_43740()
+                    {
+                        var return_v = RunspacePoolStrings.ChangePropertyAfterOpen;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 43697, 43740);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Runspaces.InvalidRunspacePoolStateException
+                    f_1484_43659_43741(string
+                    message)
+                    {
+                        var return_v = new System.Management.Automation.Runspaces.InvalidRunspacePoolStateException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 43659, 43741);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 43344, 43843);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 43344, 43843);
+                }
             }
         }
 
-        /// <summary>
-        /// ApartmentState of the thread used to execute commands within this RunspacePool.
-        /// </summary>
-        /// <remarks>
-        /// Any updates to the value of this property must be done before the RunspacePool is opened
-        /// </remarks>
-        /// <exception cref="InvalidRunspacePoolStateException">
-        /// An attempt to change this property was made after opening the RunspacePool
-        /// </exception>
         public ApartmentState ApartmentState
         {
             get
             {
-                return _internalPool.ApartmentState;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 44385, 44472);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 44421, 44457);
 
+                    return f_1484_44428_44456(_internalPool);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 44385, 44472);
+
+                    System.Threading.ApartmentState
+                    f_1484_44428_44456(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                    this_param)
+                    {
+                        var return_v = this_param.ApartmentState;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 44428, 44456);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 44324, 44825);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 44324, 44825);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                if (this.RunspacePoolStateInfo.State != RunspacePoolState.BeforeOpen)
+                try
                 {
-                    throw new InvalidRunspacePoolStateException(RunspacePoolStrings.ChangePropertyAfterOpen);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 44488, 44814);
 
-                _internalPool.ApartmentState = value;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 44524, 44742) || true) && (f_1484_44528_44560(f_1484_44528_44554(this)) != RunspacePoolState.BeforeOpen)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 44524, 44742);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 44634, 44723);
+
+                        throw f_1484_44640_44722(f_1484_44678_44721());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 44524, 44742);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 44762, 44799);
+
+                    _internalPool.ApartmentState = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 44488, 44814);
+
+                    System.Management.Automation.RunspacePoolStateInfo
+                    f_1484_44528_44554(System.Management.Automation.Runspaces.RunspacePool
+                    this_param)
+                    {
+                        var return_v = this_param.RunspacePoolStateInfo;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 44528, 44554);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Runspaces.RunspacePoolState
+                    f_1484_44528_44560(System.Management.Automation.RunspacePoolStateInfo
+                    this_param)
+                    {
+                        var return_v = this_param.State;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 44528, 44560);
+                        return return_v;
+                    }
+
+
+                    string
+                    f_1484_44678_44721()
+                    {
+                        var return_v = RunspacePoolStrings.ChangePropertyAfterOpen;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1484, 44678, 44721);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Runspaces.InvalidRunspacePoolStateException
+                    f_1484_44640_44722(string
+                    message)
+                    {
+                        var return_v = new System.Management.Automation.Runspaces.InvalidRunspacePoolStateException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 44640, 44722);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 44324, 44825);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 44324, 44825);
+                }
             }
         }
 
-        /// <summary>
-        /// Gets Runspace asynchronously from the runspace pool. The caller
-        /// will get notified with the runspace using <paramref name="callback"/>
-        /// </summary>
-        /// <param name="callback">
-        /// A AsyncCallback to call once the runspace is available.
-        /// </param>
-        /// <param name="state">
-        /// A user supplied state to call the <paramref name="callback"/>
-        /// with.
-        /// </param>
-        /// <returns>
-        /// An IAsyncResult object to track the status of the Async operation.
-        /// </returns>
         internal IAsyncResult BeginGetRunspace(
-            AsyncCallback callback, object state)
+                    AsyncCallback callback, object state)
         {
-            return _internalPool.BeginGetRunspace(callback, state);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 45449, 45630);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 45564, 45619);
+
+                return f_1484_45571_45618(_internalPool, callback, state);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 45449, 45630);
+
+                System.IAsyncResult
+                f_1484_45571_45618(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.AsyncCallback
+                callback, object
+                state)
+                {
+                    var return_v = this_param.BeginGetRunspace(callback, state);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 45571, 45618);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 45449, 45630);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 45449, 45630);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Cancels the pending asynchronous BeginGetRunspace operation.
-        /// </summary>
-        /// <param name="asyncResult">
-        /// </param>
         internal void CancelGetRunspace(IAsyncResult asyncResult)
         {
-            _internalPool.CancelGetRunspace(asyncResult);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 45825, 45963);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 45907, 45952);
+
+                f_1484_45907_45951(_internalPool, asyncResult);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 45825, 45963);
+
+                int
+                f_1484_45907_45951(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.IAsyncResult
+                asyncResult)
+                {
+                    this_param.CancelGetRunspace(asyncResult);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 45907, 45951);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 45825, 45963);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 45825, 45963);
+            }
         }
 
-        /// <summary>
-        /// Waits for the pending asynchronous BeginGetRunspace to complete.
-        /// </summary>
-        /// <param name="asyncResult">
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// asyncResult is a null reference.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// asyncResult object was not created by calling BeginGetRunspace
-        /// on this runspacepool instance.
-        /// </exception>
-        /// <exception cref="InvalidRunspacePoolStateException">
-        /// RunspacePoolState is not BeforeOpen.
-        /// </exception>
         internal Runspace EndGetRunspace(IAsyncResult asyncResult)
         {
-            return _internalPool.EndGetRunspace(asyncResult);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 46626, 46769);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 46709, 46758);
+
+                return f_1484_46716_46757(_internalPool, asyncResult);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 46626, 46769);
+
+                System.Management.Automation.Runspaces.Runspace
+                f_1484_46716_46757(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.IAsyncResult
+                asyncResult)
+                {
+                    var return_v = this_param.EndGetRunspace(asyncResult);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 46716, 46757);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 46626, 46769);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 46626, 46769);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Releases a Runspace to the pool. If pool is closed, this
-        /// will be a no-op.
-        /// </summary>
-        /// <param name="runspace">
-        /// Runspace to release to the pool.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// <paramref name="runspace"/> is null.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// Cannot release the runspace to this pool as the runspace
-        /// doesn't belong to this pool.
-        /// </exception>
-        /// <exception cref="InvalidRunspaceStateException">
-        /// Only opened runspaces can be released back to the pool.
-        /// </exception>
         internal void ReleaseRunspace(Runspace runspace)
         {
-            _internalPool.ReleaseRunspace(runspace);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 47512, 47636);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 47585, 47625);
+
+                f_1484_47585_47624(_internalPool, runspace);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 47512, 47636);
+
+                int
+                f_1484_47585_47624(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param, System.Management.Automation.Runspaces.Runspace
+                runspace)
+                {
+                    this_param.ReleaseRunspace(runspace);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 47585, 47624);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 47512, 47636);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 47512, 47636);
+            }
         }
 
-        /// <summary>
-        /// Indicates whether the RunspacePool is a remote one.
-        /// </summary>
-        internal bool IsRemote { get; } = false;
+        internal bool IsRemote { get; }
 
-        /// <summary>
-        /// RemoteRunspacePoolInternal associated with this
-        /// runspace pool.
-        /// </summary>
         internal RemoteRunspacePoolInternal RemoteRunspacePoolInternal
         {
             get
             {
-                if (_internalPool is RemoteRunspacePoolInternal)
+                try
                 {
-                    return (RemoteRunspacePoolInternal)_internalPool;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 48035, 48337);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 48071, 48322) || true) && (_internalPool is RemoteRunspacePoolInternal)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 48071, 48322);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 48160, 48209);
+
+                        return (RemoteRunspacePoolInternal)_internalPool;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 48071, 48322);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1484, 48071, 48322);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 48291, 48303);
+
+                        return null;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1484, 48071, 48322);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 48035, 48337);
                 }
-                else
+                catch
                 {
-                    return null;
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 47948, 48348);
+                    throw;
                 }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 47948, 48348);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         internal void AssertPoolIsOpen()
         {
-            _internalPool.AssertPoolIsOpen();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1484, 48360, 48461);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1484, 48417, 48450);
+
+                f_1484_48417_48449(_internalPool);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1484, 48360, 48461);
+
+                int
+                f_1484_48417_48449(System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+                this_param)
+                {
+                    this_param.AssertPoolIsOpen();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 48417, 48449);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1484, 48360, 48461);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 48360, 48461);
+            }
         }
 
-        #endregion
+        static RunspacePool()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1484, 14984, 48490);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1484, 14984, 48490);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1484, 14984, 48490);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1484, 14984, 48490);
+
+        object
+        f_1484_15161_15173()
+        {
+            var return_v = new object();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 15161, 15173);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+        f_1484_16800_16858(int
+        minRunspaces, int
+        maxRunspaces, System.Management.Automation.Host.PSHost
+        host)
+        {
+            var return_v = new System.Management.Automation.Runspaces.Internal.RunspacePoolInternal(minRunspaces, maxRunspaces, host);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 16800, 16858);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Runspaces.Internal.RunspacePoolInternal
+        f_1484_18411_18507(int
+        minRunspaces, int
+        maxRunspaces, System.Management.Automation.Runspaces.InitialSessionState
+        initialSessionState, System.Management.Automation.Host.PSHost
+        host)
+        {
+            var return_v = new System.Management.Automation.Runspaces.Internal.RunspacePoolInternal(minRunspaces, maxRunspaces, initialSessionState, host);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 18411, 18507);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Runspaces.Internal.RemoteRunspacePoolInternal
+        f_1484_19379_19618(int
+        minRunspaces, int
+        maxRunspaces, System.Management.Automation.Runspaces.TypeTable
+        typeTable, System.Management.Automation.Host.PSHost
+        host, System.Management.Automation.PSPrimitiveDictionary
+        applicationArguments, System.Management.Automation.Runspaces.RunspaceConnectionInfo
+        connectionInfo, string
+        name)
+        {
+            var return_v = new System.Management.Automation.Runspaces.Internal.RemoteRunspacePoolInternal(minRunspaces, maxRunspaces, typeTable, host, applicationArguments, connectionInfo, name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 19379, 19618);
+            return return_v;
+        }
+
+
+        System.NotSupportedException
+        f_1484_21030_21057()
+        {
+            var return_v = new System.NotSupportedException();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 21030, 21057);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Runspaces.Internal.RemoteRunspacePoolInternal
+        f_1484_21105_21236(System.Guid
+        instanceId, string
+        name, bool
+        isDisconnected, System.Management.Automation.Runspaces.Internal.ConnectCommandInfo[]
+        connectCommands, System.Management.Automation.Runspaces.RunspaceConnectionInfo
+        connectionInfo, System.Management.Automation.Host.PSHost
+        host, System.Management.Automation.Runspaces.TypeTable
+        typeTable)
+        {
+            var return_v = new System.Management.Automation.Runspaces.Internal.RemoteRunspacePoolInternal(instanceId, name, isDisconnected, connectCommands, connectionInfo, host, typeTable);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1484, 21105, 21236);
+            return return_v;
+        }
+
     }
 
-    #endregion
 }

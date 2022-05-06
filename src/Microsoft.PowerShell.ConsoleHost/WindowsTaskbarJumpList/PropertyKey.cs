@@ -6,115 +6,220 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.PowerShell
 {
-    /// <summary>
-    /// Defines a unique key for a Shell Property.
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential, Pack = 4)]
+
+[StructLayout(LayoutKind.Sequential, Pack = 4)]
     internal struct PropertyKey : IEquatable<PropertyKey>
     {
-        #region Public Properties
-        /// <summary>
-        /// A unique GUID for the property.
-        /// </summary>
-        public Guid FormatId { get; }
 
-        /// <summary>
-        /// Property identifier (PID)
-        /// </summary>
-        public Int32 PropertyId { get; }
+public Guid FormatId {get; }
 
-        #endregion
+public Int32 PropertyId {get; }
 
-        #region Public Construction
-
-        /// <summary>
-        /// PropertyKey Constructor.
-        /// </summary>
-        /// <param name="formatId">A unique GUID for the property.</param>
-        /// <param name="propertyId">Property identifier (PID).</param>
-        internal PropertyKey(Guid formatId, Int32 propertyId)
+internal PropertyKey(Guid formatId, Int32 propertyId)
+		{
+			try
         {
-            this.FormatId = formatId;
-            this.PropertyId = propertyId;
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(132,1002,1159);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,1080,1105);
+
+this.FormatId = formatId;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,1119,1148);
+
+this.PropertyId = propertyId;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(132,1002,1159);
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,1002,1159);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,1002,1159);
+}
+		}
 
-        #endregion
-
-        #region IEquatable<PropertyKey> Members
-
-        /// <summary>
-        /// Returns whether this object is equal to another. This is vital for performance of value types.
-        /// </summary>
-        /// <param name="other">The object to compare against.</param>
-        /// <returns>Equality result.</returns>
-        public bool Equals(PropertyKey other)
+public bool Equals(PropertyKey other)
+		{
+			try
         {
-            return other.Equals((object)this);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(132,1520,1627);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,1582,1616);
+
+return other.Equals(this);
+DynAbs.Tracing.TraceSender.TraceExitMethod(132,1520,1627);
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,1520,1627);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,1520,1627);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-
-        #region equality and hashing
-
-        /// <summary>
-        /// Returns the hash code of the object. This is vital for performance of value types.
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode()
+public override int GetHashCode()
+		{
+			try
         {
-            return FormatId.GetHashCode() ^ PropertyId;
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(132,1877,1989);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,1935,1978);
 
-        /// <summary>
-        /// Returns whether this object is equal to another. This is vital for performance of value types.
-        /// </summary>
-        /// <param name="obj">The object to compare against.</param>
-        /// <returns>Equality result.</returns>
-        public override bool Equals(object obj)
+return FormatId.GetHashCode()^ PropertyId;
+DynAbs.Tracing.TraceSender.TraceExitMethod(132,1877,1989);
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,1877,1989);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,1877,1989);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+public override bool Equals(object obj)
+		{
+			try
         {
-            if (obj == null)
-                return false;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(132,2275,2612);
 
-            if (!(obj is PropertyKey))
-                return false;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,2339,2386) || true) && (obj == null)
+)
 
-            PropertyKey other = (PropertyKey)obj;
-            return other.FormatId.Equals(FormatId) && (other.PropertyId == PropertyId);
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(132,2339,2386);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,2373,2386);
+
+return false;
+DynAbs.Tracing.TraceSender.TraceExitCondition(132,2339,2386);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,2402,2459) || true) && (!(obj is PropertyKey))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(132,2402,2459);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,2446,2459);
+
+return false;
+DynAbs.Tracing.TraceSender.TraceExitCondition(132,2402,2459);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,2475,2512);
+
+PropertyKey 
+other = (PropertyKey)obj
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,2526,2601);
+
+return other.FormatId.Equals(FormatId)&&(DynAbs.Tracing.TraceSender.Expression_True(132, 2533, 2600)&&(other.PropertyId == PropertyId));
+DynAbs.Tracing.TraceSender.TraceExitMethod(132,2275,2612);
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,2275,2612);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,2275,2612);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Implements the == (equality) operator.
-        /// </summary>
-        /// <param name="propKey1">First property key to compare.</param>
-        /// <param name="propKey2">Second property key to compare.</param>
-        /// <returns>True if object a equals object b. false otherwise.</returns>
-        public static bool operator ==(PropertyKey propKey1, PropertyKey propKey2)
+public static bool operator ==(PropertyKey propKey1, PropertyKey propKey2)
+		{
+			try
         {
-            return propKey1.Equals(propKey2);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(132,2957,3100);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,3056,3089);
 
-        /// <summary>
-        /// Implements the != (inequality) operator.
-        /// </summary>
-        /// <param name="propKey1">First property key to compare.</param>
-        /// <param name="propKey2">Second property key to compare.</param>
-        /// <returns>True if object a does not equal object b. false otherwise.</returns>
-        public static bool operator !=(PropertyKey propKey1, PropertyKey propKey2)
+return propKey1.Equals(propKey2);
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(132,2957,3100);
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,2957,3100);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,2957,3100);
+}
+		}
+
+public static bool operator !=(PropertyKey propKey1, PropertyKey propKey2)
+		{
+			try
         {
-            return !propKey1.Equals(propKey2);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(132,3455,3599);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,3554,3588);
 
-        /// <summary>
-        /// Override ToString() to provide a user friendly string representation.
-        /// </summary>
-        /// <returns>String representing the property key.</returns>
-        public override string ToString()
+return !propKey1.Equals(propKey2);
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(132,3455,3599);
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,3455,3599);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,3455,3599);
+}
+		}
+
+public override string ToString()
+		{
+			try
         {
-            return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                "PropertyKeyFormatString",
-                FormatId.ToString("B"), PropertyId);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(132,3811,4049);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(132,3869,4038);
 
-        #endregion
-    }
+return f_132_3876_4037(f_132_3890_3939(), "PropertyKeyFormatString", FormatId.ToString("B"), PropertyId);
+DynAbs.Tracing.TraceSender.TraceExitMethod(132,3811,4049);
+
+System.Globalization.CultureInfo
+f_132_3890_3939()
+{
+var return_v = System.Globalization.CultureInfo.InvariantCulture;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(132, 3890, 3939);
+return return_v;
+}
+
+
+string
+f_132_3876_4037(System.Globalization.CultureInfo
+provider,string
+format,string
+arg0,int
+arg1)
+{
+var return_v = string.Format( (System.IFormatProvider)provider, format, (object)arg0, (object)arg1);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(132, 3876, 4037);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(132,3811,4049);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,3811,4049);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+static PropertyKey(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(132,286,4078);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(132,286,4078);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(132,286,4078);
+}
+
+            }
 }

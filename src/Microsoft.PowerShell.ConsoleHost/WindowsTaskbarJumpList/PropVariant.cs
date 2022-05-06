@@ -6,48 +6,93 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.PowerShell
 {
-    /// <summary>
-    /// Represents the OLE struct PROPVARIANT.
-    /// This class is intended for internal use only.
-    /// </summary>
-    /// <remarks>
-    /// Originally sourced from https://blogs.msdn.com/adamroot/pages/interop-with-propvariants-in-net.aspx
-    /// and modified to add ability to set values
-    /// </remarks>
     [StructLayout(LayoutKind.Explicit)]
     internal sealed class PropVariant : IDisposable
     {
-        // This is actually a VarEnum value, but the VarEnum type requires 4 bytes instead of the expected 2.
         [FieldOffset(0)]
         ushort _valueType;
 
         [FieldOffset(8)]
         IntPtr _ptr;
 
-        /// <summary>
-        /// Set a string value.
-        /// </summary>
         internal PropVariant(string value)
         {
-            if (value == null)
+            try
             {
-                throw new ArgumentException("PropVariantNullString", "value");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(133, 938, 1454);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 785, 795);
 
-#pragma warning disable CS0618 // Type or member is obsolete (might get deprecated in future versions
-            _valueType = (ushort)VarEnum.VT_LPWSTR;
-#pragma warning restore CS0618 // Type or member is obsolete (might get deprecated in future versions
-            _ptr = Marshal.StringToCoTaskMemUni(value);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 997, 1125) || true) && (value == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(133, 997, 1125);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 1048, 1110);
+
+                    throw f_133_1054_1109("PropVariantNullString", "value");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(133, 997, 1125);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 1244, 1283);
+
+                _valueType = (ushort)VarEnum.VT_LPWSTR;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 1400, 1443);
+
+                _ptr = f_133_1407_1442(value);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(133, 938, 1454);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(133, 938, 1454);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(133, 938, 1454);
+            }
         }
 
-        /// <summary>
-        /// Disposes the object, calls the clear function.
-        /// </summary>
         public void Dispose()
         {
-            PropVariantNativeMethods.PropVariantClear(this);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(133, 1573, 1720);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 1619, 1667);
 
-            GC.SuppressFinalize(this);
+                f_133_1619_1666(this);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 1683, 1709);
+
+                f_133_1683_1708(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(133, 1573, 1720);
+
+                int
+                f_133_1619_1666(Microsoft.PowerShell.PropVariant
+                pvar)
+                {
+                    PropVariantNativeMethods.PropVariantClear(pvar);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(133, 1619, 1666);
+                    return 0;
+                }
+
+
+                int
+                f_133_1683_1708(Microsoft.PowerShell.PropVariant
+                obj)
+                {
+                    GC.SuppressFinalize((object)obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(133, 1683, 1708);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(133, 1573, 1720);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(133, 1573, 1720);
+            }
         }
 
         /// <summary>
@@ -55,13 +100,75 @@ namespace Microsoft.PowerShell
         /// </summary>
         ~PropVariant()
         {
-            Dispose();
-        }
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(133, 1842, 1852);
 
+            f_133_1842_1851(this);
+        }
         private class PropVariantNativeMethods
         {
             [DllImport("Ole32.dll", PreserveSig = false)]
             internal static extern void PropVariantClear([In, Out] PropVariant pvar);
+
+            public PropVariantNativeMethods()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(133, 1875, 2081);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(133, 1875, 2081);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(133, 1875, 2081);
+            }
+
+
+            static PropVariantNativeMethods()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(133, 1875, 2081);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(133, 1875, 2081);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(133, 1875, 2081);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(133, 1875, 2081);
         }
+
+        static PropVariant()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(133, 536, 2088);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(133, 536, 2088);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(133, 536, 2088);
+        }
+
+        [FieldOffset(16)]
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(133, 536, 2088);
+
+        System.ArgumentException
+        f_133_1054_1109(string
+        message, string
+        paramName)
+        {
+            var return_v = new System.ArgumentException(message, paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(133, 1054, 1109);
+            return return_v;
+        }
+
+
+        System.IntPtr
+        f_133_1407_1442(string
+        s)
+        {
+            var return_v = Marshal.StringToCoTaskMemUni(s);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(133, 1407, 1442);
+            return return_v;
+        }
+
+
+        int
+        f_133_1842_1851(Microsoft.PowerShell.PropVariant
+        this_param)
+        {
+            this_param.Dispose();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(133, 1842, 1851);
+            return 0;
+        }
+
     }
 }

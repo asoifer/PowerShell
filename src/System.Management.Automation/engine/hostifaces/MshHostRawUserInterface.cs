@@ -7,395 +7,830 @@ using System.Globalization;
 
 namespace System.Management.Automation.Host
 {
-    #region Ancillary types.
-
-    // I would have preferred to make these nested types within PSHostRawUserInterface, but that
-    // is evidently discouraged by the .net design guidelines.
-
-    /// <summary>
-    /// Represents an (x,y) coordinate pair.
-    /// </summary>
 
     public
-    struct Coordinates
+        struct Coordinates
     {
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell
 
         private int x;
+
         private int y;
 
-        #endregion
-
-        /// <summary>
-        /// Gets and sets the X coordinate.
-        /// </summary>
         public int X
         {
-            get { return x; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 925, 942);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 931, 940);
 
-            set { x = value; }
+                    return x;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 925, 942);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 888, 987);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 888, 987);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 958, 976);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 964, 974);
+
+                    x = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 958, 976);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 888, 987);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 888, 987);
+                }
+            }
         }
 
-        /// <summary>
-        /// Gets and sets the Y coordinate.
-        /// </summary>
         public int Y
         {
-            get { return y; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 1128, 1145);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 1134, 1143);
 
-            set { y = value; }
+                    return y;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 1128, 1145);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 1091, 1190);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 1091, 1190);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 1161, 1179);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 1167, 1177);
+
+                    y = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 1161, 1179);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 1091, 1190);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 1091, 1190);
+                }
+            }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the Coordinates class and defines the X and Y values.
-        /// </summary>
-        /// <param name="x">
-        /// The X coordinate
-        /// </param>
-        /// <param name="y">
-        /// The Y coordinate
-        /// </param>
         public
-        Coordinates(int x, int y)
+                Coordinates(int x, int y)
         {
-            this.x = x;
-            this.y = y;
-        }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.ToString"/>
-        /// </summary>
-        /// <returns>
-        /// "a,b" where a and b are the values of the X and Y properties.
-        /// </returns>
-
-        public override
-        string
-        ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "{0},{1}", X, Y);
-        }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.Equals(object)"/>
-        /// </summary>
-        /// <param name="obj">
-        /// object to be compared for equality.
-        /// </param>
-        /// <returns>
-        /// True if <paramref name="objB"/> is Coordinates and its X and Y values are the same as those of this instance,
-        /// false if not.
-        /// </returns>
-
-        public override
-        bool
-        Equals(object obj)
-        {
-            bool result = false;
-
-            if (obj is Coordinates)
+            try
             {
-                result = this == ((Coordinates)obj);
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 1510, 1623);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 1576, 1587);
+
+                this.x = x;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 1601, 1612);
+
+                this.y = y;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 1510, 1623);
             }
-
-            return result;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 1510, 1623);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 1510, 1623);
+            }
         }
 
-        /// <summary>
-        /// Overrides <see cref="System.Object.GetHashCode"/>
-        /// </summary>
-        /// <returns>
-        /// Hash code for this instance.
-        /// </returns>
+        public override
+                string
+                ToString()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 1866, 2021);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 1942, 2010);
+
+                return f_1471_1949_2009(f_1471_1963_1991(), "{0},{1}", X, Y);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 1866, 2021);
+
+                System.Globalization.CultureInfo
+                f_1471_1963_1991()
+                {
+                    var return_v = CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 1963, 1991);
+                    return return_v;
+                }
+
+
+                string
+                f_1471_1949_2009(System.Globalization.CultureInfo
+                provider, string
+                format, int
+                arg0, int
+                arg1)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, (object)arg0, (object)arg1);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 1949, 2009);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 1866, 2021);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 1866, 2021);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
         public override
-        int
-        GetHashCode()
+                bool
+                Equals(object obj)
         {
-            // idea: consider X the high-order part of a 64-bit in, and Y the lower order half.  Then use the int64.GetHashCode.
-
-            UInt64 i64 = 0;
-
-            if (X < 0)
+            try
             {
-                if (X == Int32.MinValue)
-                {
-                    // add one and invert to avoid an overflow.
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 2448, 2714);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 2530, 2550);
 
-                    i64 = (UInt64)(-1 * (X + 1));
+                bool
+                result = false
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 2566, 2673) || true) && (obj is Coordinates)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 2566, 2673);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 2622, 2658);
+
+                    result = this == ((Coordinates)obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 2566, 2673);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 2689, 2703);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 2448, 2714);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 2448, 2714);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 2448, 2714);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public override
+                int
+                GetHashCode()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 2927, 4158);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3135, 3150);
+
+                UInt64
+                i64 = 0
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3166, 3587) || true) && (X < 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3166, 3587);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3209, 3490) || true) && (X == Int32.MinValue)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3209, 3490);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3341, 3370);
+
+                        i64 = (UInt64)(-1 * (X + 1));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3209, 3490);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3209, 3490);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3452, 3471);
+
+                        i64 = (UInt64)(f_1471_3467_3469_M(-X));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3209, 3490);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3166, 3587);
+                }
+
                 else
+
                 {
-                    i64 = (UInt64)(-X);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3166, 3587);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3556, 3572);
+
+                    i64 = (UInt64)X;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3166, 3587);
                 }
-            }
-            else
-            {
-                i64 = (UInt64)X;
-            }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3649, 3669);
 
-            // rotate 32 bits to the left.
+                i64 *= 0x100000000U;
 
-            i64 *= 0x100000000U;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3713, 4070) || true) && (Y < 0)
+                )
 
-            // mask in Y
-
-            if (Y < 0)
-            {
-                if (Y == Int32.MinValue)
                 {
-                    i64 += (UInt64)(-1 * (Y + 1));
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3713, 4070);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3756, 3972) || true) && (Y == Int32.MinValue)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3756, 3972);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3821, 3851);
+
+                        i64 += (UInt64)(-1 * (Y + 1));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3756, 3972);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3756, 3972);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 3933, 3953);
+
+                        i64 += (UInt64)(f_1471_3949_3951_M(-Y));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3756, 3972);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3713, 4070);
                 }
+
                 else
+
                 {
-                    i64 += (UInt64)(-Y);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 3713, 4070);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 4038, 4055);
+
+                    i64 += (UInt64)Y;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 3713, 4070);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 4086, 4117);
+
+                int
+                result = f_1471_4099_4116(i64)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 4133, 4147);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 2927, 4158);
+
+                int
+                f_1471_3467_3469_M(int
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 3467, 3469);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_3949_3951_M(int
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 3949, 3951);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_4099_4116(ulong
+                this_param)
+                {
+                    var return_v = this_param.GetHashCode();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 4099, 4116);
+                    return return_v;
+                }
+
             }
-            else
+            catch
             {
-                i64 += (UInt64)Y;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 2927, 4158);
+                throw;
             }
-
-            int result = i64.GetHashCode();
-
-            return result;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 2927, 4158);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-
-        /// <summary>
-        /// Compares two instances for equality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if the respective X and Y values are the same, false otherwise.
-        /// </returns>
 
         public static
-        bool
-        operator ==(Coordinates first, Coordinates second)
+                bool
+                operator ==(Coordinates first, Coordinates second)
         {
-            bool result = first.X == second.X && first.Y == second.Y;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 4584, 4794);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 4696, 4753);
 
-            return result;
+                bool
+                result = first.X == second.X && (DynAbs.Tracing.TraceSender.Expression_True(1471, 4710, 4752) && first.Y == second.Y)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 4769, 4783);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 4584, 4794);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 4584, 4794);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 4584, 4794);
+            }
         }
 
-        /// <summary>
-        /// Compares two instances for inequality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if any of the respective either X or Y field is not the same, false otherwise.
-        /// </returns>
-
         public static
-        bool
-        operator !=(Coordinates first, Coordinates second)
+                bool
+                operator !=(Coordinates first, Coordinates second)
         {
-            return !(first == second);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 5237, 5386);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 5349, 5375);
+
+                return !(first == second);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 5237, 5386);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 5237, 5386);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 5237, 5386);
+            }
+        }
+        static Coordinates()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1471, 558, 5393);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1471, 558, 5393);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 558, 5393);
         }
     }
 
-    /// <summary>
-    /// Represents a width and height pair.
-    /// </summary>
-
     public
-    struct Size
+        struct Size
     {
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell
 
         private int width;
+
         private int height;
 
-        #endregion
-
-        /// <summary>
-        /// Gets and sets the Width.
-        /// </summary>
         public int Width
         {
-            get { return width; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 5853, 5874);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 5859, 5872);
 
-            set { width = value; }
+                    return width;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 5853, 5874);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 5812, 5923);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 5812, 5923);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 5890, 5912);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 5896, 5910);
+
+                    width = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 5890, 5912);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 5812, 5923);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 5812, 5923);
+                }
+            }
         }
 
-        /// <summary>
-        /// Gets and sets the Height.
-        /// </summary>
         public int Height
         {
-            get { return height; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 6063, 6085);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 6069, 6083);
 
-            set { height = value; }
+                    return height;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 6063, 6085);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 6021, 6135);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 6021, 6135);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 6101, 6124);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 6107, 6122);
+
+                    height = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 6101, 6124);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 6021, 6135);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 6021, 6135);
+                }
+            }
         }
 
-        /// <summary>
-        /// Initialize a new instance of the Size class and defines the Width and Height values.
-        /// </summary>
-        /// <param name="width">
-        /// The Width
-        /// </param>
-        /// <param name="height">
-        /// The Height
-        /// </param>
         public
-        Size(int width, int height)
+                Size(int width, int height)
         {
-            this.width = width;
-            this.height = height;
-        }
-
-        /// <summary>
-        /// Overloads <see cref="System.Object.ToString"/>
-        /// </summary>
-        /// <returns>
-        /// "a,b" where a and b are the values of the Width and Height properties.
-        /// </returns>
-
-        public override
-        string
-        ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "{0},{1}", Width, Height);
-        }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.Equals(object)"/>
-        /// </summary>
-        /// <param name="obj">
-        /// object to be compared for equality.
-        /// </param>
-        /// <returns>
-        /// True if <paramref name="obj"/> is Size and its Width and Height values are the same as those of this instance,
-        /// false if not.
-        /// </returns>
-
-        public override
-        bool
-        Equals(object obj)
-        {
-            bool result = false;
-
-            if (obj is Size)
+            try
             {
-                result = this == ((Size)obj);
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 6452, 6585);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 6520, 6539);
+
+                this.width = width;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 6553, 6574);
+
+                this.height = height;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 6452, 6585);
             }
-
-            return result;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 6452, 6585);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 6452, 6585);
+            }
         }
 
-        /// <summary>
-        /// Overrides <see cref="System.Object.GetHashCode"/>
-        /// </summary>
-        /// <returns>
-        /// Hash code for this instance.
-        /// <!--
-        /// consider Width the high-order part of a 64-bit in, and
-        /// Height the lower order half.  Then use the int64.GetHashCode.-->
-        /// </returns>
+        public override
+                string
+                ToString()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 6837, 7001);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 6913, 6990);
+
+                return f_1471_6920_6989(f_1471_6934_6962(), "{0},{1}", Width, Height);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 6837, 7001);
+
+                System.Globalization.CultureInfo
+                f_1471_6934_6962()
+                {
+                    var return_v = CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 6934, 6962);
+                    return return_v;
+                }
+
+
+                string
+                f_1471_6920_6989(System.Globalization.CultureInfo
+                provider, string
+                format, int
+                arg0, int
+                arg1)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, (object)arg0, (object)arg1);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 6920, 6989);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 6837, 7001);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 6837, 7001);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
         public override
-        int
-        GetHashCode()
+                bool
+                Equals(object obj)
         {
-            // idea: consider Width the high-order part of a 64-bit in, and Height the lower order half.  Then use the int64.GetHashCode.
-
-            UInt64 i64 = 0;
-
-            if (Width < 0)
+            try
             {
-                if (Width == Int32.MinValue)
-                {
-                    // add one and invert to avoid an overflow.
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 7429, 7681);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 7511, 7531);
 
-                    i64 = (UInt64)(-1 * (Width + 1));
+                bool
+                result = false
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 7547, 7640) || true) && (obj is Size)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 7547, 7640);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 7596, 7625);
+
+                    result = this == ((Size)obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 7547, 7640);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 7656, 7670);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 7429, 7681);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 7429, 7681);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 7429, 7681);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public override
+                int
+                GetHashCode()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 8058, 9348);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8275, 8290);
+
+                UInt64
+                i64 = 0
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8306, 8747) || true) && (Width < 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8306, 8747);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8353, 8646) || true) && (Width == Int32.MinValue)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8353, 8646);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8489, 8522);
+
+                        i64 = (UInt64)(-1 * (Width + 1));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8353, 8646);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8353, 8646);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8604, 8627);
+
+                        i64 = (UInt64)(f_1471_8619_8625_M(-Width));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8353, 8646);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8306, 8747);
+                }
+
                 else
+
                 {
-                    i64 = (UInt64)(-Width);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8306, 8747);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8712, 8732);
+
+                    i64 = (UInt64)Width;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8306, 8747);
                 }
-            }
-            else
-            {
-                i64 = (UInt64)Width;
-            }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8809, 8829);
 
-            // rotate 32 bits to the left.
+                i64 *= 0x100000000U;
 
-            i64 *= 0x100000000U;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8878, 9260) || true) && (Height < 0)
+                )
 
-            // mask in Height
-
-            if (Height < 0)
-            {
-                if (Height == Int32.MinValue)
                 {
-                    i64 += (UInt64)(-1 * (Height + 1));
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8878, 9260);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8926, 9157) || true) && (Height == Int32.MinValue)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8926, 9157);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 8996, 9031);
+
+                        i64 += (UInt64)(-1 * (Height + 1));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8926, 9157);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8926, 9157);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 9113, 9138);
+
+                        i64 += (UInt64)(f_1471_9129_9136_M(-Height));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8926, 9157);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8878, 9260);
                 }
+
                 else
+
                 {
-                    i64 += (UInt64)(-Height);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 8878, 9260);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 9223, 9245);
+
+                    i64 += (UInt64)Height;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 8878, 9260);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 9276, 9307);
+
+                int
+                result = f_1471_9289_9306(i64)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 9323, 9337);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 8058, 9348);
+
+                int
+                f_1471_8619_8625_M(int
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 8619, 8625);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_9129_9136_M(int
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 9129, 9136);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_9289_9306(ulong
+                this_param)
+                {
+                    var return_v = this_param.GetHashCode();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 9289, 9306);
+                    return return_v;
+                }
+
             }
-            else
+            catch
             {
-                i64 += (UInt64)Height;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 8058, 9348);
+                throw;
             }
-
-            int result = i64.GetHashCode();
-
-            return result;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 8058, 9348);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-
-        /// <summary>
-        /// Compares two instances for equality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if the respective Width and Height fields are the same, false otherwise.
-        /// </returns>
 
         public static
-        bool
-        operator ==(Size first, Size second)
+                bool
+                operator ==(Size first, Size second)
         {
-            bool result = first.Width == second.Width && first.Height == second.Height;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 9783, 9997);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 9881, 9956);
 
-            return result;
+                bool
+                result = first.Width == second.Width && (DynAbs.Tracing.TraceSender.Expression_True(1471, 9895, 9955) && first.Height == second.Height)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 9972, 9986);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 9783, 9997);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 9783, 9997);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 9783, 9997);
+            }
         }
 
-        /// <summary>
-        /// Compares two instances for inequality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if any of the respective Width and Height fields are not the same, false otherwise.
-        /// </returns>
-
         public static
-        bool
-        operator !=(Size first, Size second)
+                bool
+                operator !=(Size first, Size second)
         {
-            return !(first == second);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 10445, 10580);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 10543, 10569);
+
+                return !(first == second);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 10445, 10580);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 10445, 10580);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 10445, 10580);
+            }
+        }
+        static Size()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1471, 5487, 10587);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1471, 5487, 10587);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 5487, 10587);
         }
     }
 
@@ -497,692 +932,1437 @@ namespace System.Management.Automation.Host
         EnhancedKey = 0x0100
     }
 
-    /// <summary>
-    /// Represents information of a keystroke.
-    /// </summary>
-
     public
-    struct KeyInfo
+        struct KeyInfo
     {
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell
 
         private int virtualKeyCode;
+
         private char character;
+
         private ControlKeyStates controlKeyState;
+
         private bool keyDown;
-
-        #endregion
-
-        /// <summary>
-        /// Gets and set device-independent key.
-        /// </summary>
 
         public int VirtualKeyCode
         {
-            get { return virtualKeyCode; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 13527, 13557);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 13533, 13555);
 
-            set { virtualKeyCode = value; }
+                    return virtualKeyCode;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 13527, 13557);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 13477, 13615);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13477, 13615);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 13573, 13604);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 13579, 13602);
+
+                    virtualKeyCode = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 13573, 13604);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 13477, 13615);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13477, 13615);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and set unicode Character of the key.
-        /// </summary>
 
         public char Character
         {
-            get { return character; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 13778, 13803);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 13784, 13801);
 
-            set { character = value; }
+                    return character;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 13778, 13803);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 13732, 13856);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13732, 13856);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 13819, 13845);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 13825, 13843);
+
+                    character = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 13819, 13845);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 13732, 13856);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13732, 13856);
+                }
+            }
         }
-
-        /// <summary>
-        /// State of the control keys.
-        /// </summary>
 
         public ControlKeyStates ControlKeyState
         {
-            get { return controlKeyState; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 14021, 14052);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 14027, 14050);
 
-            set { controlKeyState = value; }
+                    return controlKeyState;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 14021, 14052);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 13957, 14111);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13957, 14111);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 14068, 14100);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 14074, 14098);
+
+                    controlKeyState = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 14068, 14100);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 13957, 14111);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13957, 14111);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and set the status of whether this instance is generated by a key pressed or released.
-        /// </summary>
 
         public bool KeyDown
         {
-            get { return keyDown; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 14321, 14344);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 14327, 14342);
 
-            set { keyDown = value; }
+                    return keyDown;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 14321, 14344);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 14277, 14395);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 14277, 14395);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 14360, 14384);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 14366, 14382);
+
+                    keyDown = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 14360, 14384);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 14277, 14395);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 14277, 14395);
+                }
+            }
         }
-
-        /// <summary>
-        /// Initialize a new instance of the KeyInfo class and defines the VirtualKeyCode,
-        /// Character, ControlKeyState and KeyDown values.
-        /// </summary>
-        /// <param name="virtualKeyCode">
-        /// The virtual key code
-        /// </param>
-        /// <param name="ch">
-        /// The character
-        /// </param>
-        /// <param name="controlKeyState">
-        /// The control key state
-        /// </param>
-        /// <param name="keyDown">
-        /// Whether the key is pressed or released
-        /// </param>
 
         public
-        KeyInfo
-        (
-            int virtualKeyCode,
-            char ch,
-            ControlKeyStates controlKeyState,
-            bool keyDown
-        )
+                KeyInfo
+                (
+                    int virtualKeyCode,
+                    char ch,
+                    ControlKeyStates controlKeyState,
+                    bool keyDown
+                )
         {
-            this.virtualKeyCode = virtualKeyCode;
-            this.character = ch;
-            this.controlKeyState = controlKeyState;
-            this.keyDown = keyDown;
-        }
-
-        /// <summary>
-        /// Overloads <see cref="System.Object.ToString"/>
-        /// </summary>
-        /// <returns>
-        /// "a,b,c,d" where a, b, c, and d are the values of the VirtualKeyCode, Character, ControlKeyState, and KeyDown properties.
-        /// </returns>
-
-        public override
-        string
-        ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "{0},{1},{2},{3}", VirtualKeyCode, Character, ControlKeyState, KeyDown);
-        }
-        /// <summary>
-        /// Overrides <see cref="System.Object.Equals(object)"/>
-        /// </summary>
-        /// <param name="obj">
-        /// object to be compared for equality.
-        /// </param>
-        /// <returns>
-        /// True if <paramref name="obj"/> is KeyInfo and its VirtualKeyCode, Character, ControlKeyState, and KeyDown values are the
-        /// same as those of this instance, false if not.
-        /// </returns>
-
-        public override
-        bool
-        Equals(object obj)
-        {
-            bool result = false;
-
-            if (obj is KeyInfo)
+            try
             {
-                result = this == ((KeyInfo)obj);
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 14998, 15368);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 15196, 15233);
+
+                this.virtualKeyCode = virtualKeyCode;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 15247, 15267);
+
+                this.character = ch;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 15281, 15320);
+
+                this.controlKeyState = controlKeyState;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 15334, 15357);
+
+                this.keyDown = keyDown;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 14998, 15368);
             }
-
-            return result;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 14998, 15368);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 14998, 15368);
+            }
         }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.GetHashCode"/>
-        /// </summary>
-        /// <returns>
-        /// Hash code for this instance.
-        /// <!--consider KeyDown (true == 1, false == 0) the highest-order nibble,
-        ///                ControlKeyState the second to fourth highest-order nibbles
-        ///                VirtualKeyCode the lower-order nibbles of a 32-bit int,
-        ///       Then use the UInt32.GetHashCode.-->
-        /// </returns>
 
         public override
-        int
-        GetHashCode()
+                string
+                ToString()
         {
-            // idea: consider KeyDown (true == 1, false == 0) the highest-order nibble,
-            //                ControlKeyState the second to fourth highest-order nibbles
-            //                VirtualKeyCode the lower-order nibbles of a 32-bit int,
-            //       Then use the UInt32.GetHashCode.
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 15670, 15880);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 15746, 15869);
 
-            UInt32 i32 = KeyDown ? 0x10000000U : 0;
+                return f_1471_15753_15868(f_1471_15767_15795(), "{0},{1},{2},{3}", VirtualKeyCode, Character, ControlKeyState, KeyDown);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 15670, 15880);
 
-            // mask in ControlKeyState
-            i32 |= ((uint)ControlKeyState) << 16;
+                System.Globalization.CultureInfo
+                f_1471_15767_15795()
+                {
+                    var return_v = CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 15767, 15795);
+                    return return_v;
+                }
 
-            // mask in the VirtualKeyCode
-            i32 |= (UInt32)VirtualKeyCode;
 
-            return i32.GetHashCode();
+                string
+                f_1471_15753_15868(System.Globalization.CultureInfo
+                provider, string
+                format, params object?[]
+                args)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 15753, 15868);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 15670, 15880);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 15670, 15880);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Compares two instances for equality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if the respective Character, ControlKeyStates , KeyDown, and VirtualKeyCode fields
-        /// are the same, false otherwise.
-        /// </returns>
-        /// <exception/>
-
-        public static
-        bool
-        operator ==(KeyInfo first, KeyInfo second)
+        public override
+                bool
+                Equals(object obj)
         {
-            bool result = first.Character == second.Character && first.ControlKeyState == second.ControlKeyState &&
-                          first.KeyDown == second.KeyDown && first.VirtualKeyCode == second.VirtualKeyCode;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 16348, 16606);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 16430, 16450);
 
-            return result;
+                bool
+                result = false
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 16466, 16565) || true) && (obj is KeyInfo)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 16466, 16565);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 16518, 16550);
+
+                    result = this == ((KeyInfo)obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 16466, 16565);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 16581, 16595);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 16348, 16606);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 16348, 16606);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 16348, 16606);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Compares two instances for inequality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if any of the respective Character, ControlKeyStates , KeyDown, or VirtualKeyCode fields
-        /// are the different, false otherwise.
-        /// </returns>
-        /// <exception/>
+        public override
+                int
+                GetHashCode()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 17129, 17801);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 17528, 17567);
+
+                UInt32
+                i32 = (DynAbs.Tracing.TraceSender.Conditional_F1(1471, 17541, 17548) || ((KeyDown && DynAbs.Tracing.TraceSender.Conditional_F2(1471, 17551, 17562)) || DynAbs.Tracing.TraceSender.Conditional_F3(1471, 17565, 17566))) ? 0x10000000U : 0
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 17623, 17660);
+
+                i32 |= ((uint)ControlKeyState) << 16;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 17719, 17749);
+
+                i32 |= (UInt32)VirtualKeyCode;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 17765, 17790);
+
+                return f_1471_17772_17789(i32);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 17129, 17801);
+
+                int
+                f_1471_17772_17789(uint
+                this_param)
+                {
+                    var return_v = this_param.GetHashCode();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 17772, 17789);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 17129, 17801);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 17129, 17801);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
         public static
-        bool
-        operator !=(KeyInfo first, KeyInfo second)
+                bool
+                operator ==(KeyInfo first, KeyInfo second)
         {
-            return !(first == second);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 18316, 18673);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 18420, 18632);
+
+                bool
+                result = first.Character == second.Character && (DynAbs.Tracing.TraceSender.Expression_True(1471, 18434, 18520) && first.ControlKeyState == second.ControlKeyState) && (DynAbs.Tracing.TraceSender.Expression_True(1471, 18434, 18582) && first.KeyDown == second.KeyDown) && (DynAbs.Tracing.TraceSender.Expression_True(1471, 18434, 18631) && first.VirtualKeyCode == second.VirtualKeyCode)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 18648, 18662);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 18316, 18673);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 18316, 18673);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 18316, 18673);
+            }
+        }
+
+        public static
+                bool
+                operator !=(KeyInfo first, KeyInfo second)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 19201, 19342);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 19305, 19331);
+
+                return !(first == second);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 19201, 19342);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 19201, 19342);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 19201, 19342);
+            }
+        }
+        static KeyInfo()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1471, 13040, 19349);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1471, 13040, 19349);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 13040, 19349);
         }
     }
 
-    /// <summary>
-    /// Represents a rectangular region of the screen.
-    /// <!--We use this structure instead of System.Drawing.Rectangle because S.D.R
-    /// is way overkill and would bring in another assembly.-->
-    /// </summary>
-
     public
-    struct Rectangle
+        struct Rectangle
     {
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell
 
         private int left;
+
         private int top;
+
         private int right;
+
         private int bottom;
-
-        #endregion
-
-        /// <summary>
-        /// Gets and sets the left side of the rectangle.
-        /// </summary>
 
         public int Left
         {
-            get { return left; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20050, 20070);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20056, 20068);
 
-            set { left = value; }
+                    return left;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20050, 20070);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20010, 20118);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20010, 20118);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20086, 20107);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20092, 20105);
+
+                    left = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20086, 20107);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20010, 20118);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20010, 20118);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and sets the top of the rectangle.
-        /// </summary>
 
         public int Top
         {
-            get { return top; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20271, 20290);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20277, 20288);
 
-            set { top = value; }
+                    return top;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20271, 20290);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20232, 20337);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20232, 20337);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20306, 20326);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20312, 20324);
+
+                    top = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20306, 20326);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20232, 20337);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20232, 20337);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and sets the right side of the rectangle.
-        /// </summary>
 
         public int Right
         {
-            get { return right; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20499, 20520);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20505, 20518);
 
-            set { right = value; }
+                    return right;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20499, 20520);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20458, 20569);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20458, 20569);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20536, 20558);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20542, 20556);
+
+                    right = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20536, 20558);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20458, 20569);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20458, 20569);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and sets the bottom of the rectangle.
-        /// </summary>
 
         public int Bottom
         {
-            get { return bottom; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20728, 20750);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20734, 20748);
 
-            set { bottom = value; }
+                    return bottom;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20728, 20750);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20686, 20800);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20686, 20800);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 20766, 20789);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 20772, 20787);
+
+                    bottom = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 20766, 20789);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 20686, 20800);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 20686, 20800);
+                }
+            }
         }
-
-        /// <summary>
-        /// Initialize a new instance of the Rectangle class and defines the Left, Top, Right, and Bottom values.
-        /// </summary>
-        /// <param name="left">
-        /// The left side of the rectangle
-        /// </param>
-        /// <param name="top">
-        /// The top of the rectangle
-        /// </param>
-        /// <param name="right">
-        /// The right side of the rectangle
-        /// </param>
-        /// <param name="bottom">
-        /// The bottom of the rectangle
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// <paramref name="right"/> is less than <paramref name="left"/>;
-        /// <paramref name="bottom"/> is less than <paramref name="top"/>
-        /// </exception>
 
         public
-        Rectangle(int left, int top, int right, int bottom)
+                Rectangle(int left, int top, int right, int bottom)
         {
-            if (right < left)
+            try
             {
-                // "right" and "left" are not localizable
-                throw PSTraceSource.NewArgumentException("right", MshHostRawUserInterfaceStrings.LessThanErrorTemplate, "right", "left");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 21593, 22333);
 
-            if (bottom < top)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 21685, 21930) || true) && (right < left)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 21685, 21930);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 21794, 21915);
+
+                    throw f_1471_21800_21914("right", f_1471_21844_21896(), "right", "left");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 21685, 21930);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 21946, 22192) || true) && (bottom < top)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 21946, 22192);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 22055, 22177);
+
+                    throw f_1471_22061_22176("bottom", f_1471_22106_22158(), "bottom", "top");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 21946, 22192);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 22208, 22225);
+
+                this.left = left;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 22239, 22254);
+
+                this.top = top;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 22268, 22287);
+
+                this.right = right;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 22301, 22322);
+
+                this.bottom = bottom;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 21593, 22333);
+            }
+            catch
             {
-                // "bottom" and "top" are not localizable
-                throw PSTraceSource.NewArgumentException("bottom", MshHostRawUserInterfaceStrings.LessThanErrorTemplate, "bottom", "top");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 21593, 22333);
+                throw;
             }
-
-            this.left = left;
-            this.top = top;
-            this.right = right;
-            this.bottom = bottom;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 21593, 22333);
+            }
         }
-
-        /// <summary>
-        /// Initializes a new instance of the Rectangle class and defines the Left, Top, Right, and Bottom values
-        /// by <paramref name="upperLeft"/>, the upper left corner and <paramref name="lowerRight"/>, the lower
-        /// right corner.
-        /// <!--
-        /// Added based on feedback from review with BCL PM.
-        /// -->
-        /// </summary>
-        /// <param name="upperLeft">
-        /// The Coordinates of the upper left corner of the Rectangle
-        /// </param>
-        /// <param name="lowerRight">
-        /// The Coordinates of the lower right corner of the Rectangle
-        /// </param>
-        /// <exception/>
 
         public
-        Rectangle(Coordinates upperLeft, Coordinates lowerRight)
-            : this(upperLeft.X, upperLeft.Y, lowerRight.X, lowerRight.Y)
+                Rectangle(Coordinates upperLeft, Coordinates lowerRight)
+        : this(f_1471_23129_23140_C(upperLeft.X), upperLeft.Y, lowerRight.X, lowerRight.Y)
         {
-        }
-
-        /// <summary>
-        /// Overloads <see cref="System.Object.ToString"/>
-        /// </summary>
-        /// <returns>
-        /// "a,b ; c,d" where a, b, c, and d are values of the Left, Top, Right, and Bottom properties.
-        /// </returns>
-
-        public override
-        string
-        ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "{0},{1} ; {2},{3}", Left, Top, Right, Bottom);
-        }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.Equals(object)"/>
-        /// </summary>
-        /// <param name="obj">
-        /// object to be compared for equality.
-        /// </param>
-        /// <returns>
-        /// True if <paramref name="obj"/> is Rectangle and its Left, Top, Right, and Bottom values are the same as those of this instance,
-        /// false if not.
-        /// </returns>
-
-        public override
-        bool
-        Equals(object obj)
-        {
-            bool result = false;
-
-            if (obj is Rectangle)
+            try
             {
-                result = this == ((Rectangle)obj);
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 23036, 23204);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 23036, 23204);
             }
-
-            return result;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 23036, 23204);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 23036, 23204);
+            }
         }
 
-        /// <summary>
-        /// Overrides <see cref="System.Object.GetHashCode"/>
-        /// </summary>
-        /// <returns>
-        /// Hash code for this instance.
-        /// <!-- consider (Top XOR Bottom) the high-order part of a 64-bit int,
-        ///                (Left XOR Right) the lower order half.  Then use the int64.GetHashCode.-->
-        /// </returns>
-        /// <exception/>
+        public override
+                string
+                ToString()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 23477, 23662);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 23553, 23651);
+
+                return f_1471_23560_23650(f_1471_23574_23602(), "{0},{1} ; {2},{3}", Left, Top, Right, Bottom);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 23477, 23662);
+
+                System.Globalization.CultureInfo
+                f_1471_23574_23602()
+                {
+                    var return_v = CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 23574, 23602);
+                    return return_v;
+                }
+
+
+                string
+                f_1471_23560_23650(System.Globalization.CultureInfo
+                provider, string
+                format, params object?[]
+                args)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 23560, 23650);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 23477, 23662);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 23477, 23662);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
         public override
-        int
-        GetHashCode()
+                bool
+                Equals(object obj)
         {
-            // idea: consider (Top XOR Bottom) the high-order part of a 64-bit int,
-            //                (Left XOR Right) the lower order half.  Then use the int64.GetHashCode.
-
-            UInt64 i64 = 0;
-
-            int upper = Top ^ Bottom;
-            if (upper < 0)
+            try
             {
-                if (upper == Int32.MinValue)
-                {
-                    // add one and invert to avoid an overflow.
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 24107, 24369);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 24189, 24209);
 
-                    i64 = (UInt64)(-1 * (upper + 1));
+                bool
+                result = false
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 24225, 24328) || true) && (obj is Rectangle)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 24225, 24328);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 24279, 24313);
+
+                    result = this == ((Rectangle)obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 24225, 24328);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 24344, 24358);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 24107, 24369);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 24107, 24369);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 24107, 24369);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public override
+                int
+                GetHashCode()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 24792, 26203);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25058, 25073);
+
+                UInt64
+                i64 = 0
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25089, 25114);
+
+                int
+                upper = Top ^ Bottom
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25128, 25569) || true) && (upper < 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25128, 25569);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25175, 25468) || true) && (upper == Int32.MinValue)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25175, 25468);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25311, 25344);
+
+                        i64 = (UInt64)(-1 * (upper + 1));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25175, 25468);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25175, 25468);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25426, 25449);
+
+                        i64 = (UInt64)(-upper);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25175, 25468);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25128, 25569);
+                }
+
                 else
+
                 {
-                    i64 = (UInt64)(-upper);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25128, 25569);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25534, 25554);
+
+                    i64 = (UInt64)upper;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25128, 25569);
                 }
-            }
-            else
-            {
-                i64 = (UInt64)upper;
-            }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25631, 25651);
 
-            // rotate 32 bits to the left.
+                i64 *= 0x100000000U;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25699, 25724);
 
-            i64 *= 0x100000000U;
+                int
+                lower = Left ^ Right
+                ;
 
-            // mask in lower
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25738, 26115) || true) && (lower < 0)
+                )
 
-            int lower = Left ^ Right;
-            if (lower < 0)
-            {
-                if (lower == Int32.MinValue)
                 {
-                    i64 += (UInt64)(-1 * (lower + 1));
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25738, 26115);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25785, 26013) || true) && (lower == Int32.MinValue)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25785, 26013);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25854, 25888);
+
+                        i64 += (UInt64)(-1 * (lower + 1));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25785, 26013);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25785, 26013);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 25970, 25994);
+
+                        i64 += (UInt64)(-upper);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25785, 26013);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25738, 26115);
                 }
+
                 else
+
                 {
-                    i64 += (UInt64)(-upper);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 25738, 26115);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 26079, 26100);
+
+                    i64 += (UInt64)lower;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 25738, 26115);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 26131, 26162);
+
+                int
+                result = f_1471_26144_26161(i64)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 26178, 26192);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 24792, 26203);
+
+                int
+                f_1471_26144_26161(ulong
+                this_param)
+                {
+                    var return_v = this_param.GetHashCode();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 26144, 26161);
+                    return return_v;
+                }
+
             }
-            else
+            catch
             {
-                i64 += (UInt64)lower;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 24792, 26203);
+                throw;
             }
-
-            int result = i64.GetHashCode();
-
-            return result;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 24792, 26203);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-
-        /// <summary>
-        /// Compares two instances for equality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if the respective Top, Left, Bottom, and Right fields are the same, false otherwise.
-        /// </returns>
 
         public static
-        bool
-        operator ==(Rectangle first, Rectangle second)
+                bool
+                operator ==(Rectangle first, Rectangle second)
         {
-            bool result = first.Top == second.Top && first.Left == second.Left &&
-             first.Bottom == second.Bottom && first.Right == second.Right;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 26650, 26944);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 26758, 26903);
 
-            return result;
+                bool
+                result = first.Top == second.Top && (DynAbs.Tracing.TraceSender.Expression_True(1471, 26772, 26824) && first.Left == second.Left) && (DynAbs.Tracing.TraceSender.Expression_True(1471, 26772, 26871) && first.Bottom == second.Bottom) && (DynAbs.Tracing.TraceSender.Expression_True(1471, 26772, 26902) && first.Right == second.Right)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 26919, 26933);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 26650, 26944);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 26650, 26944);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 26650, 26944);
+            }
         }
-
-        /// <summary>
-        /// Compares two instances for inequality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if any of the respective Top, Left, Bottom, and Right fields are not the same, false otherwise.
-        /// </returns>
-        /// <exception/>
 
         public static
-        bool
-        operator !=(Rectangle first, Rectangle second)
+                bool
+                operator !=(Rectangle first, Rectangle second)
         {
-            return !(first == second);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 27430, 27575);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 27538, 27564);
+
+                return !(first == second);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 27430, 27575);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 27430, 27575);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 27430, 27575);
+            }
         }
+        static Rectangle()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1471, 19604, 27582);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1471, 19604, 27582);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 19604, 27582);
+        }
+
+        static string
+        f_1471_21844_21896()
+        {
+            var return_v = MshHostRawUserInterfaceStrings.LessThanErrorTemplate;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 21844, 21896);
+            return return_v;
+        }
+
+
+        static System.Management.Automation.PSArgumentException
+        f_1471_21800_21914(string
+        paramName, string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 21800, 21914);
+            return return_v;
+        }
+
+
+        static string
+        f_1471_22106_22158()
+        {
+            var return_v = MshHostRawUserInterfaceStrings.LessThanErrorTemplate;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 22106, 22158);
+            return return_v;
+        }
+
+
+        static System.Management.Automation.PSArgumentException
+        f_1471_22061_22176(string
+        paramName, string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 22061, 22176);
+            return return_v;
+        }
+
+
+        static int
+        f_1471_23129_23140_C(int
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1471, 23036, 23204);
+            return return_v;
+        }
+
     }
 
-    /// <summary>
-    /// Represents a character, a foregroundColor color, and background color.
-    /// </summary>
-
     public
-    struct BufferCell
+        struct BufferCell
     {
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell
 
         private char character;
+
         private ConsoleColor foregroundColor;
+
         private ConsoleColor backgroundColor;
+
         private BufferCellType bufferCellType;
-
-        #endregion
-
-        /// <summary>
-        /// Gets and sets the character value.
-        /// </summary>
 
         public char Character
         {
-            get { return character; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 28218, 28243);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 28224, 28241);
 
-            set { character = value; }
+                    return character;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 28218, 28243);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 28172, 28296);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 28172, 28296);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 28259, 28285);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 28265, 28283);
+
+                    character = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 28259, 28285);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 28172, 28296);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 28172, 28296);
+                }
+            }
         }
-
-        // we reuse System.ConsoleColor - it's in the core assembly, and I think it would be confusing to create another
-        // essentially identical enum
-
-        /// <summary>
-        /// Gets and sets the foreground color.
-        /// </summary>
 
         public ConsoleColor ForegroundColor
         {
-            get { return foregroundColor; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 28629, 28660);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 28635, 28658);
 
-            set { foregroundColor = value; }
+                    return foregroundColor;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 28629, 28660);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 28569, 28719);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 28569, 28719);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 28676, 28708);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 28682, 28706);
+
+                    foregroundColor = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 28676, 28708);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 28569, 28719);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 28569, 28719);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and sets the background color.
-        /// </summary>
 
         public ConsoleColor BackgroundColor
         {
-            get { return backgroundColor; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 28889, 28920);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 28895, 28918);
 
-            set { backgroundColor = value; }
+                    return backgroundColor;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 28889, 28920);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 28829, 28979);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 28829, 28979);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 28936, 28968);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 28942, 28966);
+
+                    backgroundColor = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 28936, 28968);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 28829, 28979);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 28829, 28979);
+                }
+            }
         }
-
-        /// <summary>
-        /// Gets and sets the type value.
-        /// </summary>
 
         public BufferCellType BufferCellType
         {
-            get { return bufferCellType; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 29144, 29174);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 29150, 29172);
 
-            set { bufferCellType = value; }
+                    return bufferCellType;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 29144, 29174);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 29083, 29232);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 29083, 29232);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            set
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 29190, 29221);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 29196, 29219);
+
+                    bufferCellType = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 29190, 29221);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 29083, 29232);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 29083, 29232);
+                }
+            }
         }
-
-        /// <summary>
-        /// Initializes a new instance of the BufferCell class and defines the
-        /// Character, ForegroundColor, BackgroundColor and Type values.
-        /// </summary>
-        /// <param name="character">
-        /// The character in this BufferCell object
-        /// </param>
-        /// <param name="foreground">
-        /// The foreground color of this BufferCell object
-        /// </param>
-        /// <param name="background">
-        /// The foreground color of this BufferCell object
-        /// </param>
-        /// <param name="bufferCellType">
-        /// The type of this BufferCell object
-        /// </param>
 
         public
-        BufferCell(char character, ConsoleColor foreground, ConsoleColor background, BufferCellType bufferCellType)
+                BufferCell(char character, ConsoleColor foreground, ConsoleColor background, BufferCellType bufferCellType)
         {
-            this.character = character;
-            this.foregroundColor = foreground;
-            this.backgroundColor = background;
-            this.bufferCellType = bufferCellType;
-        }
-
-        /// <summary>
-        /// Overloads <see cref="System.Object.ToString"/>
-        /// </summary>
-        /// <returns>
-        /// "'a' b c d" where a, b, c, and d are the values of the Character, ForegroundColor, BackgroundColor, and Type properties.
-        /// </returns>
-
-        public override
-        string
-        ToString()
-        {
-            return string.Format(CultureInfo.InvariantCulture, "'{0}' {1} {2} {3}", Character, ForegroundColor, BackgroundColor, BufferCellType);
-        }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.Equals(object)"/>
-        /// </summary>
-        /// <param name="obj">
-        /// object to be compared for equality.
-        /// </param>
-        /// <returns>
-        /// True if <paramref name="obj"/> is BufferCell and its Character, ForegroundColor, BackgroundColor, and BufferCellType values
-        /// are the same as those of this instance, false if not.
-        /// </returns>
-
-        public override
-        bool
-        Equals(object obj)
-        {
-            bool result = false;
-
-            if (obj is BufferCell)
+            try
             {
-                result = this == ((BufferCell)obj);
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 29915, 30248);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 30063, 30090);
+
+                this.character = character;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 30104, 30138);
+
+                this.foregroundColor = foreground;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 30152, 30186);
+
+                this.backgroundColor = background;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 30200, 30237);
+
+                this.bufferCellType = bufferCellType;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 29915, 30248);
             }
-
-            return result;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 29915, 30248);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 29915, 30248);
+            }
         }
-
-        /// <summary>
-        /// Overrides <see cref="System.Object.GetHashCode"/>
-        /// <!-- consider (ForegroundColor XOR BackgroundColor) the high-order part of a 32-bit int,
-        ///      and Character the lower order half.  Then use the int32.GetHashCode.-->
-        /// </summary>
-        /// <returns>
-        /// Hash code for this instance.
-        ///
-        ///</returns>
 
         public override
-        int
-        GetHashCode()
+                string
+                ToString()
         {
-            // idea: consider (ForegroundColor XOR BackgroundColor) the high-order part of a 32-bit int,
-            //                and Character the lower order half.  Then use the int32.GetHashCode.
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 30550, 30770);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 30626, 30759);
 
-            UInt32 i32 = ((uint)(ForegroundColor ^ BackgroundColor)) << 16;
+                return f_1471_30633_30758(f_1471_30647_30675(), "'{0}' {1} {2} {3}", Character, ForegroundColor, BackgroundColor, BufferCellType);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 30550, 30770);
 
-            // mask in Height
+                System.Globalization.CultureInfo
+                f_1471_30647_30675()
+                {
+                    var return_v = CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 30647, 30675);
+                    return return_v;
+                }
 
-            i32 |= (UInt16)Character;
-            int result = i32.GetHashCode();
 
-            return result;
+                string
+                f_1471_30633_30758(System.Globalization.CultureInfo
+                provider, string
+                format, params object?[]
+                args)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 30633, 30758);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 30550, 30770);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 30550, 30770);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Compares two instances for equality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if the respective Character, ForegroundColor, BackgroundColor, and BufferCellType values are the same, false otherwise.
-        /// </returns>
+        public override
+                bool
+                Equals(object obj)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 31251, 31515);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 31333, 31353);
+
+                bool
+                result = false
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 31369, 31474) || true) && (obj is BufferCell)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 31369, 31474);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 31424, 31459);
+
+                    result = this == ((BufferCell)obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 31369, 31474);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 31490, 31504);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 31251, 31515);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 31251, 31515);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 31251, 31515);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public override
+                int
+                GetHashCode()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 31932, 32439);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 32216, 32279);
+
+                UInt32
+                i32 = ((uint)(ForegroundColor ^ BackgroundColor)) << 16
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 32328, 32353);
+
+                i32 |= (UInt16)Character;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 32367, 32398);
+
+                int
+                result = f_1471_32380_32397(i32)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 32414, 32428);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 31932, 32439);
+
+                int
+                f_1471_32380_32397(uint
+                this_param)
+                {
+                    var return_v = this_param.GetHashCode();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 32380, 32397);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 31932, 32439);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 31932, 32439);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
         public static
-        bool
-        operator ==(BufferCell first, BufferCell second)
+                bool
+                operator ==(BufferCell first, BufferCell second)
         {
-            bool result = first.Character == second.Character &&
-                          first.BackgroundColor == second.BackgroundColor &&
-                          first.ForegroundColor == second.ForegroundColor &&
-                          first.BufferCellType == second.BufferCellType;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 32921, 33354);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 33031, 33313);
 
-            return result;
+                bool
+                result = first.Character == second.Character && (DynAbs.Tracing.TraceSender.Expression_True(1471, 33045, 33158) && first.BackgroundColor == second.BackgroundColor) && (DynAbs.Tracing.TraceSender.Expression_True(1471, 33045, 33236) && first.ForegroundColor == second.ForegroundColor) && (DynAbs.Tracing.TraceSender.Expression_True(1471, 33045, 33312) && first.BufferCellType == second.BufferCellType)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 33329, 33343);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 32921, 33354);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 32921, 33354);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 32921, 33354);
+            }
         }
-
-        /// <summary>
-        /// Compares two instances for inequality.
-        /// </summary>
-        /// <param name="first">
-        /// The left side operand.
-        /// </param>
-        /// <param name="second">
-        /// The right side operand.
-        /// </param>
-        /// <returns>
-        /// true if any of the respective Character, ForegroundColor, BackgroundColor, and BufferCellType values are not the same,
-        /// false otherwise.
-        /// </returns>
 
         public static
-        bool
-        operator !=(BufferCell first, BufferCell second)
+                bool
+                operator !=(BufferCell first, BufferCell second)
         {
-            return !(first == second);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1471, 33862, 34009);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 33972, 33998);
+
+                return !(first == second);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1471, 33862, 34009);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 33862, 34009);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 33862, 34009);
+            }
         }
 
-        private const string StringsBaseName = "MshHostRawUserInterfaceStrings";
+        private const string
+        StringsBaseName = "MshHostRawUserInterfaceStrings"
+        ;
+        static BufferCell()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1471, 27711, 34100);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 34042, 34092);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1471, 27711, 34100);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 27711, 34100);
+        }
     }
 
     /// <summary>
@@ -1211,795 +2391,1135 @@ namespace System.Management.Automation.Host
 
         Trailing
     }
-
-    #endregion Ancillary types
-
-    /// <summary>
-    /// Defines the lowest-level user interface functions that an interactive application hosting an MSH
-    /// <see cref="System.Management.Automation.Runspaces.Runspace"/> can choose to implement if it wants to
-    /// support any cmdlet that does character-mode interaction with the user.
-    /// </summary>
-    /// <remarks>
-    /// It models an 2-dimensional grid of cells called a Buffer.  A buffer has a visible rectangular region, called a window.
-    /// Each cell of the grid has a character, a foreground color, and a background color.  When the buffer has input focus, it
-    /// shows a cursor positioned in one cell.  Keystrokes can be read from the buffer and optionally echoed at the current
-    /// cursor position.
-    /// </remarks>
-    /// <seealso cref="System.Management.Automation.Host.PSHost"/>
-    /// <seealso cref="System.Management.Automation.Host.PSHostUserInterface"/>
-
     public abstract
-    class PSHostRawUserInterface
+        class PSHostRawUserInterface
     {
-        /// <summary>
-        /// Protected constructor which does nothing.  Provided per .Net design guidelines section 4.3.1.
-        /// </summary>
-
         protected
-        PSHostRawUserInterface()
+                PSHostRawUserInterface()
         {
-            // do nothing
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1471, 35943, 36035);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1471, 35943, 36035);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 35943, 36035);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 35943, 36035);
+            }
         }
 
-        /// <summary>
-        /// Gets or sets the color used to render characters on the screen buffer. Each character cell in the screen buffer can
-        /// have a separate foreground color.
-        /// </summary>
-        /// <!--Design note: we separate Foreground and Background colors into separate properties rather than having a single
-        /// property that is a ColorAttribute.  While a single property that takes a struct is consistent with all of our
-        /// other properties that take structs (e.g. -Position, -Size), I anticipate that the more common use-case for color
-        /// is to just change the foreground color.-->
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.BackgroundColor"/>
-
         public abstract
-        ConsoleColor
-        ForegroundColor
+                ConsoleColor
+                ForegroundColor
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the color used to render the background behind characters on the screen buffer.  Each character cell in
-        /// the screen buffer can have a separate background color.
-        /// </summary>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ForegroundColor"/>
-
         public abstract
-        ConsoleColor
-        BackgroundColor
+                ConsoleColor
+                BackgroundColor
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the cursor position in the screen buffer.  The view window always adjusts it's location over the screen
-        /// buffer such that the cursor is always visible.
-        /// </summary>
-        /// <remarks>
-        /// To write to the screen buffer without updating the cursor position, use
-        /// <see cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/> or
-        /// <see cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowPosition"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-
         public abstract
-        Coordinates
-        CursorPosition
+                Coordinates
+                CursorPosition
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets or sets position of the view window relative to the screen buffer, in characters. (0,0) is the upper left of the screen
-        /// buffer.
-        /// </summary>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.CursorPosition"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxWindowSize"/>
-
         public abstract
-        Coordinates
-        WindowPosition
+                Coordinates
+                WindowPosition
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the cursor size as a percentage 0..100.
-        /// </summary>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.CursorPosition"/>
-
         public abstract
-        int
-        CursorSize
+                int
+                CursorSize
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the current size of the screen buffer, measured in character cells.
-        /// </summary>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.CursorPosition"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowPosition"/>
-
         public abstract
-        Size
-        BufferSize
+                Size
+                BufferSize
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets or sets the current view window size, measured in character cells.  The window size cannot be larger than the
-        /// dimensions returned by <see cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>.
-        /// </summary>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.BufferSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.CursorPosition"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowPosition"/>
-
         public abstract
-        Size
-        WindowSize
+                Size
+                WindowSize
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Gets the size of the largest window possible for the current buffer, current font, and current display hardware.
-        /// The view window cannot be larger than the screen buffer or the current display (the display the window is rendered on).
-        /// </summary>
-        /// <value>
-        /// The largest dimensions the window can be resized to without resizing the screen buffer.
-        /// </value>
-        /// <remarks>
-        /// Always returns a value less than or equal to
-        /// <see cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxPhysicalWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.BufferSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.CursorPosition"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowPosition"/>
-
         public abstract
-        Size
-        MaxWindowSize
+                Size
+                MaxWindowSize
         {
             get;
         }
 
-        /// <summary>
-        /// Gets the largest window possible for the current font and display hardware, ignoring the current buffer dimensions.  In
-        /// other words, the dimensions of the largest window that could be rendered in the current display, if the buffer was
-        /// at least as large.
-        /// </summary>
-        /// <remarks>
-        /// To resize the window to this dimension, use <see cref="System.Management.Automation.Host.PSHostRawUserInterface.BufferSize"/>
-        /// to first check and, if necessary, adjust, the screen buffer size.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.MaxWindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.BufferSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.CursorPosition"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowSize"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowPosition"/>
-
         public abstract
-        Size
-        MaxPhysicalWindowSize
+                Size
+                MaxPhysicalWindowSize
         {
             get;
         }
-
-        /// <summary>
-        /// Reads a key stroke from the keyboard device, blocking until a keystroke is typed.
-        /// Same as ReadKey(ReadKeyOptions.IncludeKeyDown)
-        /// </summary>
-        /// <returns>
-        /// Key stroke when a key is pressed.
-        /// </returns>
-        /// <example>
-        ///     <MSH>
-        ///         $Host.UI.RawUI.ReadKey()
-        ///     </MSH>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey(ReadKeyOptions)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.FlushInputBuffer"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.KeyAvailable"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.WindowPosition"/>
 
         public
-        KeyInfo
-        ReadKey()
+                KeyInfo
+                ReadKey()
         {
-            return ReadKey(ReadKeyOptions.IncludeKeyDown);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 45037, 45161);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 45104, 45150);
+
+                return f_1471_45111_45149(this, ReadKeyOptions.IncludeKeyDown);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 45037, 45161);
+
+                System.Management.Automation.Host.KeyInfo
+                f_1471_45111_45149(System.Management.Automation.Host.PSHostRawUserInterface
+                this_param, System.Management.Automation.Host.ReadKeyOptions
+                options)
+                {
+                    var return_v = this_param.ReadKey(options);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 45111, 45149);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 45037, 45161);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 45037, 45161);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Reads a key stroke from the keyboard device, blocking until a keystroke is typed.
-        /// Either one of ReadKeyOptions.IncludeKeyDown and ReadKeyOptions.IncludeKeyUp or both must be specified.
-        /// </summary>
-        /// <param name="options">
-        /// A bit mask of the options to be used to read the keyboard. Constants defined by
-        /// <see cref="System.Management.Automation.Host.ReadKeyOptions"/>
-        /// </param>
-        /// <returns>
-        /// Key stroke depending on the value of <paramref name="options"/>.
-        /// </returns>
-        /// <exception cref="System.ArgumentException">
-        /// Neither ReadKeyOptions.IncludeKeyDown nor ReadKeyOptions.IncludeKeyUp is specified.
-        /// </exception>
-        /// <example>
-        ///     <MSH>
-        ///         $option = [System.Management.Automation.Host.ReadKeyOptions]"IncludeKeyDown";
-        ///         $host.UI.RawUI.ReadKey($option)
-        ///     </MSH>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Host.ReadKeyOptions"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey()"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey(System.Management.Automation.Host.ReadKeyOptions)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.FlushInputBuffer"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.KeyAvailable"/>
+        public abstract
+                KeyInfo
+                ReadKey(ReadKeyOptions options);
 
         public abstract
-        KeyInfo
-        ReadKey(ReadKeyOptions options);
-
-        /// <summary>
-        /// Resets the keyboard input buffer.
-        /// </summary>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey()"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey(System.Management.Automation.Host.ReadKeyOptions)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.KeyAvailable"/>
+                void
+                FlushInputBuffer();
 
         public abstract
-        void
-        FlushInputBuffer();
-
-        /// <summary>
-        /// A non-blocking call to examine if a keystroke is waiting in the input buffer.
-        /// </summary>
-        /// <value>
-        /// True if a keystroke is waiting in the input buffer, false if not.
-        /// </value>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey()"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ReadKey(ReadKeyOptions)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.FlushInputBuffer"/>
-
-        public abstract
-        bool
-        KeyAvailable
+                bool
+                KeyAvailable
         {
             get;
         }
 
-        /// <summary>
-        /// Gets or sets the titlebar text of the current view window.
-        /// </summary>
-
         public abstract
-        string
-        WindowTitle
+                string
+                WindowTitle
         {
             get;
             set;
         }
 
-        /// <summary>
-        /// Copies the <see cref="System.Management.Automation.Host.BufferCell"/> array into the screen buffer at the
-        /// given origin, clipping such that cells in the array that would fall outside the screen buffer are ignored.
-        /// </summary>
-        /// <param name="origin">
-        /// The top left corner of the rectangular screen area to which <paramref name="contents"/> is copied.
-        /// </param>
-        /// <param name="contents">
-        /// A rectangle of <see cref="System.Management.Automation.Host.BufferCell"/> objects to be copied to the
-        /// screen buffer.
-        /// </param>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
+        public abstract
+                void
+                SetBufferContents(Coordinates origin, BufferCell[,] contents);
 
         public abstract
-        void
-        SetBufferContents(Coordinates origin, BufferCell[,] contents);
-
-        /// <summary>
-        /// Copies a given character to all of the character cells in the screen buffer with the indicated colors.
-        /// </summary>
-        /// <param name="rectangle">
-        /// The rectangle on the screen buffer to which <paramref name="fill"/> is copied.
-        /// If all elements are -1, the entire screen buffer will be copied with <paramref name="fill"/>.
-        /// </param>
-        /// <param name="fill">
-        /// The character and attributes used to fill <paramref name="rectangle"/>.
-        /// </param>
-        /// <remarks>
-        /// Provided for clearing regions -- less chatty than passing an array of cells.
-        /// </remarks>
-        /// <example>
-        ///     <snippet Code="C#">
-        ///         using System;
-        ///         using System.Management.Automation;
-        ///         using System.Management.Automation.Host;
-        ///         namespace Microsoft.Samples.MSH.Cmdlet
-        ///         {
-        ///             [Cmdlet("Clear","Screen")]
-        ///             public class ClearScreen : PSCmdlet
-        ///             {
-        ///                 protected override void BeginProcessing()
-        ///                 {
-        ///                     Host.UI.RawUI.SetBufferContents(new Rectangle(-1, -1, -1, -1),
-        ///                         new BufferCell(' ', Host.UI.RawUI.ForegroundColor, Host.UI.RawUI.BackgroundColor))
-        ///                 }
-        ///             }
-        ///         }
-        ///     </snippet>
-        /// </example>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
+                void
+                SetBufferContents(Rectangle rectangle, BufferCell fill);
 
         public abstract
-        void
-        SetBufferContents(Rectangle rectangle, BufferCell fill);
-
-        /// <summary>
-        /// Extracts a rectangular region of the screen buffer.
-        /// </summary>
-        /// <param name="rectangle">
-        /// The rectangle on the screen buffer to extract.
-        /// </param>
-        /// <returns>
-        /// An array of <see cref="System.Management.Automation.Host.BufferCell"/> objects extracted from
-        /// the rectangular region of the screen buffer specified by <paramref name="rectangle"/>
-        /// </returns>
-        /// <remarks>
-        /// If the rectangle is completely outside of the screen buffer, a BufferCell array of zero rows and column will be
-        /// returned.
-        ///
-        /// If the rectangle is partially outside of the screen buffer, the area where the screen buffer and rectangle overlap
-        /// will be read and returned. The size of the returned array is the same as that of r. Each BufferCell in the
-        /// non-overlapping area of this array is set as follows:
-        ///
-        /// Character is the space (' ')
-        /// ForegroundColor to the current foreground color, given by the ForegroundColor property of this class.
-        /// BackgroundColor to the current background color, given by the BackgroundColor property of this class.
-        ///
-        /// The resulting array is organized in row-major order for performance reasons.  The screen buffer, however, is
-        /// organized in column-major order -- e.g. you specify the column index first, then the row index second, as in (x, y).
-        /// This means that a cell at screen buffer position (x, y) is in the array element [y, x].
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
+                BufferCell[,]
+                GetBufferContents(Rectangle rectangle);
 
         public abstract
-        BufferCell[,]
-        GetBufferContents(Rectangle rectangle);
-
-        /// <summary>
-        /// Scroll a region of the screen buffer.
-        /// </summary>
-        /// <param name="source">
-        /// Indicates the region of the screen to be scrolled.
-        /// </param>
-        /// <param name="destination">
-        /// Indicates the upper left coordinates of the region of the screen to receive the source region contents.  The target
-        /// region is the same size as the source region.
-        /// </param>
-        /// <param name="clip">
-        /// Indicates the region of the screen to include in the operation.  If a cell would be changed by the operation but
-        /// does not fall within the clip region, it will be unchanged.
-        /// </param>
-        /// <param name="fill">
-        /// The character and attributes to be used to fill any cells within the intersection of the source rectangle and
-        /// clipping rectangle that are left "empty" by the move.
-        /// </param>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-
-        public abstract
-        void
-        ScrollBufferContents
-        (
-            Rectangle source,
-            Coordinates destination,
-            Rectangle clip,
-            BufferCell fill
-        );
-
-        /// <summary>
-        /// Determines the number of BufferCells a substring of a string occupies.
-        /// </summary>
-        /// <param name="source">
-        /// The string whose substring length we want to know.
-        /// </param>
-        /// <param name="offset">
-        /// Offset where the substring begins in <paramref name="source"/>
-        /// </param>
-        /// <returns>
-        /// The default implementation calls <see cref="PSHostRawUserInterface.LengthInBufferCells(string)"/> method
-        /// with the substring extracted from the <paramref name="source"/> string
-        /// starting at the offset <paramref name="offset"/>
-        /// </returns>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
+                void
+                ScrollBufferContents
+                (
+                    Rectangle source,
+                    Coordinates destination,
+                    Rectangle clip,
+                    BufferCell fill
+                );
 
         public virtual
-        int
-        LengthInBufferCells
-        (
-            string source,
-            int offset
-        )
+                int
+                LengthInBufferCells
+                (
+                    string source,
+                    int offset
+                )
         {
-            if (source == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("source");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 59435, 60093);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 59590, 59712) || true) && (source == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 59590, 59712);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 59642, 59697);
+
+                    throw f_1471_59648_59696("source");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 59590, 59712);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 59958, 60025);
+
+                string
+                substring = (DynAbs.Tracing.TraceSender.Conditional_F1(1471, 59977, 59988) || ((offset == 0 && DynAbs.Tracing.TraceSender.Conditional_F2(1471, 59991, 59997)) || DynAbs.Tracing.TraceSender.Conditional_F3(1471, 60000, 60024))) ? source : f_1471_60000_60024(source, offset)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 60039, 60082);
+
+                return f_1471_60046_60081(this, substring);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 59435, 60093);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1471_59648_59696(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 59648, 59696);
+                    return return_v;
+                }
+
+
+                string
+                f_1471_60000_60024(string
+                this_param, int
+                startIndex)
+                {
+                    var return_v = this_param.Substring(startIndex);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 60000, 60024);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_60046_60081(System.Management.Automation.Host.PSHostRawUserInterface
+                this_param, string
+                source)
+                {
+                    var return_v = this_param.LengthInBufferCells(source);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 60046, 60081);
+                    return return_v;
+                }
+
             }
-
-            // this implementation is inefficient
-            // it is here to help with backcompatibility
-            // it preserves the old behavior from the times
-            // when there was only Length(string) overload
-            string substring = offset == 0 ? source : source.Substring(offset);
-            return this.LengthInBufferCells(substring);
-        }
-
-        /// <summary>
-        /// Determines the number of BufferCells a string occupies.
-        /// </summary>
-        /// <param name="source">
-        /// The string whose length we want to know.
-        /// </param>
-        /// <returns>
-        /// The default implementation returns the length of <paramref name="source"/>
-        /// </returns>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string, int)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
-
-        public virtual
-        int
-        LengthInBufferCells
-        (
-            string source
-        )
-        {
-            if (source == null)
+            catch
             {
-                throw PSTraceSource.NewArgumentNullException("source");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 59435, 60093);
+                throw;
             }
-
-            return source.Length;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 59435, 60093);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-
-        /// <summary>
-        /// Determines the number of BufferCells a character occupies.
-        /// </summary>
-        /// <param name="source">
-        /// The character whose length we want to know.
-        /// </param>
-        /// <returns>
-        /// The default implementation returns 1.
-        /// </returns>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
 
         public virtual
-        int
-        LengthInBufferCells
-        (
-            char source
-        )
+                int
+                LengthInBufferCells
+                (
+                    string source
+                )
         {
-            return 1;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 61581, 61881);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 61711, 61833) || true) && (source == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 61711, 61833);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 61763, 61818);
+
+                    throw f_1471_61769_61817("source");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 61711, 61833);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 61849, 61870);
+
+                return f_1471_61856_61869(source);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 61581, 61881);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1471_61769_61817(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 61769, 61817);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_61856_61869(string
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 61856, 61869);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 61581, 61881);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 61581, 61881);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Creates a two dimensional array of BufferCells by examining each character in <paramref name="contents"/>.
-        /// </summary>
-        /// <param name="contents">
-        /// String array based on which the two dimensional array of BufferCells will be created.
-        /// </param>
-        /// <param name="foregroundColor">
-        /// Foreground color of the buffer cells in the resulting array.
-        /// </param>
-        /// <param name="backgroundColor">
-        /// Background color of the buffer cells in the resulting array.
-        /// </param>
-        /// <returns>
-        /// A two dimensional array of BufferCells whose characters are the same as those in <paramref name="contents"/>
-        /// and whose foreground and background colors set to <paramref name="foregroundColor"/> and
-        /// <paramref name="backgroundColor"/>
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="contents"/> is null;
-        /// Any string in <paramref name="contents"/> is null or empty
-        /// </exception>
-        /// <remark>
-        /// If a character C takes one BufferCell to display as determined by LengthInBufferCells,
-        /// one BufferCell is allocated with its Character set to C and BufferCellType to BufferCell.Complete.
-        /// On the other hand, if C takes two BufferCell, two adjacent BufferCells on a row in
-        /// the returned array will be allocated: the first has Character set to C and BufferCellType to
-        /// <see cref="System.Management.Automation.Host.BufferCellType.Leading"/> and the second
-        /// Character set to (char)0 and Type to
-        /// <see cref="System.Management.Automation.Host.BufferCellType.Trailing"/>. Hence, the returned
-        /// BufferCell array has <paramref name="contents"/>.Length number of rows and number of columns
-        /// equal to the largest number of cells a string in <paramref name="contents"/> takes. The
-        /// foreground and background colors of the cells are initialized to
-        /// <paramref name="foregroundColor"/> and <paramref name="backgroundColor"/>, respectively.
-        /// The resulting array is suitable for use with <see cref="PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// and <see cref="PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>.
-        /// </remark>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
-#pragma warning disable 56506
+        public virtual
+                int
+                LengthInBufferCells
+                (
+                    char source
+                )
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 63217, 63365);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 63345, 63354);
+
+                return 1;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 63217, 63365);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 63217, 63365);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 63217, 63365);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         public
-        BufferCell[,]
-        NewBufferCellArray(string[] contents, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
+                BufferCell[,]
+                NewBufferCellArray(string[] contents, ConsoleColor foregroundColor, ConsoleColor backgroundColor)
         {
-#pragma warning disable 56506
-
-            if (contents == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("contents");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 66834, 69635);
 
-            byte[][] charLengths = new byte[contents.Length][];
-            int maxStringLengthInBufferCells = 0;
-            for (int i = 0; i < contents.Length; i++)
-            {
-                if (string.IsNullOrEmpty(contents[i]))
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67028, 67154) || true) && (contents == null)
+                )
+
                 {
-                    continue;
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 67028, 67154);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67082, 67139);
+
+                    throw f_1471_67088_67138("contents");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 67028, 67154);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67170, 67221);
 
-                int lengthInBufferCells = 0;
-                charLengths[i] = new byte[contents[i].Length];
-                for (int j = 0; j < contents[i].Length; j++)
+                byte[][]
+                charLengths = new byte[f_1471_67202_67217(contents)][]
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67235, 67272);
+
+                int
+                maxStringLengthInBufferCells = 0
+                ;
+                try
                 {
-                    charLengths[i][j] = (byte)LengthInBufferCells(contents[i][j]);
-                    lengthInBufferCells += charLengths[i][j];
-                }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67295, 67300);
+                    for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67286, 68027) || true) && (i < f_1471_67306_67321(contents))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67323, 67326)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 67286, 68027))
 
-                if (maxStringLengthInBufferCells < lengthInBufferCells)
-                {
-                    maxStringLengthInBufferCells = lengthInBufferCells;
-                }
-            }
-
-            if (maxStringLengthInBufferCells <= 0)
-            {
-                throw PSTraceSource.NewArgumentException("contents", MshHostRawUserInterfaceStrings.AllNullOrEmptyStringsErrorTemplate);
-            }
-
-            BufferCell[,] results = new BufferCell[contents.Length, maxStringLengthInBufferCells];
-            for (int i = 0; i < contents.Length; i++)
-            {
-                int resultJ = 0;
-                for (int j = 0; j < contents[i].Length; j++, resultJ++)
-                {
-                    if (charLengths[i][j] == 1)
                     {
-                        results[i, resultJ] =
-                            new BufferCell(contents[i][j], foregroundColor, backgroundColor, BufferCellType.Complete);
-                    }
-                    else if (charLengths[i][j] == 2)
-                    {
-                        results[i, resultJ] =
-                            new BufferCell(contents[i][j], foregroundColor, backgroundColor, BufferCellType.Leading);
-                        resultJ++;
-                        results[i, resultJ] =
-                            new BufferCell((char)0, foregroundColor, backgroundColor, BufferCellType.Trailing);
-                    }
-                }
-                while (resultJ < maxStringLengthInBufferCells)
-                {
-                    results[i, resultJ] = new BufferCell(' ', foregroundColor, backgroundColor, BufferCellType.Complete);
-                    resultJ++;
-                }
-            }
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 67286, 68027);
 
-            return results;
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67360, 67467) || true) && (f_1471_67364_67397(contents[i]))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 67360, 67467);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67439, 67448);
+
+                            continue;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 67360, 67467);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67487, 67515);
+
+                        int
+                        lengthInBufferCells = 0
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67533, 67579);
+
+                        charLengths[i] = new byte[f_1471_67559_67577(contents[i])];
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67606, 67611);
+                            for (int
+            j = 0
+            ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67597, 67826) || true) && (j < f_1471_67617_67635(contents[i]))
+            ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67637, 67640)
+            , j++, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 67597, 67826))
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 67597, 67826);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67682, 67744);
+
+                                charLengths[i][j] = (byte)f_1471_67708_67743(this, f_1471_67728_67742(contents[i], j));
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67766, 67807);
+
+                                lengthInBufferCells += charLengths[i][j];
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 230);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 230);
+                        }
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67846, 68012) || true) && (maxStringLengthInBufferCells < lengthInBufferCells)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 67846, 68012);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 67942, 67993);
+
+                            maxStringLengthInBufferCells = lengthInBufferCells;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 67846, 68012);
+                        }
+                    }
+                }
+                catch (System.Exception)
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 742);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 742);
+                }
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68043, 68249) || true) && (maxStringLengthInBufferCells <= 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 68043, 68249);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68114, 68234);
+
+                    throw f_1471_68120_68233("contents", f_1471_68167_68232());
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 68043, 68249);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68265, 68351);
+
+                BufferCell[,]
+                results = new BufferCell[f_1471_68304_68319(contents), maxStringLengthInBufferCells]
+                ;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68374, 68379);
+                    for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68365, 69562) || true) && (i < f_1471_68385_68400(contents))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68402, 68405)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 68365, 69562))
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 68365, 69562);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68439, 68455);
+
+                        int
+                        resultJ = 0
+                        ;
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68482, 68487);
+                            for (int
+            j = 0
+            ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68473, 69290) || true) && (j < f_1471_68493_68511(contents[i]))
+            ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68513, 68516)
+            , j++, DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68518, 68527)
+            , resultJ++, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 68473, 69290))
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 68473, 69290);
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68569, 69271) || true) && (charLengths[i][j] == 1)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 68569, 69271);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68645, 68786);
+
+                                    results[i, resultJ] =
+                                    f_1471_68696_68785(f_1471_68711_68725(contents[i], j), foregroundColor, backgroundColor, BufferCellType.Complete);
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 68569, 69271);
+                                }
+
+                                else
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 68569, 69271);
+
+                                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68836, 69271) || true) && (charLengths[i][j] == 2)
+                                    )
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 68836, 69271);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 68912, 69052);
+
+                                        results[i, resultJ] =
+                                        f_1471_68963_69051(f_1471_68978_68992(contents[i], j), foregroundColor, backgroundColor, BufferCellType.Leading);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 69078, 69088);
+
+                                        resultJ++;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 69114, 69248);
+
+                                        results[i, resultJ] =
+                                        f_1471_69165_69247((char)0, foregroundColor, backgroundColor, BufferCellType.Trailing);
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 68836, 69271);
+                                    }
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 68569, 69271);
+                                }
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 818);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 818);
+                        }
+                        try
+                        {
+                            while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 69308, 69547) || true) && (resultJ < maxStringLengthInBufferCells)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 69308, 69547);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 69395, 69496);
+
+                                results[i, resultJ] = f_1471_69417_69495(' ', foregroundColor, backgroundColor, BufferCellType.Complete);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 69518, 69528);
+
+                                resultJ++;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 69308, 69547);
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 69308, 69547);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 69308, 69547);
+                        }
+                    }
+                }
+                catch (System.Exception)
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 1198);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 1198);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 69578, 69593);
+
+                return results;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 66834, 69635);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1471_67088_67138(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 67088, 67138);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_67202_67217(string[]
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 67202, 67217);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_67306_67321(string[]
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 67306, 67321);
+                    return return_v;
+                }
+
+
+                bool
+                f_1471_67364_67397(string
+                value)
+                {
+                    var return_v = string.IsNullOrEmpty(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 67364, 67397);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_67559_67577(string
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 67559, 67577);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_67617_67635(string
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 67617, 67635);
+                    return return_v;
+                }
+
+
+                char
+                f_1471_67728_67742(string
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 67728, 67742);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_67708_67743(System.Management.Automation.Host.PSHostRawUserInterface
+                this_param, char
+                source)
+                {
+                    var return_v = this_param.LengthInBufferCells(source);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 67708, 67743);
+                    return return_v;
+                }
+
+
+                string
+                f_1471_68167_68232()
+                {
+                    var return_v = MshHostRawUserInterfaceStrings.AllNullOrEmptyStringsErrorTemplate;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 68167, 68232);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentException
+                f_1471_68120_68233(string
+                paramName, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 68120, 68233);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_68304_68319(string[]
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 68304, 68319);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_68385_68400(string[]
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 68385, 68400);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_68493_68511(string
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 68493, 68511);
+                    return return_v;
+                }
+
+
+                char
+                f_1471_68711_68725(string
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 68711, 68725);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Host.BufferCell
+                f_1471_68696_68785(char
+                character, System.ConsoleColor
+                foreground, System.ConsoleColor
+                background, System.Management.Automation.Host.BufferCellType
+                bufferCellType)
+                {
+                    var return_v = new System.Management.Automation.Host.BufferCell(character, foreground, background, bufferCellType);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 68696, 68785);
+                    return return_v;
+                }
+
+
+                char
+                f_1471_68978_68992(string
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 68978, 68992);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Host.BufferCell
+                f_1471_68963_69051(char
+                character, System.ConsoleColor
+                foreground, System.ConsoleColor
+                background, System.Management.Automation.Host.BufferCellType
+                bufferCellType)
+                {
+                    var return_v = new System.Management.Automation.Host.BufferCell(character, foreground, background, bufferCellType);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 68963, 69051);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Host.BufferCell
+                f_1471_69165_69247(int
+                character, System.ConsoleColor
+                foreground, System.ConsoleColor
+                background, System.Management.Automation.Host.BufferCellType
+                bufferCellType)
+                {
+                    var return_v = new System.Management.Automation.Host.BufferCell((char)character, foreground, background, bufferCellType);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 69165, 69247);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Host.BufferCell
+                f_1471_69417_69495(char
+                character, System.ConsoleColor
+                foreground, System.ConsoleColor
+                background, System.Management.Automation.Host.BufferCellType
+                bufferCellType)
+                {
+                    var return_v = new System.Management.Automation.Host.BufferCell(character, foreground, background, bufferCellType);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 69417, 69495);
+                    return return_v;
+                }
+
 #pragma warning restore 56506
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 66834, 69635);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 66834, 69635);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-#pragma warning restore 56506
-
-        /// <summary>
-        /// Creates a 2D array of BufferCells by examining <paramref name="contents"/>.Character.
-        /// <seealso cref="PSHostRawUserInterface"/>
-        /// </summary>
-        /// <param name="width">
-        /// The number of columns of the resulting array
-        /// </param>
-        /// <param name="height">
-        /// The number of rows of the resulting array
-        /// </param>
-        /// <param name="contents">
-        /// The cell to be copied to each of the elements of the resulting array.
-        /// </param>
-        /// <returns>
-        /// A <paramref name="width"/> by <paramref name="height"/> array of BufferCells where each cell's value is
-        /// based on <paramref name="contents"/>
-        /// <paramref name="backgroundColor"/>
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="width"/> is less than 1;
-        /// <paramref name="height"/> is less than 1.
-        /// </exception>
-        /// <remarks>
-        /// If the character takes one BufferCell to display as determined by LengthInBufferCells,
-        /// one BufferCell is allocated with its Character set to the character and BufferCellType to
-        /// BufferCell.Complete.
-        /// On the other hand, if it takes two BufferCells, two adjacent BufferCells on a row
-        /// in the returned array will be allocated: the first has Character
-        /// set to the character and BufferCellType to BufferCellType.Leading and the second Character
-        /// set to (char)0 and BufferCellType to BufferCellType.Trailing. Moreover, if <paramref name="width"/>
-        /// is odd, the last column will just contain the leading cell.
-        /// <paramref name="prototype"/>.BufferCellType is not used in creating the array.
-        /// The resulting array is suitable for use with the PSHostRawUserInterface.SetBufferContents method.
-        /// </remarks>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(Size, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
 
         public
-        BufferCell[,]
-        NewBufferCellArray(int width, int height, BufferCell contents)
+                BufferCell[,]
+                NewBufferCellArray(int width, int height, BufferCell contents)
         {
-            if (width <= 0)
+            try
             {
-                // "width" is not localizable
-                throw PSTraceSource.NewArgumentOutOfRangeException("width", width,
-                    MshHostRawUserInterfaceStrings.NonPositiveNumberErrorTemplate, "width");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 72633, 74864);
 
-            if (height <= 0)
-            {
-                // "height" is not localizable
-                throw PSTraceSource.NewArgumentOutOfRangeException("height", height,
-                    MshHostRawUserInterfaceStrings.NonPositiveNumberErrorTemplate, "height");
-            }
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 72759, 73029) || true) && (width <= 0)
+                )
 
-            BufferCell[,] buffer = new BufferCell[height, width];
-            int charLength = LengthInBufferCells(contents.Character);
-            if (charLength == 1)
-            {
-                for (int r = 0; r < buffer.GetLength(0); ++r)
                 {
-                    for (int c = 0; c < buffer.GetLength(1); ++c)
-                    {
-                        buffer[r, c] = contents;
-                        buffer[r, c].BufferCellType = BufferCellType.Complete;
-                    }
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 72759, 73029);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 72854, 73014);
+
+                    throw f_1471_72860_73013("width", width, f_1471_72942_73003(), "width");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 72759, 73029);
                 }
-            }
-            else if (charLength == 2)
-            {
-                int normalizedWidth = width % 2 == 0 ? width : width - 1;
-                for (int i = 0; i < height; i++)
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73045, 73320) || true) && (height <= 0)
+                )
+
                 {
-                    for (int j = 0; j < normalizedWidth; j++)
-                    {
-                        buffer[i, j] = contents;
-                        buffer[i, j].BufferCellType = BufferCellType.Leading;
-                        j++;
-                        buffer[i, j] = new BufferCell((char)0,
-                            contents.ForegroundColor, contents.BackgroundColor,
-                            BufferCellType.Trailing);
-                    }
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 73045, 73320);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73142, 73305);
 
-                    if (normalizedWidth < width)
-                    {
-                        buffer[i, normalizedWidth] = contents;
-                        buffer[i, normalizedWidth].BufferCellType = BufferCellType.Leading;
-                    }
+                    throw f_1471_73148_73304("height", height, f_1471_73232_73293(), "height");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 73045, 73320);
                 }
-            }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73336, 73389);
 
-            return buffer;
+                BufferCell[,]
+                buffer = new BufferCell[height, width]
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73403, 73460);
+
+                int
+                charLength = f_1471_73420_73459(this, contents.Character)
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73474, 74823) || true) && (charLength == 1)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 73474, 74823);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73536, 73541);
+                        for (int
+        r = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73527, 73853) || true) && (r < f_1471_73547_73566(buffer, 0))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73568, 73571)
+        , ++r, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 73527, 73853))
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 73527, 73853);
+                            try
+                            {
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73622, 73627);
+                                for (int
+            c = 0
+            ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73613, 73834) || true) && (c < f_1471_73633_73652(buffer, 1))
+            ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73654, 73657)
+            , ++c, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 73613, 73834))
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 73613, 73834);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73707, 73731);
+
+                                    buffer[r, c] = contents;
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73757, 73811);
+
+                                    buffer[r, c].BufferCellType = BufferCellType.Complete;
+                                }
+                            }
+                            catch (System.Exception)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 222);
+                                throw;
+                            }
+                            finally
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 222);
+                            }
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 327);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 327);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 73474, 74823);
+                }
+
+                else
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 73474, 74823);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73887, 74823) || true) && (charLength == 2)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 73887, 74823);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 73940, 73997);
+
+                        int
+                        normalizedWidth = (DynAbs.Tracing.TraceSender.Conditional_F1(1471, 73962, 73976) || ((width % 2 == 0 && DynAbs.Tracing.TraceSender.Conditional_F2(1471, 73979, 73984)) || DynAbs.Tracing.TraceSender.Conditional_F3(1471, 73987, 73996))) ? width : width - 1
+                        ;
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74024, 74029);
+                            for (int
+            i = 0
+            ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74015, 74808) || true) && (i < height)
+            ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74043, 74046)
+            , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 74015, 74808))
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 74015, 74808);
+                                try
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74097, 74102);
+                                    for (int
+                j = 0
+                ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74088, 74534) || true) && (j < normalizedWidth)
+                ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74125, 74128)
+                , j++, DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 74088, 74534))
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 74088, 74534);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74178, 74202);
+
+                                        buffer[i, j] = contents;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74228, 74281);
+
+                                        buffer[i, j].BufferCellType = BufferCellType.Leading;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74307, 74311);
+
+                                        j++;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74337, 74511);
+
+                                        buffer[i, j] = f_1471_74352_74510((char)0, contents.ForegroundColor, contents.BackgroundColor, BufferCellType.Trailing);
+                                    }
+                                }
+                                catch (System.Exception)
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 447);
+                                    throw;
+                                }
+                                finally
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 447);
+                                }
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74558, 74789) || true) && (normalizedWidth < width)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1471, 74558, 74789);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74635, 74673);
+
+                                    buffer[i, normalizedWidth] = contents;
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74699, 74766);
+
+                                    buffer[i, normalizedWidth].BufferCellType = BufferCellType.Leading;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 74558, 74789);
+                                }
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1471, 1, 794);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1471, 1, 794);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 73887, 74823);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1471, 73474, 74823);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 74839, 74853);
+
+                return buffer;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 72633, 74864);
+
+                string
+                f_1471_72942_73003()
+                {
+                    var return_v = MshHostRawUserInterfaceStrings.NonPositiveNumberErrorTemplate;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 72942, 73003);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentOutOfRangeException
+                f_1471_72860_73013(string
+                paramName, int
+                actualValue, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 72860, 73013);
+                    return return_v;
+                }
+
+
+                string
+                f_1471_73232_73293()
+                {
+                    var return_v = MshHostRawUserInterfaceStrings.NonPositiveNumberErrorTemplate;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1471, 73232, 73293);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentOutOfRangeException
+                f_1471_73148_73304(string
+                paramName, int
+                actualValue, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 73148, 73304);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_73420_73459(System.Management.Automation.Host.PSHostRawUserInterface
+                this_param, char
+                source)
+                {
+                    var return_v = this_param.LengthInBufferCells(source);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 73420, 73459);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_73547_73566(System.Management.Automation.Host.BufferCell[,]
+                this_param, int
+                dimension)
+                {
+                    var return_v = this_param.GetLength(dimension);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 73547, 73566);
+                    return return_v;
+                }
+
+
+                int
+                f_1471_73633_73652(System.Management.Automation.Host.BufferCell[,]
+                this_param, int
+                dimension)
+                {
+                    var return_v = this_param.GetLength(dimension);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 73633, 73652);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.Host.BufferCell
+                f_1471_74352_74510(int
+                character, System.ConsoleColor
+                foreground, System.ConsoleColor
+                background, System.Management.Automation.Host.BufferCellType
+                bufferCellType)
+                {
+                    var return_v = new System.Management.Automation.Host.BufferCell((char)character, foreground, background, bufferCellType);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 74352, 74510);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 72633, 74864);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 72633, 74864);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-
-        /// <summary>
-        /// Same as <see cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// </summary>
-        /// <param name="size">
-        /// The width and height of the resulting array.
-        /// </param>
-        /// <param name="contents">
-        /// The cell to be copied to each of the elements of the resulting array.
-        /// </param>
-        /// <returns>
-        /// An array of BufferCells whose size is <paramref name="size"/> and where each cell's value is
-        /// based on <paramref name="contents"/>
-        /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// If <paramref name="size"/>.Width or <paramref name="size"/>.Height is less than 1.
-        /// </exception>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(int, int, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.NewBufferCellArray(string[], ConsoleColor, ConsoleColor)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(char)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.LengthInBufferCells(string)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Rectangle, BufferCell)"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.SetBufferContents(Coordinates, BufferCell[,])"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.GetBufferContents"/>
-        /// <seealso cref="System.Management.Automation.Host.PSHostRawUserInterface.ScrollBufferContents"/>
 
         public
-        BufferCell[,]
-        NewBufferCellArray(Size size, BufferCell contents)
+                BufferCell[,]
+                NewBufferCellArray(Size size, BufferCell contents)
         {
-            return NewBufferCellArray(size.Width, size.Height, contents);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1471, 76680, 76866);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1471, 76794, 76855);
+
+                return f_1471_76801_76854(this, size.Width, size.Height, contents);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1471, 76680, 76866);
+
+                System.Management.Automation.Host.BufferCell[,]
+                f_1471_76801_76854(System.Management.Automation.Host.PSHostRawUserInterface
+                this_param, int
+                width, int
+                height, System.Management.Automation.Host.BufferCell
+                contents)
+                {
+                    var return_v = this_param.NewBufferCellArray(width, height, contents);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1471, 76801, 76854);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1471, 76680, 76866);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 76680, 76866);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
+
+        static PSHostRawUserInterface()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1471, 35721, 76873);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1471, 35721, 76873);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1471, 35721, 76873);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1471, 35721, 76873);
     }
 }

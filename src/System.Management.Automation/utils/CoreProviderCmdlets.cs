@@ -3,195 +3,200 @@
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Providers that want to specify OutputType can use these strings
-    /// for the ProviderCmdlet parameter.
-    /// </summary>
     public static class ProviderCmdlet
     {
-        /// <summary>
-        /// Add-Content cmdlet.
-        /// </summary>
-        public const string AddContent = "Add-Content";
+        public const string
+        AddContent = "Add-Content"
+        ;
 
-        /// <summary>
-        /// Clear-Content cmdlet.
-        /// </summary>
-        public const string ClearContent = "Clear-Content";
+        public const string
+        ClearContent = "Clear-Content"
+        ;
 
-        /// <summary>
-        /// Clear-Item cmdlet.
-        /// </summary>
-        public const string ClearItem = "Clear-Item";
+        public const string
+        ClearItem = "Clear-Item"
+        ;
 
-        /// <summary>
-        /// Clear-ItemProperty cmdlet.
-        /// </summary>
-        public const string ClearItemProperty = "Clear-ItemProperty";
+        public const string
+        ClearItemProperty = "Clear-ItemProperty"
+        ;
 
-        /// <summary>
-        /// Convert-Path cmdlet.
-        /// </summary>
-        public const string ConvertPath = "Convert-Path";
+        public const string
+        ConvertPath = "Convert-Path"
+        ;
 
-        /// <summary>
-        /// Copy-Item cmdlet.
-        /// </summary>
-        public const string CopyItem = "Copy-Item";
+        public const string
+        CopyItem = "Copy-Item"
+        ;
 
-        /// <summary>
-        /// Copy-ItemProperty cmdlet.
-        /// </summary>
-        public const string CopyItemProperty = "Copy-ItemProperty";
+        public const string
+        CopyItemProperty = "Copy-ItemProperty"
+        ;
 
-        /// <summary>
-        /// Get-Acl cmdlet.
-        /// </summary>
-        public const string GetAcl = "Get-Acl";
+        public const string
+        GetAcl = "Get-Acl"
+        ;
 
-        /// <summary>
-        /// Get-ChildItem cmdlet.
-        /// </summary>
-        public const string GetChildItem = "Get-ChildItem";
+        public const string
+        GetChildItem = "Get-ChildItem"
+        ;
 
-        /// <summary>
-        /// Get-Content cmdlet.
-        /// </summary>
-        public const string GetContent = "Get-Content";
+        public const string
+        GetContent = "Get-Content"
+        ;
 
-        /// <summary>
-        /// Get-Item cmdlet.
-        /// </summary>
-        public const string GetItem = "Get-Item";
+        public const string
+        GetItem = "Get-Item"
+        ;
 
-        /// <summary>
-        /// Get-ItemProperty cmdlet.
-        /// </summary>
-        public const string GetItemProperty = "Get-ItemProperty";
+        public const string
+        GetItemProperty = "Get-ItemProperty"
+        ;
 
-        /// <summary>
-        /// Get-Location cmdlet.
-        /// </summary>
-        public const string GetLocation = "Get-Location";
+        public const string
+        GetLocation = "Get-Location"
+        ;
 
-        /// <summary>
-        /// Get-PSDrive cmdlet.
-        /// </summary>
-        public const string GetPSDrive = "Get-PSDrive";
+        public const string
+        GetPSDrive = "Get-PSDrive"
+        ;
 
-        /// <summary>
-        /// Get-PSProvider cmdlet.
-        /// </summary>
-        public const string GetPSProvider = "Get-PSProvider";
+        public const string
+        GetPSProvider = "Get-PSProvider"
+        ;
 
-        /// <summary>
-        /// Invoke-Item cmdlet.
-        /// </summary>
-        public const string InvokeItem = "Invoke-Item";
+        public const string
+        InvokeItem = "Invoke-Item"
+        ;
 
-        /// <summary>
-        /// Join-Path cmdlet.
-        /// </summary>
-        public const string JoinPath = "Join-Path";
+        public const string
+        JoinPath = "Join-Path"
+        ;
 
-        /// <summary>
-        /// Move-Item cmdlet.
-        /// </summary>
-        public const string MoveItem = "Move-Item";
+        public const string
+        MoveItem = "Move-Item"
+        ;
 
-        /// <summary>
-        /// Move-ItemProperty cmdlet.
-        /// </summary>
-        public const string MoveItemProperty = "Move-ItemProperty";
+        public const string
+        MoveItemProperty = "Move-ItemProperty"
+        ;
 
-        /// <summary>
-        /// New-Item cmdlet.
-        /// </summary>
-        public const string NewItem = "New-Item";
+        public const string
+        NewItem = "New-Item"
+        ;
 
-        /// <summary>
-        /// New-ItemProperty cmdlet.
-        /// </summary>
-        public const string NewItemProperty = "New-ItemProperty";
+        public const string
+        NewItemProperty = "New-ItemProperty"
+        ;
 
-        /// <summary>
-        /// New-PSDrive cmdlet.
-        /// </summary>
-        public const string NewPSDrive = "New-PSDrive";
+        public const string
+        NewPSDrive = "New-PSDrive"
+        ;
 
-        /// <summary>
-        /// Pop-Location cmdlet.
-        /// </summary>
-        public const string PopLocation = "Pop-Location";
+        public const string
+        PopLocation = "Pop-Location"
+        ;
 
-        /// <summary>
-        /// Push-Location cmdlet.
-        /// </summary>
-        public const string PushLocation = "Push-Location";
+        public const string
+        PushLocation = "Push-Location"
+        ;
 
-        /// <summary>
-        /// Remove-Item cmdlet.
-        /// </summary>
-        public const string RemoveItem = "Remove-Item";
+        public const string
+        RemoveItem = "Remove-Item"
+        ;
 
-        /// <summary>
-        /// Remove-ItemProperty cmdlet.
-        /// </summary>
-        public const string RemoveItemProperty = "Remove-ItemProperty";
+        public const string
+        RemoveItemProperty = "Remove-ItemProperty"
+        ;
 
-        /// <summary>
-        /// Remove-PSDrive cmdlet.
-        /// </summary>
-        public const string RemovePSDrive = "Remove-PSDrive";
+        public const string
+        RemovePSDrive = "Remove-PSDrive"
+        ;
 
-        /// <summary>
-        /// Rename-Item cmdlet.
-        /// </summary>
-        public const string RenameItem = "Rename-Item";
+        public const string
+        RenameItem = "Rename-Item"
+        ;
 
-        /// <summary>
-        /// Rename-ItemProperty cmdlet.
-        /// </summary>
-        public const string RenameItemProperty = "Rename-ItemProperty";
+        public const string
+        RenameItemProperty = "Rename-ItemProperty"
+        ;
 
-        /// <summary>
-        /// Resolve-Path cmdlet.
-        /// </summary>
-        public const string ResolvePath = "Resolve-Path";
+        public const string
+        ResolvePath = "Resolve-Path"
+        ;
 
-        /// <summary>
-        /// Set-Acl cmdlet.
-        /// </summary>
-        public const string SetAcl = "Set-Acl";
+        public const string
+        SetAcl = "Set-Acl"
+        ;
 
-        /// <summary>
-        /// Set-Content cmdlet.
-        /// </summary>
-        public const string SetContent = "Set-Content";
+        public const string
+        SetContent = "Set-Content"
+        ;
 
-        /// <summary>
-        /// Set-Item cmdlet.
-        /// </summary>
-        public const string SetItem = "Set-Item";
+        public const string
+        SetItem = "Set-Item"
+        ;
 
-        /// <summary>
-        /// Set-ItemProperty cmdlet.
-        /// </summary>
-        public const string SetItemProperty = "Set-ItemProperty";
+        public const string
+        SetItemProperty = "Set-ItemProperty"
+        ;
 
-        /// <summary>
-        /// Set-Location cmdlet.
-        /// </summary>
-        public const string SetLocation = "Set-Location";
+        public const string
+        SetLocation = "Set-Location"
+        ;
 
-        /// <summary>
-        /// Split-Path cmdlet.
-        /// </summary>
-        public const string SplitPath = "Split-Path";
+        public const string
+        SplitPath = "Split-Path"
+        ;
 
-        /// <summary>
-        /// Test-Path cmdlet.
-        /// </summary>
-        public const string TestPath = "Test-Path";
+        public const string
+        TestPath = "Test-Path"
+        ;
+
+        static ProviderCmdlet()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1006, 302, 5611);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 453, 479);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 594, 624);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 736, 760);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 880, 920);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1034, 1062);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1173, 1195);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1314, 1352);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1461, 1479);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1594, 1624);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1737, 1763);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 1873, 1893);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2011, 2047);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2161, 2189);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2302, 2328);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2444, 2476);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2589, 2615);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2726, 2748);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 2859, 2881);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3000, 3038);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3148, 3168);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3286, 3322);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3435, 3461);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3575, 3603);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3718, 3748);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 3861, 3887);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4008, 4050);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4166, 4198);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4311, 4337);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4458, 4500);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4614, 4642);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4751, 4769);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 4882, 4908);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 5018, 5038);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 5156, 5192);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 5306, 5334);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 5446, 5470);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1006, 5581, 5603);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1006, 302, 5611);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1006, 302, 5611);
+        }
+
     }
 }

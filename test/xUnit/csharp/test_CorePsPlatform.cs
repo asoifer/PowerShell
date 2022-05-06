@@ -14,225 +14,51 @@ namespace PSTests.Parallel
         [Fact]
         public static void TestIsCoreCLR()
         {
-            Assert.True(Platform.IsCoreCLR);
-        }
-
-#if Unix
-        [Fact]
-        public static void TestGetUserName()
-        {
-            var startInfo = new ProcessStartInfo
+            try
             {
-                FileName = @"/usr/bin/env",
-                Arguments = "whoami",
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-            using (Process process = Process.Start(startInfo))
-            {
-                // Get output of call to whoami without trailing newline
-                string username = process.StandardOutput.ReadToEnd().Trim();
-                process.WaitForExit();
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(953, 298, 422);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(953, 373, 411);
 
-                // The process should return an exit code of 0 on success
-                Assert.Equal(0, process.ExitCode);
-                Assert.Equal(username, Environment.UserName);
+                f_953_373_410(f_953_391_409());
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(953, 298, 422);
+
+                bool
+                f_953_391_409()
+                {
+                    var return_v = Platform.IsCoreCLR;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(953, 391, 409);
+                    return return_v;
+                }
+
+
+                bool
+                f_953_373_410(bool
+                condition)
+                {
+                    var return_v = CustomAssert.True(condition);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(953, 373, 410);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(953, 298, 422);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(953, 298, 422);
             }
         }
 
-        [Fact]
-        public static void TestGetMachineName()
+        static PlatformTests()
         {
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = @"/usr/bin/env",
-                Arguments = "hostname",
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-            using (Process process = Process.Start(startInfo))
-            {
-                 // Get output of call to hostname without trailing newline
-                string hostname = process.StandardOutput.ReadToEnd().Trim();
-                process.WaitForExit();
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(953, 248, 7619);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(953, 248, 7619);
 
-                // The process should return an exit code of 0 on success
-                Assert.Equal(0, process.ExitCode);
-                // It should be the same as what our platform code returns
-                Assert.Equal(hostname, Environment.MachineName);
-            }
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(953, 248, 7619);
         }
 
-        [Fact]
-        public static void TestGetFQDN()
-        {
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = @"/usr/bin/env",
-                Arguments = "hostname --fqdn",
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-            using (Process process = Process.Start(startInfo))
-            {
-                 // Get output of call to hostname without trailing newline
-                string hostname = process.StandardOutput.ReadToEnd().Trim();
-                process.WaitForExit();
-
-                // The process should return an exit code of 0 on success
-                Assert.Equal(0, process.ExitCode);
-                // It should be the same as what our platform code returns
-                Assert.Equal(hostname, Platform.NonWindowsGetHostName());
-            }
-        }
-
-        [Fact]
-        public static void TestIsExecutable()
-        {
-            Assert.True(Platform.NonWindowsIsExecutable("/bin/ls"));
-        }
-
-        [Fact]
-        public static void TestIsNotExecutable()
-        {
-            Assert.False(Platform.NonWindowsIsExecutable("/etc/hosts"));
-        }
-
-        [Fact]
-        public static void TestDirectoryIsNotExecutable()
-        {
-            Assert.False(Platform.NonWindowsIsExecutable("/etc"));
-        }
-
-        [Fact]
-        public static void TestFileIsNotHardLink()
-        {
-            string path = @"/tmp/nothardlink";
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            File.Create(path);
-
-            FileSystemInfo fd = new FileInfo(path);
-
-            // Since this is the only reference to the file, it is not considered a
-            // hardlink by our API (though all files are hardlinks on Linux)
-            Assert.False(Platform.NonWindowsIsHardLink(fd));
-
-            File.Delete(path);
-        }
-
-        [Fact]
-        public static void TestFileIsHardLink()
-        {
-            string path = @"/tmp/originallink";
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            File.Create(path);
-
-            string link = "/tmp/newlink";
-
-            if (File.Exists(link))
-            {
-                File.Delete(link);
-            }
-
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = @"/usr/bin/env",
-                Arguments = "ln " + path + " " + link,
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-
-            using (Process process = Process.Start(startInfo))
-            {
-                process.WaitForExit();
-                Assert.Equal(0, process.ExitCode);
-            }
-
-            // Since there are now two references to the file, both are considered
-            // hardlinks by our API (though all files are hardlinks on Linux)
-            FileSystemInfo fd = new FileInfo(path);
-            Assert.True(Platform.NonWindowsIsHardLink(fd));
-
-            fd = new FileInfo(link);
-            Assert.True(Platform.NonWindowsIsHardLink(fd));
-
-            File.Delete(path);
-            File.Delete(link);
-        }
-
-        [Fact]
-        public static void TestDirectoryIsNotHardLink()
-        {
-            string path = @"/tmp";
-
-            FileSystemInfo fd = new FileInfo(path);
-
-            Assert.False(Platform.NonWindowsIsHardLink(fd));
-        }
-
-        [Fact]
-        public static void TestNonExistentIsHardLink()
-        {
-            // A file that should *never* exist on a test machine:
-            string path = @"/tmp/ThisFileShouldNotExistOnTestMachines";
-
-            // If the file exists, then there's a larger issue that needs to be looked at
-            Assert.False(File.Exists(path));
-
-            // Convert `path` string to FileSystemInfo data type. And now, it should return true
-            FileSystemInfo fd = new FileInfo(path);
-            Assert.False(Platform.NonWindowsIsHardLink(fd));
-        }
-
-        [Fact]
-        public static void TestFileIsSymLink()
-        {
-            string path = @"/tmp/originallink";
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-
-            File.Create(path);
-
-            string link = "/tmp/newlink";
-
-            if (File.Exists(link))
-            {
-                File.Delete(link);
-            }
-
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = @"/usr/bin/env",
-                Arguments = "ln -s " + path + " " + link,
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-
-            using (Process process = Process.Start(startInfo))
-            {
-                process.WaitForExit();
-                Assert.Equal(0, process.ExitCode);
-            }
-
-            FileSystemInfo fd = new FileInfo(path);
-            Assert.False(Platform.NonWindowsIsSymLink(fd));
-
-            fd = new FileInfo(link);
-            Assert.True(Platform.NonWindowsIsSymLink(fd));
-
-            File.Delete(path);
-            File.Delete(link);
-        }
-#endif
     }
 }

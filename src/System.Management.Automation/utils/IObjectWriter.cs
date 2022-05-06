@@ -7,186 +7,349 @@ using System.Threading;
 
 namespace System.Management.Automation.Runspaces
 {
-    /// <summary>
-    /// PipelineWriter allows the caller to provide an asynchronous stream of objects
-    /// as input to a <see cref="System.Management.Automation.Runspaces.Pipeline"/>.
-    /// </summary>
-    /// <seealso cref="System.Management.Automation.Runspaces.Pipeline.Input"/>
-    public abstract class PipelineWriter
-    {
-        /// <summary>
-        /// Signaled when buffer space is available in the underlying stream.
-        /// </summary>
-        public abstract WaitHandle WaitHandle
+public abstract class PipelineWriter
+{
+public abstract WaitHandle WaitHandle
+{            get;
+}
+
+public abstract bool IsOpen
+{            get;
+}
+
+public abstract int Count
+{            get;
+}
+
+public abstract int MaxCapacity
+{            get;
+}
+
+public abstract void Close();
+
+public abstract void Flush();
+
+public abstract int Write(object obj);
+
+public abstract int Write(object obj, bool enumerateCollection);
+
+public PipelineWriter()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1016,519,4647);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1016,519,4647);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,519,4647);
+}
+
+
+static PipelineWriter()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1016,519,4647);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1016,519,4647);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,519,4647);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1016,519,4647);
+}
+internal class DiscardingPipelineWriter : PipelineWriter
+{
+private ManualResetEvent _waitHandle ;
+
+public override WaitHandle WaitHandle
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,4866,4893);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,4872,4891);
+
+return _waitHandle;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,4866,4893);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,4804,4904);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,4804,4904);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+private bool _isOpen ;
+
+public override bool IsOpen
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5006,5029);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5012,5027);
+
+return _isOpen;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5006,5029);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,4954,5040);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,4954,5040);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+private int _count ;
+
+public override int Count
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5135,5157);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5141,5155);
+
+return _count;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5135,5157);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,5085,5168);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,5085,5168);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+public override int MaxCapacity
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5236,5264);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5242,5262);
+
+return int.MaxValue;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5236,5264);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,5180,5275);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,5180,5275);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+public override void Close()
+		{
+			try
         {
-            get;
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5287,5367);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5340,5356);
 
-        /// <summary>
-        /// Check if the stream is open for further writes.
-        /// </summary>
-        /// <value>true if the underlying stream is open, otherwise false</value>
-        /// <remarks>
-        /// Attempting to write to the underlying stream if IsOpen is false throws
-        /// a <see cref="PipelineClosedException"/>.
-        /// </remarks>
-        public abstract bool IsOpen
+_isOpen = false;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5287,5367);
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,5287,5367);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,5287,5367);
+}
+		}
+
+public override void Flush()
+		{
+			try
         {
-            get;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5379,5429);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5379,5429);
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,5379,5429);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,5379,5429);
+}
+		}
 
-        /// <summary>
-        /// Returns the number of objects currently in the underlying stream.
-        /// </summary>
-        public abstract int Count
+public override int Write(object obj)
+		{
+			try
         {
-            get;
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5441,5636);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5503,5534);
 
-        /// <summary>
-        /// Get the capacity of the stream.
-        /// </summary>
-        /// <value>
-        /// The capacity of the stream.
-        /// </value>
-        /// <remarks>
-        /// The capacity is the number of objects that stream may contain at one time.  Once this
-        /// limit is reached, attempts to write into the stream block until buffer space
-        /// becomes available.
-        /// </remarks>
-        public abstract int MaxCapacity
+int 
+numberOfObjectsWritten = 1
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5548,5581);
+
+_count += numberOfObjectsWritten;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5595,5625);
+
+return numberOfObjectsWritten;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5441,5636);
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,5441,5636);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,5441,5636);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+public override int Write(object obj, bool enumerateCollection)
+		{
+			try
         {
-            get;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1016,5648,6353);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5736,5832) || true) && (!enumerateCollection)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1016,5736,5832);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5794,5817);
+
+return f_1016_5801_5816(this, obj);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1016,5736,5832);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5848,5879);
+
+int 
+numberOfObjectsWritten = 0
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5893,5956);
+
+IEnumerable 
+enumerable = f_1016_5918_5955(obj)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5970,6249) || true) && (enumerable != null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1016,5970,6249);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,6026,6143);
+foreach(object o in f_1016_6047_6057_I(enumerable) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1016,6026,6143);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,6099,6124);
+
+numberOfObjectsWritten++;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1016,6026,6143);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1016,1,118);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1016,1,118);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1016,5970,6249);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1016,5970,6249);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,6209,6234);
+
+numberOfObjectsWritten++;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1016,5970,6249);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,6265,6298);
+
+_count += numberOfObjectsWritten;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,6312,6342);
+
+return numberOfObjectsWritten;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1016,5648,6353);
+
+int
+f_1016_5801_5816(System.Management.Automation.Runspaces.DiscardingPipelineWriter
+this_param,object
+obj)
+{
+var return_v = this_param.Write( obj);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1016, 5801, 5816);
+return return_v;
+}
+
+
+System.Collections.IEnumerable
+f_1016_5918_5955(object
+obj)
+{
+var return_v = LanguagePrimitives.GetEnumerable( obj);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1016, 5918, 5955);
+return return_v;
+}
+
+
+System.Collections.IEnumerable
+f_1016_6047_6057_I(System.Collections.IEnumerable
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1016, 6047, 6057);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1016,5648,6353);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,5648,6353);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Close the stream.
-        /// </summary>
-        /// <remarks>
-        /// Causes subsequent calls to IsOpen to return false and calls to
-        /// a write operation to throw an ObjectDisposedException.
-        /// All calls to Close() after the first call are silently ignored.
-        /// </remarks>
-        /// <exception cref="ObjectDisposedException">
-        /// The stream is already disposed
-        /// </exception>
-        public abstract void Close();
+public DiscardingPipelineWriter()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1016,4655,6360);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,4753,4793);
+this._waitHandle = f_1016_4767_4793(true);DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,4929,4943);
+this._isOpen = true;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1016,5064,5074);
+this._count = 0;DynAbs.Tracing.TraceSender.TraceExitConstructor(1016,4655,6360);
 
-        /// <summary>
-        /// Flush the buffered data from the stream.  Closed streams may be flushed,
-        /// but disposed streams may not.
-        /// </summary>
-        /// <exception cref="ObjectDisposedException">
-        /// The stream is already disposed
-        /// </exception>
-        public abstract void Flush();
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,4655,6360);
+}
 
-        /// <summary>
-        /// Write a single object into the underlying stream.
-        /// </summary>
-        /// <param name="obj">The object to add to the stream.</param>
-        /// <returns>
-        /// One, if the write was successful, otherwise;
-        /// zero if the stream was closed before the object could be written,
-        /// or if the object was AutomationNull.Value.
-        /// </returns>
-        /// <exception cref="PipelineClosedException">
-        /// The underlying stream is already closed
-        /// </exception>
-        /// <remarks>
-        /// AutomationNull.Value is ignored
-        /// </remarks>
-        public abstract int Write(object obj);
 
-        /// <summary>
-        /// Write multiple objects to the underlying stream.
-        /// </summary>
-        /// <param name="obj">Object or enumeration to read from.</param>
-        /// <param name="enumerateCollection">
-        /// If enumerateCollection is true, and <paramref name="obj"/>
-        /// is an enumeration according to LanguagePrimitives.GetEnumerable,
-        /// the objects in the enumeration will be unrolled and
-        /// written separately.  Otherwise, <paramref name="obj"/>
-        /// will be written as a single object.
-        /// </param>
-        /// <returns>The number of objects written.</returns>
-        /// <exception cref="PipelineClosedException">
-        /// The underlying stream is already closed
-        /// </exception>
-        /// <remarks>
-        /// If the enumeration contains elements equal to
-        /// AutomationNull.Value, they are are ignored.
-        /// This can cause the return value to be less than the size of
-        /// the collection.
-        /// </remarks>
-        public abstract int Write(object obj, bool enumerateCollection);
-    }
+static DiscardingPipelineWriter()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1016,4655,6360);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1016,4655,6360);
 
-    internal class DiscardingPipelineWriter : PipelineWriter
-    {
-        private ManualResetEvent _waitHandle = new ManualResetEvent(true);
-        public override WaitHandle WaitHandle
-        {
-            get { return _waitHandle; }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1016,4655,6360);
+}
 
-        private bool _isOpen = true;
-        public override bool IsOpen
-        {
-            get { return _isOpen; }
-        }
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1016,4655,6360);
 
-        private int _count = 0;
-        public override int Count
-        {
-            get { return _count; }
-        }
+System.Threading.ManualResetEvent
+f_1016_4767_4793(bool
+initialState)
+{
+var return_v = new System.Threading.ManualResetEvent( initialState);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1016, 4767, 4793);
+return return_v;
+}
 
-        public override int MaxCapacity
-        {
-            get { return int.MaxValue; }
-        }
-
-        public override void Close()
-        {
-            _isOpen = false;
-        }
-
-        public override void Flush()
-        {
-        }
-
-        public override int Write(object obj)
-        {
-            int numberOfObjectsWritten = 1;
-            _count += numberOfObjectsWritten;
-            return numberOfObjectsWritten;
-        }
-
-        public override int Write(object obj, bool enumerateCollection)
-        {
-            if (!enumerateCollection)
-            {
-                return this.Write(obj);
-            }
-
-            int numberOfObjectsWritten = 0;
-            IEnumerable enumerable = LanguagePrimitives.GetEnumerable(obj);
-            if (enumerable != null)
-            {
-                foreach (object o in enumerable)
-                {
-                    numberOfObjectsWritten++;
-                }
-            }
-            else
-            {
-                numberOfObjectsWritten++;
-            }
-
-            _count += numberOfObjectsWritten;
-            return numberOfObjectsWritten;
-        }
-    }
+}
 }
 

@@ -204,20 +204,11 @@ namespace System.Management.Automation.Internal
     /// the underlying channel bitmask values are used instead.
     /// The bit values are the same as used on Windows.
     /// </remarks>
-#if UNIX
-    [Flags]
-    internal enum PSChannel : byte
-    {
-        Operational = 0x80,
-        Analytic = 0x40
-    }
-#else
     internal enum PSChannel : byte
     {
         Operational = 0x10,
         Analytic = 0x11
     }
-#endif
 
     /// <summary>
     /// Defines enumerations for tasks.
@@ -251,21 +242,52 @@ namespace System.Management.Automation.Internal
     {
         One = 0x1,
     }
-
-    /// <summary>
-    /// Describes a binary blob to be used as a data item for ETW.
-    /// </summary>
     internal sealed class PSETWBinaryBlob
     {
         public PSETWBinaryBlob(byte[] blob, int offset, int length)
         {
-            this.blob = blob;
-            this.offset = offset;
-            this.length = length;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1622, 8363, 8545);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1622, 8580, 8584);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1622, 8615, 8621);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1622, 8652, 8658);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1622, 8447, 8464);
+
+                this.blob = blob;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1622, 8478, 8499);
+
+                this.offset = offset;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1622, 8513, 8534);
+
+                this.length = length;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1622, 8363, 8545);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1622, 8363, 8545);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1622, 8363, 8545);
+            }
         }
 
         public readonly byte[] blob;
+
         public readonly int offset;
+
         public readonly int length;
+
+        static PSETWBinaryBlob()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1622, 8309, 8666);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1622, 8309, 8666);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1622, 8309, 8666);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1622, 8309, 8666);
     }
 }

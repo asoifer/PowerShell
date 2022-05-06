@@ -5,95 +5,176 @@ using System.Security.AccessControl;
 
 namespace System.Management.Automation.Provider
 {
-    /// <summary>
-    /// Defines the base class for all of the classes the provide implementations for a particular
-    /// data store or item for the MSH core commands.
-    /// </summary>
     public abstract partial class CmdletProvider
     {
-        #region ISecurityDescriptorCmdletProvider method wrappers
-
-        /// <summary>
-        /// Internal wrapper for the GetSecurityDescriptor protected method. This method will
-        /// only be called if the provider implements the ISecurityDescriptorCmdletProvider interface.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to retrieve the security descriptor from.
-        /// </param>
-        /// <param name="sections">
-        /// Specifies the parts of a security descriptor to retrieve.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing. An instance of an object that represents the security descriptor
-        /// for the item specified by the path should be written to the context.
-        /// </returns>
         internal void GetSecurityDescriptor(
-            string path,
-            AccessControlSections sections,
-            CmdletProviderContext context)
+                    string path,
+                    AccessControlSections sections,
+                    CmdletProviderContext context)
         {
-            Context = context;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1207, 1367, 1972);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 1543, 1561);
 
-            ISecurityDescriptorCmdletProvider permissionProvider = this as ISecurityDescriptorCmdletProvider;
+                Context = context;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 1577, 1674);
 
-            //
-            // if this is not supported, the fn will throw
-            //
-            CheckIfSecurityDescriptorInterfaceIsSupported(permissionProvider);
+                ISecurityDescriptorCmdletProvider
+                permissionProvider = this as ISecurityDescriptorCmdletProvider
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 1782, 1848);
 
-            // Call interface method
+                f_1207_1782_1847(permissionProvider);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 1904, 1961);
 
-            permissionProvider.GetSecurityDescriptor(path, sections);
+                f_1207_1904_1960(
+                            // Call interface method
+
+                            permissionProvider, path, sections);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1207, 1367, 1972);
+
+                int
+                f_1207_1782_1847(System.Management.Automation.Provider.ISecurityDescriptorCmdletProvider
+                permissionProvider)
+                {
+                    CheckIfSecurityDescriptorInterfaceIsSupported(permissionProvider);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1207, 1782, 1847);
+                    return 0;
+                }
+
+
+                int
+                f_1207_1904_1960(System.Management.Automation.Provider.ISecurityDescriptorCmdletProvider
+                this_param, string
+                path, System.Security.AccessControl.AccessControlSections
+                includeSections)
+                {
+                    this_param.GetSecurityDescriptor(path, includeSections);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1207, 1904, 1960);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1207, 1367, 1972);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1207, 1367, 1972);
+            }
         }
 
-        /// <summary>
-        /// Internal wrapper for the SetSecurityDescriptor protected method. This method will
-        /// only be called if the provider implements the ISecurityDescriptorCmdletProvider interface.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to set the new security descriptor on.
-        /// </param>
-        /// <param name="securityDescriptor">
-        /// The new security descriptor for the item.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing. The security descriptor object that was set should be written
-        /// to the context.
-        /// </returns>
         internal void SetSecurityDescriptor(
-            string path,
-            ObjectSecurity securityDescriptor,
-            CmdletProviderContext context)
+                    string path,
+                    ObjectSecurity securityDescriptor,
+                    CmdletProviderContext context)
         {
-            Context = context;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1207, 2766, 3384);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 2945, 2963);
 
-            ISecurityDescriptorCmdletProvider permissionProvider = this as ISecurityDescriptorCmdletProvider;
+                Context = context;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 2979, 3076);
 
-            //
-            // if this is not supported, the fn will throw
-            //
-            CheckIfSecurityDescriptorInterfaceIsSupported(permissionProvider);
+                ISecurityDescriptorCmdletProvider
+                permissionProvider = this as ISecurityDescriptorCmdletProvider
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 3184, 3250);
 
-            // Call interface method
+                f_1207_3184_3249(permissionProvider);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 3306, 3373);
 
-            permissionProvider.SetSecurityDescriptor(path, securityDescriptor);
+                f_1207_3306_3372(
+                            // Call interface method
+
+                            permissionProvider, path, securityDescriptor);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1207, 2766, 3384);
+
+                int
+                f_1207_3184_3249(System.Management.Automation.Provider.ISecurityDescriptorCmdletProvider
+                permissionProvider)
+                {
+                    CheckIfSecurityDescriptorInterfaceIsSupported(permissionProvider);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1207, 3184, 3249);
+                    return 0;
+                }
+
+
+                int
+                f_1207_3306_3372(System.Management.Automation.Provider.ISecurityDescriptorCmdletProvider
+                this_param, string
+                path, System.Security.AccessControl.ObjectSecurity
+                securityDescriptor)
+                {
+                    this_param.SetSecurityDescriptor(path, securityDescriptor);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1207, 3306, 3372);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1207, 2766, 3384);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1207, 2766, 3384);
+            }
         }
 
         private static void CheckIfSecurityDescriptorInterfaceIsSupported(ISecurityDescriptorCmdletProvider permissionProvider)
         {
-            if (permissionProvider == null)
+            try
             {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        ProviderBaseSecurity.ISecurityDescriptorCmdletProvider_NotSupported);
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1207, 3396, 3791);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 3540, 3780) || true) && (permissionProvider == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1207, 3540, 3780);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1207, 3604, 3765);
+
+                    throw
+                    f_1207_3631_3764(f_1207_3696_3763());
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1207, 3540, 3780);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1207, 3396, 3791);
+
+                string
+                f_1207_3696_3763()
+                {
+                    var return_v = ProviderBaseSecurity.ISecurityDescriptorCmdletProvider_NotSupported;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1207, 3696, 3763);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSNotSupportedException
+                f_1207_3631_3764(string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException(resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1207, 3631, 3764);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1207, 3396, 3791);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1207, 3396, 3791);
             }
         }
-        #endregion ISecurityDescriptorCmdletProvider method wrappers
     }
 }

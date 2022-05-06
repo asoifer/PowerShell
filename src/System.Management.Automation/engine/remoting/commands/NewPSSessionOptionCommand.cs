@@ -10,427 +10,1218 @@ using System.Management.Automation.Runspaces;
 
 namespace Microsoft.PowerShell.Commands
 {
-    /// <summary>
-    /// This class implements New-PSSessionOption cmdlet.
-    /// Spec: TBD.
-    /// </summary>
-    [Cmdlet(VerbsCommon.New, "PSSessionOption", HelpUri = "https://go.microsoft.com/fwlink/?LinkID=2096488", RemotingCapability = RemotingCapability.None)]
+[Cmdlet(VerbsCommon.New, "PSSessionOption", HelpUri = "https://go.microsoft.com/fwlink/?LinkID=2096488", RemotingCapability = RemotingCapability.None)]
     [OutputType(typeof(PSSessionOption))]
     public sealed class NewPSSessionOptionCommand : PSCmdlet
-    {
-        #region Parameters (specific to PSSessionOption)
-
-#if !UNIX
-        /// <summary>
-        /// The MaximumRedirection parameter enables the implicit redirection functionality
-        /// -1 = no limit
-        ///  0 = no redirection.
-        /// </summary>
-        [Parameter]
+{
+[Parameter]
         public int MaximumRedirection
-        {
-            get { return _maximumRedirection.Value; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,1102,1143);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,1108,1141);
 
-            set { _maximumRedirection = value; }
-        }
+return f_1599_1115_1140(_maximumRedirection);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,1102,1143);
 
-        private int? _maximumRedirection;
+int
+f_1599_1115_1140(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 1115, 1140);
+return return_v;
+}
 
-        /// <summary>
-        /// If false, underlying WSMan infrastructure will compress data sent on the network.
-        /// If true, data will not be compressed. Compression improves performance by
-        /// reducing the amount of data sent on the network. Compression my require extra
-        /// memory consumption and CPU usage. In cases where available memory / CPU is less,
-        /// set this property to "true".
-        /// By default the value of this property is "false".
-        /// </summary>
-        [Parameter]
-        public SwitchParameter NoCompression { get; set; }
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,1027,1206);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,1027,1206);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,1159,1195);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,1165,1193);
 
-        /// <summary>
-        /// If <c>true</c> then Operating System won't load the user profile (i.e. registry keys under HKCU) on the remote server
-        /// which can result in a faster session creation time.  This option won't have any effect if the remote machine has
-        /// already loaded the profile (i.e. in another session).
-        /// </summary>
-        [Parameter]
-        public SwitchParameter NoMachineProfile { get; set; }
+_maximumRedirection = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,1159,1195);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,1027,1206);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,1027,1206);
+}
+		}}
 
-        /// <summary>
-        /// Culture that the remote session should use.
-        /// </summary>
-        [Parameter]
+private int? _maximumRedirection;
+
+[Parameter]
+        public SwitchParameter NoCompression {get; set; }
+
+[Parameter]
+        public SwitchParameter NoMachineProfile {get; set; }
+
+[Parameter]
         [ValidateNotNull]
-        public CultureInfo Culture { get; set; }
+        public CultureInfo Culture {get; set; }
 
-        /// <summary>
-        /// UI culture that the remote session should use.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [ValidateNotNull]
-        public CultureInfo UICulture { get; set; }
+        public CultureInfo UICulture {get; set; }
 
-        /// <summary>
-        /// Total data (in bytes) that can be received from a remote machine
-        /// targeted towards a command. If null, then the size is unlimited.
-        /// Default is unlimited data.
-        /// </summary>
-        [Parameter]
+[Parameter]
         public int MaximumReceivedDataSizePerCommand
-        {
-            get { return _maxRecvdDataSizePerCommand.Value; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,3068,3117);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3074,3115);
 
-            set { _maxRecvdDataSizePerCommand = value; }
-        }
+return f_1599_3081_3114(_maxRecvdDataSizePerCommand);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,3068,3117);
 
-        private int? _maxRecvdDataSizePerCommand;
+int
+f_1599_3081_3114(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 3081, 3114);
+return return_v;
+}
 
-        /// <summary>
-        /// Maximum size (in bytes) of a deserialized object received from a remote machine.
-        /// If null, then the size is unlimited. Default is unlimited object size.
-        /// </summary>
-        [Parameter]
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,2978,3188);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,2978,3188);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,3133,3177);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3139,3175);
+
+_maxRecvdDataSizePerCommand = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,3133,3177);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,2978,3188);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,2978,3188);
+}
+		}}
+
+private int? _maxRecvdDataSizePerCommand;
+
+[Parameter]
         public int MaximumReceivedObjectSize
-        {
-            get { return _maxRecvdObjectSize.Value; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,3560,3601);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3566,3599);
 
-            set { _maxRecvdObjectSize = value; }
-        }
+return f_1599_3573_3598(_maxRecvdObjectSize);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,3560,3601);
 
-        private int? _maxRecvdObjectSize;
+int
+f_1599_3573_3598(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 3573, 3598);
+return return_v;
+}
 
-        /// <summary>
-        /// Specifies the output mode on the server when it is in Disconnected mode
-        /// and its output data cache becomes full.
-        /// </summary>
-        [Parameter]
-        public OutputBufferingMode OutputBufferingMode { get; set; }
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,3478,3664);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,3478,3664);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,3617,3653);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3623,3651);
 
-        /// <summary>
-        /// Maximum number of times a connection will be re-attempted when a connection fails due to network
-        /// issues.
-        /// </summary>
-        [Parameter]
+_maxRecvdObjectSize = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,3617,3653);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,3478,3664);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,3478,3664);
+}
+		}}
+
+private int? _maxRecvdObjectSize;
+
+[Parameter]
+        public OutputBufferingMode OutputBufferingMode {get; set; }
+
+[Parameter]
         [ValidateRange(0, Int32.MaxValue)]
-        public int MaxConnectionRetryCount { get; set; }
+        public int MaxConnectionRetryCount {get; set; }
 
-        /// <summary>
-        /// Application arguments the server can see in <see cref="System.Management.Automation.Remoting.PSSenderInfo.ApplicationArguments"/>
-        /// </summary>
-        [Parameter]
+[Parameter]
         [ValidateNotNull]
         [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public PSPrimitiveDictionary ApplicationArguments { get; set; }
+        public PSPrimitiveDictionary ApplicationArguments {get; set; }
 
-        /// <summary>
-        /// The duration for which PowerShell remoting waits (in milliseconds) before timing
-        /// out on a connection to a remote machine. Simply put, the timeout for a remote
-        /// runspace creation.
-        ///
-        /// The user would like to tweak this timeout depending on whether
-        /// he/she is connecting to a machine in the data center or across a slow WAN.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [Alias("OpenTimeoutMSec")]
         [ValidateRange(0, Int32.MaxValue)]
         public int OpenTimeout
-        {
-            get
+{
+get
+		{
+			try
             {
-                return _openTimeout.HasValue ? _openTimeout.Value :
-                    RunspaceConnectionInfo.DefaultOpenTimeout;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,5297,5463);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,5333,5448);
+
+return (DynAbs.Tracing.TraceSender.Conditional_F1(1599, 5340, 5361)||((f_1599_5340_5361(_openTimeout)&&DynAbs.Tracing.TraceSender.Conditional_F2(1599, 5364, 5382))||DynAbs.Tracing.TraceSender.Conditional_F3(1599, 5406, 5447)))?f_1599_5364_5382(_openTimeout):                    RunspaceConnectionInfo.DefaultOpenTimeout;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,5297,5463);
+
+bool
+f_1599_5340_5361(int?
+this_param)
+{
+var return_v = this_param.HasValue ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 5340, 5361);
+return return_v;
+}
+
+
+int
+f_1599_5364_5382(int?
+this_param)
+{
+var return_v = this_param.Value ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 5364, 5382);
+return return_v;
+}
+
             }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,5149,5519);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,5149,5519);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,5479,5508);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,5485,5506);
 
-            set { _openTimeout = value; }
-        }
+_openTimeout = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,5479,5508);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,5149,5519);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,5149,5519);
+}
+		}}
 
-        private int? _openTimeout;
+private int? _openTimeout;
 
-        /// <summary>
-        /// The duration for which PowerShell should wait (in milliseconds) before it
-        /// times out on cancel operations (close runspace or stop powershell). For
-        /// instance, when the user hits ctrl-C, New-PSSession cmdlet tries to call a
-        /// stop on all remote runspaces which are in the Opening state. The user
-        /// wouldn't mind waiting for 15 seconds, but this should be time bound and of a
-        /// shorter duration. A high timeout here like 3 minutes will give the user
-        /// a feeling that the PowerShell client is not responding.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [Alias("CancelTimeoutMSec")]
         [ValidateRange(0, Int32.MaxValue)]
         public int CancelTimeout
-        {
-            get
+{
+get
+		{
+			try
             {
-                return _cancelTimeout.HasValue ? _cancelTimeout.Value :
-                    BaseTransportManager.ClientCloseTimeoutMs;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,6354,6524);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,6390,6509);
+
+return (DynAbs.Tracing.TraceSender.Conditional_F1(1599, 6397, 6420)||((f_1599_6397_6420(_cancelTimeout)&&DynAbs.Tracing.TraceSender.Conditional_F2(1599, 6423, 6443))||DynAbs.Tracing.TraceSender.Conditional_F3(1599, 6467, 6508)))?f_1599_6423_6443(_cancelTimeout):                    BaseTransportManager.ClientCloseTimeoutMs;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,6354,6524);
+
+bool
+f_1599_6397_6420(int?
+this_param)
+{
+var return_v = this_param.HasValue ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 6397, 6420);
+return return_v;
+}
+
+
+int
+f_1599_6423_6443(int?
+this_param)
+{
+var return_v = this_param.Value ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 6423, 6443);
+return return_v;
+}
+
             }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,6202,6582);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,6202,6582);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,6540,6571);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,6546,6569);
 
-            set { _cancelTimeout = value; }
-        }
+_cancelTimeout = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,6540,6571);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,6202,6582);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,6202,6582);
+}
+		}}
 
-        private int? _cancelTimeout;
+private int? _cancelTimeout;
 
-        /// <summary>
-        /// The duration for which a Runspace on server needs to wait (in milliseconds) before it
-        /// declares the client dead and closes itself down.
-        /// This is especially important as these values may have to be configured differently
-        /// for enterprise administration scenarios.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [ValidateRange(-1, Int32.MaxValue)]
         [Alias("IdleTimeoutMSec")]
         public int IdleTimeout
-        {
-            get
+{
+get
+		{
+			try
             {
-                return _idleTimeout.HasValue ? _idleTimeout.Value
-                    : RunspaceConnectionInfo.DefaultIdleTimeout;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,7141,7307);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,7177,7292);
+
+return (DynAbs.Tracing.TraceSender.Conditional_F1(1599, 7184, 7205)||((f_1599_7184_7205(_idleTimeout)&&DynAbs.Tracing.TraceSender.Conditional_F2(1599, 7208, 7226))||DynAbs.Tracing.TraceSender.Conditional_F3(1599, 7250, 7291)))?f_1599_7208_7226(_idleTimeout):RunspaceConnectionInfo.DefaultIdleTimeout;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,7141,7307);
+
+bool
+f_1599_7184_7205(int?
+this_param)
+{
+var return_v = this_param.HasValue ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 7184, 7205);
+return return_v;
+}
+
+
+int
+f_1599_7208_7226(int?
+this_param)
+{
+var return_v = this_param.Value
+;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 7208, 7226);
+return return_v;
+}
+
             }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,6992,7363);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,6992,7363);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,7323,7352);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,7329,7350);
 
-            set { _idleTimeout = value; }
-        }
+_idleTimeout = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,7323,7352);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,6992,7363);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,6992,7363);
+}
+		}}
 
-        private int? _idleTimeout;
-#endif
+private int? _idleTimeout;
 
-        #endregion Parameters
-
-        #region Parameters copied from New-WSManSessionOption
-
-#if !UNIX
-        /// <summary>
-        /// By default, ProxyAccessType is None, that means Proxy information (ProxyAccessType,
-        /// ProxyAuthenticationMechanism and ProxyCredential)is not passed to WSMan at all.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [ValidateNotNullOrEmpty]
-        public ProxyAccessType ProxyAccessType { get; set; } = ProxyAccessType.None;
+        public ProxyAccessType ProxyAccessType {get; set; }
 
-        /// <summary>
-        /// The following is the definition of the input parameter "ProxyAuthentication".
-        /// This parameter takes a set of authentication methods the user can select
-        /// from.  The available options should be as follows:
-        /// - Negotiate: Use the default authentication (as defined by the underlying
-        /// protocol) for establishing a remote connection.
-        /// - Basic:  Use basic authentication for establishing a remote connection
-        /// - Digest: Use Digest authentication for establishing a remote connection.
-        /// </summary>
-        [Parameter]
-        public AuthenticationMechanism ProxyAuthentication { get; set; } = AuthenticationMechanism.Negotiate;
+[Parameter]
+        public AuthenticationMechanism ProxyAuthentication {get; set; }
 
-        /// <summary>
-        /// The following is the definition of the input parameter "ProxyCredential".
-        /// </summary>
-        [Parameter]
+[Parameter]
         [ValidateNotNullOrEmpty]
         [Credential]
-        public PSCredential ProxyCredential { get; set; }
-#endif
+        public PSCredential ProxyCredential {get; set; }
 
-        /// <summary>
-        /// The following is the definition of the input parameter "SkipCACheck".
-        /// When connecting over HTTPS, the client does not validate that the server
-        /// certificate is signed by a trusted certificate authority (CA). Use only when
-        /// the remote computer is trusted by other means, for example, if the remote
-        /// computer is part of a network that is physically secure and isolated or the
-        /// remote computer is listed as a trusted host in WinRM configuration.
-        /// </summary>
-        [Parameter]
+[Parameter]
         public SwitchParameter SkipCACheck
-        {
-            get { return _skipcacheck; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,9575,9603);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,9581,9601);
 
-            set { _skipcacheck = value; }
-        }
+return _skipcacheck;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,9575,9603);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,9495,9659);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,9495,9659);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,9619,9648);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,9625,9646);
 
-        private bool _skipcacheck;
+_skipcacheck = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,9619,9648);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,9495,9659);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,9495,9659);
+}
+		}}
 
-        /// <summary>
-        /// The following is the definition of the input parameter "SkipCNCheck".
-        /// Indicates that certificate common name (CN) of the server need not match the
-        /// hostname of the server. Used only in remote operations using https. This
-        /// option should only be used for trusted machines.
-        /// </summary>
-        [Parameter]
+private bool _skipcacheck;
+
+[Parameter]
         public SwitchParameter SkipCNCheck
-        {
-            get { return _skipcncheck; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,10157,10185);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,10163,10183);
 
-            set { _skipcncheck = value; }
-        }
+return _skipcncheck;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,10157,10185);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,10077,10241);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,10077,10241);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,10201,10230);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,10207,10228);
 
-        private bool _skipcncheck;
+_skipcncheck = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,10201,10230);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,10077,10241);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,10077,10241);
+}
+		}}
 
-#if !UNIX
+private bool _skipcncheck;
 
-        /// <summary>
-        /// The following is the definition of the input parameter "SkipRevocation".
-        /// Indicates that certificate common name (CN) of the server need not match the
-        /// hostname of the server. Used only in remote operations using https. This
-        /// option should only be used for trusted machines.
-        /// </summary>
-        [Parameter]
+[Parameter]
         public SwitchParameter SkipRevocationCheck
-        {
-            get { return _skiprevocationcheck; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,10763,10799);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,10769,10797);
 
-            set { _skiprevocationcheck = value; }
-        }
+return _skiprevocationcheck;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,10763,10799);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,10675,10863);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,10675,10863);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,10815,10852);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,10821,10850);
 
-        private bool _skiprevocationcheck;
+_skiprevocationcheck = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,10815,10852);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,10675,10863);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,10675,10863);
+}
+		}}
 
-        /// <summary>
-        /// The following is the definition of the input parameter "Timeout".
-        /// Defines the timeout in milliseconds for the wsman operation.
-        /// </summary>
-        [Parameter]
+private bool _skiprevocationcheck;
+
+[Parameter]
         [Alias("OperationTimeoutMSec")]
         [ValidateRange(0, Int32.MaxValue)]
         public int OperationTimeout
-        {
-            get
+{
+get
+		{
+			try
             {
-                return (_operationtimeout.HasValue ? _operationtimeout.Value :
-                    BaseTransportManager.ClientDefaultOperationTimeoutMs);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,11279,11468);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,11315,11453);
+
+return ((DynAbs.Tracing.TraceSender.Conditional_F1(1599, 11323, 11349)||((f_1599_11323_11349(_operationtimeout)&&DynAbs.Tracing.TraceSender.Conditional_F2(1599, 11352, 11375))||DynAbs.Tracing.TraceSender.Conditional_F3(1599, 11399, 11451)))?f_1599_11352_11375(_operationtimeout):                    BaseTransportManager.ClientDefaultOperationTimeoutMs);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,11279,11468);
+
+bool
+f_1599_11323_11349(int?
+this_param)
+{
+var return_v = this_param.HasValue ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 11323, 11349);
+return return_v;
+}
+
+
+int
+f_1599_11352_11375(int?
+this_param)
+{
+var return_v = this_param.Value ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 11352, 11375);
+return return_v;
+}
+
             }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,11121,11529);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,11121,11529);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,11484,11518);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,11490,11516);
 
-            set { _operationtimeout = value; }
-        }
+_operationtimeout = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,11484,11518);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,11121,11529);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,11121,11529);
+}
+		}}
 
-        private int? _operationtimeout;
+private int? _operationtimeout;
 
-        /// <summary>
-        /// The following is the definition of the input parameter "UnEncrypted".
-        /// Specifies that no encryption will be used when doing remote operations over
-        /// http. Unencrypted traffic is not allowed by default and must be enabled in
-        /// the local configuration.
-        /// </summary>
-        [Parameter]
+[Parameter]
         public SwitchParameter NoEncryption
-        {
-            get { return _noencryption; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,12010,12039);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,12016,12037);
 
-            set
+return _noencryption;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,12010,12039);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,11929,12139);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,11929,12139);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                _noencryption = value;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,12055,12128);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,12091,12113);
+
+_noencryption = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,12055,12128);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,11929,12139);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,11929,12139);
+}
+		}}
 
-        private bool _noencryption;
+private bool _noencryption;
 
-        /// <summary>
-        /// The following is the definition of the input parameter "UTF16".
-        /// Indicates the request is encoded in UTF16 format rather than UTF8 format;
-        /// UTF8 is the default.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "UTF")]
         public SwitchParameter UseUTF16
-        {
-            get { return _useutf16; }
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,12622,12647);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,12628,12645);
 
-            set
+return _useutf16;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,12622,12647);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,12435,12743);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,12435,12743);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                _useutf16 = value;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,12663,12732);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,12699,12717);
+
+_useutf16 = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,12663,12732);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,12435,12743);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,12435,12743);
+}
+		}}
 
-        private bool _useutf16;
+private bool _useutf16;
 
-        /// <summary>
-        /// Uses Service Principal Name (SPN) along with the Port number during authentication.
-        /// </summary>
-        [Parameter]
+[Parameter]
         [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "SPN")]
         public SwitchParameter IncludePortInSPN
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,13129,13162);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13135,13160);
+
+return _includePortInSPN;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,13129,13162);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,12934,13223);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,12934,13223);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,13178,13212);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13184,13210);
+
+_includePortInSPN = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,13178,13212);
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,12934,13223);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,12934,13223);
+}
+		}}
+
+private bool _includePortInSPN;
+
+protected override void BeginProcessing()
+		{
+			try
         {
-            get { return _includePortInSPN; }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1599,13449,15911);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13515,13562);
 
-            set { _includePortInSPN = value; }
+PSSessionOption 
+result = f_1599_13540_13561()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13633,13679);
+
+result.ProxyAccessType = f_1599_13658_13678(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13693,13747);
+
+result.ProxyAuthentication = f_1599_13722_13746(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13761,13807);
+
+result.ProxyCredential = f_1599_13786_13806(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13829,13867);
+
+result.SkipCACheck = f_1599_13850_13866(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13881,13919);
+
+result.SkipCNCheck = f_1599_13902_13918(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13944,13998);
+
+result.SkipRevocationCheck = f_1599_13973_13997(this);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14012,14168) || true) && (f_1599_14016_14042(_operationtimeout))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,14012,14168);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14076,14153);
+
+result.OperationTimeout = TimeSpan.FromMilliseconds(f_1599_14128_14151(_operationtimeout));
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,14012,14168);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14184,14224);
+
+result.NoEncryption = f_1599_14206_14223(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14238,14270);
+
+result.UseUTF16 = f_1599_14256_14269(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14284,14332);
+
+result.IncludePortInSPN = f_1599_14310_14331(this);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14390,14538) || true) && (f_1599_14394_14422(_maximumRedirection))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,14390,14538);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14456,14523);
+
+result.MaximumConnectionRedirectionCount = f_1599_14499_14522(this);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,14390,14538);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14554,14606);
+
+result.NoCompression = this.NoCompression.IsPresent;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14620,14678);
+
+result.NoMachineProfile = this.NoMachineProfile.IsPresent;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14694,14765);
+
+result.MaximumReceivedDataSizePerCommand = _maxRecvdDataSizePerCommand;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14779,14834);
+
+result.MaximumReceivedObjectSize = _maxRecvdObjectSize;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14850,14953) || true) && (f_1599_14854_14866(this)!= null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,14850,14953);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14908,14938);
+
+result.Culture = f_1599_14925_14937(this);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,14850,14953);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,14969,15078) || true) && (f_1599_14973_14987(this)!= null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,14969,15078);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15029,15063);
+
+result.UICulture = f_1599_15048_15062(this);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,14969,15078);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15094,15235) || true) && (f_1599_15098_15119(_openTimeout))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,15094,15235);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15153,15220);
+
+result.OpenTimeout = TimeSpan.FromMilliseconds(f_1599_15200_15218(_openTimeout));
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,15094,15235);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15251,15398) || true) && (f_1599_15255_15278(_cancelTimeout))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,15251,15398);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15312,15383);
+
+result.CancelTimeout = TimeSpan.FromMilliseconds(f_1599_15361_15381(_cancelTimeout));
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,15251,15398);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15414,15555) || true) && (f_1599_15418_15439(_idleTimeout))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,15414,15555);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15473,15540);
+
+result.IdleTimeout = TimeSpan.FromMilliseconds(f_1599_15520_15538(_idleTimeout));
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,15414,15555);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15571,15620);
+
+result.OutputBufferingMode = f_1599_15600_15619();
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15636,15693);
+
+result.MaxConnectionRetryCount = f_1599_15669_15692();
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15709,15851) || true) && (f_1599_15713_15738(this)!= null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1599,15709,15851);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15780,15836);
+
+result.ApplicationArguments = f_1599_15810_15835(this);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1599,15709,15851);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,15875,15900);
+
+f_1599_15875_15899(
+            this, result);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1599,13449,15911);
+
+System.Management.Automation.Remoting.PSSessionOption
+f_1599_13540_13561()
+{
+var return_v = new System.Management.Automation.Remoting.PSSessionOption();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1599, 13540, 13561);
+return return_v;
+}
+
+
+System.Management.Automation.Remoting.ProxyAccessType
+f_1599_13658_13678(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.ProxyAccessType;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 13658, 13678);
+return return_v;
+}
+
+
+System.Management.Automation.Runspaces.AuthenticationMechanism
+f_1599_13722_13746(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.ProxyAuthentication;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 13722, 13746);
+return return_v;
+}
+
+
+System.Management.Automation.PSCredential
+f_1599_13786_13806(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.ProxyCredential;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 13786, 13806);
+return return_v;
+}
+
+
+System.Management.Automation.SwitchParameter
+f_1599_13850_13866(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.SkipCACheck;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 13850, 13866);
+return return_v;
+}
+
+
+System.Management.Automation.SwitchParameter
+f_1599_13902_13918(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.SkipCNCheck;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 13902, 13918);
+return return_v;
+}
+
+
+System.Management.Automation.SwitchParameter
+f_1599_13973_13997(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.SkipRevocationCheck;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 13973, 13997);
+return return_v;
+}
+
+
+bool
+f_1599_14016_14042(int?
+this_param)
+{
+var return_v = this_param.HasValue;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14016, 14042);
+return return_v;
+}
+
+
+int
+f_1599_14128_14151(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14128, 14151);
+return return_v;
+}
+
+
+System.Management.Automation.SwitchParameter
+f_1599_14206_14223(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.NoEncryption;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14206, 14223);
+return return_v;
+}
+
+
+System.Management.Automation.SwitchParameter
+f_1599_14256_14269(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.UseUTF16;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14256, 14269);
+return return_v;
+}
+
+
+System.Management.Automation.SwitchParameter
+f_1599_14310_14331(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.IncludePortInSPN;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14310, 14331);
+return return_v;
+}
+
+
+bool
+f_1599_14394_14422(int?
+this_param)
+{
+var return_v = this_param.HasValue;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14394, 14422);
+return return_v;
+}
+
+
+int
+f_1599_14499_14522(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.MaximumRedirection;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14499, 14522);
+return return_v;
+}
+
+
+System.Globalization.CultureInfo
+f_1599_14854_14866(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.Culture ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14854, 14866);
+return return_v;
+}
+
+
+System.Globalization.CultureInfo
+f_1599_14925_14937(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.Culture;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14925, 14937);
+return return_v;
+}
+
+
+System.Globalization.CultureInfo
+f_1599_14973_14987(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.UICulture ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 14973, 14987);
+return return_v;
+}
+
+
+System.Globalization.CultureInfo
+f_1599_15048_15062(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.UICulture;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15048, 15062);
+return return_v;
+}
+
+
+bool
+f_1599_15098_15119(int?
+this_param)
+{
+var return_v = this_param.HasValue;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15098, 15119);
+return return_v;
+}
+
+
+int
+f_1599_15200_15218(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15200, 15218);
+return return_v;
+}
+
+
+bool
+f_1599_15255_15278(int?
+this_param)
+{
+var return_v = this_param.HasValue;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15255, 15278);
+return return_v;
+}
+
+
+int
+f_1599_15361_15381(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15361, 15381);
+return return_v;
+}
+
+
+bool
+f_1599_15418_15439(int?
+this_param)
+{
+var return_v = this_param.HasValue;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15418, 15439);
+return return_v;
+}
+
+
+int
+f_1599_15520_15538(int?
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15520, 15538);
+return return_v;
+}
+
+
+System.Management.Automation.Runspaces.OutputBufferingMode
+f_1599_15600_15619()
+{
+var return_v = OutputBufferingMode;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15600, 15619);
+return return_v;
+}
+
+
+int
+f_1599_15669_15692()
+{
+var return_v = MaxConnectionRetryCount;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15669, 15692);
+return return_v;
+}
+
+
+System.Management.Automation.PSPrimitiveDictionary
+f_1599_15713_15738(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.ApplicationArguments ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15713, 15738);
+return return_v;
+}
+
+
+System.Management.Automation.PSPrimitiveDictionary
+f_1599_15810_15835(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param)
+{
+var return_v = this_param.ApplicationArguments;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1599, 15810, 15835);
+return return_v;
+}
+
+
+int
+f_1599_15875_15899(Microsoft.PowerShell.Commands.NewPSSessionOptionCommand
+this_param,System.Management.Automation.Remoting.PSSessionOption
+sendToPipeline)
+{
+this_param.WriteObject( (object)sendToPipeline);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1599, 15875, 15899);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1599,13449,15911);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,13449,15911);
+}
+		}
 
-        private bool _includePortInSPN;
+public NewPSSessionOptionCommand()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1599,482,15948);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,1231,1250);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,2426,2514);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,2633,2723);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3213,3240);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3689,3708);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,3906,3987);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,4177,4290);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,4492,4696);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,5544,5556);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,6607,6621);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,7388,7400);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,7767,7898);
+this.ProxyAccessType = ProxyAccessType.None;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,8518,8640);
+this.ProxyAuthentication = AuthenticationMechanism.Negotiate;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,8786,8912);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,9684,9696);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,10266,10278);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,10888,10908);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,11554,11571);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,12164,12177);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,12768,12777);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1599,13248,13265);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1599,482,15948);
 
-#endif
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,482,15948);
+}
 
-        #endregion
 
-        #region Implementation
+static NewPSSessionOptionCommand()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1599,482,15948);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1599,482,15948);
 
-        /// <summary>
-        /// Performs initialization of cmdlet execution.
-        /// </summary>
-        protected override void BeginProcessing()
-        {
-            PSSessionOption result = new PSSessionOption();
-            // Begin: WSMan specific options
-#if !UNIX
-            result.ProxyAccessType = this.ProxyAccessType;
-            result.ProxyAuthentication = this.ProxyAuthentication;
-            result.ProxyCredential = this.ProxyCredential;
-#endif
-            result.SkipCACheck = this.SkipCACheck;
-            result.SkipCNCheck = this.SkipCNCheck;
-#if !UNIX
-            result.SkipRevocationCheck = this.SkipRevocationCheck;
-            if (_operationtimeout.HasValue)
-            {
-                result.OperationTimeout = TimeSpan.FromMilliseconds(_operationtimeout.Value);
-            }
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1599,482,15948);
+}
 
-            result.NoEncryption = this.NoEncryption;
-            result.UseUTF16 = this.UseUTF16;
-            result.IncludePortInSPN = this.IncludePortInSPN;
-            // End: WSMan specific options
-            if (_maximumRedirection.HasValue)
-            {
-                result.MaximumConnectionRedirectionCount = this.MaximumRedirection;
-            }
-
-            result.NoCompression = this.NoCompression.IsPresent;
-            result.NoMachineProfile = this.NoMachineProfile.IsPresent;
-
-            result.MaximumReceivedDataSizePerCommand = _maxRecvdDataSizePerCommand;
-            result.MaximumReceivedObjectSize = _maxRecvdObjectSize;
-
-            if (this.Culture != null)
-            {
-                result.Culture = this.Culture;
-            }
-
-            if (this.UICulture != null)
-            {
-                result.UICulture = this.UICulture;
-            }
-
-            if (_openTimeout.HasValue)
-            {
-                result.OpenTimeout = TimeSpan.FromMilliseconds(_openTimeout.Value);
-            }
-
-            if (_cancelTimeout.HasValue)
-            {
-                result.CancelTimeout = TimeSpan.FromMilliseconds(_cancelTimeout.Value);
-            }
-
-            if (_idleTimeout.HasValue)
-            {
-                result.IdleTimeout = TimeSpan.FromMilliseconds(_idleTimeout.Value);
-            }
-
-            result.OutputBufferingMode = OutputBufferingMode;
-
-            result.MaxConnectionRetryCount = MaxConnectionRetryCount;
-
-            if (this.ApplicationArguments != null)
-            {
-                result.ApplicationArguments = this.ApplicationArguments;
-            }
-#endif
-
-            this.WriteObject(result);
-        }
-
-        #endregion Methods
-    }
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1599,482,15948);
+}
 }

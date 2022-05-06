@@ -56,160 +56,486 @@ namespace System.Management.Automation
         // that needs to be updated to use the new enum.
         // We can't use a "MaxValue" enum because it's value would preclude ever adding a new enum.
     }
-
-    /// <summary>
-    /// Class used to store a tab completion or Intellisense result.
-    /// </summary>
     public class CompletionResult
     {
-        /// <summary>
-        /// Text to be used as the auto completion result.
-        /// </summary>
         private string _completionText;
 
-        /// <summary>
-        /// Text to be displayed in a list.
-        /// </summary>
         private string _listItemText;
 
-        /// <summary>
-        /// The text for the tooltip with details to be displayed about the object.
-        /// </summary>
         private string _toolTip;
 
-        /// <summary>
-        /// Type of completion result.
-        /// </summary>
         private CompletionResultType _resultType;
 
-        /// <summary>
-        /// Private member for null instance.
-        /// </summary>
-        private static readonly CompletionResult s_nullInstance = new CompletionResult();
+        private static readonly CompletionResult s_nullInstance;
 
-        /// <summary>
-        /// Gets the text to be used as the auto completion result.
-        /// </summary>
         public string CompletionText
         {
             get
             {
-                if (this == s_nullInstance)
+                try
                 {
-                    throw PSTraceSource.NewInvalidOperationException(TabCompletionStrings.NoAccessToProperties);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1444, 3057, 3330);
 
-                return _completionText;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3093, 3272) || true) && (this == s_nullInstance)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 3093, 3272);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3161, 3253);
+
+                        throw f_1444_3167_3252(f_1444_3210_3251());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 3093, 3272);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3292, 3315);
+
+                    return _completionText;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1444, 3057, 3330);
+
+                    string
+                    f_1444_3210_3251()
+                    {
+                        var return_v = TabCompletionStrings.NoAccessToProperties;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1444, 3210, 3251);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.PSInvalidOperationException
+                    f_1444_3167_3252(string
+                    resourceString, params object[]
+                    args)
+                    {
+                        var return_v = PSTraceSource.NewInvalidOperationException(resourceString, args);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 3167, 3252);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 3004, 3341);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 3004, 3341);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the text to be displayed in a list.
-        /// </summary>
         public string ListItemText
         {
             get
             {
-                if (this == s_nullInstance)
+                try
                 {
-                    throw PSTraceSource.NewInvalidOperationException(TabCompletionStrings.NoAccessToProperties);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1444, 3505, 3776);
 
-                return _listItemText;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3541, 3720) || true) && (this == s_nullInstance)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 3541, 3720);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3609, 3701);
+
+                        throw f_1444_3615_3700(f_1444_3658_3699());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 3541, 3720);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3740, 3761);
+
+                    return _listItemText;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1444, 3505, 3776);
+
+                    string
+                    f_1444_3658_3699()
+                    {
+                        var return_v = TabCompletionStrings.NoAccessToProperties;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1444, 3658, 3699);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.PSInvalidOperationException
+                    f_1444_3615_3700(string
+                    resourceString, params object[]
+                    args)
+                    {
+                        var return_v = PSTraceSource.NewInvalidOperationException(resourceString, args);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 3615, 3700);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 3454, 3787);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 3454, 3787);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the type of completion result.
-        /// </summary>
         public CompletionResultType ResultType
         {
             get
             {
-                if (this == s_nullInstance)
+                try
                 {
-                    throw PSTraceSource.NewInvalidOperationException(TabCompletionStrings.NoAccessToProperties);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1444, 3958, 4227);
 
-                return _resultType;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 3994, 4173) || true) && (this == s_nullInstance)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 3994, 4173);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 4062, 4154);
+
+                        throw f_1444_4068_4153(f_1444_4111_4152());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 3994, 4173);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 4193, 4212);
+
+                    return _resultType;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1444, 3958, 4227);
+
+                    string
+                    f_1444_4111_4152()
+                    {
+                        var return_v = TabCompletionStrings.NoAccessToProperties;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1444, 4111, 4152);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.PSInvalidOperationException
+                    f_1444_4068_4153(string
+                    resourceString, params object[]
+                    args)
+                    {
+                        var return_v = PSTraceSource.NewInvalidOperationException(resourceString, args);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 4068, 4153);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 3895, 4238);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 3895, 4238);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the text for the tooltip with details to be displayed about the object.
-        /// </summary>
         public string ToolTip
         {
             get
             {
-                if (this == s_nullInstance)
+                try
                 {
-                    throw PSTraceSource.NewInvalidOperationException(TabCompletionStrings.NoAccessToProperties);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1444, 4433, 4699);
 
-                return _toolTip;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 4469, 4648) || true) && (this == s_nullInstance)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 4469, 4648);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 4537, 4629);
+
+                        throw f_1444_4543_4628(f_1444_4586_4627());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 4469, 4648);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 4668, 4684);
+
+                    return _toolTip;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1444, 4433, 4699);
+
+                    string
+                    f_1444_4586_4627()
+                    {
+                        var return_v = TabCompletionStrings.NoAccessToProperties;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1444, 4586, 4627);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.PSInvalidOperationException
+                    f_1444_4543_4628(string
+                    resourceString, params object[]
+                    args)
+                    {
+                        var return_v = PSTraceSource.NewInvalidOperationException(resourceString, args);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 4543, 4628);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 4387, 4710);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 4387, 4710);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the null instance of type CompletionResult.
-        /// </summary>
         internal static CompletionResult Null
         {
-            get { return s_nullInstance; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1444, 4893, 4923);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 4899, 4921);
+
+                    return s_nullInstance;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1444, 4893, 4923);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 4831, 4934);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 4831, 4934);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the CompletionResult class.
-        /// </summary>
-        /// <param name="completionText">The text to be used as the auto completion result.</param>
-        /// <param name="listItemText">The text to be displayed in a list.</param>
-        /// <param name="resultType">The type of completion result.</param>
-        /// <param name="toolTip">The text for the tooltip with details to be displayed about the object.</param>
         public CompletionResult(string completionText, string listItemText, CompletionResultType resultType, string toolTip)
         {
-            if (string.IsNullOrEmpty(completionText))
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("completionText");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1444, 5441, 6463);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2232, 2247);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2367, 2380);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2540, 2548);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2677, 2688);
 
-            if (string.IsNullOrEmpty(listItemText))
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 5582, 5734) || true) && (f_1444_5586_5622(completionText))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 5582, 5734);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 5656, 5719);
+
+                    throw f_1444_5662_5718("completionText");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 5582, 5734);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 5750, 5898) || true) && (f_1444_5754_5788(listItemText))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 5750, 5898);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 5822, 5883);
+
+                    throw f_1444_5828_5882("listItemText");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 5750, 5898);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 5914, 6134) || true) && (resultType < CompletionResultType.Text || (DynAbs.Tracing.TraceSender.Expression_False(1444, 5918, 6008) || resultType > CompletionResultType.DynamicKeyword))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 5914, 6134);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6042, 6119);
+
+                    throw f_1444_6048_6118("resultType", resultType);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 5914, 6134);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6150, 6288) || true) && (f_1444_6154_6183(toolTip))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1444, 6150, 6288);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6217, 6273);
+
+                    throw f_1444_6223_6272("toolTip");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1444, 6150, 6288);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6304, 6337);
+
+                _completionText = completionText;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6351, 6380);
+
+                _listItemText = listItemText;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6394, 6413);
+
+                _toolTip = toolTip;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 6427, 6452);
+
+                _resultType = resultType;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1444, 5441, 6463);
+            }
+            catch
             {
-                throw PSTraceSource.NewArgumentNullException("listItemText");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 5441, 6463);
+                throw;
             }
-
-            if (resultType < CompletionResultType.Text || resultType > CompletionResultType.DynamicKeyword)
+            finally
             {
-                throw PSTraceSource.NewArgumentOutOfRangeException("resultType", resultType);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 5441, 6463);
             }
-
-            if (string.IsNullOrEmpty(toolTip))
-            {
-                throw PSTraceSource.NewArgumentNullException("toolTip");
-            }
-
-            _completionText = completionText;
-            _listItemText = listItemText;
-            _toolTip = toolTip;
-            _resultType = resultType;
         }
 
-        /// <summary>
-        /// Initializes a new instance of this class internally if the result out of TabExpansion is a string.
-        /// </summary>
-        /// <param name="completionText">Completion text.</param>
         public CompletionResult(string completionText)
-            : this(completionText, completionText, CompletionResultType.Text, completionText)
+        : this(f_1444_6768_6782_C(completionText), completionText, CompletionResultType.Text, completionText)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1444, 6701, 6864);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1444, 6701, 6864);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 6701, 6864);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 6701, 6864);
+            }
         }
 
-        /// <summary>
-        /// An null instance of CompletionResult.
-        /// </summary>
-        /// <remarks>
-        /// This can be used in argument completion, to indicate that the completion attempt has gone through the
-        /// native command argument completion methods.
-        /// </remarks>
-        private CompletionResult() { }
+        private CompletionResult()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1444, 7193, 7223);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2232, 2247);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2367, 2380);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2540, 2548);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2677, 2688);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1444, 7193, 7223);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1444, 7193, 7223);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 7193, 7223);
+            }
+        }
+
+        static CompletionResult()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1444, 2064, 7230);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1444, 2836, 2875);
+            s_nullInstance = f_1444_2853_2875();
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1444, 2064, 7230);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1444, 2064, 7230);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1444, 2064, 7230);
+
+        static System.Management.Automation.CompletionResult
+        f_1444_2853_2875()
+        {
+            var return_v = new System.Management.Automation.CompletionResult();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 2853, 2875);
+            return return_v;
+        }
+
+
+        bool
+        f_1444_5586_5622(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 5586, 5622);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1444_5662_5718(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 5662, 5718);
+            return return_v;
+        }
+
+
+        bool
+        f_1444_5754_5788(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 5754, 5788);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1444_5828_5882(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 5828, 5882);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentOutOfRangeException
+        f_1444_6048_6118(string
+        paramName, System.Management.Automation.CompletionResultType
+        actualValue)
+        {
+            var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 6048, 6118);
+            return return_v;
+        }
+
+
+        bool
+        f_1444_6154_6183(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 6154, 6183);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1444_6223_6272(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1444, 6223, 6272);
+            return return_v;
+        }
+
+
+        static string
+        f_1444_6768_6782_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1444, 6701, 6864);
+            return return_v;
+        }
+
     }
 }

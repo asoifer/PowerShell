@@ -9,22 +9,57 @@ using Microsoft.Win32;
 
 #pragma warning disable 1591, 1572, 1571, 1573, 1587, 1570, 0067
 
-#region PS_STUBS
 // Include PS types that are not needed for PowerShell on CSS
 
 namespace System.Management.Automation
 {
-    #region PSTransaction
-
-    /// <summary>
-    /// We don't need PSTransaction related types on CSS because System.Transactions
-    /// namespace is not available in CoreCLR.
-    /// </summary>
     public sealed class PSTransactionContext : IDisposable
     {
-        internal PSTransactionContext(Internal.PSTransactionManager transactionManager) { }
+        internal PSTransactionContext(Internal.PSTransactionManager transactionManager)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 678, 761);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 678, 761);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 678, 761);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 678, 761);
+            }
+        }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 773, 798);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 773, 798);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 773, 798);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 773, 798);
+            }
+        }
+
+        static PSTransactionContext()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 607, 805);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 607, 805);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 607, 805);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 607, 805);
     }
 
     /// <summary>
@@ -49,85 +84,231 @@ namespace System.Management.Automation
         Never
     }
 
-    #endregion PSTransaction
 }
 
 namespace System.Management.Automation.Internal
 {
-    /// <summary>
-    /// We don't need PSTransaction related types on CSS because System.Transactions
-    /// namespace is not available in CoreCLR.
-    /// </summary>
     internal sealed class PSTransactionManager : IDisposable
     {
-        /// <summary>
-        /// Determines if you have a transaction that you can set active and work on.
-        /// </summary>
-        /// <remarks>
-        /// Always return false in CoreCLR
-        /// </remarks>
         internal bool HasTransaction
         {
             get
             {
-                return false;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 1965, 2029);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 2001, 2014);
+
+                    return false;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 1965, 2029);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 1912, 2040);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 1912, 2040);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Determines if the last transaction has been committed.
-        /// </summary>
         internal bool IsLastTransactionCommitted
         {
             get
             {
-                throw new NotImplementedException("IsLastTransactionCommitted");
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 2232, 2347);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 2268, 2332);
+
+                    throw f_1076_2274_2331("IsLastTransactionCommitted");
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 2232, 2347);
+
+                    System.NotImplementedException
+                    f_1076_2274_2331(string
+                    message)
+                    {
+                        var return_v = new System.NotImplementedException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 2274, 2331);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 2167, 2358);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 2167, 2358);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Determines if the last transaction has been rolled back.
-        /// </summary>
         internal bool IsLastTransactionRolledBack
         {
             get
             {
-                throw new NotImplementedException("IsLastTransactionRolledBack");
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 2553, 2669);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 2589, 2654);
+
+                    throw f_1076_2595_2653("IsLastTransactionRolledBack");
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 2553, 2669);
+
+                    System.NotImplementedException
+                    f_1076_2595_2653(string
+                    message)
+                    {
+                        var return_v = new System.NotImplementedException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 2595, 2653);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 2487, 2680);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 2487, 2680);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the rollback preference for the active transaction.
-        /// </summary>
         internal RollbackSeverity RollbackPreference
         {
             get
             {
-                throw new NotImplementedException("RollbackPreference");
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 2878, 2985);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 2914, 2970);
+
+                    throw f_1076_2920_2969("RollbackPreference");
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 2878, 2985);
+
+                    System.NotImplementedException
+                    f_1076_2920_2969(string
+                    message)
+                    {
+                        var return_v = new System.NotImplementedException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 2920, 2969);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 2809, 2996);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 2809, 2996);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Called by engine APIs to ensure they are protected from
-        /// ambient transactions.
-        /// </summary>
-        /// <remarks>
-        /// Always return null in CoreCLR
-        /// </remarks>
         internal static IDisposable GetEngineProtectionScope()
         {
-            return null;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 3249, 3351);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 3328, 3340);
+
+                return null;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 3249, 3351);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 3249, 3351);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 3249, 3351);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Aborts the current transaction, no matter how many subscribers are part of it.
-        /// </summary>
         internal void Rollback(bool suppressErrors)
         {
-            throw new NotImplementedException("Rollback");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 3502, 3627);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 3570, 3616);
+
+                throw f_1076_3576_3615("Rollback");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 3502, 3627);
+
+                System.NotImplementedException
+                f_1076_3576_3615(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 3576, 3615);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 3502, 3627);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 3502, 3627);
+            }
         }
 
-        public void Dispose() { }
+        public void Dispose()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 3639, 3664);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 3639, 3664);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 3639, 3664);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 3639, 3664);
+            }
+        }
+
+        public PSTransactionManager()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 1614, 3671);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 1614, 3671);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 1614, 3671);
+        }
+
+
+        static PSTransactionManager()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 1614, 3671);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 1614, 3671);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 1614, 3671);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 1614, 3671);
     }
 }
 
@@ -136,244 +317,604 @@ namespace System.Management.Automation.ComInterop
     using System.Dynamic;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-
-    /// <summary>
-    /// Provides helper methods to bind COM objects dynamically.
-    /// </summary>
-    /// <remarks>
-    /// COM is not supported in core powershell. So this is a stub type.
-    /// </remarks>
     internal static class ComBinder
     {
-        /// <summary>
-        /// Tries to perform binding of the dynamic get index operation.
-        /// </summary>
-        /// <remarks>
-        /// Always return false in CoreCLR.
-        /// </remarks>
         public static bool TryBindGetIndex(GetIndexBinder binder, DynamicMetaObject instance, DynamicMetaObject[] args, out DynamicMetaObject result)
         {
-            result = null;
-            return false;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 4318, 4536);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 4484, 4498);
+
+                result = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 4512, 4525);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 4318, 4536);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 4318, 4536);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 4318, 4536);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Tries to perform binding of the dynamic set index operation.
-        /// </summary>
-        /// <remarks>
-        /// Always return false in CoreCLR.
-        /// </remarks>
         public static bool TryBindSetIndex(SetIndexBinder binder, DynamicMetaObject instance, DynamicMetaObject[] args, DynamicMetaObject value, out DynamicMetaObject result)
         {
-            result = null;
-            return false;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 4761, 5004);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 4952, 4966);
+
+                result = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 4980, 4993);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 4761, 5004);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 4761, 5004);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 4761, 5004);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Tries to perform binding of the dynamic get member operation.
-        /// </summary>
-        /// <remarks>
-        /// Always return false in CoreCLR.
-        /// </remarks>
         public static bool TryBindGetMember(GetMemberBinder binder, DynamicMetaObject instance, out DynamicMetaObject result)
         {
-            result = null;
-            return false;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 5230, 5424);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 5372, 5386);
+
+                result = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 5400, 5413);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 5230, 5424);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 5230, 5424);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 5230, 5424);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Tries to perform binding of the dynamic set member operation.
-        /// </summary>
-        /// <remarks>
-        /// Always return false in CoreCLR.
-        /// </remarks>
         public static bool TryBindSetMember(SetMemberBinder binder, DynamicMetaObject instance, DynamicMetaObject value, out DynamicMetaObject result)
         {
-            result = null;
-            return false;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 5650, 5869);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 5817, 5831);
+
+                result = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 5845, 5858);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 5650, 5869);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 5650, 5869);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 5650, 5869);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Tries to perform binding of the dynamic invoke member operation.
-        /// </summary>
-        /// <remarks>
-        /// Always return false in CoreCLR.
-        /// </remarks>
         public static bool TryBindInvokeMember(InvokeMemberBinder binder, bool isSetProperty, DynamicMetaObject instance, DynamicMetaObject[] args, out DynamicMetaObject result)
         {
-            result = null;
-            return false;
-        }
-    }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 6098, 6344);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 6292, 6306);
 
-#pragma warning disable 618 // Disable obsolete warning about VarEnum in CoreCLR
+                result = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 6320, 6333);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 6098, 6344);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 6098, 6344);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 6098, 6344);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        static ComBinder()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 4057, 6351);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 4057, 6351);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 4057, 6351);
+        }
+
+    }
     internal class VarEnumSelector
     {
-        private static readonly Dictionary<VarEnum, Type> _ComToManagedPrimitiveTypes = CreateComToManagedPrimitiveTypes();
+        private static readonly Dictionary<VarEnum, Type> _ComToManagedPrimitiveTypes;
 
         internal static Type GetTypeForVarEnum(VarEnum vt)
         {
-            Type type;
-
-            switch (vt)
+            try
             {
-                // VarEnums which can be used in VARIANTs, but which cannot occur in a TYPEDESC
-                case VarEnum.VT_EMPTY:
-                case VarEnum.VT_NULL:
-                case VarEnum.VT_RECORD:
-                    type = typeof(void);
-                    break;
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 6615, 8364);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 6690, 6700);
 
-                // VarEnums which are not used in VARIANTs, but which can occur in a TYPEDESC
-                case VarEnum.VT_VOID:
-                    type = typeof(void);
-                    break;
+                Type
+                type
+                = default(Type);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 6716, 8325);
 
-                case VarEnum.VT_HRESULT:
-                    type = typeof(int);
-                    break;
+                switch (vt)
+                {
 
-                case ((VarEnum)37): // VT_INT_PTR:
-                    type = typeof(IntPtr);
-                    break;
+                    case VarEnum.VT_EMPTY:
+                    case VarEnum.VT_NULL:
+                    case VarEnum.VT_RECORD:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 6981, 7001);
 
-                case ((VarEnum)38): // VT_UINT_PTR:
-                    type = typeof(UIntPtr);
-                    break;
+                        type = typeof(void);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7023, 7029);
 
-                case VarEnum.VT_SAFEARRAY:
-                case VarEnum.VT_CARRAY:
-                    type = typeof(Array);
-                    break;
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
 
-                case VarEnum.VT_LPSTR:
-                case VarEnum.VT_LPWSTR:
-                    type = typeof(string);
-                    break;
+                    case VarEnum.VT_VOID:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 7187, 7207);
 
-                case VarEnum.VT_PTR:
-                case VarEnum.VT_USERDEFINED:
-                    type = typeof(object);
-                    break;
+                        type = typeof(void);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7229, 7235);
 
-                // For VarEnums that can be used in VARIANTs and well as TYPEDESCs, just use VarEnumSelector
-                default:
-                    type = VarEnumSelector.GetManagedMarshalType(vt);
-                    break;
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    case VarEnum.VT_HRESULT:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 7301, 7320);
+
+                        type = typeof(int);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7342, 7348);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    case ((VarEnum)37): // VT_INT_PTR:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 7424, 7446);
+
+                        type = typeof(IntPtr);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7468, 7474);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    case ((VarEnum)38): // VT_UINT_PTR:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 7551, 7574);
+
+                        type = typeof(UIntPtr);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7596, 7602);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    case VarEnum.VT_SAFEARRAY:
+                    case VarEnum.VT_CARRAY:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 7711, 7732);
+
+                        type = typeof(Array);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7754, 7760);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    case VarEnum.VT_LPSTR:
+                    case VarEnum.VT_LPWSTR:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 7865, 7887);
+
+                        type = typeof(string);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 7909, 7915);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    case VarEnum.VT_PTR:
+                    case VarEnum.VT_USERDEFINED:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 8023, 8045);
+
+                        type = typeof(object);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 8067, 8073);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+
+                    default:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 6716, 8325);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 8233, 8282);
+
+                        type = f_1076_8240_8281(vt);
+                        DynAbs.Tracing.TraceSender.TraceBreak(1076, 8304, 8310);
+
+                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 6716, 8325);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 8341, 8353);
+
+                return type;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 6615, 8364);
+
+                System.Type
+                f_1076_8240_8281(System.Runtime.InteropServices.VarEnum
+                varEnum)
+                {
+                    var return_v = VarEnumSelector.GetManagedMarshalType(varEnum);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 8240, 8281);
+                    return return_v;
+                }
+
             }
-
-            return type;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 6615, 8364);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 6615, 8364);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Gets the managed type that an object needs to be coverted to in order for it to be able
-        /// to be represented as a Variant.
-        ///
-        /// In general, there is a many-to-many mapping between Type and VarEnum. However, this method
-        /// returns a simple mapping that is needed for the current implementation. The reason for the
-        /// many-to-many relation is:
-        /// 1. Int32 maps to VT_I4 as well as VT_ERROR, and Decimal maps to VT_DECIMAL and VT_CY. However,
-        ///    this changes if you throw the wrapper types into the mix.
-        /// 2. There is no Type to represent COM types. __ComObject is a private type, and Object is too
-        ///    general.
-        /// </summary>
         internal static Type GetManagedMarshalType(VarEnum varEnum)
         {
-            Debug.Assert((varEnum & VarEnum.VT_BYREF) == 0);
-
-            if (varEnum == VarEnum.VT_CY)
+            try
             {
-                return typeof(CurrencyWrapper);
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 9142, 10142);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9226, 9274);
 
-            if (IsPrimitiveType(varEnum))
+                f_1076_9226_9273((varEnum & VarEnum.VT_BYREF) == 0);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9290, 9398) || true) && (varEnum == VarEnum.VT_CY)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 9290, 9398);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9352, 9383);
+
+                    return typeof(CurrencyWrapper);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 9290, 9398);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9414, 9535) || true) && (f_1076_9418_9442(varEnum))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 9414, 9535);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9476, 9520);
+
+                    return f_1076_9483_9519(_ComToManagedPrimitiveTypes, varEnum);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 9414, 9535);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9551, 10131);
+
+                switch (varEnum)
+                {
+
+                    case VarEnum.VT_EMPTY:
+                    case VarEnum.VT_NULL:
+                    case VarEnum.VT_UNKNOWN:
+                    case VarEnum.VT_DISPATCH:
+                    case VarEnum.VT_VARIANT:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 9551, 10131);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9810, 9832);
+
+                        return typeof(object);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 9551, 10131);
+
+                    case VarEnum.VT_ERROR:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 9551, 10131);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9896, 9924);
+
+                        return typeof(ErrorWrapper);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 9551, 10131);
+
+                    default:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 9551, 10131);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 9974, 10116);
+
+                        throw f_1076_9980_10115(f_1076_10010_10114(f_1076_10024_10071(), f_1076_10073_10104(), varEnum));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 9551, 10131);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 9142, 10142);
+
+                int
+                f_1076_9226_9273(bool
+                condition)
+                {
+                    Debug.Assert(condition);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 9226, 9273);
+                    return 0;
+                }
+
+
+                bool
+                f_1076_9418_9442(System.Runtime.InteropServices.VarEnum
+                varEnum)
+                {
+                    var return_v = IsPrimitiveType(varEnum);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 9418, 9442);
+                    return return_v;
+                }
+
+
+                System.Type
+                f_1076_9483_9519(System.Collections.Generic.Dictionary<System.Runtime.InteropServices.VarEnum, System.Type>
+                this_param, System.Runtime.InteropServices.VarEnum
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1076, 9483, 9519);
+                    return return_v;
+                }
+
+
+                System.Globalization.CultureInfo
+                f_1076_10024_10071()
+                {
+                    var return_v = System.Globalization.CultureInfo.CurrentCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1076, 10024, 10071);
+                    return return_v;
+                }
+
+
+                string
+                f_1076_10073_10104()
+                {
+                    var return_v = ParserStrings.UnexpectedVarEnum;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1076, 10073, 10104);
+                    return return_v;
+                }
+
+
+                string
+                f_1076_10010_10114(System.Globalization.CultureInfo
+                provider, string
+                format, System.Runtime.InteropServices.VarEnum
+                arg0)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, (object)arg0);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 10010, 10114);
+                    return return_v;
+                }
+
+
+                System.InvalidOperationException
+                f_1076_9980_10115(string
+                message)
+                {
+                    var return_v = new System.InvalidOperationException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 9980, 10115);
+                    return return_v;
+                }
+
+            }
+            catch
             {
-                return _ComToManagedPrimitiveTypes[varEnum];
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 9142, 10142);
+                throw;
             }
-
-            switch (varEnum)
+            finally
             {
-                case VarEnum.VT_EMPTY:
-                case VarEnum.VT_NULL:
-                case VarEnum.VT_UNKNOWN:
-                case VarEnum.VT_DISPATCH:
-                case VarEnum.VT_VARIANT:
-                    return typeof(object);
-
-                case VarEnum.VT_ERROR:
-                    return typeof(ErrorWrapper);
-
-                default:
-                    throw new InvalidOperationException(string.Format(System.Globalization.CultureInfo.CurrentCulture, ParserStrings.UnexpectedVarEnum, varEnum));
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 9142, 10142);
             }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         private static Dictionary<VarEnum, Type> CreateComToManagedPrimitiveTypes()
         {
-            Dictionary<VarEnum, Type> dict = new Dictionary<VarEnum, Type>();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 10154, 11606);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10254, 10319);
 
-            // *** BEGIN GENERATED CODE ***
-            // generated by function: gen_ComToManagedPrimitiveTypes from: generate_comdispatch.py
+                Dictionary<VarEnum, Type>
+                dict = f_1076_10287_10318()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10482, 10518);
 
-            dict[VarEnum.VT_I1] = typeof(sbyte);
-            dict[VarEnum.VT_I2] = typeof(Int16);
-            dict[VarEnum.VT_I4] = typeof(Int32);
-            dict[VarEnum.VT_I8] = typeof(Int64);
-            dict[VarEnum.VT_UI1] = typeof(byte);
-            dict[VarEnum.VT_UI2] = typeof(UInt16);
-            dict[VarEnum.VT_UI4] = typeof(UInt32);
-            dict[VarEnum.VT_UI8] = typeof(UInt64);
-            dict[VarEnum.VT_INT] = typeof(Int32);
-            dict[VarEnum.VT_UINT] = typeof(UInt32);
-            dict[VarEnum.VT_PTR] = typeof(IntPtr);
-            dict[VarEnum.VT_BOOL] = typeof(bool);
-            dict[VarEnum.VT_R4] = typeof(Single);
-            dict[VarEnum.VT_R8] = typeof(double);
-            dict[VarEnum.VT_DECIMAL] = typeof(decimal);
-            dict[VarEnum.VT_DATE] = typeof(DateTime);
-            dict[VarEnum.VT_BSTR] = typeof(string);
-            dict[VarEnum.VT_CLSID] = typeof(Guid);
+                dict[VarEnum.VT_I1] = typeof(sbyte);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10532, 10568);
 
-            // *** END GENERATED CODE ***
+                dict[VarEnum.VT_I2] = typeof(Int16);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10582, 10618);
 
-            dict[VarEnum.VT_CY] = typeof(CurrencyWrapper);
-            dict[VarEnum.VT_ERROR] = typeof(ErrorWrapper);
+                dict[VarEnum.VT_I4] = typeof(Int32);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10632, 10668);
 
-            return dict;
+                dict[VarEnum.VT_I8] = typeof(Int64);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10682, 10718);
+
+                dict[VarEnum.VT_UI1] = typeof(byte);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10732, 10770);
+
+                dict[VarEnum.VT_UI2] = typeof(UInt16);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10784, 10822);
+
+                dict[VarEnum.VT_UI4] = typeof(UInt32);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10836, 10874);
+
+                dict[VarEnum.VT_UI8] = typeof(UInt64);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10888, 10925);
+
+                dict[VarEnum.VT_INT] = typeof(Int32);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10939, 10978);
+
+                dict[VarEnum.VT_UINT] = typeof(UInt32);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 10992, 11030);
+
+                dict[VarEnum.VT_PTR] = typeof(IntPtr);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11044, 11081);
+
+                dict[VarEnum.VT_BOOL] = typeof(bool);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11095, 11132);
+
+                dict[VarEnum.VT_R4] = typeof(Single);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11146, 11183);
+
+                dict[VarEnum.VT_R8] = typeof(double);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11197, 11240);
+
+                dict[VarEnum.VT_DECIMAL] = typeof(decimal);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11254, 11295);
+
+                dict[VarEnum.VT_DATE] = typeof(DateTime);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11309, 11348);
+
+                dict[VarEnum.VT_BSTR] = typeof(string);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11362, 11400);
+
+                dict[VarEnum.VT_CLSID] = typeof(Guid);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11461, 11507);
+
+                dict[VarEnum.VT_CY] = typeof(CurrencyWrapper);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11521, 11567);
+
+                dict[VarEnum.VT_ERROR] = typeof(ErrorWrapper);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11583, 11595);
+
+                return dict;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 10154, 11606);
+
+                System.Collections.Generic.Dictionary<System.Runtime.InteropServices.VarEnum, System.Type>
+                f_1076_10287_10318()
+                {
+                    var return_v = new System.Collections.Generic.Dictionary<System.Runtime.InteropServices.VarEnum, System.Type>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 10287, 10318);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 10154, 11606);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 10154, 11606);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Primitive types are the basic COM types. It includes valuetypes like ints, but also reference types
-        /// like BStrs. It does not include composite types like arrays and user-defined COM types (IUnknown/IDispatch).
-        /// </summary>
         internal static bool IsPrimitiveType(VarEnum varEnum)
         {
-            switch (varEnum)
+            try
             {
-                case VarEnum.VT_I1:
-                case VarEnum.VT_I2:
-                case VarEnum.VT_I4:
-                case VarEnum.VT_I8:
-                case VarEnum.VT_UI1:
-                case VarEnum.VT_UI2:
-                case VarEnum.VT_UI4:
-                case VarEnum.VT_UI8:
-                case VarEnum.VT_INT:
-                case VarEnum.VT_UINT:
-                case VarEnum.VT_BOOL:
-                case VarEnum.VT_ERROR:
-                case VarEnum.VT_R4:
-                case VarEnum.VT_R8:
-                case VarEnum.VT_DECIMAL:
-                case VarEnum.VT_CY:
-                case VarEnum.VT_DATE:
-                case VarEnum.VT_BSTR:
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 11900, 12787);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 11978, 12747);
 
-                    return true;
+                switch (varEnum)
+                {
+
+                    case VarEnum.VT_I1:
+                    case VarEnum.VT_I2:
+                    case VarEnum.VT_I4:
+                    case VarEnum.VT_I8:
+                    case VarEnum.VT_UI1:
+                    case VarEnum.VT_UI2:
+                    case VarEnum.VT_UI4:
+                    case VarEnum.VT_UI8:
+                    case VarEnum.VT_INT:
+                    case VarEnum.VT_UINT:
+                    case VarEnum.VT_BOOL:
+                    case VarEnum.VT_ERROR:
+                    case VarEnum.VT_R4:
+                    case VarEnum.VT_R8:
+                    case VarEnum.VT_DECIMAL:
+                    case VarEnum.VT_CY:
+                    case VarEnum.VT_DATE:
+                    case VarEnum.VT_BSTR:
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1076, 11978, 12747);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 12720, 12732);
+
+                        return true;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1076, 11978, 12747);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 12763, 12776);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 11900, 12787);
             }
-
-            return false;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 11900, 12787);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 11900, 12787);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
+
+        public VarEnumSelector()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 6441, 12794);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 6441, 12794);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 6441, 12794);
+        }
+
+
+        static VarEnumSelector()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 6441, 12794);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 6538, 6602);
+            _ComToManagedPrimitiveTypes = f_1076_6568_6602();
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 6441, 12794);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 6441, 12794);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 6441, 12794);
+
+        static System.Collections.Generic.Dictionary<System.Runtime.InteropServices.VarEnum, System.Type>
+        f_1076_6568_6602()
+        {
+            var return_v = CreateComToManagedPrimitiveTypes();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 6568, 6602);
+            return return_v;
+        }
+
     }
 #pragma warning restore 618
 }
@@ -382,71 +923,403 @@ namespace Microsoft.PowerShell.Commands.Internal
 {
     using System.Security.AccessControl;
     using System.Security.Principal;
-
-    #region TransactedRegistryKey
-
     internal abstract class TransactedRegistryKey : IDisposable
     {
-        public void Dispose() { }
+        public void Dispose()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 13082, 13107);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 13082, 13107);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 13082, 13107);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13082, 13107);
+            }
+        }
 
         public void SetValue(string name, object value)
         {
-            throw new NotImplementedException("SetValue(string name, obj value) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 13119, 13344);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 13191, 13333);
+
+                throw f_1076_13197_13332("SetValue(string name, obj value) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 13119, 13344);
+
+                System.NotImplementedException
+                f_1076_13197_13332(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 13197, 13332);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 13119, 13344);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13119, 13344);
+            }
         }
 
         public void SetValue(string name, object value, RegistryValueKind valueKind)
         {
-            throw new NotImplementedException("SetValue(string name, obj value, RegistryValueKind valueKind) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 13356, 13639);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 13457, 13628);
+
+                throw f_1076_13463_13627("SetValue(string name, obj value, RegistryValueKind valueKind) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 13356, 13639);
+
+                System.NotImplementedException
+                f_1076_13463_13627(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 13463, 13627);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 13356, 13639);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13356, 13639);
+            }
         }
 
         public string[] GetValueNames()
         {
-            throw new NotImplementedException("GetValueNames() is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 13651, 13843);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 13707, 13832);
+
+                throw f_1076_13713_13831("GetValueNames() is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 13651, 13843);
+
+                System.NotImplementedException
+                f_1076_13713_13831(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 13713, 13831);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 13651, 13843);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13651, 13843);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public void DeleteValue(string name)
         {
-            throw new NotImplementedException("DeleteValue(string name) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 13855, 14061);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 13916, 14050);
+
+                throw f_1076_13922_14049("DeleteValue(string name) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 13855, 14061);
+
+                System.NotImplementedException
+                f_1076_13922_14049(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 13922, 14049);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 13855, 14061);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13855, 14061);
+            }
         }
 
         public string[] GetSubKeyNames()
         {
-            throw new NotImplementedException("GetSubKeyNames() is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 14073, 14267);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 14130, 14256);
+
+                throw f_1076_14136_14255("GetSubKeyNames() is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 14073, 14267);
+
+                System.NotImplementedException
+                f_1076_14136_14255(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 14136, 14255);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 14073, 14267);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 14073, 14267);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public TransactedRegistryKey CreateSubKey(string subkey)
         {
-            throw new NotImplementedException("CreateSubKey(string subkey) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 14279, 14508);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 14360, 14497);
+
+                throw f_1076_14366_14496("CreateSubKey(string subkey) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 14279, 14508);
+
+                System.NotImplementedException
+                f_1076_14366_14496(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 14366, 14496);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 14279, 14508);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 14279, 14508);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public TransactedRegistryKey OpenSubKey(string name, bool writable)
         {
-            throw new NotImplementedException("OpenSubKey(string name, bool writeable) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 14520, 14772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 14612, 14761);
+
+                throw f_1076_14618_14760("OpenSubKey(string name, bool writeable) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 14520, 14772);
+
+                System.NotImplementedException
+                f_1076_14618_14760(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 14618, 14760);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 14520, 14772);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 14520, 14772);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public void DeleteSubKeyTree(string subkey)
         {
-            throw new NotImplementedException("DeleteSubKeyTree(string subkey) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 14784, 15004);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 14852, 14993);
+
+                throw f_1076_14858_14992("DeleteSubKeyTree(string subkey) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 14784, 15004);
+
+                System.NotImplementedException
+                f_1076_14858_14992(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 14858, 14992);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 14784, 15004);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 14784, 15004);
+            }
         }
 
         public object GetValue(string name)
         {
-            throw new NotImplementedException("GetValue(string name) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 15016, 15218);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 15076, 15207);
+
+                throw f_1076_15082_15206("GetValue(string name) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 15016, 15218);
+
+                System.NotImplementedException
+                f_1076_15082_15206(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 15082, 15206);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 15016, 15218);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 15016, 15218);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public object GetValue(string name, object defaultValue, RegistryValueOptions options)
         {
-            throw new NotImplementedException("GetValue(string name, object defaultValue, RegistryValueOptions options) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 15230, 15534);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 15341, 15523);
+
+                throw f_1076_15347_15522("GetValue(string name, object defaultValue, RegistryValueOptions options) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 15230, 15534);
+
+                System.NotImplementedException
+                f_1076_15347_15522(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 15347, 15522);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 15230, 15534);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 15230, 15534);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public RegistryValueKind GetValueKind(string name)
         {
-            throw new NotImplementedException("GetValueKind(string name) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 15546, 15767);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 15621, 15756);
+
+                throw f_1076_15627_15755("GetValueKind(string name) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 15546, 15767);
+
+                System.NotImplementedException
+                f_1076_15627_15755(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 15627, 15755);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 15546, 15767);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 15546, 15767);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public void Close()
         {
-            throw new NotImplementedException("Close() is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 15779, 15951);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 15823, 15940);
+
+                throw f_1076_15829_15939("Close() is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 15779, 15951);
+
+                System.NotImplementedException
+                f_1076_15829_15939(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 15829, 15939);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 15779, 15951);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 15779, 15951);
+            }
         }
 
         public abstract string Name { get; }
@@ -455,31 +1328,155 @@ namespace Microsoft.PowerShell.Commands.Internal
 
         public void SetAccessControl(ObjectSecurity securityDescriptor)
         {
-            throw new NotImplementedException("SetAccessControl(ObjectSecurity securityDescriptor) is not implemented. TransactedRegistry related APIs should not be used.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 16063, 16323);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 16151, 16312);
+
+                throw f_1076_16157_16311("SetAccessControl(ObjectSecurity securityDescriptor) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 16063, 16323);
+
+                System.NotImplementedException
+                f_1076_16157_16311(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 16157, 16311);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 16063, 16323);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 16063, 16323);
+            }
         }
 
         public ObjectSecurity GetAccessControl(AccessControlSections includeSections)
         {
-            throw new NotImplementedException("GetAccessControl(AccessControlSections includeSections) is not implemented. TransactedRegistry related APIs should not be used.");
-        }
-    }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 16335, 16613);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 16437, 16602);
 
+                throw f_1076_16443_16601("GetAccessControl(AccessControlSections includeSections) is not implemented. TransactedRegistry related APIs should not be used.");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 16335, 16613);
+
+                System.NotImplementedException
+                f_1076_16443_16601(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 16443, 16601);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 16335, 16613);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 16335, 16613);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public TransactedRegistryKey()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 13006, 16620);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 13006, 16620);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13006, 16620);
+        }
+
+
+        static TransactedRegistryKey()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 13006, 16620);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 13006, 16620);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 13006, 16620);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 13006, 16620);
+    }
     internal sealed class TransactedRegistry
     {
         internal static readonly TransactedRegistryKey LocalMachine;
-        internal static readonly TransactedRegistryKey ClassesRoot;
-        internal static readonly TransactedRegistryKey Users;
-        internal static readonly TransactedRegistryKey CurrentConfig;
-        internal static readonly TransactedRegistryKey CurrentUser;
-    }
 
+        internal static readonly TransactedRegistryKey ClassesRoot;
+
+        internal static readonly TransactedRegistryKey Users;
+
+        internal static readonly TransactedRegistryKey CurrentConfig;
+
+        internal static readonly TransactedRegistryKey CurrentUser;
+
+        public TransactedRegistry()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 16628, 17024);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 16628, 17024);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 16628, 17024);
+        }
+
+
+        static TransactedRegistry()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 16628, 17024);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 16732, 16744);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 16802, 16813);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 16871, 16876);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 16934, 16947);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 17005, 17016);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 16628, 17024);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 16628, 17024);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 16628, 17024);
+    }
     internal sealed class TransactedRegistrySecurity : ObjectSecurity
     {
         public override Type AccessRightType
         {
             get
             {
-                throw new NotImplementedException();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 17175, 17262);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 17211, 17247);
+
+                    throw f_1076_17217_17246();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 17175, 17262);
+
+                    System.NotImplementedException
+                    f_1076_17217_17246()
+                    {
+                        var return_v = new System.NotImplementedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 17217, 17246);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 17114, 17273);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17114, 17273);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
@@ -487,7 +1484,33 @@ namespace Microsoft.PowerShell.Commands.Internal
         {
             get
             {
-                throw new NotImplementedException();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 17345, 17432);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 17381, 17417);
+
+                    throw f_1076_17387_17416();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 17345, 17432);
+
+                    System.NotImplementedException
+                    f_1076_17387_17416()
+                    {
+                        var return_v = new System.NotImplementedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 17387, 17416);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 17285, 17443);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17285, 17443);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
@@ -495,469 +1518,437 @@ namespace Microsoft.PowerShell.Commands.Internal
         {
             get
             {
-                throw new NotImplementedException();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 17514, 17601);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 17550, 17586);
+
+                    throw f_1076_17556_17585();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 17514, 17601);
+
+                    System.NotImplementedException
+                    f_1076_17556_17585()
+                    {
+                        var return_v = new System.NotImplementedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 17556, 17585);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 17455, 17612);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17455, 17612);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 17624, 17905);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 17858, 17894);
+
+                throw f_1076_17864_17893();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 17624, 17905);
+
+                System.NotImplementedException
+                f_1076_17864_17893()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 17864, 17893);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 17624, 17905);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17624, 17905);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 17917, 18190);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 18143, 18179);
+
+                throw f_1076_18149_18178();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 17917, 18190);
+
+                System.NotImplementedException
+                f_1076_18149_18178()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 18149, 18178);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 17917, 18190);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17917, 18190);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         protected override bool ModifyAccess(AccessControlModification modification, AccessRule rule, out bool modified)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 18202, 18386);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 18339, 18375);
+
+                throw f_1076_18345_18374();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 18202, 18386);
+
+                System.NotImplementedException
+                f_1076_18345_18374()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 18345, 18374);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 18202, 18386);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 18202, 18386);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         protected override bool ModifyAudit(AccessControlModification modification, AuditRule rule, out bool modified)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 18398, 18580);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 18533, 18569);
+
+                throw f_1076_18539_18568();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 18398, 18580);
+
+                System.NotImplementedException
+                f_1076_18539_18568()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 18539, 18568);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 18398, 18580);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 18398, 18580);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
+
+        public TransactedRegistrySecurity()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 17032, 18587);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 17032, 18587);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17032, 18587);
+        }
+
+
+        static TransactedRegistrySecurity()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 17032, 18587);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 17032, 18587);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 17032, 18587);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 17032, 18587);
     }
 
-    #endregion TransactedRegistryKey
 }
 
-#endregion PS_STUBS
 
 // -- Will port the actual PS component [update: Not necessarily porting all PS components listed here]
-#region TEMPORARY
 
 namespace System.Management.Automation.Internal
 {
     using Microsoft.PowerShell.Commands;
-
-    /// <summary>
-    /// TODO:CORECLR - The actual PowerShellModuleAssemblyAnalyzer cannot be enabled because we don't have 'System.Reflection.Metadata.dll' in our branch yet.
-    /// This stub will be removed once we enable the actual 'PowerShellModuleAssemblyAnalyzer'.
-    /// </summary>
     internal static class PowerShellModuleAssemblyAnalyzer
     {
         internal static BinaryAnalysisResult AnalyzeModuleAssembly(string path, out Version assemblyVersion)
         {
-            assemblyVersion = new Version("0.0.0.0");
-            return null;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 19250, 19453);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 19375, 19416);
+
+                assemblyVersion = f_1076_19393_19415("0.0.0.0");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 19430, 19442);
+
+                return null;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 19250, 19453);
+
+                System.Version
+                f_1076_19393_19415(string
+                version)
+                {
+                    var return_v = new System.Version(version);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 19393, 19415);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 19250, 19453);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 19250, 19453);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
+
+        static PowerShellModuleAssemblyAnalyzer()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 19179, 19460);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 19179, 19460);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 19179, 19460);
+        }
+
     }
 }
 
 namespace System.Management.Automation
 {
     using Microsoft.Win32;
-
-    #region RegistryStringResourceIndirect
-
     internal sealed class RegistryStringResourceIndirect : IDisposable
     {
         internal static RegistryStringResourceIndirect GetResourceIndirectReader()
         {
-            return new RegistryStringResourceIndirect();
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 19673, 19827);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 19772, 19816);
 
-        /// <summary>
-        /// Dispose method unloads the app domain that was
-        /// created in the constructor.
-        /// </summary>
-        public void Dispose()
-        {
-        }
+                return f_1076_19779_19815();
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 19673, 19827);
 
-        internal string GetResourceStringIndirect(
-            string assemblyName,
-            string modulePath,
-            string baseNameRIDPair)
-        {
-            throw new NotImplementedException("RegistryStringResourceIndirect.GetResourceStringIndirect - 3 params");
-        }
+                System.Management.Automation.RegistryStringResourceIndirect
+                f_1076_19779_19815()
+                {
+                    var return_v = new System.Management.Automation.RegistryStringResourceIndirect();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 19779, 19815);
+                    return return_v;
+                }
 
-        internal string GetResourceStringIndirect(
-            RegistryKey key,
-            string valueName,
-            string assemblyName,
-            string modulePath)
-        {
-            throw new NotImplementedException("RegistryStringResourceIndirect.GetResourceStringIndirect - 4 params");
-        }
-    }
-
-    #endregion
-}
-
-#if UNIX
-
-namespace System.Management.Automation.Security
-{
-    /// <summary>
-    /// Application white listing security policies only affect Windows OSs.
-    /// </summary>
-    internal sealed class SystemPolicy
-    {
-        private SystemPolicy() { }
-
-        /// <summary>
-        /// Gets the system lockdown policy.
-        /// </summary>
-        /// <remarks>Always return SystemEnforcementMode.None in CSS (trusted)</remarks>
-        public static SystemEnforcementMode GetSystemLockdownPolicy()
-        {
-            return SystemEnforcementMode.None;
-        }
-
-        /// <summary>
-        /// Gets lockdown policy as applied to a file.
-        /// </summary>
-        /// <remarks>Always return SystemEnforcementMode.None in CSS (trusted)</remarks>
-        public static SystemEnforcementMode GetLockdownPolicy(string path, System.Runtime.InteropServices.SafeHandle handle)
-        {
-            return SystemEnforcementMode.None;
-        }
-
-        internal static bool IsClassInApprovedList(Guid clsid)
-        {
-            throw new NotImplementedException("SystemPolicy.IsClassInApprovedList not implemented");
-        }
-    }
-
-    /// <summary>
-    /// How the policy is being enforced.
-    /// </summary>
-    internal enum SystemEnforcementMode
-    {
-        /// Not enforced at all
-        None = 0,
-
-        /// Enabled - allow, but audit
-        Audit = 1,
-
-        /// Enabled, enforce restrictions
-        Enforce = 2
-    }
-}
-
-// Porting note: Tracing is absolutely not available on Linux
-namespace System.Management.Automation.Tracing
-{
-    using System.Diagnostics.CodeAnalysis;
-    using System.Management.Automation.Internal;
-
-    /// <summary>
-    /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
-    public abstract class EtwActivity
-    {
-        /// <summary>
-        /// </summary>
-        /// <param name="activityId"></param>
-        /// <returns></returns>
-        public static bool SetActivityId(Guid activityId)
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public static Guid CreateActivityId()
-        {
-            return Guid.Empty;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <returns></returns>
-        public static Guid GetActivityId()
-        {
-            return Guid.Empty;
-        }
-    }
-
-    public enum PowerShellTraceTask
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-
-        /// <summary>
-        /// CreateRunspace.
-        /// </summary>
-        CreateRunspace = 1,
-
-        /// <summary>
-        /// ExecuteCommand.
-        /// </summary>
-        ExecuteCommand = 2,
-
-        /// <summary>
-        /// Serialization.
-        /// </summary>
-        Serialization = 3,
-
-        /// <summary>
-        /// PowerShellConsoleStartup.
-        /// </summary>
-        PowerShellConsoleStartup = 4,
-    }
-
-    /// <summary>
-    /// Defines Keywords.
-    /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1028")]
-    [Flags]
-    public enum PowerShellTraceKeywords : ulong
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-
-        /// <summary>
-        /// Runspace.
-        /// </summary>
-        Runspace = 0x1,
-
-        /// <summary>
-        /// Pipeline.
-        /// </summary>
-        Pipeline = 0x2,
-
-        /// <summary>
-        /// Protocol.
-        /// </summary>
-        Protocol = 0x4,
-
-        /// <summary>
-        /// Transport.
-        /// </summary>
-        Transport = 0x8,
-
-        /// <summary>
-        /// Host.
-        /// </summary>
-        Host = 0x10,
-
-        /// <summary>
-        /// Cmdlets.
-        /// </summary>
-        Cmdlets = 0x20,
-
-        /// <summary>
-        /// Serializer.
-        /// </summary>
-        Serializer = 0x40,
-
-        /// <summary>
-        /// Session.
-        /// </summary>
-        Session = 0x80,
-
-        /// <summary>
-        /// ManagedPlugIn.
-        /// </summary>
-        ManagedPlugIn = 0x100,
-
-        /// <summary>
-        /// </summary>
-        UseAlwaysDebug = 0x2000000000000000,
-
-        /// <summary>
-        /// </summary>
-        UseAlwaysOperational = 0x8000000000000000,
-
-        /// <summary>
-        /// </summary>
-        UseAlwaysAnalytic = 0x4000000000000000,
-    }
-
-    public sealed partial class Tracer : System.Management.Automation.Tracing.EtwActivity
-    {
-        static Tracer() { }
-
-        public void EndpointRegistered(string endpointName, string endpointType, string registeredBy)
-        {
-        }
-
-        public void EndpointUnregistered(string endpointName, string unregisteredBy)
-        {
-        }
-
-        public void EndpointDisabled(string endpointName, string disabledBy)
-        {
-        }
-
-        public void EndpointEnabled(string endpointName, string enabledBy)
-        {
-        }
-
-        public void EndpointModified(string endpointName, string modifiedBy)
-        {
-        }
-
-        public void BeginContainerParentJobExecution(Guid containerParentJobInstanceId)
-        {
-        }
-
-        public void BeginProxyJobExecution(Guid proxyJobInstanceId)
-        {
-        }
-
-        public void ProxyJobRemoteJobAssociation(Guid proxyJobInstanceId, Guid containerParentJobInstanceId)
-        {
-        }
-
-        public void EndProxyJobExecution(Guid proxyJobInstanceId)
-        {
-        }
-
-        public void BeginProxyJobEventHandler(Guid proxyJobInstanceId)
-        {
-        }
-
-        public void EndProxyJobEventHandler(Guid proxyJobInstanceId)
-        {
-        }
-
-        public void BeginProxyChildJobEventHandler(Guid proxyChildJobInstanceId)
-        {
-        }
-
-        public void EndContainerParentJobExecution(Guid containerParentJobInstanceId)
-        {
-        }
-    }
-
-    public sealed class PowerShellTraceSource : IDisposable
-    {
-        internal PowerShellTraceSource(PowerShellTraceTask task, PowerShellTraceKeywords keywords)
-        {
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 19673, 19827);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 19673, 19827);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         public void Dispose()
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 19987, 20030);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 19987, 20030);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 19987, 20030);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 19987, 20030);
+            }
         }
 
-        public bool WriteMessage(string message)
+        internal string GetResourceStringIndirect(
+                    string assemblyName,
+                    string modulePath,
+                    string baseNameRIDPair)
         {
-            return false;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 20042, 20328);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 20212, 20317);
+
+                throw f_1076_20218_20316("RegistryStringResourceIndirect.GetResourceStringIndirect - 3 params");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 20042, 20328);
+
+                System.NotImplementedException
+                f_1076_20218_20316(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 20218, 20316);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 20042, 20328);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 20042, 20328);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="message1"></param>
-        /// <param name="message2"></param>
-        /// <returns></returns>
-        public bool WriteMessage(string message1, string message2)
+        internal string GetResourceStringIndirect(
+                    RegistryKey key,
+                    string valueName,
+                    string assemblyName,
+                    string modulePath)
         {
-            return false;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1076, 20340, 20650);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 20534, 20639);
+
+                throw f_1076_20540_20638("RegistryStringResourceIndirect.GetResourceStringIndirect - 4 params");
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1076, 20340, 20650);
+
+                System.NotImplementedException
+                f_1076_20540_20638(string
+                message)
+                {
+                    var return_v = new System.NotImplementedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1076, 20540, 20638);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 20340, 20650);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 20340, 20650);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="message"></param>
-        /// <param name="instanceId"></param>
-        /// <returns></returns>
-        public bool WriteMessage(string message, Guid instanceId)
+        public RegistryStringResourceIndirect()
         {
-            return false;
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1076, 19590, 20657);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1076, 19590, 20657);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 19590, 20657);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="className"></param>
-        /// <param name="methodName"></param>
-        /// <param name="workflowId"></param>
-        /// <param name="message"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public void WriteMessage(string className, string methodName, Guid workflowId, string message, params string[] parameters)
+
+        static RegistryStringResourceIndirect()
         {
-            return;
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 19590, 20657);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 19590, 20657);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 19590, 20657);
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="className"></param>
-        /// <param name="methodName"></param>
-        /// <param name="workflowId"></param>
-        /// <param name="job"></param>
-        /// <param name="message"></param>
-        /// <param name="parameters"></param>
-        /// <returns></returns>
-        public void WriteMessage(string className, string methodName, Guid workflowId, Job job, string message, params string[] parameters)
-        {
-            return;
-        }
-
-        public bool TraceException(Exception exception)
-        {
-            return false;
-        }
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1076, 19590, 20657);
     }
 
-    /// <summary>
-    /// TraceSourceFactory will return an instance of TraceSource every time GetTraceSource method is called.
-    /// </summary>
-    public static class PowerShellTraceSourceFactory
-    {
-        /// <summary>
-        /// Returns an instance of BaseChannelWriter.
-        /// If the Etw is not supported by the platform it will return NullWriter.Instance
-        ///
-        /// A Task and a set of Keywords can be specified in the GetTraceSource method (See overloads).
-        ///    The supplied task and keywords are used to pass to the Etw provider in case they are
-        /// not defined in the manifest file.
-        /// </summary>
-        public static PowerShellTraceSource GetTraceSource()
-        {
-            return new PowerShellTraceSource(PowerShellTraceTask.None, PowerShellTraceKeywords.None);
-        }
-
-        /// <summary>
-        /// Returns an instance of BaseChannelWriter.
-        /// If the Etw is not supported by the platform it will return NullWriter.Instance
-        ///
-        /// A Task and a set of Keywords can be specified in the GetTraceSource method (See overloads).
-        ///    The supplied task and keywords are used to pass to the Etw provider in case they are
-        /// not defined in the manifest file.
-        /// </summary>
-        public static PowerShellTraceSource GetTraceSource(PowerShellTraceTask task)
-        {
-            return new PowerShellTraceSource(task, PowerShellTraceKeywords.None);
-        }
-
-        /// <summary>
-        /// Returns an instance of BaseChannelWriter.
-        /// If the Etw is not supported by the platform it will return NullWriter.Instance
-        ///
-        /// A Task and a set of Keywords can be specified in the GetTraceSource method (See overloads).
-        ///    The supplied task and keywords are used to pass to the Etw provider in case they are
-        /// not defined in the manifest file.
-        /// </summary>
-        public static PowerShellTraceSource GetTraceSource(PowerShellTraceTask task, PowerShellTraceKeywords keywords)
-        {
-            return new PowerShellTraceSource(task, keywords);
-        }
-    }
 }
 
-#endif
 
 namespace Microsoft.PowerShell
 {
     internal static class NativeCultureResolver
     {
-        internal static void SetThreadUILanguage(Int16 langId) { }
+        internal static void SetThreadUILanguage(Int16 langId)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 31130, 31188);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 31130, 31188);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 31130, 31188);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 31130, 31188);
+            }
+        }
 
         internal static CultureInfo UICulture
         {
             get
             {
-                return CultureInfo.CurrentUICulture; // this is actually wrong, but until we port "hostifaces\NativeCultureResolver.cs" to Nano, this will do and will help avoid build break.
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 31262, 31487);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 31298, 31334);
+
+                    return f_1076_31305_31333();
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 31262, 31487);
+
+                    System.Globalization.CultureInfo
+                    f_1076_31305_31333()
+                    {
+                        var return_v = CultureInfo.CurrentUICulture;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1076, 31305, 31333);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 31200, 31498);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 31200, 31498);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
@@ -965,12 +1956,46 @@ namespace Microsoft.PowerShell
         {
             get
             {
-                return CultureInfo.CurrentCulture; // this is actually wrong, but until we port "hostifaces\NativeCultureResolver.cs" to Nano, this will do and will help avoid build break.
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1076, 31570, 31793);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1076, 31606, 31640);
+
+                    return f_1076_31613_31639();
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1076, 31570, 31793);
+
+                    System.Globalization.CultureInfo
+                    f_1076_31613_31639()
+                    {
+                        var return_v = CultureInfo.CurrentCulture;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1076, 31613, 31639);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1076, 31510, 31804);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 31510, 31804);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
+
+        static NativeCultureResolver()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1076, 31070, 31811);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1076, 31070, 31811);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1076, 31070, 31811);
+        }
+
     }
 }
 
-#endregion TEMPORARY
 
 #pragma warning restore 1591, 1572, 1571, 1573, 1587, 1570, 0067

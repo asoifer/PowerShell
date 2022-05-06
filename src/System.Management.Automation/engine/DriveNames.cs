@@ -3,35 +3,40 @@
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Holds the strings used as the default drive names for all the
-    /// default providers.
-    /// </summary>
     internal static class DriveNames
     {
-        /// <summary>
-        /// The default VariableProvider drive name.
-        /// </summary>
-        internal const string VariableDrive = "Variable";
+        internal const string
+        VariableDrive = "Variable"
+        ;
 
-        /// <summary>
-        /// The default EnvironmentProvider drive name.
-        /// </summary>
-        internal const string EnvironmentDrive = "Env";
+        internal const string
+        EnvironmentDrive = "Env"
+        ;
 
-        /// <summary>
-        /// The default AliasProvider drive name.
-        /// </summary>
-        internal const string AliasDrive = "Alias";
+        internal const string
+        AliasDrive = "Alias"
+        ;
 
-        /// <summary>
-        /// The default FunctionProvider drive name.
-        /// </summary>
-        internal const string FunctionDrive = "Function";
+        internal const string
+        FunctionDrive = "Function"
+        ;
 
-        /// <summary>
-        /// The Temp drive name.
-        /// </summary>
-        internal const string TempDrive = "Temp";
+        internal const string
+        TempDrive = "Temp"
+        ;
+
+        static DriveNames()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1265, 285, 1103);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1265, 457, 483);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1265, 622, 646);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1265, 779, 799);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1265, 935, 961);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1265, 1077, 1095);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1265, 285, 1103);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1265, 285, 1103);
+        }
+
     }
 }

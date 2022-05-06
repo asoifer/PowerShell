@@ -23,162 +23,374 @@ namespace System.Management.Automation
         /// </summary>
         Internal
     }
+public class AuthorizationManager
+{
+public AuthorizationManager(string shellId)
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1337,1769,1866);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,1927,1958);
+this._policyCheckLock = f_1337_1946_1958();DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,5716,5748);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,1837,1855);
 
-    /// <summary>
-    /// Defines the base class for an authorization manager of a Runspace.
-    ///
-    /// An authorization manager helps a host control and restrict the
-    /// execution of commands.  For each of the command types listed in
-    /// the <see cref="System.Management.Automation.CommandTypes"/>
-    /// enumeration, the engine requests permission from the AuthorizationManager
-    /// to run the command.
-    ///
-    /// Extending this class requires that you override the ShouldRun method with
-    /// the logic specific to your needs.  The base class gives permission to run
-    /// every command.  The default
-    /// Microsoft.PowerShell.PSAuthorizationManager
-    /// provides a customized and much more complete authorization policy.
-    /// </summary>
-    public class AuthorizationManager
-    {
-        #region constructor
+ShellId = shellId;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1337,1769,1866);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1337,1769,1866);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1337,1769,1866);
+}
+		}
 
-        /// <summary>
-        /// Creates an instance of authorization manager using specified shellID.
-        /// </summary>
-        /// <param name="shellId">
-        /// </param>
-        public AuthorizationManager(string shellId)
-        {
-            ShellId = shellId;
-        }
+private object _policyCheckLock ;
 
-        #endregion constructor
-
-        private object _policyCheckLock = new object();
-
-        #region methods to use internally
-
-        /// <summary>
-        /// Determine if we should run the specified file.
-        /// </summary>
-        /// <param name="commandInfo">Info on entity to be run.</param>
-        /// <param name="origin">The dispatch origin of a command.</param>
-        /// <param name="host">Allows access to the host.</param>
-        /// <remarks>
-        /// This method throws SecurityException in case running is not allowed.
-        /// </remarks>
-        /// <exception cref="System.Management.Automation.PSSecurityException">
-        /// If the derived security manager threw an exception or returned
-        /// false with a reason.
-        /// </exception>
-        internal void ShouldRunInternal(CommandInfo commandInfo,
+internal void ShouldRunInternal(CommandInfo commandInfo,
                                         CommandOrigin origin,
                                         PSHost host)
+		{
+			try
         {
-#if UNIX
-            // TODO:PSL this is a workaround since the exception below
-            // hides the internal issue of what's going on in terms of
-            // execution policy.
-            // On non-Windows platform Set/Get-ExecutionPolicy throw
-            // PlatformNotSupportedException
-            return;
-#else
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1337,2685,5593);
 
-#if DEBUG
-            // If we are debugging, let the unit tests swap the file from beneath us
-            if (commandInfo.CommandType == CommandTypes.ExternalScript)
-            {
-                while (Environment.GetEnvironmentVariable("PSCommandDiscoveryPreDelay") != null) { System.Threading.Thread.Sleep(100); }
-            }
-#endif
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3314,3541) || true) && (f_1337_3318_3341(commandInfo)== CommandTypes.ExternalScript)
+)
 
-            bool result = false;
-            bool defaultCatch = false;
-            Exception authorizationManagerException = null;
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,3314,3541);
+try {
+while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3406,3526) || true) && (f_1337_3413_3477("PSCommandDiscoveryPreDelay")!= null)
+) 
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,3406,3526);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3489,3524);
+
+f_1337_3489_3523(100);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,3406,3526);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1337,3406,3526);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1337,3406,3526);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1337,3314,3541);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3565,3585);
+
+bool 
+result = false
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3599,3625);
+
+bool 
+defaultCatch = false
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3639,3686);
+
+Exception 
+authorizationManagerException = null
+;
 
             try
             {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3744,3760);
                 lock (_policyCheckLock)
                 {
-                    result = this.ShouldRun(commandInfo, origin, host, out authorizationManagerException);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,3802,3888);
+
+result = f_1337_3811_3887(this, commandInfo, origin, host, out authorizationManagerException);
                 }
 
-#if DEBUG
-                // If we are debugging, let the unit tests swap the file from beneath us
-                if (commandInfo.CommandType == CommandTypes.ExternalScript)
-                {
-                    while (Environment.GetEnvironmentVariable("PSCommandDiscoveryPostDelay") != null) { System.Threading.Thread.Sleep(100); }
-                }
-#endif
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4028,4268) || true) && (f_1337_4032_4055(commandInfo)== CommandTypes.ExternalScript)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4028,4268);
+try {
+while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4128,4249) || true) && (f_1337_4135_4200("PSCommandDiscoveryPostDelay")!= null)
+) 
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4128,4249);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4212,4247);
+
+f_1337_4212_4246(100);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4128,4249);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1337,4128,4249);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1337,4128,4249);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4028,4268);
+}
             }
             catch (Exception e) // Catch-all OK. 3rd party callout
             {
-                authorizationManagerException = e;
+DynAbs.Tracing.TraceSender.TraceEnterCatch(1337,4305,4514);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4392,4426);
 
-                defaultCatch = true;
-                result = false;
+authorizationManagerException = e;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4446,4466);
+
+defaultCatch = true;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4484,4499);
+
+result = false;
+DynAbs.Tracing.TraceSender.TraceExitCatch(1337,4305,4514);
             }
 
-            if (!result)
-            {
-                if (authorizationManagerException != null)
-                {
-                    if (authorizationManagerException is PSSecurityException)
-                    {
-                        throw authorizationManagerException;
-                    }
-                    else
-                    {
-                        string message = authorizationManagerException.Message;
-                        if (defaultCatch)
-                        {
-                            message = AuthorizationManagerBase.AuthorizationManagerDefaultFailureReason;
-                        }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4530,5574) || true) && (!result)
+)
 
-                        PSSecurityException securityException = new PSSecurityException(message, authorizationManagerException);
-                        throw securityException;
-                    }
-                }
-                else
-                {
-                    throw new PSSecurityException(AuthorizationManagerBase.AuthorizationManagerDefaultFailureReason);
-                }
-            }
-#endif
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4530,5574);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4575,5559) || true) && (authorizationManagerException != null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4575,5559);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4658,5361) || true) && (authorizationManagerException is PSSecurityException)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4658,5361);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4764,4800);
+
+throw authorizationManagerException;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4658,5361);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4658,5361);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4898,4953);
+
+string 
+message = f_1337_4915_4952(authorizationManagerException)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,4979,5156) || true) && (defaultCatch)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4979,5156);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,5053,5129);
+
+message = f_1337_5063_5128();
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4979,5156);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,5184,5288);
+
+PSSecurityException 
+securityException = f_1337_5224_5287(message, authorizationManagerException)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,5314,5338);
+
+throw securityException;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4658,5361);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4575,5559);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1337,4575,5559);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,5443,5540);
+
+throw f_1337_5449_5539(f_1337_5473_5538());
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4575,5559);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1337,4530,5574);
+}
+DynAbs.Tracing.TraceSender.TraceExitMethod(1337,2685,5593);
+
+System.Management.Automation.CommandTypes
+f_1337_3318_3341(System.Management.Automation.CommandInfo
+this_param)
+{
+var return_v = this_param.CommandType ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1337, 3318, 3341);
+return return_v;
+}
+
+
+string?
+f_1337_3413_3477(string
+variable)
+{
+var return_v = Environment.GetEnvironmentVariable( variable);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 3413, 3477);
+return return_v;
+}
+
+
+int
+f_1337_3489_3523(int
+millisecondsTimeout)
+{
+System.Threading.Thread.Sleep( millisecondsTimeout);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 3489, 3523);
+return 0;
+}
+
+
+bool
+f_1337_3811_3887(System.Management.Automation.AuthorizationManager
+this_param,System.Management.Automation.CommandInfo
+commandInfo,System.Management.Automation.CommandOrigin
+origin,System.Management.Automation.Host.PSHost
+host,out System.Exception
+reason)
+{
+var return_v = this_param.ShouldRun( commandInfo, origin, host, out reason);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 3811, 3887);
+return return_v;
+}
+
+
+System.Management.Automation.CommandTypes
+f_1337_4032_4055(System.Management.Automation.CommandInfo
+this_param)
+{
+var return_v = this_param.CommandType ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1337, 4032, 4055);
+return return_v;
+}
+
+
+string?
+f_1337_4135_4200(string
+variable)
+{
+var return_v = Environment.GetEnvironmentVariable( variable);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 4135, 4200);
+return return_v;
+}
+
+
+int
+f_1337_4212_4246(int
+millisecondsTimeout)
+{
+System.Threading.Thread.Sleep( millisecondsTimeout);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 4212, 4246);
+return 0;
+}
+
+
+string
+f_1337_4915_4952(System.Exception
+this_param)
+{
+var return_v = this_param.Message;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1337, 4915, 4952);
+return return_v;
+}
+
+
+string
+f_1337_5063_5128()
+{
+var return_v = AuthorizationManagerBase.AuthorizationManagerDefaultFailureReason;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1337, 5063, 5128);
+return return_v;
+}
+
+
+System.Management.Automation.PSSecurityException
+f_1337_5224_5287(string
+message,System.Exception
+innerException)
+{
+var return_v = new System.Management.Automation.PSSecurityException( message, innerException);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 5224, 5287);
+return return_v;
+}
+
+
+string
+f_1337_5473_5538()
+{
+var return_v = AuthorizationManagerBase.AuthorizationManagerDefaultFailureReason;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1337, 5473, 5538);
+return return_v;
+}
+
+
+System.Management.Automation.PSSecurityException
+f_1337_5449_5539(string
+message)
+{
+var return_v = new System.Management.Automation.PSSecurityException( message);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 5449, 5539);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1337,2685,5593);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1337,2685,5593);
+}
+		}
 
-        /// <summary>
-        /// Get the shell ID from the authorization manager...
-        /// </summary>
-        internal string ShellId { get; }
+internal string ShellId {get; }
 
-        #endregion methods to use internally
-
-        #region methods for derived class to override
-
-        /// <summary>
-        /// Determines if the host should run the command a specified by the CommandInfo parameter.
-        /// The default implementation gives permission to run every command.
-        /// </summary>
-        /// <param name="commandInfo">Information about the command to be run.</param>
-        /// <param name="origin">The origin of the command.</param>
-        /// <param name="host">The host running the command.</param>
-        /// <param name="reason">The reason for preventing execution, if applicable.</param>
-        /// <returns>True if the host should run the command.  False otherwise.</returns>
-        protected internal virtual bool ShouldRun(CommandInfo commandInfo,
+protected internal virtual bool ShouldRun(CommandInfo commandInfo,
                                                   CommandOrigin origin,
                                                   PSHost host,
                                                   out Exception reason)
+		{
+			try
         {
-            Dbg.Diagnostics.Assert(commandInfo != null, "caller should validate the parameter");
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1337,6504,6958);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,6805,6889);
 
-            reason = null;
+f_1337_6805_6888(commandInfo != null, "caller should validate the parameter");
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,6905,6919);
 
-            return true;
+reason = null;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1337,6935,6947);
+
+return true;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1337,6504,6958);
+
+int
+f_1337_6805_6888(bool
+condition,string
+whyThisShouldNeverHappen)
+{
+Dbg.Diagnostics.Assert( condition, whyThisShouldNeverHappen);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 6805, 6888);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1337,6504,6958);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1337,6504,6958);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion methods for derived class to override
-    }
+static AuthorizationManager()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1337,1500,7025);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1337,1500,7025);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1337,1500,7025);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1337,1500,7025);
+
+object
+f_1337_1946_1958()
+{
+var return_v = new object();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1337, 1946, 1958);
+return return_v;
+}
+
+}
 }
 

@@ -253,451 +253,1391 @@ namespace System.Management.Automation.Remoting
         IPCCloseTimedOut = 2106,
         IPCExceptionLaunchingProcess = 2107,
     }
-
-    /// <summary>
-    /// This static class defines the resource base name used by remoting errors.
-    /// It also provides a convenience method to get the localized strings.
-    /// </summary>
     internal static class PSRemotingErrorInvariants
     {
-        /// <summary>
-        /// This method is a convenience method to retrieve the localized string.
-        /// </summary>
-        /// <param name="resourceString">
-        /// This parameter holds the string in the resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required by the resource string formating information.
-        /// </param>
-        /// <returns>
-        /// The formatted localized string.
-        /// </returns>
         internal static string FormatResourceString(string resourceString, params object[] args)
         {
-            string resourceFormatedString = StringUtil.Format(resourceString, args);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1628, 11250, 11492);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 11363, 11435);
 
-            return resourceFormatedString;
+                string
+                resourceFormatedString = f_1628_11395_11434(resourceString, args)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 11451, 11481);
+
+                return resourceFormatedString;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1628, 11250, 11492);
+
+                string
+                f_1628_11395_11434(string
+                formatSpec, params object[]
+                o)
+                {
+                    var return_v = StringUtil.Format(formatSpec, o);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 11395, 11434);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 11250, 11492);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 11250, 11492);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
-    }
 
-    /// <summary>
-    /// This exception is used by remoting code to indicated a data structure handler related error.
-    /// </summary>
+        static PSRemotingErrorInvariants()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1628, 10689, 11499);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1628, 10689, 11499);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 10689, 11499);
+        }
+
+    }
     [Serializable]
     public class PSRemotingDataStructureException : RuntimeException
     {
-        #region Constructors
-
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
         public PSRemotingDataStructureException()
-            : base(PSRemotingErrorInvariants.FormatResourceString(RemotingErrorIdStrings.DefaultRemotingExceptionMessage, typeof(PSRemotingDataStructureException).FullName))
+        : base(f_1628_11924_12077_C(f_1628_11924_12077(f_1628_11971_12025(), f_1628_12027_12076(typeof(PSRemotingDataStructureException)))))
         {
-            SetDefaultErrorRecord();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 11862, 12138);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 12103, 12127);
+
+                f_1628_12103_12126(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 11862, 12138);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 11862, 12138);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 11862, 12138);
+            }
         }
 
-        /// <summary>
-        /// This constuctor takes a localized string as the error message.
-        /// </summary>
-        /// <param name="message">
-        /// A localized string as an error message.
-        /// </param>
         public PSRemotingDataStructureException(string message)
-            : base(message)
+        : base(f_1628_12460_12467_C(message))
         {
-            SetDefaultErrorRecord();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 12384, 12528);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 12493, 12517);
+
+                f_1628_12493_12516(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 12384, 12528);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 12384, 12528);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 12384, 12528);
+            }
         }
 
-        /// <summary>
-        /// This constuctor takes a localized string as the error message, and an inner exception.
-        /// </summary>
-        /// <param name="message">
-        /// A localized string as an error message.
-        /// </param>
-        /// <param name="innerException">
-        /// Inner exception.
-        /// </param>
         public PSRemotingDataStructureException(string message, Exception innerException)
-            : base(message, innerException)
+        : base(f_1628_12995_13002_C(message), innerException)
         {
-            SetDefaultErrorRecord();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 12893, 13079);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 13044, 13068);
+
+                f_1628_13044_13067(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 12893, 13079);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 12893, 13079);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 12893, 13079);
+            }
         }
 
-        /// <summary>
-        /// This constructor takes an error id and optional parameters.
-        /// </summary>
-        /// <param name="resourceString">
-        /// The resource string in the base resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required to format the resource string.
-        /// </param>
         internal PSRemotingDataStructureException(string resourceString, params object[] args)
-            : base(PSRemotingErrorInvariants.FormatResourceString(resourceString, args))
+        : base(f_1628_13571_13639_C(f_1628_13571_13639(resourceString, args)))
         {
-            SetDefaultErrorRecord();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 13464, 13700);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 13665, 13689);
+
+                f_1628_13665_13688(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 13464, 13700);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 13464, 13700);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 13464, 13700);
+            }
         }
 
-        /// <summary>
-        /// This constuctor takes an inner exception and an error id.
-        /// </summary>
-        /// <param name="innerException">
-        /// Inner exception.
-        /// </param>
-        /// <param name="resourceString">
-        /// The resource string in the base resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required to format the resource string.
-        /// </param>
         internal PSRemotingDataStructureException(Exception innerException, string resourceString, params object[] args)
-            : base(PSRemotingErrorInvariants.FormatResourceString(resourceString, args), innerException)
+        : base(f_1628_14311_14379_C(f_1628_14311_14379(resourceString, args)), innerException)
         {
-            SetDefaultErrorRecord();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 14178, 14456);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 14421, 14445);
+
+                f_1628_14421_14444(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 14178, 14456);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 14178, 14456);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 14178, 14456);
+            }
         }
 
-        /// <summary>
-        /// This constructor is required by serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
         protected PSRemotingDataStructureException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        : base(f_1628_14773_14777_C(info), context)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 14660, 14809);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 14660, 14809);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 14660, 14809);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 14660, 14809);
+            }
         }
 
-        #endregion Constructors
-
-        /// <summary>
-        /// Set the default ErrorRecord.
-        /// </summary>
         private void SetDefaultErrorRecord()
         {
-            SetErrorCategory(ErrorCategory.ResourceUnavailable);
-            SetErrorId(typeof(PSRemotingDataStructureException).FullName);
-        }
-    }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 14945, 15145);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15006, 15058);
 
-    /// <summary>
-    /// This exception is used by remoting code to indicate an error condition in network operations.
-    /// </summary>
+                f_1628_15006_15057(this, ErrorCategory.ResourceUnavailable);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15072, 15134);
+
+                f_1628_15072_15133(this, f_1628_15083_15132(typeof(PSRemotingDataStructureException)));
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 14945, 15145);
+
+                int
+                f_1628_15006_15057(System.Management.Automation.Remoting.PSRemotingDataStructureException
+                this_param, System.Management.Automation.ErrorCategory
+                errorCategory)
+                {
+                    this_param.SetErrorCategory(errorCategory);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 15006, 15057);
+                    return 0;
+                }
+
+
+                string
+                f_1628_15083_15132(System.Type
+                this_param)
+                {
+                    var return_v = this_param.FullName;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 15083, 15132);
+                    return return_v;
+                }
+
+
+                int
+                f_1628_15072_15133(System.Management.Automation.Remoting.PSRemotingDataStructureException
+                this_param, string
+                errorId)
+                {
+                    this_param.SetErrorId(errorId);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 15072, 15133);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 14945, 15145);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 14945, 15145);
+            }
+        }
+
+        static PSRemotingDataStructureException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1628, 11648, 15152);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1628, 11648, 15152);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 11648, 15152);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1628, 11648, 15152);
+
+        static string
+        f_1628_11971_12025()
+        {
+            var return_v = RemotingErrorIdStrings.DefaultRemotingExceptionMessage;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 11971, 12025);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_12027_12076(System.Type
+        this_param)
+        {
+            var return_v = this_param.FullName;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 12027, 12076);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_11924_12077(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 11924, 12077);
+            return return_v;
+        }
+
+
+        int
+        f_1628_12103_12126(System.Management.Automation.Remoting.PSRemotingDataStructureException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 12103, 12126);
+            return 0;
+        }
+
+
+        static string
+        f_1628_11924_12077_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 11862, 12138);
+            return return_v;
+        }
+
+
+        int
+        f_1628_12493_12516(System.Management.Automation.Remoting.PSRemotingDataStructureException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 12493, 12516);
+            return 0;
+        }
+
+
+        static string
+        f_1628_12460_12467_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 12384, 12528);
+            return return_v;
+        }
+
+
+        int
+        f_1628_13044_13067(System.Management.Automation.Remoting.PSRemotingDataStructureException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 13044, 13067);
+            return 0;
+        }
+
+
+        static string
+        f_1628_12995_13002_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 12893, 13079);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_13571_13639(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 13571, 13639);
+            return return_v;
+        }
+
+
+        int
+        f_1628_13665_13688(System.Management.Automation.Remoting.PSRemotingDataStructureException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 13665, 13688);
+            return 0;
+        }
+
+
+        static string
+        f_1628_13571_13639_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 13464, 13700);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_14311_14379(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 14311, 14379);
+            return return_v;
+        }
+
+
+        int
+        f_1628_14421_14444(System.Management.Automation.Remoting.PSRemotingDataStructureException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 14421, 14444);
+            return 0;
+        }
+
+
+        static string
+        f_1628_14311_14379_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 14178, 14456);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1628_14773_14777_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 14660, 14809);
+            return return_v;
+        }
+
+    }
     [Serializable]
     public class PSRemotingTransportException : RuntimeException
     {
         private int _errorCode;
+
         private string _transportMessage;
 
-        #region Constructors
-
-        /// <summary>
-        /// This is the default constructor.
-        /// </summary>
         public PSRemotingTransportException()
-            : base(PSRemotingErrorInvariants.FormatResourceString(RemotingErrorIdStrings.DefaultRemotingExceptionMessage, typeof(PSRemotingTransportException).FullName))
+        : base(f_1628_15660_15809_C(f_1628_15660_15809(f_1628_15707_15761(), f_1628_15763_15808(typeof(PSRemotingTransportException)))))
         {
-            SetDefaultErrorRecord();
-        }
-
-        /// <summary>
-        /// This constructor takes a localized error message.
-        /// </summary>
-        /// <param name="message">
-        /// A localized error message.
-        /// </param>
-        public PSRemotingTransportException(string message)
-            : base(message)
-        {
-            SetDefaultErrorRecord();
-        }
-
-        /// <summary>
-        /// This constructor takes a localized message and an inner exception.
-        /// </summary>
-        /// <param name="message">
-        /// Localized error message.
-        /// </param>
-        /// <param name="innerException">
-        /// Inner exception.
-        /// </param>
-        public PSRemotingTransportException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-            SetDefaultErrorRecord();
-        }
-
-        /// <summary>
-        /// This constructor takes an error id and optional parameters.
-        /// </summary>
-        /// <param name="errorId">
-        /// The error id in the base resource file.
-        /// </param>
-        /// <param name="resourceString">
-        /// The resource string in the base resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required to format the resource string.
-        /// </param>
-        internal PSRemotingTransportException(PSRemotingErrorId errorId, string resourceString, params object[] args)
-            : base(PSRemotingErrorInvariants.FormatResourceString(resourceString, args))
-        {
-            SetDefaultErrorRecord();
-            _errorCode = (int)errorId;
-        }
-
-        /// <summary>
-        /// This constuctor takes an inner exception and an error id.
-        /// </summary>
-        /// <param name="innerException">
-        /// Inner exception.
-        /// </param>
-        /// <param name="resourceString">
-        /// The resource string in the base resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required to format the resource string.
-        /// </param>
-        internal PSRemotingTransportException(Exception innerException, string resourceString, params object[] args)
-            : base(PSRemotingErrorInvariants.FormatResourceString(resourceString, args), innerException)
-        {
-            SetDefaultErrorRecord();
-        }
-
-        /// <summary>
-        /// This constructor is required by serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        /// <exception cref="ArgumentNullException">
-        /// 1. info is null.
-        /// </exception>
-        protected PSRemotingTransportException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            if (info == null)
+            try
             {
-                throw new PSArgumentNullException("info");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 15602, 15870);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15411, 15421);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15447, 15464);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15835, 15859);
 
-            _errorCode = info.GetInt32("ErrorCode");
-            _transportMessage = info.GetString("TransportMessage");
+                f_1628_15835_15858(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 15602, 15870);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 15602, 15870);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 15602, 15870);
+            }
         }
 
-        #endregion Constructors
+        public PSRemotingTransportException(string message)
+        : base(f_1628_16162_16169_C(message))
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 16090, 16230);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15411, 15421);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15447, 15464);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 16195, 16219);
 
-        /// <summary>
-        /// Serializes the exception data.
-        /// </summary>
-        /// <param name="info">Serialization information.</param>
-        /// <param name="context">Streaming context.</param>
+                f_1628_16195_16218(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 16090, 16230);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 16090, 16230);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 16090, 16230);
+            }
+        }
+
+        public PSRemotingTransportException(string message, Exception innerException)
+        : base(f_1628_16658_16665_C(message), innerException)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 16560, 16742);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15411, 15421);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15447, 15464);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 16707, 16731);
+
+                f_1628_16707_16730(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 16560, 16742);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 16560, 16742);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 16560, 16742);
+            }
+        }
+
+        internal PSRemotingTransportException(PSRemotingErrorId errorId, string resourceString, params object[] args)
+        : base(f_1628_17368_17436_C(f_1628_17368_17436(resourceString, args)))
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 17238, 17537);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15411, 15421);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15447, 15464);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 17462, 17486);
+
+                f_1628_17462_17485(this);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 17500, 17526);
+
+                _errorCode = (int)errorId;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 17238, 17537);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 17238, 17537);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 17238, 17537);
+            }
+        }
+
+        internal PSRemotingTransportException(Exception innerException, string resourceString, params object[] args)
+        : base(f_1628_18144_18212_C(f_1628_18144_18212(resourceString, args)), innerException)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 18015, 18289);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15411, 15421);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15447, 15464);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 18254, 18278);
+
+                f_1628_18254_18277(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 18015, 18289);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 18015, 18289);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 18015, 18289);
+            }
+        }
+
+        protected PSRemotingTransportException(SerializationInfo info, StreamingContext context)
+        : base(f_1628_18712_18716_C(info), context)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 18603, 18994);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15411, 15421);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 15447, 15464);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 18751, 18858) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1628, 18751, 18858);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 18801, 18843);
+
+                    throw f_1628_18807_18842("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1628, 18751, 18858);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 18874, 18914);
+
+                _errorCode = f_1628_18887_18913(info, "ErrorCode");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 18928, 18983);
+
+                _transportMessage = f_1628_18948_18982(info, "TransportMessage");
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 18603, 18994);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 18603, 18994);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 18603, 18994);
+            }
+        }
+
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
+            try
             {
-                throw new PSArgumentNullException("info");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 19261, 19829);
 
-            base.GetObjectData(info, context);
-            // If there are simple fields, serialize them with info.AddValue
-            info.AddValue("ErrorCode", _errorCode);
-            info.AddValue("TransportMessage", _transportMessage);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 19463, 19570) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1628, 19463, 19570);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 19513, 19555);
+
+                    throw f_1628_19519_19554("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1628, 19463, 19570);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 19586, 19620);
+
+                DynAbs.Tracing.TraceSender.TraceInvocationWrapper(() => base.GetObjectData(info, context), 1628, 19586, 19619);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 19712, 19751);
+
+                f_1628_19712_19750(            // If there are simple fields, serialize them with info.AddValue
+                            info, "ErrorCode", _errorCode);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 19765, 19818);
+
+                f_1628_19765_19817(info, "TransportMessage", _transportMessage);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 19261, 19829);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1628_19519_19554(string
+                paramName)
+                {
+                    var return_v = new System.Management.Automation.PSArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 19519, 19554);
+                    return return_v;
+                }
+
+
+                int
+                f_1628_19712_19750(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, int
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 19712, 19750);
+                    return 0;
+                }
+
+
+                int
+                f_1628_19765_19817(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, string
+                value)
+                {
+                    this_param.AddValue(name, (object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 19765, 19817);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 19261, 19829);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 19261, 19829);
+            }
         }
 
-        /// <summary>
-        /// Set the default ErrorRecord.
-        /// </summary>
         protected void SetDefaultErrorRecord()
         {
-            SetErrorCategory(ErrorCategory.ResourceUnavailable);
-            SetErrorId(typeof(PSRemotingDataStructureException).FullName);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 19930, 20132);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 19993, 20045);
+
+                f_1628_19993_20044(this, ErrorCategory.ResourceUnavailable);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 20059, 20121);
+
+                f_1628_20059_20120(this, f_1628_20070_20119(typeof(PSRemotingDataStructureException)));
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 19930, 20132);
+
+                int
+                f_1628_19993_20044(System.Management.Automation.Remoting.PSRemotingTransportException
+                this_param, System.Management.Automation.ErrorCategory
+                errorCategory)
+                {
+                    this_param.SetErrorCategory(errorCategory);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 19993, 20044);
+                    return 0;
+                }
+
+
+                string
+                f_1628_20070_20119(System.Type
+                this_param)
+                {
+                    var return_v = this_param.FullName;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 20070, 20119);
+                    return return_v;
+                }
+
+
+                int
+                f_1628_20059_20120(System.Management.Automation.Remoting.PSRemotingTransportException
+                this_param, string
+                errorId)
+                {
+                    this_param.SetErrorId(errorId);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 20059, 20120);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 19930, 20132);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 19930, 20132);
+            }
         }
 
-        /// <summary>
-        /// The error code from native library API call.
-        /// </summary>
         public int ErrorCode
         {
             get
             {
-                return _errorCode;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 20294, 20363);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 20330, 20348);
 
+                    return _errorCode;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 20294, 20363);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 20249, 20460);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 20249, 20460);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                _errorCode = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 20379, 20449);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 20415, 20434);
+
+                    _errorCode = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 20379, 20449);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 20249, 20460);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 20249, 20460);
+                }
             }
         }
 
-        /// <summary>
-        /// This the message from the native transport layer.
-        /// </summary>
         public string TransportMessage
         {
             get
             {
-                return _transportMessage;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 20637, 20713);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 20673, 20698);
 
+                    return _transportMessage;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 20637, 20713);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 20582, 20817);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 20582, 20817);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                _transportMessage = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 20729, 20806);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 20765, 20791);
+
+                    _transportMessage = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 20729, 20806);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 20582, 20817);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 20582, 20817);
+                }
             }
         }
-    }
 
-    /// <summary>
-    /// This exception is used by PowerShell's remoting infrastructure to notify a URI redirection
-    /// exception.
-    /// </summary>
+        static PSRemotingTransportException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1628, 15302, 20824);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1628, 15302, 20824);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 15302, 20824);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1628, 15302, 20824);
+
+        static string
+        f_1628_15707_15761()
+        {
+            var return_v = RemotingErrorIdStrings.DefaultRemotingExceptionMessage;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 15707, 15761);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_15763_15808(System.Type
+        this_param)
+        {
+            var return_v = this_param.FullName;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 15763, 15808);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_15660_15809(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 15660, 15809);
+            return return_v;
+        }
+
+
+        int
+        f_1628_15835_15858(System.Management.Automation.Remoting.PSRemotingTransportException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 15835, 15858);
+            return 0;
+        }
+
+
+        static string
+        f_1628_15660_15809_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 15602, 15870);
+            return return_v;
+        }
+
+
+        int
+        f_1628_16195_16218(System.Management.Automation.Remoting.PSRemotingTransportException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 16195, 16218);
+            return 0;
+        }
+
+
+        static string
+        f_1628_16162_16169_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 16090, 16230);
+            return return_v;
+        }
+
+
+        int
+        f_1628_16707_16730(System.Management.Automation.Remoting.PSRemotingTransportException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 16707, 16730);
+            return 0;
+        }
+
+
+        static string
+        f_1628_16658_16665_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 16560, 16742);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_17368_17436(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 17368, 17436);
+            return return_v;
+        }
+
+
+        int
+        f_1628_17462_17485(System.Management.Automation.Remoting.PSRemotingTransportException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 17462, 17485);
+            return 0;
+        }
+
+
+        static string
+        f_1628_17368_17436_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 17238, 17537);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_18144_18212(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 18144, 18212);
+            return return_v;
+        }
+
+
+        int
+        f_1628_18254_18277(System.Management.Automation.Remoting.PSRemotingTransportException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 18254, 18277);
+            return 0;
+        }
+
+
+        static string
+        f_1628_18144_18212_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 18015, 18289);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1628_18807_18842(string
+        paramName)
+        {
+            var return_v = new System.Management.Automation.PSArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 18807, 18842);
+            return return_v;
+        }
+
+
+        int
+        f_1628_18887_18913(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetInt32(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 18887, 18913);
+            return return_v;
+        }
+
+
+        string?
+        f_1628_18948_18982(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetString(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 18948, 18982);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1628_18712_18716_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 18603, 18994);
+            return return_v;
+        }
+
+    }
     [Serializable]
     public class PSRemotingTransportRedirectException : PSRemotingTransportException
     {
-        #region Constructor
-        /// <summary>
-        /// This is the default constructor.
-        /// </summary>
         public PSRemotingTransportRedirectException()
-            : base(PSRemotingErrorInvariants.FormatResourceString(RemotingErrorIdStrings.DefaultRemotingExceptionMessage,
-             typeof(PSRemotingTransportRedirectException).FullName))
+        : base(f_1628_21296_21467_C(f_1628_21296_21467(f_1628_21343_21397(), f_1628_21413_21466(typeof(PSRemotingTransportRedirectException)))))
         {
-            SetDefaultErrorRecord();
-        }
-
-        /// <summary>
-        /// This constructor takes a localized error message.
-        /// </summary>
-        /// <param name="message">
-        /// A localized error message.
-        /// </param>
-        public PSRemotingTransportRedirectException(string message)
-            : base(message)
-        {
-        }
-
-        /// <summary>
-        /// This constructor takes a localized message and an inner exception.
-        /// </summary>
-        /// <param name="message">
-        /// Localized error message.
-        /// </param>
-        /// <param name="innerException">
-        /// Inner exception.
-        /// </param>
-        public PSRemotingTransportRedirectException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
-
-        /// <summary>
-        /// This constuctor takes an inner exception and an error id.
-        /// </summary>
-        /// <param name="innerException">
-        /// Inner exception.
-        /// </param>
-        /// <param name="resourceString">
-        /// The resource string in the base resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required to format the resource string.
-        /// </param>
-        internal PSRemotingTransportRedirectException(Exception innerException, string resourceString, params object[] args)
-            : base(innerException, resourceString, args)
-        {
-        }
-
-        /// <summary>
-        /// This constructor is required by serialization.
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        /// <exception cref="ArgumentNullException">
-        /// 1. info is null.
-        /// </exception>
-        protected PSRemotingTransportRedirectException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            if (info == null)
+            try
             {
-                throw new PSArgumentNullException("info");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 21230, 21528);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25531, 25570);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 21493, 21517);
+
+                f_1628_21493_21516(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 21230, 21528);
             }
-
-            RedirectLocation = info.GetString("RedirectLocation");
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 21230, 21528);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 21230, 21528);
+            }
         }
 
-        /// <summary>
-        /// This constructor takes an redirect URI, error id and optional parameters.
-        /// </summary>
-        /// <param name="redirectLocation">
-        /// String specifying a redirect location.
-        /// </param>
-        /// <param name="errorId">
-        /// The error id in the base resource file.
-        /// </param>
-        /// <param name="resourceString">
-        /// The resource string in the base resource file.
-        /// </param>
-        /// <param name="args">
-        /// Optional parameters required to format the resource string.
-        /// </param>
-        internal PSRemotingTransportRedirectException(string redirectLocation, PSRemotingErrorId errorId, string resourceString, params object[] args)
-            : base(errorId, resourceString, args)
+        public PSRemotingTransportRedirectException(string message)
+        : base(f_1628_21828_21835_C(message))
         {
-            RedirectLocation = redirectLocation;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 21748, 21858);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25531, 25570);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 21748, 21858);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 21748, 21858);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 21748, 21858);
+            }
         }
 
-        #endregion
+        public PSRemotingTransportRedirectException(string message, Exception innerException)
+        : base(f_1628_22294_22301_C(message), innerException)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 22188, 22340);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25531, 25570);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 22188, 22340);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 22188, 22340);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 22188, 22340);
+            }
+        }
 
-        #region Public overrides
+        internal PSRemotingTransportRedirectException(Exception innerException, string resourceString, params object[] args)
+        : base(f_1628_22955_22969_C(innerException), resourceString, args)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 22818, 23014);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25531, 25570);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 22818, 23014);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 22818, 23014);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 22818, 23014);
+            }
+        }
 
-        /// <summary>
-        /// Serializes the exception data.
-        /// </summary>
-        /// <param name="info">Serialization information.</param>
-        /// <param name="context">Streaming context.</param>
+        protected PSRemotingTransportRedirectException(SerializationInfo info, StreamingContext context)
+        : base(f_1628_23445_23449_C(info), context)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 23328, 23672);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25531, 25570);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 23484, 23591) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1628, 23484, 23591);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 23534, 23576);
+
+                    throw f_1628_23540_23575("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1628, 23484, 23591);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 23607, 23661);
+
+                RedirectLocation = f_1628_23626_23660(info, "RedirectLocation");
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 23328, 23672);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 23328, 23672);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 23328, 23672);
+            }
+        }
+
+        internal PSRemotingTransportRedirectException(string redirectLocation, PSRemotingErrorId errorId, string resourceString, params object[] args)
+        : base(f_1628_24464_24471_C(errorId), resourceString, args)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 24301, 24566);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25531, 25570);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 24519, 24555);
+
+                RedirectLocation = redirectLocation;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 24301, 24566);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 24301, 24566);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 24301, 24566);
+            }
+        }
+
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
+            try
             {
-                throw new PSArgumentNullException("info");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1628, 24856, 25370);
 
-            base.GetObjectData(info, context);
-            // If there are simple fields, serialize them with info.AddValue
-            info.AddValue("RedirectLocation", RedirectLocation);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25058, 25165) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1628, 25058, 25165);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25108, 25150);
+
+                    throw f_1628_25114_25149("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1628, 25058, 25165);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25181, 25215);
+
+                DynAbs.Tracing.TraceSender.TraceInvocationWrapper(() => base.GetObjectData(info, context), 1628, 25181, 25214);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1628, 25307, 25359);
+
+                f_1628_25307_25358(            // If there are simple fields, serialize them with info.AddValue
+                            info, "RedirectLocation", f_1628_25341_25357());
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1628, 24856, 25370);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1628_25114_25149(string
+                paramName)
+                {
+                    var return_v = new System.Management.Automation.PSArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 25114, 25149);
+                    return return_v;
+                }
+
+
+                string
+                f_1628_25341_25357()
+                {
+                    var return_v = RedirectLocation;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 25341, 25357);
+                    return return_v;
+                }
+
+
+                int
+                f_1628_25307_25358(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, string
+                value)
+                {
+                    this_param.AddValue(name, (object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 25307, 25358);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 24856, 25370);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 24856, 25370);
+            }
         }
 
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// String specifying a redirect location.
-        /// </summary>
         public string RedirectLocation { get; }
 
-        #endregion
-    }
+        static PSRemotingTransportRedirectException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1628, 20991, 25599);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1628, 20991, 25599);
 
-    /// <summary>
-    /// This exception is used by PowerShell Direct errors.
-    /// </summary>
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 20991, 25599);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1628, 20991, 25599);
+
+        static string
+        f_1628_21343_21397()
+        {
+            var return_v = RemotingErrorIdStrings.DefaultRemotingExceptionMessage;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 21343, 21397);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_21413_21466(System.Type
+        this_param)
+        {
+            var return_v = this_param.FullName;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1628, 21413, 21466);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_21296_21467(string
+        resourceString, params object[]
+        args)
+        {
+            var return_v = PSRemotingErrorInvariants.FormatResourceString(resourceString, args);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 21296, 21467);
+            return return_v;
+        }
+
+
+        int
+        f_1628_21493_21516(System.Management.Automation.Remoting.PSRemotingTransportRedirectException
+        this_param)
+        {
+            this_param.SetDefaultErrorRecord();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 21493, 21516);
+            return 0;
+        }
+
+
+        static string
+        f_1628_21296_21467_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 21230, 21528);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_21828_21835_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 21748, 21858);
+            return return_v;
+        }
+
+
+        static string
+        f_1628_22294_22301_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 22188, 22340);
+            return return_v;
+        }
+
+
+        static System.Exception
+        f_1628_22955_22969_C(System.Exception
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 22818, 23014);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1628_23540_23575(string
+        paramName)
+        {
+            var return_v = new System.Management.Automation.PSArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 23540, 23575);
+            return return_v;
+        }
+
+
+        string?
+        f_1628_23626_23660(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetString(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1628, 23626, 23660);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1628_23445_23449_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 23328, 23672);
+            return return_v;
+        }
+
+
+        static System.Management.Automation.Remoting.PSRemotingErrorId
+        f_1628_24464_24471_C(System.Management.Automation.Remoting.PSRemotingErrorId
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 24301, 24566);
+            return return_v;
+        }
+
+    }
     [Serializable]
     public class PSDirectException : RuntimeException
     {
-        #region Constructor
-
-        /// <summary>
-        /// This constuctor takes a localized string as the error message.
-        /// </summary>
-        /// <param name="message">
-        /// A localized string as an error message.
-        /// </param>
         public PSDirectException(string message)
-            : base(message)
+        : base(f_1628_26119_26126_C(message))
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1628, 26058, 26149);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1628, 26058, 26149);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1628, 26058, 26149);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 26058, 26149);
+            }
         }
 
-        #endregion Constructor
+        static PSDirectException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1628, 25707, 26190);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1628, 25707, 26190);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1628, 25707, 26190);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1628, 25707, 26190);
+
+        static string
+        f_1628_26119_26126_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1628, 26058, 26149);
+            return return_v;
+        }
+
     }
 }

@@ -7,35 +7,46 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Defines type which has information about RunspacePoolState
-    /// and exception associated with that state.
-    /// </summary>
-    /// <remarks>This class is created so that a state change along
-    /// with its reason can be transported from the server to the
-    /// client in case of RemoteRunspacePool</remarks>
     public sealed class RunspacePoolStateInfo
     {
-        /// <summary>
-        /// State of the runspace pool when this event occured.
-        /// </summary>
         public RunspacePoolState State { get; }
 
-        /// <summary>
-        /// Exception associated with that state.
-        /// </summary>
         public Exception Reason { get; }
 
-        /// <summary>
-        /// Constructor for creating the state info.
-        /// </summary>
-        /// <param name="state">State.</param>
-        /// <param name="reason">exception that resulted in this
-        /// state change. Can be null</param>
         public RunspacePoolStateInfo(RunspacePoolState state, Exception reason)
         {
-            State = state;
-            Reason = reason;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1631, 1228, 1379);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1631, 773, 812);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1631, 922, 954);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1631, 1324, 1338);
+
+                State = state;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1631, 1352, 1368);
+
+                Reason = reason;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1631, 1228, 1379);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1631, 1228, 1379);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1631, 1228, 1379);
+            }
         }
+
+        static RunspacePoolStateInfo()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1631, 603, 1386);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1631, 603, 1386);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1631, 603, 1386);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1631, 603, 1386);
     }
 }

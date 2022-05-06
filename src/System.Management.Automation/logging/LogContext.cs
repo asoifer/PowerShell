@@ -3,133 +3,100 @@
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// LogContext is the class to keep track of context information for each
-    /// event to be logged.
-    ///
-    /// LogContext info is collected by Msh Log Engine and passed on to log provider
-    /// interface.
-    /// </summary>
     internal class LogContext
     {
-        #region Context Properties
+        internal string Severity { get; set; }
 
-        internal string Severity { get; set; } = string.Empty;
+        internal string HostName { get; set; }
 
-        /// <summary>
-        /// Name of the host.
-        /// </summary>
-        /// <value></value>
-        internal string HostName { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Name of the host application.
-        /// </summary>
-        /// <value></value>
         internal string HostApplication
         {
             get; set;
         }
 
-        /// <summary>
-        /// Version of the host.
-        /// </summary>
-        /// <value></value>
-        internal string HostVersion { get; set; } = string.Empty;
+        internal string HostVersion { get; set; }
 
-        /// <summary>
-        /// Id of the host that is hosting current monad engine.
-        /// </summary>
-        /// <value></value>
-        internal string HostId { get; set; } = string.Empty;
+        internal string HostId { get; set; }
 
-        /// <summary>
-        /// Version of monad engine.
-        /// </summary>
-        /// <value></value>
-        internal string EngineVersion { get; set; } = string.Empty;
+        internal string EngineVersion { get; set; }
 
-        /// <summary>
-        /// Id for currently running runspace.
-        /// </summary>
-        /// <value></value>
-        internal string RunspaceId { get; set; } = string.Empty;
+        internal string RunspaceId { get; set; }
 
-        /// <summary>
-        /// PipelineId of current running pipeline.
-        /// </summary>
-        /// <value></value>
-        internal string PipelineId { get; set; } = string.Empty;
+        internal string PipelineId { get; set; }
 
-        /// <summary>
-        /// Command text that is typed in from commandline.
-        /// </summary>
-        /// <value></value>
-        internal string CommandName { get; set; } = string.Empty;
+        internal string CommandName { get; set; }
 
-        /// <summary>
-        /// Type of the command, which can be Alias, CommandLet, Script, Application, etc.
-        ///
-        /// The value of this property is a usually conversion of CommandTypes enum into a string.
-        /// </summary>
-        /// <value></value>
-        internal string CommandType { get; set; } = string.Empty;
+        internal string CommandType { get; set; }
 
-        /// <summary>
-        /// Script file name if current command is executed as a result of script run.
-        /// </summary>
-        internal string ScriptName { get; set; } = string.Empty;
+        internal string ScriptName { get; set; }
 
-        /// <summary>
-        /// Path to the command executable file.
-        /// </summary>
-        internal string CommandPath { get; set; } = string.Empty;
+        internal string CommandPath { get; set; }
 
-        /// <summary>
-        /// Extension for the command executable file.
-        /// </summary>
-        internal string CommandLine { get; set; } = string.Empty;
+        internal string CommandLine { get; set; }
 
-        /// <summary>
-        /// Sequence Id for the event to be logged.
-        /// </summary>
-        internal string SequenceNumber { get; set; } = string.Empty;
+        internal string SequenceNumber { get; set; }
 
-        /// <summary>
-        /// Current user.
-        /// </summary>
-        internal string User { get; set; } = string.Empty;
+        internal string User { get; set; }
 
-        /// <summary>
-        /// The user connected to the machine, if being done with
-        /// PowerShell remoting.
-        /// </summary>
         internal string ConnectedUser { get; set; }
 
-        /// <summary>
-        /// Event happening time.
-        /// </summary>
-        internal string Time { get; set; } = string.Empty;
+        internal string Time { get; set; }
 
-        #endregion
-
-        #region Shell Id
-
-        /// <summary>
-        /// This property should be filled in when logging api is called directly
-        /// with LogContext (when ExecutionContext is not available).
-        /// </summary>
         internal string ShellId { get; set; }
 
-        #endregion
-
-        #region Execution context
-
-        /// <summary>
-        /// Execution context is necessary for GetVariableValue.
-        /// </summary>
         internal ExecutionContext ExecutionContext { get; set; }
 
-        #endregion
+        public LogContext()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1183, 409, 4203);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 489, 543);
+            this.Severity = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 662, 716);
+            this.HostName = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 847, 923);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 1045, 1102);
+            this.HostVersion = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 1256, 1308);
+            this.HostId = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 1434, 1493);
+            this.EngineVersion = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 1629, 1685);
+            this.RunspaceId = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 1826, 1882);
+            this.PipelineId = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 2031, 2088);
+            this.CommandName = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 2381, 2438);
+            this.CommandType = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 2585, 2641);
+            this.ScriptName = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 2750, 2807);
+            this.CommandPath = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 2922, 2979);
+            this.CommandLine = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 3091, 3151);
+            this.SequenceNumber = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 3237, 3287);
+            this.User = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 3447, 3490);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 3584, 3634);
+            this.Time = string.Empty;
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 3897, 3934);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1183, 4118, 4174);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1183, 409, 4203);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1183, 409, 4203);
+        }
+
+
+        static LogContext()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1183, 409, 4203);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1183, 409, 4203);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1183, 409, 4203);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1183, 409, 4203);
     }
 }

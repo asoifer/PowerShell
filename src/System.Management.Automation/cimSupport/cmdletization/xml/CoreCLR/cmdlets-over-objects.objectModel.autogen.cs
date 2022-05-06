@@ -20,7 +20,6 @@ using System.Xml.Serialization;
 
 namespace Microsoft.PowerShell.Cmdletization.Xml
 {
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -31,37 +30,118 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private EnumMetadataEnum[] _enumsField;
 
-        /// <remarks/>
         public ClassMetadata Class
         {
             get
             {
-                return this._classField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 1380, 1455);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 1416, 1440);
 
+                    return this._classField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 1380, 1455);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 1329, 1558);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 1329, 1558);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._classField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 1471, 1547);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 1507, 1532);
+
+                    this._classField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 1471, 1547);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 1329, 1558);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 1329, 1558);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Enum", IsNullable = false)]
         public EnumMetadataEnum[] Enums
         {
             get
             {
-                return this._enumsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 1736, 1811);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 1772, 1796);
 
+                    return this._enumsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 1736, 1811);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 1594, 1914);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 1594, 1914);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._enumsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 1827, 1903);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 1863, 1888);
+
+                    this._enumsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 1827, 1903);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 1594, 1914);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 1594, 1914);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public PowerShellMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 727, 1921);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 1230, 1241);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 1281, 1292);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 727, 1921);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 727, 1921);
+        }
+
+
+        static PowerShellMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 727, 1921);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 727, 1921);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 727, 1921);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 727, 1921);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -83,125 +163,398 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _classVersionField;
 
-        /// <remarks/>
         public string Version
         {
             get
             {
-                return this._versionField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 2758, 2835);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2794, 2820);
 
+                    return this._versionField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 2758, 2835);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 2712, 2940);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 2712, 2940);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._versionField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 2851, 2929);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2887, 2914);
+
+                    this._versionField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 2851, 2929);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 2712, 2940);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 2712, 2940);
+                }
             }
         }
 
-        /// <remarks/>
         public string DefaultNoun
         {
             get
             {
-                return this._defaultNounField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 3026, 3107);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 3062, 3092);
 
+                    return this._defaultNounField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 3026, 3107);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 2976, 3216);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 2976, 3216);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._defaultNounField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 3123, 3205);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 3159, 3190);
+
+                    this._defaultNounField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 3123, 3205);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 2976, 3216);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 2976, 3216);
+                }
             }
         }
 
-        /// <remarks/>
         public ClassMetadataInstanceCmdlets InstanceCmdlets
         {
             get
             {
-                return this._instanceCmdletsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 3328, 3413);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 3364, 3398);
 
+                    return this._instanceCmdletsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 3328, 3413);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 3252, 3526);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 3252, 3526);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._instanceCmdletsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 3429, 3515);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 3465, 3500);
+
+                    this._instanceCmdletsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 3429, 3515);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 3252, 3526);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 3252, 3526);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Cmdlet", IsNullable = false)]
         public StaticCmdletMetadata[] StaticCmdlets
         {
             get
             {
-                return this._staticCmdletsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 3718, 3801);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 3754, 3786);
 
+                    return this._staticCmdletsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 3718, 3801);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 3562, 3912);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 3562, 3912);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._staticCmdletsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 3817, 3901);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 3853, 3886);
+
+                    this._staticCmdletsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 3817, 3901);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 3562, 3912);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 3562, 3912);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Data", IsNullable = false)]
         public ClassMetadataData[] CmdletAdapterPrivateData
         {
             get
             {
-                return this._cmdletAdapterPrivateDataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 4110, 4204);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 4146, 4189);
 
+                    return this._cmdletAdapterPrivateDataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 4110, 4204);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 3948, 4326);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 3948, 4326);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletAdapterPrivateDataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 4220, 4315);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 4256, 4300);
+
+                    this._cmdletAdapterPrivateDataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 4220, 4315);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 3948, 4326);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 3948, 4326);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string CmdletAdapter
         {
             get
             {
-                return this._cmdletAdapterField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 4474, 4557);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 4510, 4542);
 
+                    return this._cmdletAdapterField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 4474, 4557);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 4362, 4668);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 4362, 4668);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletAdapterField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 4573, 4657);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 4609, 4642);
+
+                    this._cmdletAdapterField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 4573, 4657);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 4362, 4668);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 4362, 4668);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ClassName
         {
             get
             {
-                return this._classNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 4812, 4891);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 4848, 4876);
 
+                    return this._classNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 4812, 4891);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 4704, 4998);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 4704, 4998);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._classNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 4907, 4987);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 4943, 4972);
+
+                    this._classNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 4907, 4987);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 4704, 4998);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 4704, 4998);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ClassVersion
         {
             get
             {
-                return this._classVersionField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 5145, 5227);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 5181, 5212);
 
+                    return this._classVersionField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 5145, 5227);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 5034, 5337);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 5034, 5337);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._classVersionField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 5243, 5326);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 5279, 5311);
+
+                    this._classVersionField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 5243, 5326);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 5034, 5337);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 5034, 5337);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public ClassMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 1949, 5344);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2276, 2289);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2317, 2334);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2384, 2405);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2449, 2468);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2509, 2539);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2567, 2586);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2614, 2629);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 2657, 2675);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 1949, 5344);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 1949, 5344);
+        }
+
+
+        static ClassMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 1949, 5344);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 1949, 5344);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 1949, 5344);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 1949, 5344);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -213,51 +566,164 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private InstanceCmdletMetadata[] _cmdletField;
 
-        /// <remarks/>
         public GetCmdletParameters GetCmdletParameters
         {
             get
             {
-                return this._getCmdletParametersField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 5994, 6083);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 6030, 6068);
 
+                    return this._getCmdletParametersField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 5994, 6083);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 5923, 6200);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 5923, 6200);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._getCmdletParametersField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 6099, 6189);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 6135, 6174);
+
+                    this._getCmdletParametersField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 6099, 6189);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 5923, 6200);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 5923, 6200);
+                }
             }
         }
 
-        /// <remarks/>
         public GetCmdletMetadata GetCmdlet
         {
             get
             {
-                return this._getCmdletField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 6295, 6374);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 6331, 6359);
 
+                    return this._getCmdletField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 6295, 6374);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 6236, 6481);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 6236, 6481);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._getCmdletField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 6390, 6470);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 6426, 6455);
+
+                    this._getCmdletField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 6390, 6470);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 6236, 6481);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 6236, 6481);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Cmdlet")]
         public InstanceCmdletMetadata[] Cmdlet
         {
             get
             {
-                return this._cmdletField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 6646, 6722);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 6682, 6707);
 
+                    return this._cmdletField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 6646, 6722);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 6517, 6826);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 6517, 6826);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 6738, 6815);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 6774, 6800);
+
+                    this._cmdletField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 6738, 6815);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 6517, 6826);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 6517, 6826);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public ClassMetadataInstanceCmdlets()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 5372, 6833);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 5749, 5774);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 5813, 5828);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 5874, 5886);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 5372, 6833);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 5372, 6833);
+        }
+
+
+        static ClassMetadataInstanceCmdlets()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 5372, 6833);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 5372, 6833);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 5372, 6833);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 5372, 6833);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -271,68 +737,213 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _defaultCmdletParameterSetField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Property", IsNullable = false)]
         public PropertyMetadata[] QueryableProperties
         {
             get
             {
-                return this._queryablePropertiesField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 7602, 7691);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 7638, 7676);
 
+                    return this._queryablePropertiesField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 7602, 7691);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 7442, 7808);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 7442, 7808);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._queryablePropertiesField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 7707, 7797);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 7743, 7782);
+
+                    this._queryablePropertiesField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 7707, 7797);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 7442, 7808);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 7442, 7808);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute(IsNullable = false)]
         public Association[] QueryableAssociations
         {
             get
             {
-                return this._queryableAssociationsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 7989, 8080);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 8025, 8065);
 
+                    return this._queryableAssociationsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 7989, 8080);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 7844, 8199);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 7844, 8199);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._queryableAssociationsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 8096, 8188);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 8132, 8173);
+
+                    this._queryableAssociationsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 8096, 8188);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 7844, 8199);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 7844, 8199);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Option", IsNullable = false)]
         public QueryOption[] QueryOptions
         {
             get
             {
-                return this._queryOptionsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 8381, 8463);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 8417, 8448);
 
+                    return this._queryOptionsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 8381, 8463);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 8235, 8573);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 8235, 8573);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._queryOptionsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 8479, 8562);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 8515, 8547);
+
+                    this._queryOptionsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 8479, 8562);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 8235, 8573);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 8235, 8573);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DefaultCmdletParameterSet
         {
             get
             {
-                return this._defaultCmdletParameterSetField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 8733, 8828);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 8769, 8813);
 
+                    return this._defaultCmdletParameterSetField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 8733, 8828);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 8609, 8951);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 8609, 8951);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._defaultCmdletParameterSetField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 8844, 8940);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 8880, 8925);
+
+                    this._defaultCmdletParameterSetField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 8844, 8940);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 8609, 8951);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 8609, 8951);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public GetCmdletParameters()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 6861, 8958);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 7206, 7231);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 7266, 7293);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 7328, 7346);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 7374, 7405);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 6861, 8958);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 6861, 8958);
+        }
+
+
+        static GetCmdletParameters()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 6861, 8958);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 6861, 8958);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 6861, 8958);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 6861, 8958);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -346,21 +957,51 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _propertyNameField;
 
-        /// <remarks/>
         public TypeMetadata Type
         {
             get
             {
-                return this._typeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 9573, 9647);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 9609, 9632);
 
+                    return this._typeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 9573, 9647);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 9524, 9749);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 9524, 9749);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._typeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 9663, 9738);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 9699, 9723);
+
+                    this._typeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 9663, 9738);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 9524, 9749);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 9524, 9749);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ExcludeQuery", typeof(WildcardablePropertyQuery))]
         [System.Xml.Serialization.XmlElementAttribute("MaxValueQuery", typeof(PropertyQuery))]
         [System.Xml.Serialization.XmlElementAttribute("MinValueQuery", typeof(PropertyQuery))]
@@ -370,48 +1011,163 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
         {
             get
             {
-                return this._itemsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 10329, 10404);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 10365, 10389);
 
+                    return this._itemsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 10329, 10404);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 9785, 10507);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 9785, 10507);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._itemsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 10420, 10496);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 10456, 10481);
+
+                    this._itemsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 10420, 10496);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 9785, 10507);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 9785, 10507);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public ItemsChoiceType[] ItemsElementName
         {
             get
             {
-                return this._itemsElementNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 10742, 10828);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 10778, 10813);
 
+                    return this._itemsElementNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 10742, 10828);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 10543, 10942);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 10543, 10942);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._itemsElementNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 10844, 10931);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 10880, 10916);
+
+                    this._itemsElementNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 10844, 10931);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 10543, 10942);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 10543, 10942);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string PropertyName
         {
             get
             {
-                return this._propertyNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 11089, 11171);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 11125, 11156);
 
+                    return this._propertyNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 11089, 11171);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 10978, 11281);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 10978, 11281);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._propertyNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 11187, 11270);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 11223, 11255);
+
+                    this._propertyNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 11187, 11270);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 10978, 11281);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 10978, 11281);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public PropertyMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 8986, 11288);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 9322, 9332);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 9369, 9380);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 9419, 9441);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 9469, 9487);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 8986, 11288);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 8986, 11288);
+        }
+
+
+        static PropertyMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 8986, 11288);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 8986, 11288);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 8986, 11288);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 8986, 11288);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -421,38 +1177,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _eTSTypeField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string PSType
         {
             get
             {
-                return this._pSTypeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 11837, 11913);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 11873, 11898);
 
+                    return this._pSTypeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 11837, 11913);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 11732, 12017);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 11732, 12017);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._pSTypeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 11929, 12006);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 11965, 11991);
+
+                    this._pSTypeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 11929, 12006);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 11732, 12017);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 11732, 12017);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ETSType
         {
             get
             {
-                return this._eTSTypeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 12159, 12236);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 12195, 12221);
 
+                    return this._eTSTypeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 12159, 12236);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 12053, 12341);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 12053, 12341);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._eTSTypeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 12252, 12330);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 12288, 12315);
+
+                    this._eTSTypeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 12252, 12330);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 12053, 12341);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 12053, 12341);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public TypeMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 11316, 12348);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 11642, 11654);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 11682, 11695);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 11316, 12348);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 11316, 12348);
+        }
+
+
+        static TypeMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 11316, 12348);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 11316, 12348);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 11316, 12348);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 11316, 12348);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -466,67 +1303,212 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _resultRoleField;
 
-        /// <remarks/>
         public AssociationAssociatedInstance AssociatedInstance
         {
             get
             {
-                return this._associatedInstanceField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 12999, 13087);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 13035, 13072);
 
+                    return this._associatedInstanceField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 12999, 13087);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 12919, 13203);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 12919, 13203);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._associatedInstanceField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 13103, 13192);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 13139, 13177);
+
+                    this._associatedInstanceField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 13103, 13192);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 12919, 13203);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 12919, 13203);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute("Association")]
         public string Association1
         {
             get
             {
-                return this._association1Field;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 13363, 13445);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 13399, 13430);
 
+                    return this._association1Field;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 13363, 13445);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 13239, 13555);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 13239, 13555);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._association1Field = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 13461, 13544);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 13497, 13529);
+
+                    this._association1Field = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 13461, 13544);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 13239, 13555);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 13239, 13555);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string SourceRole
         {
             get
             {
-                return this._sourceRoleField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 13700, 13780);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 13736, 13765);
 
+                    return this._sourceRoleField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 13700, 13780);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 13591, 13888);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 13591, 13888);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._sourceRoleField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 13796, 13877);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 13832, 13862);
+
+                    this._sourceRoleField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 13796, 13877);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 13591, 13888);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 13591, 13888);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ResultRole
         {
             get
             {
-                return this._resultRoleField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 14033, 14113);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 14069, 14098);
 
+                    return this._resultRoleField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 14033, 14113);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 13924, 14221);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 13924, 14221);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._resultRoleField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 14129, 14210);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 14165, 14195);
+
+                    this._resultRoleField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 14129, 14210);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 13924, 14221);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 13924, 14221);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public Association()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 12376, 14228);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 12724, 12748);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 12776, 12794);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 12822, 12838);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 12866, 12882);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 12376, 14228);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 12376, 14228);
+        }
+
+
+        static Association()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 12376, 14228);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 12376, 14228);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 12376, 14228);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 12376, 14228);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -536,36 +1518,117 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private CmdletParameterMetadataForGetCmdletFilteringParameter _cmdletParameterMetadataField;
 
-        /// <remarks/>
         public TypeMetadata Type
         {
             get
             {
-                return this._typeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 14827, 14901);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 14863, 14886);
 
+                    return this._typeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 14827, 14901);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 14778, 15003);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 14778, 15003);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._typeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 14917, 14992);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 14953, 14977);
+
+                    this._typeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 14917, 14992);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 14778, 15003);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 14778, 15003);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletParameterMetadataForGetCmdletFilteringParameter CmdletParameterMetadata
         {
             get
             {
-                return this._cmdletParameterMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 15148, 15241);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 15184, 15226);
 
+                    return this._cmdletParameterMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 15148, 15241);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 15039, 15362);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 15039, 15362);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 15257, 15351);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 15293, 15336);
+
+                    this._cmdletParameterMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 15257, 15351);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 15039, 15362);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 15039, 15362);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public AssociationAssociatedInstance()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 14256, 15369);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 14627, 14637);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 14712, 14741);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 14256, 15369);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 14256, 15369);
+        }
+
+
+        static AssociationAssociatedInstance()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 14256, 15369);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 14256, 15369);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 14256, 15369);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 14256, 15369);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -575,38 +1638,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private bool _errorOnNoMatchFieldSpecified;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ErrorOnNoMatch
         {
             get
             {
-                return this._errorOnNoMatchField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 16032, 16116);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 16068, 16101);
 
+                    return this._errorOnNoMatchField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 16032, 16116);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 15921, 16228);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 15921, 16228);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._errorOnNoMatchField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 16132, 16217);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 16168, 16202);
+
+                    this._errorOnNoMatchField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 16132, 16217);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 15921, 16228);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 15921, 16228);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ErrorOnNoMatchSpecified
         {
             get
             {
-                return this._errorOnNoMatchFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 16381, 16474);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 16417, 16459);
 
+                    return this._errorOnNoMatchFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 16381, 16474);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 16264, 16595);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 16264, 16595);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._errorOnNoMatchFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 16490, 16584);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 16526, 16569);
+
+                    this._errorOnNoMatchFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 16490, 16584);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 16264, 16595);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 16264, 16595);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataForGetCmdletFilteringParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 15397, 16602);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 15809, 15829);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 15855, 15884);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 15397, 16602);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 15397, 16602);
+        }
+
+
+        static CmdletParameterMetadataForGetCmdletFilteringParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 15397, 16602);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 15397, 16602);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 15397, 16602);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 15397, 16602);
+    }
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CmdletParameterMetadataForGetCmdletFilteringParameter))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -623,83 +1767,260 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string[] _cmdletParameterSetsField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ValueFromPipeline
         {
             get
             {
-                return this._valueFromPipelineField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 17549, 17636);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17585, 17621);
 
+                    return this._valueFromPipelineField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 17549, 17636);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 17435, 17751);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 17435, 17751);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 17652, 17740);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17688, 17725);
+
+                    this._valueFromPipelineField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 17652, 17740);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 17435, 17751);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 17435, 17751);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ValueFromPipelineSpecified
         {
             get
             {
-                return this._valueFromPipelineFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 17907, 18003);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17943, 17988);
 
+                    return this._valueFromPipelineFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 17907, 18003);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 17787, 18127);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 17787, 18127);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 18019, 18116);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 18055, 18101);
+
+                    this._valueFromPipelineFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 18019, 18116);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 17787, 18127);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 17787, 18127);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ValueFromPipelineByPropertyName
         {
             get
             {
-                return this._valueFromPipelineByPropertyNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 18291, 18392);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 18327, 18377);
 
+                    return this._valueFromPipelineByPropertyNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 18291, 18392);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 18163, 18521);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 18163, 18521);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineByPropertyNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 18408, 18510);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 18444, 18495);
+
+                    this._valueFromPipelineByPropertyNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 18408, 18510);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 18163, 18521);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 18163, 18521);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ValueFromPipelineByPropertyNameSpecified
         {
             get
             {
-                return this._valueFromPipelineByPropertyNameFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 18691, 18801);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 18727, 18786);
 
+                    return this._valueFromPipelineByPropertyNameFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 18691, 18801);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 18557, 18939);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 18557, 18939);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineByPropertyNameFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 18817, 18928);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 18853, 18913);
+
+                    this._valueFromPipelineByPropertyNameFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 18817, 18928);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 18557, 18939);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 18557, 18939);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string[] CmdletParameterSets
         {
             get
             {
-                return this._cmdletParameterSetsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 19095, 19184);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 19131, 19169);
 
+                    return this._cmdletParameterSetsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 19095, 19184);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 18975, 19301);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 18975, 19301);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterSetsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 19200, 19290);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 19236, 19275);
+
+                    this._cmdletParameterSetsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 19200, 19290);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 18975, 19301);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 18975, 19301);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataForGetCmdletParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 16630, 19308);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17127, 17150);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17176, 17208);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17234, 17271);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17297, 17343);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 17373, 17398);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 16630, 19308);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 16630, 19308);
+        }
+
+
+        static CmdletParameterMetadataForGetCmdletParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 16630, 19308);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 16630, 19308);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 16630, 19308);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 16630, 19308);
+    }
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CmdletParameterMetadataForGetCmdletParameter))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CmdletParameterMetadataForGetCmdletFilteringParameter))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CmdletParameterMetadataForInstanceMethodParameter))]
@@ -739,224 +2060,721 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _positionField;
 
-        /// <remarks/>
         public object AllowEmptyCollection
         {
             get
             {
-                return this._allowEmptyCollectionField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 20995, 21085);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21031, 21070);
 
+                    return this._allowEmptyCollectionField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 20995, 21085);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 20936, 21203);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 20936, 21203);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._allowEmptyCollectionField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21101, 21192);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21137, 21177);
+
+                    this._allowEmptyCollectionField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21101, 21192);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 20936, 21203);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 20936, 21203);
+                }
             }
         }
 
-        /// <remarks/>
         public object AllowEmptyString
         {
             get
             {
-                return this._allowEmptyStringField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21294, 21380);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21330, 21365);
 
+                    return this._allowEmptyStringField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21294, 21380);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 21239, 21494);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 21239, 21494);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._allowEmptyStringField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21396, 21483);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21432, 21468);
+
+                    this._allowEmptyStringField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21396, 21483);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 21239, 21494);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 21239, 21494);
+                }
             }
         }
 
-        /// <remarks/>
         public object AllowNull
         {
             get
             {
-                return this._allowNullField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21578, 21657);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21614, 21642);
 
+                    return this._allowNullField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21578, 21657);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 21530, 21764);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 21530, 21764);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._allowNullField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21673, 21753);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21709, 21738);
+
+                    this._allowNullField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21673, 21753);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 21530, 21764);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 21530, 21764);
+                }
             }
         }
 
-        /// <remarks/>
         public object ValidateNotNull
         {
             get
             {
-                return this._validateNotNullField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21854, 21939);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21890, 21924);
 
+                    return this._validateNotNullField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21854, 21939);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 21800, 22052);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 21800, 22052);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._validateNotNullField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 21955, 22041);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 21991, 22026);
+
+                    this._validateNotNullField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 21955, 22041);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 21800, 22052);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 21800, 22052);
+                }
             }
         }
 
-        /// <remarks/>
         public object ValidateNotNullOrEmpty
         {
             get
             {
-                return this._validateNotNullOrEmptyField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 22149, 22241);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 22185, 22226);
 
+                    return this._validateNotNullOrEmptyField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 22149, 22241);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 22088, 22361);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 22088, 22361);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._validateNotNullOrEmptyField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 22257, 22350);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 22293, 22335);
+
+                    this._validateNotNullOrEmptyField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 22257, 22350);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 22088, 22361);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 22088, 22361);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletParameterMetadataValidateCount ValidateCount
         {
             get
             {
-                return this._validateCountField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 22479, 22562);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 22515, 22547);
 
+                    return this._validateCountField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 22479, 22562);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 22397, 22673);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 22397, 22673);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._validateCountField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 22578, 22662);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 22614, 22647);
+
+                    this._validateCountField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 22578, 22662);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 22397, 22673);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 22397, 22673);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletParameterMetadataValidateLength ValidateLength
         {
             get
             {
-                return this._validateLengthField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 22793, 22877);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 22829, 22862);
 
+                    return this._validateLengthField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 22793, 22877);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 22709, 22989);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 22709, 22989);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._validateLengthField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 22893, 22978);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 22929, 22963);
+
+                    this._validateLengthField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 22893, 22978);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 22709, 22989);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 22709, 22989);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletParameterMetadataValidateRange ValidateRange
         {
             get
             {
-                return this._validateRangeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 23107, 23190);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 23143, 23175);
 
+                    return this._validateRangeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 23107, 23190);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23025, 23301);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23025, 23301);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._validateRangeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 23206, 23290);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 23242, 23275);
+
+                    this._validateRangeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 23206, 23290);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23025, 23301);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23025, 23301);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("AllowedValue", IsNullable = false)]
         public string[] ValidateSet
         {
             get
             {
-                return this._validateSetField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 23483, 23564);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 23519, 23549);
 
+                    return this._validateSetField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 23483, 23564);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23337, 23673);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23337, 23673);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._validateSetField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 23580, 23662);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 23616, 23647);
+
+                    this._validateSetField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 23580, 23662);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23337, 23673);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23337, 23673);
+                }
             }
         }
 
-        /// <remarks/>
         public ObsoleteAttributeMetadata Obsolete
         {
             get
             {
-                return this._obsoleteField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 23775, 23853);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 23811, 23838);
 
+                    return this._obsoleteField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 23775, 23853);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23709, 23959);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23709, 23959);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._obsoleteField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 23869, 23948);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 23905, 23933);
+
+                    this._obsoleteField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 23869, 23948);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23709, 23959);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23709, 23959);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsMandatory
         {
             get
             {
-                return this._isMandatoryField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 24103, 24184);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 24139, 24169);
 
+                    return this._isMandatoryField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 24103, 24184);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23995, 24293);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23995, 24293);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._isMandatoryField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 24200, 24282);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 24236, 24267);
+
+                    this._isMandatoryField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 24200, 24282);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 23995, 24293);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 23995, 24293);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsMandatorySpecified
         {
             get
             {
-                return this._isMandatoryFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 24443, 24533);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 24479, 24518);
 
+                    return this._isMandatoryFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 24443, 24533);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 24329, 24651);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 24329, 24651);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._isMandatoryFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 24549, 24640);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 24585, 24625);
+
+                    this._isMandatoryFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 24549, 24640);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 24329, 24651);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 24329, 24651);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string[] Aliases
         {
             get
             {
-                return this._aliasesField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 24795, 24872);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 24831, 24857);
 
+                    return this._aliasesField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 24795, 24872);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 24687, 24977);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 24687, 24977);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._aliasesField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 24888, 24966);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 24924, 24951);
+
+                    this._aliasesField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 24888, 24966);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 24687, 24977);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 24687, 24977);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string PSName
         {
             get
             {
-                return this._pSNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 25118, 25194);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 25154, 25179);
 
+                    return this._pSNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 25118, 25194);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 25013, 25298);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 25013, 25298);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._pSNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 25210, 25287);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 25246, 25272);
+
+                    this._pSNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 25210, 25287);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 25013, 25298);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 25013, 25298);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
         public string Position
         {
             get
             {
-                return this._positionField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 25472, 25550);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 25508, 25535);
 
+                    return this._positionField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 25472, 25550);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 25334, 25656);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 25334, 25656);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._positionField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 25566, 25645);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 25602, 25630);
+
+                    this._positionField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 25566, 25645);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 25334, 25656);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 25334, 25656);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 19336, 25663);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20114, 20140);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20168, 20190);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20218, 20233);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20261, 20282);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20310, 20338);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20396, 20415);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20474, 20494);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20552, 20571);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20601, 20618);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20665, 20679);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20705, 20722);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20748, 20774);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20804, 20817);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20845, 20857);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 20885, 20899);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 19336, 25663);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 19336, 25663);
+        }
+
+
+        static CmdletParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 19336, 25663);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 19336, 25663);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 19336, 25663);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 19336, 25663);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -966,38 +2784,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _maxField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
         public string Min
         {
             get
             {
-                return this._minField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 26279, 26352);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 26315, 26337);
 
+                    return this._minField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 26279, 26352);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 26146, 26453);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 26146, 26453);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._minField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 26368, 26442);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 26404, 26427);
+
+                    this._minField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 26368, 26442);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 26146, 26453);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 26146, 26453);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
         public string Max
         {
             get
             {
-                return this._maxField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 26622, 26695);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 26658, 26680);
 
+                    return this._maxField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 26622, 26695);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 26489, 26796);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 26489, 26796);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._maxField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 26711, 26785);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 26747, 26770);
+
+                    this._maxField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 26711, 26785);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 26489, 26796);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 26489, 26796);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataValidateCount()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 25691, 26803);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 26063, 26072);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 26100, 26109);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 25691, 26803);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 25691, 26803);
+        }
+
+
+        static CmdletParameterMetadataValidateCount()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 25691, 26803);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 25691, 26803);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 25691, 26803);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 25691, 26803);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1007,38 +2906,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _maxField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
         public string Min
         {
             get
             {
-                return this._minField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 27420, 27493);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 27456, 27478);
 
+                    return this._minField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 27420, 27493);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 27287, 27594);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 27287, 27594);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._minField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 27509, 27583);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 27545, 27568);
+
+                    this._minField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 27509, 27583);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 27287, 27594);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 27287, 27594);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "nonNegativeInteger")]
         public string Max
         {
             get
             {
-                return this._maxField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 27763, 27836);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 27799, 27821);
 
+                    return this._maxField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 27763, 27836);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 27630, 27937);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 27630, 27937);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._maxField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 27852, 27926);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 27888, 27911);
+
+                    this._maxField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 27852, 27926);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 27630, 27937);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 27630, 27937);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataValidateLength()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 26831, 27944);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 27204, 27213);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 27241, 27250);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 26831, 27944);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 26831, 27944);
+        }
+
+
+        static CmdletParameterMetadataValidateLength()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 26831, 27944);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 26831, 27944);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 26831, 27944);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 26831, 27944);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1048,38 +3028,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _maxField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "integer")]
         public string Min
         {
             get
             {
-                return this._minField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 28549, 28622);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 28585, 28607);
 
+                    return this._minField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 28549, 28622);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 28427, 28723);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 28427, 28723);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._minField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 28638, 28712);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 28674, 28697);
+
+                    this._minField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 28638, 28712);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 28427, 28723);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 28427, 28723);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "integer")]
         public string Max
         {
             get
             {
-                return this._maxField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 28881, 28954);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 28917, 28939);
 
+                    return this._maxField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 28881, 28954);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 28759, 29055);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 28759, 29055);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._maxField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 28970, 29044);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 29006, 29029);
+
+                    this._maxField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 28970, 29044);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 28759, 29055);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 28759, 29055);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataValidateRange()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 27972, 29062);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 28344, 28353);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 28381, 28390);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 27972, 29062);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 27972, 29062);
+        }
+
+
+        static CmdletParameterMetadataValidateRange()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 27972, 29062);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 27972, 29062);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 27972, 29062);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 27972, 29062);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1087,23 +3148,72 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
     {
         private string _messageField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Message
         {
             get
             {
-                return this._messageField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 29585, 29662);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 29621, 29647);
 
+                    return this._messageField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 29585, 29662);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 29479, 29767);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 29479, 29767);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._messageField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 29678, 29756);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 29714, 29741);
+
+                    this._messageField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 29678, 29756);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 29479, 29767);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 29479, 29767);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public ObsoleteAttributeMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 29090, 29774);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 29429, 29442);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 29090, 29774);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 29090, 29774);
+        }
+
+
+        static ObsoleteAttributeMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 29090, 29774);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 29090, 29774);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 29090, 29774);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 29090, 29774);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1113,38 +3223,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private bool _valueFromPipelineByPropertyNameFieldSpecified;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ValueFromPipelineByPropertyName
         {
             get
             {
-                return this._valueFromPipelineByPropertyNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 30463, 30564);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 30499, 30549);
 
+                    return this._valueFromPipelineByPropertyNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 30463, 30564);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 30335, 30693);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 30335, 30693);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineByPropertyNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 30580, 30682);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 30616, 30667);
+
+                    this._valueFromPipelineByPropertyNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 30580, 30682);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 30335, 30693);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 30335, 30693);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ValueFromPipelineByPropertyNameSpecified
         {
             get
             {
-                return this._valueFromPipelineByPropertyNameFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 30863, 30973);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 30899, 30958);
 
+                    return this._valueFromPipelineByPropertyNameFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 30863, 30973);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 30729, 31111);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 30729, 31111);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineByPropertyNameFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 30989, 31100);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 31025, 31085);
+
+                    this._valueFromPipelineByPropertyNameFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 30989, 31100);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 30729, 31111);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 30729, 31111);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataForInstanceMethodParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 29802, 31118);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 30189, 30226);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 30252, 30298);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 29802, 31118);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 29802, 31118);
+        }
+
+
+        static CmdletParameterMetadataForInstanceMethodParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 29802, 31118);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 29802, 31118);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 29802, 31118);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 29802, 31118);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1158,68 +3349,213 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private bool _valueFromPipelineByPropertyNameFieldSpecified;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ValueFromPipeline
         {
             get
             {
-                return this._valueFromPipelineField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 31898, 31985);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 31934, 31970);
 
+                    return this._valueFromPipelineField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 31898, 31985);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 31784, 32100);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 31784, 32100);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 32001, 32089);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 32037, 32074);
+
+                    this._valueFromPipelineField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 32001, 32089);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 31784, 32100);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 31784, 32100);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ValueFromPipelineSpecified
         {
             get
             {
-                return this._valueFromPipelineFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 32256, 32352);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 32292, 32337);
 
+                    return this._valueFromPipelineFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 32256, 32352);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 32136, 32476);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 32136, 32476);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 32368, 32465);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 32404, 32450);
+
+                    this._valueFromPipelineFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 32368, 32465);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 32136, 32476);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 32136, 32476);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ValueFromPipelineByPropertyName
         {
             get
             {
-                return this._valueFromPipelineByPropertyNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 32640, 32741);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 32676, 32726);
 
+                    return this._valueFromPipelineByPropertyNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 32640, 32741);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 32512, 32870);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 32512, 32870);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineByPropertyNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 32757, 32859);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 32793, 32844);
+
+                    this._valueFromPipelineByPropertyNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 32757, 32859);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 32512, 32870);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 32512, 32870);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ValueFromPipelineByPropertyNameSpecified
         {
             get
             {
-                return this._valueFromPipelineByPropertyNameFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 33040, 33150);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 33076, 33135);
 
+                    return this._valueFromPipelineByPropertyNameFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 33040, 33150);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 32906, 33288);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 32906, 33288);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueFromPipelineByPropertyNameFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 33166, 33277);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 33202, 33262);
+
+                    this._valueFromPipelineByPropertyNameFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 33166, 33277);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 32906, 33288);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 32906, 33288);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletParameterMetadataForStaticMethodParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 31146, 33295);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 31531, 31554);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 31580, 31612);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 31638, 31675);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 31701, 31747);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 31146, 33295);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 31146, 33295);
+        }
+
+
+        static CmdletParameterMetadataForStaticMethodParameter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 31146, 33295);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 31146, 33295);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 31146, 33295);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 31146, 33295);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1231,51 +3567,164 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _optionNameField;
 
-        /// <remarks/>
         public TypeMetadata Type
         {
             get
             {
-                return this._typeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 33889, 33963);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 33925, 33948);
 
+                    return this._typeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 33889, 33963);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 33840, 34065);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 33840, 34065);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._typeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 33979, 34054);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 34015, 34039);
+
+                    this._typeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 33979, 34054);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 33840, 34065);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 33840, 34065);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletParameterMetadataForGetCmdletParameter CmdletParameterMetadata
         {
             get
             {
-                return this._cmdletParameterMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 34201, 34294);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 34237, 34279);
 
+                    return this._cmdletParameterMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 34201, 34294);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 34101, 34415);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 34101, 34415);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 34310, 34404);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 34346, 34389);
+
+                    this._cmdletParameterMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 34310, 34404);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 34101, 34415);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 34101, 34415);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string OptionName
         {
             get
             {
-                return this._optionNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 34560, 34640);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 34596, 34625);
 
+                    return this._optionNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 34560, 34640);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 34451, 34748);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 34451, 34748);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._optionNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 34656, 34737);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 34692, 34722);
+
+                    this._optionNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 34656, 34737);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 34451, 34748);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 34451, 34748);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public QueryOption()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 33323, 34755);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 33654, 33664);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 33730, 33759);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 33787, 33803);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 33323, 34755);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 33323, 34755);
+        }
+
+
+        static QueryOption()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 33323, 34755);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 33323, 34755);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 33323, 34755);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 33323, 34755);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1285,36 +3734,117 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private GetCmdletParameters _getCmdletParametersField;
 
-        /// <remarks/>
         public CommonCmdletMetadata CmdletMetadata
         {
             get
             {
-                return this._cmdletMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 35318, 35402);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 35354, 35387);
 
+                    return this._cmdletMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 35318, 35402);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 35251, 35514);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 35251, 35514);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 35418, 35503);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 35454, 35488);
+
+                    this._cmdletMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 35418, 35503);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 35251, 35514);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 35251, 35514);
+                }
             }
         }
 
-        /// <remarks/>
         public GetCmdletParameters GetCmdletParameters
         {
             get
             {
-                return this._getCmdletParametersField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 35621, 35710);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 35657, 35695);
 
+                    return this._getCmdletParametersField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 35621, 35710);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 35550, 35827);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 35550, 35827);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._getCmdletParametersField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 35726, 35816);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 35762, 35801);
+
+                    this._getCmdletParametersField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 35726, 35816);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 35550, 35827);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 35550, 35827);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public GetCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 34783, 35834);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 35128, 35148);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 35189, 35214);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 34783, 35834);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 34783, 35834);
+        }
+
+
+        static GetCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 34783, 35834);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 34783, 35834);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 34783, 35834);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 34783, 35834);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1334,109 +3864,352 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _helpUriField;
 
-        /// <remarks/>
         public ObsoleteAttributeMetadata Obsolete
         {
             get
             {
-                return this._obsoleteField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 36600, 36678);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36636, 36663);
 
+                    return this._obsoleteField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 36600, 36678);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 36534, 36784);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 36534, 36784);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._obsoleteField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 36694, 36773);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36730, 36758);
+
+                    this._obsoleteField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 36694, 36773);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 36534, 36784);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 36534, 36784);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Verb
         {
             get
             {
-                return this._verbField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 36923, 36997);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36959, 36982);
 
+                    return this._verbField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 36923, 36997);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 36820, 37099);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 36820, 37099);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._verbField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37013, 37088);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 37049, 37073);
+
+                    this._verbField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37013, 37088);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 36820, 37099);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 36820, 37099);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Noun
         {
             get
             {
-                return this._nounField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37238, 37312);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 37274, 37297);
 
+                    return this._nounField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37238, 37312);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 37135, 37414);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 37135, 37414);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._nounField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37328, 37403);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 37364, 37388);
+
+                    this._nounField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37328, 37403);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 37135, 37414);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 37135, 37414);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string[] Aliases
         {
             get
             {
-                return this._aliasesField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37558, 37635);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 37594, 37620);
 
+                    return this._aliasesField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37558, 37635);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 37450, 37740);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 37450, 37740);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._aliasesField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37651, 37729);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 37687, 37714);
+
+                    this._aliasesField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37651, 37729);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 37450, 37740);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 37450, 37740);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public ConfirmImpact ConfirmImpact
         {
             get
             {
-                return this._confirmImpactField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37895, 37978);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 37931, 37963);
 
+                    return this._confirmImpactField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37895, 37978);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 37776, 38089);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 37776, 38089);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._confirmImpactField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 37994, 38078);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 38030, 38063);
+
+                    this._confirmImpactField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 37994, 38078);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 37776, 38089);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 37776, 38089);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ConfirmImpactSpecified
         {
             get
             {
-                return this._confirmImpactFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 38241, 38333);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 38277, 38318);
 
+                    return this._confirmImpactFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 38241, 38333);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 38125, 38453);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 38125, 38453);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._confirmImpactFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 38349, 38442);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 38385, 38427);
+
+                    this._confirmImpactFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 38349, 38442);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 38125, 38453);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 38125, 38453);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
         public string HelpUri
         {
             get
             {
-                return this._helpUriField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 38614, 38691);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 38650, 38676);
 
+                    return this._helpUriField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 38614, 38691);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 38489, 38796);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 38489, 38796);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._helpUriField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 38707, 38785);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 38743, 38770);
+
+                    this._helpUriField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 38707, 38785);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 38489, 38796);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 38489, 38796);
+                }
             }
         }
+
+        public CommonCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 35862, 38803);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36215, 36229);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36257, 36267);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36295, 36305);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36335, 36348);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36383, 36402);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36428, 36456);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 36484, 36497);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 35862, 38803);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 35862, 38803);
+        }
+
+
+        static CommonCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 35862, 38803);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 35862, 38803);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 35862, 38803);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 35862, 38803);
     }
 
     /// <remarks/>
@@ -1456,8 +4229,6 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
         /// <remarks/>
         High,
     }
-
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1467,37 +4238,118 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private StaticMethodMetadata[] _methodField;
 
-        /// <remarks/>
         public StaticCmdletMetadataCmdletMetadata CmdletMetadata
         {
             get
             {
-                return this._cmdletMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 39819, 39903);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 39855, 39888);
 
+                    return this._cmdletMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 39819, 39903);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 39738, 40015);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 39738, 40015);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 39919, 40004);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 39955, 39989);
+
+                    this._cmdletMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 39919, 40004);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 39738, 40015);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 39738, 40015);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Method")]
         public StaticMethodMetadata[] Method
         {
             get
             {
-                return this._methodField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 40178, 40254);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 40214, 40239);
 
+                    return this._methodField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 40178, 40254);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 40051, 40358);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 40051, 40358);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._methodField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 40270, 40347);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 40306, 40332);
+
+                    this._methodField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 40270, 40347);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 40051, 40358);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 40051, 40358);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public StaticCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 39263, 40365);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 39625, 39645);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 39689, 39701);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 39263, 40365);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 39263, 40365);
+        }
+
+
+        static StaticCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 39263, 40365);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 39263, 40365);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 39263, 40365);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 39263, 40365);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1505,23 +4357,72 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
     {
         private string _defaultCmdletParameterSetField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DefaultCmdletParameterSet
         {
             get
             {
-                return this._defaultCmdletParameterSetField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 40978, 41073);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 41014, 41058);
 
+                    return this._defaultCmdletParameterSetField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 40978, 41073);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 40854, 41196);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 40854, 41196);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._defaultCmdletParameterSetField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 41089, 41185);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 41125, 41170);
+
+                    this._defaultCmdletParameterSetField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 41089, 41185);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 40854, 41196);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 40854, 41196);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public StaticCmdletMetadataCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 40393, 41203);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 40786, 40817);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 40393, 41203);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 40393, 41203);
+        }
+
+
+        static StaticCmdletMetadataCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 40393, 41203);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 40393, 41203);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 40393, 41203);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 40393, 41203);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1531,38 +4432,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _cmdletParameterSetField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Parameter", IsNullable = false)]
         public StaticMethodParameterMetadata[] Parameters
         {
             get
             {
-                return this._parametersField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 41883, 41963);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 41919, 41948);
 
+                    return this._parametersField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 41883, 41963);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 41718, 42071);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 41718, 42071);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._parametersField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 41979, 42060);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 42015, 42045);
+
+                    this._parametersField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 41979, 42060);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 41718, 42071);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 41718, 42071);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string CmdletParameterSet
         {
             get
             {
-                return this._cmdletParameterSetField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 42224, 42312);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 42260, 42297);
 
+                    return this._cmdletParameterSetField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 42224, 42312);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 42107, 42428);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 42107, 42428);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterSetField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 42328, 42417);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 42364, 42402);
+
+                    this._cmdletParameterSetField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 42328, 42417);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 42107, 42428);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 42107, 42428);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public StaticMethodMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 41231, 42435);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 41613, 41629);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 41657, 41681);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 41231, 42435);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 41231, 42435);
+        }
+
+
+        static StaticMethodMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 41231, 42435);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 41231, 42435);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 41231, 42435);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 41231, 42435);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1572,36 +4554,117 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private CmdletOutputMetadata _cmdletOutputMetadataField;
 
-        /// <remarks/>
         public CmdletParameterMetadataForStaticMethodParameter CmdletParameterMetadata
         {
             get
             {
-                return this._cmdletParameterMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 43116, 43209);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 43152, 43194);
 
+                    return this._cmdletParameterMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 43116, 43209);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 43013, 43330);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 43013, 43330);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 43225, 43319);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 43261, 43304);
+
+                    this._cmdletParameterMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 43225, 43319);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 43013, 43330);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 43013, 43330);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletOutputMetadata CmdletOutputMetadata
         {
             get
             {
-                return this._cmdletOutputMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 43439, 43529);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 43475, 43514);
 
+                    return this._cmdletOutputMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 43439, 43529);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 43366, 43647);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 43366, 43647);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletOutputMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 43545, 43636);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 43581, 43621);
+
+                    this._cmdletOutputMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 43545, 43636);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 43366, 43647);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 43366, 43647);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public StaticMethodParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 42463, 43654);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 42879, 42908);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 42950, 42976);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 42463, 43654);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 42463, 43654);
+        }
+
+
+        static StaticMethodParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 42463, 43654);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 42463, 43654);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 42463, 43654);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 42463, 43654);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1611,37 +4674,118 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _pSNameField;
 
-        /// <remarks/>
         public object ErrorCode
         {
             get
             {
-                return this._errorCodeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 44156, 44235);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 44192, 44220);
 
+                    return this._errorCodeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 44156, 44235);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 44108, 44342);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 44108, 44342);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._errorCodeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 44251, 44331);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 44287, 44316);
+
+                    this._errorCodeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 44251, 44331);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 44108, 44342);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 44108, 44342);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string PSName
         {
             get
             {
-                return this._pSNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 44483, 44559);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 44519, 44544);
 
+                    return this._pSNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 44483, 44559);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 44378, 44663);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 44378, 44663);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._pSNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 44575, 44652);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 44611, 44637);
+
+                    this._pSNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 44575, 44652);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 44378, 44663);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 44378, 44663);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CmdletOutputMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 43682, 44670);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 44016, 44031);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 44059, 44071);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 43682, 44670);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 43682, 44670);
+        }
+
+
+        static CmdletOutputMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 43682, 44670);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 43682, 44670);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 43682, 44670);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 43682, 44670);
+    }
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(InstanceMethodParameterMetadata))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StaticMethodParameterMetadata))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
@@ -1655,52 +4799,165 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _defaultValueField;
 
-        /// <remarks/>
         public TypeMetadata Type
         {
             get
             {
-                return this._typeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 45420, 45494);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45456, 45479);
 
+                    return this._typeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 45420, 45494);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 45371, 45596);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 45371, 45596);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._typeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 45510, 45585);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45546, 45570);
+
+                    this._typeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 45510, 45585);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 45371, 45596);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 45371, 45596);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ParameterName
         {
             get
             {
-                return this._parameterNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 45744, 45827);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45780, 45812);
 
+                    return this._parameterNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 45744, 45827);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 45632, 45938);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 45632, 45938);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._parameterNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 45843, 45927);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45879, 45912);
+
+                    this._parameterNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 45843, 45927);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 45632, 45938);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 45632, 45938);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DefaultValue
         {
             get
             {
-                return this._defaultValueField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 46085, 46167);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 46121, 46152);
 
+                    return this._defaultValueField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 46085, 46167);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 45974, 46277);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 45974, 46277);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._defaultValueField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 46183, 46266);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 46219, 46251);
+
+                    this._defaultValueField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 46183, 46266);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 45974, 46277);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 45974, 46277);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CommonMethodParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 44698, 46284);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45231, 45241);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45269, 45288);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 45316, 45334);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 44698, 46284);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 44698, 46284);
+        }
+
+
+        static CommonMethodParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 44698, 46284);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 44698, 46284);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 44698, 46284);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 44698, 46284);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1710,36 +4967,117 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private CmdletOutputMetadata _cmdletOutputMetadataField;
 
-        /// <remarks/>
         public CmdletParameterMetadataForInstanceMethodParameter CmdletParameterMetadata
         {
             get
             {
-                return this._cmdletParameterMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 46971, 47064);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 47007, 47049);
 
+                    return this._cmdletParameterMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 46971, 47064);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 46866, 47185);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 46866, 47185);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 47080, 47174);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 47116, 47159);
+
+                    this._cmdletParameterMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 47080, 47174);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 46866, 47185);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 46866, 47185);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletOutputMetadata CmdletOutputMetadata
         {
             get
             {
-                return this._cmdletOutputMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 47294, 47384);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 47330, 47369);
 
+                    return this._cmdletOutputMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 47294, 47384);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 47221, 47502);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 47221, 47502);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletOutputMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 47400, 47491);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 47436, 47476);
+
+                    this._cmdletOutputMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 47400, 47491);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 47221, 47502);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 47221, 47502);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public InstanceMethodParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 46312, 47509);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 46732, 46761);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 46803, 46829);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 46312, 47509);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 46312, 47509);
+        }
+
+
+        static InstanceMethodParameterMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 46312, 47509);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 46312, 47509);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 46312, 47509);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 46312, 47509);
+    }
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(InstanceMethodMetadata))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StaticMethodMetadata))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
@@ -1751,37 +5089,118 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _methodNameField;
 
-        /// <remarks/>
         public CommonMethodMetadataReturnValue ReturnValue
         {
             get
             {
-                return this._returnValueField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 48235, 48316);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 48271, 48301);
 
+                    return this._returnValueField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 48235, 48316);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 48160, 48425);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 48160, 48425);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._returnValueField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 48332, 48414);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 48368, 48399);
+
+                    this._returnValueField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 48332, 48414);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 48160, 48425);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 48160, 48425);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string MethodName
         {
             get
             {
-                return this._methodNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 48570, 48650);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 48606, 48635);
 
+                    return this._methodNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 48570, 48650);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 48461, 48758);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 48461, 48758);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._methodNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 48666, 48747);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 48702, 48732);
+
+                    this._methodNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 48666, 48747);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 48461, 48758);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 48461, 48758);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CommonMethodMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 47537, 48765);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 48062, 48079);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 48107, 48123);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 47537, 48765);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 47537, 48765);
+        }
+
+
+        static CommonMethodMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 47537, 48765);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 47537, 48765);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 47537, 48765);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 47537, 48765);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1791,36 +5210,117 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private CmdletOutputMetadata _cmdletOutputMetadataField;
 
-        /// <remarks/>
         public TypeMetadata Type
         {
             get
             {
-                return this._typeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 49330, 49404);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 49366, 49389);
 
+                    return this._typeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 49330, 49404);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 49281, 49506);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 49281, 49506);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._typeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 49420, 49495);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 49456, 49480);
+
+                    this._typeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 49420, 49495);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 49281, 49506);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 49281, 49506);
+                }
             }
         }
 
-        /// <remarks/>
         public CmdletOutputMetadata CmdletOutputMetadata
         {
             get
             {
-                return this._cmdletOutputMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 49615, 49705);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 49651, 49690);
 
+                    return this._cmdletOutputMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 49615, 49705);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 49542, 49823);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 49542, 49823);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletOutputMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 49721, 49812);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 49757, 49797);
+
+                    this._cmdletOutputMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 49721, 49812);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 49542, 49823);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 49542, 49823);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public CommonMethodMetadataReturnValue()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 48793, 49830);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 49166, 49176);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 49218, 49244);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 48793, 49830);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 48793, 49830);
+        }
+
+
+        static CommonMethodMetadataReturnValue()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 48793, 49830);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 48793, 49830);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 48793, 49830);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 48793, 49830);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1828,23 +5328,72 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
     {
         private InstanceMethodParameterMetadata[] _parametersField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Parameter", IsNullable = false)]
         public InstanceMethodParameterMetadata[] Parameters
         {
             get
             {
-                return this._parametersField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 50464, 50544);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 50500, 50529);
 
+                    return this._parametersField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 50464, 50544);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 50297, 50652);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 50297, 50652);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._parametersField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 50560, 50641);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 50596, 50626);
+
+                    this._parametersField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 50560, 50641);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 50297, 50652);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 50297, 50652);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public InstanceMethodMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 49858, 50659);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 50244, 50260);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 49858, 50659);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 49858, 50659);
+        }
+
+
+        static InstanceMethodMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 49858, 50659);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 49858, 50659);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 49858, 50659);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 49858, 50659);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1856,50 +5405,163 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private GetCmdletParameters _getCmdletParametersField;
 
-        /// <remarks/>
         public CommonCmdletMetadata CmdletMetadata
         {
             get
             {
-                return this._cmdletMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 51283, 51367);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51319, 51352);
 
+                    return this._cmdletMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 51283, 51367);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 51216, 51479);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 51216, 51479);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 51383, 51468);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51419, 51453);
+
+                    this._cmdletMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 51383, 51468);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 51216, 51479);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 51216, 51479);
+                }
             }
         }
 
-        /// <remarks/>
         public InstanceMethodMetadata Method
         {
             get
             {
-                return this._methodField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 51576, 51652);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51612, 51637);
 
+                    return this._methodField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 51576, 51652);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 51515, 51756);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 51515, 51756);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._methodField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 51668, 51745);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51704, 51730);
+
+                    this._methodField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 51668, 51745);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 51515, 51756);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 51515, 51756);
+                }
             }
         }
 
-        /// <remarks/>
         public GetCmdletParameters GetCmdletParameters
         {
             get
             {
-                return this._getCmdletParametersField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 51863, 51952);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51899, 51937);
 
+                    return this._getCmdletParametersField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 51863, 51952);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 51792, 52069);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 51792, 52069);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._getCmdletParametersField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 51968, 52058);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 52004, 52043);
+
+                    this._getCmdletParametersField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 51968, 52058);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 51792, 52069);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 51792, 52069);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public InstanceCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 50687, 52076);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51037, 51057);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51101, 51113);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 51154, 51179);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 50687, 52076);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 50687, 52076);
+        }
+
+
+        static InstanceCmdletMetadata()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 50687, 52076);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 50687, 52076);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 50687, 52076);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 50687, 52076);
+    }
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(WildcardablePropertyQuery))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1908,22 +5570,71 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
     {
         private CmdletParameterMetadataForGetCmdletFilteringParameter _cmdletParameterMetadataField;
 
-        /// <remarks/>
         public CmdletParameterMetadataForGetCmdletFilteringParameter CmdletParameterMetadata
         {
             get
             {
-                return this._cmdletParameterMetadataField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 52740, 52833);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 52776, 52818);
 
+                    return this._cmdletParameterMetadataField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 52740, 52833);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 52631, 52954);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 52631, 52954);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._cmdletParameterMetadataField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 52849, 52943);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 52885, 52928);
+
+                    this._cmdletParameterMetadataField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 52849, 52943);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 52631, 52954);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 52631, 52954);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public PropertyQuery()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 52104, 52961);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 52565, 52594);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 52104, 52961);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 52104, 52961);
+        }
+
+
+        static PropertyQuery()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 52104, 52961);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 52104, 52961);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 52104, 52961);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 52104, 52961);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1933,35 +5644,118 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private bool _allowGlobbingFieldSpecified;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool AllowGlobbing
         {
             get
             {
-                return this._allowGlobbingField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 53562, 53645);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 53598, 53630);
 
+                    return this._allowGlobbingField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 53562, 53645);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 53452, 53756);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 53452, 53756);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._allowGlobbingField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 53661, 53745);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 53697, 53730);
+
+                    this._allowGlobbingField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 53661, 53745);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 53452, 53756);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 53452, 53756);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AllowGlobbingSpecified
         {
             get
             {
-                return this._allowGlobbingFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 53908, 54000);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 53944, 53985);
 
+                    return this._allowGlobbingFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 53908, 54000);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 53792, 54120);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 53792, 54120);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._allowGlobbingFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 54016, 54109);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 54052, 54094);
+
+                    this._allowGlobbingFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 54016, 54109);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 53792, 54120);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 53792, 54120);
+                }
             }
         }
+
+        public WildcardablePropertyQuery()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 52989, 54127);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 53342, 53361);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 53387, 53415);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 52989, 54127);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 52989, 54127);
+        }
+
+
+        static WildcardablePropertyQuery()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 52989, 54127);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 52989, 54127);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 52989, 54127);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 52989, 54127);
     }
 
     /// <remarks/>
@@ -1981,8 +5775,6 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
         /// <remarks/>
         RegularQuery,
     }
-
-    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -1992,38 +5784,119 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _valueField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
             get
             {
-                return this._nameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 55189, 55263);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 55225, 55248);
 
+                    return this._nameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 55189, 55263);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 55086, 55365);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 55086, 55365);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._nameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 55279, 55354);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 55315, 55339);
+
+                    this._nameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 55279, 55354);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 55086, 55365);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 55086, 55365);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
         public string Value
         {
             get
             {
-                return this._valueField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 55500, 55575);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 55536, 55560);
 
+                    return this._valueField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 55500, 55575);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 55401, 55678);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 55401, 55678);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 55591, 55667);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 55627, 55652);
+
+                    this._valueField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 55591, 55667);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 55401, 55678);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 55401, 55678);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public ClassMetadataData()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 54647, 55685);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 55000, 55010);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 55038, 55049);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 54647, 55685);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 54647, 55685);
+        }
+
+
+        static ClassMetadataData()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 54647, 55685);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 54647, 55685);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 54647, 55685);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 54647, 55685);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -2039,83 +5912,260 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private bool _bitwiseFlagsFieldSpecified;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Value")]
         public EnumMetadataEnumValue[] Value
         {
             get
             {
-                return this._valueField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 56443, 56518);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56479, 56503);
 
+                    return this._valueField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 56443, 56518);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 56317, 56621);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 56317, 56621);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 56534, 56610);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56570, 56595);
+
+                    this._valueField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 56534, 56610);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 56317, 56621);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 56317, 56621);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string EnumName
         {
             get
             {
-                return this._enumNameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 56764, 56842);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56800, 56827);
 
+                    return this._enumNameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 56764, 56842);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 56657, 56948);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 56657, 56948);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._enumNameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 56858, 56937);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56894, 56922);
+
+                    this._enumNameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 56858, 56937);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 56657, 56948);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 56657, 56948);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string UnderlyingType
         {
             get
             {
-                return this._underlyingTypeField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 57097, 57181);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 57133, 57166);
 
+                    return this._underlyingTypeField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 57097, 57181);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 56984, 57293);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 56984, 57293);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._underlyingTypeField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 57197, 57282);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 57233, 57267);
+
+                    this._underlyingTypeField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 57197, 57282);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 56984, 57293);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 56984, 57293);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool BitwiseFlags
         {
             get
             {
-                return this._bitwiseFlagsField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 57438, 57520);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 57474, 57505);
 
+                    return this._bitwiseFlagsField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 57438, 57520);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 57329, 57630);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 57329, 57630);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._bitwiseFlagsField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 57536, 57619);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 57572, 57604);
+
+                    this._bitwiseFlagsField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 57536, 57619);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 57329, 57630);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 57329, 57630);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool BitwiseFlagsSpecified
         {
             get
             {
-                return this._bitwiseFlagsFieldSpecified;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 57781, 57872);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 57817, 57857);
 
+                    return this._bitwiseFlagsFieldSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 57781, 57872);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 57666, 57991);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 57666, 57991);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._bitwiseFlagsFieldSpecified = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 57888, 57980);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 57924, 57965);
+
+                    this._bitwiseFlagsFieldSpecified = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 57888, 57980);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 57666, 57991);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 57666, 57991);
+                }
             }
         }
-    }
 
-    /// <remarks/>
+        public EnumMetadataEnum()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 55713, 57998);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56082, 56093);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56121, 56135);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56163, 56183);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56209, 56227);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 56253, 56280);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 55713, 57998);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 55713, 57998);
+        }
+
+
+        static EnumMetadataEnum()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 55713, 57998);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 55713, 57998);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 55713, 57998);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 55713, 57998);
+    }
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.0.30319.17929")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://schemas.microsoft.com/cmdlets-over-objects/2009/11")]
@@ -2125,34 +6175,117 @@ namespace Microsoft.PowerShell.Cmdletization.Xml
 
         private string _valueField;
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
             get
             {
-                return this._nameField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 58572, 58646);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 58608, 58631);
 
+                    return this._nameField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 58572, 58646);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 58469, 58748);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 58469, 58748);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._nameField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 58662, 58737);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 58698, 58722);
+
+                    this._nameField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 58662, 58737);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 58469, 58748);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 58469, 58748);
+                }
             }
         }
 
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "integer")]
         public string Value
         {
             get
             {
-                return this._valueField;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 58908, 58983);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 58944, 58968);
 
+                    return this._valueField;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 58908, 58983);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 58784, 59086);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 58784, 59086);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                this._valueField = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1072, 58999, 59075);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 59035, 59060);
+
+                    this._valueField = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1072, 58999, 59075);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1072, 58784, 59086);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 58784, 59086);
+                }
             }
         }
+
+        public EnumMetadataEnumValue()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1072, 58026, 59093);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 58383, 58393);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1072, 58421, 58432);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1072, 58026, 59093);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 58026, 59093);
+        }
+
+
+        static EnumMetadataEnumValue()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1072, 58026, 59093);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1072, 58026, 59093);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1072, 58026, 59093);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1072, 58026, 59093);
     }
 }

@@ -14,823 +14,2507 @@ using System.Management.Automation.Internal;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Monad help is an architecture made up of three layers:
-    ///     1. At the top is get-help commandlet from where help functionality is accessed.
-    ///     2. At the middle is the help system which collects help objects based on user's request.
-    ///     3. At the bottom are different help providers which provide help contents for different kinds of information requested.
-    ///
-    /// Class HelpSystem implements the middle layer of Monad Help.
-    ///
-    /// HelpSystem will provide functionalitys in following areas,
-    ///     1. Initialization and management of help providers
-    ///     2. Help engine: this will invoke different providers based on user's request.
-    ///     3. Help API: this is the API HelpSystem provide to get-help commandlet.
-    ///
-    /// Initialization:
-    ///     Initialization of different help providers needs some context information like "ExecutionContext"
-    ///
-    /// Help engine:
-    ///     By default, HelpInfo will be retrieved in two phase: exact-match phase and search phase.
-    ///
-    ///     Exact-match phase: help providers will be called in appropriate order to retrieve HelpInfo.
-    ///         If a match is found, help engine will stop and return the one and only HelpInfo retrieved.
-    ///
-    ///     Search phase: all relevant help providers will be called to retrieve HelpInfo. (Order doesn't
-    ///         matter in this case) Help engine will not stop until all help providers are called.
-    ///
-    ///     Behaviour of help engine can be modified based on Help API parameters in following ways,
-    ///         1. limit the number of HelpInfo to be returned.
-    ///         2. specify which providers will be used.
-    ///         3. general help info returned in case the search target is empty.
-    ///         4. default help info (or hint) returned in case no match is found.
-    ///
-    /// Help Api:
-    ///     Help Api is the function to be called by get-help commandlet.
-    ///
-    ///     Following information needs to be provided in Help Api parameters,
-    ///         1. search target: (which can be one or multiple strings)
-    ///         2. help type: limit the type of help to be searched.
-    ///         3. included fields: the fields to be included in the help info
-    ///         4. excluded fields: the fields to be excluded in the help info
-    ///         5. max number of results to be returned:
-    ///         6. scoring algorithm for help results?
-    ///         7. help reason: help can be directly invoked by end user or as a result of
-    ///             some command syntax error.
-    ///
-    ///     [gxie, 7-25-04]: included fields, excluded fields and help reason will be handled in
-    ///         get-help commandlet.
-    ///
-    ///     Help API's are internal. The only way to access help is by
-    ///     invoking the get-help command.
-    ///
-    ///     To support the scenario where multiple monad engine running in one process. It
-    ///     is required that each monad engine has its one help system instance.
-    ///
-    ///     Currently each ExecutionContext has a help system instance as its member.
-    ///
-    /// Help Providers:
-    ///     The basic contract for help providers is to provide help based on the
-    ///     search target.
-    ///
-    ///     The result of help provider invocation can be three things:
-    ///         a. Full help info. (in the case of exact-match and single search result)
-    ///         b. Short help info. (in the case of multiple search result)
-    ///         c. Partial help info. (in the case of some commandlet help info, which
-    ///                                 should be supplemented by provider help info)
-    ///         d. Help forwarding info. (in the case of alias, which will change the target
-    ///                                   for alias)
-    ///
-    ///     Help providers may need to provide functionality in following two area,
-    ///         a. caching and indexing to boost performance
-    ///         b. localization.
-    /// </summary>
-    internal class HelpSystem
-    {
-        /// <summary>
-        /// Constructor for HelpSystem.
-        /// </summary>
-        /// <param name="context">Execution context for this help system.</param>
-        internal HelpSystem(ExecutionContext context)
-        {
-            if (context == null)
+internal class HelpSystem
+{
+internal HelpSystem(ExecutionContext context)
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1161,4823,5110);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,5147,5164);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7431,7474);
+this._lastErrors = f_1161_7445_7474();DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7848,7885);
+this._lastHelpCategory = HelpCategory.None;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,8316,8342);
+this._verboseHelpErrors = false;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,9560,9579);
+this._searchPaths = null;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22501,22533);
+this._helpProviders = f_1161_22518_22533();DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,28125,28141);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29748,29756);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31318,31397);
+this._scriptBlockTokenCache = f_1161_31343_31397(isThreadSafe: true);
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,4893,5026) || true) && (context == null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,4893,5026);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,4946,5011);
+
+throw f_1161_4952_5010("ExecutionContext");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,4893,5026);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,5042,5070);
+
+_executionContext = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,5086,5099);
+
+f_1161_5086_5098(this);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1161,4823,5110);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,4823,5110);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,4823,5110);
+}
+		}
+
+private ExecutionContext _executionContext;
+
+internal ExecutionContext ExecutionContext
+{
+get
+		{
+			try
             {
-                throw PSTraceSource.NewArgumentNullException("ExecutionContext");
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,5532,5608);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,5568,5593);
+
+return _executionContext;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,5532,5608);
             }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,5465,5619);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,5465,5619);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
 
-            _executionContext = context;
-
-            Initialize();
-        }
-
-        private ExecutionContext _executionContext;
-
-        /// <summary>
-        /// ExecutionContext for the help system. Different help providers
-        /// will depend on this to retrieve session related information like
-        /// session state and command discovery objects.
-        /// </summary>
-        /// <value></value>
-        internal ExecutionContext ExecutionContext
-        {
-            get
-            {
-                return _executionContext;
-            }
-        }
-
-        #region Progress Callback
-
+        
         internal delegate void HelpProgressHandler(object sender, HelpProgressInfo arg);
 
-        internal event HelpProgressHandler OnProgress;
+        internal event HelpProgressHandler 
+OnProgress
+;
 
-        #endregion
-
-        #region Initialization
-
-        /// <summary>
-        /// Initialize help system with an execution context. If the execution context
-        /// matches the execution context of current singleton HelpSystem object, nothing
-        /// needs to be done. Otherwise, a new singleton HelpSystem object will be created
-        /// with the new execution context.
-        /// </summary>
-        internal void Initialize()
+internal void Initialize()
+		{
+			try
         {
-            _verboseHelpErrors = LanguagePrimitives.IsTrue(
-                _executionContext.GetVariableValue(SpecialVariables.VerboseHelpErrorsVarPath, false));
-            _helpErrorTracer = new HelpErrorTracer(this);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,6237,6551);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,6288,6439);
 
-            InitializeHelpProviders();
+_verboseHelpErrors = f_1161_6309_6438(f_1161_6353_6437(                _executionContext, SpecialVariables.VerboseHelpErrorsVarPath, false));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,6453,6498);
+
+_helpErrorTracer = f_1161_6472_6497(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,6514,6540);
+
+f_1161_6514_6539(this);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,6237,6551);
+
+object
+f_1161_6353_6437(System.Management.Automation.ExecutionContext
+this_param,System.Management.Automation.VariablePath
+path,bool
+defaultValue)
+{
+var return_v = this_param.GetVariableValue( path, (object)defaultValue);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 6353, 6437);
+return return_v;
+}
+
+
+bool
+f_1161_6309_6438(object
+obj)
+{
+var return_v = LanguagePrimitives.IsTrue( obj);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 6309, 6438);
+return return_v;
+}
+
+
+System.Management.Automation.HelpErrorTracer
+f_1161_6472_6497(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.HelpErrorTracer( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 6472, 6497);
+return return_v;
+}
+
+
+int
+f_1161_6514_6539(System.Management.Automation.HelpSystem
+this_param)
+{
+this_param.InitializeHelpProviders();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 6514, 6539);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,6237,6551);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,6237,6551);
+}
+		}
 
-        #endregion Initialization
-
-        #region Help API
-
-        /// <summary>
-        /// Get Help api function. This is the basic form of the Help API using help
-        /// request.
-        ///
-        /// Variants of this function are defined below, which will create help request
-        /// object on fly.
-        /// </summary>
-        /// <param name="helpRequest">HelpRequest object.</param>
-        /// <returns>An array of HelpInfo object.</returns>
-        internal IEnumerable<HelpInfo> GetHelp(HelpRequest helpRequest)
+internal IEnumerable<HelpInfo> GetHelp(HelpRequest helpRequest)
+		{
+			try
         {
-            if (helpRequest == null)
-                return null;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,7041,7322);
 
-            helpRequest.Validate();
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7129,7183) || true) && (helpRequest == null)
+)
 
-            ValidateHelpCulture();
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,7129,7183);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7171,7183);
 
-            return this.DoGetHelp(helpRequest);
+return null;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,7129,7183);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7199,7222);
+
+f_1161_7199_7221(
+            helpRequest);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7238,7260);
+
+f_1161_7238_7259(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7276,7311);
+
+return f_1161_7283_7310(this, helpRequest);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,7041,7322);
+
+int
+f_1161_7199_7221(System.Management.Automation.HelpRequest
+this_param)
+{
+this_param.Validate();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 7199, 7221);
+return 0;
+}
+
+
+int
+f_1161_7238_7259(System.Management.Automation.HelpSystem
+this_param)
+{
+this_param.ValidateHelpCulture();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 7238, 7259);
+return 0;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_7283_7310(System.Management.Automation.HelpSystem
+this_param,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.DoGetHelp( helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 7283, 7310);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,7041,7322);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,7041,7322);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion Help API
+private Collection<ErrorRecord> _lastErrors ;
 
-        #region Error Handling
-
-        private Collection<ErrorRecord> _lastErrors = new Collection<ErrorRecord>();
-
-        /// <summary>
-        /// This is for tracking the last set of errors happened during the help
-        /// search.
-        /// </summary>
-        /// <value></value>
-        internal Collection<ErrorRecord> LastErrors
-        {
-            get
+internal Collection<ErrorRecord> LastErrors
+{
+get
+		{
+			try
             {
-                return _lastErrors;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,7734,7804);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,7770,7789);
+
+return _lastErrors;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,7734,7804);
             }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,7666,7815);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,7666,7815);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+private HelpCategory _lastHelpCategory ;
+
+internal HelpCategory LastHelpCategory
+{
+get
+		{
+			try
+            {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,8149,8225);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,8185,8210);
+
+return _lastHelpCategory;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,8149,8225);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,8086,8236);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,8086,8236);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+private bool _verboseHelpErrors ;
+
+internal bool VerboseHelpErrors
+{
+get
+		{
+			try
+            {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,9242,9319);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,9278,9304);
+
+return _verboseHelpErrors;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,9242,9319);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,9186,9330);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,9186,9330);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+private Collection<string> _searchPaths ;
+
+internal Collection<string> GetSearchPaths()
+		{
+			try
+        {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,9978,10765);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10100,10193) || true) && (_searchPaths != null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,10100,10193);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10158,10178);
+
+return _searchPaths;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,10100,10193);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10209,10249);
+
+_searchPaths = f_1161_10224_10248();
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10325,10718) || true) && (f_1161_10329_10353(f_1161_10329_10345())!= null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,10325,10718);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10395,10703);
+foreach(PSModuleInfo loadedModule in f_1161_10433_10476_I(f_1161_10433_10476(f_1161_10433_10469(f_1161_10433_10457(f_1161_10433_10449())))) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,10395,10703);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10518,10684) || true) && (!f_1161_10523_10569(_searchPaths, f_1161_10545_10568(loadedModule)))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,10518,10684);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10619,10661);
+
+f_1161_10619_10660(                        _searchPaths, f_1161_10636_10659(loadedModule));
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,10518,10684);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,10395,10703);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,309);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,309);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1161,10325,10718);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,10734,10754);
+
+return _searchPaths;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,9978,10765);
+
+System.Collections.ObjectModel.Collection<string>
+f_1161_10224_10248()
+{
+var return_v = new System.Collections.ObjectModel.Collection<string>();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 10224, 10248);
+return return_v;
+}
+
+
+System.Management.Automation.ExecutionContext
+f_1161_10329_10345()
+{
+var return_v = ExecutionContext;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10329, 10345);
+return return_v;
+}
+
+
+System.Management.Automation.ModuleIntrinsics
+f_1161_10329_10353(System.Management.Automation.ExecutionContext
+this_param)
+{
+var return_v = this_param.Modules ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10329, 10353);
+return return_v;
+}
+
+
+System.Management.Automation.ExecutionContext
+f_1161_10433_10449()
+{
+var return_v = ExecutionContext;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10433, 10449);
+return return_v;
+}
+
+
+System.Management.Automation.ModuleIntrinsics
+f_1161_10433_10457(System.Management.Automation.ExecutionContext
+this_param)
+{
+var return_v = this_param.Modules;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10433, 10457);
+return return_v;
+}
+
+
+System.Collections.Generic.Dictionary<string, System.Management.Automation.PSModuleInfo>
+f_1161_10433_10469(System.Management.Automation.ModuleIntrinsics
+this_param)
+{
+var return_v = this_param.ModuleTable;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10433, 10469);
+return return_v;
+}
+
+
+System.Collections.Generic.Dictionary<string, System.Management.Automation.PSModuleInfo>.ValueCollection
+f_1161_10433_10476(System.Collections.Generic.Dictionary<string, System.Management.Automation.PSModuleInfo>
+this_param)
+{
+var return_v = this_param.Values;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10433, 10476);
+return return_v;
+}
+
+
+string
+f_1161_10545_10568(System.Management.Automation.PSModuleInfo
+this_param)
+{
+var return_v = this_param.ModuleBase;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10545, 10568);
+return return_v;
+}
+
+
+bool
+f_1161_10523_10569(System.Collections.ObjectModel.Collection<string>
+this_param,string
+item)
+{
+var return_v = this_param.Contains( item);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 10523, 10569);
+return return_v;
+}
+
+
+string
+f_1161_10636_10659(System.Management.Automation.PSModuleInfo
+this_param)
+{
+var return_v = this_param.ModuleBase;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 10636, 10659);
+return return_v;
+}
+
+
+int
+f_1161_10619_10660(System.Collections.ObjectModel.Collection<string>
+this_param,string
+item)
+{
+this_param.Add( item);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 10619, 10660);
+return 0;
+}
+
+
+System.Collections.Generic.Dictionary<string, System.Management.Automation.PSModuleInfo>.ValueCollection
+f_1161_10433_10476_I(System.Collections.Generic.Dictionary<string, System.Management.Automation.PSModuleInfo>.ValueCollection
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 10433, 10476);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,9978,10765);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,9978,10765);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        private HelpCategory _lastHelpCategory = HelpCategory.None;
-
-        /// <summary>
-        /// This is the help category to search for help for the last command.
-        /// </summary>
-        /// <value>help category to search for help</value>
-        internal HelpCategory LastHelpCategory
+private IEnumerable<HelpInfo> DoGetHelp(HelpRequest helpRequest)
+		{
+			try
         {
-            get
-            {
-                return _lastHelpCategory;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,11554,13878);
+
+var listYield= new List<HelpInfo>();
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,11643,11663);
+
+f_1161_11643_11662(            _lastErrors);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,11711,11731);
+
+_searchPaths = null;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,11747,11792);
+
+_lastHelpCategory = f_1161_11767_11791(helpRequest);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,11808,13867) || true) && (f_1161_11812_11852(f_1161_11833_11851(helpRequest)))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,11808,13867);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,11886,11923);
+
+HelpInfo 
+helpInfo = f_1161_11906_11922(this)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,11943,12046) || true) && (helpInfo != null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,11943,12046);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12005,12027);
+
+listYield.Add(helpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,11943,12046);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12066,12084);
+
+listYield.Add(null);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,11808,13867);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,11808,13867);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12150,12176);
+
+bool 
+isMatchFound = false
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12194,12520) || true) && (!f_1161_12199_12261(f_1161_12242_12260(helpRequest)))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,12194,12520);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12303,12501);
+foreach(HelpInfo helpInfo in f_1161_12333_12360_I(f_1161_12333_12360(this, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,12303,12501);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12410,12430);
+
+isMatchFound = true;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12456,12478);
+
+listYield.Add(helpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,12303,12501);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,199);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,199);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1161,12194,12520);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12540,13852) || true) && (!isMatchFound)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,12540,13852);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12599,12793);
+foreach(HelpInfo helpInfo in f_1161_12629_12652_I(f_1161_12629_12652(this, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,12599,12793);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12702,12722);
+
+isMatchFound = true;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12748,12770);
+
+listYield.Add(helpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,12599,12793);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,195);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,195);
+}
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,12817,13833) || true) && (!isMatchFound)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,12817,13833);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,13331,13810) || true) && (!f_1161_13336_13398(f_1161_13379_13397(helpRequest))&&(DynAbs.Tracing.TraceSender.Expression_True(1161, 13335, 13428)&&f_1161_13402_13423(f_1161_13402_13417(this))== 0))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,13331,13810);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,13486,13546);
+
+Exception 
+e = f_1161_13500_13545(f_1161_13526_13544(helpRequest))
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,13576,13678);
+
+ErrorRecord 
+errorRecord = f_1161_13602_13677(e, "HelpNotFound", ErrorCategory.ResourceUnavailable, null)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,13708,13741);
+
+f_1161_13708_13740(f_1161_13708_13723(this), errorRecord);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,13771,13783);
+
+return listYield;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,13331,13810);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,12817,13833);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,12540,13852);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,11808,13867);
+}
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,11554,13878);
+
+return listYield;
+
+int
+f_1161_11643_11662(System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+this_param)
+{
+this_param.Clear();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 11643, 11662);
+return 0;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_11767_11791(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.HelpCategory;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 11767, 11791);
+return return_v;
+}
+
+
+string
+f_1161_11833_11851(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.Target;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 11833, 11851);
+return return_v;
+}
+
+
+bool
+f_1161_11812_11852(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 11812, 11852);
+return return_v;
+}
+
+
+System.Management.Automation.HelpInfo
+f_1161_11906_11922(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.GetDefaultHelp();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 11906, 11922);
+return return_v;
+}
+
+
+string
+f_1161_12242_12260(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.Target;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 12242, 12260);
+return return_v;
+}
+
+
+bool
+f_1161_12199_12261(string
+pattern)
+{
+var return_v = WildcardPattern.ContainsWildcardCharacters( pattern);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 12199, 12261);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_12333_12360(System.Management.Automation.HelpSystem
+this_param,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.ExactMatchHelp( helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 12333, 12360);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_12333_12360_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 12333, 12360);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_12629_12652(System.Management.Automation.HelpSystem
+this_param,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.SearchHelp( helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 12629, 12652);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_12629_12652_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 12629, 12652);
+return return_v;
+}
+
+
+string
+f_1161_13379_13397(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.Target;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 13379, 13397);
+return return_v;
+}
+
+
+bool
+f_1161_13336_13398(string
+pattern)
+{
+var return_v = WildcardPattern.ContainsWildcardCharacters( pattern);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 13336, 13398);
+return return_v;
+}
+
+
+System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+f_1161_13402_13417(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.LastErrors;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 13402, 13417);
+return return_v;
+}
+
+
+int
+f_1161_13402_13423(System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+this_param)
+{
+var return_v = this_param.Count ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 13402, 13423);
+return return_v;
+}
+
+
+string
+f_1161_13526_13544(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.Target;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 13526, 13544);
+return return_v;
+}
+
+
+Microsoft.PowerShell.Commands.HelpNotFoundException
+f_1161_13500_13545(string
+helpTopic)
+{
+var return_v = new Microsoft.PowerShell.Commands.HelpNotFoundException( helpTopic);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 13500, 13545);
+return return_v;
+}
+
+
+System.Management.Automation.ErrorRecord
+f_1161_13602_13677(System.Exception
+exception,string
+errorId,System.Management.Automation.ErrorCategory
+errorCategory,object
+targetObject)
+{
+var return_v = new System.Management.Automation.ErrorRecord( exception, errorId, errorCategory, targetObject);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 13602, 13677);
+return return_v;
+}
+
+
+System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+f_1161_13708_13723(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.LastErrors;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 13708, 13723);
+return return_v;
+}
+
+
+int
+f_1161_13708_13740(System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+this_param,System.Management.Automation.ErrorRecord
+item)
+{
+this_param.Add( item);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 13708, 13740);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,11554,13878);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,11554,13878);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-
-        #region Configuration
-
-        private bool _verboseHelpErrors = false;
-
-        /// <summary>
-        /// VerboseHelpErrors is used in the case when end user is interested
-        /// to know all errors happened during a help search. This property
-        /// is false by default.
-        ///
-        /// If this property is turned on (by setting session variable "VerboseHelpError"),
-        /// following two behaviours will be different,
-        ///     a. Help errors will be written to error pipeline regardless the situation.
-        ///        (Normally, help errors will be written to error pipeline if there is no
-        ///         help found and there is no wildcard in help search target).
-        ///     b. Some additional warnings, including maml processing warnings, will be
-        ///        written to error pipeline.
-        /// </summary>
-        /// <value></value>
-        internal bool VerboseHelpErrors
+internal IEnumerable<HelpInfo> ExactMatchHelp(HelpRequest helpRequest)
+		{
+			try
         {
-            get
-            {
-                return _verboseHelpErrors;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,14350,15721);
+
+var listYield= new List<HelpInfo>();
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14445,14474);
+
+bool 
+isHelpInfoFound = false
+;
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14497,14502);
+            for (int 
+i = 0
+; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14488,15710) || true) && (i < f_1161_14508_14532(f_1161_14508_14526(this)))
+; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14534,14537)
+,i++,DynAbs.Tracing.TraceSender.TraceExitCondition(1161,14488,15710))
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,14488,15710);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14571,14635);
+
+HelpProvider 
+helpProvider = (HelpProvider)f_1161_14613_14634(f_1161_14613_14631(this), i)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14653,15145) || true) && ((f_1161_14658_14683(helpProvider)& f_1161_14686_14710(helpRequest)) > 0)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,14653,15145);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14757,15126);
+foreach(HelpInfo helpInfo in f_1161_14787_14827_I(f_1161_14787_14827(helpProvider, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,14757,15126);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14877,14900);
+
+isHelpInfoFound = true;
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,14926,15103);
+foreach(HelpInfo fwdHelpInfo in f_1161_14959_14993_I(f_1161_14959_14993(this, helpInfo, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,14926,15103);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,15051,15076);
+
+listYield.Add(fwdHelpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,14926,15103);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,178);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,178);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1161,14757,15126);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,370);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,370);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1161,14653,15145);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,15455,15695) || true) && (isHelpInfoFound &&(DynAbs.Tracing.TraceSender.Expression_True(1161, 15459, 15524)&&(!(helpProvider is ScriptCommandHelpProvider))))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,15455,15695);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,15664,15676);
+
+return listYield;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,15455,15695);
+}
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,1223);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,1223);
+}DynAbs.Tracing.TraceSender.TraceExitMethod(1161,14350,15721);
+
+return listYield;
+
+System.Collections.ArrayList
+f_1161_14508_14526(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 14508, 14526);
+return return_v;
+}
+
+
+int
+f_1161_14508_14532(System.Collections.ArrayList
+this_param)
+{
+var return_v = this_param.Count;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 14508, 14532);
+return return_v;
+}
+
+
+System.Collections.ArrayList
+f_1161_14613_14631(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 14613, 14631);
+return return_v;
+}
+
+
+object
+f_1161_14613_14634(System.Collections.ArrayList
+this_param,int
+i0)
+{
+var return_v = this_param[ i0];
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 14613, 14634);
+return return_v;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_14658_14683(System.Management.Automation.HelpProvider
+this_param)
+{
+var return_v = this_param.HelpCategory ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 14658, 14683);
+return return_v;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_14686_14710(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.HelpCategory;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 14686, 14710);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_14787_14827(System.Management.Automation.HelpProvider
+this_param,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.ExactMatchHelp( helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 14787, 14827);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_14959_14993(System.Management.Automation.HelpSystem
+this_param,System.Management.Automation.HelpInfo
+helpInfo,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.ForwardHelp( helpInfo, helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 14959, 14993);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_14959_14993_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 14959, 14993);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_14787_14827_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 14787, 14827);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,14350,15721);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,14350,15721);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-
-        #region Help Engine
-
-        // Cache of search paths that are currently active.
-        // This will save a lot time when help providers do their searching
-        private Collection<string> _searchPaths = null;
-
-        /// <summary>
-        /// Gets the search paths for external snapins/modules that are currently loaded.
-        /// If the current shell is single-shell based, then the returned
-        /// search path contains all the directories of currently active PSSnapIns/modules.
-        /// </summary>
-        /// <returns>A collection of strings representing locations.</returns>
-        internal Collection<string> GetSearchPaths()
+private IEnumerable<HelpInfo> ForwardHelp(HelpInfo helpInfo, HelpRequest helpRequest)
+		{
+			try
         {
-            // return the cache if already present.
-            if (_searchPaths != null)
-            {
-                return _searchPaths;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,16335,18423);
 
-            _searchPaths = new Collection<string>();
+var listYield= new List<HelpInfo>();
 
-            // add loaded modules paths to the search path
-            if (ExecutionContext.Modules != null)
-            {
-                foreach (PSModuleInfo loadedModule in ExecutionContext.Modules.ModuleTable.Values)
-                {
-                    if (!_searchPaths.Contains(loadedModule.ModuleBase))
-                    {
-                        _searchPaths.Add(loadedModule.ModuleBase);
-                    }
-                }
-            }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,16518,18412) || true) && (f_1161_16522_16550(helpInfo)== HelpCategory.None &&(DynAbs.Tracing.TraceSender.Expression_True(1161, 16522, 16619)&&f_1161_16575_16619(f_1161_16596_16618(helpInfo))))
+)
 
-            return _searchPaths;
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,16518,18412);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,16756,16778);
+
+listYield.Add(helpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,16518,18412);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,16518,18412);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,16919,16983);
+
+HelpCategory 
+forwardHelpCategory = f_1161_16954_16982(helpInfo)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17001,17034);
+
+bool 
+isHelpInfoProcessed = false
+;
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17061,17066);
+                for (int 
+i = 0
+; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17052,18128) || true) && (i < f_1161_17072_17096(f_1161_17072_17090(this)))
+; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17098,17101)
+,i++,DynAbs.Tracing.TraceSender.TraceExitCondition(1161,17052,18128))
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,17052,18128);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17143,17207);
+
+HelpProvider 
+helpProvider = (HelpProvider)f_1161_17185_17206(f_1161_17185_17203(this), i)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17229,18109) || true) && ((f_1161_17234_17259(helpProvider)& forwardHelpCategory) != HelpCategory.None)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,17229,18109);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17353,17380);
+
+isHelpInfoProcessed = true;
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17553,18086);
+foreach(HelpInfo fwdResult in f_1161_17584_17640_I(f_1161_17584_17640(helpProvider, helpInfo, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,17553,18086);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17766,17952);
+foreach(HelpInfo fHelpInfo in f_1161_17797_17832_I(f_1161_17797_17832(this, fwdResult, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,17766,17952);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,17898,17921);
+
+listYield.Add(fHelpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,17766,17952);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,187);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,187);
+}DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18047,18059);
+
+return listYield;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,17553,18086);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,534);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,534);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1161,17229,18109);
+}
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,1077);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,1077);
+}
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18148,18397) || true) && (!isHelpInfoProcessed)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,18148,18397);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18356,18378);
+
+listYield.Add(helpInfo);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,18148,18397);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,16518,18412);
+}
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,16335,18423);
+
+return listYield;
+
+System.Management.Automation.HelpCategory
+f_1161_16522_16550(System.Management.Automation.HelpInfo
+this_param)
+{
+var return_v = this_param.ForwardHelpCategory ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 16522, 16550);
+return return_v;
+}
+
+
+string
+f_1161_16596_16618(System.Management.Automation.HelpInfo
+this_param)
+{
+var return_v = this_param.ForwardTarget;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 16596, 16618);
+return return_v;
+}
+
+
+bool
+f_1161_16575_16619(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 16575, 16619);
+return return_v;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_16954_16982(System.Management.Automation.HelpInfo
+this_param)
+{
+var return_v = this_param.ForwardHelpCategory;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 16954, 16982);
+return return_v;
+}
+
+
+System.Collections.ArrayList
+f_1161_17072_17090(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 17072, 17090);
+return return_v;
+}
+
+
+int
+f_1161_17072_17096(System.Collections.ArrayList
+this_param)
+{
+var return_v = this_param.Count;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 17072, 17096);
+return return_v;
+}
+
+
+System.Collections.ArrayList
+f_1161_17185_17203(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 17185, 17203);
+return return_v;
+}
+
+
+object
+f_1161_17185_17206(System.Collections.ArrayList
+this_param,int
+i0)
+{
+var return_v = this_param[ i0];
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 17185, 17206);
+return return_v;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_17234_17259(System.Management.Automation.HelpProvider
+this_param)
+{
+var return_v = this_param.HelpCategory ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 17234, 17259);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_17584_17640(System.Management.Automation.HelpProvider
+this_param,System.Management.Automation.HelpInfo
+helpInfo,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.ProcessForwardedHelp( helpInfo, helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 17584, 17640);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_17797_17832(System.Management.Automation.HelpSystem
+this_param,System.Management.Automation.HelpInfo
+helpInfo,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.ForwardHelp( helpInfo, helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 17797, 17832);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_17797_17832_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 17797, 17832);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_17584_17640_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 17584, 17640);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,16335,18423);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,16335,18423);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Get help based on the target, help type, etc
-        ///
-        /// Help engine retrieve help based on following schemes,
-        ///
-        ///     1. if help target is empty, get default help
-        ///     2. if help target is not a search pattern, try to retrieve exact help
-        ///     3. if help target is a search pattern or step 2 returns no helpInfo, try to search for help
-        ///        (Search for pattern in command name followed by pattern match in help content)
-        ///     4. if step 3 returns exact one helpInfo object, try to retrieve exact help.
-        /// </summary>
-        /// <param name="helpRequest">Help request object.</param>
-        /// <returns>An array of HelpInfo object.</returns>
-        private IEnumerable<HelpInfo> DoGetHelp(HelpRequest helpRequest)
+private HelpInfo GetDefaultHelp()
+		{
+			try
         {
-            _lastErrors.Clear();
-            // Reset SearchPaths
-            _searchPaths = null;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,18592,18962);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18650,18729);
 
-            _lastHelpCategory = helpRequest.HelpCategory;
+HelpRequest 
+helpRequest = f_1161_18676_18728("default", HelpCategory.DefaultHelp)
+;
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18743,18923);
+foreach(HelpInfo helpInfo in f_1161_18773_18800_I(f_1161_18773_18800(this, helpRequest)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,18743,18923);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18892,18908);
 
-            if (string.IsNullOrEmpty(helpRequest.Target))
-            {
-                HelpInfo helpInfo = GetDefaultHelp();
+return helpInfo;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,18743,18923);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,181);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,181);
+}DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,18939,18951);
 
-                if (helpInfo != null)
-                {
-                    yield return helpInfo;
-                }
+return null;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,18592,18962);
 
-                yield return null;
-            }
-            else
-            {
-                bool isMatchFound = false;
-                if (!WildcardPattern.ContainsWildcardCharacters(helpRequest.Target))
-                {
-                    foreach (HelpInfo helpInfo in ExactMatchHelp(helpRequest))
-                    {
-                        isMatchFound = true;
-                        yield return helpInfo;
-                    }
-                }
+System.Management.Automation.HelpRequest
+f_1161_18676_18728(string
+target,System.Management.Automation.HelpCategory
+helpCategory)
+{
+var return_v = new System.Management.Automation.HelpRequest( target, helpCategory);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 18676, 18728);
+return return_v;
+}
 
-                if (!isMatchFound)
-                {
-                    foreach (HelpInfo helpInfo in SearchHelp(helpRequest))
-                    {
-                        isMatchFound = true;
-                        yield return helpInfo;
-                    }
 
-                    if (!isMatchFound)
-                    {
-                        // Throwing exception here may not be the
-                        // best thing to do. Instead we can choose to
-                        //    a. give a hint
-                        //    b. just silently return an empty search result.
-                        // Solution:
-                        //    If it is an exact help target, throw exception.
-                        //    Otherwise, return empty result set.
-                        if (!WildcardPattern.ContainsWildcardCharacters(helpRequest.Target) && this.LastErrors.Count == 0)
-                        {
-                            Exception e = new HelpNotFoundException(helpRequest.Target);
-                            ErrorRecord errorRecord = new ErrorRecord(e, "HelpNotFound", ErrorCategory.ResourceUnavailable, null);
-                            this.LastErrors.Add(errorRecord);
-                            yield break;
-                        }
-                    }
-                }
-            }
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_18773_18800(System.Management.Automation.HelpSystem
+this_param,System.Management.Automation.HelpRequest
+helpRequest)
+{
+var return_v = this_param.ExactMatchHelp( helpRequest);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 18773, 18800);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_18773_18800_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 18773, 18800);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,18592,18962);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,18592,18962);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Get help that exactly match the target.
-        ///
-        /// If the helpInfo returned is not complete, we will forward the
-        /// helpInfo object to appropriate help provider for further processing.
-        /// (this is implemented by ForwardHelp)
-        /// </summary>
-        /// <param name="helpRequest">Help request object.</param>
-        /// <returns>HelpInfo object retrieved. Can be Null.</returns>
-        internal IEnumerable<HelpInfo> ExactMatchHelp(HelpRequest helpRequest)
+private IEnumerable<HelpInfo> SearchHelp(HelpRequest helpRequest)
+		{
+			try
         {
-            bool isHelpInfoFound = false;
-            for (int i = 0; i < this.HelpProviders.Count; i++)
-            {
-                HelpProvider helpProvider = (HelpProvider)this.HelpProviders[i];
-                if ((helpProvider.HelpCategory & helpRequest.HelpCategory) > 0)
-                {
-                    foreach (HelpInfo helpInfo in helpProvider.ExactMatchHelp(helpRequest))
-                    {
-                        isHelpInfoFound = true;
-                        foreach (HelpInfo fwdHelpInfo in ForwardHelp(helpInfo, helpRequest))
-                        {
-                            yield return fwdHelpInfo;
-                        }
-                    }
-                }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,19209,22396);
 
-                // Bug Win7 737383: Win7 RTM shows both function and cmdlet help when there is
-                // function and cmdlet with the same name. So, ignoring the ScriptCommandHelpProvider's
-                // results and going to the CommandHelpProvider for further evaluation.
-                if (isHelpInfoFound && (!(helpProvider is ScriptCommandHelpProvider)))
-                {
-                    // once helpInfo found from a provider..no need to traverse other providers.
-                    yield break;
-                }
-            }
-        }
+var listYield= new List<HelpInfo>();
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19299,19329);
 
-        /// <summary>
-        /// Forward help to the help provider with type forwardHelpCategory.
-        ///
-        /// This is used in the following known scenarios so far
-        ///     1. Alias: helpInfo returned by Alias is not what end user needed.
-        ///               The real help can be retrieved from Command help provider.
-        /// </summary>
-        /// <param name="helpInfo"></param>
-        /// <param name="helpRequest">Help request object.</param>
-        /// <returns>Never returns null.</returns>
-        /// <remarks>helpInfos is not null or empty.</remarks>
-        private IEnumerable<HelpInfo> ForwardHelp(HelpInfo helpInfo, HelpRequest helpRequest)
-        {
-            // findout if this helpInfo needs to be processed further..
-            if (helpInfo.ForwardHelpCategory == HelpCategory.None && string.IsNullOrEmpty(helpInfo.ForwardTarget))
-            {
-                // this helpInfo is final...so store this in result
-                // and move on..
-                yield return helpInfo;
-            }
-            else
-            {
-                // Find out a capable provider to process this request...
-                HelpCategory forwardHelpCategory = helpInfo.ForwardHelpCategory;
-                bool isHelpInfoProcessed = false;
-                for (int i = 0; i < this.HelpProviders.Count; i++)
-                {
-                    HelpProvider helpProvider = (HelpProvider)this.HelpProviders[i];
-                    if ((helpProvider.HelpCategory & forwardHelpCategory) != HelpCategory.None)
-                    {
-                        isHelpInfoProcessed = true;
-                        // If this help info is processed by this provider already, break
-                        // out of the provider loop...
-                        foreach (HelpInfo fwdResult in helpProvider.ProcessForwardedHelp(helpInfo, helpRequest))
-                        {
-                            // Add each helpinfo to our repository
-                            foreach (HelpInfo fHelpInfo in ForwardHelp(fwdResult, helpRequest))
-                            {
-                                yield return fHelpInfo;
-                            }
+int 
+countOfHelpInfosFound = 0
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19343,19376);
 
-                            // get out of the provider loop..
-                            yield break;
-                        }
-                    }
-                }
+bool 
+searchInHelpContent = false
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19390,19415);
 
-                if (!isHelpInfoProcessed)
-                {
-                    // we are here because no help provider processed the helpinfo..
-                    // so add this to our repository..
-                    yield return helpInfo;
-                }
-            }
-        }
+bool 
+shouldBreak = false
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19431,19482);
 
-        /// <summary>
-        /// Get the default help info (normally when help target is empty).
-        /// </summary>
-        /// <returns></returns>
-        private HelpInfo GetDefaultHelp()
-        {
-            HelpRequest helpRequest = new HelpRequest("default", HelpCategory.DefaultHelp);
-            foreach (HelpInfo helpInfo in ExactMatchHelp(helpRequest))
-            {
-                // return just the first helpInfo object
-                return helpInfo;
-            }
+HelpProgressInfo 
+progress = f_1161_19459_19481()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19498,19600);
 
-            return null;
-        }
+progress.Activity = f_1161_19518_19599(f_1161_19536_19578(), f_1161_19580_19598(helpRequest));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19614,19641);
 
-        /// <summary>
-        /// Get help that exactly match the target.
-        /// </summary>
-        /// <param name="helpRequest">Help request object.</param>
-        /// <returns>An IEnumerable of HelpInfo object.</returns>
-        private IEnumerable<HelpInfo> SearchHelp(HelpRequest helpRequest)
-        {
-            int countOfHelpInfosFound = 0;
-            bool searchInHelpContent = false;
-            bool shouldBreak = false;
+progress.Completed = false;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19655,19684);
 
-            HelpProgressInfo progress = new HelpProgressInfo();
-
-            progress.Activity = StringUtil.Format(HelpDisplayStrings.SearchingForHelpContent, helpRequest.Target);
-            progress.Completed = false;
-            progress.PercentComplete = 0;
+progress.PercentComplete = 0;
 
             try
             {
-                OnProgress(this, progress);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19736,19763);
 
-                // algorithm:
-                // 1. Search for pattern (helpRequest.Target) in command name
-                // 2. If Step 1 fails then search for pattern in help content
-                do
-                {
-                    // we should not continue the search loop if we are
-                    // searching in the help content (as this is the last step
-                    // in our search algorithm).
-                    if (searchInHelpContent)
-                    {
-                        shouldBreak = true;
-                    }
+f_1161_19736_19762(OnProgress, this, progress);
+{try {
+do
 
-                    for (int i = 0; i < this.HelpProviders.Count; i++)
-                    {
-                        HelpProvider helpProvider = (HelpProvider)this.HelpProviders[i];
-                        if ((helpProvider.HelpCategory & helpRequest.HelpCategory) > 0)
-                        {
-                            foreach (HelpInfo helpInfo in helpProvider.SearchHelp(helpRequest, searchInHelpContent))
-                            {
-                                if (_executionContext.CurrentPipelineStopping)
-                                {
-                                    yield break;
-                                }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,19972,22179);
 
-                                countOfHelpInfosFound++;
-                                yield return helpInfo;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20218,20333) || true) && (searchInHelpContent)
+)
 
-                                if ((countOfHelpInfosFound >= helpRequest.MaxResults) && (helpRequest.MaxResults > 0))
-                                {
-                                    yield break;
-                                }
-                            }
-                        }
-                    }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,20218,20333);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20291,20310);
 
-                    // no need to do help content search once we have some help topics
-                    // with command name search.
-                    if (countOfHelpInfosFound > 0)
-                    {
-                        yield break;
-                    }
+shouldBreak = true;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,20218,20333);
+}
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20366,20371);
 
-                    // appears that we did not find any help matching command names..look for
-                    // pattern in help content.
-                    searchInHelpContent = true;
+                    for (int 
+i = 0
+; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20357,21424) || true) && (i < f_1161_20377_20401(f_1161_20377_20395(this)))
+; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20403,20406)
+,i++,DynAbs.Tracing.TraceSender.TraceExitCondition(1161,20357,21424))
 
-                    if (this.HelpProviders.Count > 0)
-                    {
-                        progress.PercentComplete += (100 / this.HelpProviders.Count);
-                        OnProgress(this, progress);
-                    }
-                } while (!shouldBreak);
-            }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,20357,21424);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20456,20520);
+
+HelpProvider 
+helpProvider = (HelpProvider)f_1161_20498_20519(f_1161_20498_20516(this), i)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20546,21401) || true) && ((f_1161_20551_20576(helpProvider)& f_1161_20579_20603(helpRequest)) > 0)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,20546,21401);
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20666,21374);
+foreach(HelpInfo helpInfo in f_1161_20696_20753_I(f_1161_20696_20753(helpProvider, helpRequest, searchInHelpContent)) )
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,20666,21374);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20819,20985) || true) && (f_1161_20823_20864(_executionContext))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,20819,20985);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,20938,20950);
+
+return listYield;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,20819,20985);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21021,21045);
+
+countOfHelpInfosFound++;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21079,21101);
+
+listYield.Add(helpInfo);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21137,21343) || true) && ((countOfHelpInfosFound >= f_1161_21167_21189(helpRequest)) &&(DynAbs.Tracing.TraceSender.Expression_True(1161, 21141, 21222)&&(f_1161_21195_21217(helpRequest)> 0)))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,21137,21343);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21296,21308);
+
+return listYield;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,21137,21343);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,20666,21374);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,709);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,709);
+}DynAbs.Tracing.TraceSender.TraceExitCondition(1161,20546,21401);
+}
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,1068);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,1068);
+}
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21586,21700) || true) && (countOfHelpInfosFound > 0)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,21586,21700);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21665,21677);
+
+return listYield;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,21586,21700);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21868,21895);
+
+searchInHelpContent = true;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,21919,22138) || true) && (f_1161_21923_21947(f_1161_21923_21941(this))> 0)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,21919,22138);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22001,22062);
+
+progress.PercentComplete += (100 / f_1161_22036_22060(f_1161_22036_22054(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22088,22115);
+
+f_1161_22088_22114(OnProgress, this, progress);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,21919,22138);
+}
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,19972,22179);
+}
+while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,19972,22179) || true) && (!shouldBreak)
+);
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,19972,22179);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,19972,22179);
+}}            }
             finally
             {
-                progress.Completed = true;
-                progress.PercentComplete = 100;
+DynAbs.Tracing.TraceSender.TraceEnterFinally(1161,22208,22385);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22248,22274);
 
-                OnProgress(this, progress);
+progress.Completed = true;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22292,22323);
+
+progress.PercentComplete = 100;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22343,22370);
+
+f_1161_22343_22369(OnProgress, this, progress);
+DynAbs.Tracing.TraceSender.TraceExitFinally(1161,22208,22385);
             }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,19209,22396);
+
+return listYield;
+
+System.Management.Automation.HelpProgressInfo
+f_1161_19459_19481()
+{
+var return_v = new System.Management.Automation.HelpProgressInfo();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 19459, 19481);
+return return_v;
+}
+
+
+string
+f_1161_19536_19578()
+{
+var return_v = HelpDisplayStrings.SearchingForHelpContent;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 19536, 19578);
+return return_v;
+}
+
+
+string
+f_1161_19580_19598(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.Target;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 19580, 19598);
+return return_v;
+}
+
+
+string
+f_1161_19518_19599(string
+formatSpec,string
+o)
+{
+var return_v = StringUtil.Format( formatSpec, (object)o);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 19518, 19599);
+return return_v;
+}
+
+
+int
+f_1161_19736_19762(System.Management.Automation.HelpSystem.HelpProgressHandler
+this_param,System.Management.Automation.HelpSystem
+sender,System.Management.Automation.HelpProgressInfo
+arg)
+{
+this_param.Invoke( (object)sender, arg);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 19736, 19762);
+return 0;
+}
+
+
+System.Collections.ArrayList
+f_1161_20377_20395(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20377, 20395);
+return return_v;
+}
+
+
+int
+f_1161_20377_20401(System.Collections.ArrayList
+this_param)
+{
+var return_v = this_param.Count;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20377, 20401);
+return return_v;
+}
+
+
+System.Collections.ArrayList
+f_1161_20498_20516(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20498, 20516);
+return return_v;
+}
+
+
+object
+f_1161_20498_20519(System.Collections.ArrayList
+this_param,int
+i0)
+{
+var return_v = this_param[ i0];
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20498, 20519);
+return return_v;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_20551_20576(System.Management.Automation.HelpProvider
+this_param)
+{
+var return_v = this_param.HelpCategory ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20551, 20576);
+return return_v;
+}
+
+
+System.Management.Automation.HelpCategory
+f_1161_20579_20603(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.HelpCategory;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20579, 20603);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_20696_20753(System.Management.Automation.HelpProvider
+this_param,System.Management.Automation.HelpRequest
+helpRequest,bool
+searchOnlyContent)
+{
+var return_v = this_param.SearchHelp( helpRequest, searchOnlyContent);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 20696, 20753);
+return return_v;
+}
+
+
+bool
+f_1161_20823_20864(System.Management.Automation.ExecutionContext
+this_param)
+{
+var return_v = this_param.CurrentPipelineStopping;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 20823, 20864);
+return return_v;
+}
+
+
+int
+f_1161_21167_21189(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.MaxResults;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 21167, 21189);
+return return_v;
+}
+
+
+int
+f_1161_21195_21217(System.Management.Automation.HelpRequest
+this_param)
+{
+var return_v = this_param.MaxResults ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 21195, 21217);
+return return_v;
+}
+
+
+System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+f_1161_20696_20753_I(System.Collections.Generic.IEnumerable<System.Management.Automation.HelpInfo>
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 20696, 20753);
+return return_v;
+}
+
+
+System.Collections.ArrayList
+f_1161_21923_21941(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 21923, 21941);
+return return_v;
+}
+
+
+int
+f_1161_21923_21947(System.Collections.ArrayList
+this_param)
+{
+var return_v = this_param.Count ;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 21923, 21947);
+return return_v;
+}
+
+
+System.Collections.ArrayList
+f_1161_22036_22054(System.Management.Automation.HelpSystem
+this_param)
+{
+var return_v = this_param.HelpProviders;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 22036, 22054);
+return return_v;
+}
+
+
+int
+f_1161_22036_22060(System.Collections.ArrayList
+this_param)
+{
+var return_v = this_param.Count;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 22036, 22060);
+return return_v;
+}
+
+
+int
+f_1161_22088_22114(System.Management.Automation.HelpSystem.HelpProgressHandler
+this_param,System.Management.Automation.HelpSystem
+sender,System.Management.Automation.HelpProgressInfo
+arg)
+{
+this_param.Invoke( (object)sender, arg);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 22088, 22114);
+return 0;
+}
+
+
+int
+f_1161_22343_22369(System.Management.Automation.HelpSystem.HelpProgressHandler
+this_param,System.Management.Automation.HelpSystem
+sender,System.Management.Automation.HelpProgressInfo
+arg)
+{
+this_param.Invoke( (object)sender, arg);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 22343, 22369);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,19209,22396);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,19209,22396);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion Help Engine
+private ArrayList _helpProviders ;
 
-        #region Help Provider Manager
-
-        private ArrayList _helpProviders = new ArrayList();
-
-        /// <summary>
-        /// Return the list of help providers initialized.
-        /// </summary>
-        /// <value>a list of help providers</value>
-        internal ArrayList HelpProviders
-        {
-            get
+internal ArrayList HelpProviders
+{
+get
+		{
+			try
             {
-                return _helpProviders;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,22763,22836);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,22799,22821);
+
+return _helpProviders;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,22763,22836);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,22706,22847);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,22706,22847);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
 
-        /// <summary>
-        /// Initialize help providers.
-        /// </summary>
-        /// <remarks>
-        /// Currently we hardcode the sequence of help provider initialization.
-        /// In the longer run, we probably will load help providers based on some provider catalog. That
-        /// will allow new providers to be defined by customer.
-        /// </remarks>
-        private void InitializeHelpProviders()
+private void InitializeHelpProviders()
+		{
+			try
         {
-            HelpProvider helpProvider = null;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,23245,24417);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23308,23341);
 
-            helpProvider = new AliasHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+HelpProvider 
+helpProvider = null
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23357,23400);
 
-            helpProvider = new ScriptCommandHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+helpProvider = f_1161_23372_23399(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23414,23447);
 
-            helpProvider = new CommandHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+f_1161_23414_23446(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23463,23514);
 
-            helpProvider = new ProviderHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+helpProvider = f_1161_23478_23513(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23528,23561);
 
-            helpProvider = new PSClassHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+f_1161_23528_23560(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23577,23622);
 
-            /* TH Bug#3141590 - Disable DscResourceHelp for ClientRTM due to perf issue.
-#if !CORECLR // TODO:CORECLR Add this back in once we support Get-DscResource
-            helpProvider = new DscResourceHelpProvider(this);
-            _helpProviders.Add(helpProvider);
-#endif
-            */
-            helpProvider = new HelpFileHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+helpProvider = f_1161_23592_23621(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23636,23669);
 
-            helpProvider = new DefaultHelpProvider(this);
-            _helpProviders.Add(helpProvider);
+f_1161_23636_23668(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23685,23731);
+
+helpProvider = f_1161_23700_23730(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23745,23778);
+
+f_1161_23745_23777(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23794,23839);
+
+helpProvider = f_1161_23809_23838(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,23853,23886);
+
+f_1161_23853_23885(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,24205,24251);
+
+helpProvider = f_1161_24220_24250(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,24265,24298);
+
+f_1161_24265_24297(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,24314,24359);
+
+helpProvider = f_1161_24329_24358(this);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,24373,24406);
+
+f_1161_24373_24405(            _helpProviders, helpProvider);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,23245,24417);
+
+System.Management.Automation.AliasHelpProvider
+f_1161_23372_23399(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.AliasHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23372, 23399);
+return return_v;
+}
+
+
+int
+f_1161_23414_23446(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23414, 23446);
+return return_v;
+}
+
+
+System.Management.Automation.ScriptCommandHelpProvider
+f_1161_23478_23513(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.ScriptCommandHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23478, 23513);
+return return_v;
+}
+
+
+int
+f_1161_23528_23560(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23528, 23560);
+return return_v;
+}
+
+
+System.Management.Automation.CommandHelpProvider
+f_1161_23592_23621(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.CommandHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23592, 23621);
+return return_v;
+}
+
+
+int
+f_1161_23636_23668(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23636, 23668);
+return return_v;
+}
+
+
+System.Management.Automation.ProviderHelpProvider
+f_1161_23700_23730(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.ProviderHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23700, 23730);
+return return_v;
+}
+
+
+int
+f_1161_23745_23777(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23745, 23777);
+return return_v;
+}
+
+
+System.Management.Automation.PSClassHelpProvider
+f_1161_23809_23838(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.PSClassHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23809, 23838);
+return return_v;
+}
+
+
+int
+f_1161_23853_23885(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 23853, 23885);
+return return_v;
+}
+
+
+System.Management.Automation.HelpFileHelpProvider
+f_1161_24220_24250(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.HelpFileHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 24220, 24250);
+return return_v;
+}
+
+
+int
+f_1161_24265_24297(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 24265, 24297);
+return return_v;
+}
+
+
+System.Management.Automation.DefaultHelpProvider
+f_1161_24329_24358(System.Management.Automation.HelpSystem
+helpSystem)
+{
+var return_v = new System.Management.Automation.DefaultHelpProvider( helpSystem);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 24329, 24358);
+return return_v;
+}
+
+
+int
+f_1161_24373_24405(System.Collections.ArrayList
+this_param,System.Management.Automation.HelpProvider
+value)
+{
+var return_v = this_param.Add( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 24373, 24405);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,23245,24417);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,23245,24417);
+}
+		}
 
-#if _HelpProviderReflection
+private HelpErrorTracer _helpErrorTracer;
 
-        // Eventually we will publicize the provider api and initialize
-        // help providers using reflection. This is not in v1 right now.
-        //
-        private static HelpProviderInfo[] _providerInfos = new HelpProviderInfo[]
-                            { new HelpProviderInfo(string.Empty, "AliasHelpProvider", HelpCategory.Alias),
-                              new HelpProviderInfo(string.Empty, "CommandHelpProvider", HelpCategory.Command),
-                              new HelpProviderInfo(string.Empty, "ProviderHelpProvider", HelpCategory.Provider),
-                              new HelpProviderInfo(string.Empty, "OverviewHelpProvider", HelpCategory.Overview),
-                              new HelpProviderInfo(string.Empty, "GeneralHelpProvider", HelpCategory.General),
-                              new HelpProviderInfo(string.Empty, "FAQHelpProvider", HelpCategory.FAQ),
-                              new HelpProviderInfo(string.Empty, "GlossaryHelpProvider", HelpCategory.Glossary),
-                              new HelpProviderInfo(string.Empty, "HelpFileHelpProvider", HelpCategory.HelpFile),
-                              new HelpProviderInfo(string.Empty, "DefaultHelpHelpProvider", HelpCategory.DefaultHelp)
-                            };
-
-        private void InitializeHelpProviders()
-        {
-            for (int i = 0; i < _providerInfos.Length; i++)
+internal HelpErrorTracer HelpErrorTracer
+{
+get
+		{
+			try
             {
-                HelpProvider helpProvider = GetHelpProvider(_providerInfos[i]);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,28347,28422);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,28383,28407);
 
-                if (helpProvider != null)
-                {
-                    helpProvider.Initialize(this._executionContext);
-                    _helpProviders.Add(helpProvider);
-                }
+return _helpErrorTracer;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,28347,28422);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,28282,28433);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,28282,28433);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
 
-        private HelpProvider GetHelpProvider(HelpProviderInfo providerInfo)
+internal IDisposable Trace(string helpFile)
+		{
+			try
         {
-            Assembly providerAssembly = null;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,28620,28814);
 
-            if (string.IsNullOrEmpty(providerInfo.AssemblyName))
-            {
-                providerAssembly = Assembly.GetExecutingAssembly();
-            }
-            else
-            {
-                providerAssembly = Assembly.Load(providerInfo.AssemblyName);
-            }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,28688,28747) || true) && (_helpErrorTracer == null)
+)
 
-            try
-            {
-                if (providerAssembly != null)
-                {
-                    HelpProvider helpProvider =
-                        (HelpProvider)providerAssembly.CreateInstance(providerInfo.ClassName,
-                                                                     false, // don't ignore case
-                                                                     BindingFlags.CreateInstance,
-                                                                     null, // use default binder
-                                                                     null,
-                                                                     null, // use current culture
-                                                                     null // no special activation attributes
-                                                                    );
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,28688,28747);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,28735,28747);
 
-                    return helpProvider;
-                }
-            }
-            catch (TargetInvocationException e)
-            {
-                System.Console.WriteLine(e.Message);
-                if (e.InnerException != null)
-                {
-                    System.Console.WriteLine(e.InnerException.Message);
-                    System.Console.WriteLine(e.InnerException.StackTrace);
-                }
-            }
+return null;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,28688,28747);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,28763,28803);
 
-            return null;
+return f_1161_28770_28802(_helpErrorTracer, helpFile);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,28620,28814);
+
+System.IDisposable
+f_1161_28770_28802(System.Management.Automation.HelpErrorTracer
+this_param,string
+helpFile)
+{
+var return_v = this_param.Trace( helpFile);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 28770, 28802);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,28620,28814);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,28620,28814);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-#endif
-
-        #endregion Help Provider Manager
-
-        #region Help Error Tracer
-
-        private HelpErrorTracer _helpErrorTracer;
-
-        /// <summary>
-        /// The error tracer for this help system.
-        /// </summary>
-        /// <value></value>
-        internal HelpErrorTracer HelpErrorTracer
+internal void TraceError(ErrorRecord errorRecord)
+		{
+			try
         {
-            get
-            {
-                return _helpErrorTracer;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,29010,29206);
 
-        /// <summary>
-        /// Start a trace frame for a help file.
-        /// </summary>
-        /// <param name="helpFile"></param>
-        /// <returns></returns>
-        internal IDisposable Trace(string helpFile)
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29084,29138) || true) && (_helpErrorTracer == null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,29084,29138);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29131,29138);
+
+return;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,29084,29138);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29154,29195);
+
+f_1161_29154_29194(
+            _helpErrorTracer, errorRecord);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,29010,29206);
+
+int
+f_1161_29154_29194(System.Management.Automation.HelpErrorTracer
+this_param,System.Management.Automation.ErrorRecord
+errorRecord)
+{
+this_param.TraceError( errorRecord);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 29154, 29194);
+return 0;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,29010,29206);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,29010,29206);
+}
+		}
+
+internal void TraceErrors(Collection<ErrorRecord> errorRecords)
+		{
+			try
         {
-            if (_helpErrorTracer == null)
-                return null;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,29430,29666);
 
-            return _helpErrorTracer.Trace(helpFile);
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29518,29596) || true) && (_helpErrorTracer == null ||(DynAbs.Tracing.TraceSender.Expression_False(1161, 29522, 29570)||errorRecords == null))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,29518,29596);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29589,29596);
+
+return;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,29518,29596);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,29612,29655);
+
+f_1161_29612_29654(
+            _helpErrorTracer, errorRecords);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,29430,29666);
+
+int
+f_1161_29612_29654(System.Management.Automation.HelpErrorTracer
+this_param,System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+errorRecords)
+{
+this_param.TraceErrors( errorRecords);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 29612, 29654);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,29430,29666);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,29430,29666);
+}
+		}
 
-        /// <summary>
-        /// Trace an error within a help frame, which is tracked by help tracer itself.
-        /// </summary>
-        /// <param name="errorRecord"></param>
-        internal void TraceError(ErrorRecord errorRecord)
+private CultureInfo _culture;
+
+private void ValidateHelpCulture()
+		{
+			try
         {
-            if (_helpErrorTracer == null)
-                return;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,30059,30479);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30118,30169);
 
-            _helpErrorTracer.TraceError(errorRecord);
+CultureInfo 
+culture = f_1161_30140_30168()
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30185,30298) || true) && (_culture == null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,30185,30298);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30239,30258);
+
+_culture = culture;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30276,30283);
+
+return;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,30185,30298);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30314,30398) || true) && (f_1161_30318_30342(_culture, culture))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,30314,30398);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30376,30383);
+
+return;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,30314,30398);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30414,30433);
+
+_culture = culture;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30447,30468);
+
+f_1161_30447_30467(this);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,30059,30479);
+
+System.Globalization.CultureInfo
+f_1161_30140_30168()
+{
+var return_v = CultureInfo.CurrentUICulture;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 30140, 30168);
+return return_v;
+}
+
+
+bool
+f_1161_30318_30342(System.Globalization.CultureInfo
+this_param,System.Globalization.CultureInfo
+value)
+{
+var return_v = this_param.Equals( (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 30318, 30342);
+return return_v;
+}
+
+
+int
+f_1161_30447_30467(System.Management.Automation.HelpSystem
+this_param)
+{
+this_param.ResetHelpProviders();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 30447, 30467);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,30059,30479);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,30059,30479);
+}
+		}
 
-        /// <summary>
-        /// Trace a collection of errors within a help frame, which is tracked by
-        /// help tracer itself.
-        /// </summary>
-        /// <param name="errorRecords"></param>
-        internal void TraceErrors(Collection<ErrorRecord> errorRecords)
+internal void ResetHelpProviders()
+		{
+			try
         {
-            if (_helpErrorTracer == null || errorRecords == null)
-                return;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,30805,31161);
 
-            _helpErrorTracer.TraceErrors(errorRecords);
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30864,30916) || true) && (_helpProviders == null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,30864,30916);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30909,30916);
+
+return;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,30864,30916);
+}
+try {DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30941,30946);
+
+            for (int 
+i = 0
+; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30932,31127) || true) && (i < f_1161_30952_30972(_helpProviders))
+; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,30974,30977)
+,i++,DynAbs.Tracing.TraceSender.TraceExitCondition(1161,30932,31127))
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,30932,31127);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31011,31071);
+
+HelpProvider 
+helpProvider = (HelpProvider)f_1161_31053_31070(_helpProviders, i)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31091,31112);
+
+f_1161_31091_31111(
+                helpProvider);
+}
+}catch(System.Exception) { DynAbs.Tracing.TraceSender.TraceExitLoopByException(1161,1,196);
+ throw; }finally{DynAbs.Tracing.TraceSender.TraceExitLoop(1161,1,196);
+}DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31143,31150);
+
+return;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,30805,31161);
+
+int
+f_1161_30952_30972(System.Collections.ArrayList
+this_param)
+{
+var return_v = this_param.Count;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 30952, 30972);
+return return_v;
+}
+
+
+object
+f_1161_31053_31070(System.Collections.ArrayList
+this_param,int
+i0)
+{
+var return_v = this_param[ i0];
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 31053, 31070);
+return return_v;
+}
+
+
+int
+f_1161_31091_31111(System.Management.Automation.HelpProvider
+this_param)
+{
+this_param.Reset();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 31091, 31111);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,30805,31161);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,30805,31161);
+}
+		}
 
-        #endregion
+private readonly Lazy<Dictionary<Ast, Token[]>> _scriptBlockTokenCache ;
 
-        #region Help MUI
+internal Dictionary<Ast, Token[]> ScriptBlockTokenCache
+{
+get 		{
+			try
+{ DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,31490,31534);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31496,31532);
 
-        private CultureInfo _culture;
+return f_1161_31503_31531(_scriptBlockTokenCache);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,31490,31534);
 
-        /// <summary>
-        /// Before each help request is serviced, current thread culture will validate
-        /// against the current culture of help system. If there is a miss match, each
-        /// help provider will be notified of the culture change.
-        /// </summary>
-        private void ValidateHelpCulture()
+System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>
+f_1161_31503_31531(System.Lazy<System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>>
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 31503, 31531);
+return return_v;
+}
+
+}
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,31410,31545);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,31410,31545);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
+
+internal void ClearScriptBlockTokenCache()
+		{
+			try
         {
-            CultureInfo culture = CultureInfo.CurrentUICulture;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1161,31557,31762);
 
-            if (_culture == null)
-            {
-                _culture = culture;
-                return;
-            }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31624,31751) || true) && (f_1161_31628_31665(_scriptBlockTokenCache))
+)
 
-            if (_culture.Equals(culture))
-            {
-                return;
-            }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1161,31624,31751);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31699,31736);
 
-            _culture = culture;
-            ResetHelpProviders();
+f_1161_31699_31735(f_1161_31699_31727(_scriptBlockTokenCache));
+DynAbs.Tracing.TraceSender.TraceExitCondition(1161,31624,31751);
+}
+DynAbs.Tracing.TraceSender.TraceExitMethod(1161,31557,31762);
+
+bool
+f_1161_31628_31665(System.Lazy<System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>>
+this_param)
+{
+var return_v = this_param.IsValueCreated;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 31628, 31665);
+return return_v;
+}
+
+
+System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>
+f_1161_31699_31727(System.Lazy<System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>>
+this_param)
+{
+var return_v = this_param.Value;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1161, 31699, 31727);
+return return_v;
+}
+
+
+int
+f_1161_31699_31735(System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>
+this_param)
+{
+this_param.Clear();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 31699, 31735);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,31557,31762);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,31557,31762);
+}
+		}
 
-        /// <summary>
-        /// Reset help providers providers. This normally corresponds to help culture change.
-        ///
-        /// Normally help providers will remove cached help content to make sure new help
-        /// requests will be served with content of right culture.
-        /// </summary>
-        internal void ResetHelpProviders()
-        {
-            if (_helpProviders == null)
-                return;
+static HelpSystem()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1161,4610,31791);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1161,4610,31791);
 
-            for (int i = 0; i < _helpProviders.Count; i++)
-            {
-                HelpProvider helpProvider = (HelpProvider)_helpProviders[i];
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,4610,31791);
+}
 
-                helpProvider.Reset();
-            }
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1161,4610,31791);
 
-            return;
-        }
+System.Management.Automation.PSArgumentNullException
+f_1161_4952_5010(string
+paramName)
+{
+var return_v = PSTraceSource.NewArgumentNullException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 4952, 5010);
+return return_v;
+}
 
-        #endregion
 
-        #region ScriptBlock Parse Tokens Caching/Clearing Functionality
+int
+f_1161_5086_5098(System.Management.Automation.HelpSystem
+this_param)
+{
+this_param.Initialize();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 5086, 5098);
+return 0;
+}
 
-        private readonly Lazy<Dictionary<Ast, Token[]>> _scriptBlockTokenCache = new Lazy<Dictionary<Ast, Token[]>>(isThreadSafe: true);
 
-        internal Dictionary<Ast, Token[]> ScriptBlockTokenCache
-        {
-            get { return _scriptBlockTokenCache.Value; }
-        }
+System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>
+f_1161_7445_7474()
+{
+var return_v = new System.Collections.ObjectModel.Collection<System.Management.Automation.ErrorRecord>();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 7445, 7474);
+return return_v;
+}
 
-        internal void ClearScriptBlockTokenCache()
-        {
-            if (_scriptBlockTokenCache.IsValueCreated)
-            {
-                _scriptBlockTokenCache.Value.Clear();
-            }
-        }
 
-        #endregion
-    }
+System.Collections.ArrayList
+f_1161_22518_22533()
+{
+var return_v = new System.Collections.ArrayList();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 22518, 22533);
+return return_v;
+}
 
-    /// <summary>
-    /// Help progress info.
-    /// </summary>
-    internal class HelpProgressInfo
-    {
-        internal bool Completed;
-        internal string Activity;
-        internal int PercentComplete;
-    }
 
-    /// <summary>
-    /// This is the structure to keep track of HelpProvider Info.
-    /// </summary>
-    internal class HelpProviderInfo
-    {
-        internal string AssemblyName = string.Empty;
-        internal string ClassName = string.Empty;
-        internal HelpCategory HelpCategory = HelpCategory.None;
+System.Lazy<System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>>
+f_1161_31343_31397(bool
+isThreadSafe)
+{
+var return_v = new System.Lazy<System.Collections.Generic.Dictionary<System.Management.Automation.Language.Ast, System.Management.Automation.Language.Token[]>>( isThreadSafe: isThreadSafe);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1161, 31343, 31397);
+return return_v;
+}
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="assemblyName">Assembly that contains this help provider.</param>
-        /// <param name="className">The class that implements this help provider.</param>
-        /// <param name="helpCategory">Help category of this help provider.</param>
-        internal HelpProviderInfo(string assemblyName, string className, HelpCategory helpCategory)
-        {
-            this.AssemblyName = assemblyName;
-            this.ClassName = className;
-            this.HelpCategory = helpCategory;
-        }
-    }
+}
+internal class HelpProgressInfo
+{
+internal bool Completed;
+
+internal string Activity;
+
+internal int PercentComplete;
+
+public HelpProgressInfo()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1161,31867,32020);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31929,31938);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31965,31973);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,31997,32012);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1161,31867,32020);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,31867,32020);
+}
+
+
+static HelpProgressInfo()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1161,31867,32020);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1161,31867,32020);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,31867,32020);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1161,31867,32020);
+}
+internal class HelpProviderInfo
+{
+internal string AssemblyName ;
+
+internal string ClassName ;
+
+internal HelpCategory HelpCategory ;
+
+internal HelpProviderInfo(string assemblyName, string className, HelpCategory helpCategory)
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1161,32694,32942);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,32198,32225);
+this.AssemblyName = string.Empty;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,32252,32276);
+this.ClassName = string.Empty;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,32309,32341);
+this.HelpCategory = HelpCategory.None;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,32810,32843);
+
+this.AssemblyName = assemblyName;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,32857,32884);
+
+this.ClassName = className;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1161,32898,32931);
+
+this.HelpCategory = helpCategory;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1161,32694,32942);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1161,32694,32942);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,32694,32942);
+}
+		}
+
+static HelpProviderInfo()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1161,32134,32949);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1161,32134,32949);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1161,32134,32949);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1161,32134,32949);
+}
 
     /// <summary>
     /// Help categories.

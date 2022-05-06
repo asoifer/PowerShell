@@ -6,173 +6,129 @@ using System.Management.Automation.Internal;
 
 namespace System.Management.Automation.Provider
 {
-    #region ContainerCmdletProvider
-
-    /// <summary>
-    /// The base class for Cmdlet providers that expose a single level of items.
-    /// </summary>
-    /// <remarks>
-    /// The ContainerCmdletProvider class is base class that a provider derives from
-    /// to implement methods that allow
-    /// the use of a set of core commands against the objects that the provider
-    /// gives access to. By deriving from this class users can take advantage of
-    /// all the features of the <see cref="ItemCmdletProvider"/> as well as
-    /// globbing and the following commands when targeting this provider:
-    ///     get-childitem
-    ///     rename-item
-    ///     new-item
-    ///     remove-item
-    ///     set-location
-    ///     push-location
-    ///     pop-location
-    ///     get-location -stack
-    /// </remarks>
-    public abstract class ContainerCmdletProvider : ItemCmdletProvider
-    {
-        #region Internal methods
-
-        /// <summary>
-        /// Internal wrapper for the GetChildItems protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path (or name in a flat namespace) to the item from which to retrieve the children.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be retrieved, false if only a single
-        /// level of children should be retrieved. This parameter should only be true for
-        /// the NavigationCmdletProvider derived class.
-        /// </param>
-        /// <param name="depth">
-        /// Limits the depth of recursion; uint.MaxValue performs full recursion.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all children should be written to the Write*Object or
-        /// Write*Objects method.
-        /// </returns>
-        internal void GetChildItems(
+public abstract class ContainerCmdletProvider : ItemCmdletProvider
+{
+internal void GetChildItems(
             string path,
             bool recurse,
             uint depth,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,2378,2672);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,2553,2571);
 
-            // Call virtual method
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,2625,2661);
 
-            GetChildItems(path, recurse, depth);
+f_1188_2625_2660(this, path, recurse, depth);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,2378,2672);
+
+int
+f_1188_2625_2660(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,bool
+recurse,uint
+depth)
+{
+this_param.GetChildItems( path, recurse, depth);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 2625, 2660);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,2378,2672);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,2378,2672);
+}
+		}
 
-        /// <summary>
-        /// Gives the provider to attach additional parameters to
-        /// the get-childitem cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be retrieved, false if only a single
-        /// level of children should be retrieved. This parameter should only be true for
-        /// the NavigationCmdletProvider derived class.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        internal object GetChildItemsDynamicParameters(
+internal object GetChildItemsDynamicParameters(
             string path,
             bool recurse,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
-            return GetChildItemsDynamicParameters(path, recurse);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,3853,4118);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,4022,4040);
 
-        /// <summary>
-        /// Internal wrapper for the GetChildNames protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item from which to retrieve the child names.
-        /// </param>
-        /// <param name="returnContainers">
-        /// Determines if all containers should be returned or only those containers that match the
-        /// filter(s).
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all names should be written to the Write*Object or
-        /// Write*Objects method.
-        /// </returns>
-        /// <remarks>
-        /// The child names are the leaf portion of the path. Example, for the file system
-        /// the name for the path c:\windows\system32\foo.dll would be foo.dll or for
-        /// the directory c:\windows\system32 would be system32. For Active Directory the
-        /// child names would be RDN values of the child objects of the container.
-        /// </remarks>
-        internal void GetChildNames(
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,4054,4107);
+
+return f_1188_4061_4106(this, path, recurse);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,3853,4118);
+
+object
+f_1188_4061_4106(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,bool
+recurse)
+{
+var return_v = this_param.GetChildItemsDynamicParameters( path, recurse);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 4061, 4106);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,3853,4118);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,3853,4118);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+internal void GetChildNames(
             string path,
             ReturnContainers returnContainers,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,5420,5710);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,5591,5609);
 
-            // Call virtual method
-            GetChildNames(path, returnContainers);
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,5661,5699);
+
+f_1188_5661_5698(this, path, returnContainers);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,5420,5710);
+
+int
+f_1188_5661_5698(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,System.Management.Automation.ReturnContainers
+returnContainers)
+{
+this_param.GetChildNames( path, returnContainers);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 5661, 5698);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,5420,5710);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,5420,5710);
+}
+		}
 
-        /// <summary>
-        /// Gets a new provider-specific path and filter (if any) that corresponds to the given
-        /// path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item. Unlike most other provider APIs, this path is likely to
-        /// contain PowerShell wildcards.
-        /// </param>
-        /// <param name="filter">
-        /// The provider-specific filter currently applied.
-        /// </param>
-        /// <param name="updatedPath">
-        /// The new path to the item.
-        /// </param>
-        /// <param name="updatedFilter">
-        /// The new filter.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// True if the path or filter were altered. False otherwise.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method if they support a native filtering syntax that
-        /// can offer performance improvements over wildcard matching done by the PowerShell
-        /// engine.
-        /// If the provider can handle a portion (or all) of the PowerShell wildcard with
-        /// semantics equivalent to the PowerShell wildcard, it may adjust the path to exclude
-        /// the PowerShell wildcard.
-        /// If the provider can augment the PowerShell wildcard with an approximate filter (but
-        /// not replace it entirely,) it may simply return a filter without modifying the path.
-        /// In this situation, PowerShell's wildcarding will still be applied to a smaller result
-        /// set, resulting in improved performance.
-        ///
-        /// The default implementation of this method leaves both Path and Filter unmodified.
-        /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "2#")]
+[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "2#")]
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "3#")]
         internal virtual bool ConvertPath(
             string path,
@@ -180,908 +136,1206 @@ namespace System.Management.Automation.Provider
             ref string updatedPath,
             ref string updatedFilter,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,7560,8145);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,7995,8013);
 
-            // Call virtual method
-            return ConvertPath(path, filter, ref updatedPath, ref updatedFilter);
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,8065,8134);
+
+return f_1188_8072_8133(this, path, filter, ref updatedPath, ref updatedFilter);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,7560,8145);
+
+bool
+f_1188_8072_8133(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+filter,ref string
+updatedPath,ref string
+updatedFilter)
+{
+var return_v = this_param.ConvertPath( path, filter, ref updatedPath, ref updatedFilter);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 8072, 8133);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,7560,8145);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,7560,8145);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Gives the provider to attach additional parameters to
-        /// the get-childitem -name cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        internal object GetChildNamesDynamicParameters(
+internal object GetChildNamesDynamicParameters(
             string path,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
-            return GetChildNamesDynamicParameters(path);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,9035,9264);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,9177,9195);
+
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,9209,9253);
+
+return f_1188_9216_9252(this, path);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,9035,9264);
+
+object
+f_1188_9216_9252(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path)
+{
+var return_v = this_param.GetChildNamesDynamicParameters( path);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 9216, 9252);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,9035,9264);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,9035,9264);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Internal wrapper for the RenameItem protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to rename.
-        /// </param>
-        /// <param name="newName">
-        /// The name to which the item should be renamed. This name should always be
-        /// relative to the parent container.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all renamed items should be written to the Write*Object or
-        /// Write*Objects.
-        /// </returns>
-        internal void RenameItem(
-            string path,
-            string newName,
-            CmdletProviderContext context)
-        {
-            Context = context;
-
-            // Call virtual method
-
-            RenameItem(path, newName);
-        }
-
-        /// <summary>
-        /// Gives the provider to attach additional parameters to
-        /// the rename-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="newName">
-        /// The name to which the item should be renamed. This name should always be
-        /// relative to the parent container.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        internal object RenameItemDynamicParameters(
+internal void RenameItem(
             string path,
             string newName,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
-            return RenameItemDynamicParameters(path, newName);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,10133,10391);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,10282,10300);
 
-        /// <summary>
-        /// Internal wrapper for the New protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to create.
-        /// </param>
-        /// <param name="type">
-        /// The provider defined type of the item to create.
-        /// </param>
-        /// <param name="newItemValue">
-        /// This is a provider specific type that the provider can use to create a new
-        /// instance of an item at the specified path.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all new items should be written to the Write*Object or
-        /// Write*Objects.
-        /// </returns>
-        internal void NewItem(
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,10354,10380);
+
+f_1188_10354_10379(this, path, newName);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,10133,10391);
+
+int
+f_1188_10354_10379(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+newName)
+{
+this_param.RenameItem( path, newName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 10354, 10379);
+return 0;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,10133,10391);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,10133,10391);
+}
+		}
+
+internal object RenameItemDynamicParameters(
+            string path,
+            string newName,
+            CmdletProviderContext context)
+		{
+			try
+        {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,11236,11497);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,11404,11422);
+
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,11436,11486);
+
+return f_1188_11443_11485(this, path, newName);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,11236,11497);
+
+object
+f_1188_11443_11485(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+newName)
+{
+var return_v = this_param.RenameItemDynamicParameters( path, newName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 11443, 11485);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,11236,11497);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,11236,11497);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+internal void NewItem(
             string path,
             string type,
             object newItemValue,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,12488,12782);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,12665,12683);
 
-            // Call virtual method
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,12737,12771);
 
-            NewItem(path, type, newItemValue);
+f_1188_12737_12770(this, path, type, newItemValue);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,12488,12782);
+
+int
+f_1188_12737_12770(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+itemTypeName,object
+newItemValue)
+{
+this_param.NewItem( path, itemTypeName, newItemValue);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 12737, 12770);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,12488,12782);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,12488,12782);
+}
+		}
 
-        /// <summary>
-        /// Gives the provider to attach additional parameters to
-        /// the new-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="type">
-        /// The provider defined type of the item to create.
-        /// </param>
-        /// <param name="newItemValue">
-        /// This is a provider specific type that the provider can use to create a new
-        /// instance of an item at the specified path.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        internal object NewItemDynamicParameters(
+internal object NewItemDynamicParameters(
             string path,
             string type,
             object newItemValue,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
-            return NewItemDynamicParameters(path, type, newItemValue);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,13757,14054);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,13953,13971);
 
-        /// <summary>
-        /// Internal wrapper for the Remove protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to remove.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be removed, false if only a single
-        /// level of children should be removed. This parameter should only be true for
-        /// NavigationCmdletProvider and its derived classes.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        internal void RemoveItem(
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,13985,14043);
+
+return f_1188_13992_14042(this, path, type, newItemValue);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,13757,14054);
+
+object
+f_1188_13992_14042(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+itemTypeName,object
+newItemValue)
+{
+var return_v = this_param.NewItemDynamicParameters( path, itemTypeName, newItemValue);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 13992, 14042);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,13757,14054);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,13757,14054);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+internal void RemoveItem(
             string path,
             bool recurse,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,14855,15111);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,15002,15020);
 
-            // Call virtual method
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,15074,15100);
 
-            RemoveItem(path, recurse);
+f_1188_15074_15099(this, path, recurse);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,14855,15111);
+
+int
+f_1188_15074_15099(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,bool
+recurse)
+{
+this_param.RemoveItem( path, recurse);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 15074, 15099);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,14855,15111);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,14855,15111);
+}
+		}
 
-        /// <summary>
-        /// Gives the provider to attach additional parameters to
-        /// the remove-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be removed, false if only a single
-        /// level of children should be removed. This parameter should only be true for
-        /// NavigationCmdletProvider and its derived classes.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        internal object RemoveItemDynamicParameters(
+internal object RemoveItemDynamicParameters(
             string path,
             bool recurse,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
-            return RemoveItemDynamicParameters(path, recurse);
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,16064,16323);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,16230,16248);
 
-        /// <summary>
-        /// Internal wrapper for the HasChildItems protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to see if it has children.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// True if the item has children, false otherwise.
-        /// </returns>
-        /// <remarks>
-        /// For implementers of ContainerCmdletProvider classes and those derived from it,
-        /// if a null or empty path is passed,
-        /// the provider should consider any items in the data store to be children
-        /// and return true.
-        /// </remarks>
-        internal bool HasChildItems(string path, CmdletProviderContext context)
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,16262,16312);
+
+return f_1188_16269_16311(this, path, recurse);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,16064,16323);
+
+object
+f_1188_16269_16311(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,bool
+recurse)
+{
+var return_v = this_param.RemoveItemDynamicParameters( path, recurse);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 16269, 16311);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,16064,16323);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,16064,16323);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+internal bool HasChildItems(string path, CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,17258,17464);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,17354,17372);
 
-            // Call virtual method
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,17426,17453);
 
-            return HasChildItems(path);
+return f_1188_17433_17452(this, path);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,17258,17464);
+
+bool
+f_1188_17433_17452(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path)
+{
+var return_v = this_param.HasChildItems( path);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 17433, 17452);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,17258,17464);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,17258,17464);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Internal wrapper for the Copy protected method. It is called instead
-        /// of the protected method that is overridden by derived classes so that the
-        /// context of the command can be set.
-        /// </summary>
-        /// <param name="path">
-        /// The path of the item to copy.
-        /// </param>
-        /// <param name="copyPath">
-        /// The path of the item to copy to.
-        /// </param>
-        /// <param name="recurse">
-        /// Tells the provider to recurse sub-containers when copying.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// Nothing. All objects that are copied should be written to the Write*Object or
-        /// Write*Objects methods.
-        /// </returns>
-        internal void CopyItem(
+internal void CopyItem(
             string path,
             string copyPath,
             bool recurse,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,18371,18663);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,18546,18564);
 
-            // Call virtual method
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,18618,18652);
 
-            CopyItem(path, copyPath, recurse);
+f_1188_18618_18651(this, path, copyPath, recurse);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,18371,18663);
+
+int
+f_1188_18618_18651(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+copyPath,bool
+recurse)
+{
+this_param.CopyItem( path, copyPath, recurse);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 18618, 18651);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,18371,18663);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,18371,18663);
+}
+		}
 
-        /// <summary>
-        /// Gives the provider to attach additional parameters to
-        /// the copy-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="destination">
-        /// The path of the item to copy to.
-        /// </param>
-        /// <param name="recurse">
-        /// Tells the provider to recurse sub-containers when copying.
-        /// </param>
-        /// <param name="context">
-        /// The context under which this method is being called.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        internal object CopyItemDynamicParameters(
+internal object CopyItemDynamicParameters(
             string path,
             string destination,
             bool recurse,
             CmdletProviderContext context)
+		{
+			try
         {
-            Context = context;
-            return CopyItemDynamicParameters(path, destination, recurse);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,19553,19854);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,19750,19768);
+
+Context = context;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,19782,19843);
+
+return f_1188_19789_19842(this, path, destination, recurse);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,19553,19854);
+
+object
+f_1188_19789_19842(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,string
+destination,bool
+recurse)
+{
+var return_v = this_param.CopyItemDynamicParameters( path, destination, recurse);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 19789, 19842);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,19553,19854);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,19553,19854);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion Internal members
-
-        #region Protected methods
-
-        /// <summary>
-        /// Gets the children of the item at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path (or name in a flat namespace) to the item from which to retrieve the children.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be retrieved, false if only a single
-        /// level of children should be retrieved. This parameter should only be true for
-        /// the NavigationCmdletProvider derived class.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all objects should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the user access to the provider objects using
-        /// the get-childitem cmdlets.
-        ///
-        /// Providers that declare <see cref="System.Management.Automation.Provider.ProviderCapabilities"/>
-        /// of ExpandWildcards, Filter, Include, or Exclude should ensure that the path passed meets those
-        /// requirements by accessing the appropriate property from the base class.
-        ///
-        /// By default overrides of this method should not write objects that are generally hidden from
-        /// the user unless the Force property is set to true. For instance, the FileSystem provider should
-        /// not call WriteItemObject for hidden or system files unless the Force property is set to true.
-        ///
-        /// The provider implementation is responsible for preventing infinite recursion when there are
-        /// circular links and the like. An appropriate terminating exception should be thrown if this
-        /// situation occurs.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void GetChildItems(
+protected virtual void GetChildItems(
             string path,
             bool recurse)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,21887,22257);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,22002,22246);
+using(f_1188_22009_22056())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,22090,22231);
 
-        /// <summary>
-        /// Gets the children of the item at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path (or name in a flat namespace) to the item from which to retrieve the children.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be retrieved, false if only a single
-        /// level of children should be retrieved. This parameter should only be true for
-        /// the NavigationCmdletProvider derived class.
-        /// </param>
-        /// <param name="depth">
-        /// Limits the depth of recursion; uint.MaxValue performs full recursion.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all objects should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the user access to the provider objects using
-        /// the get-childitem cmdlets.
-        ///
-        /// Providers that declare <see cref="System.Management.Automation.Provider.ProviderCapabilities"/>
-        /// of ExpandWildcards, Filter, Include, or Exclude should ensure that the path passed meets those
-        /// requirements by accessing the appropriate property from the base class.
-        ///
-        /// By default overrides of this method should not write objects that are generally hidden from
-        /// the user unless the Force property is set to true. For instance, the FileSystem provider should
-        /// not call WriteItemObject for hidden or system files unless the Force property is set to true.
-        ///
-        /// The provider implementation is responsible for preventing infinite recursion when there are
-        /// circular links and the like. An appropriate terminating exception should be thrown if this
-        /// situation occurs.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void GetChildItems(
+throw
+f_1188_22117_22230(f_1188_22182_22229());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,22002,22246);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,21887,22257);
+
+System.IDisposable
+f_1188_22009_22056()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 22009, 22056);
+return return_v;
+}
+
+
+string
+f_1188_22182_22229()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 22182, 22229);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_22117_22230(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 22117, 22230);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,21887,22257);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,21887,22257);
+}
+		}
+
+protected virtual void GetChildItems(
             string path,
             bool recurse,
             uint depth)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                if (depth == uint.MaxValue)
-                {
-                    this.GetChildItems(path, recurse);
-                }
-                else
-                {
-                    throw
-                        PSTraceSource.NewNotSupportedException(
-                            SessionStateStrings.CmdletProvider_NotSupportedRecursionDepth);
-                }
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,24353,24973);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,24493,24962);
+using(f_1188_24500_24547())            {
 
-        /// <summary>
-        /// Gives the provider an opportunity to attach additional parameters to
-        /// the get-childitem cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be retrieved, false if only a single
-        /// level of children should be retrieved. This parameter should only be true for
-        /// the NavigationCmdletProvider derived class.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        protected virtual object GetChildItemsDynamicParameters(string path, bool recurse)
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,24581,24947) || true) && (depth == uint.MaxValue)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1188,24581,24947);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,24649,24683);
+
+f_1188_24649_24682(                    this, path, recurse);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1188,24581,24947);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1188,24581,24947);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,24765,24928);
+
+throw
+f_1188_24796_24927(f_1188_24865_24926());
+DynAbs.Tracing.TraceSender.TraceExitCondition(1188,24581,24947);
+}
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,24493,24962);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,24353,24973);
+
+System.IDisposable
+f_1188_24500_24547()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 24500, 24547);
+return return_v;
+}
+
+
+int
+f_1188_24649_24682(System.Management.Automation.Provider.ContainerCmdletProvider
+this_param,string
+path,bool
+recurse)
+{
+this_param.GetChildItems( path, recurse);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 24649, 24682);
+return 0;
+}
+
+
+string
+f_1188_24865_24926()
+{
+var return_v =                             SessionStateStrings.CmdletProvider_NotSupportedRecursionDepth;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 24865, 24926);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_24796_24927(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 24796, 24927);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,24353,24973);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,24353,24973);
+}
+		}
+
+protected virtual object GetChildItemsDynamicParameters(string path, bool recurse)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return null;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,26045,26278);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,26152,26267);
+using(f_1188_26159_26206())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,26240,26252);
 
-        /// <summary>
-        /// Gets names of the children of the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item from which to retrieve the child names.
-        /// </param>
-        /// <param name="returnContainers">
-        /// Determines if all containers should be returned or only those containers that match the
-        /// filter(s).
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all objects should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the user access to the provider objects using
-        /// the get-childitem  -name cmdlet.
-        ///
-        /// Providers that declare <see cref="System.Management.Automation.Provider.ProviderCapabilities"/>
-        /// of ExpandWildcards, Filter, Include, or Exclude should ensure that the path passed meets those
-        /// requirements by accessing the appropriate property from the base class. The exception to this
-        /// is if <paramref name="returnAllContainers"/> is true, then any child name for a container should
-        /// be returned even if it doesn't match the Filter, Include, or Exclude.
-        ///
-        /// By default overrides of this method should not write the names of objects that are generally hidden from
-        /// the user unless the Force property is set to true. For instance, the FileSystem provider should
-        /// not call WriteItemObject for hidden or system files unless the Force property is set to true.
-        ///
-        /// The provider implementation is responsible for preventing infinite recursion when there are
-        /// circular links and the like. An appropriate terminating exception should be thrown if this
-        /// situation occurs.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void GetChildNames(
+return null;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,26152,26267);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,26045,26278);
+
+System.IDisposable
+f_1188_26159_26206()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 26159, 26206);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,26045,26278);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,26045,26278);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual void GetChildNames(
             string path,
             ReturnContainers returnContainers)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,28334,28725);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,28470,28714);
+using(f_1188_28477_28524())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,28558,28699);
 
-        /// <summary>
-        /// Gets a new provider-specific path and filter (if any) that corresponds to the given
-        /// path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item. Unlike most other provider APIs, this path is likely to
-        /// contain PowerShell wildcards.
-        /// </param>
-        /// <param name="filter">
-        /// The provider-specific filter currently applied.
-        /// </param>
-        /// <param name="updatedPath">
-        /// The new path to the item.
-        /// </param>
-        /// <param name="updatedFilter">
-        /// The new filter.
-        /// </param>
-        /// <returns>
-        /// True if the path or filter were altered. False otherwise.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method if they support a native filtering syntax that
-        /// can offer performance improvements over wildcard matching done by the PowerShell
-        /// engine.
-        /// If the provider can handle a portion (or all) of the PowerShell wildcard with
-        /// semantics equivalent to the PowerShell wildcard, it may adjust the path to exclude
-        /// the PowerShell wildcard.
-        /// If the provider can augment the PowerShell wildcard with an approximate filter (but
-        /// not replace it entirely,) it may simply return a filter without modifying the path.
-        /// In this situation, PowerShell's wildcarding will still be applied to a smaller result
-        /// set, resulting in improved performance.
-        ///
-        /// The default implementation of this method leaves both Path and Filter unmodified.
-        ///
-        /// PowerShell wildcarding semantics are handled by the System.Management.Automation.Wildcardpattern
-        /// class.
-        /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "2#")]
+throw
+f_1188_28585_28698(f_1188_28650_28697());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,28470,28714);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,28334,28725);
+
+System.IDisposable
+f_1188_28477_28524()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 28477, 28524);
+return return_v;
+}
+
+
+string
+f_1188_28650_28697()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 28650, 28697);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_28585_28698(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 28585, 28698);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,28334,28725);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,28334,28725);
+}
+		}
+
+[SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "2#")]
         [SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference", MessageId = "3#")]
         protected virtual bool ConvertPath(
             string path,
             string filter,
             ref string updatedPath,
             ref string updatedFilter)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return false;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,30594,31113);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,30986,31102);
+using(f_1188_30993_31040())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,31074,31087);
 
-        /// <summary>
-        /// Gives the provider an opportunity to attach additional parameters to
-        /// the get-childitem -name cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        protected virtual object GetChildNamesDynamicParameters(string path)
+return false;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,30986,31102);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,30594,31113);
+
+System.IDisposable
+f_1188_30993_31040()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 30993, 31040);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,30594,31113);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,30594,31113);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual object GetChildNamesDynamicParameters(string path)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return null;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,31894,32113);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,31987,32102);
+using(f_1188_31994_32041())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,32075,32087);
 
-        /// <summary>
-        /// Renames the item at the specified path to the new name provided.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to rename.
-        /// </param>
-        /// <param name="newName">
-        /// The name to which the item should be renamed. This name should always be
-        /// relative to the parent container.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but the renamed items should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the user the ability to rename provider objects using
-        /// the rename-item cmdlet.
-        ///
-        /// Providers that declare <see cref="System.Management.Automation.Provider.ProviderCapabilities"/>
-        /// of ExpandWildcards, Filter, Include, or Exclude should ensure that the path passed meets those
-        /// requirements by accessing the appropriate property from the base class.
-        ///
-        /// By default overrides of this method should not allow renaming objects that are generally hidden from
-        /// the user unless the Force property is set to true. For instance, the FileSystem provider should
-        /// not allow renaming of a hidden or system file unless the Force property is set to true.
-        ///
-        /// This method is intended for the modification of the item's name only and not for Move operations.
-        /// An error should be written to <see cref="CmdletProvider.WriteError"/> if the <paramref name="newName"/>
-        /// parameter contains path separators or would cause the item to change its parent location.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void RenameItem(
+return null;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,31987,32102);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,31894,32113);
+
+System.IDisposable
+f_1188_31994_32041()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 31994, 32041);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,31894,32113);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,31894,32113);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual void RenameItem(
             string path,
             string newName)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,34025,34394);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,34139,34383);
+using(f_1188_34146_34193())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,34227,34368);
 
-        /// <summary>
-        /// Gives the provider an opportunity to attach additional parameters to
-        /// the rename-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="newName">
-        /// The name to which the item should be renamed. This name should always be
-        /// relative to the parent container.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        protected virtual object RenameItemDynamicParameters(string path, string newName)
+throw
+f_1188_34254_34367(f_1188_34319_34366());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,34139,34383);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,34025,34394);
+
+System.IDisposable
+f_1188_34146_34193()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 34146, 34193);
+return return_v;
+}
+
+
+string
+f_1188_34319_34366()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 34319, 34366);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_34254_34367(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 34254, 34367);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,34025,34394);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,34025,34394);
+}
+		}
+
+protected virtual object RenameItemDynamicParameters(string path, string newName)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return null;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,35358,35590);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,35464,35579);
+using(f_1188_35471_35518())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,35552,35564);
 
-        /// <summary>
-        /// Creates a new item at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to create.
-        /// </param>
-        /// <param name="itemTypeName">
-        /// The provider defined type for the object to create.
-        /// </param>
-        /// <param name="newItemValue">
-        /// This is a provider specific type that the provider can use to create a new
-        /// instance of an item at the specified path.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but the renamed items should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the user the ability to create new provider objects using
-        /// the new-item cmdlet.
-        ///
-        /// The <paramref name="itemTypeName"/> parameter is a provider specific string that the user specifies to tell
-        /// the provider what type of object to create.  For instance, in the FileSystem provider the <paramref name="type"/>
-        /// parameter can take a value of "file" or "directory". The comparison of this string should be
-        /// case-insensitive and you should also allow for least ambiguous matches. So if the provider allows
-        /// for the types "file" and "directory", only the first letter is required to disambiguate.
-        /// If <paramref name="itemTypeName"/> refers to a type the provider cannot create, the provider should produce
-        /// an <see cref="ArgumentException"/> with a message indicating the types the provider can create.
-        ///
-        /// The <paramref name="newItemValue"/> parameter can be any type of object that the provider can use
-        /// to create the item. It is recommended that the provider accept at a minimum strings, and an instance
-        /// of the type of object that would be returned from GetItem() for this path. <see cref="LanguagePrimitives.ConvertTo(System.Object, System.Type)"/>
-        /// can be used to convert some types to the desired type.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void NewItem(
+return null;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,35464,35579);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,35358,35590);
+
+System.IDisposable
+f_1188_35471_35518()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 35471, 35518);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,35358,35590);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,35358,35590);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual void NewItem(
             string path,
             string itemTypeName,
             object newItemValue)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,37903,38308);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,38053,38297);
+using(f_1188_38060_38107())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,38141,38282);
 
-        /// <summary>
-        /// Gives the provider an opportunity to attach additional parameters to
-        /// the new-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="itemTypeName">
-        /// The provider defined type of the item to create.
-        /// </param>
-        /// <param name="newItemValue">
-        /// This is a provider specific type that the provider can use to create a new
-        /// instance of an item at the specified path.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        protected virtual object NewItemDynamicParameters(
+throw
+f_1188_38168_38281(f_1188_38233_38280());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,38053,38297);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,37903,38308);
+
+System.IDisposable
+f_1188_38060_38107()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 38060, 38107);
+return return_v;
+}
+
+
+string
+f_1188_38233_38280()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 38233, 38280);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_38168_38281(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 38168, 38281);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,37903,38308);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,37903,38308);
+}
+		}
+
+protected virtual object NewItemDynamicParameters(
             string path,
             string itemTypeName,
             object newItemValue)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return null;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,39410,39705);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,39579,39694);
+using(f_1188_39586_39633())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,39667,39679);
 
-        /// <summary>
-        /// Removes (deletes) the item at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to remove.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be removed, false if only a single
-        /// level of children should be removed. This parameter should only be true for
-        /// NavigationCmdletProvider and its derived classes.
-        /// </param>
-        /// <returns>
-        /// Nothing should be returned or written from this method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to allow the user the ability to remove provider objects using
-        /// the remove-item cmdlet.
-        ///
-        /// Providers that declare <see cref="System.Management.Automation.Provider.ProviderCapabilities"/>
-        /// of ExpandWildcards, Filter, Include, or Exclude should ensure that the path passed meets those
-        /// requirements by accessing the appropriate property from the base class.
-        ///
-        /// By default overrides of this method should not remove objects that are generally hidden from
-        /// the user unless the Force property is set to true. For instance, the FileSystem provider should
-        /// not remove a hidden or system file unless the Force property is set to true.
-        ///
-        /// The provider implementation is responsible for preventing infinite recursion when there are
-        /// circular links and the like. An appropriate terminating exception should be thrown if this
-        /// situation occurs.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void RemoveItem(
+return null;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,39579,39694);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,39410,39705);
+
+System.IDisposable
+f_1188_39586_39633()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 39586, 39633);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,39410,39705);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,39410,39705);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual void RemoveItem(
             string path,
             bool recurse)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,41565,41932);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,41677,41921);
+using(f_1188_41684_41731())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,41765,41906);
 
-        /// <summary>
-        /// Gives the provider an opportunity to attach additional parameters to
-        /// the remove-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="recurse">
-        /// True if all children in a subtree should be removed, false if only a single
-        /// level of children should be removed. This parameter should only be true for
-        /// NavigationCmdletProvider and its derived classes.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        protected virtual object RemoveItemDynamicParameters(
+throw
+f_1188_41792_41905(f_1188_41857_41904());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,41677,41921);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,41565,41932);
+
+System.IDisposable
+f_1188_41684_41731()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 41684, 41731);
+return return_v;
+}
+
+
+string
+f_1188_41857_41904()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 41857, 41904);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_41792_41905(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 41792, 41905);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,41565,41932);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,41565,41932);
+}
+		}
+
+protected virtual object RemoveItemDynamicParameters(
             string path,
             bool recurse)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return null;
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,43004,43261);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,43135,43250);
+using(f_1188_43142_43189())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,43223,43235);
 
-        /// <summary>
-        /// Determines if the item at the specified path has children.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to see if it has children.
-        /// </param>
-        /// <returns>
-        /// True if the item has children, false otherwise.
-        /// </returns>
-        /// <returns>
-        /// Nothing is returned, but all objects should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the provider infrastructure the ability to determine
-        /// if a particular provider object has children without having to retrieve all the child items.
-        ///
-        /// For implementers of <see cref="ContainerCmdletProvider"/> classes and those derived from it,
-        /// if a null or empty path is passed,
-        /// the provider should consider any items in the data store to be children
-        /// and return true.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual bool HasChildItems(string path)
+return null;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,43135,43250);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,43004,43261);
+
+System.IDisposable
+f_1188_43142_43189()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 43142, 43189);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,43004,43261);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,43004,43261);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual bool HasChildItems(string path)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,44448,44777);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,44522,44766);
+using(f_1188_44529_44576())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,44610,44751);
 
-        /// <summary>
-        /// Copies an item at the specified path to an item at the <paramref name="copyPath" />.
-        /// </summary>
-        /// <param name="path">
-        /// The path of the item to copy.
-        /// </param>
-        /// <param name="copyPath">
-        /// The path of the item to copy to.
-        /// </param>
-        /// <param name="recurse">
-        /// Tells the provider to recurse sub-containers when copying.
-        /// </param>
-        /// <returns>
-        /// Nothing is returned, but all the objects that were copied should be written to the WriteItemObject method.
-        /// </returns>
-        /// <remarks>
-        /// Providers override this method to give the user the ability to copy provider objects using
-        /// the copy-item cmdlet.
-        ///
-        /// Providers that declare <see cref="System.Management.Automation.Provider.ProviderCapabilities"/>
-        /// of ExpandWildcards, Filter, Include, or Exclude should ensure that the path and items being copied
-        /// meets those requirements by accessing the appropriate property from the base class.
-        ///
-        /// By default overrides of this method should not copy objects over existing items unless the Force
-        /// property is set to true. For instance, the FileSystem provider should not copy c:\temp\foo.txt over
-        /// c:\bar.txt if c:\bar.txt already exists unless the Force parameter is true.
-        ///
-        /// If <paramref name="copyPath"/> exists and is a container then Force isn't required and <paramref name="path"/>
-        /// should be copied into the <paramref name="copyPath"/> container as a child.
-        ///
-        /// If <paramref name="recurse"/> is true, the provider implementation is responsible for
-        /// preventing infinite recursion when there are circular links and the like. An appropriate
-        /// terminating exception should be thrown if this situation occurs.
-        ///
-        /// The default implementation of this method throws an <see cref="System.Management.Automation.PSNotSupportedException"/>.
-        /// </remarks>
-        protected virtual void CopyItem(
+throw
+f_1188_44637_44750(f_1188_44702_44749());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,44522,44766);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,44448,44777);
+
+System.IDisposable
+f_1188_44529_44576()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 44529, 44576);
+return return_v;
+}
+
+
+string
+f_1188_44702_44749()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 44702, 44749);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_44637_44750(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 44637, 44750);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,44448,44777);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,44448,44777);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+protected virtual void CopyItem(
             string path,
             string copyPath,
             bool recurse)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                throw
-                    PSTraceSource.NewNotSupportedException(
-                        SessionStateStrings.CmdletProvider_NotSupported);
-            }
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,46940,47335);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,47080,47324);
+using(f_1188_47087_47134())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,47168,47309);
 
-        /// <summary>
-        /// Gives the provider an opportunity to attach additional parameters to
-        /// the copy-item cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// If the path was specified on the command line, this is the path
-        /// to the item to get the dynamic parameters for.
-        /// </param>
-        /// <param name="destination">
-        /// The path of the item to copy to.
-        /// </param>
-        /// <param name="recurse">
-        /// Tells the provider to recurse sub-containers when copying.
-        /// </param>
-        /// <returns>
-        /// Overrides of this method should return an object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class or a
-        /// <see cref="System.Management.Automation.RuntimeDefinedParameterDictionary"/>.
-        ///
-        /// The default implementation returns null. (no additional parameters)
-        /// </returns>
-        protected virtual object CopyItemDynamicParameters(
+throw
+f_1188_47195_47308(f_1188_47260_47307());
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,47080,47324);
+            }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,46940,47335);
+
+System.IDisposable
+f_1188_47087_47134()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 47087, 47134);
+return return_v;
+}
+
+
+string
+f_1188_47260_47307()
+{
+var return_v =                         SessionStateStrings.CmdletProvider_NotSupported;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1188, 47260, 47307);
+return return_v;
+}
+
+
+System.Management.Automation.PSNotSupportedException
+f_1188_47195_47308(string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewNotSupportedException( resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 47195, 47308);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,46940,47335);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,46940,47335);
+}
+		}
+
+protected virtual object CopyItemDynamicParameters(
             string path,
             string destination,
             bool recurse)
+		{
+			try
         {
-            using (PSTransactionManager.GetEngineProtectionScope())
-            {
-                return null;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1188,48344,48632);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,48506,48621);
+using(f_1188_48513_48560())            {
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1188,48594,48606);
+
+return null;
+DynAbs.Tracing.TraceSender.TraceExitUsing(1188,48506,48621);
             }
-        }
+DynAbs.Tracing.TraceSender.TraceExitMethod(1188,48344,48632);
 
-        #endregion Protected members
-    }
-
-    #endregion ContainerCmdletProvider
+System.IDisposable
+f_1188_48513_48560()
+{
+var return_v = PSTransactionManager.GetEngineProtectionScope();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1188, 48513, 48560);
+return return_v;
 }
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1188,48344,48632);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,48344,48632);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+public ContainerCmdletProvider()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1188,1096,48679);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1188,1096,48679);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,1096,48679);
+}
+
+
+static ContainerCmdletProvider()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1188,1096,48679);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1188,1096,48679);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1188,1096,48679);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1188,1096,48679);
+}
+
+    }
 

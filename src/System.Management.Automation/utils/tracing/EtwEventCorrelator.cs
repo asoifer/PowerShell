@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-#if !UNIX
 
 namespace System.Management.Automation.Tracing
 {
@@ -13,104 +12,265 @@ namespace System.Management.Automation.Tracing
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Etw")]
     public interface IEtwEventCorrelator
     {
-        /// <summary>
-        ///     Gets or sets the ETW activity ID of the current thread.
-        /// </summary>
-        /// <remarks>
-        ///     <para>This method should only be used for advanced scenarios
-        ///         or diagnostics.  Prefer using <see cref="StartActivity()" />
-        ///         or <see cref="StartActivity(Guid)" /> instead.</para>
-        /// </remarks>
-        Guid CurrentActivityId { get; set; }
 
-        /// <summary>
-        ///     Creates and sets a new activity ID for the current thread, optionally correlating
-        ///     the new activity with another activity.
-        /// </summary>
-        /// <param name="relatedActivityId">The ID of an existing activity to be correlated with the
-        ///     new activity or <see cref="Guid.Empty" /> if correlation is not desired.</param>
-        /// <returns>An object which can be used to revert the activity ID of the current thread once
-        ///     the new activity yields control of the current thread.</returns>
-        IEtwActivityReverter StartActivity(Guid relatedActivityId);
+Guid CurrentActivityId {get; set; }
 
-        /// <summary>
-        ///     Creates and sets a new activity ID for the current thread.  If the current thread
-        ///     has an existing activity ID, it will be correlated with the new activity ID.
-        /// </summary>
-        /// <returns>An object which can be used to revert the activity ID of the current thread once
-        ///     the new activity yields control of the current thread.</returns>
-        IEtwActivityReverter StartActivity();
+IEtwActivityReverter StartActivity(Guid relatedActivityId);
+
+IEtwActivityReverter StartActivity();
     }
-
-    /// <summary>
-    ///     A simple implementation of <see cref="IEtwEventCorrelator" />.
-    /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Etw")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Etw")]
     public class EtwEventCorrelator :
         IEtwEventCorrelator
-    {
-        private readonly EventProvider _transferProvider;
-        private readonly EventDescriptor _transferEvent;
+{
+private readonly EventProvider _transferProvider;
 
-        /// <summary>
-        ///     Creates an <see cref="EtwEventCorrelator" />.
-        /// </summary>
-        /// <param name="transferProvider">The <see cref="EventProvider" /> to use when logging transfer events
-        ///     during activity correlation.</param>
-        /// <param name="transferEvent">The <see cref="EventDescriptor" /> to use when logging transfer events
-        ///     during activity correlation.</param>
-        public EtwEventCorrelator(EventProvider transferProvider, EventDescriptor transferEvent)
-        {
-            if (transferProvider == null)
+private readonly EventDescriptor _transferEvent;
+
+public EtwEventCorrelator(EventProvider transferProvider, EventDescriptor transferEvent)
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1053,3034,3385);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,2503,2520);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,3147,3276) || true) && (transferProvider == null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1053,3147,3276);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,3209,3261);
+
+throw f_1053_3215_3260("transferProvider");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1053,3147,3276);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,3292,3329);
+
+_transferProvider = transferProvider;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,3343,3374);
+
+_transferEvent = transferEvent;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1053,3034,3385);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1053,3034,3385);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1053,3034,3385);
+}
+		}
+
+public Guid CurrentActivityId
+{
+get
+		{
+			try
             {
-                throw new ArgumentNullException("transferProvider");
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1053,3580,3666);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,3616,3651);
 
-            _transferProvider = transferProvider;
-            _transferEvent = transferEvent;
-        }
+return f_1053_3623_3650();
+DynAbs.Tracing.TraceSender.TraceExitMethod(1053,3580,3666);
 
-        /// <summary>
-        ///     Implements <see cref="IEtwEventCorrelator.CurrentActivityId" />.
-        /// </summary>
-        public Guid CurrentActivityId
-        {
-            get
-            {
-                return EtwActivity.GetActivityId();
-            }
-
-            set
-            {
-                EventProvider.SetActivityId(ref value);
-            }
-        }
-
-        /// <summary>
-        ///     Implements <see cref="IEtwEventCorrelator.StartActivity(Guid)" />.
-        /// </summary>
-        public IEtwActivityReverter StartActivity(Guid relatedActivityId)
-        {
-            var retActivity = new EtwActivityReverter(this, CurrentActivityId);
-            CurrentActivityId = EventProvider.CreateActivityId();
-
-            if (relatedActivityId != Guid.Empty)
-            {
-                var tempTransferEvent = _transferEvent;
-                _transferProvider.WriteTransferEvent(ref tempTransferEvent, relatedActivityId);
-            }
-
-            return retActivity;
-        }
-
-        /// <summary>
-        ///     Implements <see cref="IEtwEventCorrelator.StartActivity()" />.
-        /// </summary>
-        public IEtwActivityReverter StartActivity()
-        {
-            return StartActivity(CurrentActivityId);
-        }
-    }
+System.Guid
+f_1053_3623_3650()
+{
+var return_v = EtwActivity.GetActivityId();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 3623, 3650);
+return return_v;
 }
 
-#endif
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1053,3526,3783);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1053,3526,3783);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
+            {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1053,3682,3772);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,3718,3757);
+
+f_1053_3718_3756(ref value);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1053,3682,3772);
+
+int
+f_1053_3718_3756(ref System.Guid
+id)
+{
+EventProvider.SetActivityId( ref id);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 3718, 3756);
+return 0;
+}
+
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1053,3526,3783);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1053,3526,3783);
+}
+		}}
+
+public IEtwActivityReverter StartActivity(Guid relatedActivityId)
+		{
+			try
+        {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1053,3926,4432);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4016,4083);
+
+var 
+retActivity = f_1053_4034_4082(this, f_1053_4064_4081())
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4097,4150);
+
+CurrentActivityId = f_1053_4117_4149();
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4166,4386) || true) && (relatedActivityId != Guid.Empty)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1053,4166,4386);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4235,4274);
+
+var 
+tempTransferEvent = _transferEvent
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4292,4371);
+
+f_1053_4292_4370(                _transferProvider, ref tempTransferEvent, relatedActivityId);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1053,4166,4386);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4402,4421);
+
+return retActivity;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1053,3926,4432);
+
+System.Guid
+f_1053_4064_4081()
+{
+var return_v = CurrentActivityId;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1053, 4064, 4081);
+return return_v;
+}
+
+
+System.Management.Automation.Tracing.EtwActivityReverter
+f_1053_4034_4082(System.Management.Automation.Tracing.EtwEventCorrelator
+correlator,System.Guid
+oldActivityId)
+{
+var return_v = new System.Management.Automation.Tracing.EtwActivityReverter( (System.Management.Automation.Tracing.IEtwEventCorrelator)correlator, oldActivityId);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 4034, 4082);
+return return_v;
+}
+
+
+System.Guid
+f_1053_4117_4149()
+{
+var return_v = EventProvider.CreateActivityId();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 4117, 4149);
+return return_v;
+}
+
+
+bool
+f_1053_4292_4370(System.Diagnostics.Eventing.EventProvider
+this_param,ref System.Diagnostics.Eventing.EventDescriptor
+eventDescriptor,System.Guid
+relatedActivityId,params object[]
+eventPayload)
+{
+var return_v = this_param.WriteTransferEvent( ref eventDescriptor, relatedActivityId, eventPayload);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 4292, 4370);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1053,3926,4432);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1053,3926,4432);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+public IEtwActivityReverter StartActivity()
+		{
+			try
+        {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1053,4571,4690);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1053,4639,4679);
+
+return f_1053_4646_4678(this, f_1053_4660_4677());
+DynAbs.Tracing.TraceSender.TraceExitMethod(1053,4571,4690);
+
+System.Guid
+f_1053_4660_4677()
+{
+var return_v = CurrentActivityId;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1053, 4660, 4677);
+return return_v;
+}
+
+
+System.Management.Automation.Tracing.IEtwActivityReverter
+f_1053_4646_4678(System.Management.Automation.Tracing.EtwEventCorrelator
+this_param,System.Guid
+relatedActivityId)
+{
+var return_v = this_param.StartActivity( relatedActivityId);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 4646, 4678);
+return return_v;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1053,4571,4690);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1053,4571,4690);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+
+static EtwEventCorrelator()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1053,2253,4697);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1053,2253,4697);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1053,2253,4697);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1053,2253,4697);
+
+System.ArgumentNullException
+f_1053_3215_3260(string
+paramName)
+{
+var return_v = new System.ArgumentNullException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1053, 3215, 3260);
+return return_v;
+}
+
+}
+}
+

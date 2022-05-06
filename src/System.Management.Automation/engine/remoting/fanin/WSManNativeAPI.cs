@@ -12,188 +12,384 @@ namespace System.Management.Automation.Remoting.Client
 {
     internal static class WSManNativeApi
     {
-        internal const uint INFINITE = 0xFFFFFFFF;
-        internal const string PS_CREATION_XML_TAG = "creationXml";
-        internal const string PS_CONNECT_XML_TAG = "connectXml";
-        internal const string PS_CONNECTRESPONSE_XML_TAG = "connectResponseXml";
-        internal const string PS_XML_NAMESPACE = "http://schemas.microsoft.com/powershell";
-        internal const string WSMAN_STREAM_ID_STDOUT = "stdout";
-        internal const string WSMAN_STREAM_ID_PROMPTRESPONSE = "pr";
-        internal const string WSMAN_STREAM_ID_STDIN = "stdin";
-        internal const string ResourceURIPrefix = @"http://schemas.microsoft.com/powershell/";
-        internal const string NoProfile = "WINRS_NOPROFILE";
-        internal const string CodePage = "WINRS_CODEPAGE";
-        internal static readonly Version WSMAN_STACK_VERSION = new Version(3, 0);
-        internal const int WSMAN_FLAG_REQUESTED_API_VERSION_1_1 = 1;
-        // WSMan's default max env size in V2
-        internal const int WSMAN_DEFAULT_MAX_ENVELOPE_SIZE_KB_V2 = 150;
-        // WSMan's default max env size in V3
-        internal const int WSMAN_DEFAULT_MAX_ENVELOPE_SIZE_KB_V3 = 500;
+        internal const uint
+        INFINITE = 0xFFFFFFFF
+        ;
 
-        #region WSMan errors
+        internal const string
+        PS_CREATION_XML_TAG = "creationXml"
+        ;
 
-        /// <summary>
-        /// The WinRM service cannot process the request because the request needs to be sent
-        /// to a different machine.
-        /// Use the redirect information to send the request to a new machine.
-        /// 0x8033819B from sdk\inc\wsmerror.h.
-        /// </summary>
-        internal const int ERROR_WSMAN_REDIRECT_REQUESTED = -2144108135;
+        internal const string
+        PS_CONNECT_XML_TAG = "connectXml"
+        ;
 
-        /// <summary>
-        /// The WS-Management service cannot process the request. The resource URI is missing or
-        ///  it has an incorrect format. Check the documentation or use the following command for
-        /// information on how to construct a resource URI: "winrm help uris".
-        /// </summary>
-        internal const int ERROR_WSMAN_INVALID_RESOURCE_URI = -2144108485;
+        internal const string
+        PS_CONNECTRESPONSE_XML_TAG = "connectResponseXml"
+        ;
 
-        /// <summary>
-        /// The WinRM service cannon re-connect the session because the session is no longer
-        /// associated with this transportmanager object.
-        /// </summary>
-        internal const int ERROR_WSMAN_INUSE_CANNOT_RECONNECT = -2144108083;
+        internal const string
+        PS_XML_NAMESPACE = "http://schemas.microsoft.com/powershell"
+        ;
 
-        /// <summary>
-        /// Sending data to a remote command failed with the following error message: The client
-        /// cannot connect to the destination specified in the request. Verify that the service on
-        /// the destination is running and is accepting requests. Consult the logs and documentation
-        /// for the WS-Management service running on the destination, most commonly IIS or WinRM.
-        /// If the destination is the WinRM service, run the following command on the destination to
-        /// analyze and configure the WinRM service:
-        /// </summary>
-        internal const int ERROR_WSMAN_SENDDATA_CANNOT_CONNECT = -2144108526;
+        internal const string
+        WSMAN_STREAM_ID_STDOUT = "stdout"
+        ;
 
-        /// <summary>
-        /// Sending data to a remote command failed with the following error message: The WinRM client
-        /// cannot complete the operation within the time specified. Check if the machine name is valid
-        /// and is reachable over the network and firewall exception for Windows Remote Management service
-        /// is enabled.
-        /// </summary>
-        internal const int ERROR_WSMAN_SENDDATA_CANNOT_COMPLETE = -2144108250;
+        internal const string
+        WSMAN_STREAM_ID_PROMPTRESPONSE = "pr"
+        ;
 
-        internal const int ERROR_WSMAN_ACCESS_DENIED = 5;
+        internal const string
+        WSMAN_STREAM_ID_STDIN = "stdin"
+        ;
 
-        internal const int ERROR_WSMAN_OUTOF_MEMORY = 14;
+        internal const string
+        ResourceURIPrefix = @"http://schemas.microsoft.com/powershell/"
+        ;
 
-        internal const int ERROR_WSMAN_NETWORKPATH_NOTFOUND = 53;
+        internal const string
+        NoProfile = "WINRS_NOPROFILE"
+        ;
 
-        internal const int ERROR_WSMAN_OPERATION_ABORTED = 995;
+        internal const string
+        CodePage = "WINRS_CODEPAGE"
+        ;
 
-        internal const int ERROR_WSMAN_SHUTDOWN_INPROGRESS = 1115;
+        internal static readonly Version WSMAN_STACK_VERSION;
 
-        internal const int ERROR_WSMAN_AUTHENTICATION_FAILED = 1311;
+        internal const int
+        WSMAN_FLAG_REQUESTED_API_VERSION_1_1 = 1
+        ;
 
-        internal const int ERROR_WSMAN_NO_LOGON_SESSION_EXIST = 1312;
+        internal const int
+        WSMAN_DEFAULT_MAX_ENVELOPE_SIZE_KB_V2 = 150
+        ;
 
-        internal const int ERROR_WSMAN_LOGON_FAILURE = 1326;
+        internal const int
+        WSMAN_DEFAULT_MAX_ENVELOPE_SIZE_KB_V3 = 500
+        ;
 
-        internal const int ERROR_WSMAN_IMPROPER_RESPONSE = 1722;
+        internal const int
+        ERROR_WSMAN_REDIRECT_REQUESTED = -2144108135
+        ;
 
-        internal const int ERROR_WSMAN_INCORRECT_PROTOCOLVERSION = -2141974624;
+        internal const int
+        ERROR_WSMAN_INVALID_RESOURCE_URI = -2144108485
+        ;
 
-        internal const int ERROR_WSMAN_URL_NOTAVAILABLE = -2144108269;
+        internal const int
+        ERROR_WSMAN_INUSE_CANNOT_RECONNECT = -2144108083
+        ;
 
-        internal const int ERROR_WSMAN_INVALID_AUTHENTICATION = -2144108274;
+        internal const int
+        ERROR_WSMAN_SENDDATA_CANNOT_CONNECT = -2144108526
+        ;
 
-        internal const int ERROR_WSMAN_CANNOT_CONNECT_INVALID = -2144108080;
+        internal const int
+        ERROR_WSMAN_SENDDATA_CANNOT_COMPLETE = -2144108250
+        ;
 
-        internal const int ERROR_WSMAN_CANNOT_CONNECT_MISMATCH = -2144108090;
+        internal const int
+        ERROR_WSMAN_ACCESS_DENIED = 5
+        ;
 
-        internal const int ERROR_WSMAN_CANNOT_CONNECT_RUNASFAILED = -2144108065;
+        internal const int
+        ERROR_WSMAN_OUTOF_MEMORY = 14
+        ;
 
-        internal const int ERROR_WSMAN_CREATEFAILED_INVALIDNAME = -2144108094;
+        internal const int
+        ERROR_WSMAN_NETWORKPATH_NOTFOUND = 53
+        ;
 
-        internal const int ERROR_WSMAN_TARGETSESSION_DOESNOTEXIST = -2144108453;
+        internal const int
+        ERROR_WSMAN_OPERATION_ABORTED = 995
+        ;
 
-        internal const int ERROR_WSMAN_REMOTESESSION_DISALLOWED = -2144108116;
+        internal const int
+        ERROR_WSMAN_SHUTDOWN_INPROGRESS = 1115
+        ;
 
-        internal const int ERROR_WSMAN_REMOTECONNECTION_DISALLOWED = -2144108061;
+        internal const int
+        ERROR_WSMAN_AUTHENTICATION_FAILED = 1311
+        ;
 
-        internal const int ERROR_WSMAN_INVALID_RESOURCE_URI2 = -2144108542;
+        internal const int
+        ERROR_WSMAN_NO_LOGON_SESSION_EXIST = 1312
+        ;
 
-        internal const int ERROR_WSMAN_CORRUPTED_CONFIG = -2144108539;
+        internal const int
+        ERROR_WSMAN_LOGON_FAILURE = 1326
+        ;
 
-        internal const int ERROR_WSMAN_URI_LIMIT = -2144108499;
+        internal const int
+        ERROR_WSMAN_IMPROPER_RESPONSE = 1722
+        ;
 
-        internal const int ERROR_WSMAN_CLIENT_KERBEROS_DISABLED = -2144108318;
+        internal const int
+        ERROR_WSMAN_INCORRECT_PROTOCOLVERSION = -2141974624
+        ;
 
-        internal const int ERROR_WSMAN_SERVER_NOTTRUSTED = -2144108316;
+        internal const int
+        ERROR_WSMAN_URL_NOTAVAILABLE = -2144108269
+        ;
 
-        internal const int ERROR_WSMAN_WORKGROUP_NO_KERBEROS = -2144108276;
+        internal const int
+        ERROR_WSMAN_INVALID_AUTHENTICATION = -2144108274
+        ;
 
-        internal const int ERROR_WSMAN_EXPLICIT_CREDENTIALS_REQUIRED = -2144108315;
+        internal const int
+        ERROR_WSMAN_CANNOT_CONNECT_INVALID = -2144108080
+        ;
 
-        internal const int ERROR_WSMAN_REDIRECT_LOCATION_INVALID = -2144108105;
+        internal const int
+        ERROR_WSMAN_CANNOT_CONNECT_MISMATCH = -2144108090
+        ;
 
-        internal const int ERROR_WSMAN_BAD_METHOD = -2144108428;
+        internal const int
+        ERROR_WSMAN_CANNOT_CONNECT_RUNASFAILED = -2144108065
+        ;
 
-        internal const int ERROR_WSMAN_HTTP_SERVICE_UNAVAILABLE = -2144108270;
+        internal const int
+        ERROR_WSMAN_CREATEFAILED_INVALIDNAME = -2144108094
+        ;
 
-        internal const int ERROR_WSMAN_HTTP_SERVICE_ERROR = -2144108176;
+        internal const int
+        ERROR_WSMAN_TARGETSESSION_DOESNOTEXIST = -2144108453
+        ;
 
-        internal const int ERROR_WSMAN_COMPUTER_NOTFOUND = -2144108103;
+        internal const int
+        ERROR_WSMAN_REMOTESESSION_DISALLOWED = -2144108116
+        ;
 
-        internal const int ERROR_WSMAN_TARGET_UNKNOWN = -2146893053;
+        internal const int
+        ERROR_WSMAN_REMOTECONNECTION_DISALLOWED = -2144108061
+        ;
 
-        internal const int ERROR_WSMAN_CANNOTUSE_IP = -2144108101;
+        internal const int
+        ERROR_WSMAN_INVALID_RESOURCE_URI2 = -2144108542
+        ;
 
-        #endregion
+        internal const int
+        ERROR_WSMAN_CORRUPTED_CONFIG = -2144108539
+        ;
 
-        #region MarshalledObject
+        internal const int
+        ERROR_WSMAN_URI_LIMIT = -2144108499
+        ;
 
-        /// <summary>
-        /// A struct holding marshalled data (IntPtr). This is
-        /// created to supply IDisposable pattern to safely
-        /// release the unmanaged pointer.
-        /// </summary>
+        internal const int
+        ERROR_WSMAN_CLIENT_KERBEROS_DISABLED = -2144108318
+        ;
+
+        internal const int
+        ERROR_WSMAN_SERVER_NOTTRUSTED = -2144108316
+        ;
+
+        internal const int
+        ERROR_WSMAN_WORKGROUP_NO_KERBEROS = -2144108276
+        ;
+
+        internal const int
+        ERROR_WSMAN_EXPLICIT_CREDENTIALS_REQUIRED = -2144108315
+        ;
+
+        internal const int
+        ERROR_WSMAN_REDIRECT_LOCATION_INVALID = -2144108105
+        ;
+
+        internal const int
+        ERROR_WSMAN_BAD_METHOD = -2144108428
+        ;
+
+        internal const int
+        ERROR_WSMAN_HTTP_SERVICE_UNAVAILABLE = -2144108270
+        ;
+
+        internal const int
+        ERROR_WSMAN_HTTP_SERVICE_ERROR = -2144108176
+        ;
+
+        internal const int
+        ERROR_WSMAN_COMPUTER_NOTFOUND = -2144108103
+        ;
+
+        internal const int
+        ERROR_WSMAN_TARGET_UNKNOWN = -2146893053
+        ;
+
+        internal const int
+        ERROR_WSMAN_CANNOTUSE_IP = -2144108101
+        ;
+
         internal struct MarshalledObject : IDisposable
         {
+
             private IntPtr _dataPtr;
 
-            /// <summary>
-            /// Constructs a MarshalledObject with the supplied
-            /// ptr.
-            /// </summary>
-            /// <param name="dataPtr"></param>
             internal MarshalledObject(IntPtr dataPtr)
             {
-                _dataPtr = dataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 6877, 6985);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 6951, 6970);
+
+                    _dataPtr = dataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 6877, 6985);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 6877, 6985);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 6877, 6985);
+                }
             }
 
-            /// <summary>
-            /// Gets the unmanaged ptr.
-            /// </summary>
-            internal IntPtr DataPtr { get { return _dataPtr; } }
+            internal IntPtr DataPtr
+            {
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 7123, 7147);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 7129, 7145);
 
-            /// <summary>
-            /// Creates a MarshalledObject for the specified object.
-            /// </summary>
-            /// <typeparam name="T">
-            /// Must be a value type.
-            /// </typeparam>
-            /// <param name="obj"></param>
-            /// <returns>MarshalledObject.</returns>
+                        return _dataPtr;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 7123, 7147);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 7097, 7149);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 7097, 7149);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
+            }
+
             internal static MarshalledObject Create<T>(T obj)
             {
-                IntPtr ptr = Marshal.AllocHGlobal(Marshal.SizeOf<T>());
-                Marshal.StructureToPtr(obj, ptr, false);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 7495, 7912);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 7577, 7632);
 
-                // Now create the MarshalledObject and return.
-                MarshalledObject result = new MarshalledObject();
-                result._dataPtr = ptr;
+                    IntPtr
+                    ptr = f_1639_7590_7631(f_1639_7611_7630())
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 7650, 7690);
 
-                return result;
+                    f_1639_7650_7689(obj, ptr, false);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 7774, 7823);
+
+                    MarshalledObject
+                    result = f_1639_7800_7822()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 7841, 7863);
+
+                    result._dataPtr = ptr;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 7883, 7897);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 7495, 7912);
+
+                    int
+                    f_1639_7611_7630()
+                    {
+                        var return_v = Marshal.SizeOf<T>();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 7611, 7630);
+                        return return_v;
+                    }
+
+
+                    System.IntPtr
+                    f_1639_7590_7631(int
+                    cb)
+                    {
+                        var return_v = Marshal.AllocHGlobal(cb);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 7590, 7631);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_7650_7689(T
+                    structure, System.IntPtr
+                    ptr, bool
+                    fDeleteOld)
+                    {
+                        Marshal.StructureToPtr(structure, ptr, fDeleteOld);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 7650, 7689);
+                        return 0;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.MarshalledObject
+                    f_1639_7800_7822()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.MarshalledObject();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 7800, 7822);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 7495, 7912);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 7495, 7912);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Dispose the unmanaged IntPtr.
-            /// </summary>
             public void Dispose()
             {
-                if (IntPtr.Zero != _dataPtr)
+                try
                 {
-                    Marshal.FreeHGlobal(_dataPtr);
-                    _dataPtr = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 8030, 8262);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 8084, 8247) || true) && (IntPtr.Zero != _dataPtr)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 8084, 8247);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 8153, 8183);
+
+                        f_1639_8153_8182(_dataPtr);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 8205, 8228);
+
+                        _dataPtr = IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 8084, 8247);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 8030, 8262);
+
+                    int
+                    f_1639_8153_8182(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 8153, 8182);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 8030, 8262);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 8030, 8262);
                 }
             }
 
@@ -204,13 +400,34 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(MarshalledObject obj)
             {
-                return obj._dataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 8456, 8584);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 8549, 8569);
+
+                    return obj._dataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 8456, 8584);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 8456, 8584);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 8456, 8584);
+                }
+            }
+            static MarshalledObject()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 6576, 8595);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 6576, 8595);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 6576, 8595);
             }
         }
 
-        #endregion
 
-        #region WSMan_Authentication_Credentials
 
         /// <summary>
         /// Different Authentication Mechanisms supported by WSMan.
@@ -257,203 +474,442 @@ namespace System.Management.Automation.Remoting.Client
             /// </summary>
             WSMAN_FLAG_AUTH_CREDSSP = 0x80,
         }
-
-        /// <summary>
-        /// This is used to represent _WSMAN_AUTHENTICATION_CREDENTIALS
-        /// native structure. _WSMAN_AUTHENTICATION_CREDENTIALS has a union
-        /// member which cannot be easily represented in managed code.
-        /// So created an interface and each union member is represented
-        /// with a different structure.
-        /// </summary>
         internal abstract class BaseWSManAuthenticationCredentials : IDisposable
         {
-            // used to get Marshalled data of the class.
             public abstract MarshalledObject GetMarshalledObject();
 
             public void Dispose()
             {
-                Dispose(true);
-                System.GC.SuppressFinalize(this);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 11265, 11399);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 11319, 11333);
+
+                    f_1639_11319_11332(this, true);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 11351, 11384);
+
+                    f_1639_11351_11383(this);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 11265, 11399);
+
+                    int
+                    f_1639_11319_11332(System.Management.Automation.Remoting.Client.WSManNativeApi.BaseWSManAuthenticationCredentials
+                    this_param, bool
+                    isDisposing)
+                    {
+                        this_param.Dispose(isDisposing);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 11319, 11332);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1639_11351_11383(System.Management.Automation.Remoting.Client.WSManNativeApi.BaseWSManAuthenticationCredentials
+                    obj)
+                    {
+                        System.GC.SuppressFinalize((object)obj);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 11351, 11383);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 11265, 11399);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 11265, 11399);
+                }
             }
 
             protected virtual void Dispose(bool isDisposing)
             {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 11415, 11493);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 11415, 11493);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 11415, 11493);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 11415, 11493);
+                }
             }
-        }
 
-        /// <summary>
-        /// Used to supply _WSMAN_USERNAME_PASSWORD_CREDS type credentials for
-        /// WSManCreateSession.
-        /// </summary>
+            public BaseWSManAuthenticationCredentials()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 11039, 11504);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 11039, 11504);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 11039, 11504);
+            }
+
+
+            static BaseWSManAuthenticationCredentials()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 11039, 11504);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 11039, 11504);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 11039, 11504);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 11039, 11504);
+        }
         internal class WSManUserNameAuthenticationCredentials : BaseWSManAuthenticationCredentials
         {
-            /// <summary>
-            /// </summary>
             [StructLayout(LayoutKind.Sequential)]
             internal struct WSManUserNameCredentialStruct
             {
-                /// <summary>
-                /// </summary>
+
                 internal WSManAuthenticationMechanism authenticationMechanism;
-                /// <summary>
-                /// </summary>
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string userName;
-                /// <summary>
-                /// Making password secure.
-                /// </summary>
+
                 [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
                 internal IntPtr password;
+                static WSManUserNameCredentialStruct()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 11846, 12535);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 11846, 12535);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 11846, 12535);
+                }
             }
 
             private WSManUserNameCredentialStruct _cred;
+
             private MarshalledObject _data;
 
-            /// <summary>
-            /// Default constructor.
-            /// </summary>
             internal WSManUserNameAuthenticationCredentials()
             {
-                _cred = new WSManUserNameCredentialStruct();
-                _data = MarshalledObject.Create<WSManUserNameCredentialStruct>(_cred);
-            }
-
-            /// <summary>
-            /// Constructs an WSManUserNameAuthenticationCredentials object.
-            /// It is upto the caller to verify if <paramref name="name"/>
-            /// and <paramref name="pwd"/> are valid. This API wont complain
-            /// if they are Empty or Null.
-            /// </summary>
-            /// <param name="name">
-            /// user name.
-            /// </param>
-            /// <param name="pwd">
-            /// password.
-            /// </param>
-            /// <param name="authMechanism">
-            /// can be 0 (the user did not specify an authentication mechanism,
-            /// WSMan client will choose between Kerberos and Negotiate only);
-            /// if it is not 0, it must be one of the values from
-            /// WSManAuthenticationMechanism enumeration.
-            /// </param>
-            internal WSManUserNameAuthenticationCredentials(string name,
-                System.Security.SecureString pwd, WSManAuthenticationMechanism authMechanism)
-            {
-                _cred = new WSManUserNameCredentialStruct();
-                _cred.authenticationMechanism = authMechanism;
-                _cred.userName = name;
-                if (pwd != null)
+                try
                 {
-                    _cred.password = Marshal.SecureStringToCoTaskMemUnicode(pwd);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 12749, 12978);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 12831, 12875);
 
-                _data = MarshalledObject.Create<WSManUserNameCredentialStruct>(_cred);
+                    _cred = f_1639_12839_12874();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 12893, 12963);
+
+                    _data = MarshalledObject.Create<WSManUserNameCredentialStruct>(_cred);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 12749, 12978);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 12749, 12978);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 12749, 12978);
+                }
             }
 
-            /// <summary>
-            /// Gets a structure representation (used for marshalling)
-            /// </summary>
+            internal WSManUserNameAuthenticationCredentials(string name,
+                            System.Security.SecureString pwd, WSManAuthenticationMechanism authMechanism)
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 13864, 14460);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14052, 14096);
+
+                    _cred = f_1639_14060_14095();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14114, 14160);
+
+                    _cred.authenticationMechanism = authMechanism;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14178, 14200);
+
+                    _cred.userName = name;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14218, 14355) || true) && (pwd != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 14218, 14355);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14275, 14336);
+
+                        _cred.password = f_1639_14292_14335(pwd);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 14218, 14355);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14375, 14445);
+
+                    _data = MarshalledObject.Create<WSManUserNameCredentialStruct>(_cred);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 13864, 14460);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 13864, 14460);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 13864, 14460);
+                }
+            }
+
             internal WSManUserNameCredentialStruct CredentialStruct
             {
-                get { return _cred; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 14691, 14712);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14697, 14710);
+
+                        return _cred;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 14691, 14712);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 14603, 14727);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 14603, 14727);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
             }
 
-            /// <summary>
-            /// Marshalled Data.
-            /// </summary>
-            /// <returns></returns>
             public override MarshalledObject GetMarshalledObject()
             {
-                return _data;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 14869, 14984);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 14956, 14969);
+
+                    return _data;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 14869, 14984);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 14869, 14984);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 14869, 14984);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Dispose of the resources.
-            /// </summary>
-            /// <param name="isDisposing"></param>
             protected override void Dispose(bool isDisposing)
             {
-                if (_cred.password != IntPtr.Zero)
+                try
                 {
-                    Marshal.ZeroFreeCoTaskMemUnicode(_cred.password);
-                    _cred.password = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 15150, 15477);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 15232, 15426) || true) && (_cred.password != IntPtr.Zero)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 15232, 15426);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 15307, 15356);
+
+                        f_1639_15307_15355(_cred.password);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 15378, 15407);
+
+                        _cred.password = IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 15232, 15426);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 15446, 15462);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 15150, 15477);
+
+                    int
+                    f_1639_15307_15355(System.IntPtr
+                    s)
+                    {
+                        Marshal.ZeroFreeCoTaskMemUnicode(s);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 15307, 15355);
+                        return 0;
+                    }
+
                 }
-
-                _data.Dispose();
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 15150, 15477);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 15150, 15477);
+                }
             }
-        }
 
-        /// <summary>
-        /// </summary>
+            static WSManUserNameAuthenticationCredentials()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 11676, 15488);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 11676, 15488);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 11676, 15488);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 11676, 15488);
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct
+            f_1639_12839_12874()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 12839, 12874);
+                return return_v;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct
+            f_1639_14060_14095()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 14060, 14095);
+                return return_v;
+            }
+
+
+            System.IntPtr
+            f_1639_14292_14335(System.Security.SecureString
+            s)
+            {
+                var return_v = Marshal.SecureStringToCoTaskMemUnicode(s);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 14292, 14335);
+                return return_v;
+            }
+
+        }
         internal class WSManCertificateThumbprintCredentials : BaseWSManAuthenticationCredentials
         {
-            /// <summary>
-            /// </summary>
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManThumbprintStruct
             {
-                /// <summary>
-                /// </summary>
+
                 internal WSManAuthenticationMechanism authenticationMechanism;
-                /// <summary>
-                /// </summary>
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string certificateThumbprint;
-                /// <summary>
-                /// This is provided for padding as underlying WSMan's implementation
-                /// uses a union, we need to pad up unused fields.
-                /// </summary>
+
                 internal IntPtr reserved;
+                static WSManThumbprintStruct()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 15716, 16407);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 15716, 16407);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 15716, 16407);
+                }
             }
 
             private MarshalledObject _data;
 
-            /// <summary>
-            /// Constructs an WSManCertificateThumbprintCredentials object.
-            /// It is upto the caller to verify if <paramref name="thumbPrint"/>
-            /// is valid. This API wont complain if it is Empty or Null.
-            /// </summary>
-            /// <param name="thumbPrint"></param>
             internal WSManCertificateThumbprintCredentials(string thumbPrint)
             {
-                WSManThumbprintStruct cred = new WSManThumbprintStruct();
-                cred.authenticationMechanism = WSManAuthenticationMechanism.WSMAN_FLAG_AUTH_CLIENT_CERTIFICATE;
-                cred.certificateThumbprint = thumbPrint;
-                cred.reserved = IntPtr.Zero;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 16809, 17277);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 16907, 16964);
 
-                _data = MarshalledObject.Create<WSManThumbprintStruct>(cred);
+                    WSManThumbprintStruct
+                    cred = f_1639_16936_16963()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 16982, 17077);
+
+                    cred.authenticationMechanism = WSManAuthenticationMechanism.WSMAN_FLAG_AUTH_CLIENT_CERTIFICATE;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 17095, 17135);
+
+                    cred.certificateThumbprint = thumbPrint;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 17153, 17181);
+
+                    cred.reserved = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 17201, 17262);
+
+                    _data = MarshalledObject.Create<WSManThumbprintStruct>(cred);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 16809, 17277);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 16809, 17277);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 16809, 17277);
+                }
             }
 
-            /// <summary>
-            /// Marshalled Data.
-            /// </summary>
-            /// <returns></returns>
             public override MarshalledObject GetMarshalledObject()
             {
-                return _data;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 17419, 17534);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 17506, 17519);
+
+                    return _data;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 17419, 17534);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 17419, 17534);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 17419, 17534);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Dispose of the resources.
-            /// </summary>
-            /// <param name="isDisposing"></param>
             protected override void Dispose(bool isDisposing)
             {
-                // data is of struct type..so there is no need to set it to null..
-                _data.Dispose();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 17700, 17897);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 17866, 17882);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 17700, 17897);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 17700, 17897);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 17700, 17897);
+                }
             }
+
+            static WSManCertificateThumbprintCredentials()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 15547, 17908);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 15547, 17908);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 15547, 17908);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 15547, 17908);
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCertificateThumbprintCredentials.WSManThumbprintStruct
+            f_1639_16936_16963()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCertificateThumbprintCredentials.WSManThumbprintStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 16936, 16963);
+                return return_v;
+            }
+
         }
 
-        #endregion
 
-        #region WSMan Session Options
 
         /// <summary>
         /// Enum representing native WSManSessionOption enum.
         /// </summary>
         internal enum WSManSessionOption : int
         {
-            #region TimeOuts
 
             /// <summary>
             /// Int - default timeout in ms that applies to all operations on the client side.
@@ -484,9 +940,7 @@ namespace System.Management.Automation.Remoting.Client
             /// </summary>
             WSMAN_OPTION_TIMEOUTMS_CLOSE_SHELL_OPERATION = 17,
 
-            #endregion
 
-            #region Connection Options
 
             /// <summary>
             /// Int - 1 to not validate the CA on the server certificate; 0 - default.
@@ -518,9 +972,7 @@ namespace System.Management.Automation.Remoting.Client
             /// </summary>
             WSMAN_OPTION_USE_INTERACTIVE_TOKEN = 34,
 
-            #endregion
 
-            #region Locale
             /// <summary>
             /// String - RFC 3066 language code.
             /// </summary>
@@ -530,9 +982,7 @@ namespace System.Management.Automation.Remoting.Client
             /// </summary>
             WSMAN_OPTION_UI_LANGUAGE = 26,
 
-            #endregion
 
-            #region Other
             /// <summary>
             /// Int - max SOAP envelope size (kb) - default 150kb from winrm config
             /// (see 'winrm help config' for more details); the client SOAP packet size cannot surpass
@@ -567,7 +1017,6 @@ namespace System.Management.Automation.Remoting.Client
             /// 0 means HTTP, 1 means HTTPS.  Default is 0.
             /// </summary>
             WSMAN_OPTION_USE_SSL = 33
-            #endregion
         }
 
         /// <summary>
@@ -596,9 +1045,7 @@ namespace System.Management.Automation.Remoting.Client
             WSMAN_FLAG_RECEIVE_DELAY_OUTPUT_STREAM = 0X10
         }
 
-        #endregion
 
-        #region WSManData
         /// <summary>
         /// Types of supported WSMan data.
         /// PowerShell uses only Text and DWORD (in some places).
@@ -611,75 +1058,178 @@ namespace System.Management.Automation.Remoting.Client
             WSMAN_DATA_TYPE_WS_XML_READER = 3,
             WSMAN_DATA_TYPE_DWORD = 4
         };
-
         [StructLayout(LayoutKind.Sequential)]
         internal class WSManDataStruct
         {
             internal uint type;
-            internal WSManBinaryOrTextDataStruct binaryOrTextData;
-        }
 
+            internal WSManBinaryOrTextDataStruct binaryOrTextData;
+
+            public WSManDataStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 25343, 25543);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 25459, 25463);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 25515, 25531);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 25343, 25543);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 25343, 25543);
+            }
+
+
+            static WSManDataStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 25343, 25543);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 25343, 25543);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 25343, 25543);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 25343, 25543);
+        }
         [StructLayout(LayoutKind.Sequential)]
         internal class WSManBinaryOrTextDataStruct
         {
             internal int bufferLength;
+
             [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
             internal IntPtr data;
-        }
 
-        /// <summary>
-        /// Used to supply WSMAN_DATA_BINARY/WSMAN_DATA_TEXT type in place of _WSMAN_DATA.
-        /// </summary>
+            public WSManBinaryOrTextDataStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 25555, 25849);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 25682, 25694);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 25555, 25849);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 25555, 25849);
+            }
+
+
+            static WSManBinaryOrTextDataStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 25555, 25849);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 25555, 25849);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 25555, 25849);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 25555, 25849);
+        }
         internal class WSManData_ManToUn : IDisposable
         {
             private WSManDataStruct _internalData;
-            [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
-            private IntPtr _marshalledObject = IntPtr.Zero;
-            [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
-            private IntPtr _marshalledBuffer = IntPtr.Zero;
 
-            /// <summary>
-            /// Constructs a WSMAN_DATA_BINARY object. This is used to send
-            /// data to remote end.
-            /// </summary>
-            /// <param name="data"></param>
+            [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
+            private IntPtr _marshalledObject;
+
+            [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
+            private IntPtr _marshalledBuffer;
+
             internal WSManData_ManToUn(byte[] data)
             {
-                Dbg.Assert(data != null, "Data cannot be null");
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 26677, 27718);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26095, 26108);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26246, 26277);
+                    this._marshalledObject = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26415, 26446);
+                    this._marshalledBuffer = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26749, 26797);
 
-                _internalData = new WSManDataStruct();
-                _internalData.binaryOrTextData = new WSManBinaryOrTextDataStruct();
-                _internalData.binaryOrTextData.bufferLength = data.Length;
-                _internalData.type = (uint)WSManDataType.WSMAN_DATA_TYPE_BINARY;
+                    f_1639_26749_26796(data != null, "Data cannot be null");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26817, 26855);
 
-                IntPtr dataToSendPtr = Marshal.AllocHGlobal(_internalData.binaryOrTextData.bufferLength);
-                _internalData.binaryOrTextData.data = dataToSendPtr;
-                _marshalledBuffer = dataToSendPtr; // Stored directly to enable graceful clean up during finalizer scenarios
+                    _internalData = f_1639_26833_26854();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26873, 26940);
 
-                Marshal.Copy(data, 0, _internalData.binaryOrTextData.data, _internalData.binaryOrTextData.bufferLength);
-                _marshalledObject = Marshal.AllocHGlobal(Marshal.SizeOf<WSManDataStruct>());
-                Marshal.StructureToPtr(_internalData, _marshalledObject, false);
+                    _internalData.binaryOrTextData = f_1639_26906_26939();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26958, 27016);
+
+                    _internalData.binaryOrTextData.bufferLength = f_1639_27004_27015(data);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27034, 27098);
+
+                    _internalData.type = (uint)WSManDataType.WSMAN_DATA_TYPE_BINARY;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27118, 27207);
+
+                    IntPtr
+                    dataToSendPtr = f_1639_27141_27206(_internalData.binaryOrTextData.bufferLength)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27225, 27277);
+
+                    _internalData.binaryOrTextData.data = dataToSendPtr;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27295, 27329);
+
+                    _marshalledBuffer = dataToSendPtr;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27423, 27527);
+
+                    f_1639_27423_27526(data, 0, _internalData.binaryOrTextData.data, _internalData.binaryOrTextData.bufferLength);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27545, 27621);
+
+                    _marshalledObject = f_1639_27565_27620(f_1639_27586_27619());
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 27639, 27703);
+
+                    f_1639_27639_27702(_internalData, _marshalledObject, false);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 26677, 27718);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 26677, 27718);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 26677, 27718);
+                }
             }
 
-            /// <summary>
-            /// Constructs a WSMAN_DATA_TEXT object. This is used to send data
-            /// to remote end.
-            /// </summary>
-            /// <param name="data"></param>
             internal WSManData_ManToUn(string data)
             {
-                Dbg.Assert(data != null, "Data cannot be null");
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 27946, 28833);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26095, 26108);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26246, 26277);
+                    this._marshalledObject = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 26415, 26446);
+                    this._marshalledBuffer = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28018, 28066);
 
-                _internalData = new WSManDataStruct();
-                _internalData.binaryOrTextData = new WSManBinaryOrTextDataStruct();
-                _internalData.binaryOrTextData.bufferLength = data.Length;
-                _internalData.type = (uint)WSManDataType.WSMAN_DATA_TYPE_TEXT;
+                    f_1639_28018_28065(data != null, "Data cannot be null");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28086, 28124);
 
-                // marshal text data
-                _internalData.binaryOrTextData.data = Marshal.StringToHGlobalUni(data);
-                _marshalledBuffer = _internalData.binaryOrTextData.data; // Stored directly to enable graceful clean up during finalizer scenarios
-                _marshalledObject = Marshal.AllocHGlobal(Marshal.SizeOf<WSManDataStruct>());
-                Marshal.StructureToPtr(_internalData, _marshalledObject, false);
+                    _internalData = f_1639_28102_28123();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28142, 28209);
+
+                    _internalData.binaryOrTextData = f_1639_28175_28208();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28227, 28285);
+
+                    _internalData.binaryOrTextData.bufferLength = f_1639_28273_28284(data);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28303, 28365);
+
+                    _internalData.type = (uint)WSManDataType.WSMAN_DATA_TYPE_TEXT;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28423, 28494);
+
+                    _internalData.binaryOrTextData.data = f_1639_28461_28493(data);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28512, 28568);
+
+                    _marshalledBuffer = _internalData.binaryOrTextData.data;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28660, 28736);
+
+                    _marshalledObject = f_1639_28680_28735(f_1639_28701_28734());
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 28754, 28818);
+
+                    f_1639_28754_28817(_internalData, _marshalledObject, false);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 27946, 28833);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 27946, 28833);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 27946, 28833);
+                }
             }
 
             /// <summary>
@@ -691,54 +1241,209 @@ namespace System.Management.Automation.Remoting.Client
             /// </summary>
             ~WSManData_ManToUn()
             {
-                Dispose(false);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 29187, 29202);
+
+                f_1639_29187_29201(this, false);
             }
 
-            /// <summary>
-            /// Gets the type of data.
-            /// </summary>
             internal uint Type
             {
-                get { return _internalData.type; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 29379, 29413);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 29385, 29411);
 
-                set { _internalData.type = value; }
+                        return _internalData.type;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 29379, 29413);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 29328, 29483);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 29328, 29483);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
+                set
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 29433, 29468);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 29439, 29466);
+
+                        _internalData.type = value;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 29433, 29468);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 29328, 29483);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 29328, 29483);
+                    }
+                }
             }
 
-            /// <summary>
-            /// Gets the buffer length of data.
-            /// </summary>
             internal int BufferLength
             {
-                get { return _internalData.binaryOrTextData.bufferLength; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 29661, 29720);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 29667, 29718);
 
-                set { _internalData.binaryOrTextData.bufferLength = value; }
+                        return _internalData.binaryOrTextData.bufferLength;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 29661, 29720);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 29603, 29815);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 29603, 29815);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
+                set
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 29740, 29800);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 29746, 29798);
+
+                        _internalData.binaryOrTextData.bufferLength = value;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 29740, 29800);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 29603, 29815);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 29603, 29815);
+                    }
+                }
             }
 
-            /// <summary>
-            /// Free unmanaged resources. All users of this class should call Dispose rather than
-            /// depending on the finalizer to clean it up.
-            /// </summary>
             public void Dispose()
             {
-                Dispose(true);
-                GC.SuppressFinalize(this);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 30045, 30172);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30099, 30113);
+
+                    f_1639_30099_30112(this, true);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30131, 30157);
+
+                    f_1639_30131_30156(this);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 30045, 30172);
+
+                    int
+                    f_1639_30099_30112(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_ManToUn
+                    this_param, bool
+                    isDisposing)
+                    {
+                        this_param.Dispose(isDisposing);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 30099, 30112);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1639_30131_30156(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_ManToUn
+                    obj)
+                    {
+                        GC.SuppressFinalize((object)obj);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 30131, 30156);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 30045, 30172);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 30045, 30172);
+                }
             }
 
             private void Dispose(bool isDisposing)
             {
-                // Managed objects should not be deleted when this is called via the finalizer
-                // because they may have been collected already. To prevent leaking the marshalledBuffer
-                // pointer, we are storing its value as a private member of the class, just like marshalledObject.
-                if (_marshalledBuffer != IntPtr.Zero)
+                try
                 {
-                    Marshal.FreeHGlobal(_marshalledBuffer);
-                    _marshalledBuffer = IntPtr.Zero;
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 30188, 30992);
 
-                if (_marshalledObject != IntPtr.Zero)
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30577, 30767) || true) && (_marshalledBuffer != IntPtr.Zero)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 30577, 30767);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30655, 30694);
+
+                        f_1639_30655_30693(_marshalledBuffer);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30716, 30748);
+
+                        _marshalledBuffer = IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 30577, 30767);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30787, 30977) || true) && (_marshalledObject != IntPtr.Zero)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 30787, 30977);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30865, 30904);
+
+                        f_1639_30865_30903(_marshalledObject);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 30926, 30958);
+
+                        _marshalledObject = IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 30787, 30977);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 30188, 30992);
+
+                    int
+                    f_1639_30655_30693(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 30655, 30693);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1639_30865_30903(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 30865, 30903);
+                        return 0;
+                    }
+
+                }
+                catch
                 {
-                    Marshal.FreeHGlobal(_marshalledObject);
-                    _marshalledObject = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 30188, 30992);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 30188, 30992);
                 }
             }
 
@@ -749,239 +1454,978 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManData_ManToUn data)
             {
-                if (data != null)
+                try
                 {
-                    return data._marshalledObject;
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 31190, 31508);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31285, 31493) || true) && (data != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 31285, 31493);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31343, 31373);
+
+                        return data._marshalledObject;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 31285, 31493);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 31285, 31493);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31455, 31474);
+
+                        return IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 31285, 31493);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 31190, 31508);
                 }
-                else
+                catch
                 {
-                    return IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 31190, 31508);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 31190, 31508);
                 }
             }
-        }
+            static WSManData_ManToUn()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 26000, 31519);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 26000, 31519);
 
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 26000, 31519);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 26000, 31519);
+
+            int
+            f_1639_26749_26796(bool
+            condition, string
+            message)
+            {
+                Dbg.Assert(condition, message);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 26749, 26796);
+                return 0;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+            f_1639_26833_26854()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 26833, 26854);
+                return return_v;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManBinaryOrTextDataStruct
+            f_1639_26906_26939()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManBinaryOrTextDataStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 26906, 26939);
+                return return_v;
+            }
+
+
+            int
+            f_1639_27004_27015(byte[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 27004, 27015);
+                return return_v;
+            }
+
+
+            System.IntPtr
+            f_1639_27141_27206(int
+            cb)
+            {
+                var return_v = Marshal.AllocHGlobal(cb);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 27141, 27206);
+                return return_v;
+            }
+
+
+            int
+            f_1639_27423_27526(byte[]
+            source, int
+            startIndex, System.IntPtr
+            destination, int
+            length)
+            {
+                Marshal.Copy(source, startIndex, destination, length);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 27423, 27526);
+                return 0;
+            }
+
+
+            int
+            f_1639_27586_27619()
+            {
+                var return_v = Marshal.SizeOf<WSManDataStruct>();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 27586, 27619);
+                return return_v;
+            }
+
+
+            System.IntPtr
+            f_1639_27565_27620(int
+            cb)
+            {
+                var return_v = Marshal.AllocHGlobal(cb);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 27565, 27620);
+                return return_v;
+            }
+
+
+            int
+            f_1639_27639_27702(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+            structure, System.IntPtr
+            ptr, bool
+            fDeleteOld)
+            {
+                Marshal.StructureToPtr(structure, ptr, fDeleteOld);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 27639, 27702);
+                return 0;
+            }
+
+
+            int
+            f_1639_28018_28065(bool
+            condition, string
+            message)
+            {
+                Dbg.Assert(condition, message);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28018, 28065);
+                return 0;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+            f_1639_28102_28123()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28102, 28123);
+                return return_v;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManBinaryOrTextDataStruct
+            f_1639_28175_28208()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManBinaryOrTextDataStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28175, 28208);
+                return return_v;
+            }
+
+
+            int
+            f_1639_28273_28284(string
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 28273, 28284);
+                return return_v;
+            }
+
+
+            System.IntPtr
+            f_1639_28461_28493(string
+            s)
+            {
+                var return_v = Marshal.StringToHGlobalUni(s);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28461, 28493);
+                return return_v;
+            }
+
+
+            int
+            f_1639_28701_28734()
+            {
+                var return_v = Marshal.SizeOf<WSManDataStruct>();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28701, 28734);
+                return return_v;
+            }
+
+
+            System.IntPtr
+            f_1639_28680_28735(int
+            cb)
+            {
+                var return_v = Marshal.AllocHGlobal(cb);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28680, 28735);
+                return return_v;
+            }
+
+
+            int
+            f_1639_28754_28817(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+            structure, System.IntPtr
+            ptr, bool
+            fDeleteOld)
+            {
+                Marshal.StructureToPtr(structure, ptr, fDeleteOld);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 28754, 28817);
+                return 0;
+            }
+
+
+            int
+            f_1639_29187_29201(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_ManToUn
+            this_param, bool
+            isDisposing)
+            {
+                this_param.Dispose(isDisposing);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 29187, 29201);
+                return 0;
+            }
+
+        }
         internal class WSManData_UnToMan
         {
-            /// <summary>
-            /// Gets the type of data.
-            /// </summary>
             private uint _type;
+
             internal uint Type
             {
-                get { return _type; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 31767, 31788);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31773, 31786);
 
-                set { _type = value; }
+                        return _type;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 31767, 31788);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 31716, 31845);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 31716, 31845);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
+                set
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 31808, 31830);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31814, 31828);
+
+                        _type = value;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 31808, 31830);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 31716, 31845);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 31716, 31845);
+                    }
+                }
             }
 
-            /// <summary>
-            /// Gets the buffer length of data.
-            /// </summary>
             private int _bufferLength;
+
             internal int BufferLength
             {
-                get { return _bufferLength; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 32063, 32092);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32069, 32090);
 
-                set { _bufferLength = value; }
+                        return _bufferLength;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 32063, 32092);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 32005, 32157);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 32005, 32157);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
+                set
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 32112, 32142);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32118, 32140);
+
+                        _bufferLength = value;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 32112, 32142);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 32005, 32157);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 32005, 32157);
+                    }
+                }
             }
 
             private string _text;
+
             internal string Text
             {
                 get
                 {
-                    if (this.Type == (uint)WSManDataType.WSMAN_DATA_TYPE_TEXT)
-                        return _text;
-                    else
-                        return string.Empty;
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 32261, 32493);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32305, 32474) || true) && (f_1639_32309_32318(this) == (uint)WSManDataType.WSMAN_DATA_TYPE_TEXT)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 32305, 32474);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32389, 32402);
+
+                            return _text;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 32305, 32474);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 32305, 32474);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32454, 32474);
+
+                            return string.Empty;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 32305, 32474);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 32261, 32493);
+
+                        uint
+                        f_1639_32309_32318(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_UnToMan
+                        this_param)
+                        {
+                            var return_v = this_param.Type;
+                            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 32309, 32318);
+                            return return_v;
+                        }
+
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 32208, 32508);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 32208, 32508);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
                 }
             }
 
             private byte[] _data;
+
             internal byte[] Data
             {
                 get
                 {
-                    if (this.Type == (uint)WSManDataType.WSMAN_DATA_TYPE_BINARY)
-                        return _data;
-                    else
-                        return Array.Empty<byte>();
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 32612, 32853);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32656, 32834) || true) && (f_1639_32660_32669(this) == (uint)WSManDataType.WSMAN_DATA_TYPE_BINARY)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 32656, 32834);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32742, 32755);
+
+                            return _data;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 32656, 32834);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 32656, 32834);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32807, 32834);
+
+                            return f_1639_32814_32833();
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 32656, 32834);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 32612, 32853);
+
+                        uint
+                        f_1639_32660_32669(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_UnToMan
+                        this_param)
+                        {
+                            var return_v = this_param.Type;
+                            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 32660, 32669);
+                            return return_v;
+                        }
+
+
+                        byte[]
+                        f_1639_32814_32833()
+                        {
+                            var return_v = Array.Empty<byte>();
+                            DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 32814, 32833);
+                            return return_v;
+                        }
+
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 32559, 32868);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 32559, 32868);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
                 }
             }
 
-            /// <summary>
-            /// Converts the unmanaged structure to a managed class object.
-            /// </summary>
-            /// <param name="dataStruct"></param>
-            /// <returns></returns>
             internal static WSManData_UnToMan UnMarshal(WSManDataStruct dataStruct)
             {
-                WSManData_UnToMan newData = new WSManData_UnToMan();
-
-                newData._type = dataStruct.type;
-                newData._bufferLength = dataStruct.binaryOrTextData.bufferLength;
-
-                switch (dataStruct.type)
+                try
                 {
-                    case (uint)WSManNativeApi.WSManDataType.WSMAN_DATA_TYPE_TEXT:
-                        if (dataStruct.binaryOrTextData.bufferLength > 0)
-                        {
-                            string tempText = Marshal.PtrToStringUni(dataStruct.binaryOrTextData.data, dataStruct.binaryOrTextData.bufferLength);
-                            newData._text = tempText;
-                        }
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 33104, 34814);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33208, 33260);
 
-                        break;
-                    case (uint)WSManNativeApi.WSManDataType.WSMAN_DATA_TYPE_BINARY:
-                        if (dataStruct.binaryOrTextData.bufferLength > 0)
-                        {
-                            // copy data from unmanaged heap to managed heap.
-                            byte[] dataRecvd = new byte[dataStruct.binaryOrTextData.bufferLength];
-                            Marshal.Copy(
-                                dataStruct.binaryOrTextData.data,
-                                dataRecvd,
-                                0,
-                                dataStruct.binaryOrTextData.bufferLength);
-                            newData._data = dataRecvd;
-                        }
+                    WSManData_UnToMan
+                    newData = f_1639_33236_33259()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33280, 33312);
 
-                        break;
-                    default:
-                        throw new NotSupportedException();
+                    newData._type = dataStruct.type;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33330, 33395);
+
+                    newData._bufferLength = dataStruct.binaryOrTextData.bufferLength;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33415, 34764);
+
+                    switch (dataStruct.type)
+                    {
+
+                        case (uint)WSManNativeApi.WSManDataType.WSMAN_DATA_TYPE_TEXT:
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 33415, 34764);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33567, 33872) || true) && (dataStruct.binaryOrTextData.bufferLength > 0)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 33567, 33872);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33673, 33790);
+
+                                string
+                                tempText = f_1639_33691_33789(dataStruct.binaryOrTextData.data, dataStruct.binaryOrTextData.bufferLength)
+                                ;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 33820, 33845);
+
+                                newData._text = tempText;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 33567, 33872);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceBreak(1639, 33900, 33906);
+
+                            break;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 33415, 34764);
+
+                        case (uint)WSManNativeApi.WSManDataType.WSMAN_DATA_TYPE_BINARY:
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 33415, 34764);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 34017, 34621) || true) && (dataStruct.binaryOrTextData.bufferLength > 0)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 34017, 34621);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 34202, 34272);
+
+                                byte[]
+                                dataRecvd = new byte[dataStruct.binaryOrTextData.bufferLength]
+                                ;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 34302, 34538);
+
+                                f_1639_34302_34537(dataStruct.binaryOrTextData.data, dataRecvd, 0, dataStruct.binaryOrTextData.bufferLength);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 34568, 34594);
+
+                                newData._data = dataRecvd;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 34017, 34621);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceBreak(1639, 34649, 34655);
+
+                            break;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 33415, 34764);
+
+                        default:
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 33415, 34764);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 34711, 34745);
+
+                            throw f_1639_34717_34744();
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 33415, 34764);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 34784, 34799);
+
+                    return newData;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 33104, 34814);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_UnToMan
+                    f_1639_33236_33259()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_UnToMan();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 33236, 33259);
+                        return return_v;
+                    }
+
+
+                    string
+                    f_1639_33691_33789(System.IntPtr
+                    ptr, int
+                    len)
+                    {
+                        var return_v = Marshal.PtrToStringUni(ptr, len);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 33691, 33789);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_34302_34537(System.IntPtr
+                    source, byte[]
+                    destination, int
+                    startIndex, int
+                    length)
+                    {
+                        Marshal.Copy(source, destination, startIndex, length);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 34302, 34537);
+                        return 0;
+                    }
+
+
+                    System.NotSupportedException
+                    f_1639_34717_34744()
+                    {
+                        var return_v = new System.NotSupportedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 34717, 34744);
+                        return return_v;
+                    }
+
                 }
-
-                return newData;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 33104, 34814);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 33104, 34814);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManData_UnToMan UnMarshal(IntPtr unmanagedData)
             {
-                WSManData_UnToMan result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManDataStruct resultInternal = Marshal.PtrToStructure<WSManDataStruct>(unmanagedData);
-                    result = WSManData_UnToMan.UnMarshal(resultInternal);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 35051, 35506);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 35149, 35181);
 
-                return result;
+                    WSManData_UnToMan
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 35201, 35457) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 35201, 35457);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 35275, 35363);
+
+                        WSManDataStruct
+                        resultInternal = f_1639_35308_35362(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 35385, 35438);
+
+                        result = f_1639_35394_35437(resultInternal);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 35201, 35457);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 35477, 35491);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 35051, 35506);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+                    f_1639_35308_35362(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManDataStruct>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 35308, 35362);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_UnToMan
+                    f_1639_35394_35437(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+                    dataStruct)
+                    {
+                        var return_v = WSManData_UnToMan.UnMarshal(dataStruct);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 35394, 35437);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 35051, 35506);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 35051, 35506);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
+
+            public WSManData_UnToMan()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 31531, 35517);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31696, 31701);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 31977, 31990);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32188, 32193);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 32539, 32544);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 31531, 35517);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 31531, 35517);
+            }
+
+
+            static WSManData_UnToMan()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 31531, 35517);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 31531, 35517);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 31531, 35517);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 31531, 35517);
         }
 
-        /// <summary>
-        /// Used to supply a DWORD data in place of _WSMAN_DATA.
-        /// </summary>
         [StructLayout(LayoutKind.Sequential)]
         internal struct WSManDataDWord
         {
+
             private WSManDataType _type;
+
             private WSManDWordDataInternal _dwordData;
 
-            /// <summary>
-            /// Constructs a WSMAN_DATA_DWORD object.
-            /// </summary>
-            /// <param name="data"></param>
             internal WSManDataDWord(int data)
             {
-                _dwordData = new WSManDWordDataInternal();
-                _dwordData.number = data;
-                _type = WSManDataType.WSMAN_DATA_TYPE_DWORD;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 35999, 36227);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 36065, 36107);
+
+                    _dwordData = f_1639_36078_36106();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 36125, 36150);
+
+                    _dwordData.number = data;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 36168, 36212);
+
+                    _type = WSManDataType.WSMAN_DATA_TYPE_DWORD;
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 35999, 36227);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 35999, 36227);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 35999, 36227);
+                }
             }
 
-            /// <summary>
-            /// Creates an unmanaged ptr which holds the class data.
-            /// This unmanaged ptr can be used with WSMan native API.
-            /// </summary>
-            /// <returns></returns>
             internal MarshalledObject Marshal()
             {
-                return MarshalledObject.Create<WSManDataDWord>(this);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 36476, 36612);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 36544, 36597);
+
+                    return MarshalledObject.Create<WSManDataDWord>(this);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 36476, 36612);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 36476, 36612);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 36476, 36612);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// This struct is created to honor struct boundaries between
-            /// x86,amd64 and ia64. WSMan defines a generic WSMAN_DATA
-            /// structure that addresses DWORD, binary, text data.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManDWordDataInternal
             {
+
                 internal int number;
+
                 internal IntPtr reserved;
+                static WSManDWordDataInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 36898, 37097);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 36898, 37097);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 36898, 37097);
+                }
             }
+            static WSManDataDWord()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 35642, 37108);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 35642, 37108);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 35642, 37108);
+            }
+
+            static System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataDWord.WSManDWordDataInternal
+            f_1639_36078_36106()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataDWord.WSManDWordDataInternal();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 36078, 36106);
+                return return_v;
+            }
+
         }
 
-        #endregion
-
-        #region WSManShellStartupInfo / WSManOptionSet / WSManCommandArgSet / WSManProxyInfo
-
-        /// <summary>
-        /// WSMan allows multiple streams within a shell but powershell is
-        /// using only 1 stream for input and 1 stream for output to allow
-        /// sequencing of data. Because of this the following structure will
-        /// have only one string to hold stream information.
-        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct WSManStreamIDSetStruct
         {
+
             internal int streamIDsCount;
+
             [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
             internal IntPtr streamIDs;
+            static WSManStreamIDSetStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 37577, 37901);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 37577, 37901);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 37577, 37901);
+            }
         }
 
         internal struct WSManStreamIDSet_ManToUn
         {
+
             private WSManStreamIDSetStruct _streamSetInfo;
+
             private MarshalledObject _data;
 
-            /// <summary>
-            /// Constructor.
-            /// </summary>
-            /// <param name="streamIds"></param>
             internal WSManStreamIDSet_ManToUn(string[] streamIds)
             {
-                Dbg.Assert(streamIds != null, "stream ids cannot be null or empty");
-
-                int sizeOfIntPtr = Marshal.SizeOf<IntPtr>();
-                _streamSetInfo = new WSManStreamIDSetStruct();
-                _streamSetInfo.streamIDsCount = streamIds.Length;
-                _streamSetInfo.streamIDs = Marshal.AllocHGlobal(sizeOfIntPtr * streamIds.Length);
-                for (int index = 0; index < streamIds.Length; index++)
+                try
                 {
-                    IntPtr streamAddress = Marshal.StringToHGlobalUni(streamIds[index]);
-                    Marshal.WriteIntPtr(_streamSetInfo.streamIDs, index * sizeOfIntPtr, streamAddress);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 38220, 39080);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38306, 38374);
 
-                _data = MarshalledObject.Create<WSManStreamIDSetStruct>(_streamSetInfo);
-            }
+                    f_1639_38306_38373(streamIds != null, "stream ids cannot be null or empty");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38394, 38438);
 
-            /// <summary>
-            /// Free resources.
-            /// </summary>
-            internal void Dispose()
-            {
-                if (IntPtr.Zero != _streamSetInfo.streamIDs)
-                {
-                    int sizeOfIntPtr = Marshal.SizeOf<IntPtr>();
-                    for (int index = 0; index < _streamSetInfo.streamIDsCount; index++)
+                    int
+                    sizeOfIntPtr = f_1639_38413_38437()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38456, 38502);
+
+                    _streamSetInfo = f_1639_38473_38501();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38520, 38569);
+
+                    _streamSetInfo.streamIDsCount = f_1639_38552_38568(streamIds);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38587, 38668);
+
+                    _streamSetInfo.streamIDs = f_1639_38614_38667(sizeOfIntPtr * f_1639_38650_38666(streamIds));
+                    try
                     {
-                        IntPtr streamAddress = IntPtr.Zero;
-                        streamAddress = Marshal.ReadIntPtr(_streamSetInfo.streamIDs, index * sizeOfIntPtr);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38695, 38704);
+                        for (int
+        index = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38686, 38973) || true) && (index < f_1639_38714_38730(streamIds))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38732, 38739)
+        , index++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 38686, 38973))
 
-                        if (IntPtr.Zero != streamAddress)
                         {
-                            Marshal.FreeHGlobal(streamAddress);
-                            streamAddress = IntPtr.Zero;
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 38686, 38973);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38781, 38849);
+
+                            IntPtr
+                            streamAddress = f_1639_38804_38848(streamIds[index])
+                            ;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38871, 38954);
+
+                            f_1639_38871_38953(_streamSetInfo.streamIDs, index * sizeOfIntPtr, streamAddress);
                         }
                     }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 288);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 288);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 38993, 39065);
 
-                    Marshal.FreeHGlobal(_streamSetInfo.streamIDs);
-                    _streamSetInfo.streamIDs = IntPtr.Zero;
+                    _data = MarshalledObject.Create<WSManStreamIDSetStruct>(_streamSetInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 38220, 39080);
                 }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 38220, 39080);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 38220, 39080);
+                }
+            }
 
-                _data.Dispose();
+            internal void Dispose()
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 39184, 40113);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39240, 40062) || true) && (IntPtr.Zero != _streamSetInfo.streamIDs)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 39240, 40062);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39325, 39369);
+
+                        int
+                        sizeOfIntPtr = f_1639_39344_39368()
+                        ;
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39400, 39409);
+                            for (int
+        index = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39391, 39912) || true) && (index < _streamSetInfo.streamIDsCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39450, 39457)
+        , index++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 39391, 39912))
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 39391, 39912);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39507, 39542);
+
+                                IntPtr
+                                streamAddress = IntPtr.Zero
+                                ;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39568, 39651);
+
+                                streamAddress = f_1639_39584_39650(_streamSetInfo.streamIDs, index * sizeOfIntPtr);
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39679, 39889) || true) && (IntPtr.Zero != streamAddress)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 39679, 39889);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39769, 39804);
+
+                                    f_1639_39769_39803(streamAddress);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39834, 39862);
+
+                                    streamAddress = IntPtr.Zero;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 39679, 39889);
+                                }
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 522);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 522);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 39936, 39982);
+
+                        f_1639_39936_39981(_streamSetInfo.streamIDs);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 40004, 40043);
+
+                        _streamSetInfo.streamIDs = IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 39240, 40062);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 40082, 40098);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 39184, 40113);
+
+                    int
+                    f_1639_39344_39368()
+                    {
+                        var return_v = Marshal.SizeOf<IntPtr>();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 39344, 39368);
+                        return return_v;
+                    }
+
+
+                    System.IntPtr
+                    f_1639_39584_39650(System.IntPtr
+                    ptr, int
+                    ofs)
+                    {
+                        var return_v = Marshal.ReadIntPtr(ptr, ofs);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 39584, 39650);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_39769_39803(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 39769, 39803);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1639_39936_39981(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 39936, 39981);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 39184, 40113);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 39184, 40113);
+                }
             }
 
             /// <summary>
@@ -991,151 +2435,456 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManStreamIDSet_ManToUn obj)
             {
-                return obj._data.DataPtr;
-            }
-        }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 40307, 40448);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 40408, 40433);
 
+                    return obj._data.DataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 40307, 40448);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 40307, 40448);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 40307, 40448);
+                }
+            }
+            static WSManStreamIDSet_ManToUn()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 37913, 40459);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 37913, 40459);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 37913, 40459);
+            }
+
+            static int
+            f_1639_38306_38373(bool
+            condition, string
+            message)
+            {
+                Dbg.Assert(condition, message);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 38306, 38373);
+                return 0;
+            }
+
+
+            static int
+            f_1639_38413_38437()
+            {
+                var return_v = Marshal.SizeOf<IntPtr>();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 38413, 38437);
+                return return_v;
+            }
+
+
+            static System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSetStruct
+            f_1639_38473_38501()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSetStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 38473, 38501);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_38552_38568(string[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 38552, 38568);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_38650_38666(string[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 38650, 38666);
+                return return_v;
+            }
+
+
+            static System.IntPtr
+            f_1639_38614_38667(int
+            cb)
+            {
+                var return_v = Marshal.AllocHGlobal(cb);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 38614, 38667);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_38714_38730(string[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 38714, 38730);
+                return return_v;
+            }
+
+
+            static System.IntPtr
+            f_1639_38804_38848(string
+            s)
+            {
+                var return_v = Marshal.StringToHGlobalUni(s);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 38804, 38848);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_38871_38953(System.IntPtr
+            ptr, int
+            ofs, System.IntPtr
+            val)
+            {
+                Marshal.WriteIntPtr(ptr, ofs, val);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 38871, 38953);
+                return 0;
+            }
+
+        }
         internal class WSManStreamIDSet_UnToMan
         {
             internal string[] streamIDs;
+
             internal int streamIDsCount;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManStreamIDSet_UnToMan UnMarshal(IntPtr unmanagedData)
             {
-                WSManStreamIDSet_UnToMan result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManStreamIDSetStruct resultInternal = Marshal.PtrToStructure<WSManStreamIDSetStruct>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 40842, 42813);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 40947, 40986);
 
-                    result = new WSManStreamIDSet_UnToMan();
-                    string[] idsArray = null;
-                    if (resultInternal.streamIDsCount > 0)
+                    WSManStreamIDSet_UnToMan
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41006, 42764) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
                     {
-                        idsArray = new string[resultInternal.streamIDsCount];
-                        IntPtr[] ptrs = new IntPtr[resultInternal.streamIDsCount];
-                        Marshal.Copy(resultInternal.streamIDs, ptrs, 0, resultInternal.streamIDsCount); // Marshal the array of string pointers
-                        for (int i = 0; i < resultInternal.streamIDsCount; i++)
-                        {
-                            idsArray[i] = Marshal.PtrToStringUni(ptrs[i]); // Marshal the string pointers into strings
-                        }
-                        /*
-                         * // TODO: Why didn't this work? It looks more efficient
-                        idsArray = new string[resultInternal.streamIDsCount];
-                        int sizeInBytes = Marshal.SizeOf<IntPtr>();
-                        IntPtr perElementPtr = resultInternal.streamIDs;
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 41006, 42764);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41080, 41182);
 
-                        for (int i = 0; i < resultInternal.streamIDsCount; i++)
+                        WSManStreamIDSetStruct
+                        resultInternal = f_1639_41120_41181(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41206, 41246);
+
+                        result = f_1639_41215_41245();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41268, 41293);
+
+                        string[]
+                        idsArray = null
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41315, 42617) || true) && (resultInternal.streamIDsCount > 0)
+                        )
+
                         {
-                            IntPtr p = IntPtr.Add(perElementPtr, (i * sizeInBytes));
-                            idsArray[i] = Marshal.PtrToStringUni(p);
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 41315, 42617);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41402, 41455);
+
+                            idsArray = new string[resultInternal.streamIDsCount];
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41481, 41539);
+
+                            IntPtr[]
+                            ptrs = new IntPtr[resultInternal.streamIDsCount]
+                            ;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41565, 41644);
+
+                            f_1639_41565_41643(resultInternal.streamIDs, ptrs, 0, resultInternal.streamIDsCount);
+                            try
+                            {
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41719, 41724);
+                                for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41710, 41939) || true) && (i < resultInternal.streamIDsCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41761, 41764)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 41710, 41939))
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 41710, 41939);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 41822, 41868);
+
+                                    idsArray[i] = f_1639_41836_41867(ptrs[i]);
+                                }
+                            }
+                            catch (System.Exception)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 230);
+                                throw;
+                            }
+                            finally
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 230);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 41315, 42617);
                         }
-                         */
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 42641, 42669);
+
+                        result.streamIDs = idsArray;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 42691, 42745);
+
+                        result.streamIDsCount = resultInternal.streamIDsCount;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 41006, 42764);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 42784, 42798);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 40842, 42813);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSetStruct
+                    f_1639_41120_41181(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManStreamIDSetStruct>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 41120, 41181);
+                        return return_v;
                     }
 
-                    result.streamIDs = idsArray;
-                    result.streamIDsCount = resultInternal.streamIDsCount;
-                }
 
-                return result;
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSet_UnToMan
+                    f_1639_41215_41245()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSet_UnToMan();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 41215, 41245);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_41565_41643(System.IntPtr
+                    source, System.IntPtr[]
+                    destination, int
+                    startIndex, int
+                    length)
+                    {
+                        Marshal.Copy(source, destination, startIndex, length);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 41565, 41643);
+                        return 0;
+                    }
+
+
+                    string?
+                    f_1639_41836_41867(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStringUni(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 41836, 41867);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 40842, 42813);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 40842, 42813);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
+
+            public WSManStreamIDSet_UnToMan()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 40471, 42824);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 40553, 40562);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 40590, 40604);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 40471, 42824);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 40471, 42824);
+            }
+
+
+            static WSManStreamIDSet_UnToMan()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 40471, 42824);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 40471, 42824);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 40471, 42824);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 40471, 42824);
         }
 
-        /// <summary>
-        /// Managed to Unmanaged: Option struct used to pass optional information with WSManCreateShellEx .
-        /// Unmanaged to Managed: Included in WSManPluginRequest.
-        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct WSManOption
         {
-            /// <summary>
-            /// Underlying type = PCWSTR.
-            /// </summary>
+
             [MarshalAs(UnmanagedType.LPWStr)]
             internal string name;
-            /// <summary>
-            /// Underlying type = PCWSTR.
-            /// </summary>
+
             [MarshalAs(UnmanagedType.LPWStr)]
             internal string value;
-            /// <summary>
-            /// Underlying type = BOOL.
-            /// </summary>
+
             internal bool mustComply;
+            static WSManOption()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 43059, 43678);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 43059, 43678);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 43059, 43678);
+            }
         }
 
-        /// <summary>
-        /// Unmanaged to Managed: WSMAN_OPERATION_INFO includes the struct directly, so this cannot be made internal to WsmanOptionSet.
-        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct WSManOptionSetStruct
         {
+
             internal int optionsCount;
-            /// <summary>
-            /// Pointer to an array of WSManOption objects.
-            /// </summary>
+
             [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
             internal IntPtr options;
+
             internal bool optionsMustUnderstand;
+            static WSManOptionSetStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 43874, 44358);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 43874, 44358);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 43874, 44358);
+            }
         }
 
-        /// <summary>
-        /// Option set struct used to pass optional information
-        /// with WSManCreateShellEx.
-        /// </summary>
         internal struct WSManOptionSet : IDisposable
         {
-            #region Managed to Unmanaged
 
             private WSManOptionSetStruct _optionSet;
+
             private MarshalledObject _data;
 
-            /// <summary>
-            /// Options to construct this OptionSet with.
-            /// </summary>
-            /// <param name="options"></param>
             internal WSManOptionSet(WSManOption[] options)
             {
-                Dbg.Assert(options != null, "options cannot be null");
-
-                int sizeOfOption = Marshal.SizeOf<WSManOption>();
-                _optionSet = new WSManOptionSetStruct();
-                _optionSet.optionsCount = options.Length;
-                _optionSet.optionsMustUnderstand = true;
-                _optionSet.options = Marshal.AllocHGlobal(sizeOfOption * options.Length);
-
-                for (int index = 0; index < options.Length; index++)
+                try
                 {
-                    // Look at the structure of native WSManOptionSet.. Options is a pointer..
-                    // In C-Style array individual elements are continuous..so I am building
-                    // continuous array elements here.
-                    Marshal.StructureToPtr(options[index], (IntPtr)(_optionSet.options.ToInt64() + (sizeOfOption * index)), false);
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 44896, 46123);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 44975, 45029);
+
+                    f_1639_44975_45028(options != null, "options cannot be null");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45049, 45098);
+
+                    int
+                    sizeOfOption = f_1639_45068_45097()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45116, 45156);
+
+                    _optionSet = f_1639_45129_45155();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45174, 45215);
+
+                    _optionSet.optionsCount = f_1639_45200_45214(options);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45233, 45273);
+
+                    _optionSet.optionsMustUnderstand = true;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45291, 45364);
+
+                    _optionSet.options = f_1639_45312_45363(sizeOfOption * f_1639_45348_45362(options));
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45393, 45402);
+
+                        for (int
+        index = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45384, 45853) || true) && (index < f_1639_45412_45426(options))
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45428, 45435)
+        , index++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 45384, 45853))
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 45384, 45853);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45723, 45834);
+
+                            f_1639_45723_45833(options[index], (_optionSet.options.ToInt64() + (sizeOfOption * index)), false);
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 470);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 470);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45873, 45939);
+
+                    _data = MarshalledObject.Create<WSManOptionSetStruct>(_optionSet);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 45995, 46017);
+
+                    this.optionsCount = 0;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46035, 46055);
+
+                    this.options = null;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46073, 46108);
+
+                    this.optionsMustUnderstand = false;
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 44896, 46123);
                 }
-
-                _data = MarshalledObject.Create<WSManOptionSetStruct>(_optionSet);
-
-                // For conformity:
-                this.optionsCount = 0;
-                this.options = null;
-                this.optionsMustUnderstand = false;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 44896, 46123);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 44896, 46123);
+                }
             }
 
-            /// <summary>
-            /// </summary>
             public void Dispose()
             {
-                if (IntPtr.Zero != _optionSet.options)
+                try
                 {
-                    Marshal.FreeHGlobal(_optionSet.options);
-                    _optionSet.options = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 46194, 46529);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46248, 46441) || true) && (IntPtr.Zero != _optionSet.options)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 46248, 46441);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46327, 46367);
+
+                        f_1639_46327_46366(_optionSet.options);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46389, 46422);
+
+                        _optionSet.options = IntPtr.Zero;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 46248, 46441);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46498, 46514);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 46194, 46529);
+
+                    int
+                    f_1639_46327_46366(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 46327, 46366);
+                        return 0;
+                    }
+
                 }
-                // dispose option set
-                _data.Dispose();
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 46194, 46529);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 46194, 46529);
+                }
             }
 
             /// <summary>
@@ -1145,120 +2894,447 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManOptionSet optionSet)
             {
-                return optionSet._data.DataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 46726, 46869);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 46823, 46854);
+
+                    return optionSet._data.DataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 46726, 46869);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 46726, 46869);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 46726, 46869);
+                }
             }
-
-            #endregion
-
-            #region Unmanaged to Managed
-
             internal int optionsCount;
+
             internal WSManOption[] options;
+
             internal bool optionsMustUnderstand;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManOptionSet UnMarshal(IntPtr unmanagedData)
             {
-                if (IntPtr.Zero == unmanagedData)
+                try
                 {
-                    return new WSManOptionSet();
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 47313, 47779);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 47408, 47764) || true) && (IntPtr.Zero == unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 47408, 47764);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 47482, 47510);
+
+                        return f_1639_47489_47509();
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 47408, 47764);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 47408, 47764);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 47592, 47690);
+
+                        WSManOptionSetStruct
+                        resultInternal = f_1639_47630_47689(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 47712, 47745);
+
+                        return UnMarshal(resultInternal);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 47408, 47764);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 47313, 47779);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSet
+                    f_1639_47489_47509()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSet();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 47489, 47509);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSetStruct
+                    f_1639_47630_47689(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManOptionSetStruct>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 47630, 47689);
+                        return return_v;
+                    }
+
                 }
-                else
+                catch
                 {
-                    WSManOptionSetStruct resultInternal = Marshal.PtrToStructure<WSManOptionSetStruct>(unmanagedData);
-                    return UnMarshal(resultInternal);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 47313, 47779);
+                    throw;
                 }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 47313, 47779);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Converts the unmanaged structure to a managed class object.
-            /// </summary>
-            /// <param name="resultInternal"></param>
-            /// <returns></returns>
             internal static WSManOptionSet UnMarshal(WSManOptionSetStruct resultInternal)
             {
-                WSManOption[] tempOptions = null;
-                if (resultInternal.optionsCount > 0)
+                try
                 {
-                    tempOptions = new WSManOption[resultInternal.optionsCount];
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 48019, 49077);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48129, 48162);
 
-                    int sizeInBytes = Marshal.SizeOf<WSManOption>();
-                    IntPtr perElementPtr = resultInternal.options;
+                    WSManOption[]
+                    tempOptions = null
+                    ;
 
-                    for (int i = 0; i < resultInternal.optionsCount; i++)
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48180, 48762) || true) && (resultInternal.optionsCount > 0)
+                    )
+
                     {
-                        IntPtr p = IntPtr.Add(perElementPtr, (i * sizeInBytes));
-                        tempOptions[i] = Marshal.PtrToStructure<WSManOption>(p);
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 48180, 48762);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48257, 48316);
+
+                        tempOptions = new WSManOption[resultInternal.optionsCount];
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48340, 48388);
+
+                        int
+                        sizeInBytes = f_1639_48358_48387()
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48410, 48456);
+
+                        IntPtr
+                        perElementPtr = resultInternal.options
+                        ;
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48489, 48494);
+
+                            for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48480, 48743) || true) && (i < resultInternal.optionsCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48529, 48532)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 48480, 48743))
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 48480, 48743);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48582, 48638);
+
+                                IntPtr
+                                p = IntPtr.Add(perElementPtr, (i * sizeInBytes))
+                                ;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48664, 48720);
+
+                                tempOptions[i] = f_1639_48681_48719(p);
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 264);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 264);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 48180, 48762);
                     }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48782, 48827);
+
+                    WSManOptionSet
+                    result = f_1639_48806_48826()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48845, 48895);
+
+                    result.optionsCount = resultInternal.optionsCount;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48913, 48942);
+
+                    result.options = tempOptions;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 48960, 49028);
+
+                    result.optionsMustUnderstand = resultInternal.optionsMustUnderstand;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 49048, 49062);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 48019, 49077);
+
+                    int
+                    f_1639_48358_48387()
+                    {
+                        var return_v = Marshal.SizeOf<WSManOption>();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 48358, 48387);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOption
+                    f_1639_48681_48719(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManOption>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 48681, 48719);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSet
+                    f_1639_48806_48826()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSet();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 48806, 48826);
+                        return return_v;
+                    }
+
                 }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 48019, 49077);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 48019, 49077);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            static WSManOptionSet()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 44520, 49114);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 44520, 49114);
 
-                WSManOptionSet result = new WSManOptionSet();
-                result.optionsCount = resultInternal.optionsCount;
-                result.options = tempOptions;
-                result.optionsMustUnderstand = resultInternal.optionsMustUnderstand;
-
-                return result;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 44520, 49114);
             }
 
-            #endregion
+            static int
+            f_1639_44975_45028(bool
+            condition, string
+            message)
+            {
+                Dbg.Assert(condition, message);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 44975, 45028);
+                return 0;
+            }
+
+
+            static int
+            f_1639_45068_45097()
+            {
+                var return_v = Marshal.SizeOf<WSManOption>();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 45068, 45097);
+                return return_v;
+            }
+
+
+            static System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSetStruct
+            f_1639_45129_45155()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSetStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 45129, 45155);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_45200_45214(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOption[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 45200, 45214);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_45348_45362(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOption[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 45348, 45362);
+                return return_v;
+            }
+
+
+            static System.IntPtr
+            f_1639_45312_45363(int
+            cb)
+            {
+                var return_v = Marshal.AllocHGlobal(cb);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 45312, 45363);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_45412_45426(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOption[]
+            this_param)
+            {
+                var return_v = this_param.Length;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 45412, 45426);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_45723_45833(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOption
+            structure, long
+            ptr, bool
+            fDeleteOld)
+            {
+                Marshal.StructureToPtr(structure, (System.IntPtr)ptr, fDeleteOld);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 45723, 45833);
+                return 0;
+            }
+
+
         }
 
-        /// <summary>
-        /// </summary>
         internal struct WSManCommandArgSet : IDisposable
         {
+
             [StructLayout(LayoutKind.Sequential)]
             internal struct WSManCommandArgSetInternal
             {
+
                 internal int argsCount;
+
                 [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
                 internal IntPtr args;
+                static WSManCommandArgSetInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 49246, 49561);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 49246, 49561);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 49246, 49561);
+                }
             }
 
             private WSManCommandArgSetInternal _internalData;
+
             [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
             private MarshalledObject _data;
 
-            #region Managed to Unmanaged
-
             internal WSManCommandArgSet(byte[] firstArgument)
             {
-                _internalData = new WSManCommandArgSetInternal();
-                _internalData.argsCount = 1;
-                _internalData.args = Marshal.AllocHGlobal(Marshal.SizeOf<IntPtr>());
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 49839, 50887);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 49921, 49970);
 
-                // argument set takes only strings..but powershell's serialized pipeline might contain
-                // \0 (null characters) which are unacceptable in WSMan. So we are converting to Base64
-                // here. The server will convert this back to original string.
-                string base64EncodedArgument = Convert.ToBase64String(firstArgument);
-                IntPtr firstArgAddress = Marshal.StringToHGlobalUni(base64EncodedArgument);
-                Marshal.WriteIntPtr(_internalData.args, firstArgAddress);
+                    _internalData = f_1639_49937_49969();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 49988, 50016);
 
-                _data = MarshalledObject.Create<WSManCommandArgSet.WSManCommandArgSetInternal>(_internalData);
+                    _internalData.argsCount = 1;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50034, 50102);
 
-                // For conformity:
-                this.args = null;
-                this.argsCount = 0;
+                    _internalData.args = f_1639_50055_50101(f_1639_50076_50100());
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50411, 50480);
+
+                    string
+                    base64EncodedArgument = f_1639_50442_50479(firstArgument)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50498, 50573);
+
+                    IntPtr
+                    firstArgAddress = f_1639_50523_50572(base64EncodedArgument)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50591, 50648);
+
+                    f_1639_50591_50647(_internalData.args, firstArgAddress);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50668, 50762);
+
+                    _data = MarshalledObject.Create<WSManCommandArgSet.WSManCommandArgSetInternal>(_internalData);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50818, 50835);
+
+                    this.args = null;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 50853, 50872);
+
+                    this.argsCount = 0;
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 49839, 50887);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 49839, 50887);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 49839, 50887);
+                }
             }
 
-            /// <summary>
-            /// Free resources.
-            /// </summary>
             public void Dispose()
             {
-                IntPtr firstArgAddress = Marshal.ReadIntPtr(_internalData.args);
-                if (IntPtr.Zero != firstArgAddress)
+                try
                 {
-                    Marshal.FreeHGlobal(firstArgAddress);
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 50991, 51370);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 51045, 51109);
+
+                    IntPtr
+                    firstArgAddress = f_1639_51070_51108(_internalData.args)
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 51127, 51259) || true) && (IntPtr.Zero != firstArgAddress)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 51127, 51259);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 51203, 51240);
+
+                        f_1639_51203_51239(firstArgAddress);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 51127, 51259);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 51279, 51319);
+
+                    f_1639_51279_51318(_internalData.args);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 51339, 51355);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 50991, 51370);
+
+                    System.IntPtr
+                    f_1639_51070_51108(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.ReadIntPtr(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 51070, 51108);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_51203_51239(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 51203, 51239);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1639_51279_51318(System.IntPtr
+                    hglobal)
+                    {
+                        Marshal.FreeHGlobal(hglobal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 51279, 51318);
+                        return 0;
+                    }
+
                 }
-
-                Marshal.FreeHGlobal(_internalData.args);
-
-                _data.Dispose();
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 50991, 51370);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 50991, 51370);
+                }
             }
 
             /// <summary>
@@ -1268,81 +3344,300 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManCommandArgSet obj)
             {
-                return obj._data.DataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 51564, 51699);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 51659, 51684);
+
+                    return obj._data.DataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 51564, 51699);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 51564, 51699);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 51564, 51699);
+                }
             }
-
-            #endregion
-
-            #region Unmanaged to Managed
-
             internal string[] args;
+
             internal int argsCount;
 
-            /// <summary>
-            /// Since this is a structure, it must be non-null. This differs in behavior from all the other UnMarshals
-            /// that are classes since they can be null.
-            /// TODO: Do I need to worry about intermediate null characters in the arguments? The managed to unmanaged does!
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManCommandArgSet UnMarshal(IntPtr unmanagedData)
             {
-                WSManCommandArgSet result = new WSManCommandArgSet();
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManCommandArgSetInternal resultInternal = Marshal.PtrToStructure<WSManCommandArgSetInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 52311, 53536);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52410, 52463);
 
-                    string[] tempArgs = null;
-                    if (resultInternal.argsCount > 0)
+                    WSManCommandArgSet
+                    result = f_1639_52438_52462()
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52483, 53487) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
                     {
-                        tempArgs = new string[resultInternal.argsCount];
-                        IntPtr[] ptrs = new IntPtr[resultInternal.argsCount];
-                        Marshal.Copy(resultInternal.args, ptrs, 0, resultInternal.argsCount); // Marshal the array of string pointers
-                        for (int i = 0; i < resultInternal.argsCount; i++)
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 52483, 53487);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52557, 52667);
+
+                        WSManCommandArgSetInternal
+                        resultInternal = f_1639_52601_52666(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52691, 52716);
+
+                        string[]
+                        tempArgs = null
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52738, 53355) || true) && (resultInternal.argsCount > 0)
+                        )
+
                         {
-                            tempArgs[i] = Marshal.PtrToStringUni(ptrs[i]); // Marshal the string pointers into strings
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 52738, 53355);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52820, 52868);
+
+                            tempArgs = new string[resultInternal.argsCount];
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52894, 52947);
+
+                            IntPtr[]
+                            ptrs = new IntPtr[resultInternal.argsCount]
+                            ;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 52973, 53042);
+
+                            f_1639_52973_53041(resultInternal.args, ptrs, 0, resultInternal.argsCount);
+                            try
+                            {
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53117, 53122);
+                                for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53108, 53332) || true) && (i < resultInternal.argsCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53154, 53157)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 53108, 53332))
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 53108, 53332);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53215, 53261);
+
+                                    tempArgs[i] = f_1639_53229_53260(ptrs[i]);
+                                }
+                            }
+                            catch (System.Exception)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 225);
+                                throw;
+                            }
+                            finally
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 225);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 52738, 53355);
                         }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53379, 53423);
+
+                        result.argsCount = resultInternal.argsCount;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53445, 53468);
+
+                        result.args = tempArgs;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 52483, 53487);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 53507, 53521);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 52311, 53536);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCommandArgSet
+                    f_1639_52438_52462()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCommandArgSet();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 52438, 52462);
+                        return return_v;
                     }
 
-                    result.argsCount = resultInternal.argsCount;
-                    result.args = tempArgs;
-                }
 
-                return result;
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCommandArgSet.WSManCommandArgSetInternal
+                    f_1639_52601_52666(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManCommandArgSetInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 52601, 52666);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_52973_53041(System.IntPtr
+                    source, System.IntPtr[]
+                    destination, int
+                    startIndex, int
+                    length)
+                    {
+                        Marshal.Copy(source, destination, startIndex, length);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 52973, 53041);
+                        return 0;
+                    }
+
+
+                    string?
+                    f_1639_53229_53260(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStringUni(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 53229, 53260);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 52311, 53536);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 52311, 53536);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            static WSManCommandArgSet()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 49173, 53573);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 49173, 53573);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 49173, 53573);
             }
 
-            #endregion
+            static System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCommandArgSet.WSManCommandArgSetInternal
+            f_1639_49937_49969()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCommandArgSet.WSManCommandArgSetInternal();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 49937, 49969);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_50076_50100()
+            {
+                var return_v = Marshal.SizeOf<IntPtr>();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 50076, 50100);
+                return return_v;
+            }
+
+
+            static System.IntPtr
+            f_1639_50055_50101(int
+            cb)
+            {
+                var return_v = Marshal.AllocHGlobal(cb);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 50055, 50101);
+                return return_v;
+            }
+
+
+            static string
+            f_1639_50442_50479(byte[]
+            inArray)
+            {
+                var return_v = Convert.ToBase64String(inArray);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 50442, 50479);
+                return return_v;
+            }
+
+
+            static System.IntPtr
+            f_1639_50523_50572(string
+            s)
+            {
+                var return_v = Marshal.StringToHGlobalUni(s);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 50523, 50572);
+                return return_v;
+            }
+
+
+            static int
+            f_1639_50591_50647(System.IntPtr
+            ptr, System.IntPtr
+            val)
+            {
+                Marshal.WriteIntPtr(ptr, val);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 50591, 50647);
+                return 0;
+            }
+
+
         }
 
         internal struct WSManShellDisconnectInfo : IDisposable
         {
+
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManShellDisconnectInfoInternal
             {
-                /// <summary>
-                /// New idletimeout for the server shell that overrides the original idletimeout specified in WSManCreateShell.
-                /// </summary>
+
                 internal uint idleTimeoutMs;
+                static WSManShellDisconnectInfoInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 53664, 54057);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 53664, 54057);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 53664, 54057);
+                }
             }
 
             private WSManShellDisconnectInfoInternal _internalInfo;
+
             internal MarshalledObject data;
 
-            #region Constructor / Other methods
             internal WSManShellDisconnectInfo(uint serverIdleTimeOut)
             {
-                _internalInfo = new WSManShellDisconnectInfoInternal();
-                _internalInfo.idleTimeoutMs = serverIdleTimeOut;
-                data = MarshalledObject.Create<WSManShellDisconnectInfoInternal>(_internalInfo);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 54238, 54562);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 54328, 54383);
+
+                    _internalInfo = f_1639_54344_54382();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 54401, 54449);
+
+                    _internalInfo.idleTimeoutMs = serverIdleTimeOut;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 54467, 54547);
+
+                    data = MarshalledObject.Create<WSManShellDisconnectInfoInternal>(_internalInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 54238, 54562);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 54238, 54562);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 54238, 54562);
+                }
             }
 
-            /// <summary>
-            /// Disposes the object.
-            /// </summary>
             public void Dispose()
             {
-                data.Dispose();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 54671, 54755);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 54725, 54740);
+
+                    data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 54671, 54755);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 54671, 54755);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 54671, 54755);
+                }
             }
 
             /// <summary>
@@ -1352,90 +3647,137 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManShellDisconnectInfo disconnectInfo)
             {
-                return disconnectInfo.data.DataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 54952, 55114);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 55064, 55099);
+
+                    return disconnectInfo.data.DataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 54952, 55114);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 54952, 55114);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 54952, 55114);
+                }
+            }
+            static WSManShellDisconnectInfo()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 53585, 55151);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 53585, 55151);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 53585, 55151);
             }
 
-            #endregion
+            static System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellDisconnectInfo.WSManShellDisconnectInfoInternal
+            f_1639_54344_54382()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellDisconnectInfo.WSManShellDisconnectInfoInternal();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 54344, 54382);
+                return return_v;
+            }
+
+
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct WSManShellStartupInfoStruct
         {
-            /// <summary>
-            /// PowerShell always uses one stream. So no need to expand this.
-            /// Maps to WSManStreamIDSet.
-            /// </summary>
+
             internal IntPtr inputStreamSet;
-            /// <summary>
-            /// PowerShell always uses one stream. So no need to expand this.
-            /// Maps to WSManStreamIDSet.
-            /// </summary>
+
             internal IntPtr outputStreamSet;
-            /// <summary>
-            /// Idle timeout.
-            /// </summary>
+
             internal uint idleTimeoutMs;
-            /// <summary>
-            /// Working directory of the shell.
-            /// </summary>
+
             [MarshalAs(UnmanagedType.LPWStr)]
             internal string workingDirectory;
-            /// <summary>
-            /// Environment variables available to the shell.
-            /// Maps to WSManEnvironmentVariableSet.
-            /// </summary>
+
             internal IntPtr environmentVariableSet;
-            /// <summary>
-            /// Environment variables available to the shell.
-            /// </summary>
+
             [MarshalAs(UnmanagedType.LPWStr)]
             internal string name;
+            static WSManShellStartupInfoStruct()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 55163, 56498);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 55163, 56498);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 55163, 56498);
+            }
         }
 
-        /// <summary>
-        /// Managed to unmanaged representation of WSMAN_SHELL_STARTUP_INFO.
-        /// It converts managed values into an unmanaged compatible WSManShellStartupInfoStruct that
-        /// is marshaled into unmanaged memory.
-        /// </summary>
         internal struct WSManShellStartupInfo_ManToUn : IDisposable
         {
+
             private WSManShellStartupInfoStruct _internalInfo;
+
             internal MarshalledObject data;
 
-            #region Constructor / Other methods
-
-            /// <summary>
-            /// Creates a startup info with 1 startup option.
-            /// The startup option is intended to specify the version.
-            /// </summary>
-            /// <param name="inputStreamSet">
-            /// </param>
-            /// <param name="outputStreamSet">
-            /// </param>
-            /// <param name="serverIdleTimeOut">
-            /// </param>
-            /// <param name="name">
-            /// </param>
             internal WSManShellStartupInfo_ManToUn(WSManStreamIDSet_ManToUn inputStreamSet, WSManStreamIDSet_ManToUn outputStreamSet, uint serverIdleTimeOut, string name)
             {
-                _internalInfo = new WSManShellStartupInfoStruct();
-                _internalInfo.inputStreamSet = inputStreamSet;
-                _internalInfo.outputStreamSet = outputStreamSet;
-                _internalInfo.idleTimeoutMs = serverIdleTimeOut;
-                // WSMan uses %USER_PROFILE% as the default working directory.
-                _internalInfo.workingDirectory = null;
-                _internalInfo.environmentVariableSet = IntPtr.Zero;
-                _internalInfo.name = name;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 57508, 58304);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 57699, 57749);
 
-                data = MarshalledObject.Create<WSManShellStartupInfoStruct>(_internalInfo);
+                    _internalInfo = f_1639_57715_57748();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 57767, 57813);
+
+                    _internalInfo.inputStreamSet = inputStreamSet;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 57831, 57879);
+
+                    _internalInfo.outputStreamSet = outputStreamSet;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 57897, 57945);
+
+                    _internalInfo.idleTimeoutMs = serverIdleTimeOut;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 58043, 58081);
+
+                    _internalInfo.workingDirectory = null;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 58099, 58150);
+
+                    _internalInfo.environmentVariableSet = IntPtr.Zero;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 58168, 58194);
+
+                    _internalInfo.name = name;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 58214, 58289);
+
+                    data = MarshalledObject.Create<WSManShellStartupInfoStruct>(_internalInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 57508, 58304);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 57508, 58304);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 57508, 58304);
+                }
             }
 
-            /// <summary>
-            /// Disposes the object.
-            /// </summary>
             public void Dispose()
             {
-                data.Dispose();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 58413, 58497);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 58467, 58482);
+
+                    data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 58413, 58497);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 58413, 58497);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 58413, 58497);
+                }
             }
 
             /// <summary>
@@ -1445,152 +3787,495 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManShellStartupInfo_ManToUn startupInfo)
             {
-                return startupInfo.data.DataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 58691, 58852);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 58805, 58837);
+
+                    return startupInfo.data.DataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 58691, 58852);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 58691, 58852);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 58691, 58852);
+                }
+            }
+            static WSManShellStartupInfo_ManToUn()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 56786, 58889);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 56786, 58889);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 56786, 58889);
             }
 
-            #endregion
-        }
+            static System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellStartupInfoStruct
+            f_1639_57715_57748()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellStartupInfoStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 57715, 57748);
+                return return_v;
+            }
 
-        /// <summary>
-        /// Unmanaged to managed representation of WSMAN_SHELL_STARTUP_INFO.
-        /// It unmarshals the unmanaged struct into this object for use by managed code.
-        /// </summary>
+
+        }
         internal class WSManShellStartupInfo_UnToMan
         {
             internal WSManStreamIDSet_UnToMan inputStreamSet;
+
             internal WSManStreamIDSet_UnToMan outputStreamSet;
+
             internal uint idleTimeoutMS;
+
             internal string workingDirectory;
+
             internal WSManEnvironmentVariableSet environmentVariableSet;
+
             internal string name;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManShellStartupInfo_UnToMan UnMarshal(IntPtr unmanagedData)
             {
-                WSManShellStartupInfo_UnToMan result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManShellStartupInfoStruct resultInternal = Marshal.PtrToStructure<WSManShellStartupInfoStruct>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 59733, 60840);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59843, 59887);
 
-                    result = new WSManShellStartupInfo_UnToMan();
-                    result.inputStreamSet = WSManStreamIDSet_UnToMan.UnMarshal(resultInternal.inputStreamSet);
-                    result.outputStreamSet = WSManStreamIDSet_UnToMan.UnMarshal(resultInternal.outputStreamSet);
-                    result.idleTimeoutMS = resultInternal.idleTimeoutMs;
-                    result.workingDirectory = resultInternal.workingDirectory; // TODO: Special marshaling required here?
-                    result.environmentVariableSet = WSManEnvironmentVariableSet.UnMarshal(resultInternal.environmentVariableSet);
-                    result.name = resultInternal.name;
+                    WSManShellStartupInfo_UnToMan
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59907, 60791) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 59907, 60791);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59981, 60093);
+
+                        WSManShellStartupInfoStruct
+                        resultInternal = f_1639_60026_60092(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60117, 60162);
+
+                        result = f_1639_60126_60161();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60184, 60274);
+
+                        result.inputStreamSet = f_1639_60208_60273(resultInternal.inputStreamSet);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60296, 60388);
+
+                        result.outputStreamSet = f_1639_60321_60387(resultInternal.outputStreamSet);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60410, 60462);
+
+                        result.idleTimeoutMS = resultInternal.idleTimeoutMs;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60484, 60542);
+
+                        result.workingDirectory = resultInternal.workingDirectory;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60607, 60716);
+
+                        result.environmentVariableSet = f_1639_60639_60715(resultInternal.environmentVariableSet);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60738, 60772);
+
+                        result.name = resultInternal.name;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 59907, 60791);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 60811, 60825);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 59733, 60840);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellStartupInfoStruct
+                    f_1639_60026_60092(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManShellStartupInfoStruct>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 60026, 60092);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellStartupInfo_UnToMan
+                    f_1639_60126_60161()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellStartupInfo_UnToMan();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 60126, 60161);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSet_UnToMan
+                    f_1639_60208_60273(System.IntPtr
+                    unmanagedData)
+                    {
+                        var return_v = WSManStreamIDSet_UnToMan.UnMarshal(unmanagedData);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 60208, 60273);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManStreamIDSet_UnToMan
+                    f_1639_60321_60387(System.IntPtr
+                    unmanagedData)
+                    {
+                        var return_v = WSManStreamIDSet_UnToMan.UnMarshal(unmanagedData);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 60321, 60387);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManEnvironmentVariableSet
+                    f_1639_60639_60715(System.IntPtr
+                    unmanagedData)
+                    {
+                        var return_v = WSManEnvironmentVariableSet.UnMarshal(unmanagedData);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 60639, 60715);
+                        return return_v;
+                    }
+
                 }
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 59733, 60840);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 59733, 60840);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
-        }
 
-        /// <summary>
-        /// Managed representation of WSMAN_ENVIRONMENT_VARIABLE_SET.
-        /// It wraps WSManEnvironmentVariableSetInternal and UnMarshals the unmanaged
-        /// data into the object.
-        /// </summary>
+            public WSManShellStartupInfo_UnToMan()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 59116, 60851);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59219, 59233);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59282, 59297);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59326, 59339);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59370, 59386);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59438, 59460);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 59491, 59495);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 59116, 60851);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 59116, 60851);
+            }
+
+
+            static WSManShellStartupInfo_UnToMan()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 59116, 60851);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 59116, 60851);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 59116, 60851);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 59116, 60851);
+        }
         internal class WSManEnvironmentVariableSet
         {
             internal uint varsCount;
+
             internal WSManEnvironmentVariableInternal[] vars;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManEnvironmentVariableSet UnMarshal(IntPtr unmanagedData)
             {
-                WSManEnvironmentVariableSet result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManEnvironmentVariableSetInternal resultInternal = Marshal.PtrToStructure<WSManEnvironmentVariableSetInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 61494, 62878);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61602, 61644);
 
-                    result = new WSManEnvironmentVariableSet();
-                    WSManEnvironmentVariableInternal[] varsArray = null;
-                    if (resultInternal.varsCount > 0)
+                    WSManEnvironmentVariableSet
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61664, 62829) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
                     {
-                        varsArray = new WSManEnvironmentVariableInternal[resultInternal.varsCount];
-                        int sizeInBytes = Marshal.SizeOf<WSManEnvironmentVariableInternal>();
-                        IntPtr perElementPtr = resultInternal.vars;
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 61664, 62829);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61738, 61866);
 
-                        for (int i = 0; i < resultInternal.varsCount; i++)
+                        WSManEnvironmentVariableSetInternal
+                        resultInternal = f_1639_61791_61865(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61890, 61933);
+
+                        result = f_1639_61899_61932();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61955, 62007);
+
+                        WSManEnvironmentVariableInternal[]
+                        varsArray = null
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62029, 62696) || true) && (resultInternal.varsCount > 0)
+                        )
+
                         {
-                            IntPtr p = IntPtr.Add(perElementPtr, (i * sizeInBytes));
-                            varsArray[i] = Marshal.PtrToStructure<WSManEnvironmentVariableInternal>(p);
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 62029, 62696);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62111, 62186);
+
+                            varsArray = new WSManEnvironmentVariableInternal[resultInternal.varsCount];
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62212, 62281);
+
+                            int
+                            sizeInBytes = f_1639_62230_62280()
+                            ;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62307, 62350);
+
+                            IntPtr
+                            perElementPtr = resultInternal.vars
+                            ;
+                            try
+                            {
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62387, 62392);
+
+                                for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62378, 62673) || true) && (i < resultInternal.varsCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62424, 62427)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 62378, 62673))
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 62378, 62673);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62485, 62541);
+
+                                    IntPtr
+                                    p = IntPtr.Add(perElementPtr, (i * sizeInBytes))
+                                    ;
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62571, 62646);
+
+                                    varsArray[i] = f_1639_62586_62645(p);
+                                }
+                            }
+                            catch (System.Exception)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 296);
+                                throw;
+                            }
+                            finally
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 296);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 62029, 62696);
                         }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62720, 62744);
+
+                        result.vars = varsArray;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62766, 62810);
+
+                        result.varsCount = resultInternal.varsCount;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 61664, 62829);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 62849, 62863);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 61494, 62878);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManEnvironmentVariableSet.WSManEnvironmentVariableSetInternal
+                    f_1639_61791_61865(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManEnvironmentVariableSetInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 61791, 61865);
+                        return return_v;
                     }
 
-                    result.vars = varsArray;
-                    result.varsCount = resultInternal.varsCount;
-                }
 
-                return result;
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManEnvironmentVariableSet
+                    f_1639_61899_61932()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManEnvironmentVariableSet();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 61899, 61932);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_62230_62280()
+                    {
+                        var return_v = Marshal.SizeOf<WSManEnvironmentVariableInternal>();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 62230, 62280);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManEnvironmentVariableSet.WSManEnvironmentVariableInternal
+                    f_1639_62586_62645(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManEnvironmentVariableInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 62586, 62645);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 61494, 62878);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 61494, 62878);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManEnvironmentVariableSetInternal
             {
+
                 internal uint varsCount;
-                internal IntPtr vars; // Array of WSManEnvironmentVariableInternal structs
+
+                internal IntPtr vars;
+                static WSManEnvironmentVariableSetInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 62894, 63186);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 62894, 63186);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 62894, 63186);
+                }
             }
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal struct WSManEnvironmentVariableInternal
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string name;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string value;
-            }
-        }
+                static WSManEnvironmentVariableInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 63202, 63539);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 63202, 63539);
 
-        /// <summary>
-        /// Proxy Info used with WSManCreateSession.
-        /// </summary>
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 63202, 63539);
+                }
+            }
+
+            public WSManEnvironmentVariableSet()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 61103, 63550);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61184, 61193);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 61252, 61256);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 61103, 63550);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 61103, 63550);
+            }
+
+
+            static WSManEnvironmentVariableSet()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 61103, 63550);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 61103, 63550);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 61103, 63550);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 61103, 63550);
+        }
         internal class WSManProxyInfo : IDisposable
         {
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManProxyInfoInternal
             {
+
                 public int proxyAccessType;
+
                 public WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct proxyAuthCredentialsStruct;
+                static WSManProxyInfoInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 63731, 64042);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 63731, 64042);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 63731, 64042);
+                }
             }
 
             private MarshalledObject _data;
 
-            /// <summary>
-            /// </summary>
-            /// <param name="proxyAccessType"></param>
-            /// <param name="authCredentials"></param>
             internal WSManProxyInfo(ProxyAccessType proxyAccessType,
-                WSManUserNameAuthenticationCredentials authCredentials)
+                            WSManUserNameAuthenticationCredentials authCredentials)
             {
-                WSManProxyInfoInternal internalInfo = new WSManProxyInfoInternal();
-                internalInfo.proxyAccessType = (int)proxyAccessType;
-                internalInfo.proxyAuthCredentialsStruct = new WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct();
-                internalInfo.proxyAuthCredentialsStruct.authenticationMechanism = WSManAuthenticationMechanism.WSMAN_FLAG_DEFAULT_AUTHENTICATION;
-
-                if (authCredentials != null)
+                try
                 {
-                    internalInfo.proxyAuthCredentialsStruct = authCredentials.CredentialStruct;
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 64272, 65141);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 64434, 64501);
 
-                _data = MarshalledObject.Create<WSManProxyInfoInternal>(internalInfo);
+                    WSManProxyInfoInternal
+                    internalInfo = f_1639_64472_64500()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 64519, 64571);
+
+                    internalInfo.proxyAccessType = (int)proxyAccessType;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 64589, 64706);
+
+                    internalInfo.proxyAuthCredentialsStruct = f_1639_64631_64705();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 64724, 64853);
+
+                    internalInfo.proxyAuthCredentialsStruct.authenticationMechanism = WSManAuthenticationMechanism.WSMAN_FLAG_DEFAULT_AUTHENTICATION;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 64873, 65036) || true) && (authCredentials != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 64873, 65036);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 64942, 65017);
+
+                        internalInfo.proxyAuthCredentialsStruct = f_1639_64984_65016(authCredentials);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 64873, 65036);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 65056, 65126);
+
+                    _data = MarshalledObject.Create<WSManProxyInfoInternal>(internalInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 64272, 65141);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 64272, 65141);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 64272, 65141);
+                }
             }
 
             public void Dispose()
             {
-                // data is of struct type..so no need to set it to null.
-                _data.Dispose();
-                GC.SuppressFinalize(this);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 65157, 65360);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 65285, 65301);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 65319, 65345);
+
+                    f_1639_65319_65344(this);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 65157, 65360);
+
+                    int
+                    f_1639_65319_65344(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManProxyInfo
+                    obj)
+                    {
+                        GC.SuppressFinalize((object)obj);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 65319, 65344);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 65157, 65360);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 65157, 65360);
+                }
             }
 
             /// <summary>
@@ -1600,13 +4285,64 @@ namespace System.Management.Automation.Remoting.Client
             /// <returns></returns>
             public static implicit operator IntPtr(WSManProxyInfo proxyInfo)
             {
-                return proxyInfo._data.DataPtr;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 65552, 65695);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 65649, 65680);
+
+                    return proxyInfo._data.DataPtr;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 65552, 65695);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 65552, 65695);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 65552, 65695);
+                }
             }
+            static WSManProxyInfo()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 63663, 65706);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 63663, 65706);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 63663, 65706);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 63663, 65706);
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManProxyInfo.WSManProxyInfoInternal
+            f_1639_64472_64500()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManProxyInfo.WSManProxyInfoInternal();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 64472, 64500);
+                return return_v;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct
+            f_1639_64631_64705()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 64631, 64705);
+                return return_v;
+            }
+
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials.WSManUserNameCredentialStruct
+            f_1639_64984_65016(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManUserNameAuthenticationCredentials
+            this_param)
+            {
+                var return_v = this_param.CredentialStruct;
+                DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 64984, 65016);
+                return return_v;
+            }
+
         }
 
-        #endregion
 
-        #region WSMan Shell Async
 
         /// <summary>
         /// Flags used by all callback functions: WSMAN_COMPLETION_FUNCTION,
@@ -1714,1197 +4450,2192 @@ namespace System.Management.Automation.Remoting.Client
             IntPtr data
             );
 
-        /// <summary>
-        /// Struct which holds reference to the callback(delegate) passed to WSMan
-        /// API.
-        /// </summary>
         internal struct WSManShellAsyncCallback
         {
-            // GC handle which prevents garbage collector from collecting this delegate.
+
             private GCHandle _gcHandle;
+
             [SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
             private IntPtr _asyncCallback;
 
             internal WSManShellAsyncCallback(WSManShellCompletionFunction callback)
             {
-                // if a delegate is re-located by a garbage collection, it will not affect
-                // the underlaying managed callback, so Alloc is used to add a reference
-                // to the delegate, allowing relocation of the delegate, but preventing
-                // disposal. Using GCHandle without pinning reduces fragmentation potential
-                // of the managed heap.
-                _gcHandle = GCHandle.Alloc(callback);
-                _asyncCallback = Marshal.GetFunctionPointerForDelegate(callback);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 70978, 71622);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 71487, 71524);
+
+                    _gcHandle = GCHandle.Alloc(callback);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 71542, 71607);
+
+                    _asyncCallback = f_1639_71559_71606(callback);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 70978, 71622);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 70978, 71622);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 70978, 71622);
+                }
             }
 
             public static implicit operator IntPtr(WSManShellAsyncCallback callback)
             {
-                return callback._asyncCallback;
-            }
-        }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 71638, 71789);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 71743, 71774);
 
-        /// <summary>
-        /// Used in different WSMan functions to supply async callback.
-        /// </summary>
+                    return callback._asyncCallback;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 71638, 71789);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 71638, 71789);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 71638, 71789);
+                }
+            }
+            static WSManShellAsyncCallback()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 70629, 71800);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 70629, 71800);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 70629, 71800);
+            }
+
+            static System.IntPtr
+            f_1639_71559_71606(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellCompletionFunction
+            d)
+            {
+                var return_v = Marshal.GetFunctionPointerForDelegate(d);
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 71559, 71606);
+                return return_v;
+            }
+
+        }
         internal class WSManShellAsync
         {
             [StructLayout(LayoutKind.Sequential)]
             internal struct WSManShellAsyncInternal
             {
+
                 internal IntPtr operationContext;
+
                 internal IntPtr asyncCallback;
+                static WSManShellAsyncInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 71987, 72206);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 71987, 72206);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 71987, 72206);
+                }
             }
 
             private MarshalledObject _data;
+
             private WSManShellAsyncInternal _internalData;
 
             internal WSManShellAsync(IntPtr context, WSManShellAsyncCallback callback)
             {
-                _internalData = new WSManShellAsyncInternal();
-                _internalData.operationContext = context;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 72329, 72705);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 72436, 72482);
 
-                _internalData.asyncCallback = callback;
-                _data = MarshalledObject.Create<WSManShellAsyncInternal>(_internalData);
+                    _internalData = f_1639_72452_72481();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 72500, 72541);
+
+                    _internalData.operationContext = context;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 72561, 72600);
+
+                    _internalData.asyncCallback = callback;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 72618, 72690);
+
+                    _data = MarshalledObject.Create<WSManShellAsyncInternal>(_internalData);
+                    DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 72329, 72705);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 72329, 72705);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 72329, 72705);
+                }
             }
 
             public void Dispose()
             {
-                _data.Dispose();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 72721, 72806);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 72775, 72791);
+
+                    _data.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 72721, 72806);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 72721, 72806);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 72721, 72806);
+                }
             }
 
             public static implicit operator IntPtr(WSManShellAsync async)
             {
-                return async._data;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 72822, 72950);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 72916, 72935);
+
+                    return async._data;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 72822, 72950);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 72822, 72950);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 72822, 72950);
+                }
             }
+            static WSManShellAsync()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 71932, 72961);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 71932, 72961);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 71932, 72961);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 71932, 72961);
+
+            System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellAsync.WSManShellAsyncInternal
+            f_1639_72452_72481()
+            {
+                var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellAsync.WSManShellAsyncInternal();
+                DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 72452, 72481);
+                return return_v;
+            }
+
         }
 
-        /// <summary>
-        /// Used in the shell completion function delegate to refer to error.
-        /// </summary>
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct WSManError
         {
+
             internal int errorCode;
-            /// <summary>
-            /// Extended error description from the fault;
-            /// </summary>
+
             internal string errorDetail;
-            /// <summary>
-            /// Language for error description (RFC 3066 language code); it can be NULL.
-            /// </summary>
+
             internal string language;
-            /// <summary>
-            /// Machine id; it can be NULL.
-            /// </summary>
+
             internal string machineName;
 
-            /// <summary>
-            /// Constructs a WSManError from the unmanaged pointer.
-            /// This involves copying data from unmanaged memory to managed heap.
-            /// </summary>
-            /// <param name="unmanagedData">
-            /// Pointer to unmanaged data.
-            /// </param>
-            /// <returns>
-            /// </returns>
             internal static WSManError UnMarshal(IntPtr unmanagedData)
             {
-                return Marshal.PtrToStructure<WSManError>(unmanagedData);
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 74124, 74287);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 74215, 74272);
+
+                    return f_1639_74222_74271(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 74124, 74287);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManError
+                    f_1639_74222_74271(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManError>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 74222, 74271);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 74124, 74287);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 74124, 74287);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+            static WSManError()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 73099, 74298);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 73099, 74298);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 73099, 74298);
             }
         }
-
         internal class WSManCreateShellDataResult
         {
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManCreateShellDataResultInternal
             {
+
                 internal WSManDataStruct data;
+                static WSManCreateShellDataResultInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 74376, 74554);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 74376, 74554);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 74376, 74554);
+                }
             }
 
             internal string data;
 
             internal static WSManCreateShellDataResult UnMarshal(IntPtr unmanagedData)
             {
-                WSManCreateShellDataResult result = new WSManCreateShellDataResult();
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManCreateShellDataResultInternal resultInternal = Marshal.PtrToStructure<WSManCreateShellDataResultInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 74607, 75426);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 74714, 74783);
 
-                    string connectData = null;
-                    if (resultInternal.data.textData.textLength > 0)
+                    WSManCreateShellDataResult
+                    result = f_1639_74750_74782()
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 74803, 75377) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
                     {
-                        connectData = Marshal.PtrToStringUni(resultInternal.data.textData.text, resultInternal.data.textData.textLength);
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 74803, 75377);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 74877, 75003);
+
+                        WSManCreateShellDataResultInternal
+                        resultInternal = f_1639_74929_75002(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 75027, 75053);
+
+                        string
+                        connectData = null
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 75075, 75308) || true) && (resultInternal.data.textData.textLength > 0)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 75075, 75308);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 75172, 75285);
+
+                            connectData = f_1639_75186_75284(resultInternal.data.textData.text, resultInternal.data.textData.textLength);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 75075, 75308);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 75332, 75358);
+
+                        result.data = connectData;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 74803, 75377);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 75397, 75411);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 74607, 75426);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCreateShellDataResult
+                    f_1639_74750_74782()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCreateShellDataResult();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 74750, 74782);
+                        return return_v;
                     }
 
-                    result.data = connectData;
-                }
 
-                return result;
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCreateShellDataResult.WSManCreateShellDataResultInternal
+                    f_1639_74929_75002(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManCreateShellDataResultInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 74929, 75002);
+                        return return_v;
+                    }
+
+
+                    string
+                    f_1639_75186_75284(System.IntPtr
+                    ptr, int
+                    len)
+                    {
+                        var return_v = Marshal.PtrToStringUni(ptr, len);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 75186, 75284);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 74607, 75426);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 74607, 75426);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            // The following structures are created to honor struct boundaries
-            // on x86,amd64 and ia64
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManDataStruct
             {
+
                 internal uint type;
+
                 internal WSManTextDataInternal textData;
             }
 
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManTextDataInternal
             {
-                internal int textLength;
-                internal IntPtr text;
-            }
-        }
 
+                internal int textLength;
+
+                internal IntPtr text;
+                static WSManTextDataInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 75782, 75980);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 75782, 75980);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 75782, 75980);
+                }
+            }
+
+            public WSManCreateShellDataResult()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 74310, 75991);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 74586, 74590);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 74310, 75991);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 74310, 75991);
+            }
+
+
+            static WSManCreateShellDataResult()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 74310, 75991);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 74310, 75991);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 74310, 75991);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 74310, 75991);
+        }
         internal class WSManConnectDataResult
         {
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManConnectDataResultInternal
             {
+
                 internal WSManDataStruct data;
+                static WSManConnectDataResultInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 76065, 76239);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 76065, 76239);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 76065, 76239);
+                }
             }
 
             internal string data;
 
             internal static WSManConnectDataResult UnMarshal(IntPtr unmanagedData)
             {
-                WSManConnectDataResultInternal resultInternal = Marshal.PtrToStructure<WSManConnectDataResultInternal>(unmanagedData);
-
-                string connectData = null;
-                if (resultInternal.data.textData.textLength > 0)
+                try
                 {
-                    connectData = Marshal.PtrToStringUni(resultInternal.data.textData.text, resultInternal.data.textData.textLength);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 76292, 76972);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76395, 76513);
+
+                    WSManConnectDataResultInternal
+                    resultInternal = f_1639_76443_76512(unmanagedData)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76533, 76559);
+
+                    string
+                    connectData = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76577, 76798) || true) && (resultInternal.data.textData.textLength > 0)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 76577, 76798);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76666, 76779);
+
+                        connectData = f_1639_76680_76778(resultInternal.data.textData.text, resultInternal.data.textData.textLength);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 76577, 76798);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76818, 76879);
+
+                    WSManConnectDataResult
+                    result = f_1639_76850_76878()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76897, 76923);
+
+                    result.data = connectData;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76943, 76957);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 76292, 76972);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManConnectDataResult.WSManConnectDataResultInternal
+                    f_1639_76443_76512(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManConnectDataResultInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 76443, 76512);
+                        return return_v;
+                    }
+
+
+                    string
+                    f_1639_76680_76778(System.IntPtr
+                    ptr, int
+                    len)
+                    {
+                        var return_v = Marshal.PtrToStringUni(ptr, len);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 76680, 76778);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManConnectDataResult
+                    f_1639_76850_76878()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManConnectDataResult();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 76850, 76878);
+                        return return_v;
+                    }
+
                 }
-
-                WSManConnectDataResult result = new WSManConnectDataResult();
-                result.data = connectData;
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 76292, 76972);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 76292, 76972);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            // The following structures are created to honor struct boundaries
-            // on x86,amd64 and ia64
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManDataStruct
             {
+
                 internal uint type;
+
                 internal WSManTextDataInternal textData;
             }
 
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManTextDataInternal
             {
+
                 internal int textLength;
+
                 internal IntPtr text;
             }
+
+            public WSManConnectDataResult()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 76003, 77537);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 76271, 76275);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 76003, 77537);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 76003, 77537);
+            }
+
+
+            static WSManConnectDataResult()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 76003, 77537);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 76003, 77537);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 76003, 77537);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 76003, 77537);
         }
-        /// <summary>
-        /// Used in the shell completion function delegate to refer to the data.
-        /// </summary>
         internal class WSManReceiveDataResult
         {
-            /// <summary>
-            /// The actual data.
-            /// </summary>
             internal byte[] data;
-            /// <summary>
-            /// Stream the data belongs to.
-            /// </summary>
+
             internal string stream;
 
-            /// <summary>
-            /// Constructs a WSManReceiveDataResult from the unmanaged pointer.
-            /// This involves copying data from unmanaged memory to managed heap.
-            /// Currently PowerShell supports only binary data on the wire, so this
-            /// method asserts if the data is not binary.
-            /// </summary>
-            /// <param name="unmanagedData">
-            /// Pointer to unmanaged data.
-            /// </param>
-            /// <returns>
-            /// </returns>
             internal static WSManReceiveDataResult UnMarshal(IntPtr unmanagedData)
             {
-                WSManReceiveDataResultInternal result1 =
-                    Marshal.PtrToStructure<WSManReceiveDataResultInternal>(unmanagedData);
-
-                // copy data from unmanaged heap to managed heap.
-                byte[] dataRecvd = null;
-                if (result1.data.binaryData.bufferLength > 0)
+                try
                 {
-                    dataRecvd = new byte[result1.data.binaryData.bufferLength];
-                    Marshal.Copy(result1.data.binaryData.buffer,
-                        dataRecvd,
-                        0,
-                        result1.data.binaryData.bufferLength);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 78535, 79666);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 78638, 78770);
+
+                    WSManReceiveDataResultInternal
+                    result1 =
+                    f_1639_78700_78769(unmanagedData)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 78857, 78881);
+
+                    byte[]
+                    dataRecvd = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 78899, 79257) || true) && (result1.data.binaryData.bufferLength > 0)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 78899, 79257);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 78985, 79044);
+
+                        dataRecvd = new byte[result1.data.binaryData.bufferLength];
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 79066, 79238);
+
+                        f_1639_79066_79237(result1.data.binaryData.buffer, dataRecvd, 0, result1.data.binaryData.bufferLength);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 78899, 79257);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 79288, 79435);
+
+                    f_1639_79288_79434(result1.data.type == (uint)WSManDataType.WSMAN_DATA_TYPE_BINARY, "ReceiveDataResult can receive only binary data");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 79463, 79524);
+
+                    WSManReceiveDataResult
+                    result = f_1639_79495_79523()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 79542, 79566);
+
+                    result.data = dataRecvd;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 79584, 79617);
+
+                    result.stream = result1.streamId;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 79637, 79651);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 78535, 79666);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManReceiveDataResult.WSManReceiveDataResultInternal
+                    f_1639_78700_78769(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManReceiveDataResultInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 78700, 78769);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1639_79066_79237(System.IntPtr
+                    source, byte[]
+                    destination, int
+                    startIndex, int
+                    length)
+                    {
+                        Marshal.Copy(source, destination, startIndex, length);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 79066, 79237);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1639_79288_79434(bool
+                    condition, string
+                    message)
+                    {
+                        Dbg.Assert(condition, message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 79288, 79434);
+                        return 0;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManReceiveDataResult
+                    f_1639_79495_79523()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManReceiveDataResult();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 79495, 79523);
+                        return return_v;
+                    }
+
                 }
-
-#if !UNIX
-                Dbg.Assert(result1.data.type == (uint)WSManDataType.WSMAN_DATA_TYPE_BINARY,
-                    "ReceiveDataResult can receive only binary data");
-#endif
-
-                WSManReceiveDataResult result = new WSManReceiveDataResult();
-                result.data = dataRecvd;
-                result.stream = result1.streamId;
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 78535, 79666);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 78535, 79666);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManReceiveDataResultInternal
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string streamId;
+
                 internal WSManDataStruct data;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string commandState;
+
                 internal int exitCode;
+                static WSManReceiveDataResultInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 79682, 80088);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 79682, 80088);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 79682, 80088);
+                }
             }
 
-            // The following structures are created to honor struct boundaries
-            // on x86,amd64 and ia64
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManDataStruct
             {
+
                 internal uint type;
+
                 internal WSManBinaryDataInternal binaryData;
             }
 
             [StructLayout(LayoutKind.Sequential)]
             private struct WSManBinaryDataInternal
             {
+
                 internal int bufferLength;
+
                 internal IntPtr buffer;
+                static WSManBinaryDataInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 80448, 80652);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 80448, 80652);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 80448, 80652);
+                }
             }
+
+            public WSManReceiveDataResult()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 77676, 80663);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 77843, 77847);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 77978, 77984);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 77676, 80663);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 77676, 80663);
+            }
+
+
+            static WSManReceiveDataResult()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 77676, 80663);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 77676, 80663);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 77676, 80663);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 77676, 80663);
         }
-
-        #endregion
-
-        #region Plugin API Structure Definitions
-
-        /// <summary>
-        /// This is the managed representation of the WSMAN_PLUGIN_REQUEST struct.
-        /// </summary>
         internal class WSManPluginRequest
         {
-            /// <summary>
-            /// Unmarshaled WSMAN_SENDER_DETAILS struct.
-            /// </summary>
             internal WSManSenderDetails senderDetails;
+
             internal string locale;
+
             internal string resourceUri;
-            /// <summary>
-            /// Unmarshaled WSMAN_OPERATION_INFO struct.
-            /// </summary>
+
             internal WSManOperationInfo operationInfo;
 
-            /// <summary>
-            /// Kept around to allow direct access to shutdownNotification and its handle.
-            /// </summary>
             private WSManPluginRequestInternal _internalDetails;
 
-            /// <summary>
-            /// Volatile value that should be read directly from its unmanaged location.
-            /// TODO: Does "volatile" still apply when accessing it in managed code.
-            /// </summary>
             internal bool shutdownNotification
             {
-                get { return _internalDetails.shutdownNotification; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 81870, 81923);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 81876, 81921);
+
+                        return _internalDetails.shutdownNotification;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 81870, 81923);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 81803, 81938);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 81803, 81938);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
             }
 
-            /// <summary>
-            /// Left untouched in unmanaged memory because it is passed directly to
-            /// RegisterWaitForSingleObject().
-            /// </summary>
             internal IntPtr shutdownNotificationHandle
             {
-                get { return _internalDetails.shutdownNotificationHandle; }
+                get
+                {
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 82217, 82276);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 82223, 82274);
+
+                        return _internalDetails.shutdownNotificationHandle;
+                        DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 82217, 82276);
+                    }
+                    catch
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 82142, 82291);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 82142, 82291);
+                    }
+                    throw new System.Exception("Slicer error: unreachable code");
+                }
             }
 
-            /// <summary>
-            /// Copy of the unmanagedData value used to create the structure.
-            /// </summary>
             internal IntPtr unmanagedHandle;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManPluginRequest UnMarshal(IntPtr unmanagedData)
             {
-                // Dbg.Assert(IntPtr.Zero != unmanagedData, "unmanagedData must be non-null. This means WinRM sent a bad pointer.");
-                WSManPluginRequest result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManPluginRequestInternal resultInternal = Marshal.PtrToStructure<WSManPluginRequestInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 82710, 83768);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 82943, 82976);
 
-                    result = new WSManPluginRequest();
-                    result.senderDetails = WSManSenderDetails.UnMarshal(resultInternal.senderDetails);
-                    result.locale = resultInternal.locale;
-                    result.resourceUri = resultInternal.resourceUri;
-                    result.operationInfo = WSManOperationInfo.UnMarshal(resultInternal.operationInfo);
-                    result._internalDetails = resultInternal;
-                    result.unmanagedHandle = unmanagedData;
+                    WSManPluginRequest
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 82996, 83719) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 82996, 83719);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83070, 83180);
+
+                        WSManPluginRequestInternal
+                        resultInternal = f_1639_83114_83179(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83204, 83238);
+
+                        result = f_1639_83213_83237();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83260, 83342);
+
+                        result.senderDetails = f_1639_83283_83341(resultInternal.senderDetails);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83364, 83402);
+
+                        result.locale = resultInternal.locale;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83424, 83472);
+
+                        result.resourceUri = resultInternal.resourceUri;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83494, 83576);
+
+                        result.operationInfo = f_1639_83517_83575(resultInternal.operationInfo);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83598, 83639);
+
+                        result._internalDetails = resultInternal;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83661, 83700);
+
+                        result.unmanagedHandle = unmanagedData;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 82996, 83719);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 83739, 83753);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 82710, 83768);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManPluginRequest.WSManPluginRequestInternal
+                    f_1639_83114_83179(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManPluginRequestInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 83114, 83179);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManPluginRequest
+                    f_1639_83213_83237()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManPluginRequest();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 83213, 83237);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSenderDetails
+                    f_1639_83283_83341(System.IntPtr
+                    unmanagedData)
+                    {
+                        var return_v = WSManSenderDetails.UnMarshal(unmanagedData);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 83283, 83341);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOperationInfo
+                    f_1639_83517_83575(System.IntPtr
+                    unmanagedData)
+                    {
+                        var return_v = WSManOperationInfo.UnMarshal(unmanagedData);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 83517, 83575);
+                        return return_v;
+                    }
+
                 }
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 82710, 83768);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 82710, 83768);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Representation of WSMAN_PLUGIN_REQUEST.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManPluginRequestInternal
             {
-                /// <summary>
-                /// WSManSenderDetails.
-                /// </summary>
+
                 internal IntPtr senderDetails;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string locale;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string resourceUri;
-                /// <summary>
-                /// WSManOperationInfo.
-                /// </summary>
-                internal IntPtr operationInfo;
-                internal bool shutdownNotification;
-                internal IntPtr shutdownNotificationHandle;
-            }
-        }
 
+                internal IntPtr operationInfo;
+
+                internal bool shutdownNotification;
+
+                internal IntPtr shutdownNotificationHandle;
+                static WSManPluginRequestInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 83896, 84652);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 83896, 84652);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 83896, 84652);
+                }
+            }
+
+            public WSManPluginRequest()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 80880, 84663);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 81079, 81092);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 81123, 81129);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 81160, 81171);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 81327, 81340);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 80880, 84663);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 80880, 84663);
+            }
+
+
+            static WSManPluginRequest()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 80880, 84663);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 80880, 84663);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 80880, 84663);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 80880, 84663);
+        }
         internal class WSManSenderDetails
         {
             internal string senderName;
+
             internal string authenticationMechanism;
+
             internal WSManCertificateDetails certificateDetails;
-            internal IntPtr clientToken; // TODO: How should this be marshaled?????
+
+            internal IntPtr clientToken;
+
             internal string httpUrl;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManSenderDetails UnMarshal(IntPtr unmanagedData)
             {
-                WSManSenderDetails result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManSenderDetailsInternal resultInternal = Marshal.PtrToStructure<WSManSenderDetailsInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 85240, 86153);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85339, 85372);
 
-                    result = new WSManSenderDetails();
-                    result.senderName = resultInternal.senderName;
-                    result.authenticationMechanism = resultInternal.authenticationMechanism;
-                    result.certificateDetails = WSManCertificateDetails.UnMarshal(resultInternal.certificateDetails);
-                    result.clientToken = resultInternal.clientToken; // TODO: UnMarshaling needed here!!!!
-                    result.httpUrl = resultInternal.httpUrl;
+                    WSManSenderDetails
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85392, 86104) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 85392, 86104);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85466, 85576);
+
+                        WSManSenderDetailsInternal
+                        resultInternal = f_1639_85510_85575(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85600, 85634);
+
+                        result = f_1639_85609_85633();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85656, 85702);
+
+                        result.senderName = resultInternal.senderName;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85724, 85796);
+
+                        result.authenticationMechanism = resultInternal.authenticationMechanism;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85818, 85915);
+
+                        result.certificateDetails = f_1639_85846_85914(resultInternal.certificateDetails);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 85937, 85985);
+
+                        result.clientToken = resultInternal.clientToken;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 86045, 86085);
+
+                        result.httpUrl = resultInternal.httpUrl;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 85392, 86104);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 86124, 86138);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 85240, 86153);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSenderDetails.WSManSenderDetailsInternal
+                    f_1639_85510_85575(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManSenderDetailsInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 85510, 85575);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSenderDetails
+                    f_1639_85609_85633()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSenderDetails();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 85609, 85633);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCertificateDetails
+                    f_1639_85846_85914(System.IntPtr
+                    unmanagedData)
+                    {
+                        var return_v = WSManCertificateDetails.UnMarshal(unmanagedData);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 85846, 85914);
+                        return return_v;
+                    }
+
                 }
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 85240, 86153);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 85240, 86153);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Managed representation of WSMAN_SENDER_DETAILS.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManSenderDetailsInternal
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string senderName;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string authenticationMechanism;
-                /// <summary>
-                /// WSManCertificateDetails.
-                /// </summary>
+
                 internal IntPtr certificateDetails;
+
                 internal IntPtr clientToken;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string httpUrl;
-            }
-        }
+                static WSManSenderDetailsInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 86289, 86944);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 86289, 86944);
 
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 86289, 86944);
+                }
+            }
+
+            public WSManSenderDetails()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 84675, 86955);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 84749, 84759);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 84790, 84813);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 84861, 84879);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 84995, 85002);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 84675, 86955);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 84675, 86955);
+            }
+
+
+            static WSManSenderDetails()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 84675, 86955);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 84675, 86955);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 84675, 86955);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 84675, 86955);
+        }
         internal class WSManCertificateDetails
         {
             internal string subject;
+
             internal string issuerName;
+
             internal string issuerThumbprint;
+
             internal string subjectName;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManCertificateDetails UnMarshal(IntPtr unmanagedData)
             {
-                WSManCertificateDetails result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManCertificateDetailsInternal resultInternal = Marshal.PtrToStructure<WSManCertificateDetailsInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 87421, 88188);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87525, 87563);
 
-                    result = new WSManCertificateDetails();
-                    result.subject = resultInternal.subject;
-                    result.issuerName = resultInternal.issuerName;
-                    result.issuerThumbprint = resultInternal.issuerThumbprint;
-                    result.subjectName = resultInternal.subjectName;
+                    WSManCertificateDetails
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87583, 88139) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 87583, 88139);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87657, 87777);
+
+                        WSManCertificateDetailsInternal
+                        resultInternal = f_1639_87706_87776(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87801, 87840);
+
+                        result = f_1639_87810_87839();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87862, 87902);
+
+                        result.subject = resultInternal.subject;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87924, 87970);
+
+                        result.issuerName = resultInternal.issuerName;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87992, 88050);
+
+                        result.issuerThumbprint = resultInternal.issuerThumbprint;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 88072, 88120);
+
+                        result.subjectName = resultInternal.subjectName;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 87583, 88139);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 88159, 88173);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 87421, 88188);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCertificateDetails.WSManCertificateDetailsInternal
+                    f_1639_87706_87776(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManCertificateDetailsInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 87706, 87776);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCertificateDetails
+                    f_1639_87810_87839()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManCertificateDetails();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 87810, 87839);
+                        return return_v;
+                    }
+
                 }
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 87421, 88188);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 87421, 88188);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
-            /// <summary>
-            /// Managed representation of WSMAN_CERTIFICATE_DETAILS.
-            /// </summary>
+
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManCertificateDetailsInternal
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string subject;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string issuerName;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string issuerThumbprint;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string subjectName;
-            }
-        }
+                static WSManCertificateDetailsInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 88327, 88869);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 88327, 88869);
 
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 88327, 88869);
+                }
+            }
+
+            public WSManCertificateDetails()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 86967, 88880);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87046, 87053);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87084, 87094);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87125, 87141);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 87172, 87183);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 86967, 88880);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 86967, 88880);
+            }
+
+
+            static WSManCertificateDetails()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 86967, 88880);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 86967, 88880);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 86967, 88880);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 86967, 88880);
+        }
         internal class WSManOperationInfo
         {
             internal WSManFragmentInternal fragment;
+
             internal WSManFilterInternal filter;
+
             internal WSManSelectorSet selectorSet;
+
             internal WSManOptionSet optionSet;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="unmanagedData"></param>
-            /// <returns></returns>
             internal static WSManOperationInfo UnMarshal(IntPtr unmanagedData)
             {
-                WSManOperationInfo result = null;
-
-                if (IntPtr.Zero != unmanagedData)
+                try
                 {
-                    WSManOperationInfoInternal resultInternal = Marshal.PtrToStructure<WSManOperationInfoInternal>(unmanagedData);
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 89377, 90153);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89476, 89509);
 
-                    result = new WSManOperationInfo();
-                    result.fragment = resultInternal.fragment;
-                    result.filter = resultInternal.filter;
-                    result.selectorSet = WSManSelectorSet.UnMarshal(resultInternal.selectorSet);
-                    result.optionSet = WSManOptionSet.UnMarshal(resultInternal.optionSet);
+                    WSManOperationInfo
+                    result = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89529, 90104) || true) && (IntPtr.Zero != unmanagedData)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 89529, 90104);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89603, 89713);
+
+                        WSManOperationInfoInternal
+                        resultInternal = f_1639_89647_89712(unmanagedData)
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89737, 89771);
+
+                        result = f_1639_89746_89770();
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89793, 89835);
+
+                        result.fragment = resultInternal.fragment;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89857, 89895);
+
+                        result.filter = resultInternal.filter;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89917, 89993);
+
+                        result.selectorSet = f_1639_89938_89992(resultInternal.selectorSet);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 90015, 90085);
+
+                        result.optionSet = WSManOptionSet.UnMarshal(resultInternal.optionSet);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 89529, 90104);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 90124, 90138);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 89377, 90153);
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOperationInfo.WSManOperationInfoInternal
+                    f_1639_89647_89712(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManOperationInfoInternal>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 89647, 89712);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOperationInfo
+                    f_1639_89746_89770()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOperationInfo();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 89746, 89770);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSelectorSet
+                    f_1639_89938_89992(System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSelectorSet.WSManSelectorSetStruct
+                    resultInternal)
+                    {
+                        var return_v = WSManSelectorSet.UnMarshal(resultInternal);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 89938, 89992);
+                        return return_v;
+                    }
+
                 }
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 89377, 90153);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 89377, 90153);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
-            /// <summary>
-            /// Managed representation of WSMAN_OPERATION_INFO.
-            /// selectorSet and optionSet are handled differently because they are structs that contain pointers to arrays of structs.
-            /// Most other data structures in the API point to structures using IntPtr rather than including the actual structure.
-            /// </summary>
+
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             private struct WSManOperationInfoInternal
             {
+
                 internal WSManFragmentInternal fragment;
+
                 internal WSManFilterInternal filter;
+
                 internal WSManSelectorSet.WSManSelectorSetStruct selectorSet;
+
                 internal WSManOptionSetStruct optionSet;
+                static WSManOperationInfoInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 90555, 90953);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 90555, 90953);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 90555, 90953);
+                }
             }
 
-            /// <summary>
-            /// Managed representation of WSMAN_FRAGMENT.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal struct WSManFragmentInternal
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string path;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string dialect;
+                static WSManFragmentInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 91083, 91411);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 91083, 91411);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 91083, 91411);
+                }
             }
 
-            /// <summary>
-            /// Managed representation of WSMAN_FILTER.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal struct WSManFilterInternal
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string filter;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string dialect;
-            }
-        }
+                static WSManFilterInternal()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 91539, 91867);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 91539, 91867);
 
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 91539, 91867);
+                }
+            }
+
+            public WSManOperationInfo()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 88892, 91878);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 89080, 89091);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 88892, 91878);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 88892, 91878);
+            }
+
+
+            static WSManOperationInfo()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 88892, 91878);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 88892, 91878);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 88892, 91878);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 88892, 91878);
+        }
         internal class WSManSelectorSet
         {
             internal int numberKeys;
+
             internal WSManKeyStruct[] keys;
 
-            /// <summary>
-            /// Converts the unmanaged pointer to a managed class object.
-            /// </summary>
-            /// <param name="resultInternal"></param>
-            /// <returns></returns>
             internal static WSManSelectorSet UnMarshal(WSManSelectorSetStruct resultInternal)
             {
-                WSManKeyStruct[] tempKeys = null;
-                if (resultInternal.numberKeys > 0)
+                try
                 {
-                    tempKeys = new WSManKeyStruct[resultInternal.numberKeys];
-                    int sizeInBytes = Marshal.SizeOf<WSManKeyStruct>();
-                    IntPtr perElementPtr = resultInternal.keys;
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 92253, 93215);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92367, 92400);
 
-                    for (int i = 0; i < resultInternal.numberKeys; i++)
+                    WSManKeyStruct[]
+                    tempKeys = null
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92418, 92992) || true) && (resultInternal.numberKeys > 0)
+                    )
+
                     {
-                        IntPtr p = IntPtr.Add(perElementPtr, (i * sizeInBytes));
-                        tempKeys[i] = Marshal.PtrToStructure<WSManKeyStruct>(p);
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 92418, 92992);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92493, 92550);
+
+                        tempKeys = new WSManKeyStruct[resultInternal.numberKeys];
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92572, 92623);
+
+                        int
+                        sizeInBytes = f_1639_92590_92622()
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92645, 92688);
+
+                        IntPtr
+                        perElementPtr = resultInternal.keys
+                        ;
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92721, 92726);
+
+                            for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92712, 92973) || true) && (i < resultInternal.numberKeys)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92759, 92762)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 92712, 92973))
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 92712, 92973);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92812, 92868);
+
+                                IntPtr
+                                p = IntPtr.Add(perElementPtr, (i * sizeInBytes))
+                                ;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92894, 92950);
+
+                                tempKeys[i] = f_1639_92908_92949(p);
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1639, 1, 262);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1639, 1, 262);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 92418, 92992);
                     }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 93012, 93061);
+
+                    WSManSelectorSet
+                    result = f_1639_93038_93060()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 93079, 93125);
+
+                    result.numberKeys = resultInternal.numberKeys;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 93143, 93166);
+
+                    result.keys = tempKeys;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 93186, 93200);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 92253, 93215);
+
+                    int
+                    f_1639_92590_92622()
+                    {
+                        var return_v = Marshal.SizeOf<WSManKeyStruct>();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 92590, 92622);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSelectorSet.WSManKeyStruct
+                    f_1639_92908_92949(System.IntPtr
+                    ptr)
+                    {
+                        var return_v = Marshal.PtrToStructure<WSManKeyStruct>(ptr);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 92908, 92949);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSelectorSet
+                    f_1639_93038_93060()
+                    {
+                        var return_v = new System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSelectorSet();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 93038, 93060);
+                        return return_v;
+                    }
+
                 }
-
-                WSManSelectorSet result = new WSManSelectorSet();
-                result.numberKeys = resultInternal.numberKeys;
-                result.keys = tempKeys;
-
-                return result;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 92253, 93215);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 92253, 93215);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
-            /// <summary>
-            /// Managed representation of WSMAN_SELECTOR_SET.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal struct WSManSelectorSetStruct
             {
+
                 internal int numberKeys;
-                /// <summary>
-                /// Array of WSManKeyStruct structures.
-                /// </summary>
+
                 internal IntPtr keys;
+                static WSManSelectorSetStruct()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 93349, 93696);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 93349, 93696);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 93349, 93696);
+                }
             }
 
-            /// <summary>
-            /// Managed representation of WSMAN_OPTION_SET.
-            /// </summary>
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
             internal struct WSManKeyStruct
             {
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string key;
+
                 [MarshalAs(UnmanagedType.LPWStr)]
                 internal string value;
+                static WSManKeyStruct()
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 93828, 94146);
+                    DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 93828, 94146);
+
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 93828, 94146);
+                }
             }
+
+            public WSManSelectorSet()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 91890, 94157);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 91959, 91969);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 92010, 92014);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 91890, 94157);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 91890, 94157);
+            }
+
+
+            static WSManSelectorSet()
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 91890, 94157);
+                DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 91890, 94157);
+
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 91890, 94157);
+            }
+
+            int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 91890, 94157);
         }
 
-        #endregion
+        internal const string
+        WSManClientApiDll = @"WsmSvc.dll"
+        ;
 
-        #region DllImports ClientAPI
+        internal const string
+        WSManProviderApiDll = @"WsmSvc.dll"
+        ;
 
-#if !UNIX
-        internal const string WSManClientApiDll = @"WsmSvc.dll";
-        internal const string WSManProviderApiDll = @"WsmSvc.dll";
-#else
-        internal const string WSManClientApiDll = @"libpsrpclient";
-        internal const string WSManProviderApiDll = @"libpsrpomiprov";
-#endif
-
-        /// <summary>
-        /// This API is used to initialize the WinRM client;
-        /// It can be used by different clients on the same process, ie svchost.exe.
-        /// Returns a nonzero error code upon failure.
-        /// </summary>
-        /// <param name="flags">
-        /// </param>
-        /// <param name="wsManAPIHandle">
-        /// </param>
-        /// <returns>
-        /// </returns>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManInitialize(int flags,
-          [In, Out]  ref IntPtr wsManAPIHandle);
+                  [In, Out] ref IntPtr wsManAPIHandle);
 
-        /// <summary>
-        /// This API deinitializes the Winrm client stack; all operations will
-        /// finish before this API will return; this is a sync call;
-        /// it is highly recommended that all operations are explicitly cancelled
-        /// and all sessions are closed before calling this API
-        /// Returns non zero error code upon failure.
-        /// </summary>
-        /// <param name="wsManAPIHandle"></param>
-        /// <param name="flags"></param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManDeinitialize(IntPtr wsManAPIHandle, int flags);
 
-        /// <summary>
-        /// Creates a session which can be used to perform subsequent operations
-        /// Returns a non zero error code upon failure.
-        /// </summary>
-        /// <param name="wsManAPIHandle"></param>
-        /// <param name="connection">
-        /// if NULL, then connection will default to 127.0.0.1
-        /// </param>
-        /// <param name="flags"></param>
-        /// <param name="authenticationCredentials">
-        /// can be null.
-        /// </param>
-        /// <param name="proxyInfo">
-        /// </param>
-        /// <param name="wsManSessionHandle"></param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManCreateSession(IntPtr wsManAPIHandle,
-            [MarshalAs(UnmanagedType.LPWStr)]string connection,
-            int flags,
-            IntPtr authenticationCredentials,
-            IntPtr proxyInfo,
-            [In, Out]  ref IntPtr wsManSessionHandle);
+                    [MarshalAs(UnmanagedType.LPWStr)] string connection,
+                    int flags,
+                    IntPtr authenticationCredentials,
+                    IntPtr proxyInfo,
+                    [In, Out] ref IntPtr wsManSessionHandle);
 
-        /// <summary>
-        /// Frees memory of session and closes all related operations before returning;
-        /// this is sync call it is recommended that all pending operations are either
-        /// completed or cancelled before calling this API. Returns a non zero error
-        /// code upon failure.
-        /// </summary>
-        /// <param name="wsManSessionHandle"></param>
-        /// <param name="flags"></param>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManCloseSession(IntPtr wsManSessionHandle,
-            int flags);
+                    int flags);
 
-        /// <summary>
-        /// WSManSetSessionOption API - set session options
-        /// Returns a non zero error code upon failure.
-        /// </summary>
-        /// <param name="wsManSessionHandle"></param>
-        /// <param name="option"></param>
-        /// <param name="data">
-        /// An int (DWORD) data.
-        /// </param>
-        /// <returns></returns>
         internal static int WSManSetSessionOption(IntPtr wsManSessionHandle,
-            WSManSessionOption option,
-            WSManDataDWord data)
+                    WSManSessionOption option,
+                    WSManDataDWord data)
         {
-            MarshalledObject marshalObj = data.Marshal();
-            using (marshalObj)
+            try
             {
-                return WSManSetSessionOption(wsManSessionHandle, option, marshalObj.DataPtr);
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 97991, 98371);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 98158, 98203);
+
+                MarshalledObject
+                marshalObj = data.Marshal()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 98217, 98360);
+                using (marshalObj)
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 98268, 98345);
+
+                    return f_1639_98275_98344(wsManSessionHandle, option, marshalObj.DataPtr);
+                    DynAbs.Tracing.TraceSender.TraceExitUsing(1639, 98217, 98360);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 97991, 98371);
+
+                int
+                f_1639_98275_98344(System.IntPtr
+                wsManSessionHandle, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSessionOption
+                option, System.IntPtr
+                data)
+                {
+                    var return_v = WSManSetSessionOption(wsManSessionHandle, option, data);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 98275, 98344);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 97991, 98371);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 97991, 98371);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManSetSessionOption(IntPtr wsManSessionHandle,
-            WSManSessionOption option,
-            IntPtr data);
+                    WSManSessionOption option,
+                    IntPtr data);
 
-        /// <summary>
-        /// WSManGetSessionOptionAsDword API - get a session option. Returns a non
-        /// zero error code upon failure.
-        /// </summary>
-        /// <param name="wsManSessionHandle"></param>
-        /// <param name="option"></param>
-        /// <param name="value">
-        /// An int (DWORD) data.
-        /// </param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManGetSessionOptionAsDword(IntPtr wsManSessionHandle,
-            WSManSessionOption option,
-            out int value);
+                    WSManSessionOption option,
+                    out int value);
 
-        /// <summary>
-        /// Function that retrieves a WSMan session option as string. Thread.CurrentUICulture
-        /// will be used as the language code to get the error message in.
-        /// </summary>
-        /// <param name="wsManAPIHandle"></param>
-        /// <param name="option">Session option to get.</param>
-        /// <returns></returns>
         internal static string WSManGetSessionOptionAsString(IntPtr wsManAPIHandle,
-            WSManSessionOption option)
+                    WSManSessionOption option)
         {
-            Dbg.Assert(IntPtr.Zero != wsManAPIHandle, "wsManAPIHandle cannot be null.");
-            // The error code taken from winerror.h used for getting buffer length.
-            const int ERROR_INSUFFICIENT_BUFFER = 122;
-
-            string returnval = string.Empty;
-            int bufferSize = 0;
-            // calculate buffer size required
-            if (ERROR_INSUFFICIENT_BUFFER != WSManGetSessionOptionAsString(wsManAPIHandle,
-                option, 0, null, out bufferSize))
-            {
-                return returnval;
-            }
-            // calculate space required to store output.
-            // StringBuilder will not work for this case as CLR
-            // does not copy the entire string if there are delimiters ('\0')
-            // in the middle of a string.
-            int bufferSizeInBytes = bufferSize * 2;
-            byte[] msgBufferPtr = new byte[bufferSizeInBytes];
-
-            // Now get the actual value
-            int messageLength;
-            if (0 != WSManGetSessionOptionAsString(wsManAPIHandle,
-                    option, bufferSizeInBytes, msgBufferPtr, out messageLength))
-            {
-                return returnval;
-            }
-
             try
             {
-                returnval = Encoding.Unicode.GetString(msgBufferPtr, 0, bufferSizeInBytes);
-            }
-            catch (ArgumentNullException)
-            {
-            }
-            catch (System.Text.DecoderFallbackException)
-            {
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 99671, 101363);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 99811, 99887);
 
-            return returnval;
+                f_1639_99811_99886(IntPtr.Zero != wsManAPIHandle, "wsManAPIHandle cannot be null.");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 99986, 100028);
+
+                const int
+                ERROR_INSUFFICIENT_BUFFER = 122
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100044, 100076);
+
+                string
+                returnval = string.Empty
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100090, 100109);
+
+                int
+                bufferSize = 0
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100170, 100364) || true) && (ERROR_INSUFFICIENT_BUFFER != f_1639_100203_100298(wsManAPIHandle, option, 0, null, out bufferSize))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 100170, 100364);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100332, 100349);
+
+                    return returnval;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 100170, 100364);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100623, 100662);
+
+                int
+                bufferSizeInBytes = bufferSize * 2
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100676, 100726);
+
+                byte[]
+                msgBufferPtr = new byte[bufferSizeInBytes]
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100783, 100801);
+
+                int
+                messageLength
+                = default(int);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100815, 101016) || true) && (0 != f_1639_100824_100950(wsManAPIHandle, option, bufferSizeInBytes, msgBufferPtr, out messageLength))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 100815, 101016);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 100984, 101001);
+
+                    return returnval;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 100815, 101016);
+                }
+
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 101068, 101143);
+
+                    returnval = f_1639_101080_101142(f_1639_101080_101096(), msgBufferPtr, 0, bufferSizeInBytes);
+                }
+                catch (ArgumentNullException)
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCatch(1639, 101172, 101231);
+                    DynAbs.Tracing.TraceSender.TraceExitCatch(1639, 101172, 101231);
+                }
+                catch (System.Text.DecoderFallbackException)
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCatch(1639, 101245, 101319);
+                    DynAbs.Tracing.TraceSender.TraceExitCatch(1639, 101245, 101319);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 101335, 101352);
+
+                return returnval;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 99671, 101363);
+
+                int
+                f_1639_99811_99886(bool
+                condition, string
+                message)
+                {
+                    Dbg.Assert(condition, message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 99811, 99886);
+                    return 0;
+                }
+
+
+                int
+                f_1639_100203_100298(System.IntPtr
+                wsManSessionHandle, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSessionOption
+                option, int
+                optionLength, byte[]
+                optionAsString, out int
+                optionLengthUsed)
+                {
+                    var return_v = WSManGetSessionOptionAsString(wsManSessionHandle, option, optionLength, optionAsString, out optionLengthUsed);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 100203, 100298);
+                    return return_v;
+                }
+
+
+                int
+                f_1639_100824_100950(System.IntPtr
+                wsManSessionHandle, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManSessionOption
+                option, int
+                optionLength, byte[]
+                optionAsString, out int
+                optionLengthUsed)
+                {
+                    var return_v = WSManGetSessionOptionAsString(wsManSessionHandle, option, optionLength, optionAsString, out optionLengthUsed);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 100824, 100950);
+                    return return_v;
+                }
+
+
+                System.Text.Encoding
+                f_1639_101080_101096()
+                {
+                    var return_v = Encoding.Unicode;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 101080, 101096);
+                    return return_v;
+                }
+
+
+                string
+                f_1639_101080_101142(System.Text.Encoding
+                this_param, byte[]
+                bytes, int
+                index, int
+                count)
+                {
+                    var return_v = this_param.GetString(bytes, index, count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 101080, 101142);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 99671, 101363);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 99671, 101363);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         private static extern int WSManGetSessionOptionAsString(IntPtr wsManSessionHandle,
-            WSManSessionOption option,
-            int optionLength,
-            byte[] optionAsString,
-            out int optionLengthUsed);
+                    WSManSessionOption option,
+                    int optionLength,
+                    byte[] optionAsString,
+                    out int optionLengthUsed);
 
-        /// <summary>
-        /// Creates a shell on the remote end.
-        /// </summary>
-        /// <param name="wsManSessionHandle">
-        /// Session in which the shell is created.
-        /// </param>
-        /// <param name="flags">
-        /// </param>
-        /// <param name="resourceUri">
-        /// The resource Uri to use to create the shell.
-        /// </param>
-        /// <param name="shellId"></param>
-        /// <param name="startupInfo">
-        /// startup information to be passed to the shell.
-        /// </param>
-        /// <param name="optionSet">
-        /// Options to be passed with CreateShell
-        /// </param>
-        /// <param name="openContent">
-        /// any content that is used by the remote shell to startup.
-        /// </param>
-        /// <param name="asyncCallback">
-        /// callback to notify when the create operation completes.
-        /// </param>
-        /// <param name="shellOperationHandle">
-        /// An out parameter referencing a WSMan shell operation handle
-        /// for this shell.
-        /// </param>
-        /// <returns></returns>
         internal static void WSManCreateShellEx(IntPtr wsManSessionHandle,
-            int flags,
-            string resourceUri,
-            string shellId,
-            WSManShellStartupInfo_ManToUn startupInfo,
-            WSManOptionSet optionSet,
-            WSManData_ManToUn openContent,
-            IntPtr asyncCallback,
-            ref IntPtr shellOperationHandle)
+                    int flags,
+                    string resourceUri,
+                    string shellId,
+                    WSManShellStartupInfo_ManToUn startupInfo,
+                    WSManOptionSet optionSet,
+                    WSManData_ManToUn openContent,
+                    IntPtr asyncCallback,
+                    ref IntPtr shellOperationHandle)
         {
-            WSManCreateShellExInternal(wsManSessionHandle, flags, resourceUri, shellId, startupInfo, optionSet,
-                    openContent, asyncCallback, ref shellOperationHandle);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 102860, 103443);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 103257, 103432);
+
+                f_1639_103257_103431(wsManSessionHandle, flags, resourceUri, shellId, startupInfo, optionSet, openContent, asyncCallback, ref shellOperationHandle);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 102860, 103443);
+
+                int
+                f_1639_103257_103431(System.IntPtr
+                wsManSessionHandle, int
+                flags, string
+                resourceUri, string
+                shellId, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManShellStartupInfo_ManToUn
+                startupInfo, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManOptionSet
+                optionSet, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_ManToUn
+                openContent, System.IntPtr
+                asyncCallback, ref System.IntPtr
+                shellOperationHandle)
+                {
+                    WSManCreateShellExInternal(wsManSessionHandle, flags, resourceUri, shellId, (System.IntPtr)startupInfo, (System.IntPtr)optionSet, (System.IntPtr)openContent, asyncCallback, ref shellOperationHandle);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 103257, 103431);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 102860, 103443);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 102860, 103443);
+            }
         }
 
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManCreateShellEx", SetLastError = false, CharSet = CharSet.Unicode)]
         private static extern void WSManCreateShellExInternal(IntPtr wsManSessionHandle,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)]string resourceUri,
-            [MarshalAs(UnmanagedType.LPWStr)]string shellId,
-            IntPtr startupInfo,
-            IntPtr optionSet,
-            IntPtr openContent,
-            IntPtr asyncCallback,
-            [In, Out]  ref IntPtr shellOperationHandle);
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)] string resourceUri,
+                    [MarshalAs(UnmanagedType.LPWStr)] string shellId,
+                    IntPtr startupInfo,
+                    IntPtr optionSet,
+                    IntPtr openContent,
+                    IntPtr asyncCallback,
+                    [In, Out] ref IntPtr shellOperationHandle);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="wsManSessionHandle"></param>
-        /// <param name="flags"></param>
-        /// <param name="resourceUri"></param>
-        /// <param name="shellId"></param>
-        /// <param name="optionSet"></param>
-        /// <param name="connectXml"></param>
-        /// <param name="asyncCallback"></param>
-        /// <param name="shellOperationHandle"></param>
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManConnectShell", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManConnectShellEx(IntPtr wsManSessionHandle,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)]string resourceUri,
-            [MarshalAs(UnmanagedType.LPWStr)]string shellId,
-            IntPtr optionSet,
-            IntPtr connectXml,
-            IntPtr asyncCallback,
-            [In, Out]  ref IntPtr shellOperationHandle);
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)] string resourceUri,
+                    [MarshalAs(UnmanagedType.LPWStr)] string shellId,
+                    IntPtr optionSet,
+                    IntPtr connectXml,
+                    IntPtr asyncCallback,
+                    [In, Out] ref IntPtr shellOperationHandle);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="wsManSessionHandle"></param>
-        /// <param name="flags"></param>
-        /// <param name="disconnectInfo"></param>
-        /// <param name="asyncCallback"></param>
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManDisconnectShell", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManDisconnectShellEx(IntPtr wsManSessionHandle,
-            int flags,
-            IntPtr disconnectInfo,
-            IntPtr asyncCallback);
+                    int flags,
+                    IntPtr disconnectInfo,
+                    IntPtr asyncCallback);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="wsManSessionHandle"></param>
-        /// <param name="flags"></param>
-        /// <param name="asyncCallback"></param>
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManReconnectShell", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManReconnectShellEx(IntPtr wsManSessionHandle,
-            int flags,
-            IntPtr asyncCallback);
+                    int flags,
+                    IntPtr asyncCallback);
 
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManReconnectShellCommand", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManReconnectShellCommandEx(IntPtr wsManCommandHandle,
-            int flags,
-            IntPtr asyncCallback);
+                    int flags,
+                    IntPtr asyncCallback);
 
-        /// <summary>
-        /// Starts a command on the remote end.
-        /// </summary>
-        /// <param name="shellOperationHandle">
-        /// Shell handle in which the command is created and run.
-        /// </param>
-        /// <param name="flags"></param>
-        /// <param name="commandId"></param>
-        /// <param name="commandLine">
-        /// command line for the command.
-        /// </param>
-        /// <param name="commandArgSet">
-        /// arguments for the command.
-        /// </param>
-        /// <param name="optionSet">
-        /// options.
-        /// </param>
-        /// <param name="asyncCallback">
-        /// callback to notify when the operation completes.
-        /// </param>
-        /// <param name="commandOperationHandle">
-        /// An out parameter referencing a WSMan shell operation handle
-        /// for this command.
-        /// </param>
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManRunShellCommandEx", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManRunShellCommandEx(IntPtr shellOperationHandle,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)]
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)]
             string commandId,
-            [MarshalAs(UnmanagedType.LPWStr)]
+                    [MarshalAs(UnmanagedType.LPWStr)]
             string commandLine,
-            IntPtr commandArgSet,
-            IntPtr optionSet,
-            IntPtr asyncCallback,
-            ref IntPtr commandOperationHandle);
+                    IntPtr commandArgSet,
+                    IntPtr optionSet,
+                    IntPtr asyncCallback,
+                    ref IntPtr commandOperationHandle);
 
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManConnectShellCommand", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManConnectShellCommandEx(IntPtr shellOperationHandle,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)]
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)]
             string commandID,
-            IntPtr optionSet,
-            IntPtr connectXml,
-            IntPtr asyncCallback,
-            ref IntPtr commandOperationHandle);
+                    IntPtr optionSet,
+                    IntPtr connectXml,
+                    IntPtr asyncCallback,
+                    ref IntPtr commandOperationHandle);
 
-        /// <summary>
-        /// Registers a callback with WSMan to receive output from the remote end.
-        /// If commandOperationHandle is null, then the receive callback is registered
-        /// for shell. It is enough to register the callback only once. WSMan will
-        /// keep on calling this callback as and when it has data for a particular
-        /// command + shell. There will be only 1 callback active per command or per shell.
-        /// So if there are multiple commands active, then there can be 1 callback active
-        /// for each of them.
-        /// TODO: How to unregister the callback.
-        /// </summary>
-        /// <param name="shellOperationHandle">
-        /// Shell Operation Handle.
-        /// </param>
-        /// <param name="commandOperationHandle">
-        /// Command Operation Handle. If null, the receive request corresponds
-        /// to the shell.
-        /// </param>
-        /// <param name="flags"></param>
-        /// <param name="desiredStreamSet"></param>
-        /// <param name="asyncCallback">
-        /// callback which receives the data asynchronously.
-        /// </param>
-        /// <param name="receiveOperationHandle">
-        /// handle to use to cancel the operation.
-        /// </param>
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManReceiveShellOutput", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManReceiveShellOutputEx(IntPtr shellOperationHandle,
-            IntPtr commandOperationHandle,
-            int flags,
-            IntPtr desiredStreamSet,
-            IntPtr asyncCallback,
-            [In, Out]  ref IntPtr receiveOperationHandle);
+                    IntPtr commandOperationHandle,
+                    int flags,
+                    IntPtr desiredStreamSet,
+                    IntPtr asyncCallback,
+                    [In, Out] ref IntPtr receiveOperationHandle);
 
-        /// <summary>
-        /// Send data to the remote end.
-        /// </summary>
-        /// <param name="shellOperationHandle">
-        /// Shell Operation Handle.
-        /// </param>
-        /// <param name="commandOperationHandle">
-        /// Command Operation Handle. If null, the send request corresponds
-        /// to the shell.
-        /// </param>
-        /// <param name="flags"></param>
-        /// <param name="streamId"></param>
-        /// <param name="streamData"></param>
-        /// <param name="asyncCallback">
-        /// callback to notify when the operation completes.
-        /// </param>
-        /// <param name="sendOperationHandle">
-        /// handle to use to cancel the operation.
-        /// </param>
         internal static void WSManSendShellInputEx(IntPtr shellOperationHandle,
-            IntPtr commandOperationHandle,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)] string streamId,
-            WSManData_ManToUn streamData,
-            IntPtr asyncCallback,
-            ref IntPtr sendOperationHandle)
+                    IntPtr commandOperationHandle,
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)] string streamId,
+                    WSManData_ManToUn streamData,
+                    IntPtr asyncCallback,
+                    ref IntPtr sendOperationHandle)
         {
-            WSManSendShellInputExInternal(shellOperationHandle, commandOperationHandle, flags, streamId,
-                    streamData, false, asyncCallback, ref sendOperationHandle);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 110804, 111339);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 111155, 111328);
+
+                f_1639_111155_111327(shellOperationHandle, commandOperationHandle, flags, streamId, streamData, false, asyncCallback, ref sendOperationHandle);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 110804, 111339);
+
+                int
+                f_1639_111155_111327(System.IntPtr
+                shellOperationHandle, System.IntPtr
+                commandOperationHandle, int
+                flags, string
+                streamId, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManData_ManToUn
+                streamData, bool
+                endOfStream, System.IntPtr
+                asyncCallback, ref System.IntPtr
+                sendOperationHandle)
+                {
+                    WSManSendShellInputExInternal(shellOperationHandle, commandOperationHandle, flags, streamId, (System.IntPtr)streamData, endOfStream, asyncCallback, ref sendOperationHandle);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 111155, 111327);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 110804, 111339);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 110804, 111339);
+            }
         }
 
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManSendShellInput", SetLastError = false, CharSet = CharSet.Unicode)]
         private static extern void WSManSendShellInputExInternal(IntPtr shellOperationHandle,
-            IntPtr commandOperationHandle,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)] string streamId,
-            IntPtr streamData,
-            bool endOfStream,
-            IntPtr asyncCallback,
-            [In, Out]  ref IntPtr sendOperationHandle);
+                    IntPtr commandOperationHandle,
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)] string streamId,
+                    IntPtr streamData,
+                    bool endOfStream,
+                    IntPtr asyncCallback,
+                    [In, Out] ref IntPtr sendOperationHandle);
 
-        /// <summary>
-        /// Closes a shell or a command; if the callback associated with the operation
-        /// is pending and have not completed when WSManCloseShellOperationEx is called,
-        /// the function waits for the callback to finish; If the operation was not finished,
-        /// the operation is cancelled and the operation callback is called with
-        /// WSMAN_ERROR_OPERATION_ABORTED error; then the WSManCloseShellOperationEx callback
-        /// is called with WSMAN_FLAG_CALLBACK_END_OF_OPERATION flag as result of this operation.
-        /// </summary>
-        /// <param name="shellHandle">
-        /// Shell handle to Close.
-        /// </param>
-        /// <param name="flags"></param>
-        /// <param name="asyncCallback">
-        /// callback to notify when the operation completes.
-        /// </param>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManCloseShell(IntPtr shellHandle,
-            int flags,
-            IntPtr asyncCallback);
+                    int flags,
+                    IntPtr asyncCallback);
 
-        /// <summary>
-        /// Closes a command (signals the termination of a command); the WSManCloseCommand callback
-        /// is called with WSMAN_FLAG_CALLBACK_END_OF_OPERATION flag as result of this operation.
-        /// </summary>
-        /// <param name="cmdHandle">
-        /// Command handle to Close.
-        /// </param>
-        /// <param name="flags"></param>
-        /// <param name="asyncCallback">
-        /// callback to notify when the operation completes.
-        /// </param>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManCloseCommand(IntPtr cmdHandle,
-            int flags,
-            IntPtr asyncCallback);
+                    int flags,
+                    IntPtr asyncCallback);
 
-        /// <summary>
-        /// Sends a signal. If <paramref name="cmdOperationHandle"/> is null, then the signal will
-        /// be sent to shell.
-        /// </summary>
-        /// <param name="shellOperationHandle"></param>
-        /// <param name="cmdOperationHandle"></param>
-        /// <param name="flags"></param>
-        /// <param name="code"></param>
-        /// <param name="asyncCallback"></param>
-        /// <param name="signalOperationHandle"></param>
         [DllImport(WSManNativeApi.WSManClientApiDll, EntryPoint = "WSManSignalShell", SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManSignalShellEx(IntPtr shellOperationHandle,
-            IntPtr cmdOperationHandle,
-            int flags,
-            string code,
-            IntPtr asyncCallback,
-            [In, Out] ref IntPtr signalOperationHandle);
+                    IntPtr cmdOperationHandle,
+                    int flags,
+                    string code,
+                    IntPtr asyncCallback,
+                    [In, Out] ref IntPtr signalOperationHandle);
 
-        /// <summary>
-        /// Closes an asynchronous operation; if the callback associated with the operation
-        /// is pending and have not completed when WSManCloseOperation is called, then
-        /// the function marks the operation for deletion and returns; If the callback was not called,
-        /// the operation is cancelled and the operation callback is called with
-        /// WSMAN_ERROR_OPERATION_ABORTED error; the operation handle is freed in all cases
-        /// after the callback returns.
-        /// </summary>
-        /// <param name="operationHandle"></param>
-        /// <param name="flags"></param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern void WSManCloseOperation(IntPtr operationHandle, int flags);
 
-        /// <summary>
-        /// Function that retrieves WSMan error messages with a particular error code. Thread.CurrentUICulture
-        /// will be used as the language code to get the error message in.
-        /// </summary>
-        /// <param name="wsManAPIHandle"></param>
-        /// <param name="errorCode"></param>
-        /// <returns></returns>
         internal static string WSManGetErrorMessage(IntPtr wsManAPIHandle, int errorCode)
         {
-            Dbg.Assert(IntPtr.Zero != wsManAPIHandle, "wsManAPIHandle cannot be null.");
-
-            // The error code taken from winerror.h used for getting buffer length.
-            const int ERROR_INSUFFICIENT_BUFFER = 122;
-
-            // get language code.
-            string langCode = CultureInfo.CurrentUICulture.Name;
-
-            string returnval = string.Empty;
-            int bufferSize = 0;
-            // calculate buffer size required
-            if (ERROR_INSUFFICIENT_BUFFER != WSManGetErrorMessage(wsManAPIHandle,
-                    0, langCode, errorCode, 0, null, out bufferSize))
-            {
-                return returnval;
-            }
-            // calculate space required to store output.
-            // StringBuilder will not work for this case as CLR
-            // does not copy the entire string if there are delimiters ('\0')
-            // in the middle of a string.
-            int bufferSizeInBytes = bufferSize * 2;
-            byte[] msgBufferPtr = new byte[bufferSizeInBytes];
-
-            // Now get the actual value
-            int messageLength;
-            if (0 != WSManGetErrorMessage(wsManAPIHandle,
-                    0, langCode, errorCode, bufferSizeInBytes, msgBufferPtr, out messageLength))
-            {
-                return returnval;
-            }
-
             try
             {
-                returnval = Encoding.Unicode.GetString(msgBufferPtr, 0, bufferSizeInBytes);
-            }
-            catch (ArgumentNullException)
-            {
-            }
-            catch (System.Text.DecoderFallbackException)
-            {
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1639, 115855, 117715);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 115961, 116037);
 
-            return returnval;
+                f_1639_115961_116036(IntPtr.Zero != wsManAPIHandle, "wsManAPIHandle cannot be null.");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116138, 116180);
+
+                const int
+                ERROR_INSUFFICIENT_BUFFER = 122
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116231, 116283);
+
+                string
+                langCode = f_1639_116249_116282(f_1639_116249_116277())
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116299, 116331);
+
+                string
+                returnval = string.Empty
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116345, 116364);
+
+                int
+                bufferSize = 0
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116425, 116630) || true) && (ERROR_INSUFFICIENT_BUFFER != f_1639_116458_116564(wsManAPIHandle, 0, langCode, errorCode, 0, null, out bufferSize))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 116425, 116630);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116598, 116615);
+
+                    return returnval;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 116425, 116630);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116889, 116928);
+
+                int
+                bufferSizeInBytes = bufferSize * 2
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 116942, 116992);
+
+                byte[]
+                msgBufferPtr = new byte[bufferSizeInBytes]
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 117049, 117067);
+
+                int
+                messageLength
+                = default(int);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 117081, 117289) || true) && (0 != f_1639_117090_117223(wsManAPIHandle, 0, langCode, errorCode, bufferSizeInBytes, msgBufferPtr, out messageLength))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1639, 117081, 117289);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 117257, 117274);
+
+                    return returnval;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1639, 117081, 117289);
+                }
+
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 117341, 117416);
+
+                    returnval = f_1639_117353_117415(f_1639_117353_117369(), msgBufferPtr, 0, bufferSizeInBytes);
+                }
+                catch (ArgumentNullException)
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCatch(1639, 117445, 117504);
+                    DynAbs.Tracing.TraceSender.TraceExitCatch(1639, 117445, 117504);
+                }
+                catch (System.Text.DecoderFallbackException)
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCatch(1639, 117518, 117592);
+                    DynAbs.Tracing.TraceSender.TraceExitCatch(1639, 117518, 117592);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCatch(1639, 117606, 117671);
+                    DynAbs.Tracing.TraceSender.TraceExitCatch(1639, 117606, 117671);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 117687, 117704);
+
+                return returnval;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1639, 115855, 117715);
+
+                int
+                f_1639_115961_116036(bool
+                condition, string
+                message)
+                {
+                    Dbg.Assert(condition, message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 115961, 116036);
+                    return 0;
+                }
+
+
+                System.Globalization.CultureInfo
+                f_1639_116249_116277()
+                {
+                    var return_v = CultureInfo.CurrentUICulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 116249, 116277);
+                    return return_v;
+                }
+
+
+                string
+                f_1639_116249_116282(System.Globalization.CultureInfo
+                this_param)
+                {
+                    var return_v = this_param.Name;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 116249, 116282);
+                    return return_v;
+                }
+
+
+                int
+                f_1639_116458_116564(System.IntPtr
+                wsManAPIHandle, int
+                flags, string
+                languageCode, int
+                errorCode, int
+                messageLength, byte[]
+                message, out int
+                messageLengthUsed)
+                {
+                    var return_v = WSManGetErrorMessage(wsManAPIHandle, flags, languageCode, errorCode, messageLength, message, out messageLengthUsed);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 116458, 116564);
+                    return return_v;
+                }
+
+
+                int
+                f_1639_117090_117223(System.IntPtr
+                wsManAPIHandle, int
+                flags, string
+                languageCode, int
+                errorCode, int
+                messageLength, byte[]
+                message, out int
+                messageLengthUsed)
+                {
+                    var return_v = WSManGetErrorMessage(wsManAPIHandle, flags, languageCode, errorCode, messageLength, message, out messageLengthUsed);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 117090, 117223);
+                    return return_v;
+                }
+
+
+                System.Text.Encoding
+                f_1639_117353_117369()
+                {
+                    var return_v = Encoding.Unicode;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1639, 117353, 117369);
+                    return return_v;
+                }
+
+
+                string
+                f_1639_117353_117415(System.Text.Encoding
+                this_param, byte[]
+                bytes, int
+                index, int
+                count)
+                {
+                    var return_v = this_param.GetString(bytes, index, count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 117353, 117415);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 115855, 117715);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 115855, 117715);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Function that retrieves WSMan error messages with a particular error code and a language code.
-        /// </summary>
-        /// <param name="wsManAPIHandle">
-        /// The handle returned by WSManInitialize API call. It cannot be NULL.
-        /// </param>
-        /// <param name="flags">
-        /// Reserved for future use. It must be 0.
-        /// </param>
-        /// <param name="languageCode">
-        /// Defines the RFC 3066 language code name that should be used to localize the error. It can be NULL.
-        /// if not specified, the thread's UI language will be used.
-        /// </param>
-        /// <param name="errorCode">
-        /// Represents the error code for the requested error message. This error code can be a hexadecimal or
-        /// decimal component from WSManagement component, WinHttp component or other Windows operating system
-        /// components.
-        /// </param>
-        /// <param name="messageLength">
-        /// Represents the size of the output message buffer in characters, including the NULL terminator.
-        /// If 0, then the "message" parameter must be NULL; in this case the function will return
-        /// ERROR_INSUFFICIENT_BUFFER error and the "messageLengthUsed" parameter will be set to the number
-        /// of characters needed, including NULL terminator.
-        /// </param>
-        /// <param name="message">
-        /// Represents the output buffer to store the message in. It must be allocated/deallocated by the client.
-        /// The buffer must be big enough to store the message plus the NULL terminator otherwise an
-        /// ERROR_INSUFFICIENT_BUFFER error will be returned and the "messageLengthUsed" parameter will be set
-        /// to the number of characters needed, including NULL terminator. If NULL, then the "messageLength" parameter
-        /// must be NULL; in this case the function will return ERROR_INSUFFICIENT_BUFFER error and the "messageLengthUsed"
-        /// parameter will be set to the number of characters needed, including NULL terminator.
-        /// </param>
-        /// <param name="messageLengthUsed">
-        /// Represents the effective number of characters written to the output buffer, including the NULL terminator.
-        /// It cannot be NULL. If both "messageLength" and "message" parameters are 0, the function will return ERROR_INSUFFICIENT_BUFFER
-        /// and "messageLengthUsed" parameter will be set to the number of characters needed, including NULL terminator
-        /// </param>
         [DllImport(WSManNativeApi.WSManClientApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManGetErrorMessage(IntPtr wsManAPIHandle,
-            int flags,
-            string languageCode,
-            int errorCode,
-            int messageLength,
-            byte[] message,
-            out int messageLengthUsed);
+                    int flags,
+                    string languageCode,
+                    int errorCode,
+                    int messageLength,
+                    byte[] message,
+                    out int messageLengthUsed);
 
-        #endregion
-
-        #region DllImports PluginAPI
-
-        /// <summary>
-        /// Gets operational information for items such as time-outs and data restrictions that
-        /// are associated with the operation.
-        /// </summary>
-        /// <param name="requestDetails">Specifies the resource URI, options, locale, shutdown flag, and handle for the request.</param>
-        /// <param name="flags">Specifies the options that are available for retrieval.</param>
-        /// <param name="data">Specifies the result object (WSMAN_DATA).</param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManProviderApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManPluginGetOperationParameters(
-            IntPtr requestDetails,
-            int flags,
-            [In, Out, MarshalAs(UnmanagedType.LPStruct)] WSManDataStruct data);
-        // [In, Out] ref IntPtr data);
+                    IntPtr requestDetails,
+                    int flags,
+                    [In, Out, MarshalAs(UnmanagedType.LPStruct)] WSManDataStruct data);
 
-        /// <summary>
-        /// Reports the completion of an operation by all operation entry points except for the
-        /// WSManPluginStartup and WSManPluginShutdown methods.
-        /// </summary>
-        /// <param name="requestDetails">Specifies the resource URI, options, locale, shutdown flag, and handle for the request.</param>
-        /// <param name="flags"></param>
-        /// <param name="errorCode">Reports any failure in the operation. Terminates on non-NO_ERROR status.</param>
-        /// <param name="extendedInformation">XML document containing extra error information.</param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManProviderApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManPluginOperationComplete(
-            IntPtr requestDetails,
-            int flags,
-            int errorCode,
-            [MarshalAs(UnmanagedType.LPWStr)] string extendedInformation);
+                    IntPtr requestDetails,
+                    int flags,
+                    int errorCode,
+                    [MarshalAs(UnmanagedType.LPWStr)] string extendedInformation);
 
         internal enum WSManFlagReceive : int
         {
@@ -2928,62 +6659,116 @@ namespace System.Management.Automation.Remoting.Client
             WSMAN_FLAG_RECEIVE_RESULT_DATA_BOUNDARY = 4
         }
 
-        internal const string WSMAN_SHELL_NAMESPACE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell";
-        internal const string WSMAN_COMMAND_STATE_DONE = WSMAN_SHELL_NAMESPACE + "/CommandState/Done";
-        internal const string WSMAN_COMMAND_STATE_PENDING = WSMAN_SHELL_NAMESPACE + "/CommandState/Pending";
-        internal const string WSMAN_COMMAND_STATE_RUNNING = WSMAN_SHELL_NAMESPACE + "/CommandState/Running";
+        internal const string
+        WSMAN_SHELL_NAMESPACE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell"
+        ;
 
-        /// <summary>
-        /// Reports results for the WSMAN_PLUGIN_RECEIVE plug-in call and is used by most shell
-        /// plug-ins that return results. After all of the data is received, the
-        /// WSManPluginOperationComplete method must be called.
-        /// </summary>
-        /// <param name="requestDetails">Specifies the resource URI, options, locale, shutdown flag, and handle for the request.</param>
-        /// <param name="flags"></param>
-        /// <param name="stream">Specifies the stream that the data is associated with.</param>
-        /// <param name="streamResult">A pointer to a WSMAN_DATA structure that specifies the result object that is returned to the client.</param>
-        /// <param name="commandState">Specifies the state of the command. It must be set to a value specified by the plugin.</param>
-        /// <param name="exitCode">Only set when the commandState is terminating.</param>
-        /// <returns></returns>
+        internal const string
+        WSMAN_COMMAND_STATE_DONE = WSMAN_SHELL_NAMESPACE + "/CommandState/Done"
+        ;
+
+        internal const string
+        WSMAN_COMMAND_STATE_PENDING = WSMAN_SHELL_NAMESPACE + "/CommandState/Pending"
+        ;
+
+        internal const string
+        WSMAN_COMMAND_STATE_RUNNING = WSMAN_SHELL_NAMESPACE + "/CommandState/Running"
+        ;
+
         [DllImport(WSManNativeApi.WSManProviderApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManPluginReceiveResult(
-            IntPtr requestDetails,
-            int flags,
-            [MarshalAs(UnmanagedType.LPWStr)] string stream,
-            IntPtr streamResult,
-            [MarshalAs(UnmanagedType.LPWStr)] string commandState,
-            int exitCode);
+                    IntPtr requestDetails,
+                    int flags,
+                    [MarshalAs(UnmanagedType.LPWStr)] string stream,
+                    IntPtr streamResult,
+                    [MarshalAs(UnmanagedType.LPWStr)] string commandState,
+                    int exitCode);
 
-        /// <summary>
-        /// Reports shell and command context back to the Windows Remote Management (WinRM)
-        /// infrastructure so that further operations can be performed against the shell and/or
-        /// command. This method is called only for WSManPluginShell and WSManPluginCommand plug-in
-        /// entry points.
-        /// </summary>
-        /// <param name="requestDetails">Specifies the resource URI, options, locale, shutdown flag, and handle for the request.</param>
-        /// <param name="flags"></param>
-        /// <param name="context">Defines the value to pass into all future shell and command operations. Represents either the shell or the command.</param>
-        /// <returns></returns>
         [DllImport(WSManNativeApi.WSManProviderApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
         internal static extern int WSManPluginReportContext(
-            IntPtr requestDetails,
-            int flags,
-            IntPtr context);
-#if UNIX
-        /// <summary>
-        /// Registers the shutdown callback.
-        /// </summary>
-        /// <param name="requestDetails">Specifies the resource URI, options, locale, shutdown flag, and handle for the request.</param>
-        /// <param name="shutdownCallback">Callback to be executed on shutdown.</param>
-        /// <param name="shutdownContext"></param>
-        /// <returns></returns>
-        [DllImport(WSManNativeApi.WSManProviderApiDll, SetLastError = false, CharSet = CharSet.Unicode)]
-        internal static extern void WSManPluginRegisterShutdownCallback(
-            IntPtr requestDetails,
-            IntPtr shutdownCallback,
-            IntPtr shutdownContext);
-#endif
-        #endregion
+                    IntPtr requestDetails,
+                    int flags,
+                    IntPtr context);
+
+        static WSManNativeApi()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 334, 127305);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 407, 428);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 461, 496);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 529, 562);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 595, 644);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 677, 737);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 770, 803);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 836, 873);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 906, 937);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 970, 1033);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1066, 1095);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1128, 1155);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1199, 1238);
+            WSMAN_STACK_VERSION = f_1639_1221_1238(3, 0);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1268, 1308);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1385, 1428);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1505, 1548);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 1920, 1964);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 2320, 2366);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 2598, 2646);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 3280, 3329);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 3750, 3800);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 3832, 3861);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 3893, 3922);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 3954, 3991);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4023, 4058);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4090, 4128);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4160, 4200);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4232, 4273);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4305, 4337);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4369, 4405);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4437, 4488);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4520, 4562);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4594, 4642);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4674, 4722);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4754, 4803);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4835, 4887);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 4919, 4969);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5001, 5053);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5085, 5135);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5167, 5220);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5252, 5299);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5331, 5373);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5405, 5440);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5472, 5522);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5554, 5597);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5629, 5676);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5708, 5763);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5795, 5846);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5878, 5914);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 5946, 5996);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 6028, 6072);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 6104, 6147);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 6179, 6219);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 6251, 6289);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 94264, 94297);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 94330, 94365);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 123762, 123843);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 123876, 123947);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 123980, 124057);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 124090, 124167);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 334, 127305);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 334, 127305);
+        }
+
+
+        static System.Version
+        f_1639_1221_1238(int
+        major, int
+        minor)
+        {
+            var return_v = new System.Version(major, minor);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 1221, 1238);
+            return return_v;
+        }
+
     }
 
     /// <summary>
@@ -2993,87 +6778,232 @@ namespace System.Management.Automation.Remoting.Client
     /// </summary>
     internal interface IWSManNativeApiFacade
     {
-        // TODO: Expand this to cover the rest of the API once I prove that it works!
 
         int WSManPluginGetOperationParameters(
-            IntPtr requestDetails,
-            int flags,
-            WSManNativeApi.WSManDataStruct data);
+                    IntPtr requestDetails,
+                    int flags,
+                    WSManNativeApi.WSManDataStruct data);
 
         int WSManPluginOperationComplete(
-            IntPtr requestDetails,
-            int flags,
-            int errorCode,
-            string extendedInformation);
+                    IntPtr requestDetails,
+                    int flags,
+                    int errorCode,
+                    string extendedInformation);
 
         int WSManPluginReceiveResult(
-            IntPtr requestDetails,
-            int flags,
-            string stream,
-            IntPtr streamResult,
-            string commandState,
-            int exitCode);
+                    IntPtr requestDetails,
+                    int flags,
+                    string stream,
+                    IntPtr streamResult,
+                    string commandState,
+                    int exitCode);
 
         int WSManPluginReportContext(
-            IntPtr requestDetails,
-            int flags,
-            IntPtr context);
+                    IntPtr requestDetails,
+                    int flags,
+                    IntPtr context);
 
         void WSManPluginRegisterShutdownCallback(
-            IntPtr requestDetails,
-            IntPtr shutdownCallback,
-            IntPtr shutdownContext);
+                    IntPtr requestDetails,
+                    IntPtr shutdownCallback,
+                    IntPtr shutdownContext);
     }
-
-    /// <summary>
-    /// Concrete implementation of the PInvoke facade for use in the production code.
-    /// </summary>
     internal class WSManNativeApiFacade : IWSManNativeApiFacade
     {
         int IWSManNativeApiFacade.WSManPluginGetOperationParameters(
-            IntPtr requestDetails,
-            int flags,
-            WSManNativeApi.WSManDataStruct data)
+                    IntPtr requestDetails,
+                    int flags,
+                    WSManNativeApi.WSManDataStruct data)
         {
-            return WSManNativeApi.WSManPluginGetOperationParameters(requestDetails, flags, data);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 128746, 129037);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 128941, 129026);
+
+                return f_1639_128948_129025(requestDetails, flags, data);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 128746, 129037);
+
+                int
+                f_1639_128948_129025(System.IntPtr
+                requestDetails, int
+                flags, System.Management.Automation.Remoting.Client.WSManNativeApi.WSManDataStruct
+                data)
+                {
+                    var return_v = WSManNativeApi.WSManPluginGetOperationParameters(requestDetails, flags, data);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 128948, 129025);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 128746, 129037);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 128746, 129037);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         int IWSManNativeApiFacade.WSManPluginOperationComplete(
-            IntPtr requestDetails,
-            int flags,
-            int errorCode,
-            string extendedInformation)
+                    IntPtr requestDetails,
+                    int flags,
+                    int errorCode,
+                    string extendedInformation)
         {
-            return WSManNativeApi.WSManPluginOperationComplete(requestDetails, flags, errorCode, extendedInformation);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 129049, 129375);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 129258, 129364);
+
+                return f_1639_129265_129363(requestDetails, flags, errorCode, extendedInformation);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 129049, 129375);
+
+                int
+                f_1639_129265_129363(System.IntPtr
+                requestDetails, int
+                flags, int
+                errorCode, string
+                extendedInformation)
+                {
+                    var return_v = WSManNativeApi.WSManPluginOperationComplete(requestDetails, flags, errorCode, extendedInformation);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 129265, 129363);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 129049, 129375);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 129049, 129375);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         int IWSManNativeApiFacade.WSManPluginReceiveResult(
-            IntPtr requestDetails,
-            int flags,
-            string stream,
-            IntPtr streamResult,
-            string commandState,
-            int exitCode)
+                    IntPtr requestDetails,
+                    int flags,
+                    string stream,
+                    IntPtr streamResult,
+                    string commandState,
+                    int exitCode)
         {
-            return WSManNativeApi.WSManPluginReceiveResult(requestDetails, flags, stream, streamResult, commandState, exitCode);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 129387, 129773);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 129646, 129762);
+
+                return f_1639_129653_129761(requestDetails, flags, stream, streamResult, commandState, exitCode);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 129387, 129773);
+
+                int
+                f_1639_129653_129761(System.IntPtr
+                requestDetails, int
+                flags, string
+                stream, System.IntPtr
+                streamResult, string
+                commandState, int
+                exitCode)
+                {
+                    var return_v = WSManNativeApi.WSManPluginReceiveResult(requestDetails, flags, stream, streamResult, commandState, exitCode);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 129653, 129761);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 129387, 129773);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 129387, 129773);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         int IWSManNativeApiFacade.WSManPluginReportContext(
-            IntPtr requestDetails,
-            int flags,
-            IntPtr context)
+                    IntPtr requestDetails,
+                    int flags,
+                    IntPtr context)
         {
-            return WSManNativeApi.WSManPluginReportContext(requestDetails, flags, context);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 129785, 130040);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1639, 129950, 130029);
+
+                return f_1639_129957_130028(requestDetails, flags, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 129785, 130040);
+
+                int
+                f_1639_129957_130028(System.IntPtr
+                requestDetails, int
+                flags, System.IntPtr
+                context)
+                {
+                    var return_v = WSManNativeApi.WSManPluginReportContext(requestDetails, flags, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1639, 129957, 130028);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 129785, 130040);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 129785, 130040);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         void IWSManNativeApiFacade.WSManPluginRegisterShutdownCallback(
-            IntPtr requestDetails,
-            IntPtr shutdownCallback,
-            IntPtr shutdownContext)
+                    IntPtr requestDetails,
+                    IntPtr shutdownCallback,
+                    IntPtr shutdownContext)
         {
-#if UNIX
-            WSManNativeApi.WSManPluginRegisterShutdownCallback(requestDetails, shutdownCallback, shutdownContext);
-#endif
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1639, 130052, 130382);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1639, 130052, 130382);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1639, 130052, 130382);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 130052, 130382);
+            }
         }
+
+        public WSManNativeApiFacade()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1639, 128670, 130389);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1639, 128670, 130389);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 128670, 130389);
+        }
+
+
+        static WSManNativeApiFacade()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1639, 128670, 130389);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1639, 128670, 130389);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1639, 128670, 130389);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1639, 128670, 130389);
     }
 }

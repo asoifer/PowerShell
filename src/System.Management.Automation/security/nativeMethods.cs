@@ -13,138 +13,169 @@ using BOOL = System.UInt32;
 
 namespace System.Management.Automation.Security
 {
-    // Crypto API native constants
-    internal partial class NativeConstants
-    {
-        internal const int CRYPT_OID_INFO_OID_KEY = 1;
-        internal const int CRYPT_OID_INFO_NAME_KEY = 2;
-        internal const int CRYPT_OID_INFO_CNG_ALGID_KEY = 5;
-    }
+internal partial class NativeConstants
+{
+internal const int 
+CRYPT_OID_INFO_OID_KEY = 1
+;
 
-    // Safer native constants
-    internal partial class NativeConstants
-    {
-        /// <Summary>
-        /// SAFER_TOKEN_NULL_IF_EQUAL -> 0x00000001.
-        /// </Summary>
-        public const int SAFER_TOKEN_NULL_IF_EQUAL = 1;
+internal const int 
+CRYPT_OID_INFO_NAME_KEY = 2
+;
 
-        /// <Summary>
-        /// SAFER_TOKEN_COMPARE_ONLY -> 0x00000002.
-        /// </Summary>
-        public const int SAFER_TOKEN_COMPARE_ONLY = 2;
+internal const int 
+CRYPT_OID_INFO_CNG_ALGID_KEY = 5
+;
 
-        /// <Summary>
-        /// SAFER_TOKEN_MAKE_INERT -> 0x00000004.
-        /// </Summary>
-        public const int SAFER_TOKEN_MAKE_INERT = 4;
+public NativeConstants()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1225,505,732);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1225,505,732);
 
-        /// <Summary>
-        /// SAFER_CRITERIA_IMAGEPATH -> 0x00001.
-        /// </Summary>
-        public const int SAFER_CRITERIA_IMAGEPATH = 1;
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,505,732);
+}
 
-        /// <Summary>
-        /// SAFER_CRITERIA_NOSIGNEDHASH -> 0x00002.
-        /// </Summary>
-        public const int SAFER_CRITERIA_NOSIGNEDHASH = 2;
 
-        /// <Summary>
-        /// SAFER_CRITERIA_IMAGEHASH -> 0x00004.
-        /// </Summary>
-        public const int SAFER_CRITERIA_IMAGEHASH = 4;
+static NativeConstants()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,505,732);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,579,605);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,635,662);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,692,724);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,944,973);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,1103,1131);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,1259,1285);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,1412,1440);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,1570,1601);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,1728,1756);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,1886,1917);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2042,2069);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2199,2233);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2347,2362);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2474,2482);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2597,2608);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2723,2744);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,2876,2914);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,3057,3106);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,3223,3247);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,3371,3399);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,3533,3588);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,3715,3747);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,3868,3894);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,4003,4017);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,4156,4184);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69690,69716);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69797,69827);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69911,69945);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70030,70060);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70143,70171);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70256,70286);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70376,70415);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70508,70550);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70643,70685);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70772,70809);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,70900,70941);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,71029,71067);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,505,732);
 
-        /// <Summary>
-        /// SAFER_CRITERIA_AUTHENTICODE -> 0x00008.
-        /// </Summary>
-        public const int SAFER_CRITERIA_AUTHENTICODE = 8;
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,505,732);
+}
 
-        /// <Summary>
-        /// SAFER_CRITERIA_URLZONE -> 0x00010.
-        /// </Summary>
-        public const int SAFER_CRITERIA_URLZONE = 16;
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1225,505,732);
+}
+internal partial class NativeConstants
+{
+public const int 
+SAFER_TOKEN_NULL_IF_EQUAL = 1
+;
 
-        /// <Summary>
-        /// SAFER_CRITERIA_IMAGEPATH_NT -> 0x01000.
-        /// </Summary>
-        public const int SAFER_CRITERIA_IMAGEPATH_NT = 4096;
+public const int 
+SAFER_TOKEN_COMPARE_ONLY = 2
+;
 
-        /// <Summary>
-        /// WTD_UI_NONE -> 0x00002.
-        /// </Summary>
-        public const int WTD_UI_NONE = 2;
+public const int 
+SAFER_TOKEN_MAKE_INERT = 4
+;
 
-        /// <Summary>
-        /// S_OK -> ((HRESULT)0L)
-        /// </Summary>
-        public const int S_OK = 0;
+public const int 
+SAFER_CRITERIA_IMAGEPATH = 1
+;
 
-        /// <Summary>
-        /// S_FALSE -> ((HRESULT)1L)
-        /// </Summary>
-        public const int S_FALSE = 1;
+public const int 
+SAFER_CRITERIA_NOSIGNEDHASH = 2
+;
 
-        /// <Summary>
-        /// ERROR_MORE_DATA -> 234L.
-        /// </Summary>
-        public const int ERROR_MORE_DATA = 234;
+public const int 
+SAFER_CRITERIA_IMAGEHASH = 4
+;
 
-        /// <Summary>
-        /// ERROR_ACCESS_DISABLED_BY_POLICY -> 1260L.
-        /// </Summary>
-        public const int ERROR_ACCESS_DISABLED_BY_POLICY = 1260;
+public const int 
+SAFER_CRITERIA_AUTHENTICODE = 8
+;
 
-        /// <Summary>
-        /// ERROR_ACCESS_DISABLED_NO_SAFER_UI_BY_POLICY -> 786L.
-        /// </Summary>
-        public const int ERROR_ACCESS_DISABLED_NO_SAFER_UI_BY_POLICY = 786;
+public const int 
+SAFER_CRITERIA_URLZONE = 16
+;
 
-        /// <Summary>
-        /// SAFER_MAX_HASH_SIZE -> 64.
-        /// </Summary>
-        public const int SAFER_MAX_HASH_SIZE = 64;
+public const int 
+SAFER_CRITERIA_IMAGEPATH_NT = 4096
+;
 
-        /// <Summary>
-        /// SRP_POLICY_SCRIPT -> L"SCRIPT"
-        /// </Summary>
-        public const string SRP_POLICY_SCRIPT = "SCRIPT";
+public const int 
+WTD_UI_NONE = 2
+;
 
-        /// <Summary>
-        /// SIGNATURE_DISPLAYNAME_LENGTH -> MAX_PATH.
-        /// </Summary>
-        internal const int SIGNATURE_DISPLAYNAME_LENGTH = NativeConstants.MAX_PATH;
+public const int 
+S_OK = 0
+;
 
-        /// <Summary>
-        /// SIGNATURE_PUBLISHER_LENGTH -> 128.
-        /// </Summary>
-        internal const int SIGNATURE_PUBLISHER_LENGTH = 128;
+public const int 
+S_FALSE = 1
+;
 
-        /// <Summary>
-        /// SIGNATURE_HASH_LENGTH -> 64.
-        /// </Summary>
-        internal const int SIGNATURE_HASH_LENGTH = 64;
+public const int 
+ERROR_MORE_DATA = 234
+;
 
-        /// <Summary>
-        /// MAX_PATH -> 260.
-        /// </Summary>
-        internal const int MAX_PATH = 260;
+public const int 
+ERROR_ACCESS_DISABLED_BY_POLICY = 1260
+;
 
-        /// <Summary>
-        /// This function is not supported on this system.
-        /// </Summary>
-        internal const int FUNCTION_NOT_SUPPORTED = 120;
-    }
+public const int 
+ERROR_ACCESS_DISABLED_NO_SAFER_UI_BY_POLICY = 786
+;
 
-    /// <summary>
-    /// Pinvoke methods from crypt32.dll.
-    /// </summary>
-    internal static partial class NativeMethods
-    {
-        // -------------------------------------------------------------------
-        // crypt32.dll stuff
-        //
+public const int 
+SAFER_MAX_HASH_SIZE = 64
+;
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+public const string 
+SRP_POLICY_SCRIPT = "SCRIPT"
+;
+
+internal const int 
+SIGNATURE_DISPLAYNAME_LENGTH = NativeConstants.MAX_PATH
+;
+
+internal const int 
+SIGNATURE_PUBLISHER_LENGTH = 128
+;
+
+internal const int 
+SIGNATURE_HASH_LENGTH = 64
+;
+
+internal const int 
+MAX_PATH = 260
+;
+
+internal const int 
+FUNCTION_NOT_SUPPORTED = 120
+;
+}
+internal static partial class NativeMethods
+{
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertEnumSystemStore(CertStoreFlags Flags,
                                  IntPtr notUsed1,
@@ -162,18 +193,12 @@ namespace System.Management.Automation.Security
                                                IntPtr notUsed2,
                                                IntPtr notUsed3);
 
-        /// <summary>
-        /// Signature of cert enumeration function.
-        /// </summary>
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         IntPtr CertEnumCertificatesInStore(IntPtr storeHandle,
                                             IntPtr certContext);
 
-        /// <summary>
-        /// Signature of cert find function.
-        /// </summary>
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         IntPtr CertFindCertificateInStore(
             IntPtr hCertStore,
@@ -181,7 +206,7 @@ namespace System.Management.Automation.Security
             DWORD dwFindFlags,                  // 0
             Security.NativeMethods.CertFindType dwFindType,
             [MarshalAs(UnmanagedType.LPWStr)] string pvFindPara,
-            IntPtr notUsed1);                   // pPrevCertContext
+            IntPtr notUsed1);
 
         [Flags]
         internal enum CertFindType
@@ -194,7 +219,7 @@ namespace System.Management.Automation.Security
             CERT_FIND_HASH_STR = 20 << 16,        // thumbprint
         }
 
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertCloseStore(IntPtr hCertStore, int dwFlags);
@@ -212,14 +237,14 @@ namespace System.Management.Automation.Security
             CERT_SYSTEM_STORE_LOCAL_MACHINE_ENTERPRISE = 9 << 16,
         }
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertGetEnhancedKeyUsage(IntPtr pCertContext, // PCCERT_CONTEXT
                                       DWORD dwFlags,
                                       IntPtr pUsage,       // PCERT_ENHKEY_USAGE
-                                      out int pcbUsage);  // DWORD*
+                                      out int pcbUsage);
 
-        [DllImport("Crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("Crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         IntPtr CertOpenStore(CertOpenStoreProvider storeProvider,
                               CertOpenStoreEncodingType dwEncodingType,
@@ -271,7 +296,7 @@ namespace System.Management.Automation.Security
             X509_ASN_ENCODING = 0x00000001,
         }
 
-        [DllImport("Crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("Crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertControlStore(
                         IntPtr hCertStore,
@@ -414,88 +439,73 @@ namespace System.Management.Automation.Security
             INTEL_SEC = 22
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct CRYPT_KEY_PROV_INFO
         {
-            /// <summary>
-            /// String naming a key container within a particular CSP.
-            /// </summary>
-            public string pwszContainerName;
 
-            /// <summary>
-            /// String that names a CSP.
-            /// </summary>
-            public string pwszProvName;
+public string pwszContainerName;
 
-            /// <summary>
-            /// CSP type.
-            /// </summary>
-            public PROV dwProvType;
+public string pwszProvName;
 
-            /// <summary>
-            /// Flags value indicating whether a key container is to be created or destroyed, and
-            /// whether an application is allowed access to a key container.
-            /// </summary>
-            public uint dwFlags;
+public PROV dwProvType;
 
-            /// <summary>
-            /// Number of elements in the rgProvParam array.
-            /// </summary>
-            public uint cProvParam;
+public uint dwFlags;
 
-            /// <summary>
-            /// Array of pointers to CRYPT_KEY_PROV_PARAM structures.
-            /// </summary>
-            public IntPtr rgProvParam;
+public uint cProvParam;
 
-            /// <summary>
-            /// The specification of the private key to retrieve. AT_KEYEXCHANGE and AT_SIGNATURE
-            /// are defined for the default provider.
-            /// </summary>
-            public uint dwKeySpec;
+public IntPtr rgProvParam;
+
+public uint dwKeySpec;
+static CRYPT_KEY_PROV_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,14497,15901);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,14497,15901);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,14497,15901);
+}
         }
 
-        internal const string NCRYPT_WINDOW_HANDLE_PROPERTY = "HWND Handle";
+internal const string 
+NCRYPT_WINDOW_HANDLE_PROPERTY = "HWND Handle"
+;
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertDeleteCertificateFromStore(IntPtr pCertContext);
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         IntPtr CertDuplicateCertificateContext(IntPtr pCertContext);
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertAddCertificateContextToStore(IntPtr hCertStore,
                                               IntPtr pCertContext,
                                               DWORD dwAddDisposition,
                                               ref IntPtr ppStoreContext);
 
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+[ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertFreeCertificateContext(IntPtr certContext);
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertGetCertificateContextProperty(IntPtr pCertContext,
                                                CertPropertyId dwPropId,
                                                IntPtr pvData,
                                                ref int pcbData);
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CertSetCertificateContextProperty(IntPtr pCertContext,
                                                CertPropertyId dwPropId,
                                                DWORD dwFlags,
                                                IntPtr pvData);
 
-        [DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("crypt32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         IntPtr CryptFindLocalizedName(string pwszCryptName);
 
-        [DllImport(PinvokeDllNames.CryptAcquireContextDllName, SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport(PinvokeDllNames.CryptAcquireContextDllName, SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CryptAcquireContext(ref IntPtr hProv,
                                  string strContainerName,
@@ -503,49 +513,42 @@ namespace System.Management.Automation.Security
                                  int nProviderType,
                                  uint uiProviderFlags);
 
-        [DllImport(PinvokeDllNames.CryptReleaseContextDllName, SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport(PinvokeDllNames.CryptReleaseContextDllName, SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CryptReleaseContext(IntPtr hProv, int dwFlags);
 
-        [DllImport(PinvokeDllNames.CryptSetProvParamDllName, SetLastError = true)]
+[DllImport(PinvokeDllNames.CryptSetProvParamDllName, SetLastError = true)]
         internal static extern unsafe
         bool CryptSetProvParam(IntPtr hProv, ProviderParam dwParam, void* pbData, int dwFlags);
 
-        [DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
+[DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
         internal static extern
         int NCryptOpenStorageProvider(ref IntPtr hProv,
                                       string strProviderName,
                                       uint dwFlags);
 
-        [DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
+[DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
         internal static extern
         int NCryptOpenKey(IntPtr hProv,
                           ref IntPtr hKey,
                           string strKeyName,
                           uint dwLegacySpec,
                           uint dwFlags);
-        [DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
+
+[DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
         internal static extern unsafe
         int NCryptSetProperty(IntPtr hProv, string pszProperty, void* pbInput, int cbInput, int dwFlags);
 
-        [DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
+[DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
         internal static extern
         int NCryptDeleteKey(IntPtr hKey,
                             uint dwFlags);
 
-        [DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
+[DllImport("ncrypt.dll", CharSet = CharSet.Unicode)]
         internal static extern
         int NCryptFreeObject(IntPtr hObject);
 
-        // -----------------------------------------------------------------
-        // cryptUI.dll stuff
-        //
-
-        //
-        // CryptUIWizDigitalSign() function and associated structures/enums
-        //
-
-        [DllImport("cryptUI.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("cryptUI.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         bool CryptUIWizDigitalSign(DWORD dwFlags,
                                    IntPtr hwndParentNotUsed,
@@ -560,19 +563,32 @@ namespace System.Management.Automation.Security
             // other flags not used
         };
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPTUI_WIZ_DIGITAL_SIGN_INFO
         {
-            internal DWORD dwSize;
-            internal DWORD dwSubjectChoice;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+internal DWORD dwSize;
+
+internal DWORD dwSubjectChoice;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszFileName;
-            internal DWORD dwSigningCertChoice;
-            internal IntPtr pSigningCertContext; // PCCERT_CONTEXT
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+internal DWORD dwSigningCertChoice;
+
+internal IntPtr pSigningCertContext;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszTimestampURL;
-            internal DWORD dwAdditionalCertChoice;
-            internal IntPtr pSignExtInfo; // PCCRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+
+internal DWORD dwAdditionalCertChoice;
+
+internal IntPtr pSignExtInfo;
+static CRYPTUI_WIZ_DIGITAL_SIGN_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,20757,21393);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,20757,21393);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,20757,21393);
+}
         };
 
         [Flags]
@@ -597,192 +613,451 @@ namespace System.Management.Automation.Security
             CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT = 2
         };
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
         {
-            internal DWORD dwSize;
-            internal DWORD dwAttrFlagsNotUsed;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+internal DWORD dwSize;
+
+internal DWORD dwAttrFlagsNotUsed;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszDescription;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszMoreInfoLocation;
-            [MarshalAs(UnmanagedType.LPStr)]
+
+[MarshalAs(UnmanagedType.LPStr)]
             internal string pszHashAlg;
 
-            internal IntPtr pwszSigningCertDisplayStringNotUsed; // LPCWSTR
-            internal IntPtr hAdditionalCertStoreNotUsed; // HCERTSTORE
-            internal IntPtr psAuthenticatedNotUsed;      // PCRYPT_ATTRIBUTES
-            internal IntPtr psUnauthenticatedNotUsed;    // PCRYPT_ATTRIBUTES
+internal IntPtr pwszSigningCertDisplayStringNotUsed;
+
+internal IntPtr hAdditionalCertStoreNotUsed;
+
+internal IntPtr psAuthenticatedNotUsed;
+
+internal IntPtr psUnauthenticatedNotUsed;
+static CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,22084,22879);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,22084,22879);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,22084,22879);
+}
         };
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
             InitSignInfoExtendedStruct(string description,
                                        string moreInfoUrl,
                                        string hashAlgorithm)
+		{
+			try
         {
-            CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO siex =
-                new CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO();
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,22891,23938);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23185,23293);
 
-            siex.dwSize = (DWORD)Marshal.SizeOf(siex);
-            siex.dwAttrFlagsNotUsed = 0;
-            siex.pwszDescription = description;
-            siex.pwszMoreInfoLocation = moreInfoUrl;
-            siex.pszHashAlg = null;
-            siex.pwszSigningCertDisplayStringNotUsed = IntPtr.Zero;
-            siex.hAdditionalCertStoreNotUsed = IntPtr.Zero;
-            siex.psAuthenticatedNotUsed = IntPtr.Zero;
-            siex.psUnauthenticatedNotUsed = IntPtr.Zero;
+CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO 
+siex =
+f_1225_23248_23292()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23309,23351);
 
-            if (hashAlgorithm != null)
-            {
-                siex.pszHashAlg = hashAlgorithm;
-            }
+siex.dwSize = (DWORD)f_1225_23330_23350(siex);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23365,23393);
 
-            return siex;
+siex.dwAttrFlagsNotUsed = 0;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23407,23442);
+
+siex.pwszDescription = description;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23456,23496);
+
+siex.pwszMoreInfoLocation = moreInfoUrl;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23510,23533);
+
+siex.pszHashAlg = null;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23547,23602);
+
+siex.pwszSigningCertDisplayStringNotUsed = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23616,23663);
+
+siex.hAdditionalCertStoreNotUsed = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23677,23719);
+
+siex.psAuthenticatedNotUsed = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23733,23777);
+
+siex.psUnauthenticatedNotUsed = IntPtr.Zero;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23793,23899) || true) && (hashAlgorithm != null)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,23793,23899);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23852,23884);
+
+siex.pszHashAlg = hashAlgorithm;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,23793,23899);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,23915,23927);
+
+return siex;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,22891,23938);
+
+System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+f_1225_23248_23292()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 23248, 23292);
+return return_v;
+}
+
+
+int
+f_1225_23330_23350(System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 23330, 23350);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,22891,23938);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,22891,23938);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_OID_INFO
         {
-            /// DWORD->unsigned int
-            public uint cbSize;
 
-            /// LPCSTR->CHAR*
-            [MarshalAsAttribute(UnmanagedType.LPStr)]
+public uint cbSize;
+
+[MarshalAsAttribute(UnmanagedType.LPStr)]
             public string pszOID;
 
-            /// LPCWSTR->WCHAR*
-            [MarshalAsAttribute(UnmanagedType.LPWStr)]
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
             public string pwszName;
 
-            /// DWORD->unsigned int
-            public uint dwGroupId;
+public uint dwGroupId;
 
-            /// Anonymous_a3ae7823_8a1d_432c_bc07_a72b6fc6c7d8
-            public Anonymous_a3ae7823_8a1d_432c_bc07_a72b6fc6c7d8 Union1;
+public Anonymous_a3ae7823_8a1d_432c_bc07_a72b6fc6c7d8 Union1;
 
-            /// CRYPT_DATA_BLOB->_CRYPTOAPI_BLOB
-            public CRYPT_ATTR_BLOB ExtraInfo;
+public CRYPT_ATTR_BLOB ExtraInfo;
+static CRYPT_OID_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,23950,24685);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,23950,24685);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,23950,24685);
+}
         }
 
-        [StructLayout(LayoutKind.Explicit)]
+[StructLayout(LayoutKind.Explicit)]
         internal struct Anonymous_a3ae7823_8a1d_432c_bc07_a72b6fc6c7d8
         {
-            /// DWORD->unsigned int
-            [FieldOffset(0)]
+
+[FieldOffset(0)]
             public uint dwValue;
 
-            /// ALG_ID->unsigned int
-            [FieldOffset(0)]
+[FieldOffset(0)]
             public uint Algid;
 
-            /// DWORD->unsigned int
-            [FieldOffset(0)]
+[FieldOffset(0)]
             public uint dwLength;
+static Anonymous_a3ae7823_8a1d_432c_bc07_a72b6fc6c7d8(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,24697,25133);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,24697,25133);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,24697,25133);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_ATTR_BLOB
         {
-            /// DWORD->unsigned int
-            public uint cbData;
 
-            /// BYTE*
-            public System.IntPtr pbData;
+public uint cbData;
+
+public System.IntPtr pbData;
+static CRYPT_ATTR_BLOB(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,25145,25382);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,25145,25382);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,25145,25382);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_DATA_BLOB
         {
-            /// DWORD->unsigned int
-            public uint cbData;
 
-            /// BYTE*
-            public System.IntPtr pbData;
+public uint cbData;
+
+public System.IntPtr pbData;
+static CRYPT_DATA_BLOB(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,25394,25631);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,25394,25631);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,25394,25631);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CERT_CONTEXT
         {
-            public int dwCertEncodingType;
-            public IntPtr pbCertEncoded;
-            public int cbCertEncoded;
-            public IntPtr pCertInfo;
-            public IntPtr hCertStore;
+
+public int dwCertEncodingType;
+
+public IntPtr pbCertEncoded;
+
+public int cbCertEncoded;
+
+public IntPtr pCertInfo;
+
+public IntPtr hCertStore;
+static CERT_CONTEXT(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,25643,25942);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,25643,25942);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,25643,25942);
+}
         }
 
-        // Return the OID info for a given algorithm
-        [DllImport("crypt32.dll", EntryPoint = "CryptFindOIDInfo")]
+[DllImport("crypt32.dll", EntryPoint = "CryptFindOIDInfo")]
         internal static extern IntPtr CryptFindOIDInfo(
             uint dwKeyType,
             System.IntPtr pvKey,
             uint dwGroupId);
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static DWORD GetCertChoiceFromSigningOption(
             SigningOption option)
+		{
+			try
         {
-            DWORD cc = 0;
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,26229,27157);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,26375,26388);
 
-            switch (option)
+DWORD 
+cc = 0
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,26404,27120);
+
+switch (option)
             {
-                case SigningOption.AddOnlyCertificate:
-                    cc = 0;
-                    break;
 
-                case SigningOption.AddFullCertificateChain:
-                    cc = (DWORD)SignInfoAdditionalCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN;
-                    break;
+case SigningOption.AddOnlyCertificate:
+DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,26404,27120);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,26512,26519);
 
-                case SigningOption.AddFullCertificateChainExceptRoot:
-                    cc = (DWORD)SignInfoAdditionalCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT;
-                    break;
+cc = 0;
+DynAbs.Tracing.TraceSender.TraceBreak(1225,26541,26547);
 
-                default:
-                    cc = (DWORD)SignInfoAdditionalCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT;
-                    break;
+break;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,26404,27120);
+
+case SigningOption.AddFullCertificateChain:
+DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,26404,27120);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,26632,26708);
+
+cc = (DWORD)SignInfoAdditionalCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN;
+DynAbs.Tracing.TraceSender.TraceBreak(1225,26730,26736);
+
+break;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,26404,27120);
+
+case SigningOption.AddFullCertificateChainExceptRoot:
+DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,26404,27120);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,26831,26915);
+
+cc = (DWORD)SignInfoAdditionalCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT;
+DynAbs.Tracing.TraceSender.TraceBreak(1225,26937,26943);
+
+break;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,26404,27120);
+
+default:
+DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,26404,27120);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,26993,27077);
+
+cc = (DWORD)SignInfoAdditionalCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT;
+DynAbs.Tracing.TraceSender.TraceBreak(1225,27099,27105);
+
+break;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,26404,27120);
             }
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27136,27146);
 
-            return cc;
+return cc;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,26229,27157);
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,26229,27157);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,26229,27157);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static CRYPTUI_WIZ_DIGITAL_SIGN_INFO
             InitSignInfoStruct(string fileName,
                                X509Certificate2 signingCert,
                                string timeStampServerUrl,
                                string hashAlgorithm,
                                SigningOption option)
+		{
+			try
         {
-            CRYPTUI_WIZ_DIGITAL_SIGN_INFO si = new CRYPTUI_WIZ_DIGITAL_SIGN_INFO();
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,27169,28480);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27550,27621);
 
-            si.dwSize = (DWORD)Marshal.SizeOf(si);
-            si.dwSubjectChoice = (DWORD)SignInfoSubjectChoice.CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE;
-            si.pwszFileName = fileName;
-            si.dwSigningCertChoice = (DWORD)SignInfoCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_CERT;
-            si.pSigningCertContext = signingCert.Handle;
-            si.pwszTimestampURL = timeStampServerUrl;
-            si.dwAdditionalCertChoice = GetCertChoiceFromSigningOption(option);
+CRYPTUI_WIZ_DIGITAL_SIGN_INFO 
+si = f_1225_27585_27620()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27637,27675);
 
-            CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO siex =
-                InitSignInfoExtendedStruct(string.Empty, string.Empty, hashAlgorithm);
-            IntPtr pSiexBuffer = Marshal.AllocCoTaskMem(Marshal.SizeOf(siex));
-            Marshal.StructureToPtr(siex, pSiexBuffer, false);
-            si.pSignExtInfo = pSiexBuffer;
+si.dwSize = (DWORD)f_1225_27656_27674(si);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27689,27777);
 
-            return si;
+si.dwSubjectChoice = (DWORD)SignInfoSubjectChoice.CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27791,27818);
+
+si.pwszFileName = fileName;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27832,27913);
+
+si.dwSigningCertChoice = (DWORD)SignInfoCertChoice.CRYPTUI_WIZ_DIGITAL_SIGN_CERT;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27927,27971);
+
+si.pSigningCertContext = f_1225_27952_27970(signingCert);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,27985,28026);
+
+si.pwszTimestampURL = timeStampServerUrl;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,28040,28107);
+
+si.dwAdditionalCertChoice = f_1225_28068_28106(option);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,28123,28256);
+
+CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO 
+siex =
+f_1225_28186_28255(string.Empty, string.Empty, hashAlgorithm)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,28270,28336);
+
+IntPtr 
+pSiexBuffer = f_1225_28291_28335(f_1225_28314_28334(siex))
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,28350,28399);
+
+f_1225_28350_28398(siex, pSiexBuffer, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,28413,28443);
+
+si.pSignExtInfo = pSiexBuffer;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,28459,28469);
+
+return si;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,27169,28480);
+
+System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_INFO
+f_1225_27585_27620()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_INFO();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 27585, 27620);
+return return_v;
+}
+
+
+int
+f_1225_27656_27674(System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 27656, 27674);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_27952_27970(System.Security.Cryptography.X509Certificates.X509Certificate2
+this_param)
+{
+var return_v = this_param.Handle;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1225, 27952, 27970);
+return return_v;
+}
+
+
+uint
+f_1225_28068_28106(System.Management.Automation.SigningOption
+option)
+{
+var return_v = GetCertChoiceFromSigningOption( option);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 28068, 28106);
+return return_v;
+}
+
+
+System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+f_1225_28186_28255(string
+description,string
+moreInfoUrl,string
+hashAlgorithm)
+{
+var return_v = InitSignInfoExtendedStruct( description, moreInfoUrl, hashAlgorithm);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 28186, 28255);
+return return_v;
+}
+
+
+int
+f_1225_28314_28334(System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 28314, 28334);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_28291_28335(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 28291, 28335);
+return return_v;
+}
+
+
+int
+f_1225_28350_28398(System.Management.Automation.Security.NativeMethods.CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 28350, 28398);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,27169,28480);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,27169,28480);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        // -----------------------------------------------------------------
-        // wintrust.dll stuff
-        //
-
-        //
-        // WinVerifyTrust() function and associated structures/enums
-        //
-
-        [DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
         DWORD WinVerifyTrust(
             IntPtr hWndNotUsed, // HWND
@@ -790,93 +1065,280 @@ namespace System.Management.Automation.Security
             IntPtr pWinTrustData // WINTRUST_DATA*
         );
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct WINTRUST_FILE_INFO
         {
-            internal DWORD cbStruct;               // = sizeof(WINTRUST_FILE_INFO)
-            [MarshalAs(UnmanagedType.LPWStr)]
-            internal string pcwszFilePath;         // LPCWSTR
-            internal IntPtr hFileNotUsed;          // optional, HANDLE to pcwszFilePath
-            internal IntPtr pgKnownSubjectNotUsed; // optional: GUID* : fill if the
+
+internal DWORD cbStruct;
+
+[MarshalAs(UnmanagedType.LPWStr)]
+            internal string pcwszFilePath;
+
+internal IntPtr hFileNotUsed;
+
+internal IntPtr pgKnownSubjectNotUsed;
+static WINTRUST_FILE_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,29007,29556);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,29007,29556);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,29007,29556);
+}
                                                    // subject type is known
         };
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct WINTRUST_BLOB_INFO
         {
-            /// DWORD->unsigned int
-            internal uint cbStruct;
 
-            /// GUID->_GUID
-            internal GUID gSubject;
+internal uint cbStruct;
 
-            /// LPCWSTR->WCHAR*
-            [MarshalAsAttribute(UnmanagedType.LPWStr)]
+internal GUID gSubject;
+
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
             internal string pcwszDisplayName;
 
-            /// DWORD->unsigned int
-            internal uint cbMemObject;
+internal uint cbMemObject;
 
-            /// BYTE*
-            internal System.IntPtr pbMemObject;
+internal System.IntPtr pbMemObject;
 
-            /// DWORD->unsigned int
-            internal uint cbMemSignedMsg;
+internal uint cbMemSignedMsg;
 
-            /// BYTE*
-            internal System.IntPtr pbMemSignedMsg;
+internal System.IntPtr pbMemSignedMsg;
+static WINTRUST_BLOB_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,29568,30272);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,29568,30272);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,29568,30272);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+[StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         internal struct GUID
         {
-            /// unsigned int
-            internal uint Data1;
 
-            /// unsigned short
-            internal ushort Data2;
+internal uint Data1;
 
-            /// unsigned short
-            internal ushort Data3;
+internal ushort Data2;
 
-            /// unsigned char[8]
-            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+internal ushort Data3;
+
+[MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
             internal byte[] Data4;
+static GUID(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,30284,30748);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,30284,30748);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,30284,30748);
+}
         }
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static WINTRUST_FILE_INFO InitWintrustFileInfoStruct(string fileName)
+		{
+			try
         {
-            WINTRUST_FILE_INFO fi = new WINTRUST_FILE_INFO();
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,30760,31177);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,30896,30945);
 
-            fi.cbStruct = (DWORD)Marshal.SizeOf(fi);
-            fi.pcwszFilePath = fileName;
-            fi.hFileNotUsed = IntPtr.Zero;
-            fi.pgKnownSubjectNotUsed = IntPtr.Zero;
+WINTRUST_FILE_INFO 
+fi = f_1225_30920_30944()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,30961,31001);
 
-            return fi;
+fi.cbStruct = (DWORD)f_1225_30982_31000(fi);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31015,31043);
+
+fi.pcwszFilePath = fileName;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31057,31087);
+
+fi.hFileNotUsed = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31101,31140);
+
+fi.pgKnownSubjectNotUsed = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31156,31166);
+
+return fi;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,30760,31177);
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_FILE_INFO
+f_1225_30920_30944()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.WINTRUST_FILE_INFO();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 30920, 30944);
+return return_v;
+}
+
+
+int
+f_1225_30982_31000(System.Management.Automation.Security.NativeMethods.WINTRUST_FILE_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 30982, 31000);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,30760,31177);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,30760,31177);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static WINTRUST_BLOB_INFO InitWintrustBlobInfoStruct(string fileName, string content)
+		{
+			try
         {
-            WINTRUST_BLOB_INFO bi = new WINTRUST_BLOB_INFO();
-            byte[] contentBytes = System.Text.Encoding.Unicode.GetBytes(content);
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,31189,32096);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31341,31390);
 
-            // The GUID of the PowerShell SIP
-            bi.gSubject.Data1 = 0x603bcc1f;
-            bi.gSubject.Data2 = 0x4b59;
-            bi.gSubject.Data3 = 0x4e08;
-            bi.gSubject.Data4 = new byte[] { 0xb7, 0x24, 0xd2, 0xc6, 0x29, 0x7e, 0xf3, 0x51 };
+WINTRUST_BLOB_INFO 
+bi = f_1225_31365_31389()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31404,31473);
 
-            bi.cbStruct = (DWORD)Marshal.SizeOf(bi);
-            bi.pcwszDisplayName = fileName;
-            bi.cbMemObject = (uint)contentBytes.Length;
-            bi.pbMemObject = Marshal.AllocCoTaskMem(contentBytes.Length);
-            Marshal.Copy(contentBytes, 0, bi.pbMemObject, contentBytes.Length);
+byte[] 
+contentBytes = f_1225_31426_31472(f_1225_31426_31454(), content)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31536,31567);
 
-            return bi;
+bi.gSubject.Data1 = 0x603bcc1f;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31581,31608);
+
+bi.gSubject.Data2 = 0x4b59;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31622,31649);
+
+bi.gSubject.Data3 = 0x4e08;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31663,31745);
+
+bi.gSubject.Data4 = new byte[] { 0xb7, 0x24, 0xd2, 0xc6, 0x29, 0x7e, 0xf3, 0x51 };
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31761,31801);
+
+bi.cbStruct = (DWORD)f_1225_31782_31800(bi);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31815,31846);
+
+bi.pcwszDisplayName = fileName;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31860,31903);
+
+bi.cbMemObject = (uint)f_1225_31883_31902(contentBytes);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31917,31978);
+
+bi.pbMemObject = f_1225_31934_31977(f_1225_31957_31976(contentBytes));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,31992,32059);
+
+f_1225_31992_32058(contentBytes, 0, bi.pbMemObject, f_1225_32038_32057(contentBytes));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,32075,32085);
+
+return bi;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,31189,32096);
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO
+f_1225_31365_31389()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 31365, 31389);
+return return_v;
+}
+
+
+System.Text.Encoding
+f_1225_31426_31454()
+{
+var return_v = System.Text.Encoding.Unicode;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1225, 31426, 31454);
+return return_v;
+}
+
+
+byte[]
+f_1225_31426_31472(System.Text.Encoding
+this_param,string
+s)
+{
+var return_v = this_param.GetBytes( s);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 31426, 31472);
+return return_v;
+}
+
+
+int
+f_1225_31782_31800(System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 31782, 31800);
+return return_v;
+}
+
+
+int
+f_1225_31883_31902(byte[]
+this_param)
+{
+var return_v = this_param.Length;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1225, 31883, 31902);
+return return_v;
+}
+
+
+int
+f_1225_31957_31976(byte[]
+this_param)
+{
+var return_v = this_param.Length;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1225, 31957, 31976);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_31934_31977(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 31934, 31977);
+return return_v;
+}
+
+
+int
+f_1225_32038_32057(byte[]
+this_param)
+{
+var return_v = this_param.Length;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1225, 32038, 32057);
+return return_v;
+}
+
+
+int
+f_1225_31992_32058(byte[]
+source,int
+startIndex,System.IntPtr
+destination,int
+length)
+{
+Marshal.Copy( source, startIndex, destination, length);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 31992, 32058);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,31189,32096);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,31189,32096);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
         [Flags]
         internal enum WintrustUIChoice
@@ -925,221 +1387,699 @@ namespace System.Management.Automation.Security
             WTD_STATEACTION_AUTO_CACHE_FLUSH = 0x00000004
         };
 
-        [StructLayoutAttribute(LayoutKind.Explicit)]
+[StructLayoutAttribute(LayoutKind.Explicit)]
         internal struct WinTrust_Choice
         {
-            /// WINTRUST_FILE_INFO_*
-            [FieldOffsetAttribute(0)]
+
+[FieldOffsetAttribute(0)]
             internal System.IntPtr pFile;
 
-            /// WINTRUST_CATALOG_INFO_*
-            [FieldOffsetAttribute(0)]
+[FieldOffsetAttribute(0)]
             internal System.IntPtr pCatalog;
 
-            /// WINTRUST_BLOB_INFO_*
-            [FieldOffsetAttribute(0)]
+[FieldOffsetAttribute(0)]
             internal System.IntPtr pBlob;
 
-            /// WINTRUST_SGNR_INFO_*
-            [FieldOffsetAttribute(0)]
+[FieldOffsetAttribute(0)]
             internal System.IntPtr pSgnr;
 
-            /// WINTRUST_CERT_INFO_*
-            [FieldOffsetAttribute(0)]
+[FieldOffsetAttribute(0)]
             internal System.IntPtr pCert;
+static WinTrust_Choice(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,33689,34410);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,33689,34410);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,33689,34410);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct WINTRUST_DATA
         {
-            /// DWORD->unsigned int
-            internal uint cbStruct;
 
-            /// LPVOID->void*
-            internal System.IntPtr pPolicyCallbackData;
+internal uint cbStruct;
 
-            /// LPVOID->void*
-            internal System.IntPtr pSIPClientData;
+internal System.IntPtr pPolicyCallbackData;
 
-            /// DWORD->unsigned int
-            internal uint dwUIChoice;
+internal System.IntPtr pSIPClientData;
 
-            /// DWORD->unsigned int
-            internal uint fdwRevocationChecks;
+internal uint dwUIChoice;
 
-            /// DWORD->unsigned int
-            internal uint dwUnionChoice;
+internal uint fdwRevocationChecks;
 
-            /// WinTrust_Choice struct
-            internal WinTrust_Choice Choice;
+internal uint dwUnionChoice;
 
-            /// DWORD->unsigned int
-            internal uint dwStateAction;
+internal WinTrust_Choice Choice;
 
-            /// HANDLE->void*
-            internal System.IntPtr hWVTStateData;
+internal uint dwStateAction;
 
-            /// WCHAR*
-            [MarshalAsAttribute(UnmanagedType.LPWStr)]
+internal System.IntPtr hWVTStateData;
+
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
             internal string pwszURLReference;
 
-            /// DWORD->unsigned int
-            internal uint dwProvFlags;
+internal uint dwProvFlags;
 
-            /// DWORD->unsigned int
-            internal uint dwUIContext;
+internal uint dwUIContext;
+static WINTRUST_DATA(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,34422,35564);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,34422,35564);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,34422,35564);
+}
         }
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static WINTRUST_DATA InitWintrustDataStructFromFile(WINTRUST_FILE_INFO wfi)
+		{
+			try
         {
-            WINTRUST_DATA wtd = new WINTRUST_DATA();
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,35576,36530);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,35718,35758);
 
-            wtd.cbStruct = (DWORD)Marshal.SizeOf(wtd);
-            wtd.pPolicyCallbackData = IntPtr.Zero;
-            wtd.pSIPClientData = IntPtr.Zero;
-            wtd.dwUIChoice = (DWORD)WintrustUIChoice.WTD_UI_NONE;
-            wtd.fdwRevocationChecks = 0;
-            wtd.dwUnionChoice = (DWORD)WintrustUnionChoice.WTD_CHOICE_FILE;
+WINTRUST_DATA 
+wtd = f_1225_35738_35757()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,35774,35816);
 
-            IntPtr pFileBuffer = Marshal.AllocCoTaskMem(Marshal.SizeOf(wfi));
-            Marshal.StructureToPtr(wfi, pFileBuffer, false);
-            wtd.Choice.pFile = pFileBuffer;
+wtd.cbStruct = (DWORD)f_1225_35796_35815(wtd);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,35830,35868);
 
-            wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_VERIFY;
-            wtd.hWVTStateData = IntPtr.Zero;
-            wtd.pwszURLReference = null;
-            wtd.dwProvFlags = 0;
+wtd.pPolicyCallbackData = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,35882,35915);
 
-            return wtd;
+wtd.pSIPClientData = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,35929,35982);
+
+wtd.dwUIChoice = (DWORD)WintrustUIChoice.WTD_UI_NONE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,35996,36024);
+
+wtd.fdwRevocationChecks = 0;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36038,36101);
+
+wtd.dwUnionChoice = (DWORD)WintrustUnionChoice.WTD_CHOICE_FILE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36117,36182);
+
+IntPtr 
+pFileBuffer = f_1225_36138_36181(f_1225_36161_36180(wfi))
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36196,36244);
+
+f_1225_36196_36243(wfi, pFileBuffer, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36258,36289);
+
+wtd.Choice.pFile = pFileBuffer;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36305,36370);
+
+wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_VERIFY;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36384,36416);
+
+wtd.hWVTStateData = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36430,36458);
+
+wtd.pwszURLReference = null;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36472,36492);
+
+wtd.dwProvFlags = 0;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36508,36519);
+
+return wtd;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,35576,36530);
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+f_1225_35738_35757()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.WINTRUST_DATA();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 35738, 35757);
+return return_v;
+}
+
+
+int
+f_1225_35796_35815(System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 35796, 35815);
+return return_v;
+}
+
+
+int
+f_1225_36161_36180(System.Management.Automation.Security.NativeMethods.WINTRUST_FILE_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 36161, 36180);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_36138_36181(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 36138, 36181);
+return return_v;
+}
+
+
+int
+f_1225_36196_36243(System.Management.Automation.Security.NativeMethods.WINTRUST_FILE_INFO
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 36196, 36243);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,35576,36530);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,35576,36530);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static WINTRUST_DATA InitWintrustDataStructFromBlob(WINTRUST_BLOB_INFO wbi)
+		{
+			try
         {
-            WINTRUST_DATA wtd = new WINTRUST_DATA();
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,36542,37478);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36684,36724);
 
-            wtd.cbStruct = (DWORD)Marshal.SizeOf(wbi);
-            wtd.pPolicyCallbackData = IntPtr.Zero;
-            wtd.pSIPClientData = IntPtr.Zero;
-            wtd.dwUIChoice = (DWORD)WintrustUIChoice.WTD_UI_NONE;
-            wtd.fdwRevocationChecks = 0;
-            wtd.dwUnionChoice = (DWORD)WintrustUnionChoice.WTD_CHOICE_BLOB;
+WINTRUST_DATA 
+wtd = f_1225_36704_36723()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36740,36782);
 
-            IntPtr pBlob = Marshal.AllocCoTaskMem(Marshal.SizeOf(wbi));
-            Marshal.StructureToPtr(wbi, pBlob, false);
-            wtd.Choice.pBlob = pBlob;
+wtd.cbStruct = (DWORD)f_1225_36762_36781(wbi);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36796,36834);
 
-            wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_VERIFY;
-            wtd.hWVTStateData = IntPtr.Zero;
-            wtd.pwszURLReference = null;
-            wtd.dwProvFlags = 0;
+wtd.pPolicyCallbackData = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36848,36881);
 
-            return wtd;
+wtd.pSIPClientData = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36895,36948);
+
+wtd.dwUIChoice = (DWORD)WintrustUIChoice.WTD_UI_NONE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,36962,36990);
+
+wtd.fdwRevocationChecks = 0;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37004,37067);
+
+wtd.dwUnionChoice = (DWORD)WintrustUnionChoice.WTD_CHOICE_BLOB;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37083,37142);
+
+IntPtr 
+pBlob = f_1225_37098_37141(f_1225_37121_37140(wbi))
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37156,37198);
+
+f_1225_37156_37197(wbi, pBlob, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37212,37237);
+
+wtd.Choice.pBlob = pBlob;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37253,37318);
+
+wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_VERIFY;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37332,37364);
+
+wtd.hWVTStateData = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37378,37406);
+
+wtd.pwszURLReference = null;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37420,37440);
+
+wtd.dwProvFlags = 0;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37456,37467);
+
+return wtd;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,36542,37478);
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+f_1225_36704_36723()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.WINTRUST_DATA();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 36704, 36723);
+return return_v;
+}
+
+
+int
+f_1225_36762_36781(System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 36762, 36781);
+return return_v;
+}
+
+
+int
+f_1225_37121_37140(System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 37121, 37140);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_37098_37141(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 37098, 37141);
+return return_v;
+}
+
+
+int
+f_1225_37156_37197(System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 37156, 37197);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,36542,37478);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,36542,37478);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        [ArchitectureSensitive]
+[ArchitectureSensitive]
         internal static DWORD DestroyWintrustDataStruct(WINTRUST_DATA wtd)
+		{
+			try
         {
-            DWORD dwResult = Win32Errors.E_FAIL;
-            IntPtr WINTRUST_ACTION_GENERIC_VERIFY_V2 = IntPtr.Zero;
-            IntPtr wtdBuffer = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,37490,40029);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37614,37650);
 
-            Guid actionVerify =
-                new Guid("00AAC56B-CD44-11d0-8CC2-00C04FC295EE");
+DWORD 
+dwResult = Win32Errors.E_FAIL
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37664,37719);
+
+IntPtr 
+WINTRUST_ACTION_GENERIC_VERIFY_V2 = IntPtr.Zero
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37733,37764);
+
+IntPtr 
+wtdBuffer = IntPtr.Zero
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37780,37866);
+
+Guid 
+actionVerify =
+f_1225_37817_37865("00AAC56B-CD44-11d0-8CC2-00C04FC295EE")
+;
 
             try
             {
-                WINTRUST_ACTION_GENERIC_VERIFY_V2 =
-                    Marshal.AllocCoTaskMem(Marshal.SizeOf(actionVerify));
-                Marshal.StructureToPtr(actionVerify,
-                                       WINTRUST_ACTION_GENERIC_VERIFY_V2,
-                                       false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,37918,38028);
 
-                wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_CLOSE;
-                wtdBuffer = Marshal.AllocCoTaskMem(Marshal.SizeOf(wtd));
-                Marshal.StructureToPtr(wtd, wtdBuffer, false);
+WINTRUST_ACTION_GENERIC_VERIFY_V2 =
+f_1225_37975_38027(f_1225_37998_38026(actionVerify));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38046,38205);
 
-                // The GetLastWin32Error of this is checked, but PreSharp doesn't seem to be
-                // able to see that.
-#pragma warning disable 56523
-                dwResult = WinVerifyTrust(
-                    IntPtr.Zero,
-                    WINTRUST_ACTION_GENERIC_VERIFY_V2,
-                    wtdBuffer);
-#pragma warning restore 56523
+f_1225_38046_38204(actionVerify, WINTRUST_ACTION_GENERIC_VERIFY_V2, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38225,38289);
 
-                wtd = Marshal.PtrToStructure<WINTRUST_DATA>(wtdBuffer);
+wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_CLOSE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38307,38363);
+
+wtdBuffer = f_1225_38319_38362(f_1225_38342_38361(wtd));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38381,38427);
+
+f_1225_38381_38426(wtd, wtdBuffer, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38610,38759);
+
+dwResult = f_1225_38621_38758(IntPtr.Zero, WINTRUST_ACTION_GENERIC_VERIFY_V2, wtdBuffer);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38810,38865);
+
+wtd = f_1225_38816_38864(wtdBuffer);
             }
             finally
             {
-                Marshal.DestroyStructure<WINTRUST_DATA>(wtdBuffer);
-                Marshal.FreeCoTaskMem(wtdBuffer);
-                Marshal.DestroyStructure<Guid>(WINTRUST_ACTION_GENERIC_VERIFY_V2);
-                Marshal.FreeCoTaskMem(WINTRUST_ACTION_GENERIC_VERIFY_V2);
+DynAbs.Tracing.TraceSender.TraceEnterFinally(1225,38894,39210);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,38934,38985);
+
+f_1225_38934_38984(wtdBuffer);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39003,39036);
+
+f_1225_39003_39035(wtdBuffer);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39054,39120);
+
+f_1225_39054_39119(WINTRUST_ACTION_GENERIC_VERIFY_V2);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39138,39195);
+
+f_1225_39138_39194(WINTRUST_ACTION_GENERIC_VERIFY_V2);
+DynAbs.Tracing.TraceSender.TraceExitFinally(1225,38894,39210);
             }
 
-            // Clear the blob or file info, depending on the type of
-            // verification that was done.
-            if (wtd.dwUnionChoice == (DWORD)WintrustUnionChoice.WTD_CHOICE_BLOB)
-            {
-                WINTRUST_BLOB_INFO originalBlob =
-                    (WINTRUST_BLOB_INFO)Marshal.PtrToStructure<WINTRUST_BLOB_INFO>(wtd.Choice.pBlob);
-                Marshal.FreeCoTaskMem(originalBlob.pbMemObject);
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39340,39986) || true) && (wtd.dwUnionChoice == (DWORD)WintrustUnionChoice.WTD_CHOICE_BLOB)
+)
 
-                Marshal.DestroyStructure<WINTRUST_BLOB_INFO>(wtd.Choice.pBlob);
-                Marshal.FreeCoTaskMem(wtd.Choice.pBlob);
-            }
-            else
-            {
-                Marshal.DestroyStructure<WINTRUST_FILE_INFO>(wtd.Choice.pFile);
-                Marshal.FreeCoTaskMem(wtd.Choice.pFile);
-            }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,39340,39986);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39441,39577);
 
-            return dwResult;
+WINTRUST_BLOB_INFO 
+originalBlob =
+                    (WINTRUST_BLOB_INFO)f_1225_39516_39576(wtd.Choice.pBlob)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39595,39643);
+
+f_1225_39595_39642(originalBlob.pbMemObject);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39663,39726);
+
+f_1225_39663_39725(wtd.Choice.pBlob);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39744,39784);
+
+f_1225_39744_39783(wtd.Choice.pBlob);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,39340,39986);
+}
+
+else
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,39340,39986);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39850,39913);
+
+f_1225_39850_39912(wtd.Choice.pFile);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,39931,39971);
+
+f_1225_39931_39970(wtd.Choice.pFile);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,39340,39986);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,40002,40018);
+
+return dwResult;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,37490,40029);
+
+System.Guid
+f_1225_37817_37865(string
+g)
+{
+var return_v = new System.Guid( g);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 37817, 37865);
+return return_v;
+}
+
+
+int
+f_1225_37998_38026(System.Guid
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 37998, 38026);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_37975_38027(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 37975, 38027);
+return return_v;
+}
+
+
+int
+f_1225_38046_38204(System.Guid
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38046, 38204);
+return 0;
+}
+
+
+int
+f_1225_38342_38361(System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38342, 38361);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_38319_38362(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38319, 38362);
+return return_v;
+}
+
+
+int
+f_1225_38381_38426(System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38381, 38426);
+return 0;
+}
+
+
+uint
+f_1225_38621_38758(System.IntPtr
+hWndNotUsed,System.IntPtr
+pgActionID,System.IntPtr
+pWinTrustData)
+{
+var return_v = WinVerifyTrust( hWndNotUsed, pgActionID, pWinTrustData);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38621, 38758);
+return return_v;
+}
+
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+f_1225_38816_38864(System.IntPtr
+ptr)
+{
+var return_v = Marshal.PtrToStructure<WINTRUST_DATA>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38816, 38864);
+return return_v;
+}
+
+
+int
+f_1225_38934_38984(System.IntPtr
+ptr)
+{
+Marshal.DestroyStructure<WINTRUST_DATA>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 38934, 38984);
+return 0;
+}
+
+
+int
+f_1225_39003_39035(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39003, 39035);
+return 0;
+}
+
+
+int
+f_1225_39054_39119(System.IntPtr
+ptr)
+{
+Marshal.DestroyStructure<Guid>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39054, 39119);
+return 0;
+}
+
+
+int
+f_1225_39138_39194(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39138, 39194);
+return 0;
+}
+
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_BLOB_INFO
+f_1225_39516_39576(System.IntPtr
+ptr)
+{
+var return_v = Marshal.PtrToStructure<WINTRUST_BLOB_INFO>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39516, 39576);
+return return_v;
+}
+
+
+int
+f_1225_39595_39642(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39595, 39642);
+return 0;
+}
+
+
+int
+f_1225_39663_39725(System.IntPtr
+ptr)
+{
+Marshal.DestroyStructure<WINTRUST_BLOB_INFO>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39663, 39725);
+return 0;
+}
+
+
+int
+f_1225_39744_39783(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39744, 39783);
+return 0;
+}
+
+
+int
+f_1225_39850_39912(System.IntPtr
+ptr)
+{
+Marshal.DestroyStructure<WINTRUST_FILE_INFO>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39850, 39912);
+return 0;
+}
+
+
+int
+f_1225_39931_39970(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 39931, 39970);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,37490,40029);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,37490,40029);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_PROVIDER_CERT
         {
-            private DWORD _cbStruct;
-            internal IntPtr pCert; // PCCERT_CONTEXT
-            private BOOL _fCommercial;
-            private BOOL _fTrustedRoot;
-            private BOOL _fSelfSigned;
-            private BOOL _fTestCert;
-            private DWORD _dwRevokedReason;
-            private DWORD _dwConfidence;
-            private DWORD _dwError;
-            private IntPtr _pTrustListContext; // CTL_CONTEXT*
-            private BOOL _fTrustListSignerCert;
-            private IntPtr _pCtlContext; // PCCTL_CONTEXT
-            private DWORD _dwCtlError;
-            private BOOL _fIsCyclic;
-            private IntPtr _pChainElement; // PCERT_CHAIN_ELEMENT
+
+private DWORD _cbStruct;
+
+internal IntPtr pCert;
+
+private BOOL _fCommercial;
+
+private BOOL _fTrustedRoot;
+
+private BOOL _fSelfSigned;
+
+private BOOL _fTestCert;
+
+private DWORD _dwRevokedReason;
+
+private DWORD _dwConfidence;
+
+private DWORD _dwError;
+
+private IntPtr _pTrustListContext;
+
+private BOOL _fTrustListSignerCert;
+
+private IntPtr _pCtlContext;
+
+private DWORD _dwCtlError;
+
+private BOOL _fIsCyclic;
+
+private IntPtr _pChainElement;
+static CRYPT_PROVIDER_CERT(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,40041,40838);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,40041,40838);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,40041,40838);
+}
         };
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_PROVIDER_SGNR
         {
-            private DWORD _cbStruct;
-            private FILETIME _sftVerifyAsOf;
-            private DWORD _csCertChain;
-            private IntPtr _pasCertChain; // CRYPT_PROVIDER_CERT*
-            private DWORD _dwSignerType;
-            private IntPtr _psSigner; // CMSG_SIGNER_INFO*
-            private DWORD _dwError;
-            internal DWORD csCounterSigners;
-            internal IntPtr pasCounterSigners; // CRYPT_PROVIDER_SGNR*
-            private IntPtr _pChainContext; // PCCERT_CHAIN_CONTEXT
+
+private DWORD _cbStruct;
+
+private FILETIME _sftVerifyAsOf;
+
+private DWORD _csCertChain;
+
+private IntPtr _pasCertChain;
+
+private DWORD _dwSignerType;
+
+private IntPtr _psSigner;
+
+private DWORD _dwError;
+
+internal DWORD csCounterSigners;
+
+internal IntPtr pasCounterSigners;
+
+private IntPtr _pChainContext;
+static CRYPT_PROVIDER_SGNR(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,40850,41472);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,40850,41472);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,40850,41472);
+}
         };
 
-        [DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
             IntPtr // CRYPT_PROVIDER_DATA*
             WTHelperProvDataFromStateData(IntPtr hStateData);
 
-        [DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
             IntPtr // CRYPT_PROVIDER_SGNR*
             WTHelperGetProvSignerFromChain(
@@ -1149,7 +2089,7 @@ namespace System.Management.Automation.Security
                 DWORD idxCounterSigner
             );
 
-        [DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern
             IntPtr // CRYPT_PROVIDER_CERT*
             WTHelperGetProvCertFromChain(
@@ -1157,73 +2097,266 @@ namespace System.Management.Automation.Security
                 DWORD idxCert
             );
 
-        /// Return Type: HRESULT->LONG->int
-        ///pszFile: PCWSTR->WCHAR*
-        ///hFile: HANDLE->void*
-        ///sigInfoFlags: SIGNATURE_INFO_FLAGS->Anonymous_5157c654_2076_48e7_9241_84ac648615e9
-        ///psiginfo: SIGNATURE_INFO*
-        ///ppCertContext: void**
-        ///phWVTStateData: HANDLE*
-        [DllImportAttribute("wintrust.dll", EntryPoint = "WTGetSignatureInfo", CallingConvention = CallingConvention.StdCall)]
+[DllImportAttribute("wintrust.dll", EntryPoint = "WTGetSignatureInfo", CallingConvention = CallingConvention.StdCall)]
         internal static extern int WTGetSignatureInfo([InAttribute()] [MarshalAsAttribute(UnmanagedType.LPWStr)] string pszFile, [InAttribute()] System.IntPtr hFile, SIGNATURE_INFO_FLAGS sigInfoFlags, ref SIGNATURE_INFO psiginfo, ref System.IntPtr ppCertContext, ref System.IntPtr phWVTStateData);
 
-        internal static void FreeWVTStateData(System.IntPtr phWVTStateData)
+internal static void FreeWVTStateData(System.IntPtr phWVTStateData)
+		{
+			try
         {
-            WINTRUST_DATA wtd = new WINTRUST_DATA();
-            DWORD dwResult = Win32Errors.E_FAIL;
-            IntPtr WINTRUST_ACTION_GENERIC_VERIFY_V2 = IntPtr.Zero;
-            IntPtr wtdBuffer = IntPtr.Zero;
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,43159,45150);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43251,43291);
 
-            Guid actionVerify =
-                new Guid("00AAC56B-CD44-11d0-8CC2-00C04FC295EE");
+WINTRUST_DATA 
+wtd = f_1225_43271_43290()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43305,43341);
+
+DWORD 
+dwResult = Win32Errors.E_FAIL
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43355,43410);
+
+IntPtr 
+WINTRUST_ACTION_GENERIC_VERIFY_V2 = IntPtr.Zero
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43424,43455);
+
+IntPtr 
+wtdBuffer = IntPtr.Zero
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43471,43557);
+
+Guid 
+actionVerify =
+f_1225_43508_43556("00AAC56B-CD44-11d0-8CC2-00C04FC295EE")
+;
 
             try
             {
-                WINTRUST_ACTION_GENERIC_VERIFY_V2 =
-                    Marshal.AllocCoTaskMem(Marshal.SizeOf(actionVerify));
-                Marshal.StructureToPtr(actionVerify,
-                                       WINTRUST_ACTION_GENERIC_VERIFY_V2,
-                                       false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43609,43719);
 
-                wtd.cbStruct = (DWORD)Marshal.SizeOf(wtd);
-                wtd.dwUIChoice = (DWORD)WintrustUIChoice.WTD_UI_NONE;
-                wtd.fdwRevocationChecks = 0;
-                wtd.dwUnionChoice = (DWORD)WintrustUnionChoice.WTD_CHOICE_BLOB;
-                wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_CLOSE;
-                wtd.hWVTStateData = phWVTStateData;
+WINTRUST_ACTION_GENERIC_VERIFY_V2 =
+f_1225_43666_43718(f_1225_43689_43717(actionVerify));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43737,43896);
 
-                wtdBuffer = Marshal.AllocCoTaskMem(Marshal.SizeOf(wtd));
-                Marshal.StructureToPtr(wtd, wtdBuffer, false);
+f_1225_43737_43895(actionVerify, WINTRUST_ACTION_GENERIC_VERIFY_V2, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43916,43958);
 
-                // The GetLastWin32Error of this is checked, but PreSharp doesn't seem to be
-                // able to see that.
-#pragma warning disable 56523
-                dwResult = WinVerifyTrust(
-                    IntPtr.Zero,
-                    WINTRUST_ACTION_GENERIC_VERIFY_V2,
-                    wtdBuffer);
+wtd.cbStruct = (DWORD)f_1225_43938_43957(wtd);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,43976,44029);
+
+wtd.dwUIChoice = (DWORD)WintrustUIChoice.WTD_UI_NONE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44047,44075);
+
+wtd.fdwRevocationChecks = 0;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44093,44156);
+
+wtd.dwUnionChoice = (DWORD)WintrustUnionChoice.WTD_CHOICE_BLOB;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44174,44238);
+
+wtd.dwStateAction = (DWORD)WintrustAction.WTD_STATEACTION_CLOSE;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44256,44291);
+
+wtd.hWVTStateData = phWVTStateData;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44311,44367);
+
+wtdBuffer = f_1225_44323_44366(f_1225_44346_44365(wtd));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44385,44431);
+
+f_1225_44385_44430(wtd, wtdBuffer, false);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44614,44763);
+
+dwResult = f_1225_44625_44762(IntPtr.Zero, WINTRUST_ACTION_GENERIC_VERIFY_V2, wtdBuffer);
 #pragma warning restore 56523
             }
             finally
             {
-                Marshal.DestroyStructure<WINTRUST_DATA>(wtdBuffer);
-                Marshal.FreeCoTaskMem(wtdBuffer);
-                Marshal.DestroyStructure<Guid>(WINTRUST_ACTION_GENERIC_VERIFY_V2);
-                Marshal.FreeCoTaskMem(WINTRUST_ACTION_GENERIC_VERIFY_V2);
+DynAbs.Tracing.TraceSender.TraceEnterFinally(1225,44823,45139);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44863,44914);
+
+f_1225_44863_44913(wtdBuffer);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44932,44965);
+
+f_1225_44932_44964(wtdBuffer);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,44983,45049);
+
+f_1225_44983_45048(WINTRUST_ACTION_GENERIC_VERIFY_V2);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,45067,45124);
+
+f_1225_45067_45123(WINTRUST_ACTION_GENERIC_VERIFY_V2);
+DynAbs.Tracing.TraceSender.TraceExitFinally(1225,44823,45139);
             }
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,43159,45150);
+
+System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+f_1225_43271_43290()
+{
+var return_v = new System.Management.Automation.Security.NativeMethods.WINTRUST_DATA();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 43271, 43290);
+return return_v;
+}
+
+
+System.Guid
+f_1225_43508_43556(string
+g)
+{
+var return_v = new System.Guid( g);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 43508, 43556);
+return return_v;
+}
+
+
+int
+f_1225_43689_43717(System.Guid
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 43689, 43717);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_43666_43718(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 43666, 43718);
+return return_v;
+}
+
+
+int
+f_1225_43737_43895(System.Guid
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 43737, 43895);
+return 0;
+}
+
+
+int
+f_1225_43938_43957(System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 43938, 43957);
+return return_v;
+}
+
+
+int
+f_1225_44346_44365(System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+structure)
+{
+var return_v = Marshal.SizeOf( structure);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44346, 44365);
+return return_v;
+}
+
+
+System.IntPtr
+f_1225_44323_44366(int
+cb)
+{
+var return_v = Marshal.AllocCoTaskMem( cb);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44323, 44366);
+return return_v;
+}
+
+
+int
+f_1225_44385_44430(System.Management.Automation.Security.NativeMethods.WINTRUST_DATA
+structure,System.IntPtr
+ptr,bool
+fDeleteOld)
+{
+Marshal.StructureToPtr( structure, ptr, fDeleteOld);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44385, 44430);
+return 0;
+}
+
+
+uint
+f_1225_44625_44762(System.IntPtr
+hWndNotUsed,System.IntPtr
+pgActionID,System.IntPtr
+pWinTrustData)
+{
+var return_v = WinVerifyTrust( hWndNotUsed, pgActionID, pWinTrustData);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44625, 44762);
+return return_v;
+}
+
+
+int
+f_1225_44863_44913(System.IntPtr
+ptr)
+{
+Marshal.DestroyStructure<WINTRUST_DATA>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44863, 44913);
+return 0;
+}
+
+
+int
+f_1225_44932_44964(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44932, 44964);
+return 0;
+}
+
+
+int
+f_1225_44983_45048(System.IntPtr
+ptr)
+{
+Marshal.DestroyStructure<Guid>( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 44983, 45048);
+return 0;
+}
+
+
+int
+f_1225_45067_45123(System.IntPtr
+ptr)
+{
+Marshal.FreeCoTaskMem( ptr);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 45067, 45123);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,43159,45150);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,43159,45150);
+}
+		}
 
-        //
-        // stuff required for getting cert extensions
-        //
-
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CERT_ENHKEY_USAGE
         {
-            internal DWORD cUsageIdentifier;
-            // [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.LPStr, SizeParamIndex=0)]
-            // internal string[] rgpszUsageIdentifier; // LPSTR*
-            internal IntPtr rgpszUsageIdentifier;
+
+internal DWORD cUsageIdentifier;
+
+internal IntPtr rgpszUsageIdentifier;
+static CERT_ENHKEY_USAGE(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,45243,45612);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,45243,45612);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,45243,45612);
+}
         };
 
         internal enum SIGNATURE_STATE
@@ -1298,162 +2431,216 @@ namespace System.Management.Automation.Security
             SIT_CATALOG,
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct SIGNATURE_INFO
         {
-            /// DWORD->unsigned int
-            internal uint cbSize;
 
-            /// SIGNATURE_STATE->Anonymous_7e0526d8_af30_47f9_9233_a77658d0f1e5
-            internal SIGNATURE_STATE nSignatureState;
+internal uint cbSize;
 
-            /// SIGNATURE_INFO_TYPE->Anonymous_27075e4b_faa5_4e57_ada0_6d49fae74187
-            internal SIGNATURE_INFO_TYPE nSignatureType;
+internal SIGNATURE_STATE nSignatureState;
 
-            /// DWORD->unsigned int
-            internal uint dwSignatureInfoAvailability;
+internal SIGNATURE_INFO_TYPE nSignatureType;
 
-            /// DWORD->unsigned int
-            internal uint dwInfoAvailability;
+internal uint dwSignatureInfoAvailability;
 
-            /// PWSTR->WCHAR*
-            [MarshalAsAttribute(UnmanagedType.LPWStr)]
+internal uint dwInfoAvailability;
+
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
             internal string pszDisplayName;
 
-            /// DWORD->unsigned int
-            internal uint cchDisplayName;
+internal uint cchDisplayName;
 
-            /// PWSTR->WCHAR*
-            [MarshalAsAttribute(UnmanagedType.LPWStr)]
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
             internal string pszPublisherName;
 
-            /// DWORD->unsigned int
-            internal uint cchPublisherName;
+internal uint cchPublisherName;
 
-            /// PWSTR->WCHAR*
-            [MarshalAsAttribute(UnmanagedType.LPWStr)]
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
             internal string pszMoreInfoURL;
 
-            /// DWORD->unsigned int
-            internal uint cchMoreInfoURL;
+internal uint cchMoreInfoURL;
 
-            /// LPBYTE->BYTE*
-            internal System.IntPtr prgbHash;
+internal System.IntPtr prgbHash;
 
-            /// DWORD->unsigned int
-            internal uint cbHash;
+internal uint cbHash;
 
-            /// BOOL->int
-            internal int fOSBinary;
+internal int fOSBinary;
+static SIGNATURE_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,47411,48926);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,47411,48926);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,47411,48926);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct CERT_INFO
         {
-            /// DWORD->unsigned int
-            internal uint dwVersion;
 
-            /// CRYPT_INTEGER_BLOB->_CRYPTOAPI_BLOB
-            internal CRYPT_ATTR_BLOB SerialNumber;
+internal uint dwVersion;
 
-            /// CRYPT_ALGORITHM_IDENTIFIER->_CRYPT_ALGORITHM_IDENTIFIER
-            internal CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
+internal CRYPT_ATTR_BLOB SerialNumber;
 
-            /// CERT_NAME_BLOB->_CRYPTOAPI_BLOB
-            internal CRYPT_ATTR_BLOB Issuer;
+internal CRYPT_ALGORITHM_IDENTIFIER SignatureAlgorithm;
 
-            /// FILETIME->_FILETIME
-            internal FILETIME NotBefore;
+internal CRYPT_ATTR_BLOB Issuer;
 
-            /// FILETIME->_FILETIME
-            internal FILETIME NotAfter;
+internal FILETIME NotBefore;
 
-            /// CERT_NAME_BLOB->_CRYPTOAPI_BLOB
-            internal CRYPT_ATTR_BLOB Subject;
+internal FILETIME NotAfter;
 
-            /// CERT_PUBLIC_KEY_INFO->_CERT_PUBLIC_KEY_INFO
-            internal CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
+internal CRYPT_ATTR_BLOB Subject;
 
-            /// CRYPT_BIT_BLOB->_CRYPT_BIT_BLOB
-            internal CRYPT_BIT_BLOB IssuerUniqueId;
+internal CERT_PUBLIC_KEY_INFO SubjectPublicKeyInfo;
 
-            /// CRYPT_BIT_BLOB->_CRYPT_BIT_BLOB
-            internal CRYPT_BIT_BLOB SubjectUniqueId;
+internal CRYPT_BIT_BLOB IssuerUniqueId;
 
-            /// DWORD->unsigned int
-            internal uint cExtension;
+internal CRYPT_BIT_BLOB SubjectUniqueId;
 
-            /// PCERT_EXTENSION->_CERT_EXTENSION*
-            internal System.IntPtr rgExtension;
+internal uint cExtension;
+
+internal System.IntPtr rgExtension;
+static CERT_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,48938,50240);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,48938,50240);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,48938,50240);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct CRYPT_ALGORITHM_IDENTIFIER
         {
-            /// LPSTR->CHAR*
-            [MarshalAsAttribute(UnmanagedType.LPStr)]
+
+[MarshalAsAttribute(UnmanagedType.LPStr)]
             internal string pszObjId;
 
-            /// CRYPT_OBJID_BLOB->_CRYPTOAPI_BLOB
-            internal CRYPT_ATTR_BLOB Parameters;
+internal CRYPT_ATTR_BLOB Parameters;
+static CRYPT_ALGORITHM_IDENTIFIER(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,50252,50599);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,50252,50599);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,50252,50599);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct FILETIME
         {
-            /// DWORD->unsigned int
-            internal uint dwLowDateTime;
 
-            /// DWORD->unsigned int
-            internal uint dwHighDateTime;
+internal uint dwLowDateTime;
+
+internal uint dwHighDateTime;
+static FILETIME(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,50611,50874);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,50611,50874);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,50611,50874);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct CERT_PUBLIC_KEY_INFO
         {
-            /// CRYPT_ALGORITHM_IDENTIFIER->_CRYPT_ALGORITHM_IDENTIFIER
-            internal CRYPT_ALGORITHM_IDENTIFIER Algorithm;
 
-            /// CRYPT_BIT_BLOB->_CRYPT_BIT_BLOB
-            internal CRYPT_BIT_BLOB PublicKey;
+internal CRYPT_ALGORITHM_IDENTIFIER Algorithm;
+
+internal CRYPT_BIT_BLOB PublicKey;
+static CERT_PUBLIC_KEY_INFO(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,50886,51232);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,50886,51232);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,50886,51232);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct CRYPT_BIT_BLOB
         {
-            /// DWORD->unsigned int
-            internal uint cbData;
 
-            /// BYTE*
-            internal System.IntPtr pbData;
+internal uint cbData;
 
-            /// DWORD->unsigned int
-            internal uint cUnusedBits;
+internal System.IntPtr pbData;
+
+internal uint cUnusedBits;
+static CRYPT_BIT_BLOB(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,51244,51572);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,51244,51572);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,51244,51572);
+}
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
         internal struct CERT_EXTENSION
         {
-            /// LPSTR->CHAR*
-            [MarshalAsAttribute(UnmanagedType.LPStr)]
+
+[MarshalAsAttribute(UnmanagedType.LPStr)]
             internal string pszObjId;
 
-            /// BOOL->int
-            internal int fCritical;
+internal int fCritical;
 
-            /// CRYPT_OBJID_BLOB->_CRYPTOAPI_BLOB
-            internal CRYPT_ATTR_BLOB Value;
+internal CRYPT_ATTR_BLOB Value;
+static CERT_EXTENSION(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,51584,51980);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,51584,51980);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,51584,51980);
+}
         }
-    }
 
-    /// <summary>
-    /// Pinvoke methods from certca.dll.
-    /// </summary>
-    internal static partial class NativeMethods
-    {
-        internal const int CRYPT_E_NOT_FOUND = unchecked((int)0x80092004);
-        internal const int E_INVALID_DATA = unchecked((int)0x8007000d);
-        internal const int NTE_NOT_SUPPORTED = unchecked((int)0x80090029);
+static NativeMethods()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,4282,51987);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,15935,15980);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,52155,52201);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,52231,52274);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,52304,52350);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58148,58165);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58196,58218);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58251,58269);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58300,58337);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58370,58386);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58419,58458);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58491,58531);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58562,58584);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58617,58646);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58677,58701);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58732,58758);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58789,58809);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58840,58867);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58898,58930);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,58961,58989);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,59020,59049);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,59080,59111);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,59144,59188);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,59219,59252);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,59283,59316);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,59347,59388);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67319,67359);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67390,67427);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67458,67500);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67531,67572);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67603,67646);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67677,67724);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67755,67802);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67833,67878);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67909,67957);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,67988,68030);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,68061,68102);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,68133,68178);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,4282,51987);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,4282,51987);
+}
+
+}
+internal static partial class NativeMethods
+{
+internal const int 
+CRYPT_E_NOT_FOUND = unchecked((int)0x80092004)
+;
+
+internal const int 
+E_INVALID_DATA = unchecked((int)0x8007000d)
+;
+
+internal const int 
+NTE_NOT_SUPPORTED = unchecked((int)0x80090029)
+;
 
         internal enum AltNameType : uint
         {
@@ -1474,19 +2661,10 @@ namespace System.Management.Automation.Security
             CRYPT_DECODE_ENABLE_UTF8PERCENT_FLAG = 0x04000000,
             CRYPT_DECODE_ENABLE_IA5CONVERSION_FLAG = (CRYPT_DECODE_ENABLE_PUNYCODE_FLAG | CRYPT_DECODE_ENABLE_UTF8PERCENT_FLAG),
         }
-    }
-
-    #region SAFER_APIs
-
-    // SAFER native methods
-    internal static partial class NativeMethods
-    {
-        /// Return Type: BOOL->int
-        ///dwNumProperties: DWORD->unsigned int
-        ///pCodeProperties: PSAFER_CODE_PROPERTIES->_SAFER_CODE_PROPERTIES*
-        ///pLevelHandle: SAFER_LEVEL_HANDLE*
-        ///lpReserved: LPVOID->void*
-        [DllImportAttribute("advapi32.dll", EntryPoint = "SaferIdentifyLevel", SetLastError = true)]
+}
+internal static partial class NativeMethods
+{
+[DllImportAttribute("advapi32.dll", EntryPoint = "SaferIdentifyLevel", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         internal static extern bool SaferIdentifyLevel(
             uint dwNumProperties,
@@ -1497,13 +2675,7 @@ namespace System.Management.Automation.Security
             [MarshalAsAttribute(UnmanagedType.LPWStr)]
             string bucket);
 
-        /// Return Type: BOOL->int
-        ///LevelHandle: SAFER_LEVEL_HANDLE->SAFER_LEVEL_HANDLE__*
-        ///InAccessToken: HANDLE->void*
-        ///OutAccessToken: PHANDLE->HANDLE*
-        ///dwFlags: DWORD->unsigned int
-        ///lpReserved: LPVOID->void*
-        [DllImportAttribute("advapi32.dll", EntryPoint = "SaferComputeTokenFromLevel", SetLastError = true)]
+[DllImportAttribute("advapi32.dll", EntryPoint = "SaferComputeTokenFromLevel", SetLastError = true)]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         internal static extern bool SaferComputeTokenFromLevel(
             [InAttribute()]
@@ -1514,145 +2686,197 @@ namespace System.Management.Automation.Security
             uint dwFlags,
             System.IntPtr lpReserved);
 
-        /// Return Type: BOOL->int
-        ///hLevelHandle: SAFER_LEVEL_HANDLE->SAFER_LEVEL_HANDLE__*
-        [DllImportAttribute("advapi32.dll", EntryPoint = "SaferCloseLevel")]
+[DllImportAttribute("advapi32.dll", EntryPoint = "SaferCloseLevel")]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         internal static extern bool SaferCloseLevel([InAttribute()] IntPtr hLevelHandle);
 
-        /// Return Type: BOOL->int
-        ///hObject: HANDLE->void*
-        [DllImportAttribute(PinvokeDllNames.CloseHandleDllName, EntryPoint = "CloseHandle")]
+[DllImportAttribute(PinvokeDllNames.CloseHandleDllName, EntryPoint = "CloseHandle")]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]
         internal static extern bool CloseHandle([InAttribute()] System.IntPtr hObject);
-    }
+}
 
-    [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
     internal struct SAFER_CODE_PROPERTIES
     {
-        /// DWORD->unsigned int
-        public uint cbSize;
 
-        /// DWORD->unsigned int
-        public uint dwCheckFlags;
+public uint cbSize;
 
-        /// LPCWSTR->WCHAR*
-        [MarshalAsAttribute(UnmanagedType.LPWStr)]
+public uint dwCheckFlags;
+
+[MarshalAsAttribute(UnmanagedType.LPWStr)]
         public string ImagePath;
 
-        /// HANDLE->void*
-        public System.IntPtr hImageFileHandle;
+public System.IntPtr hImageFileHandle;
 
-        /// DWORD->unsigned int
-        public uint UrlZoneId;
+public uint UrlZoneId;
 
-        /// BYTE[SAFER_MAX_HASH_SIZE]
-        [MarshalAsAttribute(
+[MarshalAsAttribute(
             UnmanagedType.ByValArray,
             SizeConst = NativeConstants.SAFER_MAX_HASH_SIZE,
             ArraySubType = UnmanagedType.I1)]
         public byte[] ImageHash;
 
-        /// DWORD->unsigned int
-        public uint dwImageHashSize;
+public uint dwImageHashSize;
 
-        /// LARGE_INTEGER->_LARGE_INTEGER
-        public LARGE_INTEGER ImageSize;
+public LARGE_INTEGER ImageSize;
 
-        /// ALG_ID->unsigned int
-        public uint HashAlgorithm;
+public uint HashAlgorithm;
 
-        /// LPBYTE->BYTE*
-        public System.IntPtr pByteBlock;
+public System.IntPtr pByteBlock;
 
-        /// HWND->HWND__*
-        public System.IntPtr hWndParent;
+public System.IntPtr hWndParent;
 
-        /// DWORD->unsigned int
-        public uint dwWVTUIChoice;
+public uint dwWVTUIChoice;
+static SAFER_CODE_PROPERTIES(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,55402,56595);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,55402,56595);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,55402,56595);
+}
     }
 
-    [StructLayoutAttribute(LayoutKind.Explicit)]
+[StructLayoutAttribute(LayoutKind.Explicit)]
     internal struct LARGE_INTEGER
     {
-        /// Anonymous_9320654f_2227_43bf_a385_74cc8c562686
-        [FieldOffsetAttribute(0)]
+
+[FieldOffsetAttribute(0)]
         public Anonymous_9320654f_2227_43bf_a385_74cc8c562686 Struct1;
 
-        /// Anonymous_947eb392_1446_4e25_bbd4_10e98165f3a9
-        [FieldOffsetAttribute(0)]
+[FieldOffsetAttribute(0)]
         public Anonymous_947eb392_1446_4e25_bbd4_10e98165f3a9 u;
 
-        /// LONGLONG->__int64
-        [FieldOffsetAttribute(0)]
+[FieldOffsetAttribute(0)]
         public long QuadPart;
+static LARGE_INTEGER(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,56603,57125);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,56603,57125);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,56603,57125);
+}
     }
 
-    [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
     internal struct HWND__
     {
-        /// int
-        public int unused;
+
+public int unused;
+static HWND__(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,57133,57266);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,57133,57266);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,57133,57266);
+}
     }
 
-    [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
     internal struct Anonymous_9320654f_2227_43bf_a385_74cc8c562686
     {
-        /// DWORD->unsigned int
-        public uint LowPart;
 
-        /// LONG->int
-        public int HighPart;
+public uint LowPart;
+
+public int HighPart;
+static Anonymous_9320654f_2227_43bf_a385_74cc8c562686(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,57274,57520);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,57274,57520);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,57274,57520);
+}
     }
 
-    [StructLayoutAttribute(LayoutKind.Sequential)]
+[StructLayoutAttribute(LayoutKind.Sequential)]
     internal struct Anonymous_947eb392_1446_4e25_bbd4_10e98165f3a9
     {
-        /// DWORD->unsigned int
-        public uint LowPart;
 
-        /// LONG->int
-        public int HighPart;
+public uint LowPart;
+
+public int HighPart;
+static Anonymous_947eb392_1446_4e25_bbd4_10e98165f3a9(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,57528,57774);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,57528,57774);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,57528,57774);
+}
     }
+internal static partial class NativeMethods
+{
+internal const uint 
+ERROR_SUCCESS = 0
+;
 
-    #endregion SAFER_APIs
+internal const uint 
+ERROR_NO_TOKEN = 0x3f0
+;
 
-    /// <summary>
-    /// Pinvoke methods from advapi32.dll.
-    /// </summary>
-    internal static partial class NativeMethods
-    {
-        //
-        // This is duplicating some of the effort made in Win32Native.cs,
-        // namespace = Microsoft.PowerShell.Commands.Internal.Win32Native
-        //
-        internal const uint ERROR_SUCCESS = 0;
-        internal const uint ERROR_NO_TOKEN = 0x3f0;
+internal const uint 
+STATUS_SUCCESS = 0
+;
 
-        internal const uint STATUS_SUCCESS = 0;
-        internal const uint STATUS_INVALID_PARAMETER = 0xC000000D;
+internal const uint 
+STATUS_INVALID_PARAMETER = 0xC000000D
+;
 
-        internal const uint ACL_REVISION = 2;
+internal const uint 
+ACL_REVISION = 2
+;
 
-        internal const uint SYSTEM_SCOPED_POLICY_ID_ACE_TYPE = 0x13;
+internal const uint 
+SYSTEM_SCOPED_POLICY_ID_ACE_TYPE = 0x13
+;
 
-        internal const uint SUB_CONTAINERS_AND_OBJECTS_INHERIT = 0x3;
-        internal const uint INHERIT_ONLY_ACE = 0x8;
+internal const uint 
+SUB_CONTAINERS_AND_OBJECTS_INHERIT = 0x3
+;
 
-        internal const uint TOKEN_ASSIGN_PRIMARY = 0x0001;
-        internal const uint TOKEN_DUPLICATE = 0x0002;
-        internal const uint TOKEN_IMPERSONATE = 0x0004;
-        internal const uint TOKEN_QUERY = 0x0008;
-        internal const uint TOKEN_QUERY_SOURCE = 0x0010;
-        internal const uint TOKEN_ADJUST_PRIVILEGES = 0x0020;
-        internal const uint TOKEN_ADJUST_GROUPS = 0x0040;
-        internal const uint TOKEN_ADJUST_DEFAULT = 0x0080;
-        internal const uint TOKEN_ADJUST_SESSIONID = 0x0100;
+internal const uint 
+INHERIT_ONLY_ACE = 0x8
+;
 
-        internal const uint SE_PRIVILEGE_ENABLED_BY_DEFAULT = 0x00000001;
-        internal const uint SE_PRIVILEGE_ENABLED = 0x00000002;
-        internal const uint SE_PRIVILEGE_REMOVED = 0X00000004;
-        internal const uint SE_PRIVILEGE_USED_FOR_ACCESS = 0x80000000;
+internal const uint 
+TOKEN_ASSIGN_PRIMARY = 0x0001
+;
+
+internal const uint 
+TOKEN_DUPLICATE = 0x0002
+;
+
+internal const uint 
+TOKEN_IMPERSONATE = 0x0004
+;
+
+internal const uint 
+TOKEN_QUERY = 0x0008
+;
+
+internal const uint 
+TOKEN_QUERY_SOURCE = 0x0010
+;
+
+internal const uint 
+TOKEN_ADJUST_PRIVILEGES = 0x0020
+;
+
+internal const uint 
+TOKEN_ADJUST_GROUPS = 0x0040
+;
+
+internal const uint 
+TOKEN_ADJUST_DEFAULT = 0x0080
+;
+
+internal const uint 
+TOKEN_ADJUST_SESSIONID = 0x0100
+;
+
+internal const uint 
+SE_PRIVILEGE_ENABLED_BY_DEFAULT = 0x00000001
+;
+
+internal const uint 
+SE_PRIVILEGE_ENABLED = 0x00000002
+;
+
+internal const uint 
+SE_PRIVILEGE_REMOVED = 0X00000004
+;
+
+internal const uint 
+SE_PRIVILEGE_USED_FOR_ACCESS = 0x80000000
+;
 
         internal enum SeObjectType : uint
         {
@@ -1687,74 +2911,141 @@ namespace System.Management.Automation.Security
             UNPROTECTED_SACL_SECURITY_INFORMATION = 0x10000000
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct LUID
         {
-            internal uint LowPart;
-            internal uint HighPart;
+
+internal uint LowPart;
+
+internal uint HighPart;
+static LUID(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,60688,60877);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,60688,60877);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,60688,60877);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct LUID_AND_ATTRIBUTES
         {
-            internal LUID Luid;
-            internal uint Attributes;
+
+internal LUID Luid;
+
+internal uint Attributes;
+static LUID_AND_ATTRIBUTES(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,60889,61092);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,60889,61092);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,60889,61092);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct TOKEN_PRIVILEGE
         {
-            internal uint PrivilegeCount;
-            internal LUID_AND_ATTRIBUTES Privilege;
+
+internal uint PrivilegeCount;
+
+internal LUID_AND_ATTRIBUTES Privilege;
+static TOKEN_PRIVILEGE(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,61104,61327);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,61104,61327);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,61104,61327);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct ACL
         {
-            internal byte AclRevision;
-            internal byte Sbz1;
-            internal ushort AclSize;
-            internal ushort AceCount;
-            internal ushort Sbz2;
+
+internal byte AclRevision;
+
+internal byte Sbz1;
+
+internal ushort AclSize;
+
+internal ushort AceCount;
+
+internal ushort Sbz2;
+static ACL(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,61339,61639);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,61339,61639);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,61339,61639);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct ACE_HEADER
         {
-            internal byte AceType;
-            internal byte AceFlags;
-            internal ushort AceSize;
+
+internal byte AceType;
+
+internal byte AceFlags;
+
+internal ushort AceSize;
+static ACE_HEADER(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,61651,61884);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,61651,61884);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,61651,61884);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct SYSTEM_AUDIT_ACE
         {
-            internal ACE_HEADER Header;
-            internal uint Mask;
-            internal uint SidStart;
+
+internal ACE_HEADER Header;
+
+internal uint Mask;
+
+internal uint SidStart;
+static SYSTEM_AUDIT_ACE(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,61896,62135);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,61896,62135);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,61896,62135);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct LSA_UNICODE_STRING
         {
-            internal ushort Length;
-            internal ushort MaximumLength;
-            internal IntPtr Buffer;
+
+internal ushort Length;
+
+internal ushort MaximumLength;
+
+internal IntPtr Buffer;
+static LSA_UNICODE_STRING(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,62147,62395);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,62147,62395);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,62147,62395);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct CENTRAL_ACCESS_POLICY
         {
-            internal IntPtr CAPID;
-            internal LSA_UNICODE_STRING Name;
-            internal LSA_UNICODE_STRING Description;
-            internal LSA_UNICODE_STRING ChangeId;
-            internal uint Flags;
-            internal uint CAPECount;
-            internal IntPtr CAPEs;
+
+internal IntPtr CAPID;
+
+internal LSA_UNICODE_STRING Name;
+
+internal LSA_UNICODE_STRING Description;
+
+internal LSA_UNICODE_STRING ChangeId;
+
+internal uint Flags;
+
+internal uint CAPECount;
+
+internal IntPtr CAPEs;
+static CENTRAL_ACCESS_POLICY(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,62407,62836);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,62407,62836);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,62407,62836);
+}
         }
 
-        [DllImport(PinvokeDllNames.GetNamedSecurityInfoDllName, CharSet = CharSet.Unicode)]
+[DllImport(PinvokeDllNames.GetNamedSecurityInfoDllName, CharSet = CharSet.Unicode)]
         internal static extern uint GetNamedSecurityInfo(
             string pObjectName,
             SeObjectType ObjectType,
@@ -1766,7 +3057,7 @@ namespace System.Management.Automation.Security
             out IntPtr ppSecurityDescriptor
         );
 
-        [DllImport(PinvokeDllNames.SetNamedSecurityInfoDllName, CharSet = CharSet.Unicode)]
+[DllImport(PinvokeDllNames.SetNamedSecurityInfoDllName, CharSet = CharSet.Unicode)]
         internal static extern uint SetNamedSecurityInfo(
             string pObjectName,
             SeObjectType ObjectType,
@@ -1776,37 +3067,37 @@ namespace System.Management.Automation.Security
             IntPtr pDacl,
             IntPtr pSacl);
 
-        [DllImport(PinvokeDllNames.ConvertStringSidToSidDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.ConvertStringSidToSidDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool ConvertStringSidToSid(
             string StringSid,
             out IntPtr Sid);
 
-        [DllImport(PinvokeDllNames.IsValidSidDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.IsValidSidDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool IsValidSid(IntPtr pSid);
 
-        [DllImport(PinvokeDllNames.GetLengthSidDllName, CharSet = CharSet.Unicode)]
+[DllImport(PinvokeDllNames.GetLengthSidDllName, CharSet = CharSet.Unicode)]
         internal static extern uint GetLengthSid(IntPtr pSid);
 
-        [DllImport("Advapi32.dll", CharSet = CharSet.Unicode)]
+[DllImport("Advapi32.dll", CharSet = CharSet.Unicode)]
         internal static extern uint LsaQueryCAPs(
             IntPtr[] CAPIDs,
             uint CAPIDCount,
             out IntPtr CAPs,
             out uint CAPCount);
 
-        [DllImport(PinvokeDllNames.LsaFreeMemoryDllName, CharSet = CharSet.Unicode)]
+[DllImport(PinvokeDllNames.LsaFreeMemoryDllName, CharSet = CharSet.Unicode)]
         internal static extern uint LsaFreeMemory(IntPtr Buffer);
 
-        [DllImport(PinvokeDllNames.InitializeAclDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.InitializeAclDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool InitializeAcl(
             IntPtr pAcl,
             uint nAclLength,
             uint dwAclRevision);
 
-        [DllImport("api-ms-win-security-base-l1-2-0.dll", CharSet = CharSet.Unicode)]
+[DllImport("api-ms-win-security-base-l1-2-0.dll", CharSet = CharSet.Unicode)]
         internal static extern uint AddScopedPolicyIDAce(
             IntPtr Acl,
             uint AceRevision,
@@ -1814,20 +3105,20 @@ namespace System.Management.Automation.Security
             uint AccessMask,
             IntPtr Sid);
 
-        [DllImport(PinvokeDllNames.GetCurrentProcessDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.GetCurrentProcessDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern IntPtr GetCurrentProcess();
 
-        [DllImport(PinvokeDllNames.GetCurrentThreadDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.GetCurrentThreadDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern IntPtr GetCurrentThread();
 
-        [DllImport(PinvokeDllNames.OpenProcessTokenDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.OpenProcessTokenDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool OpenProcessToken(
             IntPtr ProcessHandle,
             uint DesiredAccess,
             out IntPtr TokenHandle);
 
-        [DllImport(PinvokeDllNames.OpenThreadTokenDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.OpenThreadTokenDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool OpenThreadToken(
             IntPtr ThreadHandle,
@@ -1835,14 +3126,14 @@ namespace System.Management.Automation.Security
             bool OpenAsSelf,
             out IntPtr TokenHandle);
 
-        [DllImport(PinvokeDllNames.LookupPrivilegeValueDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.LookupPrivilegeValueDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool LookupPrivilegeValue(
             string lpSystemName,
             string lpName,
             ref LUID lpLuid);
 
-        [DllImport(PinvokeDllNames.AdjustTokenPrivilegesDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.AdjustTokenPrivilegesDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool AdjustTokenPrivileges(
             IntPtr TokenHandle,
@@ -1852,201 +3143,363 @@ namespace System.Management.Automation.Security
             ref TOKEN_PRIVILEGE PreviousState,
             ref uint ReturnLength);
 
-        [DllImport(PinvokeDllNames.LocalFreeDllName, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.LocalFreeDllName, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern IntPtr LocalFree(IntPtr hMem);
 
-        internal const uint DONT_RESOLVE_DLL_REFERENCES = 0x00000001;
-        internal const uint LOAD_LIBRARY_AS_DATAFILE = 0x00000002;
-        internal const uint LOAD_WITH_ALTERED_SEARCH_PATH = 0x00000008;
-        internal const uint LOAD_IGNORE_CODE_AUTHZ_LEVEL = 0x00000010;
-        internal const uint LOAD_LIBRARY_AS_IMAGE_RESOURCE = 0x00000020;
-        internal const uint LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = 0x00000040;
-        internal const uint LOAD_LIBRARY_REQUIRE_SIGNED_TARGET = 0x00000080;
-        internal const uint LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = 0x00000100;
-        internal const uint LOAD_LIBRARY_SEARCH_APPLICATION_DIR = 0x00000200;
-        internal const uint LOAD_LIBRARY_SEARCH_USER_DIRS = 0x00000400;
-        internal const uint LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800;
-        internal const uint LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000;
+internal const uint 
+DONT_RESOLVE_DLL_REFERENCES = 0x00000001
+;
 
-        [DllImport(PinvokeDllNames.LoadLibraryEx, CharSet = CharSet.Unicode, SetLastError = true)]
+internal const uint 
+LOAD_LIBRARY_AS_DATAFILE = 0x00000002
+;
+
+internal const uint 
+LOAD_WITH_ALTERED_SEARCH_PATH = 0x00000008
+;
+
+internal const uint 
+LOAD_IGNORE_CODE_AUTHZ_LEVEL = 0x00000010
+;
+
+internal const uint 
+LOAD_LIBRARY_AS_IMAGE_RESOURCE = 0x00000020
+;
+
+internal const uint 
+LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE = 0x00000040
+;
+
+internal const uint 
+LOAD_LIBRARY_REQUIRE_SIGNED_TARGET = 0x00000080
+;
+
+internal const uint 
+LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR = 0x00000100
+;
+
+internal const uint 
+LOAD_LIBRARY_SEARCH_APPLICATION_DIR = 0x00000200
+;
+
+internal const uint 
+LOAD_LIBRARY_SEARCH_USER_DIRS = 0x00000400
+;
+
+internal const uint 
+LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800
+;
+
+internal const uint 
+LOAD_LIBRARY_SEARCH_DEFAULT_DIRS = 0x00001000
+;
+
+[DllImport(PinvokeDllNames.LoadLibraryEx, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern IntPtr LoadLibraryExW(
             string DllName,
             IntPtr reserved,
             uint Flags);
 
-        [DllImport(PinvokeDllNames.FreeLibrary, CharSet = CharSet.Unicode, SetLastError = true)]
+[DllImport(PinvokeDllNames.FreeLibrary, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool FreeLibrary(
             IntPtr Module);
 
-        internal static bool IsSystem32DllPresent(string DllName)
+internal static bool IsSystem32DllPresent(string DllName)
+		{
+			try
         {
-            bool DllExists = false;
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1225,68661,69500);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,68743,68766);
+
+bool 
+DllExists = false
+;
 
             try
             {
-                IntPtr module = LoadLibraryExW(
-                                        DllName,
-                                        IntPtr.Zero,
-                                        NativeMethods.LOAD_LIBRARY_AS_DATAFILE |
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,68818,69217);
+
+IntPtr 
+module = f_1225_68834_69216(DllName, IntPtr.Zero, NativeMethods.LOAD_LIBRARY_AS_DATAFILE |
                                             NativeMethods.LOAD_LIBRARY_AS_IMAGE_RESOURCE |
-                                            NativeMethods.LOAD_LIBRARY_SEARCH_SYSTEM32);
-                if (IntPtr.Zero != module)
-                {
-                    FreeLibrary(module);
-                    DllExists = true;
-                }
+                                            NativeMethods.LOAD_LIBRARY_SEARCH_SYSTEM32)
+;
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69235,69380) || true) && (IntPtr.Zero != module)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1225,69235,69380);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69302,69322);
+
+f_1225_69302_69321(module);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69344,69361);
+
+DllExists = true;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1225,69235,69380);
+}
             }
             catch (Exception)
             {
+DynAbs.Tracing.TraceSender.TraceEnterCatch(1225,69409,69456);
+DynAbs.Tracing.TraceSender.TraceExitCatch(1225,69409,69456);
             }
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1225,69472,69489);
 
-            return DllExists;
+return DllExists;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1225,68661,69500);
+
+System.IntPtr
+f_1225_68834_69216(string
+DllName,System.IntPtr
+reserved,uint
+Flags)
+{
+var return_v = LoadLibraryExW( DllName, reserved, Flags);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 68834, 69216);
+return return_v;
+}
+
+
+bool
+f_1225_69302_69321(System.IntPtr
+Module)
+{
+var return_v = FreeLibrary( Module);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1225, 69302, 69321);
+return return_v;
+}
+
         }
-    }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1225,68661,69500);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,68661,69500);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+}
+internal partial class NativeConstants
+{
+public const int 
+CRYPTCAT_E_AREA_HEADER = 0
+;
 
-    // Constants needed for Catalog Error Handling
-    internal partial class NativeConstants
-    {
-        // CRYPTCAT_E_AREA_HEADER = "0x00000000";
-        public const int CRYPTCAT_E_AREA_HEADER = 0;
+public const int 
+CRYPTCAT_E_AREA_MEMBER = 65536
+;
 
-        // CRYPTCAT_E_AREA_MEMBER = "0x00010000";
-        public const int CRYPTCAT_E_AREA_MEMBER = 65536;
+public const int 
+CRYPTCAT_E_AREA_ATTRIBUTE = 131072
+;
 
-        // CRYPTCAT_E_AREA_ATTRIBUTE = "0x00020000";
-        public const int CRYPTCAT_E_AREA_ATTRIBUTE = 131072;
+public const int 
+CRYPTCAT_E_CDF_UNSUPPORTED = 1
+;
 
-        // CRYPTCAT_E_CDF_UNSUPPORTED = "0x00000001";
-        public const int CRYPTCAT_E_CDF_UNSUPPORTED = 1;
+public const int 
+CRYPTCAT_E_CDF_DUPLICATE = 2
+;
 
-        // CRYPTCAT_E_CDF_DUPLICATE = "0x00000002";
-        public const int CRYPTCAT_E_CDF_DUPLICATE = 2;
+public const int 
+CRYPTCAT_E_CDF_TAGNOTFOUND = 4
+;
 
-        // CRYPTCAT_E_CDF_TAGNOTFOUND = "0x00000004";
-        public const int CRYPTCAT_E_CDF_TAGNOTFOUND = 4;
+public const int 
+CRYPTCAT_E_CDF_MEMBER_FILE_PATH = 65537
+;
 
-        // CRYPTCAT_E_CDF_MEMBER_FILE_PATH = "0x00010001";
-        public const int CRYPTCAT_E_CDF_MEMBER_FILE_PATH = 65537;
+public const int 
+CRYPTCAT_E_CDF_MEMBER_INDIRECTDATA = 65538
+;
 
-        // CRYPTCAT_E_CDF_MEMBER_INDIRECTDATA = "0x00010002";
-        public const int CRYPTCAT_E_CDF_MEMBER_INDIRECTDATA = 65538;
+public const int 
+CRYPTCAT_E_CDF_MEMBER_FILENOTFOUND = 65540
+;
 
-        // CRYPTCAT_E_CDF_MEMBER_FILENOTFOUND = "0x00010004";
-        public const int CRYPTCAT_E_CDF_MEMBER_FILENOTFOUND = 65540;
+public const int 
+CRYPTCAT_E_CDF_BAD_GUID_CONV = 131073
+;
 
-        // CRYPTCAT_E_CDF_BAD_GUID_CONV = "0x00020001";
-        public const int CRYPTCAT_E_CDF_BAD_GUID_CONV = 131073;
+public const int 
+CRYPTCAT_E_CDF_ATTR_TOOFEWVALUES = 131074
+;
 
-        // CRYPTCAT_E_CDF_ATTR_TOOFEWVALUES = "0x00020002";
-        public const int CRYPTCAT_E_CDF_ATTR_TOOFEWVALUES = 131074;
-
-        // CRYPTCAT_E_CDF_ATTR_TYPECOMBO = "0x00020004";
-        public const int CRYPTCAT_E_CDF_ATTR_TYPECOMBO = 131076;
-    }
-
-    /// <summary>
-    /// Pinvoke methods from wintrust.dll
-    /// These are added to Generate and Validate Window Catalog Files.
-    /// </summary>
-    internal static partial class NativeMethods
-    {
-        [StructLayout(LayoutKind.Sequential)]
+public const int 
+CRYPTCAT_E_CDF_ATTR_TYPECOMBO = 131076
+;
+}
+internal static partial class NativeMethods
+{
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPT_ATTRIBUTE_TYPE_VALUE
         {
-            [MarshalAs(UnmanagedType.LPStr)]
+
+[MarshalAs(UnmanagedType.LPStr)]
             internal string pszObjId;
-            internal CRYPT_ATTR_BLOB Value;
+
+internal CRYPT_ATTR_BLOB Value;
+static CRYPT_ATTRIBUTE_TYPE_VALUE(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,71297,71538);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,71297,71538);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,71297,71538);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct SIP_INDIRECT_DATA
         {
-            internal CRYPT_ATTRIBUTE_TYPE_VALUE Data;
-            internal CRYPT_ALGORITHM_IDENTIFIER DigestAlgorithm;
-            internal CRYPT_ATTR_BLOB Digest;
+
+internal CRYPT_ATTRIBUTE_TYPE_VALUE Data;
+
+internal CRYPT_ALGORITHM_IDENTIFIER DigestAlgorithm;
+
+internal CRYPT_ATTR_BLOB Digest;
+static SIP_INDIRECT_DATA(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,71550,71819);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,71550,71819);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,71550,71819);
+}
         }
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPTCATCDF
         {
-            private DWORD _cbStruct;
-            private IntPtr _hFile;
-            private DWORD _dwCurFilePos;
-            private DWORD _dwLastMemberOffset;
-            private BOOL _fEOF;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+private DWORD _cbStruct;
+
+private IntPtr _hFile;
+
+private DWORD _dwCurFilePos;
+
+private DWORD _dwLastMemberOffset;
+
+private BOOL _fEOF;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             private string _pwszResultDir;
-            private IntPtr _hCATStore;
+
+private IntPtr _hCATStore;
+static CRYPTCATCDF(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,71831,72256);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,71831,72256);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,71831,72256);
+}
         };
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPTCATMEMBER
         {
-            internal DWORD cbStruct;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+internal DWORD cbStruct;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszReferenceTag;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszFileName;
-            internal GUID gSubjectType;
-            internal DWORD fdwMemberFlags;
-            internal IntPtr pIndirectData;
-            internal DWORD dwCertVersion;
-            internal DWORD dwReserved;
-            internal IntPtr hReserved;
-            internal CRYPT_ATTR_BLOB sEncodedIndirectData;
-            internal CRYPT_ATTR_BLOB sEncodedMemberInfo;
+
+internal GUID gSubjectType;
+
+internal DWORD fdwMemberFlags;
+
+internal IntPtr pIndirectData;
+
+internal DWORD dwCertVersion;
+
+internal DWORD dwReserved;
+
+internal IntPtr hReserved;
+
+internal CRYPT_ATTR_BLOB sEncodedIndirectData;
+
+internal CRYPT_ATTR_BLOB sEncodedMemberInfo;
+static CRYPTCATMEMBER(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,72268,72960);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,72268,72960);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,72268,72960);
+}
         };
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPTCATATTRIBUTE
         {
-            private DWORD _cbStruct;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+private DWORD _cbStruct;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszReferenceTag;
-            private DWORD _dwAttrTypeAndAction;
-            internal DWORD cbValue;
-            internal System.IntPtr pbValue;
-            private DWORD _dwReserved;
+
+private DWORD _dwAttrTypeAndAction;
+
+internal DWORD cbValue;
+
+internal System.IntPtr pbValue;
+
+private DWORD _dwReserved;
+static CRYPTCATATTRIBUTE(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,72972,73378);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,72972,73378);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,72972,73378);
+}
         };
 
-        [StructLayout(LayoutKind.Sequential)]
+[StructLayout(LayoutKind.Sequential)]
         internal struct CRYPTCATSTORE
         {
-            private DWORD _cbStruct;
-            internal DWORD dwPublicVersion;
-            [MarshalAs(UnmanagedType.LPWStr)]
+
+private DWORD _cbStruct;
+
+internal DWORD dwPublicVersion;
+
+[MarshalAs(UnmanagedType.LPWStr)]
             internal string pwszP7File;
-            private IntPtr _hProv;
-            private DWORD _dwEncodingType;
-            private DWORD _fdwStoreFlags;
-            private IntPtr _hReserved;
-            private IntPtr _hAttrs;
-            private IntPtr _hCryptMsg;
-            private IntPtr _hSorted;
+
+private IntPtr _hProv;
+
+private DWORD _dwEncodingType;
+
+private DWORD _fdwStoreFlags;
+
+private IntPtr _hReserved;
+
+private IntPtr _hAttrs;
+
+private IntPtr _hCryptMsg;
+
+private IntPtr _hSorted;
+static CRYPTCATSTORE(){DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1225,73390,73938);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1225,73390,73938);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1225,73390,73938);
+}
         };
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATCDFOpen(
             [MarshalAs(UnmanagedType.LPWStr)]
             string pwszFilePath,
             CryptCATCDFOpenCallBack pfnParseError
         );
 
-        [DllImport("wintrust.dll")]
+[DllImport("wintrust.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CryptCATCDFClose(
             IntPtr pCDF
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATCDFEnumCatAttributes(
             IntPtr pCDF,
             IntPtr pPrevAttr,
             CryptCATCDFOpenCallBack pfnParseError
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATCDFEnumMembersByCDFTagEx(
             IntPtr pCDF,
             IntPtr pwszPrevCDFTag,
@@ -2056,7 +3509,7 @@ namespace System.Management.Automation.Security
             IntPtr pvReserved
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATCDFEnumAttributesWithCDFTag(
             IntPtr pCDF,
             IntPtr pwszMemberTag,
@@ -2065,7 +3518,7 @@ namespace System.Management.Automation.Security
             CryptCATCDFEnumMembersByCDFTagExErrorCallBack fn
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATOpen(
             [MarshalAs(UnmanagedType.LPWStr)]
             string pwszFilePath,
@@ -2075,18 +3528,18 @@ namespace System.Management.Automation.Security
             DWORD dwEncodingType
          );
 
-        [DllImport("wintrust.dll")]
+[DllImport("wintrust.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CryptCATClose(
           IntPtr hCatalog
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATStoreFromHandle(
             IntPtr hCatalog
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CryptCATAdminAcquireContext2(
           ref IntPtr phCatAdmin,
@@ -2097,14 +3550,14 @@ namespace System.Management.Automation.Security
           DWORD dwFlags
       );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CryptCATAdminReleaseContext(
             IntPtr phCatAdmin,
             DWORD dwFlags
         );
 
-        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
         internal static extern unsafe IntPtr CreateFile(
             string lpFileName,
             DWORD dwDesiredAccess,
@@ -2115,7 +3568,7 @@ namespace System.Management.Automation.Security
             IntPtr hTemplateFile
            );
 
-        [DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CryptCATAdminCalcHashFromFileHandle2(
             IntPtr hCatAdmin,
@@ -2125,19 +3578,19 @@ namespace System.Management.Automation.Security
             DWORD dwFlags
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATEnumerateCatAttr(
             IntPtr hCatalog,
             IntPtr pPrevAttr
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATEnumerateMember(
                 IntPtr hCatalog,
                 IntPtr pPrevMember
         );
 
-        [DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
+[DllImport("wintrust.dll", CharSet = CharSet.Unicode)]
         internal static extern IntPtr CryptCATEnumerateAttr(
             IntPtr hCatalog,
             IntPtr pCatMember,
@@ -2161,7 +3614,7 @@ namespace System.Management.Automation.Security
                                       DWORD NotUsedDWORD2,
                                       [MarshalAs(UnmanagedType.LPWStr)]
                                       string NotUsedString);
-    }
+}
 }
 
 #pragma warning restore 56523

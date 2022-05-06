@@ -6,209 +6,583 @@ using System.Management.Automation.Language;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// The parameters for the paging support enabled by <see cref="CmdletCommonMetadataAttribute.SupportsPaging"/>.
-    /// Includes: -IncludeTotalCount, -Skip [int], -First [int]
-    /// </summary>
     public sealed class PagingParameters
     {
-        #region ctor
-
         internal PagingParameters(MshCommandRuntime commandRuntime)
         {
-            if (commandRuntime == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("commandRuntime");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1371, 523, 811);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 1342, 1395);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 1655, 1728);
+                this.First = UInt64.MaxValue;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 607, 745) || true) && (commandRuntime == null)
+                )
 
-            commandRuntime.PagingParameters = this;
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1371, 607, 745);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 667, 730);
+
+                    throw f_1371_673_729("commandRuntime");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1371, 607, 745);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 761, 800);
+
+                commandRuntime.PagingParameters = this;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1371, 523, 811);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 523, 811);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 523, 811);
+            }
         }
 
-        #endregion ctor
-
-        #region parameters
-
-        /// <summary>
-        /// Gets or sets the value of the -IncludeTotalCount parameter for all cmdlets that support paging.
-        /// </summary>
         [Parameter]
         public SwitchParameter IncludeTotalCount { get; set; }
 
-        /// <summary>
-        /// Gets or sets the value of the -Skip parameter for all cmdlets that support paging.
-        /// If the user doesn't specify anything, the default is <c>0</c>.
-        /// </summary>
         [Parameter]
         public UInt64 Skip { get; set; }
 
-        /// <summary>
-        /// Gets or sets the value of the -First parameter for all cmdlets that support paging.
-        /// If the user doesn't specify anything, the default is <see cref="System.UInt64.MaxValue"/>.
-        /// </summary>
         [Parameter]
-        public UInt64 First { get; set; } = UInt64.MaxValue;
+        public UInt64 First { get; set; }
 
-        #endregion parameters
-
-        #region emitting total count
-
-        /// <summary>
-        /// A helper method for creating an object that represents a total count
-        /// of objects that the cmdlet would return without paging
-        /// (this can be more than the size of the page specified in the <see cref="First"/> cmdlet parameter).
-        /// </summary>
-        /// <param name="totalCount">A total count of objects that the cmdlet would return without paging.</param>
-        /// <param name="accuracy">
-        /// accuracy of the <paramref name="totalCount"/> parameter.
-        /// <c>1.0</c> means 100% accurate;
-        /// <c>0.0</c> means that total count is unknown;
-        /// anything in-between means that total count is estimated
-        /// </param>
-        /// <returns>An object that represents a total count of objects that the cmdlet would return without paging.</returns>
         public PSObject NewTotalCount(UInt64 totalCount, double accuracy)
         {
-            PSObject result = new PSObject(totalCount);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 2669, 4070);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 2759, 2802);
 
-            string toStringMethodBody = string.Format(
-                CultureInfo.CurrentCulture,
-                @"
+                PSObject
+                result = f_1371_2777_2801(totalCount)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 2818, 3661);
+
+                string
+                toStringMethodBody = f_1371_2846_3660(f_1371_2878_2904(), @"
                     $totalCount = $this.PSObject.BaseObject
                     switch ($this.Accuracy) {{
                         {{ $_ -ge 1.0 }} {{ '{0}' -f $totalCount }}
                         {{ $_ -le 0.0 }} {{ '{1}' -f $totalCount }}
                         default          {{ '{2}' -f $totalCount }}
                     }}
-                ",
-                CodeGeneration.EscapeSingleQuotedStringContent(CommandBaseStrings.PagingSupportAccurateTotalCountTemplate),
-                CodeGeneration.EscapeSingleQuotedStringContent(CommandBaseStrings.PagingSupportUnknownTotalCountTemplate),
-                CodeGeneration.EscapeSingleQuotedStringContent(CommandBaseStrings.PagingSupportEstimatedTotalCountTemplate));
-            PSScriptMethod toStringMethod = new PSScriptMethod("ToString", ScriptBlock.Create(toStringMethodBody));
-            result.Members.Add(toStringMethod);
+                ", f_1371_3303_3409(f_1371_3350_3408()), f_1371_3428_3533(f_1371_3475_3532()), f_1371_3552_3659(f_1371_3599_3658()))
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 3675, 3778);
 
-            accuracy = Math.Max(0.0, Math.Min(1.0, accuracy));
-            PSNoteProperty statusProperty = new PSNoteProperty("Accuracy", accuracy);
-            result.Members.Add(statusProperty);
+                PSScriptMethod
+                toStringMethod = f_1371_3707_3777("ToString", f_1371_3738_3776(toStringMethodBody))
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 3792, 3827);
 
-            return result;
+                f_1371_3792_3826(f_1371_3792_3806(result), toStringMethod);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 3843, 3893);
+
+                accuracy = f_1371_3854_3892(0.0, f_1371_3868_3891(1.0, accuracy));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 3907, 3980);
+
+                PSNoteProperty
+                statusProperty = f_1371_3939_3979("Accuracy", accuracy)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 3994, 4029);
+
+                f_1371_3994_4028(f_1371_3994_4008(result), statusProperty);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 4045, 4059);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 2669, 4070);
+
+                System.Management.Automation.PSObject
+                f_1371_2777_2801(ulong
+                obj)
+                {
+                    var return_v = new System.Management.Automation.PSObject((object)obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 2777, 2801);
+                    return return_v;
+                }
+
+
+                System.Globalization.CultureInfo
+                f_1371_2878_2904()
+                {
+                    var return_v = CultureInfo.CurrentCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 2878, 2904);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_3350_3408()
+                {
+                    var return_v = CommandBaseStrings.PagingSupportAccurateTotalCountTemplate;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 3350, 3408);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_3303_3409(string
+                value)
+                {
+                    var return_v = CodeGeneration.EscapeSingleQuotedStringContent(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3303, 3409);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_3475_3532()
+                {
+                    var return_v = CommandBaseStrings.PagingSupportUnknownTotalCountTemplate;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 3475, 3532);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_3428_3533(string
+                value)
+                {
+                    var return_v = CodeGeneration.EscapeSingleQuotedStringContent(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3428, 3533);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_3599_3658()
+                {
+                    var return_v = CommandBaseStrings.PagingSupportEstimatedTotalCountTemplate;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 3599, 3658);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_3552_3659(string
+                value)
+                {
+                    var return_v = CodeGeneration.EscapeSingleQuotedStringContent(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3552, 3659);
+                    return return_v;
+                }
+
+
+                string
+                f_1371_2846_3660(System.Globalization.CultureInfo
+                provider, string
+                format, string
+                arg0, string
+                arg1, string
+                arg2)
+                {
+                    var return_v = string.Format((System.IFormatProvider)provider, format, (object)arg0, (object)arg1, (object)arg2);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 2846, 3660);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.ScriptBlock
+                f_1371_3738_3776(string
+                script)
+                {
+                    var return_v = ScriptBlock.Create(script);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3738, 3776);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSScriptMethod
+                f_1371_3707_3777(string
+                name, System.Management.Automation.ScriptBlock
+                script)
+                {
+                    var return_v = new System.Management.Automation.PSScriptMethod(name, script);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3707, 3777);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSMemberInfo>
+                f_1371_3792_3806(System.Management.Automation.PSObject
+                this_param)
+                {
+                    var return_v = this_param.Members;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 3792, 3806);
+                    return return_v;
+                }
+
+
+                int
+                f_1371_3792_3826(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSMemberInfo>
+                this_param, System.Management.Automation.PSScriptMethod
+                member)
+                {
+                    this_param.Add((System.Management.Automation.PSMemberInfo)member);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3792, 3826);
+                    return 0;
+                }
+
+
+                double
+                f_1371_3868_3891(double
+                val1, double
+                val2)
+                {
+                    var return_v = Math.Min(val1, val2);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3868, 3891);
+                    return return_v;
+                }
+
+
+                double
+                f_1371_3854_3892(double
+                val1, double
+                val2)
+                {
+                    var return_v = Math.Max(val1, val2);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3854, 3892);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSNoteProperty
+                f_1371_3939_3979(string
+                name, double
+                value)
+                {
+                    var return_v = new System.Management.Automation.PSNoteProperty(name, (object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3939, 3979);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSMemberInfo>
+                f_1371_3994_4008(System.Management.Automation.PSObject
+                this_param)
+                {
+                    var return_v = this_param.Members;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 3994, 4008);
+                    return return_v;
+                }
+
+
+                int
+                f_1371_3994_4028(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSMemberInfo>
+                this_param, System.Management.Automation.PSNoteProperty
+                member)
+                {
+                    this_param.Add((System.Management.Automation.PSMemberInfo)member);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 3994, 4028);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 2669, 4070);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 2669, 4070);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion emitting total count
+        static PagingParameters()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1371, 446, 4120);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1371, 446, 4120);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 446, 4120);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1371, 446, 4120);
+
+        System.Management.Automation.PSArgumentNullException
+        f_1371_673_729(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 673, 729);
+            return return_v;
+        }
+
     }
 }
 
 namespace System.Management.Automation.Internal
 {
-    /// <summary>
-    /// The declaration of parameters for the ShouldProcess mechanisms. -Whatif, and -Confirm.
-    /// </summary>
     public sealed class ShouldProcessParameters
     {
-        #region ctor
-
-        /// <summary>
-        /// Constructs an instance with the specified command instance.
-        /// </summary>
-        /// <param name="commandRuntime">
-        /// The instance of the command that the parameters should set the
-        /// user feedback properties on when the parameters get bound.
-        /// </param>
         internal ShouldProcessParameters(MshCommandRuntime commandRuntime)
         {
-            if (commandRuntime == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("commandRuntime");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1371, 4735, 5024);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 6002, 6017);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 4826, 4964) || true) && (commandRuntime == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1371, 4826, 4964);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 4886, 4949);
+
+                    throw f_1371_4892_4948("commandRuntime");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1371, 4826, 4964);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 4980, 5013);
+
+                _commandRuntime = commandRuntime;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1371, 4735, 5024);
             }
-
-            _commandRuntime = commandRuntime;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 4735, 5024);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 4735, 5024);
+            }
         }
-        #endregion ctor
 
-        #region parameters
-
-        /// <summary>
-        /// Gets or sets the value of the -Whatif parameter for all cmdlets.
-        /// </summary>
         [Parameter]
         [Alias("wi")]
         public SwitchParameter WhatIf
         {
             get
             {
-                return _commandRuntime.WhatIf;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 5314, 5395);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 5350, 5380);
 
+                    return f_1371_5357_5379(_commandRuntime);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 5314, 5395);
+
+                    System.Management.Automation.SwitchParameter
+                    f_1371_5357_5379(System.Management.Automation.MshCommandRuntime
+                    this_param)
+                    {
+                        var return_v = this_param.WhatIf;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 5357, 5379);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 5216, 5504);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 5216, 5504);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                _commandRuntime.WhatIf = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 5411, 5493);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 5447, 5478);
+
+                    _commandRuntime.WhatIf = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 5411, 5493);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 5216, 5504);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 5216, 5504);
+                }
             }
         }
 
-        /// <summary>
-        /// Gets or sets the value of the -Confirm parameter for all cmdlets.
-        /// </summary>
         [Parameter]
         [Alias("cf")]
         public SwitchParameter Confirm
         {
             get
             {
-                return _commandRuntime.Confirm;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 5741, 5823);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 5777, 5808);
 
+                    return f_1371_5784_5807(_commandRuntime);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 5741, 5823);
+
+                    System.Management.Automation.SwitchParameter
+                    f_1371_5784_5807(System.Management.Automation.MshCommandRuntime
+                    this_param)
+                    {
+                        var return_v = this_param.Confirm;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 5784, 5807);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 5642, 5933);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 5642, 5933);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                _commandRuntime.Confirm = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 5839, 5922);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 5875, 5907);
+
+                    _commandRuntime.Confirm = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 5839, 5922);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 5642, 5933);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 5642, 5933);
+                }
             }
         }
-        #endregion parameters
 
         private MshCommandRuntime _commandRuntime;
-    }
 
-    /// <summary>
-    /// The declaration of parameters for the Transactions mechanisms. -UseTransaction, and -BypassTransaction.
-    /// </summary>
+        static ShouldProcessParameters()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1371, 4318, 6025);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1371, 4318, 6025);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 4318, 6025);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1371, 4318, 6025);
+
+        System.Management.Automation.PSArgumentNullException
+        f_1371_4892_4948(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1371, 4892, 4948);
+            return return_v;
+        }
+
+    }
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.MSInternal", "CA903:InternalNamespaceShouldNotContainPublicTypes", Justification = "These are only exposed by way of the PowerShell cmdlets that surface them.")]
     public sealed class TransactionParameters
     {
-        #region ctor
-
-        /// <summary>
-        /// Constructs an instance with the specified command instance.
-        /// </summary>
-        /// <param name="commandRuntime">
-        /// The instance of the command that the parameters should set the
-        /// user feedback properties on when the parameters get bound.
-        /// </param>
         internal TransactionParameters(MshCommandRuntime commandRuntime)
         {
-            _commandRuntime = commandRuntime;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1371, 6827, 6960);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 7546, 7561);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 6916, 6949);
+
+                _commandRuntime = commandRuntime;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1371, 6827, 6960);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 6827, 6960);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 6827, 6960);
+            }
         }
-        #endregion ctor
 
-        #region parameters
-
-        /// <summary>
-        /// Gets or sets the value of the -UseTransaction parameter for all cmdlets.
-        /// </summary>
         [Parameter]
         [Alias("usetx")]
         public SwitchParameter UseTransaction
         {
             get
             {
-                return _commandRuntime.UseTransaction;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 7269, 7358);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 7305, 7343);
 
+                    return f_1371_7312_7342(_commandRuntime);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 7269, 7358);
+
+                    System.Management.Automation.SwitchParameter
+                    f_1371_7312_7342(System.Management.Automation.MshCommandRuntime
+                    this_param)
+                    {
+                        var return_v = this_param.UseTransaction;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1371, 7312, 7342);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 7160, 7475);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 7160, 7475);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                _commandRuntime.UseTransaction = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1371, 7374, 7464);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1371, 7410, 7449);
+
+                    _commandRuntime.UseTransaction = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1371, 7374, 7464);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1371, 7160, 7475);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 7160, 7475);
+                }
             }
         }
 
-        #endregion parameters
-
         private MshCommandRuntime _commandRuntime;
+
+        static TransactionParameters()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1371, 6185, 7569);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1371, 6185, 7569);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1371, 6185, 7569);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1371, 6185, 7569);
     }
 }
 

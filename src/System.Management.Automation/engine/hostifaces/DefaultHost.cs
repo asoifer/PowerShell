@@ -10,133 +10,243 @@ using Dbg = System.Diagnostics;
 
 namespace Microsoft.PowerShell
 {
-    /// <summary>
-    /// This is the default host implementing PSHost offering minimal host capabilities.
-    /// Runspace is the primary user of this class.
-    /// </summary>
-
     internal class DefaultHost : PSHost
     {
-        #region ctor
-
-        /// <summary>
-        /// Creates an instance based on the current culture and current UI culture.
-        /// </summary>
-        /// <param name="currentCulture">Current culture for this host.</param>
-        /// <param name="currentUICulture">Current UI culture for this host.</param>
-        /// <exception/>
-
         internal DefaultHost(CultureInfo currentCulture, CultureInfo currentUICulture)
         {
-            CurrentCulture = currentCulture;
-            CurrentUICulture = currentUICulture;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1458, 887, 1083);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1320, 1387);
+                this.Version = f_1458_1363_1386();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1446, 1504);
+                this.InstanceId = Guid.NewGuid();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1787, 1846);
+                this.CurrentCulture = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1934, 1995);
+                this.CurrentUICulture = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 990, 1022);
+
+                CurrentCulture = currentCulture;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1036, 1072);
+
+                CurrentUICulture = currentUICulture;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1458, 887, 1083);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 887, 1083);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 887, 1083);
+            }
         }
 
-        #endregion ctor
+        public override string Name
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 1229, 1259);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1235, 1257);
 
-        #region properties
+                    return "Default Host";
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 1229, 1259);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 1199, 1261);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 1199, 1261);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
 
-        /// <summary>See base class</summary>
-        public override string Name { get { return "Default Host"; } }
+        public override Version Version { get; }
 
-        /// <summary>See base class</summary>
-        public override Version Version { get; } = PSVersionInfo.PSVersion;
+        public override Guid InstanceId { get; }
 
-        /// <summary>See base class</summary>
-        public override Guid InstanceId { get; } = Guid.NewGuid();
+        public override PSHostUserInterface UI
+        {
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 1677, 1697);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 1683, 1695);
 
-        /// <summary>
-        /// See base class
-        /// This property is not supported.
-        /// </summary>
-        public override PSHostUserInterface UI { get { return null; } }
+                    return null;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 1677, 1697);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 1636, 1699);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 1636, 1699);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
 
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        public override CultureInfo CurrentCulture { get; } = null;
+        public override CultureInfo CurrentCulture { get; }
 
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        public override CultureInfo CurrentUICulture { get; } = null;
-
-        #endregion properties
-
-        #region methods
-
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        /// <value></value>
-        /// <exception/>
+        public override CultureInfo CurrentUICulture { get; }
 
         public override
-        void
-        SetShouldExit(int exitCode)
+                void
+                SetShouldExit(int exitCode)
         {
-            // No op
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 2200, 2310);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 2200, 2310);
+                // No op
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 2200, 2310);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 2200, 2310);
+            }
         }
-
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        /// <value></value>
-        /// <exception cref="NotSupportedException">
-        /// On calling this method
-        /// </exception>
 
         public override
-        void
-        EnterNestedPrompt()
+                void
+                EnterNestedPrompt()
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 2545, 2686);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 2628, 2675);
+
+                throw f_1458_2634_2674();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 2545, 2686);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1458_2634_2674()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1458, 2634, 2674);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 2545, 2686);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 2545, 2686);
+            }
         }
-
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        /// <value></value>
-        /// <exception cref="NotSupportedException">
-        /// On calling this method
-        /// </exception>
-        public override
-        void
-        ExitNestedPrompt()
-        {
-            throw PSTraceSource.NewNotSupportedException();
-        }
-
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        /// <value></value>
-        /// <exception/>
-
-        public override
-        void
-        NotifyBeginApplication()
-        {
-            // No op
-        }
-
-        /// <summary>
-        /// See base class.
-        /// </summary>
-        /// <value></value>
-        /// <exception/>
 
         public override
-        void
-        NotifyEndApplication()
+                void
+                ExitNestedPrompt()
         {
-            // No op
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 2919, 3059);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1458, 3001, 3048);
+
+                throw f_1458_3007_3047();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 2919, 3059);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1458_3007_3047()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1458, 3007, 3047);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 2919, 3059);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 2919, 3059);
+            }
         }
-        #endregion methods
 
-        #region private fields
+        public override
+                void
+                NotifyBeginApplication()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 3204, 3311);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 3204, 3311);
+                // No op
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 3204, 3311);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 3204, 3311);
+            }
+        }
 
-        #endregion private fields
+        public override
+                void
+                NotifyEndApplication()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1458, 3456, 3561);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1458, 3456, 3561);
+                // No op
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1458, 3456, 3561);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 3456, 3561);
+            }
+        }
+
+        static DefaultHost()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1458, 483, 3667);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1458, 483, 3667);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1458, 483, 3667);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1458, 483, 3667);
+
+        System.Version
+        f_1458_1363_1386()
+        {
+            var return_v = PSVersionInfo.PSVersion;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1458, 1363, 1386);
+            return return_v;
+        }
+
     }
 }
 

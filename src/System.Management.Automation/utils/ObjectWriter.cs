@@ -7,229 +7,374 @@ namespace System.Management.Automation.Internal
     using System.Threading;
     using System.Runtime.InteropServices;
     using System.Management.Automation.Runspaces;
-
-    /// <summary>
-    /// A ObjectWriter for an ObjectStream.
-    /// </summary>
-    /// <remarks>
-    /// This class is not safe for multi-threaded operations.
-    /// </remarks>
     internal class ObjectWriter : PipelineWriter
     {
-        /// <summary>
-        /// Construct with an existing ObjectStream.
-        /// </summary>
-        /// <param name="stream">The stream to write.</param>
-        /// <exception cref="ArgumentNullException">Thrown if the specified stream is null.</exception>
         public ObjectWriter([In, Out] ObjectStreamBase stream)
         {
-            if (stream == null)
+            try
             {
-                throw new ArgumentNullException("stream");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1028, 816, 1141);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 6847, 6854);
 
-            _stream = stream;
-#if (false)
-            stream.WriteReady += new EventHandler (this.OnWriteReady);
-#endif
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 895, 1004) || true) && (stream == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1028, 895, 1004);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 947, 989);
+
+                    throw f_1028_953_988("stream");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1028, 895, 1004);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 1020, 1037);
+
+                _stream = stream;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1028, 816, 1141);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 816, 1141);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 816, 1141);
+            }
         }
 
-        #region Properties
-
-        /// <summary>
-        /// Waitable handle for caller's to block until buffer space is available in the underlying stream.
-        /// </summary>
         public override WaitHandle WaitHandle
         {
             get
             {
-                return _stream.WriteHandle;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 1401, 1479);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 1437, 1464);
+
+                    return f_1028_1444_1463(_stream);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 1401, 1479);
+
+                    System.Threading.WaitHandle
+                    f_1028_1444_1463(System.Management.Automation.Internal.ObjectStreamBase
+                    this_param)
+                    {
+                        var return_v = this_param.WriteHandle;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1028, 1444, 1463);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 1339, 1490);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 1339, 1490);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Check if the stream is open for further writes.
-        /// </summary>
-        /// <value>true if the underlying stream is open, otherwise; false.</value>
-        /// <remarks>
-        /// Attempting to write to the underlying stream if IsOpen is false throws
-        /// a <see cref="PipelineClosedException"/>.
-        /// </remarks>
         public override bool IsOpen
         {
             get
             {
-                return _stream.IsOpen;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 1932, 2005);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 1968, 1990);
+
+                    return f_1028_1975_1989(_stream);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 1932, 2005);
+
+                    bool
+                    f_1028_1975_1989(System.Management.Automation.Internal.ObjectStreamBase
+                    this_param)
+                    {
+                        var return_v = this_param.IsOpen;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1028, 1975, 1989);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 1880, 2016);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 1880, 2016);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Returns the number of objects in the underlying stream.
-        /// </summary>
         public override int Count
         {
             get
             {
-                return _stream.Count;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 2194, 2266);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 2230, 2251);
+
+                    return f_1028_2237_2250(_stream);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 2194, 2266);
+
+                    int
+                    f_1028_2237_2250(System.Management.Automation.Internal.ObjectStreamBase
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1028, 2237, 2250);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 2144, 2277);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 2144, 2277);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Get the capacity of the stream.
-        /// </summary>
-        /// <value>
-        /// The capacity of the stream.
-        /// </value>
-        /// <remarks>
-        /// The capacity is the number of objects that stream may contain at one time.  Once this
-        /// limit is reached, attempts to write into the stream block until buffer space
-        /// becomes available.
-        /// </remarks>
         public override int MaxCapacity
         {
             get
             {
-                return _stream.MaxCapacity;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 2789, 2867);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 2825, 2852);
+
+                    return f_1028_2832_2851(_stream);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 2789, 2867);
+
+                    int
+                    f_1028_2832_2851(System.Management.Automation.Internal.ObjectStreamBase
+                    this_param)
+                    {
+                        var return_v = this_param.MaxCapacity;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1028, 2832, 2851);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 2733, 2878);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 2733, 2878);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        #endregion Properties
-
-        #region Methods
-
-        /// <summary>
-        /// Close the stream.
-        /// </summary>
-        /// <remarks>
-        /// Causes subsequent calls to IsOpen to return false and calls to
-        /// a write operation to throw an ObjectDisposedException.
-        /// All calls to Close() after the first call are silently ignored.
-        /// </remarks>
-        /// <exception cref="ObjectDisposedException">
-        /// The stream is already disposed
-        /// </exception>
         public override void Close()
         {
-            _stream.Close();
-            // 2003/09/02-JonN I removed setting _stream
-            // to null, now all of the tests for null can come out.
-        }
-
-        /// <summary>
-        /// Flush the data from the stream.  Closed streams may be flushed,
-        /// but disposed streams may not.
-        /// </summary>
-        /// <exception cref="ObjectDisposedException">
-        /// The underlying stream is disposed
-        /// </exception>
-        public override void Flush()
-        {
-            _stream.Flush();
-        }
-
-        /// <summary>
-        /// Write a single object into the underlying stream.
-        /// </summary>
-        /// <param name="obj">The object to add to the stream.</param>
-        /// <returns>
-        /// One, if the write was successful, otherwise;
-        /// zero if the stream was closed before the object could be written,
-        /// or if the object was AutomationNull.Value.
-        /// </returns>
-        /// <exception cref="PipelineClosedException">
-        /// The underlying stream is closed
-        /// </exception>
-        /// <remarks>
-        /// AutomationNull.Value is ignored
-        /// </remarks>
-        public override int Write(object obj)
-        {
-            return _stream.Write(obj);
-        }
-
-        /// <summary>
-        /// Write objects to the underlying stream.
-        /// </summary>
-        /// <param name="obj">Object or enumeration to read from.</param>
-        /// <param name="enumerateCollection">
-        /// If enumerateCollection is true, and <paramref name="obj"/>
-        /// is an enumeration according to LanguagePrimitives.GetEnumerable,
-        /// the objects in the enumeration will be unrolled and
-        /// written separately.  Otherwise, <paramref name="obj"/>
-        /// will be written as a single object.
-        /// </param>
-        /// <returns>The number of objects written.</returns>
-        /// <exception cref="PipelineClosedException">
-        /// The underlying stream is closed
-        /// </exception>
-        /// <remarks>
-        /// If the enumeration contains elements equal to
-        /// AutomationNull.Value, they are are ignored.
-        /// This can cause the return value to be less than the size of
-        /// the collection.
-        /// </remarks>
-        public override int Write(object obj, bool enumerateCollection)
-        {
-            return _stream.Write(obj, enumerateCollection);
-        }
-
-#if (false)
-        /// <summary>
-        /// Handle WriteReady events from the underlying stream.
-        /// </summary>
-        /// <param name="sender">The stream raising the event.</param>
-        /// <param name="args">Standard event args.</param>
-        private void OnWriteReady (object sender, EventArgs args)
-        {
-            if (WriteReady != null)
+            try
             {
-                // call any event handlers on this, replacing the
-                // ObjectStream sender with 'this' since receivers
-                // are expecting an PipelineWriter
-                WriteReady (this, args);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 3422, 3629);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 3475, 3491);
+
+                f_1028_3475_3490(_stream);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 3422, 3629);
+
+                int
+                f_1028_3475_3490(System.Management.Automation.Internal.ObjectStreamBase
+                this_param)
+                {
+                    this_param.Close();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1028, 3475, 3490);
+                    return 0;
+                }
+
+                // 2003/09/02-JonN I removed setting _stream
+                // to null, now all of the tests for null can come out.
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 3422, 3629);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 3422, 3629);
             }
         }
-#endif
 
-        #endregion Methods
-
-        #region Private fields
-
-        /// <summary>
-        /// The underlying stream.
-        /// </summary>
-        /// <remarks>Can never be null</remarks>
-        private ObjectStreamBase _stream;
-
-        #endregion Private Fields
-    }
-
-    /// <summary>
-    /// A ObjectWriter for a PSDataCollection ObjectStream.
-    /// </summary>
-    /// <remarks>
-    /// PSDataCollection is introduced after 1.0. PSDataCollection
-    /// is used to store data from the last command in
-    /// the pipeline and hence the writer will not
-    /// support certain features like Flush().
-    /// </remarks>
-    internal class PSDataCollectionWriter<T> : ObjectWriter
-    {
-        #region Constructors
-
-        /// <summary>
-        /// Construct with an existing PSDataCollectionStream.
-        /// </summary>
-        /// <param name="stream">The stream to write.</param>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if the specified stream is null
-        /// </exception>
-        public PSDataCollectionWriter(PSDataCollectionStream<T> stream)
-            : base(stream)
+        public override void Flush()
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 3937, 4017);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 3990, 4006);
+
+                f_1028_3990_4005(_stream);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 3937, 4017);
+
+                int
+                f_1028_3990_4005(System.Management.Automation.Internal.ObjectStreamBase
+                this_param)
+                {
+                    this_param.Flush();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1028, 3990, 4005);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 3937, 4017);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 3937, 4017);
+            }
         }
 
-        #endregion
+        public override int Write(object obj)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 4670, 4769);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 4732, 4758);
+
+                return f_1028_4739_4757(_stream, obj);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 4670, 4769);
+
+                int
+                f_1028_4739_4757(System.Management.Automation.Internal.ObjectStreamBase
+                this_param, object
+                value)
+                {
+                    var return_v = this_param.Write(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1028, 4739, 4757);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 4670, 4769);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 4670, 4769);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public override int Write(object obj, bool enumerateCollection)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1028, 5813, 5959);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1028, 5901, 5948);
+
+                return f_1028_5908_5947(_stream, obj, enumerateCollection);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1028, 5813, 5959);
+
+                int
+                f_1028_5908_5947(System.Management.Automation.Internal.ObjectStreamBase
+                this_param, object
+                obj, bool
+                enumerateCollection)
+                {
+                    var return_v = this_param.Write(obj, enumerateCollection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1028, 5908, 5947);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 5813, 5959);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 5813, 5959);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        private ObjectStreamBase _stream;
+
+        static ObjectWriter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1028, 486, 6899);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1028, 486, 6899);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 486, 6899);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1028, 486, 6899);
+
+        System.ArgumentNullException
+        f_1028_953_988(string
+        paramName)
+        {
+            var return_v = new System.ArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1028, 953, 988);
+            return return_v;
+        }
+
+    }
+    internal class PSDataCollectionWriter<T> : ObjectWriter
+    {
+        public PSDataCollectionWriter(PSDataCollectionStream<T> stream)
+        : base(f_1028_7764_7770_C(stream))
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1028, 7680, 7793);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1028, 7680, 7793);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1028, 7680, 7793);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 7680, 7793);
+            }
+        }
+
+        static PSDataCollectionWriter()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1028, 7270, 7822);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1028, 7270, 7822);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1028, 7270, 7822);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1028, 7270, 7822);
+
+        static System.Management.Automation.Internal.ObjectStreamBase
+        f_1028_7764_7770_C(System.Management.Automation.Internal.ObjectStreamBase
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1028, 7680, 7793);
+            return return_v;
+        }
+
     }
 }
 

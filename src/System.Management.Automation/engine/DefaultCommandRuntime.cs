@@ -8,238 +8,766 @@ using System.Management.Automation.Host;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Default implementation of ICommandRuntime for running Cmdlets standalone.
-    /// </summary>
     internal class DefaultCommandRuntime : ICommandRuntime2
     {
         private List<object> _output;
-        /// <summary>
-        /// Constructs an instance of the default ICommandRuntime object
-        /// that will write objects into the list that was passed.
-        /// </summary>
+
         public DefaultCommandRuntime(List<object> outputList)
         {
-            if (outputList == null)
-                throw new System.ArgumentNullException("outputList");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1263, 711, 931);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 504, 511);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 1052, 1084);
 
-            _output = outputList;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 789, 883) || true) && (outputList == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 789, 883);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 830, 883);
+
+                    throw f_1263_836_882("outputList");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 789, 883);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 899, 920);
+
+                _output = outputList;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1263, 711, 931);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 711, 931);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 711, 931);
+            }
         }
 
-        /// <summary>
-        /// Return the instance of PSHost - null by default.
-        /// </summary>
         public PSHost Host { set; get; }
 
-        #region Write
-        /// <summary>
-        /// Implementation of WriteDebug - just discards the input.
-        /// </summary>
-        /// <param name="text">Text to write.</param>
-        public void WriteDebug(string text) {; }
+        public void WriteDebug(string text)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 1290, 1330);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 1327, 1328);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 1290, 1330);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 1290, 1330);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 1290, 1330);
+            }
+        }
 
-        /// <summary>
-        /// Default implementation of WriteError - if the error record contains
-        /// an exception then that exception will be thrown. If not, then an
-        /// InvalidOperationException will be constructed and thrown.
-        /// </summary>
-        /// <param name="errorRecord">Error record instance to process.</param>
         public void WriteError(ErrorRecord errorRecord)
         {
-            if (errorRecord.Exception != null)
-                throw errorRecord.Exception;
-            else
-                throw new InvalidOperationException(errorRecord.ToString());
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 1700, 1959);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 1772, 1948) || true) && (f_1263_1776_1797(errorRecord) != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 1772, 1948);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 1824, 1852);
+
+                    throw f_1263_1830_1851(errorRecord);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 1772, 1948);
+                }
+
+                else
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 1772, 1948);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 1888, 1948);
+
+                    throw f_1263_1894_1947(f_1263_1924_1946(errorRecord));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 1772, 1948);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 1700, 1959);
+
+                System.Exception
+                f_1263_1776_1797(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.Exception;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1263, 1776, 1797);
+                    return return_v;
+                }
+
+
+                System.Exception
+                f_1263_1830_1851(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.Exception;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1263, 1830, 1851);
+                    return return_v;
+                }
+
+
+                string
+                f_1263_1924_1946(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.ToString();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 1924, 1946);
+                    return return_v;
+                }
+
+
+                System.InvalidOperationException
+                f_1263_1894_1947(string
+                message)
+                {
+                    var return_v = new System.InvalidOperationException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 1894, 1947);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 1700, 1959);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 1700, 1959);
+            }
         }
 
-        /// <summary>
-        /// Default implementation of WriteObject - adds the object to the list
-        /// passed to the objects constructor.
-        /// </summary>
-        /// <param name="sendToPipeline">Object to write.</param>
         public void WriteObject(object sendToPipeline)
         {
-            _output.Add(sendToPipeline);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 2214, 2324);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 2285, 2313);
+
+                f_1263_2285_2312(_output, sendToPipeline);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 2214, 2324);
+
+                int
+                f_1263_2285_2312(System.Collections.Generic.List<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 2285, 2312);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 2214, 2324);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 2214, 2324);
+            }
         }
 
-        /// <summary>
-        /// Default implementation of the enumerated WriteObject. Either way, the
-        /// objects are added to the list passed to this object in the constuctor.
-        /// </summary>
-        /// <param name="sendToPipeline">Object to write.</param>
-        /// <param name="enumerateCollection">If true, the collection is enumerated, otherwise
-        /// it's written as a scalar.
-        /// </param>
         public void WriteObject(object sendToPipeline, bool enumerateCollection)
         {
-            if (enumerateCollection)
+            try
             {
-                IEnumerator e = LanguagePrimitives.GetEnumerator(sendToPipeline);
-                if (e == null)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 2774, 3430);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 2871, 3419) || true) && (enumerateCollection)
+                )
+
                 {
-                    _output.Add(sendToPipeline);
-                }
-                else
-                {
-                    while (e.MoveNext())
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 2871, 3419);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 2928, 2993);
+
+                    IEnumerator
+                    e = f_1263_2944_2992(sendToPipeline)
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 3011, 3310) || true) && (e == null)
+                    )
+
                     {
-                        _output.Add(e.Current);
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 3011, 3310);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 3066, 3094);
+
+                        f_1263_3066_3093(_output, sendToPipeline);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 3011, 3310);
                     }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 3011, 3310);
+                        try
+                        {
+                            while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 3176, 3291) || true) && (f_1263_3183_3195(e))
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 3176, 3291);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 3245, 3268);
+
+                                f_1263_3245_3267(_output, f_1263_3257_3266(e));
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 3176, 3291);
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1263, 3176, 3291);
+                            throw;
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1263, 3176, 3291);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 3011, 3310);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 2871, 3419);
                 }
+
+                else
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 2871, 3419);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 3376, 3404);
+
+                    f_1263_3376_3403(_output, sendToPipeline);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 2871, 3419);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 2774, 3430);
+
+                System.Collections.IEnumerator
+                f_1263_2944_2992(object
+                obj)
+                {
+                    var return_v = LanguagePrimitives.GetEnumerator(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 2944, 2992);
+                    return return_v;
+                }
+
+
+                int
+                f_1263_3066_3093(System.Collections.Generic.List<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 3066, 3093);
+                    return 0;
+                }
+
+
+                bool
+                f_1263_3183_3195(System.Collections.IEnumerator
+                this_param)
+                {
+                    var return_v = this_param.MoveNext();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 3183, 3195);
+                    return return_v;
+                }
+
+
+                object
+                f_1263_3257_3266(System.Collections.IEnumerator
+                this_param)
+                {
+                    var return_v = this_param.Current;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1263, 3257, 3266);
+                    return return_v;
+                }
+
+
+                int
+                f_1263_3245_3267(System.Collections.Generic.List<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 3245, 3267);
+                    return 0;
+                }
+
+
+                int
+                f_1263_3376_3403(System.Collections.Generic.List<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 3376, 3403);
+                    return 0;
+                }
+
             }
-            else
+            catch
             {
-                _output.Add(sendToPipeline);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 2774, 3430);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 2774, 3430);
             }
         }
 
-        /// <summary>
-        /// Default implementation - just discards it's arguments.
-        /// </summary>
-        /// <param name="progressRecord">Progress record to write.</param>
-        public void WriteProgress(ProgressRecord progressRecord) {; }
+        public void WriteProgress(ProgressRecord progressRecord)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 3633, 3694);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 3691, 3692);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 3633, 3694);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 3633, 3694);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 3633, 3694);
+            }
+        }
 
-        /// <summary>
-        /// Default implementation - just discards it's arguments.
-        /// </summary>
-        /// <param name="sourceId">Source ID to write for.</param>
-        /// <param name="progressRecord">Record to write.</param>
-        public void WriteProgress(Int64 sourceId, ProgressRecord progressRecord) {; }
+        public void WriteProgress(Int64 sourceId, ProgressRecord progressRecord)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 3956, 4033);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 4030, 4031);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 3956, 4033);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 3956, 4033);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 3956, 4033);
+            }
+        }
 
-        /// <summary>
-        /// Default implementation - just discards it's arguments.
-        /// </summary>
-        /// <param name="text">Text to write.</param>
-        public void WriteVerbose(string text) {; }
+        public void WriteVerbose(string text)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 4215, 4257);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 4254, 4255);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 4215, 4257);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 4215, 4257);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 4215, 4257);
+            }
+        }
 
-        /// <summary>
-        /// Default implementation - just discards it's arguments.
-        /// </summary>
-        /// <param name="text">Text to write.</param>
-        public void WriteWarning(string text) {; }
+        public void WriteWarning(string text)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 4439, 4481);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 4478, 4479);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 4439, 4481);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 4439, 4481);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 4439, 4481);
+            }
+        }
 
-        /// <summary>
-        /// Default implementation - just discards it's arguments.
-        /// </summary>
-        /// <param name="text">Text to write.</param>
-        public void WriteCommandDetail(string text) {; }
+        public void WriteCommandDetail(string text)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 4663, 4711);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 4708, 4709);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 4663, 4711);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 4663, 4711);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 4663, 4711);
+            }
+        }
 
-        /// <summary>
-        /// Default implementation - just discards it's arguments.
-        /// </summary>
-        /// <param name="informationRecord">Record to write.</param>
-        public void WriteInformation(InformationRecord informationRecord) {; }
+        public void WriteInformation(InformationRecord informationRecord)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 4908, 4978);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 4975, 4976);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 4908, 4978);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 4908, 4978);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 4908, 4978);
+            }
+        }
 
-        #endregion Write
+        public bool ShouldProcess(string target)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 5237, 5294);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 5280, 5292);
 
-        #region Should
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="target">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldProcess(string target) { return true; }
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 5237, 5294);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 5237, 5294);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 5237, 5294);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="target">Ignored.</param>
-        /// <param name="action">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldProcess(string target, string action) { return true; }
+        public bool ShouldProcess(string target, string action)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 5552, 5624);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 5610, 5622);
 
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="verboseDescription">Ignored.</param>
-        /// <param name="verboseWarning">Ignored.</param>
-        /// <param name="caption">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldProcess(string verboseDescription, string verboseWarning, string caption) { return true; }
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 5552, 5624);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 5552, 5624);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 5552, 5624);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="verboseDescription">Ignored.</param>
-        /// <param name="verboseWarning">Ignored.</param>
-        /// <param name="caption">Ignored.</param>
-        /// <param name="shouldProcessReason">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldProcess(string verboseDescription, string verboseWarning, string caption, out ShouldProcessReason shouldProcessReason) { shouldProcessReason = ShouldProcessReason.None; return true; }
+        public bool ShouldProcess(string verboseDescription, string verboseWarning, string caption)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 5954, 6062);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 6048, 6060);
 
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="query">Ignored.</param>
-        /// <param name="caption">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldContinue(string query, string caption) { return true; }
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 5954, 6062);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 5954, 6062);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 5954, 6062);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="query">Ignored.</param>
-        /// <param name="caption">Ignored.</param>
-        /// <param name="yesToAll">Ignored.</param>
-        /// <param name="noToAll">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldContinue(string query, string caption, ref bool yesToAll, ref bool noToAll) { return true; }
+        public bool ShouldProcess(string verboseDescription, string verboseWarning, string caption, out ShouldProcessReason shouldProcessReason)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 6456, 6657);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 6595, 6642);
 
-        /// <summary>
-        /// Default implementation - always returns true.
-        /// </summary>
-        /// <param name="query">Ignored.</param>
-        /// <param name="caption">Ignored.</param>
-        /// <param name="hasSecurityImpact">Ignored.</param>
-        /// <param name="yesToAll">Ignored.</param>
-        /// <param name="noToAll">Ignored.</param>
-        /// <returns>True.</returns>
-        public bool ShouldContinue(string query, string caption, bool hasSecurityImpact, ref bool yesToAll, ref bool noToAll) { return true; }
+                shouldProcessReason = ShouldProcessReason.None;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 6643, 6655);
 
-        #endregion Should
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 6456, 6657);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 6456, 6657);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 6456, 6657);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
 
-        #region Transaction Support
-        /// <summary>
-        /// Returns true if a transaction is available and active.
-        /// </summary>
-        public bool TransactionAvailable() { return false; }
+        public bool ShouldContinue(string query, string caption)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 6915, 6988);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 6974, 6986);
 
-        /// <summary>
-        /// Gets an object that surfaces the current PowerShell transaction.
-        /// When this object is disposed, PowerShell resets the active transaction.
-        /// </summary>
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 6915, 6988);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 6915, 6988);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 6915, 6988);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public bool ShouldContinue(string query, string caption, ref bool yesToAll, ref bool noToAll)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 7351, 7461);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 7447, 7459);
+
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 7351, 7461);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 7351, 7461);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 7351, 7461);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public bool ShouldContinue(string query, string caption, bool hasSecurityImpact, ref bool yesToAll, ref bool noToAll)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 7886, 8020);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 8006, 8018);
+
+                return true;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 7886, 8020);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 7886, 8020);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 7886, 8020);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public bool TransactionAvailable()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 8213, 8265);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 8250, 8263);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 8213, 8265);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 8213, 8265);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 8213, 8265);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         public PSTransactionContext CurrentPSTransaction
         {
             get
             {
-                string error = TransactionStrings.CmdletRequiresUseTx;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 8560, 8923);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 8596, 8650);
 
-                // We want to throw in this situation, and want to use a
-                // property because it mimics the C# using(TransactionScope ...) syntax
-#pragma warning suppress 56503
-                throw new InvalidOperationException(error);
+                    string
+                    error = f_1263_8611_8649()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 8865, 8908);
+
+                    throw f_1263_8871_8907(error);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 8560, 8923);
+
+                    string
+                    f_1263_8611_8649()
+                    {
+                        var return_v = TransactionStrings.CmdletRequiresUseTx;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1263, 8611, 8649);
+                        return return_v;
+                    }
+
+
+                    System.InvalidOperationException
+                    f_1263_8871_8907(string
+                    message)
+                    {
+                        var return_v = new System.InvalidOperationException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 8871, 8907);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 8487, 8934);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 8487, 8934);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
-        #endregion Transaction Support
 
-        #region Misc
-        /// <summary>
-        /// Implementation of the dummy default ThrowTerminatingError API - it just
-        /// does what the base implementation does anyway - rethrow the exception
-        /// if it exists, otherwise throw an invalid operation exception.
-        /// </summary>
-        /// <param name="errorRecord">The error record to throw.</param>
         public void ThrowTerminatingError(ErrorRecord errorRecord)
         {
-            if (errorRecord.Exception != null)
+            try
             {
-                throw errorRecord.Exception;
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1263, 9372, 9709);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 9455, 9698) || true) && (f_1263_9459_9480(errorRecord) != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 9455, 9698);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 9522, 9550);
+
+                    throw f_1263_9528_9549(errorRecord);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 9455, 9698);
+                }
+
+                else
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1263, 9455, 9698);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1263, 9616, 9683);
+
+                    throw f_1263_9622_9682(f_1263_9659_9681(errorRecord));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1263, 9455, 9698);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1263, 9372, 9709);
+
+                System.Exception
+                f_1263_9459_9480(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.Exception;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1263, 9459, 9480);
+                    return return_v;
+                }
+
+
+                System.Exception
+                f_1263_9528_9549(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.Exception;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1263, 9528, 9549);
+                    return return_v;
+                }
+
+
+                string
+                f_1263_9659_9681(System.Management.Automation.ErrorRecord
+                this_param)
+                {
+                    var return_v = this_param.ToString();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 9659, 9681);
+                    return return_v;
+                }
+
+
+                System.InvalidOperationException
+                f_1263_9622_9682(string
+                message)
+                {
+                    var return_v = new System.InvalidOperationException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 9622, 9682);
+                    return return_v;
+                }
+
             }
-            else
+            catch
             {
-                throw new System.InvalidOperationException(errorRecord.ToString());
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1263, 9372, 9709);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 9372, 9709);
             }
         }
-        #endregion
+
+        static DefaultCommandRuntime()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1263, 411, 9736);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1263, 411, 9736);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1263, 411, 9736);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1263, 411, 9736);
+
+        System.ArgumentNullException
+        f_1263_836_882(string
+        paramName)
+        {
+            var return_v = new System.ArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1263, 836, 882);
+            return return_v;
+        }
+
     }
 }

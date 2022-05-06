@@ -8,1058 +8,1954 @@ using System.Security.Permissions;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// The exception thrown if the specified value can not be bound parameter of a command.
-    /// </summary>
     [Serializable]
     public class ParameterBindingException : RuntimeException
     {
-        #region Constructors
-
-        #region Preferred constructors
-
-        /// <summary>
-        /// Constructs a ParameterBindingException.
-        /// </summary>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        /// <!--
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// -->
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        /// If position is null, the one from the InvocationInfo is used.
-        /// <!--
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// -->
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        /// <!--
-        /// parameterName == {1}
-        /// -->
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        /// <!--
-        /// parameterType == {2}
-        /// -->
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        /// <!--
-        /// typeSpecified == {3}
-        /// -->
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        /// <!--
-        /// starts at {6}
-        /// -->
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingException(
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(errorCategory, invocationInfo, errorPosition, errorId, null, null)
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(f_1029_2917_2930_C(errorCategory), invocationInfo, errorPosition, errorId, null, null)
         {
-            if (string.IsNullOrEmpty(resourceString))
+            try
             {
-                throw PSTraceSource.NewArgumentException("resourceString");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 2532, 4171);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3008, 3156) || true) && (f_1029_3012_3048(resourceString))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 3008, 3156);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3082, 3141);
+
+                    throw f_1029_3088_3140("resourceString");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 3008, 3156);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3172, 3306) || true) && (f_1029_3176_3205(errorId))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 3172, 3306);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3239, 3291);
+
+                    throw f_1029_3245_3290("errorId");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 3172, 3306);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3322, 3355);
+
+                _invocationInfo = invocationInfo;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3371, 3492) || true) && (_invocationInfo != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 3371, 3492);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3432, 3477);
+
+                    _commandName = f_1029_3447_3476(f_1029_3447_3471(invocationInfo));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 3371, 3492);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3508, 3539);
+
+                _parameterName = parameterName;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3553, 3584);
+
+                _parameterType = parameterType;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3598, 3629);
+
+                _typeSpecified = typeSpecified;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3645, 3796) || true) && ((errorPosition == null) && (DynAbs.Tracing.TraceSender.Expression_True(1029, 3649, 3701) && (_invocationInfo != null)))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 3645, 3796);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3735, 3781);
+
+                    errorPosition = f_1029_3751_3780(invocationInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 3645, 3796);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3812, 3984) || true) && (errorPosition != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 3812, 3984);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3871, 3909);
+
+                    _line = f_1029_3879_3908(errorPosition);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 3927, 3969);
+
+                    _offset = f_1029_3937_3968(errorPosition);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 3812, 3984);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 4000, 4033);
+
+                _resourceString = resourceString;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 4047, 4066);
+
+                _errorId = errorId;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 4082, 4160) || true) && (args != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 4082, 4160);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 4132, 4145);
+
+                    _args = args;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 4082, 4160);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 2532, 4171);
             }
-
-            if (string.IsNullOrEmpty(errorId))
+            catch
             {
-                throw PSTraceSource.NewArgumentException("errorId");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 2532, 4171);
+                throw;
             }
-
-            _invocationInfo = invocationInfo;
-
-            if (_invocationInfo != null)
+            finally
             {
-                _commandName = invocationInfo.MyCommand.Name;
-            }
-
-            _parameterName = parameterName;
-            _parameterType = parameterType;
-            _typeSpecified = typeSpecified;
-
-            if ((errorPosition == null) && (_invocationInfo != null))
-            {
-                errorPosition = invocationInfo.ScriptPosition;
-            }
-
-            if (errorPosition != null)
-            {
-                _line = errorPosition.StartLineNumber;
-                _offset = errorPosition.StartColumnNumber;
-            }
-
-            _resourceString = resourceString;
-            _errorId = errorId;
-
-            if (args != null)
-            {
-                _args = args;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 2532, 4171);
             }
         }
 
-        /// <summary>
-        /// Constructs a ParameterBindingException.
-        /// </summary>
-        /// <param name="innerException">
-        /// The inner exception.
-        /// </param>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        /// If position is null, the one from the InvocationInfo is used.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="invocationInfo"/> is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingException(
-            Exception innerException,
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(errorCategory, invocationInfo, errorPosition, errorId, null, innerException)
+                    Exception innerException,
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(f_1029_6630_6643_C(errorCategory), invocationInfo, errorPosition, errorId, null, innerException)
         {
-            if (invocationInfo == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("invocationInfo");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 6206, 7937);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 6731, 6869) || true) && (invocationInfo == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 6731, 6869);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 6791, 6854);
+
+                    throw f_1029_6797_6853("invocationInfo");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 6731, 6869);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 6885, 7033) || true) && (f_1029_6889_6925(resourceString))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 6885, 7033);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 6959, 7018);
+
+                    throw f_1029_6965_7017("resourceString");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 6885, 7033);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7049, 7183) || true) && (f_1029_7053_7082(errorId))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 7049, 7183);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7116, 7168);
+
+                    throw f_1029_7122_7167("errorId");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 7049, 7183);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7199, 7232);
+
+                _invocationInfo = invocationInfo;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7246, 7291);
+
+                _commandName = f_1029_7261_7290(f_1029_7261_7285(invocationInfo));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7305, 7336);
+
+                _parameterName = parameterName;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7350, 7381);
+
+                _parameterType = parameterType;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7395, 7426);
+
+                _typeSpecified = typeSpecified;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7442, 7562) || true) && (errorPosition == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 7442, 7562);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7501, 7547);
+
+                    errorPosition = f_1029_7517_7546(invocationInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 7442, 7562);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7578, 7750) || true) && (errorPosition != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 7578, 7750);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7637, 7675);
+
+                    _line = f_1029_7645_7674(errorPosition);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7693, 7735);
+
+                    _offset = f_1029_7703_7734(errorPosition);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 7578, 7750);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7766, 7799);
+
+                _resourceString = resourceString;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7813, 7832);
+
+                _errorId = errorId;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7848, 7926) || true) && (args != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 7848, 7926);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 7898, 7911);
+
+                    _args = args;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 7848, 7926);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 6206, 7937);
             }
-
-            if (string.IsNullOrEmpty(resourceString))
+            catch
             {
-                throw PSTraceSource.NewArgumentException("resourceString");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 6206, 7937);
+                throw;
             }
-
-            if (string.IsNullOrEmpty(errorId))
+            finally
             {
-                throw PSTraceSource.NewArgumentException("errorId");
-            }
-
-            _invocationInfo = invocationInfo;
-            _commandName = invocationInfo.MyCommand.Name;
-            _parameterName = parameterName;
-            _parameterType = parameterType;
-            _typeSpecified = typeSpecified;
-
-            if (errorPosition == null)
-            {
-                errorPosition = invocationInfo.ScriptPosition;
-            }
-
-            if (errorPosition != null)
-            {
-                _line = errorPosition.StartLineNumber;
-                _offset = errorPosition.StartColumnNumber;
-            }
-
-            _resourceString = resourceString;
-            _errorId = errorId;
-
-            if (args != null)
-            {
-                _args = args;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 6206, 7937);
             }
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="innerException"></param>
-        /// <param name="pbex"></param>
-        /// <param name="resourceString"></param>
-        /// <param name="args"></param>
         internal ParameterBindingException(
-            Exception innerException,
-            ParameterBindingException pbex,
-            string resourceString,
-            params object[] args)
-            : base(string.Empty, innerException)
+                    Exception innerException,
+                    ParameterBindingException pbex,
+                    string resourceString,
+                    params object[] args)
+        : base(f_1029_8391_8403_C(string.Empty), innerException)
         {
-            if (pbex == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("pbex");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 8180, 9815);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8445, 8563) || true) && (pbex == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 8445, 8563);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8495, 8548);
+
+                    throw f_1029_8501_8547("pbex");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 8445, 8563);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8579, 8727) || true) && (f_1029_8583_8619(resourceString))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 8579, 8727);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8653, 8712);
+
+                    throw f_1029_8659_8711("resourceString");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 8579, 8727);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8743, 8784);
+
+                _invocationInfo = f_1029_8761_8783(pbex);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8798, 8920) || true) && (_invocationInfo != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 8798, 8920);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8859, 8905);
+
+                    _commandName = f_1029_8874_8904(f_1029_8874_8899(_invocationInfo));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 8798, 8920);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8936, 8971);
+
+                IScriptExtent
+                errorPosition = null
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 8985, 9108) || true) && (_invocationInfo != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 8985, 9108);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9046, 9093);
+
+                    errorPosition = f_1029_9062_9092(_invocationInfo);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 8985, 9108);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9124, 9142);
+
+                _line = f_1029_9132_9141(pbex);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9156, 9178);
+
+                _offset = f_1029_9166_9177(pbex);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9194, 9230);
+
+                _parameterName = f_1029_9211_9229(pbex);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9244, 9280);
+
+                _parameterType = f_1029_9261_9279(pbex);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9294, 9330);
+
+                _typeSpecified = f_1029_9311_9329(pbex);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9344, 9368);
+
+                _errorId = f_1029_9355_9367(pbex);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9384, 9417);
+
+                _resourceString = resourceString;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9433, 9511) || true) && (args != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 9433, 9511);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9483, 9496);
+
+                    _args = args;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 9433, 9511);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9527, 9577);
+
+                DynAbs.Tracing.TraceSender.TraceInvocationWrapper(() => base.SetErrorCategory(f_1029_9549_9565(pbex)._category), 1029, 9527, 9576);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9591, 9617);
+
+                DynAbs.Tracing.TraceSender.TraceInvocationWrapper(() => base.SetErrorId(_errorId), 1029, 9591, 9616);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9631, 9804) || true) && (_invocationInfo != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 9631, 9804);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 9692, 9789);
+
+                    f_1029_9692_9788(DynAbs.Tracing.TraceSender.TraceMemberAccessWrapper(() => base.ErrorRecord, 1029, 9692, 9708), f_1029_9727_9787(f_1029_9746_9771(_invocationInfo), errorPosition));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 9631, 9804);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 8180, 9815);
             }
-
-            if (string.IsNullOrEmpty(resourceString))
+            catch
             {
-                throw PSTraceSource.NewArgumentException("resourceString");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 8180, 9815);
+                throw;
             }
-
-            _invocationInfo = pbex.CommandInvocation;
-            if (_invocationInfo != null)
+            finally
             {
-                _commandName = _invocationInfo.MyCommand.Name;
-            }
-
-            IScriptExtent errorPosition = null;
-            if (_invocationInfo != null)
-            {
-                errorPosition = _invocationInfo.ScriptPosition;
-            }
-
-            _line = pbex.Line;
-            _offset = pbex.Offset;
-
-            _parameterName = pbex.ParameterName;
-            _parameterType = pbex.ParameterType;
-            _typeSpecified = pbex.TypeSpecified;
-            _errorId = pbex.ErrorId;
-
-            _resourceString = resourceString;
-
-            if (args != null)
-            {
-                _args = args;
-            }
-
-            base.SetErrorCategory(pbex.ErrorRecord._category);
-            base.SetErrorId(_errorId);
-            if (_invocationInfo != null)
-            {
-                base.ErrorRecord.SetInvocationInfo(new InvocationInfo(_invocationInfo.MyCommand, errorPosition));
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 8180, 9815);
             }
         }
-        #endregion Preferred constructors
 
-        #region serialization
-        /// <summary>
-        /// Constructors a ParameterBindingException using serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// serialization information
-        /// </param>
-        /// <param name="context">
-        /// streaming context
-        /// </param>
         protected ParameterBindingException(
-            SerializationInfo info,
-            StreamingContext context)
-            : base(info, context)
+                    SerializationInfo info,
+                    StreamingContext context)
+        : base(f_1029_10341_10345_C(info), context)
         {
-            _message = info.GetString("ParameterBindingException_Message");
-            _parameterName = info.GetString("ParameterName");
-            _line = info.GetInt64("Line");
-            _offset = info.GetInt64("Offset");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 10208, 10609);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 10380, 10443);
+
+                _message = f_1029_10391_10442(info, "ParameterBindingException_Message");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 10457, 10506);
+
+                _parameterName = f_1029_10474_10505(info, "ParameterName");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 10520, 10550);
+
+                _line = f_1029_10528_10549(info, "Line");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 10564, 10598);
+
+                _offset = f_1029_10574_10597(info, "Offset");
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 10208, 10609);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 10208, 10609);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 10208, 10609);
+            }
         }
 
-        /// <summary>
-        /// Serializes the exception.
-        /// </summary>
-        /// <param name="info">
-        /// serialization information
-        /// </param>
-        /// <param name="context">
-        /// streaming context
-        /// </param>
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
+            try
             {
-                throw new PSArgumentNullException("info");
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 10890, 11490);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11092, 11199) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 11092, 11199);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11142, 11184);
+
+                    throw f_1029_11148_11183("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 11092, 11199);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11215, 11249);
+
+                DynAbs.Tracing.TraceSender.TraceInvocationWrapper(() => base.GetObjectData(info, context), 1029, 11215, 11248);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11263, 11328);
+
+                f_1029_11263_11327(info, "ParameterBindingException_Message", f_1029_11314_11326(this));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11342, 11389);
+
+                f_1029_11342_11388(info, "ParameterName", _parameterName);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11403, 11432);
+
+                f_1029_11403_11431(info, "Line", _line);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11446, 11479);
+
+                f_1029_11446_11478(info, "Offset", _offset);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 10890, 11490);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1029_11148_11183(string
+                paramName)
+                {
+                    var return_v = new System.Management.Automation.PSArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 11148, 11183);
+                    return return_v;
+                }
+
+
+                string
+                f_1029_11314_11326(System.Management.Automation.ParameterBindingException
+                this_param)
+                {
+                    var return_v = this_param.Message;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 11314, 11326);
+                    return return_v;
+                }
+
+
+                int
+                f_1029_11263_11327(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, string
+                value)
+                {
+                    this_param.AddValue(name, (object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 11263, 11327);
+                    return 0;
+                }
+
+
+                int
+                f_1029_11342_11388(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, string
+                value)
+                {
+                    this_param.AddValue(name, (object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 11342, 11388);
+                    return 0;
+                }
+
+
+                int
+                f_1029_11403_11431(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, long
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 11403, 11431);
+                    return 0;
+                }
+
+
+                int
+                f_1029_11446_11478(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, long
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 11446, 11478);
+                    return 0;
+                }
+
             }
-
-            base.GetObjectData(info, context);
-            info.AddValue("ParameterBindingException_Message", this.Message);
-            info.AddValue("ParameterName", _parameterName);
-            info.AddValue("Line", _line);
-            info.AddValue("Offset", _offset);
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 10890, 11490);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 10890, 11490);
+            }
         }
-        #endregion serialization
 
-        #region Do Not Use
+        public ParameterBindingException() : base()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 11740, 11788);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 11785, 11786);
+                ;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 11740, 11788);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 11740, 11788);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 11740, 11788);
+            }
+        }
 
-        /// <summary>
-        /// Constructs a ParameterBindingException.
-        /// </summary>
-        /// <remarks>
-        /// DO NOT USE!!!
-        /// </remarks>
-        public ParameterBindingException() : base() {; }
+        public ParameterBindingException(string message) : base(f_1029_12140_12147_C(message))
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 12084, 12172);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 12151, 12170);
 
-        /// <summary>
-        /// Constructors a ParameterBindingException.
-        /// </summary>
-        /// <param name="message">
-        /// Message to be included in exception.
-        /// </param>
-        /// <remarks>
-        /// DO NOT USE!!!
-        /// </remarks>
-        public ParameterBindingException(string message) : base(message) { _message = message; }
+                _message = message;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 12084, 12172);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 12084, 12172);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 12084, 12172);
+            }
+        }
 
-        /// <summary>
-        /// Constructs a ParameterBindingException.
-        /// </summary>
-        /// <param name="message">
-        /// Message to be included in the exception.
-        /// </param>
-        /// <param name="innerException">
-        /// exception that led to this exception
-        /// </param>
-        /// <remarks>
-        /// DO NOT USE!!!
-        /// </remarks>
         public ParameterBindingException(
-            string message,
-            Exception innerException)
-            : base(message, innerException)
-        { _message = message; }
+                    string message,
+                    Exception innerException)
+        : base(f_1029_12707_12714_C(message), innerException)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 12585, 12764);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13114, 13122);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13455, 13484);
+                this._parameterName = string.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13758, 13772);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14061, 14075);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14351, 14359);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14632, 14654);
+                this._line = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14945, 14969);
+                this._offset = Int64.MinValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15277, 15292);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15378, 15393);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15421, 15450);
+                this._args = f_1029_15429_15450();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15476, 15488);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 12743, 12762);
 
-        #endregion Do Not Use
-        #endregion Constructors
+                _message = message;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 12585, 12764);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 12585, 12764);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 12585, 12764);
+            }
+        }
 
-        #region Properties
-        /// <summary>
-        /// Gets the message for the exception.
-        /// </summary>
         public override string Message
         {
-            get { return _message ?? (_message = BuildMessage()); }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 13021, 13076);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13027, 13074);
+
+                    return _message ?? (DynAbs.Tracing.TraceSender.Expression_Null<string>(1029, 13034, 13073) ?? (_message = f_1029_13058_13072(this)));
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 13021, 13076);
+
+                    string
+                    f_1029_13058_13072(System.Management.Automation.ParameterBindingException
+                    this_param)
+                    {
+                        var return_v = this_param.BuildMessage();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 13058, 13072);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 12966, 13087);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 12966, 13087);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
         }
 
         private string _message;
 
-        /// <summary>
-        /// Gets the name of the parameter that the parameter binding
-        /// error was encountered on.
-        /// </summary>
         public string ParameterName
         {
             get
             {
-                return _parameterName;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 13344, 13417);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13380, 13402);
+
+                    return _parameterName;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 13344, 13417);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 13292, 13428);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 13292, 13428);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        private string _parameterName = string.Empty;
+        private string _parameterName;
 
-        /// <summary>
-        /// Gets the type the parameter is expecting.
-        /// </summary>
         public Type ParameterType
         {
             get
             {
-                return _parameterType;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 13649, 13722);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13685, 13707);
+
+                    return _parameterType;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 13649, 13722);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 13599, 13733);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 13599, 13733);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         private Type _parameterType;
 
-        /// <summary>
-        /// Gets the Type that was specified as the parameter value.
-        /// </summary>
         public Type TypeSpecified
         {
             get
             {
-                return _typeSpecified;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 13952, 14025);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 13988, 14010);
+
+                    return _typeSpecified;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 13952, 14025);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 13902, 14036);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 13902, 14036);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         private Type _typeSpecified;
 
-        /// <summary>
-        /// Gets the errorId of this ParameterBindingException.
-        /// </summary>
         public string ErrorId
         {
             get
             {
-                return _errorId;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 14246, 14313);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14282, 14298);
+
+                    return _errorId;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 14246, 14313);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 14200, 14324);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 14200, 14324);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         private string _errorId;
 
-        /// <summary>
-        /// Gets the line in the script at which the error occurred.
-        /// </summary>
         public Int64 Line
         {
             get
             {
-                return _line;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 14531, 14595);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14567, 14580);
+
+                    return _line;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 14531, 14595);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 14489, 14606);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 14489, 14606);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        private Int64 _line = Int64.MinValue;
+        private Int64 _line;
 
-        /// <summary>
-        /// Gets the offset on the line in the script at which the error occurred.
-        /// </summary>
         public Int64 Offset
         {
             get
             {
-                return _offset;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 14842, 14908);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 14878, 14893);
+
+                    return _offset;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 14842, 14908);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 14798, 14919);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 14798, 14919);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        private Int64 _offset = Int64.MinValue;
+        private Int64 _offset;
 
-        /// <summary>
-        /// Gets the invocation information about the command.
-        /// </summary>
         public InvocationInfo CommandInvocation
         {
             get
             {
-                return _invocationInfo;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 15157, 15231);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15193, 15216);
+
+                    return _invocationInfo;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 15157, 15231);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 15093, 15242);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 15093, 15242);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
         private InvocationInfo _invocationInfo;
-        #endregion Properties
-
-        #region private
 
         private string _resourceString;
-        private object[] _args = Array.Empty<object>();
+
+        private object[] _args;
+
         private string _commandName;
 
         private string BuildMessage()
         {
-            object[] messageArgs = Array.Empty<object>();
-
-            if (_args != null)
+            try
             {
-                messageArgs = new object[_args.Length + 6];
-                messageArgs[0] = _commandName;
-                messageArgs[1] = _parameterName;
-                messageArgs[2] = _parameterType;
-                messageArgs[3] = _typeSpecified;
-                messageArgs[4] = _line;
-                messageArgs[5] = _offset;
-                _args.CopyTo(messageArgs, 6);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 15501, 16304);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15555, 15600);
+
+                object[]
+                messageArgs = f_1029_15578_15599()
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15616, 16054) || true) && (_args != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 15616, 16054);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15667, 15710);
+
+                    messageArgs = new object[f_1029_15692_15704(_args) + 6];
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15728, 15758);
+
+                    messageArgs[0] = _commandName;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15776, 15808);
+
+                    messageArgs[1] = _parameterName;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15826, 15858);
+
+                    messageArgs[2] = _parameterType;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15876, 15908);
+
+                    messageArgs[3] = _typeSpecified;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15926, 15949);
+
+                    messageArgs[4] = _line;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 15967, 15992);
+
+                    messageArgs[5] = _offset;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 16010, 16039);
+
+                    f_1029_16010_16038(_args, messageArgs, 6);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 15616, 16054);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 16070, 16099);
+
+                string
+                result = string.Empty
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 16115, 16263) || true) && (!f_1029_16120_16157(_resourceString))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 16115, 16263);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 16191, 16248);
+
+                    result = f_1029_16200_16247(_resourceString, messageArgs);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 16115, 16263);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 16279, 16293);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 15501, 16304);
+
+                object[]
+                f_1029_15578_15599()
+                {
+                    var return_v = Array.Empty<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 15578, 15599);
+                    return return_v;
+                }
+
+
+                int
+                f_1029_15692_15704(object[]
+                this_param)
+                {
+                    var return_v = this_param.Length;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 15692, 15704);
+                    return return_v;
+                }
+
+
+                int
+                f_1029_16010_16038(object[]
+                this_param, object[]
+                array, int
+                index)
+                {
+                    this_param.CopyTo((System.Array)array, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 16010, 16038);
+                    return 0;
+                }
+
+
+                bool
+                f_1029_16120_16157(string
+                value)
+                {
+                    var return_v = string.IsNullOrEmpty(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 16120, 16157);
+                    return return_v;
+                }
+
+
+                string
+                f_1029_16200_16247(string
+                formatSpec, params object[]
+                o)
+                {
+                    var return_v = StringUtil.Format(formatSpec, o);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 16200, 16247);
+                    return return_v;
+                }
+
             }
-
-            string result = string.Empty;
-
-            if (!string.IsNullOrEmpty(_resourceString))
+            catch
             {
-                result = StringUtil.Format(_resourceString, messageArgs);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 15501, 16304);
+                throw;
             }
-
-            return result;
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 15501, 16304);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion Private
-    }
+        static ParameterBindingException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1029, 447, 16341);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1029, 447, 16341);
 
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 447, 16341);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1029, 447, 16341);
+
+        bool
+        f_1029_3012_3048(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 3012, 3048);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1029_3088_3140(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 3088, 3140);
+            return return_v;
+        }
+
+
+        bool
+        f_1029_3176_3205(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 3176, 3205);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1029_3245_3290(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 3245, 3290);
+            return return_v;
+        }
+
+
+        System.Management.Automation.CommandInfo
+        f_1029_3447_3471(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.MyCommand;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 3447, 3471);
+            return return_v;
+        }
+
+
+        string
+        f_1029_3447_3476(System.Management.Automation.CommandInfo
+        this_param)
+        {
+            var return_v = this_param.Name;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 3447, 3476);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Language.IScriptExtent
+        f_1029_3751_3780(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.ScriptPosition;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 3751, 3780);
+            return return_v;
+        }
+
+
+        int
+        f_1029_3879_3908(System.Management.Automation.Language.IScriptExtent
+        this_param)
+        {
+            var return_v = this_param.StartLineNumber;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 3879, 3908);
+            return return_v;
+        }
+
+
+        int
+        f_1029_3937_3968(System.Management.Automation.Language.IScriptExtent
+        this_param)
+        {
+            var return_v = this_param.StartColumnNumber;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 3937, 3968);
+            return return_v;
+        }
+
+
+        static System.Management.Automation.ErrorCategory
+        f_1029_2917_2930_C(System.Management.Automation.ErrorCategory
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 2532, 4171);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1029_6797_6853(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 6797, 6853);
+            return return_v;
+        }
+
+
+        bool
+        f_1029_6889_6925(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 6889, 6925);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1029_6965_7017(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 6965, 7017);
+            return return_v;
+        }
+
+
+        bool
+        f_1029_7053_7082(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 7053, 7082);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1029_7122_7167(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 7122, 7167);
+            return return_v;
+        }
+
+
+        System.Management.Automation.CommandInfo
+        f_1029_7261_7285(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.MyCommand;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 7261, 7285);
+            return return_v;
+        }
+
+
+        string
+        f_1029_7261_7290(System.Management.Automation.CommandInfo
+        this_param)
+        {
+            var return_v = this_param.Name;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 7261, 7290);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Language.IScriptExtent
+        f_1029_7517_7546(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.ScriptPosition;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 7517, 7546);
+            return return_v;
+        }
+
+
+        int
+        f_1029_7645_7674(System.Management.Automation.Language.IScriptExtent
+        this_param)
+        {
+            var return_v = this_param.StartLineNumber;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 7645, 7674);
+            return return_v;
+        }
+
+
+        int
+        f_1029_7703_7734(System.Management.Automation.Language.IScriptExtent
+        this_param)
+        {
+            var return_v = this_param.StartColumnNumber;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 7703, 7734);
+            return return_v;
+        }
+
+
+        static System.Management.Automation.ErrorCategory
+        f_1029_6630_6643_C(System.Management.Automation.ErrorCategory
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 6206, 7937);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1029_8501_8547(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 8501, 8547);
+            return return_v;
+        }
+
+
+        bool
+        f_1029_8583_8619(string
+        value)
+        {
+            var return_v = string.IsNullOrEmpty(value);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 8583, 8619);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentException
+        f_1029_8659_8711(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 8659, 8711);
+            return return_v;
+        }
+
+
+        System.Management.Automation.InvocationInfo
+        f_1029_8761_8783(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.CommandInvocation;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 8761, 8783);
+            return return_v;
+        }
+
+
+        System.Management.Automation.CommandInfo
+        f_1029_8874_8899(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.MyCommand;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 8874, 8899);
+            return return_v;
+        }
+
+
+        string
+        f_1029_8874_8904(System.Management.Automation.CommandInfo
+        this_param)
+        {
+            var return_v = this_param.Name;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 8874, 8904);
+            return return_v;
+        }
+
+
+        System.Management.Automation.Language.IScriptExtent
+        f_1029_9062_9092(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.ScriptPosition;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9062, 9092);
+            return return_v;
+        }
+
+
+        long
+        f_1029_9132_9141(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.Line;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9132, 9141);
+            return return_v;
+        }
+
+
+        long
+        f_1029_9166_9177(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.Offset;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9166, 9177);
+            return return_v;
+        }
+
+
+        string
+        f_1029_9211_9229(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.ParameterName;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9211, 9229);
+            return return_v;
+        }
+
+
+        System.Type
+        f_1029_9261_9279(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.ParameterType;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9261, 9279);
+            return return_v;
+        }
+
+
+        System.Type
+        f_1029_9311_9329(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.TypeSpecified;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9311, 9329);
+            return return_v;
+        }
+
+
+        string
+        f_1029_9355_9367(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.ErrorId;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9355, 9367);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ErrorRecord
+        f_1029_9549_9565(System.Management.Automation.ParameterBindingException
+        this_param)
+        {
+            var return_v = this_param.ErrorRecord;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9549, 9565);
+            return return_v;
+        }
+
+
+        System.Management.Automation.CommandInfo
+        f_1029_9746_9771(System.Management.Automation.InvocationInfo
+        this_param)
+        {
+            var return_v = this_param.MyCommand;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 9746, 9771);
+            return return_v;
+        }
+
+
+        System.Management.Automation.InvocationInfo
+        f_1029_9727_9787(System.Management.Automation.CommandInfo
+        commandInfo, System.Management.Automation.Language.IScriptExtent
+        scriptPosition)
+        {
+            var return_v = new System.Management.Automation.InvocationInfo(commandInfo, scriptPosition);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 9727, 9787);
+            return return_v;
+        }
+
+
+        int
+        f_1029_9692_9788(System.Management.Automation.ErrorRecord
+        this_param, System.Management.Automation.InvocationInfo
+        invocationInfo)
+        {
+            this_param.SetInvocationInfo(invocationInfo);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 9692, 9788);
+            return 0;
+        }
+
+
+        static string
+        f_1029_8391_8403_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 8180, 9815);
+            return return_v;
+        }
+
+
+        string?
+        f_1029_10391_10442(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetString(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 10391, 10442);
+            return return_v;
+        }
+
+
+        string?
+        f_1029_10474_10505(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetString(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 10474, 10505);
+            return return_v;
+        }
+
+
+        long
+        f_1029_10528_10549(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetInt64(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 10528, 10549);
+            return return_v;
+        }
+
+
+        long
+        f_1029_10574_10597(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetInt64(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 10574, 10597);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1029_10341_10345_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 10208, 10609);
+            return return_v;
+        }
+
+
+        static string
+        f_1029_12140_12147_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 12084, 12172);
+            return return_v;
+        }
+
+
+        static string
+        f_1029_12707_12714_C(string
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 12585, 12764);
+            return return_v;
+        }
+
+
+        object[]
+        f_1029_15429_15450()
+        {
+            var return_v = Array.Empty<object>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1029, 15429, 15450);
+            return return_v;
+        }
+
+    }
     [Serializable]
     internal class ParameterBindingValidationException : ParameterBindingException
     {
-        #region Preferred constructors
-
-        /// <summary>
-        /// Constructs a ParameterBindingValidationException.
-        /// </summary>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingValidationException(
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(
-                errorCategory,
-                invocationInfo,
-                errorPosition,
-                parameterName,
-                parameterType,
-                typeSpecified,
-                resourceString,
-                errorId,
-                args)
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(
+        f_1029_18639_18652_C(errorCategory), invocationInfo, errorPosition, parameterName, parameterType, typeSpecified, resourceString, errorId, args)
         {
-        }
-
-        /// <summary>
-        /// Constructs a ParameterBindingValidationException.
-        /// </summary>
-        /// <param name="innerException">
-        /// The inner exception.
-        /// </param>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="invocationInfo"/> is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceBaseName"/> or <paramref name="errorIdAndResourceId"/>
-        /// is null or empty.
-        /// </exception>
-        internal ParameterBindingValidationException(
-            Exception innerException,
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(
-                innerException,
-                errorCategory,
-                invocationInfo,
-                errorPosition,
-                parameterName,
-                parameterType,
-                typeSpecified,
-                resourceString,
-                errorId,
-                args)
-        {
-            ValidationMetadataException validationException = innerException as ValidationMetadataException;
-            if (validationException != null && validationException.SwallowException)
+            try
             {
-                _swallowException = true;
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 18226, 18918);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 22998, 23023);
+                this._swallowException = false;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 18226, 18918);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 18226, 18918);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 18226, 18918);
             }
         }
-        #endregion Preferred constructors
 
-        #region serialization
-        /// <summary>
-        /// Constructs a ParameterBindingValidationException from serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// serialization information
-        /// </param>
-        /// <param name="context">
-        /// streaming context
-        /// </param>
-        protected ParameterBindingValidationException(
-            SerializationInfo info,
-            StreamingContext context)
-            : base(info, context)
+        internal ParameterBindingValidationException(
+                    Exception innerException,
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(
+        f_1029_21355_21369_C(innerException), errorCategory, invocationInfo, errorPosition, parameterName, parameterType, typeSpecified, resourceString, errorId, args)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 20903, 21936);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 22998, 23023);
+                this._swallowException = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 21670, 21766);
+
+                ValidationMetadataException
+                validationException = innerException as ValidationMetadataException
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 21780, 21925) || true) && (validationException != null && (DynAbs.Tracing.TraceSender.Expression_True(1029, 21784, 21851) && f_1029_21815_21851(validationException)))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1029, 21780, 21925);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 21885, 21910);
+
+                    _swallowException = true;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1029, 21780, 21925);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 20903, 21936);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 20903, 21936);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 20903, 21936);
+            }
         }
 
-        #endregion serialization
+        protected ParameterBindingValidationException(
+                    SerializationInfo info,
+                    StreamingContext context)
+        : base(f_1029_22479_22483_C(info), context)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 22336, 22515);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 22998, 23023);
+                this._swallowException = false;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 22336, 22515);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 22336, 22515);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 22336, 22515);
+            }
+        }
 
-        #region Property
-
-        /// <summary>
-        /// Make the positional binding ignore this validation exception when it's set to true.
-        /// </summary>
-        /// <remarks>
-        /// This property is only used internally in the positional binding phase
-        /// </remarks>
         internal bool SwallowException
         {
-            get { return _swallowException; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1029, 22920, 22953);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1029, 22926, 22951);
+
+                    return _swallowException;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1029, 22920, 22953);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 22865, 22964);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 22865, 22964);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
         }
 
-        private readonly bool _swallowException = false;
+        private readonly bool _swallowException;
 
-        #endregion Property
+        static ParameterBindingValidationException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1029, 16349, 23062);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1029, 16349, 23062);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 16349, 23062);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1029, 16349, 23062);
+
+        static System.Management.Automation.ErrorCategory
+        f_1029_18639_18652_C(System.Management.Automation.ErrorCategory
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 18226, 18918);
+            return return_v;
+        }
+
+
+        bool
+        f_1029_21815_21851(System.Management.Automation.ValidationMetadataException
+        this_param)
+        {
+            var return_v = this_param.SwallowException;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1029, 21815, 21851);
+            return return_v;
+        }
+
+
+        static System.Exception
+        f_1029_21355_21369_C(System.Exception
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 20903, 21936);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1029_22479_22483_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 22336, 22515);
+            return return_v;
+        }
+
     }
-
     [Serializable]
     internal class ParameterBindingArgumentTransformationException : ParameterBindingException
     {
-        #region Preferred constructors
-
-        /// <summary>
-        /// Constructs a ParameterBindingArgumentTransformationException.
-        /// </summary>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingArgumentTransformationException(
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(
-                errorCategory,
-                invocationInfo,
-                errorPosition,
-                parameterName,
-                parameterType,
-                typeSpecified,
-                resourceString,
-                errorId,
-                args)
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(
+        f_1029_25396_25409_C(errorCategory), invocationInfo, errorPosition, parameterName, parameterType, typeSpecified, resourceString, errorId, args)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 24971, 25675);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 24971, 25675);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 24971, 25675);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 24971, 25675);
+            }
         }
 
-        /// <summary>
-        /// Constructs a ParameterBindingArgumentTransformationException.
-        /// </summary>
-        /// <param name="innerException">
-        /// The inner exception.
-        /// </param>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="invocationInfo"/> is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingArgumentTransformationException(
-            Exception innerException,
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(
-                innerException,
-                errorCategory,
-                invocationInfo,
-                errorPosition,
-                parameterName,
-                parameterType,
-                typeSpecified,
-                resourceString,
-                errorId,
-                args)
+                    Exception innerException,
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(
+        f_1029_28121_28135_C(innerException), errorCategory, invocationInfo, errorPosition, parameterName, parameterType, typeSpecified, resourceString, errorId, args)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 27657, 28433);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 27657, 28433);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 27657, 28433);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 27657, 28433);
+            }
         }
-        #endregion Preferred constructors
-        #region serialization
-        /// <summary>
-        /// Constructs a ParameterBindingArgumentTransformationException using serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// serialization information
-        /// </param>
-        /// <param name="context">
-        /// streaming context
-        /// </param>
+
         protected ParameterBindingArgumentTransformationException(
-            SerializationInfo info,
-            StreamingContext context)
-            : base(info, context)
+                    SerializationInfo info,
+                    StreamingContext context)
+        : base(f_1029_28999_29003_C(info), context)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 28844, 29035);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 28844, 29035);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 28844, 29035);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 28844, 29035);
+            }
         }
 
-        #endregion serialization
-    }
+        static ParameterBindingArgumentTransformationException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1029, 23070, 29078);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1029, 23070, 29078);
 
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 23070, 29078);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1029, 23070, 29078);
+
+        static System.Management.Automation.ErrorCategory
+        f_1029_25396_25409_C(System.Management.Automation.ErrorCategory
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 24971, 25675);
+            return return_v;
+        }
+
+
+        static System.Exception
+        f_1029_28121_28135_C(System.Exception
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 27657, 28433);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1029_28999_29003_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 28844, 29035);
+            return return_v;
+        }
+
+    }
     [Serializable]
     internal class ParameterBindingParameterDefaultValueException : ParameterBindingException
     {
-        #region Preferred constructors
-
-        /// <summary>
-        /// Constructs a ParameterBindingParameterDefaultValueException.
-        /// </summary>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingParameterDefaultValueException(
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(
-                errorCategory,
-                invocationInfo,
-                errorPosition,
-                parameterName,
-                parameterType,
-                typeSpecified,
-                resourceString,
-                errorId,
-                args)
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(
+        f_1029_31409_31422_C(errorCategory), invocationInfo, errorPosition, parameterName, parameterType, typeSpecified, resourceString, errorId, args)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 30985, 31688);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 30985, 31688);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 30985, 31688);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 30985, 31688);
+            }
         }
 
-        /// <summary>
-        /// Constructs a ParameterBindingParameterDefaultValueException.
-        /// </summary>
-        /// <param name="innerException">
-        /// The inner exception.
-        /// </param>
-        /// <param name="errorCategory">
-        /// The category for the error.
-        /// </param>
-        /// <param name="invocationInfo">
-        /// The information about the command that encountered the error.
-        ///
-        /// InvocationInfo.MyCommand.Name == {0}
-        /// </param>
-        /// <param name="errorPosition">
-        /// The position for the command or parameter that caused the error.
-        ///
-        /// token.LineNumber == {4}
-        /// token.OffsetInLine == {5}
-        /// </param>
-        /// <param name="parameterName">
-        /// The parameter on which binding caused the error.
-        ///
-        /// parameterName == {1}
-        /// </param>
-        /// <param name="parameterType">
-        /// The Type the parameter was expecting.
-        ///
-        /// parameterType == {2}
-        /// </param>
-        /// <param name="typeSpecified">
-        /// The Type that was attempted to be bound to the parameter.
-        ///
-        /// typeSpecified == {3}
-        /// </param>
-        /// <param name="resourceString">
-        /// The format string for the exception message.
-        /// </param>
-        /// <param name="errorId">
-        /// The error ID.
-        /// </param>
-        /// <param name="args">
-        /// Additional arguments to pass to the format string.
-        ///
-        /// starts at {6}
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="invocationInfo"/> is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="resourceString"/> or <paramref name="errorId"/>
-        /// is null or empty.
-        /// </exception>
         internal ParameterBindingParameterDefaultValueException(
-            Exception innerException,
-            ErrorCategory errorCategory,
-            InvocationInfo invocationInfo,
-            IScriptExtent errorPosition,
-            string parameterName,
-            Type parameterType,
-            Type typeSpecified,
-            string resourceString,
-            string errorId,
-            params object[] args)
-            : base(
-                innerException,
-                errorCategory,
-                invocationInfo,
-                errorPosition,
-                parameterName,
-                parameterType,
-                typeSpecified,
-                resourceString,
-                errorId,
-                args)
+                    Exception innerException,
+                    ErrorCategory errorCategory,
+                    InvocationInfo invocationInfo,
+                    IScriptExtent errorPosition,
+                    string parameterName,
+                    Type parameterType,
+                    Type typeSpecified,
+                    string resourceString,
+                    string errorId,
+                    params object[] args)
+        : base(
+        f_1029_34132_34146_C(innerException), errorCategory, invocationInfo, errorPosition, parameterName, parameterType, typeSpecified, resourceString, errorId, args)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 33669, 34444);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 33669, 34444);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 33669, 34444);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 33669, 34444);
+            }
         }
-        #endregion Preferred constructors
 
-        #region serialization
-        /// <summary>
-        /// Constructs a ParameterBindingParameterDefaultValueException using serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// serialization information
-        /// </param>
-        /// <param name="context">
-        /// streaming context
-        /// </param>
         protected ParameterBindingParameterDefaultValueException(
-            SerializationInfo info,
-            StreamingContext context)
-            : base(info, context)
+                    SerializationInfo info,
+                    StreamingContext context)
+        : base(f_1029_35010_35014_C(info), context)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1029, 34856, 35046);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1029, 34856, 35046);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1029, 34856, 35046);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 34856, 35046);
+            }
         }
 
-        #endregion serialization
+        static ParameterBindingParameterDefaultValueException()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1029, 29086, 35089);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1029, 29086, 35089);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1029, 29086, 35089);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1029, 29086, 35089);
+
+        static System.Management.Automation.ErrorCategory
+        f_1029_31409_31422_C(System.Management.Automation.ErrorCategory
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 30985, 31688);
+            return return_v;
+        }
+
+
+        static System.Exception
+        f_1029_34132_34146_C(System.Exception
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 33669, 34444);
+            return return_v;
+        }
+
+
+        static System.Runtime.Serialization.SerializationInfo
+        f_1029_35010_35014_C(System.Runtime.Serialization.SerializationInfo
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1029, 34856, 35046);
+            return return_v;
+        }
+
     }
 }
 

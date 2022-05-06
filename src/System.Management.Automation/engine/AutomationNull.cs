@@ -3,32 +3,29 @@
 
 namespace System.Management.Automation.Internal
 {
-    /// <summary>
-    /// This is a singleton object that is used to indicate a void return result.
-    /// </summary>
-    /// <remarks>
-    /// It's a singleton class. Sealed to prevent subclassing. Any operation that
-    /// returns no actual value should return this object AutomationNull.Value.
-    /// Anything that evaluates an MSH expression should be prepared to deal
-    /// with receiving this result and discarding it. When received in an
-    /// evaluation where a value is required, it should be replaced with null.
-    /// </remarks>
     public static class AutomationNull
     {
-        #region private_members
+        public static PSObject Value { get; }
 
-        // Private member for Value.
+        static AutomationNull()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1238, 714, 1120);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1238, 1020, 1075);
+            Value = f_1238_1060_1074();
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1238, 714, 1120);
 
-        #endregion private_members
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1238, 714, 1120);
+        }
 
-        #region public_property
 
-        /// <summary>
-        /// Returns the singleton instance of this object.
-        /// </summary>
-        public static PSObject Value { get; } = new PSObject();
+        static System.Management.Automation.PSObject
+        f_1238_1060_1074()
+        {
+            var return_v = new System.Management.Automation.PSObject();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1238, 1060, 1074);
+            return return_v;
+        }
 
-        #endregion public_property
     }
 }
 

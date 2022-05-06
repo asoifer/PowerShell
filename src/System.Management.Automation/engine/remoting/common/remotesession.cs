@@ -5,23 +5,11 @@ using System.Management.Automation.Remoting;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// This abstract class is designed to provide InstanceId and self identification for
-    /// client and server remote session classes.
-    /// </summary>
     internal abstract class RemoteSession
     {
-        /// <summary>
-        /// This is the unique id of a remote session object.
-        /// </summary>
-        internal Guid InstanceId { get; } = new Guid();
+        internal Guid InstanceId { get; }
 
-        /// <summary>
-        /// This indicates the remote session object is Client, Server or Listener.
-        /// </summary>
         internal abstract RemotingDestination MySelf { get; }
-
-        #region KeyExchange
 
         internal abstract void StartKeyExchange();
 
@@ -29,7 +17,36 @@ namespace System.Management.Automation
 
         internal BaseSessionDataStructureHandler BaseSessionDataStructureHandler { get; set; }
 
-        #endregion KeyExchange
+        public RemoteSession()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1625, 376, 1065);
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1625, 540, 587);
+            this.InstanceId = f_1625_576_586();
+            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1625, 938, 1024);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1625, 376, 1065);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1625, 376, 1065);
+        }
+
+
+        static RemoteSession()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1625, 376, 1065);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1625, 376, 1065);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1625, 376, 1065);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1625, 376, 1065);
+
+        System.Guid
+        f_1625_576_586()
+        {
+            var return_v = new System.Guid();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1625, 576, 586);
+            return return_v;
+        }
+
     }
 }
 

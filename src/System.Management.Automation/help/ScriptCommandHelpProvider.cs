@@ -3,79 +3,153 @@
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Class ScriptCommandHelpProvider implement the help provider for Functions/ExternalScripts.
-    /// This class does the same thing as CommandHelpProvider except for decision making: whether
-    /// a particular command is Function/Script or not.
-    /// </summary>
-    /// <remarks>
-    /// Command Help information are stored in 'help.xml' files. Location of these files
-    /// can be found from through the engine execution context.
-    /// </remarks>
-    internal class ScriptCommandHelpProvider : CommandHelpProvider
-    {
-        /// <summary>
-        /// Constructor for CommandHelpProvider.
-        /// </summary>
-        internal ScriptCommandHelpProvider(HelpSystem helpSystem)
-            : base(helpSystem)
-        {
-        }
+internal class ScriptCommandHelpProvider : CommandHelpProvider
+{
+internal ScriptCommandHelpProvider(HelpSystem helpSystem)
+:base(f_1175_890_900_C(helpSystem) )
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1175,812,923);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1175,812,923);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1175,812,923);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1175,812,923);
+}
+		}
 
-        #region Overrides
-
-        /// <summary>
-        /// Help category for this provider, which is a constant: HelpCategory.Command.
-        /// </summary>
-        /// <value>Help category for this provider</value>
-        internal override HelpCategory HelpCategory
-        {
-            get
+internal override HelpCategory HelpCategory
+{
+get
+		{
+			try
             {
-                return
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1175,1228,1523);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1175,1264,1508);
+
+return
                     HelpCategory.ExternalScript |
                     HelpCategory.Filter |
                     HelpCategory.Function |
                     HelpCategory.Configuration |
                     HelpCategory.ScriptCommand;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1175,1228,1523);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1175,1160,1534);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1175,1160,1534);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
 
-        /// <summary>
-        /// Gets a command searcher used for ExactMatch help lookup.
-        /// </summary>
-        /// <param name="commandName"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        internal override CommandSearcher GetCommandSearcherForExactMatch(string commandName, ExecutionContext context)
+internal override CommandSearcher GetCommandSearcherForExactMatch(string commandName, ExecutionContext context)
+		{
+			try
         {
-            CommandSearcher searcher = new CommandSearcher(
-                commandName,
-                SearchResolutionOptions.None,
-                CommandTypes.Filter | CommandTypes.Function | CommandTypes.ExternalScript | CommandTypes.Configuration,
-                context);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1175,1788,2239);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1175,1924,2196);
 
-            return searcher;
+CommandSearcher 
+searcher = f_1175_1951_2195(commandName, SearchResolutionOptions.None, CommandTypes.Filter | CommandTypes.Function | CommandTypes.ExternalScript | CommandTypes.Configuration, context)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1175,2212,2228);
+
+return searcher;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1175,1788,2239);
+
+System.Management.Automation.CommandSearcher
+f_1175_1951_2195(string
+commandName,System.Management.Automation.SearchResolutionOptions
+options,System.Management.Automation.CommandTypes
+commandTypes,System.Management.Automation.ExecutionContext
+context)
+{
+var return_v = new System.Management.Automation.CommandSearcher( commandName, options, commandTypes, context);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1175, 1951, 2195);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1175,1788,2239);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1175,1788,2239);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Gets a command searcher used for searching help.
-        /// </summary>
-        /// <param name="pattern"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        internal override CommandSearcher GetCommandSearcherForSearch(string pattern, ExecutionContext context)
+internal override CommandSearcher GetCommandSearcherForSearch(string pattern, ExecutionContext context)
+		{
+			try
         {
-            CommandSearcher searcher =
-                    new CommandSearcher(
-                        pattern,
-                        SearchResolutionOptions.CommandNameIsPattern | SearchResolutionOptions.ResolveFunctionPatterns,
-                        CommandTypes.Filter | CommandTypes.Function | CommandTypes.ExternalScript | CommandTypes.Configuration,
-                        context);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1175,2481,3039);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1175,2609,2996);
 
-            return searcher;
+CommandSearcher 
+searcher =
+f_1175_2657_2995(pattern, SearchResolutionOptions.CommandNameIsPattern | SearchResolutionOptions.ResolveFunctionPatterns, CommandTypes.Filter | CommandTypes.Function | CommandTypes.ExternalScript | CommandTypes.Configuration, context)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1175,3012,3028);
+
+return searcher;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1175,2481,3039);
+
+System.Management.Automation.CommandSearcher
+f_1175_2657_2995(string
+commandName,System.Management.Automation.SearchResolutionOptions
+options,System.Management.Automation.CommandTypes
+commandTypes,System.Management.Automation.ExecutionContext
+context)
+{
+var return_v = new System.Management.Automation.CommandSearcher( commandName, options, commandTypes, context);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1175, 2657, 2995);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1175,2481,3039);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1175,2481,3039);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-    }
+static ScriptCommandHelpProvider()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1175,636,3068);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1175,636,3068);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1175,636,3068);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1175,636,3068);
+
+static System.Management.Automation.HelpSystem
+f_1175_890_900_C(System.Management.Automation.HelpSystem
+i)
+{
+var return_v = i;
+DynAbs.Tracing.TraceSender.TraceBaseCall(1175, 812, 923);
+return return_v;
+}
+
+}
 }

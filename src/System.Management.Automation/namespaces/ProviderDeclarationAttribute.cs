@@ -3,71 +3,124 @@
 
 namespace System.Management.Automation.Provider
 {
-    /// <summary>
-    /// Declares a class as a Cmdlet provider.
-    /// </summary>
-    /// <remarks>
-    /// The class must be derived from System.Management.Automation.Provider.CmdletProvider to
-    /// be recognized by the runspace.
-    /// </remarks>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class CmdletProviderAttribute : Attribute
-    {
-        /// <summary>
-        /// Constructor for the attribute.
-        /// </summary>
-        /// <param name="providerName">
-        /// The provider name.
-        /// </param>
-        /// <param name="providerCapabilities">
-        /// An enumeration of the capabilities that the provider implements beyond the
-        /// default capabilities that are required.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="providerName"/> is null or empty.
-        /// </exception>
-        /// <exception cref="PSArgumentException">
-        /// If <paramref name="providerName"/> contains any of the following characters: \ [ ] ? * :
-        /// </exception>
-        public CmdletProviderAttribute(
+{
+public CmdletProviderAttribute(
             string providerName,
             ProviderCapabilities providerCapabilities)
-        {
-            // verify parameters
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1208,1302,2040);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,2067,2132);
+this._illegalCharacters = new char[] { ':', '\\', '[', ']', '?', '*' };DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,2236,2287);
+this.ProviderName = string.Empty;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,2423,2509);
+this.ProviderCapabilities = ProviderCapabilities.None;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,1484,1632) || true) && (f_1208_1488_1522(providerName))
+)
 
-            if (string.IsNullOrEmpty(providerName))
-            {
-                throw PSTraceSource.NewArgumentNullException("providerName");
-            }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1208,1484,1632);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,1556,1617);
 
-            if (providerName.IndexOfAny(_illegalCharacters) != -1)
-            {
-                throw PSTraceSource.NewArgumentException(
-                    "providerName",
-                    SessionStateStrings.ProviderNameNotValid,
-                    providerName);
-            }
+throw f_1208_1562_1616("providerName");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1208,1484,1632);
+}
 
-            ProviderName = providerName;
-            ProviderCapabilities = providerCapabilities;
-        }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,1648,1927) || true) && (f_1208_1652_1695(providerName, _illegalCharacters)!= -1)
+)
 
-        private char[] _illegalCharacters = new char[] { ':', '\\', '[', ']', '?', '*' };
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1208,1648,1927);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,1735,1912);
 
-        /// <summary>
-        /// Gets the name of the provider.
-        /// </summary>
-        public string ProviderName { get; } = string.Empty;
+throw f_1208_1741_1911("providerName", f_1208_1835_1875(), providerName);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1208,1648,1927);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,1943,1971);
 
-        /// <summary>
-        /// Gets the flags that represent the capabilities of the provider.
-        /// </summary>
-        public ProviderCapabilities ProviderCapabilities { get; } = ProviderCapabilities.None;
+ProviderName = providerName;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1208,1985,2029);
 
-        #region private data
+ProviderCapabilities = providerCapabilities;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1208,1302,2040);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1208,1302,2040);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1208,1302,2040);
+}
+		}
 
-        #endregion private data
-    }
+private char[] _illegalCharacters ;
+
+public string ProviderName {get; }
+
+public ProviderCapabilities ProviderCapabilities {get; }
+
+static CmdletProviderAttribute()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1208,418,2583);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1208,418,2583);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1208,418,2583);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1208,418,2583);
+
+bool
+f_1208_1488_1522(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1208, 1488, 1522);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentNullException
+f_1208_1562_1616(string
+paramName)
+{
+var return_v = PSTraceSource.NewArgumentNullException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1208, 1562, 1616);
+return return_v;
+}
+
+
+int
+f_1208_1652_1695(string
+this_param,char[]
+anyOf)
+{
+var return_v = this_param.IndexOfAny( anyOf);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1208, 1652, 1695);
+return return_v;
+}
+
+
+string
+f_1208_1835_1875()
+{
+var return_v =                     SessionStateStrings.ProviderNameNotValid;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1208, 1835, 1875);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentException
+f_1208_1741_1911(string
+paramName,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1208, 1741, 1911);
+return return_v;
+}
+
+}
 
     /// <summary>
     /// This enumeration defines the capabilities that the provider implements.

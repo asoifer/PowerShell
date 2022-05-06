@@ -7,515 +7,1638 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Defines a data structure used to represent the status of an ongoing operation at a point in time.
-    /// </summary>
-    /// <remarks>
-    /// ProgressRecords are passed to <see cref="System.Management.Automation.Cmdlet.WriteProgress(ProgressRecord)"/>,
-    /// which, according to user preference, forwards that information on to the host for rendering to the user.
-    /// </remarks>
-    /// <seealso cref="System.Management.Automation.Cmdlet.WriteProgress(ProgressRecord)"/>
-
-    [DataContract()]
+[DataContract()]
     public
     class ProgressRecord
-    {
-        #region Public API
-
-        /// <summary>
-        /// Initializes a new instance of the ProgressRecord class and defines the activity Id,
-        /// activity description, and status description.
-        /// </summary>
-        /// <param name="activityId">
-        /// A unique numeric key that identifies the activity to which this record applies.
-        /// </param>
-        /// <param name="activity">
-        /// A description of the activity for which progress is being reported.
-        /// </param>
-        /// <param name="statusDescription">
-        /// A description of the status of the activity.
-        /// </param>
-
-        public
+{
+public
         ProgressRecord(int activityId, string activity, string statusDescription)
-        {
-            if (activityId < 0)
-            {
-                // negative Ids are reserved to indicate "no id" for parent Ids.
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1316,1483,2453);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15317,15319);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15377,15390);
+this.parentId = -1;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15451,15459);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15520,15526);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15587,15603);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15661,15673);
+this.percent = -1;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15731,15752);
+this.secondsRemaining = -1;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15825,15861);
+this.type = ProgressRecordType.Processing;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,1597,1882) || true) && (activityId < 0)
+)
 
-                throw PSTraceSource.NewArgumentOutOfRangeException("activityId", activityId, ProgressRecordStrings.ArgMayNotBeNegative, "activityId");
-            }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,1597,1882);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,1733,1867);
 
-            if (string.IsNullOrEmpty(activity))
-            {
-                throw PSTraceSource.NewArgumentException("activity", ProgressRecordStrings.ArgMayNotBeNullOrEmpty, "activity");
-            }
+throw f_1316_1739_1866("activityId", activityId, f_1316_1810_1851(), "activityId");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,1597,1882);
+}
 
-            if (string.IsNullOrEmpty(statusDescription))
-            {
-                throw PSTraceSource.NewArgumentException("activity", ProgressRecordStrings.ArgMayNotBeNullOrEmpty, "statusDescription");
-            }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,1898,2092) || true) && (f_1316_1902_1932(activity))
+)
 
-            this.id = activityId;
-            this.activity = activity;
-            this.status = statusDescription;
-        }
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,1898,2092);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,1966,2077);
 
-        /// <summary>
-        /// Cloning constructor (all fields are value types - can treat our implementation of cloning as "deep" copy)
-        /// </summary>
-        /// <param name="other"></param>
-        internal ProgressRecord(ProgressRecord other)
-        {
-            this.activity = other.activity;
-            this.currentOperation = other.currentOperation;
-            this.id = other.id;
-            this.parentId = other.parentId;
-            this.percent = other.percent;
-            this.secondsRemaining = other.secondsRemaining;
-            this.status = other.status;
-            this.type = other.type;
-        }
+throw f_1316_1972_2076("activity", f_1316_2019_2063(), "activity");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,1898,2092);
+}
 
-        /// <summary>
-        /// Gets the Id of the activity to which this record corresponds.  Used as a 'key' for the
-        /// linking of subordinate activities.
-        /// </summary>
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2108,2320) || true) && (f_1316_2112_2151(statusDescription))
+)
 
-        public
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,2108,2320);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2185,2305);
+
+throw f_1316_2191_2304("activity", f_1316_2238_2282(), "statusDescription");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,2108,2320);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2336,2357);
+
+this.id = activityId;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2371,2396);
+
+this.activity = activity;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2410,2442);
+
+this.status = statusDescription;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1316,1483,2453);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,1483,2453);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,1483,2453);
+}
+		}
+
+internal ProgressRecord(ProgressRecord other)
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1316,2673,3106);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15317,15319);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15377,15390);
+this.parentId = -1;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15451,15459);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15520,15526);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15587,15603);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15661,15673);
+this.percent = -1;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15731,15752);
+this.secondsRemaining = -1;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15825,15861);
+this.type = ProgressRecordType.Processing;DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2743,2774);
+
+this.activity = other.activity;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2788,2835);
+
+this.currentOperation = other.currentOperation;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2849,2868);
+
+this.id = other.id;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2882,2913);
+
+this.parentId = other.parentId;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2927,2956);
+
+this.percent = other.percent;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,2970,3017);
+
+this.secondsRemaining = other.secondsRemaining;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,3031,3058);
+
+this.status = other.status;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,3072,3095);
+
+this.type = other.type;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1316,2673,3106);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,2673,3106);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,2673,3106);
+}
+		}
+
+public
         int
         ActivityId
-        {
-            get
+{
+get
+		{
+			try
             {
-                return id;
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,3379,3440);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,3415,3425);
+
+return id;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,3379,3440);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,3315,3451);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,3315,3451);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}}
 
-        /// <summary>
-        /// Gets and sets the Id of the activity for which this record is a subordinate.
-        /// </summary>
-        /// <remarks>
-        /// Used to allow chaining of progress records (such as when one installation invokes a child installation). UI:
-        /// normally not directly visible except as already displayed as its own activity. Usually a sub-activity will be
-        /// positioned below and to the right of its parent.
-        ///
-        /// A negative value (the default) indicates that the activity is not a subordinate.
-        ///
-        /// May not be the same as ActivityId.
-        /// <!--NTRAID#Windows OS Bugs-1161549 the default value for this should be picked up from a variable in the
-        /// shell so that a script can set that variable, and have all subsequent calls to WriteProgress (the API) be
-        /// subordinate to the "current parent id".-->
-        /// </remarks>
-
-        public
+public
         int
         ParentActivityId
-        {
-            get
+{
+get
+		{
+			try
             {
-                return parentId;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,4487,4554);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,4523,4539);
 
-            set
+return parentId;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,4487,4554);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,4417,4859);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,4417,4859);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                if (value == ActivityId)
-                {
-                    throw PSTraceSource.NewArgumentException("value", ProgressRecordStrings.ParentActivityIdCantBeActivityId);
-                }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,4570,4848);
 
-                parentId = value;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,4606,4796) || true) && (value == f_1316_4619_4629())
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,4606,4796);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,4671,4777);
+
+throw f_1316_4677_4776("value", f_1316_4721_4775());
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,4606,4796);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,4816,4833);
+
+parentId = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,4570,4848);
+
+int
+f_1316_4619_4629()
+{
+var return_v = ActivityId;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 4619, 4629);
+return return_v;
+}
+
+
+string
+f_1316_4721_4775()
+{
+var return_v = ProgressRecordStrings.ParentActivityIdCantBeActivityId;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 4721, 4775);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentException
+f_1316_4677_4776(string
+paramName,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 4677, 4776);
+return return_v;
+}
+
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,4417,4859);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,4417,4859);
+}
+		}}
 
-        /// <summary>
-        /// Gets and sets the description of the activity for which progress is being reported.
-        /// </summary>
-        /// <remarks>
-        /// States the overall intent of whats being accomplished, such as "Recursively removing item c:\temp." Typically
-        /// displayed in conjunction with a progress bar.
-        /// </remarks>
-
-        public
+public
         string
         Activity
-        {
-            get
+{
+get
+		{
+			try
             {
-                return activity;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,5311,5378);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,5347,5363);
 
-            set
+return activity;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,5311,5378);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,5246,5690);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,5246,5690);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw PSTraceSource.NewArgumentException("value", ProgressRecordStrings.ArgMayNotBeNullOrEmpty, "value");
-                }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,5394,5679);
 
-                activity = value;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,5430,5627) || true) && (f_1316_5434_5461(value))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,5430,5627);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,5503,5608);
+
+throw f_1316_5509_5607("value", f_1316_5553_5597(), "value");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,5430,5627);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,5647,5664);
+
+activity = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,5394,5679);
+
+bool
+f_1316_5434_5461(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 5434, 5461);
+return return_v;
+}
+
+
+string
+f_1316_5553_5597()
+{
+var return_v = ProgressRecordStrings.ArgMayNotBeNullOrEmpty;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 5553, 5597);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentException
+f_1316_5509_5607(string
+paramName,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 5509, 5607);
+return return_v;
+}
+
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,5246,5690);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,5246,5690);
+}
+		}}
 
-        /// <summary>
-        /// Gets and sets the current status of the operation, e.g., "35 of 50 items Copied." or "95% completed." or "100 files purged."
-        /// </summary>
-
-        public
+public
         string
         StatusDescription
-        {
-            get
+{
+get
+		{
+			try
             {
-                return status;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,5963,6028);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,5999,6013);
 
-            set
+return status;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,5963,6028);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,5889,6338);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,5889,6338);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw PSTraceSource.NewArgumentException("value", ProgressRecordStrings.ArgMayNotBeNullOrEmpty, "value");
-                }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,6044,6327);
 
-                status = value;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,6080,6277) || true) && (f_1316_6084_6111(value))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,6080,6277);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,6153,6258);
+
+throw f_1316_6159_6257("value", f_1316_6203_6247(), "value");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,6080,6277);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,6297,6312);
+
+status = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,6044,6327);
+
+bool
+f_1316_6084_6111(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 6084, 6111);
+return return_v;
+}
+
+
+string
+f_1316_6203_6247()
+{
+var return_v = ProgressRecordStrings.ArgMayNotBeNullOrEmpty;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 6203, 6247);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentException
+f_1316_6159_6257(string
+paramName,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 6159, 6257);
+return return_v;
+}
+
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,5889,6338);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,5889,6338);
+}
+		}}
 
-        /// <summary>
-        /// Gets and sets the current operation of the many required to accomplish the activity (such as "copying foo.txt"). Normally displayed
-        /// below its associated progress bar, e.g., "deleting file foo.bar"
-        /// Set to null or empty in the case a sub-activity will be used to show the current operation.
-        /// </summary>
-
-        public
+public
         string
         CurrentOperation
-        {
-            get
+{
+get
+		{
+			try
             {
-                return currentOperation;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,6800,6875);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,6836,6860);
 
-            set
+return currentOperation;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,6800,6875);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,6727,7032);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,6727,7032);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                // null or empty string is allowed
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,6891,7021);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,6981,7006);
 
-                currentOperation = value;
+currentOperation = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,6891,7021);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,6727,7032);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,6727,7032);
+}
+		}}
 
-        /// <summary>
-        /// Gets and sets the estimate of the percentage of total work for the activity that is completed.  Typically displayed as a progress bar.
-        /// Set to a negative value to indicate that the percentage completed should not be displayed.
-        /// </summary>
-
-        public
+public
         int
         PercentComplete
-        {
-            get
+{
+get
+		{
+			try
             {
-                return percent;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,7414,7480);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,7450,7465);
 
-            set
+return percent;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,7414,7480);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,7345,7911);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,7345,7911);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                // negative values are allowed
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,7496,7900);
 
-                if (value > 100)
-                {
-                    throw
-                        PSTraceSource.NewArgumentOutOfRangeException(
-                            "value", value, ProgressRecordStrings.PercentMayNotBeMoreThan100, "PercentComplete");
-                }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,7582,7849) || true) && (value > 100)
+)
 
-                percent = value;
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,7582,7849);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,7639,7830);
+
+throw
+f_1316_7670_7829("value", value, f_1316_7761_7809(), "PercentComplete");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,7582,7849);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,7869,7885);
+
+percent = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,7496,7900);
+
+string
+f_1316_7761_7809()
+{
+var return_v = ProgressRecordStrings.PercentMayNotBeMoreThan100;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 7761, 7809);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentOutOfRangeException
+f_1316_7670_7829(string
+paramName,int
+actualValue,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentOutOfRangeException( paramName, (object)actualValue, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 7670, 7829);
+return return_v;
+}
+
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,7345,7911);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,7345,7911);
+}
+		}}
 
-        /// <summary>
-        /// Gets and sets the estimate of time remaining until this activity is completed.  This can be based upon a measurement of time since
-        /// started and the percent complete or another approach deemed appropriate by the caller.
-        ///
-        /// Normally displayed beside the progress bar, as "N seconds remaining."
-        /// </summary>
-        ///<remarks>
-        /// A value less than 0 means "don't display a time remaining."
-        /// </remarks>
-
-        public
+public
         int
         SecondsRemaining
-        {
-            get
+{
+get
+		{
+			try
             {
-                return secondsRemaining;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,8501,8576);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,8537,8561);
 
-            set
+return secondsRemaining;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,8501,8576);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,8431,8729);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,8431,8729);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                // negative values are allowed
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,8592,8718);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,8678,8703);
 
-                secondsRemaining = value;
+secondsRemaining = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,8592,8718);
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,8431,8729);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,8431,8729);
+}
+		}}
 
-        /// <summary>
-        /// Gets and sets the type of record represented by this instance.
-        /// </summary>
-
-        public
+public
         ProgressRecordType
         RecordType
-        {
-            get
+{
+get
+		{
+			try
             {
-                return type;
-            }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,8945,9008);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,8981,8993);
 
-            set
+return type;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,8945,9008);
+            }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,8866,9313);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,8866,9313);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
+set
+		{
+			try
             {
-                if (value != ProgressRecordType.Completed && value != ProgressRecordType.Processing)
-                {
-                    throw PSTraceSource.NewArgumentException("value");
-                }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,9024,9302);
 
-                type = value;
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,9060,9254) || true) && (value != ProgressRecordType.Completed &&(DynAbs.Tracing.TraceSender.Expression_True(1316, 9064, 9143)&&value != ProgressRecordType.Processing))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,9060,9254);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,9185,9235);
+
+throw f_1316_9191_9234("value");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,9060,9254);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,9274,9287);
+
+type = value;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,9024,9302);
+
+System.Management.Automation.PSArgumentException
+f_1316_9191_9234(string
+paramName)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 9191, 9234);
+return return_v;
+}
+
             }
-        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,8866,9313);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,8866,9313);
+}
+		}}
 
-        /// <summary>
-        /// Overrides <see cref="System.Object.ToString"/>
-        /// </summary>
-        /// <returns>
-        /// "parent = a id = b act = c stat = d cur = e pct = f sec = g type = h" where
-        /// a, b, c, d, e, f, and g are the values of ParentActivityId, ActivityId, Activity, StatusDescription,
-        /// CurrentOperation, PercentComplete, SecondsRemaining and RecordType properties.
-        /// </returns>
-
-        public override
+public override
         string
         ToString()
+		{
+			try
         {
-            return
-                string.Format(
-                    System.Globalization.CultureInfo.CurrentCulture,
-                    "parent = {0} id = {1} act = {2} stat = {3} cur = {4} pct = {5} sec = {6} type = {7}",
-                    parentId,
-                    id,
-                    activity,
-                    status,
-                    currentOperation,
-                    percent,
-                    secondsRemaining,
-                    type);
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,9776,10331);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,9852,10320);
+
+return
+f_1316_9876_10319(f_1316_9912_9959(), "parent = {0} id = {1} act = {2} stat = {3} cur = {4} pct = {5} sec = {6} type = {7}", parentId, id, activity, status, currentOperation, percent, secondsRemaining, type);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,9776,10331);
+
+System.Globalization.CultureInfo
+f_1316_9912_9959()
+{
+var return_v =                     System.Globalization.CultureInfo.CurrentCulture;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 9912, 9959);
+return return_v;
+}
+
+
+string
+f_1316_9876_10319(System.Globalization.CultureInfo
+provider,string
+format,params object?[]
+args)
+{
+var return_v = string.Format( (System.IFormatProvider)provider, format, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 9876, 10319);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,9776,10331);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,9776,10331);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-
-        #region Helper methods
-
-        internal static int? GetSecondsRemaining(DateTime startTime, double percentageComplete)
+internal static int? GetSecondsRemaining(DateTime startTime, double percentageComplete)
+		{
+			try
         {
-            Dbg.Assert(percentageComplete >= 0.0, "Caller should verify percentageComplete >= 0.0");
-            Dbg.Assert(percentageComplete <= 1.0, "Caller should verify percentageComplete <= 1.0");
-            Dbg.Assert(
-                startTime.Kind == DateTimeKind.Utc,
-                "DateTime arithmetic should always be done in utc mode [to avoid problems when some operands are calculated right before and right after switching to /from a daylight saving time");
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1316,10399,11829);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,10511,10599);
 
-            if ((percentageComplete < 0.00001) || double.IsNaN(percentageComplete))
-            {
-                return null;
-            }
+f_1316_10511_10598(percentageComplete >= 0.0, "Caller should verify percentageComplete >= 0.0");
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,10613,10701);
 
-            DateTime now = DateTime.UtcNow;
-            Dbg.Assert(startTime <= now, "Caller should pass a valid startTime");
-            TimeSpan elapsedTime = now - startTime;
+f_1316_10613_10700(percentageComplete <= 1.0, "Caller should verify percentageComplete <= 1.0");
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,10715,10978);
 
-            TimeSpan totalTime;
+f_1316_10715_10977(startTime.Kind == DateTimeKind.Utc, "DateTime arithmetic should always be done in utc mode [to avoid problems when some operands are calculated right before and right after switching to /from a daylight saving time");
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,10994,11125) || true) && ((percentageComplete < 0.00001) ||(DynAbs.Tracing.TraceSender.Expression_False(1316, 10998, 11064)||f_1316_11032_11064(percentageComplete)))
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,10994,11125);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11098,11110);
+
+return null;
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,10994,11125);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11141,11172);
+
+DateTime 
+now = DateTime.UtcNow
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11186,11255);
+
+f_1316_11186_11254(startTime <= now, "Caller should pass a valid startTime");
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11269,11308);
+
+TimeSpan 
+elapsedTime = now - startTime
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11324,11343);
+
+TimeSpan 
+totalTime
+=default(TimeSpan);
             try
             {
-                totalTime = TimeSpan.FromMilliseconds(elapsedTime.TotalMilliseconds / percentageComplete);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11393,11483);
+
+totalTime = TimeSpan.FromMilliseconds(elapsedTime.TotalMilliseconds / percentageComplete);
             }
             catch (OverflowException)
             {
-                return null;
+DynAbs.Tracing.TraceSender.TraceEnterCatch(1316,11512,11597);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11570,11582);
+
+return null;
+DynAbs.Tracing.TraceSender.TraceExitCatch(1316,11512,11597);
             }
             catch (ArgumentException)
             {
-                return null;
+DynAbs.Tracing.TraceSender.TraceEnterCatch(1316,11611,11696);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11669,11681);
+
+return null;
+DynAbs.Tracing.TraceSender.TraceExitCatch(1316,11611,11696);
             }
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11712,11761);
 
-            TimeSpan remainingTime = totalTime - elapsedTime;
+TimeSpan 
+remainingTime = totalTime - elapsedTime
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,11777,11818);
 
-            return (int)(remainingTime.TotalSeconds);
+return (int)(remainingTime.TotalSeconds);
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1316,10399,11829);
+
+int
+f_1316_10511_10598(bool
+condition,string
+whyThisShouldNeverHappen)
+{
+Dbg.Assert( condition, whyThisShouldNeverHappen);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 10511, 10598);
+return 0;
+}
+
+
+int
+f_1316_10613_10700(bool
+condition,string
+whyThisShouldNeverHappen)
+{
+Dbg.Assert( condition, whyThisShouldNeverHappen);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 10613, 10700);
+return 0;
+}
+
+
+int
+f_1316_10715_10977(bool
+condition,string
+whyThisShouldNeverHappen)
+{
+Dbg.Assert( condition, whyThisShouldNeverHappen);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 10715, 10977);
+return 0;
+}
+
+
+bool
+f_1316_11032_11064(double
+d)
+{
+var return_v = double.IsNaN( d);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 11032, 11064);
+return return_v;
+}
+
+
+int
+f_1316_11186_11254(bool
+condition,string
+whyThisShouldNeverHappen)
+{
+Dbg.Assert( condition, whyThisShouldNeverHappen);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 11186, 11254);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,10399,11829);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,10399,11829);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Returns percentage complete when it is impossible to predict how long an operation might take.
-        /// The percentage complete will slowly converge toward 100%.
-        /// At the <paramref name="expectedDuration"/> the percentage complete will be 90%.
-        /// </summary>
-        /// <param name="startTime">When did the operation start.</param>
-        /// <param name="expectedDuration">How long does the operation usually take.</param>
-        /// <returns>Estimated percentage complete of the operation (always between 0 and 99% - never returns 100%).</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when
-        /// 1) <paramref name="startTime"/> is in the future
-        /// 2) <paramref name="expectedDuration"/> is negative or zero
-        /// </exception>
-        internal static int GetPercentageComplete(DateTime startTime, TimeSpan expectedDuration)
+internal static int GetPercentageComplete(DateTime startTime, TimeSpan expectedDuration)
+		{
+			try
         {
-            DateTime now = DateTime.UtcNow;
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1316,12702,15119);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,12815,12846);
 
-            Dbg.Assert(
-                startTime.Kind == DateTimeKind.Utc,
-                "DateTime arithmetic should always be done in utc mode [to avoid problems when some operands are calculated right before and right after switching to /from a daylight saving time");
+DateTime 
+now = DateTime.UtcNow
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,12862,13125);
 
-            if (startTime > now)
-            {
-                throw new ArgumentOutOfRangeException("startTime");
-            }
+f_1316_12862_13124(startTime.Kind == DateTimeKind.Utc, "DateTime arithmetic should always be done in utc mode [to avoid problems when some operands are calculated right before and right after switching to /from a daylight saving time");
 
-            if (expectedDuration <= TimeSpan.Zero)
-            {
-                throw new ArgumentOutOfRangeException("expectedDuration");
-            }
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,13141,13260) || true) && (startTime > now)
+)
 
-            /*
-             * According to the spec of Checkpoint-Computer
-             * (http://cmdletdesigner/SpecViewer/Default.aspx?Project=PowerShell&Cmdlet=Checkpoint-Computer)
-             * we have percentage remaining = f(t) where
-             * f(inf) = 0%
-             * f(0) = 100%
-             * f(90) = <something small> = 10%
-             *
-             * The spec talks about exponential decay, but function based on 1/x seems better:
-             * f(t) = a / (T + b)
-             *
-             * This by definition has f(inf) = 0, so we have to find a and b for the last 2 cases:
-             * E1: f(0) = a / (0 + b) = 100
-             * E2: f(T = 90) = a / (T + b) = 10
-             *
-             * From E1 we have a = 100 * b, which we can use in E2:
-             * (100 * b) / (T + b) = 10
-             * 100 * b = 10 * T + 10 * b
-             * 90 * b = 10 * T
-             * b = T / 9
-             *
-             * Some sample values (for T=90):
-             * t   | %rem
-             * -----------
-             * 0   | 100.0%
-             * 5   |  66.6%
-             * 10  |  50.0%
-             * 30  |  25.0%
-             * 70  |  12.5%
-             * 90  |  10.0%
-             * 300 |   3.2%
-             * 600 |   1.6%
-             * 3600|   0.2%
-             */
-            TimeSpan timeElapsed = now - startTime;
-            double b = expectedDuration.TotalSeconds / 9.0;
-            double a = 100.0 * b;
-            double percentageRemaining = a / (timeElapsed.TotalSeconds + b);
-            double percentageCompleted = 100.0 - percentageRemaining;
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,13141,13260);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,13194,13245);
 
-            return (int)Math.Floor(percentageCompleted);
+throw f_1316_13200_13244("startTime");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,13141,13260);
+}
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,13276,13420) || true) && (expectedDuration <= TimeSpan.Zero)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,13276,13420);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,13347,13405);
+
+throw f_1316_13353_13404("expectedDuration");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,13276,13420);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,14764,14803);
+
+TimeSpan 
+timeElapsed = now - startTime
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,14817,14864);
+
+double 
+b = expectedDuration.TotalSeconds / 9.0
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,14878,14899);
+
+double 
+a = 100.0 * b
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,14913,14977);
+
+double 
+percentageRemaining = a / (timeElapsed.TotalSeconds + b)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,14991,15048);
+
+double 
+percentageCompleted = 100.0 - percentageRemaining
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,15064,15108);
+
+return (int)f_1316_15076_15107(percentageCompleted);
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1316,12702,15119);
+
+int
+f_1316_12862_13124(bool
+condition,string
+whyThisShouldNeverHappen)
+{
+Dbg.Assert( condition, whyThisShouldNeverHappen);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 12862, 13124);
+return 0;
+}
+
+
+System.ArgumentOutOfRangeException
+f_1316_13200_13244(string
+paramName)
+{
+var return_v = new System.ArgumentOutOfRangeException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 13200, 13244);
+return return_v;
+}
+
+
+System.ArgumentOutOfRangeException
+f_1316_13353_13404(string
+paramName)
+{
+var return_v = new System.ArgumentOutOfRangeException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 13353, 13404);
+return return_v;
+}
+
+
+double
+f_1316_15076_15107(double
+d)
+{
+var return_v = Math.Floor( d);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 15076, 15107);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,12702,15119);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,12702,15119);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-
-        #region DO NOT REMOVE OR RENAME THESE FIELDS - it will break remoting compatibility with Windows PowerShell
-
-        [DataMemberAttribute()]
+[DataMemberAttribute()]
         private int id;
 
-        [DataMemberAttribute()]
-        private int parentId = -1;
+[DataMemberAttribute()]
+        private int parentId ;
 
-        [DataMemberAttribute()]
+[DataMemberAttribute()]
         private string activity;
 
-        [DataMemberAttribute()]
+[DataMemberAttribute()]
         private string status;
 
-        [DataMemberAttribute()]
+[DataMemberAttribute()]
         private string currentOperation;
 
-        [DataMemberAttribute()]
-        private int percent = -1;
+[DataMemberAttribute()]
+        private int percent ;
 
-        [DataMemberAttribute()]
-        private int secondsRemaining = -1;
+[DataMemberAttribute()]
+        private int secondsRemaining ;
 
-        [DataMemberAttribute()]
-        private ProgressRecordType type = ProgressRecordType.Processing;
+[DataMemberAttribute()]
+        private ProgressRecordType type ;
 
-        #endregion
-
-        #region Serialization / deserialization for remoting
-
-        /// <summary>
-        /// Creates a ProgressRecord object from a PSObject property bag.
-        /// PSObject has to be in the format returned by ToPSObjectForRemoting method.
-        /// </summary>
-        /// <param name="progressAsPSObject">PSObject to rehydrate.</param>
-        /// <returns>
-        /// ProgressRecord rehydrated from a PSObject property bag
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// Thrown if the PSObject is null.
-        /// </exception>
-        /// <exception cref="System.Management.Automation.Remoting.PSRemotingDataStructureException">
-        /// Thrown when the PSObject is not in the expected format
-        /// </exception>
-        internal static ProgressRecord FromPSObjectForRemoting(PSObject progressAsPSObject)
+internal static ProgressRecord FromPSObjectForRemoting(PSObject progressAsPSObject)
+		{
+			try
         {
-            if (progressAsPSObject == null)
-            {
-                throw PSTraceSource.NewArgumentNullException("progressAsPSObject");
-            }
+DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1316,16684,18282);
 
-            string activity = RemotingDecoder.GetPropertyValue<string>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_Activity);
-            int activityId = RemotingDecoder.GetPropertyValue<int>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_ActivityId);
-            string statusDescription = RemotingDecoder.GetPropertyValue<string>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_StatusDescription);
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,16792,16938) || true) && (progressAsPSObject == null)
+)
 
-            ProgressRecord result = new ProgressRecord(activityId, activity, statusDescription);
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1316,16792,16938);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,16856,16923);
 
-            result.CurrentOperation = RemotingDecoder.GetPropertyValue<string>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_CurrentOperation);
-            result.ParentActivityId = RemotingDecoder.GetPropertyValue<int>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_ParentActivityId);
-            result.PercentComplete = RemotingDecoder.GetPropertyValue<int>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_PercentComplete);
-            result.RecordType = RemotingDecoder.GetPropertyValue<ProgressRecordType>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_Type);
-            result.SecondsRemaining = RemotingDecoder.GetPropertyValue<int>(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_SecondsRemaining);
+throw f_1316_16862_16922("progressAsPSObject");
+DynAbs.Tracing.TraceSender.TraceExitCondition(1316,16792,16938);
+}
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,16954,17080);
 
-            return result;
+string 
+activity = f_1316_16972_17079(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_Activity)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17094,17218);
+
+int 
+activityId = f_1316_17111_17217(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_ActivityId)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17232,17376);
+
+string 
+statusDescription = f_1316_17259_17375(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_StatusDescription)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17392,17476);
+
+ProgressRecord 
+result = f_1316_17416_17475(activityId, activity, statusDescription)
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17492,17634);
+
+result.CurrentOperation = f_1316_17518_17633(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_CurrentOperation);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17648,17787);
+
+result.ParentActivityId = f_1316_17674_17786(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_ParentActivityId);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17801,17938);
+
+result.PercentComplete = f_1316_17826_17937(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_PercentComplete);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,17952,18088);
+
+result.RecordType = f_1316_17972_18087(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_Type);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,18102,18241);
+
+result.SecondsRemaining = f_1316_18128_18240(progressAsPSObject, RemoteDataNameStrings.ProgressRecord_SecondsRemaining);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,18257,18271);
+
+return result;
+DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1316,16684,18282);
+
+System.Management.Automation.PSArgumentNullException
+f_1316_16862_16922(string
+paramName)
+{
+var return_v = PSTraceSource.NewArgumentNullException( paramName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 16862, 16922);
+return return_v;
+}
+
+
+string
+f_1316_16972_17079(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<string>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 16972, 17079);
+return return_v;
+}
+
+
+int
+f_1316_17111_17217(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<int>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17111, 17217);
+return return_v;
+}
+
+
+string
+f_1316_17259_17375(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<string>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17259, 17375);
+return return_v;
+}
+
+
+System.Management.Automation.ProgressRecord
+f_1316_17416_17475(int
+activityId,string
+activity,string
+statusDescription)
+{
+var return_v = new System.Management.Automation.ProgressRecord( activityId, activity, statusDescription);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17416, 17475);
+return return_v;
+}
+
+
+string
+f_1316_17518_17633(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<string>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17518, 17633);
+return return_v;
+}
+
+
+int
+f_1316_17674_17786(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<int>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17674, 17786);
+return return_v;
+}
+
+
+int
+f_1316_17826_17937(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<int>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17826, 17937);
+return return_v;
+}
+
+
+System.Management.Automation.ProgressRecordType
+f_1316_17972_18087(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<ProgressRecordType>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 17972, 18087);
+return return_v;
+}
+
+
+int
+f_1316_18128_18240(System.Management.Automation.PSObject
+psObject,string
+propertyName)
+{
+var return_v = RemotingDecoder.GetPropertyValue<int>( psObject, propertyName);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18128, 18240);
+return return_v;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,16684,18282);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,16684,18282);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        /// <summary>
-        /// Returns this object as a PSObject property bag
-        /// that can be used in a remoting protocol data object.
-        /// </summary>
-        /// <returns>This object as a PSObject property bag.</returns>
-        internal PSObject ToPSObjectForRemoting()
+internal PSObject ToPSObjectForRemoting()
+		{
+			try
         {
-            PSObject progressAsPSObject = RemotingEncoder.CreateEmptyPSObject();
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1316,18539,19852);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,18605,18673);
 
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_Activity, this.Activity));
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_ActivityId, this.ActivityId));
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_StatusDescription, this.StatusDescription));
+PSObject 
+progressAsPSObject = f_1316_18635_18672()
+;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,18689,18805);
 
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_CurrentOperation, this.CurrentOperation));
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_ParentActivityId, this.ParentActivityId));
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_PercentComplete, this.PercentComplete));
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_Type, this.RecordType));
-            progressAsPSObject.Properties.Add(new PSNoteProperty(RemoteDataNameStrings.ProgressRecord_SecondsRemaining, this.SecondsRemaining));
+f_1316_18689_18804(f_1316_18689_18718(progressAsPSObject), f_1316_18723_18803(RemoteDataNameStrings.ProgressRecord_Activity, f_1316_18789_18802(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,18819,18939);
 
-            return progressAsPSObject;
+f_1316_18819_18938(f_1316_18819_18848(progressAsPSObject), f_1316_18853_18937(RemoteDataNameStrings.ProgressRecord_ActivityId, f_1316_18921_18936(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,18953,19087);
+
+f_1316_18953_19086(f_1316_18953_18982(progressAsPSObject), f_1316_18987_19085(RemoteDataNameStrings.ProgressRecord_StatusDescription, f_1316_19062_19084(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,19103,19235);
+
+f_1316_19103_19234(f_1316_19103_19132(progressAsPSObject), f_1316_19137_19233(RemoteDataNameStrings.ProgressRecord_CurrentOperation, f_1316_19211_19232(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,19249,19381);
+
+f_1316_19249_19380(f_1316_19249_19278(progressAsPSObject), f_1316_19283_19379(RemoteDataNameStrings.ProgressRecord_ParentActivityId, f_1316_19357_19378(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,19395,19525);
+
+f_1316_19395_19524(f_1316_19395_19424(progressAsPSObject), f_1316_19429_19523(RemoteDataNameStrings.ProgressRecord_PercentComplete, f_1316_19502_19522(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,19539,19653);
+
+f_1316_19539_19652(f_1316_19539_19568(progressAsPSObject), f_1316_19573_19651(RemoteDataNameStrings.ProgressRecord_Type, f_1316_19635_19650(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,19667,19799);
+
+f_1316_19667_19798(f_1316_19667_19696(progressAsPSObject), f_1316_19701_19797(RemoteDataNameStrings.ProgressRecord_SecondsRemaining, f_1316_19775_19796(this)));
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1316,19815,19841);
+
+return progressAsPSObject;
+DynAbs.Tracing.TraceSender.TraceExitMethod(1316,18539,19852);
+
+System.Management.Automation.PSObject
+f_1316_18635_18672()
+{
+var return_v = RemotingEncoder.CreateEmptyPSObject();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18635, 18672);
+return return_v;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_18689_18718(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 18689, 18718);
+return return_v;
+}
+
+
+string
+f_1316_18789_18802(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.Activity;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 18789, 18802);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_18723_18803(string
+name,string
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18723, 18803);
+return return_v;
+}
+
+
+int
+f_1316_18689_18804(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18689, 18804);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_18819_18848(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 18819, 18848);
+return return_v;
+}
+
+
+int
+f_1316_18921_18936(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.ActivityId;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 18921, 18936);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_18853_18937(string
+name,int
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18853, 18937);
+return return_v;
+}
+
+
+int
+f_1316_18819_18938(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18819, 18938);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_18953_18982(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 18953, 18982);
+return return_v;
+}
+
+
+string
+f_1316_19062_19084(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.StatusDescription;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19062, 19084);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_18987_19085(string
+name,string
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18987, 19085);
+return return_v;
+}
+
+
+int
+f_1316_18953_19086(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 18953, 19086);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_19103_19132(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19103, 19132);
+return return_v;
+}
+
+
+string
+f_1316_19211_19232(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.CurrentOperation;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19211, 19232);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_19137_19233(string
+name,string
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19137, 19233);
+return return_v;
+}
+
+
+int
+f_1316_19103_19234(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19103, 19234);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_19249_19278(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19249, 19278);
+return return_v;
+}
+
+
+int
+f_1316_19357_19378(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.ParentActivityId;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19357, 19378);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_19283_19379(string
+name,int
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19283, 19379);
+return return_v;
+}
+
+
+int
+f_1316_19249_19380(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19249, 19380);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_19395_19424(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19395, 19424);
+return return_v;
+}
+
+
+int
+f_1316_19502_19522(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.PercentComplete;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19502, 19522);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_19429_19523(string
+name,int
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19429, 19523);
+return return_v;
+}
+
+
+int
+f_1316_19395_19524(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19395, 19524);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_19539_19568(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19539, 19568);
+return return_v;
+}
+
+
+System.Management.Automation.ProgressRecordType
+f_1316_19635_19650(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.RecordType;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19635, 19650);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_19573_19651(string
+name,System.Management.Automation.ProgressRecordType
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19573, 19651);
+return return_v;
+}
+
+
+int
+f_1316_19539_19652(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19539, 19652);
+return 0;
+}
+
+
+System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+f_1316_19667_19696(System.Management.Automation.PSObject
+this_param)
+{
+var return_v = this_param.Properties;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19667, 19696);
+return return_v;
+}
+
+
+int
+f_1316_19775_19796(System.Management.Automation.ProgressRecord
+this_param)
+{
+var return_v = this_param.SecondsRemaining;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 19775, 19796);
+return return_v;
+}
+
+
+System.Management.Automation.PSNoteProperty
+f_1316_19701_19797(string
+name,int
+value)
+{
+var return_v = new System.Management.Automation.PSNoteProperty( name, (object)value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19701, 19797);
+return return_v;
+}
+
+
+int
+f_1316_19667_19798(System.Management.Automation.PSMemberInfoCollection<System.Management.Automation.PSPropertyInfo>
+this_param,System.Management.Automation.PSNoteProperty
+member)
+{
+this_param.Add( (System.Management.Automation.PSPropertyInfo)member);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 19667, 19798);
+return 0;
+}
+
         }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1316,18539,19852);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,18539,19852);
+}
+			throw new System.Exception("Slicer error: unreachable code");
+		}
 
-        #endregion
-    }
+static ProgressRecord()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1316,757,19881);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1316,757,19881);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1316,757,19881);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1316,757,19881);
+
+string
+f_1316_1810_1851()
+{
+var return_v = ProgressRecordStrings.ArgMayNotBeNegative;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 1810, 1851);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentOutOfRangeException
+f_1316_1739_1866(string
+paramName,int
+actualValue,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentOutOfRangeException( paramName, (object)actualValue, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 1739, 1866);
+return return_v;
+}
+
+
+bool
+f_1316_1902_1932(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 1902, 1932);
+return return_v;
+}
+
+
+string
+f_1316_2019_2063()
+{
+var return_v = ProgressRecordStrings.ArgMayNotBeNullOrEmpty;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 2019, 2063);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentException
+f_1316_1972_2076(string
+paramName,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 1972, 2076);
+return return_v;
+}
+
+
+bool
+f_1316_2112_2151(string
+value)
+{
+var return_v = string.IsNullOrEmpty( value);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 2112, 2151);
+return return_v;
+}
+
+
+string
+f_1316_2238_2282()
+{
+var return_v = ProgressRecordStrings.ArgMayNotBeNullOrEmpty;
+DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1316, 2238, 2282);
+return return_v;
+}
+
+
+System.Management.Automation.PSArgumentException
+f_1316_2191_2304(string
+paramName,string
+resourceString,params object[]
+args)
+{
+var return_v = PSTraceSource.NewArgumentException( paramName, resourceString, args);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1316, 2191, 2304);
+return return_v;
+}
+
+}
 
     /// <summary>
     /// Defines two types of progress record that refer to the beginning (or middle) and end of an operation.

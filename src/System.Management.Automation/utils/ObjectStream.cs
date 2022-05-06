@@ -9,1974 +9,4497 @@ namespace System.Management.Automation.Internal
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Management.Automation.Runspaces;
-
-#pragma warning disable 1634, 1691 // Stops compiler from warning about unknown warnings
-
-    /// <summary>
-    /// Base class representing a FIFO memory based object stream.
-    /// The purpose of this abstraction is to provide the
-    /// semantics of a unidirectional stream of objects
-    /// between two threads using a dynamic memory buffer.
-    /// </summary>
     internal abstract class ObjectStreamBase : IDisposable
-    {
-        #region Public events
-        /// <summary>
-        /// Event fired when data is added to the buffer.
-        /// </summary>
-        internal event EventHandler DataReady = null;
+    {                /// <summary>
+                     /// Event fired when data is added to the buffer.
+                     /// </summary>
+        internal event EventHandler
+DataReady = null
+;
 
-        /// <summary>
-        /// Raises DataReadyEvent.
-        /// </summary>
-        /// <param name="source">
-        /// Source of the event
-        /// </param>
-        /// <param name="args">
-        /// Event args
-        /// </param>
         internal void FireDataReadyEvent(object source, EventArgs args)
         {
-            DataReady.SafeInvoke(source, args);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 1262, 1396);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 1350, 1385);
+
+                f_1027_1350_1384(DataReady, source, args);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 1262, 1396);
+
+                int
+                f_1027_1350_1384(System.EventHandler
+                eventHandler, object
+                sender, System.EventArgs
+                eventArgs)
+                {
+                    eventHandler.SafeInvoke(sender, eventArgs);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 1350, 1384);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 1262, 1396);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 1262, 1396);
+            }
         }
 
-        #endregion Public events
-
-        #region Virtual Properties
-
-        /// <summary>
-        /// Get the capacity of the stream.
-        /// </summary>
-        /// <value>
-        /// The capacity of the stream.
-        /// </value>
-        /// <remarks>
-        /// The capacity is the number of objects the stream may contain at one time.  Once this
-        /// limit is reached, attempts to write into the stream block until buffer space
-        /// becomes available.
-        /// MaxCapacity cannot change, so we can skip the lock.
-        /// </remarks>
         internal abstract int MaxCapacity { get; }
 
-        /// <summary>
-        /// Waitable handle for callers to wait on until data ready to read.
-        /// </summary>
-        /// <remarks>
-        /// The handle is set when data becomes available to read or
-        /// when a partial read has completed.  If multiple readers
-        /// are used, setting the handle does not guarantee that
-        /// a read operation will return data. If using multiple
-        /// reader threads, <see cref="NonBlockingRead"/> for
-        /// performing non-blocking reads.
-        /// </remarks>
         internal virtual WaitHandle ReadHandle
         {
             get
             {
-#pragma warning disable 56503
-                // disabled compiler warning as PSDataCollectionStream doesn't override this
-                // and I didn't want code duplication.
-                throw PSTraceSource.NewNotSupportedException();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 2657, 2967);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 2874, 2921);
+
+                    throw f_1027_2880_2920();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 2657, 2967);
+
+                    System.Management.Automation.PSNotSupportedException
+                    f_1027_2880_2920()
+                    {
+                        var return_v = PSTraceSource.NewNotSupportedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 2880, 2920);
+                        return return_v;
+                    }
+
 #pragma warning restore 56503
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 2594, 2978);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 2594, 2978);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Waitable handle for callers to block until buffer space becomes available.
-        /// </summary>
-        /// <remarks>
-        /// The handle is set when space becomes available for writing. For multiple
-        /// writer threads writing to a bounded stream, the writer may still block
-        /// if another thread fills the stream to capacity.
-        /// </remarks>
         internal virtual WaitHandle WriteHandle
         {
             get
             {
-#pragma warning disable 56503
-                // disabled compiler warning as PSDataCollectionStream doesn't override this
-                // and I didn't want code duplication.
-                throw PSTraceSource.NewNotSupportedException();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 3467, 3777);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 3684, 3731);
+
+                    throw f_1027_3690_3730();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 3467, 3777);
+
+                    System.Management.Automation.PSNotSupportedException
+                    f_1027_3690_3730()
+                    {
+                        var return_v = PSTraceSource.NewNotSupportedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 3690, 3730);
+                        return return_v;
+                    }
+
 #pragma warning restore 56503
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 3403, 3788);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 3403, 3788);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Determine if we are at the end of the stream.
-        /// </summary>
-        /// <remarks>
-        /// EndOfPipeline is defined as the stream being closed and containing
-        /// zero objects.  Readers check this to determine if any objects
-        /// are in the stream.  Writers should check <see cref="IsOpen"/> to determine
-        /// if the stream can be written to.
-        /// </remarks>
         internal abstract bool EndOfPipeline { get; }
 
-        /// <summary>
-        /// Check if the stream is open for further writes.
-        /// </summary>
-        /// <returns>True if the stream is open, false if not.</returns>
-        /// <remarks>
-        /// IsOpen returns true until the first call to Close(). Writers should
-        /// check IsOpen to determine if a write operation can be made.  Note that
-        /// writers need to catch <see cref="PipelineClosedException"/>.
-        /// <seealso cref="EndOfPipeline"/>
-        /// </remarks>
         internal abstract bool IsOpen { get; }
 
-        /// <summary>
-        /// Returns the number of objects in the stream.
-        /// </summary>
         internal abstract int Count { get; }
 
-        /// <summary>
-        /// Return a PipelineReader(object) for this stream.
-        /// </summary>
         internal abstract PipelineReader<object> ObjectReader { get; }
 
-        /// <summary>
-        /// Return a PipelineReader(PSObject) for this stream.
-        /// </summary>
         internal abstract PipelineReader<PSObject> PSObjectReader { get; }
 
-        // 913921-2005/07/08 ObjectWriter can be retrieved on a closed stream
-        /// <summary>
-        /// Return an PipelineWriter for this stream.
-        /// </summary>
         internal abstract PipelineWriter ObjectWriter { get; }
 
-        #endregion
-
-        #region Read Abstractions
-
-        /// <summary>
-        /// Read a single object from the stream.
-        /// </summary>
-        /// <returns>The next object in the stream or AutomationNull if EndOfPipeline is reached.</returns>
-        /// <remarks>This method blocks if the stream is empty</remarks>
         internal virtual object Read()
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 5974, 6087);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 6029, 6076);
+
+                throw f_1027_6035_6075();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 5974, 6087);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_6035_6075()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 6035, 6075);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 5974, 6087);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 5974, 6087);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Read at most <paramref name="count"/> objects.
-        /// </summary>
-        /// <param name="count">The maximum number of objects to read.</param>
-        /// <returns>The objects read.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="count"/> is less than 0
-        /// </exception>
-        /// <remarks>
-        /// This method blocks if the number of objects in the stream is less than <paramref name="count"/>
-        /// and the stream is not closed.
-        ///
-        /// If there are multiple reader threads, the objects returned
-        /// to blocking reads Read(int count) and ReadToEnd()
-        /// are not necessarily single blocks of objects added to the
-        /// stream in that order.  For example, if ABCDEF are added to the
-        /// stream, one reader may get ABDE and the other may get CF.
-        /// Each reader reads items from the stream as they become available.
-        /// Otherwise, if a maximum _capacity has been imposed, the writer
-        /// and reader could become mutually deadlocked.
-        ///
-        /// When there are multiple blocked readers, any of the readers
-        /// may get the next object(s) added.
-        /// </remarks>
         internal virtual Collection<object> Read(int count)
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 7386, 7520);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 7462, 7509);
+
+                throw f_1027_7468_7508();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 7386, 7520);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_7468_7508()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 7468, 7508);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 7386, 7520);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 7386, 7520);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Blocks until the pipeline closes and reads all objects.
-        /// </summary>
-        /// <returns>A collection of zero or more objects.</returns>
-        /// <remarks>
-        /// If the stream is empty, a collection of size zero is returned.
-        ///
-        /// If there are multiple reader threads, the objects returned
-        /// to blocking reads Read(int count) and ReadToEnd()
-        /// are not necessarily single blocks of objects added to the
-        /// stream in that order.  For example, if ABCDEF are added to the
-        /// stream, one reader may get ABDE and the other may get CF.
-        /// Each reader reads items from the stream as they become available.
-        /// Otherwise, if a maximum _capacity has been imposed, the writer
-        /// and reader could become mutually deadlocked.
-        ///
-        /// When there are multiple blocked readers, any of the readers
-        /// may get the next object(s) added.
-        /// </remarks>
         internal virtual Collection<object> ReadToEnd()
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 8553, 8683);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 8625, 8672);
+
+                throw f_1027_8631_8671();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 8553, 8683);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_8631_8671()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 8631, 8671);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 8553, 8683);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 8553, 8683);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Reads objects currently in the stream, but does not block.
-        /// </summary>
-        /// <returns>An array of zero or more objects.</returns>
-        /// <remarks>
-        /// This method performs a read of objects currently in the
-        /// stream. The method will block until exclusive access to the
-        /// stream is acquired.  If there are no objects in the stream,
-        /// an empty array is returned.
-        /// </remarks>
-        /// <param name="maxRequested">
-        /// Return no more than maxRequested objects.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="maxRequested"/> is less than 0
-        /// </exception>
         internal virtual Collection<object> NonBlockingRead(int maxRequested)
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 9447, 9599);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 9541, 9588);
+
+                throw f_1027_9547_9587();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 9447, 9599);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_9547_9587()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 9547, 9587);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 9447, 9599);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 9447, 9599);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Peek the next object.
-        /// </summary>
-        /// <returns>
-        /// The next object in the stream or AutomationNull.Value if the stream is empty
-        /// </returns>
-        /// <exception cref="PipelineClosedException">The ObjectStream is closed.</exception>
         internal virtual object Peek()
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 9925, 10038);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 9980, 10027);
+
+                throw f_1027_9986_10026();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 9925, 10038);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_9986_10026()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 9986, 10026);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 9925, 10038);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 9925, 10038);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Write Abstractions
-
-        /// <summary>
-        /// Writes a object to the current position in the stream and
-        /// advances the position within the stream by one object.
-        /// </summary>
-        /// <param name="value">The object to write to the stream.</param>
-        /// <returns>
-        /// One, if the write was successful, otherwise;
-        /// zero if the stream was closed before the object could be written,
-        /// or if the object was AutomationNull.Value.
-        /// </returns>
-        /// <exception cref="PipelineClosedException">
-        /// The stream is closed
-        /// </exception>
-        /// <remarks>
-        /// AutomationNull.Value is ignored
-        /// </remarks>
         internal virtual int Write(object value)
         {
-            return Write(value, false);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 10820, 10923);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 10885, 10912);
+
+                return f_1027_10892_10911(this, value, false);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 10820, 10923);
+
+                int
+                f_1027_10892_10911(System.Management.Automation.Internal.ObjectStreamBase
+                this_param, object
+                obj, bool
+                enumerateCollection)
+                {
+                    var return_v = this_param.Write(obj, enumerateCollection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 10892, 10911);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 10820, 10923);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 10820, 10923);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Write objects to the underlying stream.
-        /// </summary>
-        /// <param name="obj">Object or enumeration to read from.</param>
-        /// <param name="enumerateCollection">
-        /// If enumerateCollection is true, and <paramref name="obj"/>
-        /// is an enumeration according to LanguagePrimitives.GetEnumerable,
-        /// the objects in the enumeration will be unrolled and
-        /// written separately.  Otherwise, <paramref name="obj"/>
-        /// will be written as a single object.
-        /// </param>
-        /// <returns>The number of objects written.</returns>
-        /// <exception cref="PipelineClosedException">
-        /// The underlying stream is closed
-        /// </exception>
-        /// <remarks>
-        /// If the enumeration contains elements equal to
-        /// AutomationNull.Value, they are are ignored.
-        /// This can cause the return value to be less than the size of
-        /// the collection.
-        /// </remarks>
         internal virtual int Write(object obj, bool enumerateCollection)
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 11967, 12114);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 12056, 12103);
+
+                throw f_1027_12062_12102();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 11967, 12114);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_12062_12102()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 12062, 12102);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 11967, 12114);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 11967, 12114);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Close / Flush
-
-        /// <summary>
-        /// Close the stream.
-        /// </summary>
-        /// <remarks>
-        /// Causes subsequent calls to IsOpen to return false and calls to
-        /// a write operation to throw PipelineClosedException.
-        /// All calls to Close() after the first call are silently ignored.
-        /// </remarks>
         internal virtual void Close()
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 12524, 12636);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 12578, 12625);
+
+                throw f_1027_12584_12624();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 12524, 12636);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_12584_12624()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 12584, 12624);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 12524, 12636);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 12524, 12636);
+            }
         }
 
-        /// <summary>
-        /// Flush the data from the stream.  Closed streams may be flushed.
-        /// </summary>
         internal virtual void Flush()
         {
-            throw PSTraceSource.NewNotSupportedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 12772, 12884);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 12826, 12873);
+
+                throw f_1027_12832_12872();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 12772, 12884);
+
+                System.Management.Automation.PSNotSupportedException
+                f_1027_12832_12872()
+                {
+                    var return_v = PSTraceSource.NewNotSupportedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 12832, 12872);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 12772, 12884);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 12772, 12884);
+            }
         }
 
-        #endregion
-
-        #region IDisposable
-
-        /// <summary>
-        /// Public method for dispose.
-        /// </summary>
         public void Dispose()
         {
-            Dispose(true);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 13036, 13149);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 13082, 13096);
 
-            GC.SuppressFinalize(this);
+                f_1027_13082_13095(this, true);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 13112, 13138);
+
+                f_1027_13112_13137(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 13036, 13149);
+
+                int
+                f_1027_13082_13095(System.Management.Automation.Internal.ObjectStreamBase
+                this_param, bool
+                disposing)
+                {
+                    this_param.Dispose(disposing);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 13082, 13095);
+                    return 0;
+                }
+
+
+                int
+                f_1027_13112_13137(System.Management.Automation.Internal.ObjectStreamBase
+                obj)
+                {
+                    GC.SuppressFinalize((object)obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 13112, 13137);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 13036, 13149);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 13036, 13149);
+            }
         }
 
-        /// <summary>
-        /// Release all resources.
-        /// </summary>
-        /// <param name="disposing">If true, release all managed resources.</param>
         protected abstract void Dispose(bool disposing);
 
-        #endregion IDisposable
-    }
+        public ObjectStreamBase()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1027, 745, 13418);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1027, 745, 13418);
 
-    /// <summary>
-    /// A FIFO memory based object stream.
-    /// The purpose of this stream class is to provide the
-    /// semantics of a unidirectional stream of objects
-    /// between two threads using a dynamic memory buffer.
-    /// </summary>
-    /// <remarks>
-    /// The stream may be bound or unbounded.  Bounded streams
-    /// are created via passing a capacity to the constructor.
-    /// Unbounded streams are created using the default constructor.
-    ///
-    /// The capacity of the stream can not be changed after
-    /// construction.
-    ///
-    /// For bounded streams, attempts to write to the stream when
-    /// the capacity has been reached causes the writer to block
-    /// until objects are read.
-    ///
-    /// For unbounded streams, writers only block for the amount
-    /// of time needed to acquire exclusive access to the
-    /// stream.  Note that unbounded streams have a capacity of
-    /// of Int32.MaxValue objects.  In theory, if this limit were
-    /// reached, the stream would function as a bounded stream.
-    ///
-    /// This class is safe for multi-threaded use with the following
-    /// side-effects:
-    ///
-    /// > For bounded streams, write operations are not guaranteed to
-    /// be atomic.  If a write operation causes the capacity to be
-    /// reached without writing all data, a partial write occurs and
-    /// the writer blocks until data is read from the stream.
-    ///
-    /// > When multiple writer or reader threads are used, the order
-    /// the reader or writer acquires a lock on the stream is
-    /// undefined.  This means that the first call to write does not
-    /// guarantee the writer will acquire a write lock first.  The first
-    /// call to read does not guarantee the reader will acquire the
-    /// read lock first.
-    ///
-    /// > Reads and writes may occur in any order. With a bounded
-    /// stream, write operations between threads may also result in
-    /// interleaved write operations.
-    ///
-    /// The result is that the order of data is only guaranteed if there is a
-    /// single writer.
-    /// </remarks>
-    // 897230-2003/10/29-JonN marked sealed
-    // 905990-2005/05/10-JonN Removed IDisposable
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 745, 13418);
+        }
+
+
+        static ObjectStreamBase()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1027, 745, 13418);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1027, 745, 13418);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 745, 13418);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1027, 745, 13418);
+    }
     internal sealed class ObjectStream : ObjectStreamBase, IDisposable
     {
-        #region Private Fields
-        /// <summary>
-        /// Objects in the stream.
-        /// </summary>
-        // PERF-2003/08/22-JonN We should probably use Queue instead
-        // PERF-2004/06/30-JonN Probably more efficient to use type
-        //  Collection<object> as the underlying store
         private List<object> _objects;
 
-        /// <summary>
-        /// Is the stream open or closed for writing?
-        /// </summary>
         private bool _isOpen;
 
-        #region Synchronization handles
-        /// <summary>
-        /// Read handle - signaled when data is ready to read.
-        /// </summary>
-        /// <remarks>
-        /// This event may, on occasion, be signalled even when there is
-        /// no data available.  If this happens, just wait again.
-        /// Never wait on this event alone.  Since this is an AutoResetEvent,
-        /// there is no way to definitely release all blocked threads when
-        /// the stream is closed for reading.  Instead, use WaitAny on
-        /// this handle and also _readClosedHandle.
-        /// </remarks>
         private AutoResetEvent _readHandle;
 
-        /// <summary>
-        /// Handle returned to callers for blocking on data ready.
-        /// </summary>
         private ManualResetEvent _readWaitHandle;
 
-        /// <summary>
-        /// When this handle is set, the stream is closed for reading,
-        /// so all blocked readers should be released.
-        /// </summary>
         private ManualResetEvent _readClosedHandle;
 
-        /// <summary>
-        /// Write handle - signaled with the number of objects in the
-        /// stream becomes less than the maximum number of objects
-        /// allowed in the stream.  <see cref="_capacity"/>
-        /// </summary>
-        /// <remarks>
-        /// This event may, on occasion, be signalled even when there is
-        /// no write buffer available.  If this happens, just wait again.
-        /// Never wait on this event alone.  Since this is an AutoResetEvent,
-        /// there is no way to definitely release all blocked threads when
-        /// the stream is closed for writing.  Instead, use WaitAny on
-        /// this handle and also _writeClosedHandle.
-        /// </remarks>
         private AutoResetEvent _writeHandle;
 
-        /// <summary>
-        /// Handle returned to callers for blocking until buffer space
-        /// is available for write.
-        /// </summary>
         private ManualResetEvent _writeWaitHandle;
 
-        /// <summary>
-        /// When this handle is set, the stream is closed for writing,
-        /// so all blocked readers should be released.
-        /// </summary>
         private ManualResetEvent _writeClosedHandle;
-        #endregion Synchronization handles
 
-        /// <summary>
-        /// The object reader for this stream.
-        /// </summary>
-        /// <remarks>
-        /// This field is allocated on first demand and
-        /// returned on subsequent calls.
-        /// </remarks>
-        private PipelineReader<object> _reader = null;
+        private PipelineReader<object> _reader;
 
-        /// <summary>
-        /// The PSObject reader for this stream.
-        /// </summary>
-        /// <remarks>
-        /// This field is allocated on first demand and
-        /// returned on subsequent calls.
-        /// </remarks>
-        private PipelineReader<PSObject> _mshreader = null;
+        private PipelineReader<PSObject> _mshreader;
 
-        /// <summary>
-        /// The object writer for this stream.
-        /// </summary>
-        /// <remarks>
-        /// This field is allocated on first demand and
-        /// returned on subsequent calls.
-        /// </remarks>
-        private PipelineWriter _writer = null;
+        private PipelineWriter _writer;
 
-        /// <summary>
-        /// Maximum number of objects allowed in the stream
-        /// Note that this is not permitted to be more than Int32.MaxValue,
-        /// since the underlying list has this limitation.
-        /// </summary>
-        private int _capacity = Int32.MaxValue;
+        private int _capacity;
 
-        /// <summary>
-        /// This object is used to acquire an exclusive lock on the stream.
-        /// </summary>
-        /// <remarks>
-        /// Note that we lock _monitorObject rather than "this" so that
-        /// we are protected from outside code interfering in our
-        /// critical section.  Thanks to Wintellect for the hint.
-        /// </remarks>
-        private object _monitorObject = new object();
+        private object _monitorObject;
 
-        /// <summary>
-        /// Indicates if this stream has already been disposed.
-        /// </summary>
-        private bool _disposed = false;
+        private bool _disposed;
 
-        #endregion Private Fields
-
-        #region Ctor
-
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        /// <remarks>
-        /// Constructs a stream with a maximum size of Int32.Max
-        /// </remarks>
         internal ObjectStream()
-            : this(Int32.MaxValue)
+        : this(f_1027_20654_20668_C(Int32.MaxValue))
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1027, 20610, 20691);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1027, 20610, 20691);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 20610, 20691);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 20610, 20691);
+            }
         }
 
-        /// <summary>
-        /// Allocate the stream with an initial size.
-        /// </summary>
-        /// <param name="capacity">
-        /// The maximum number of objects to allow in the buffer at a time.
-        /// Note that this is not permitted to be more than Int32.MaxValue,
-        /// since the underlying list has this limitation
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="_capacity"/> is less than or equal to zero
-        /// <paramref name="_capacity"/> is greater than Int32.MaxValue
-        /// </exception>
         internal ObjectStream(int capacity)
         {
-            if (capacity <= 0 || capacity > Int32.MaxValue)
+            try
             {
-                throw PSTraceSource.NewArgumentOutOfRangeException("capacity", capacity);
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1027, 21308, 22362);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 16092, 16100);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 16228, 16235);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 16891, 16902);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 17055, 17070);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 17283, 17300);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 18060, 18072);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 18266, 18282);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 18495, 18513);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 18843, 18857);
+                this._reader = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 19147, 19164);
+                this._mshreader = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 19442, 19456);
+                this._writer = null;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 19726, 19752);
+                this._capacity = Int32.MaxValue;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 20158, 20187);
+                this._monitorObject = f_1027_20175_20187();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 20325, 20342);
+                this._disposed = false;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 21368, 21536) || true) && (capacity <= 0 || (DynAbs.Tracing.TraceSender.Expression_False(1027, 21372, 21414) || capacity > Int32.MaxValue))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 21368, 21536);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 21448, 21521);
+
+                    throw f_1027_21454_21520("capacity", capacity);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 21368, 21536);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 21638, 21659);
+
+                _capacity = capacity;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 21744, 21784);
+
+                _readHandle = f_1027_21758_21783(false);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 21872, 21912);
+
+                _writeHandle = f_1027_21887_21911(true);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 22001, 22049);
+
+                _readClosedHandle = f_1027_22021_22048(false);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 22135, 22184);
+
+                _writeClosedHandle = f_1027_22156_22183(false);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 22254, 22284);
+
+                _objects = f_1027_22265_22283();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 22336, 22351);
+
+                _isOpen = true;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1027, 21308, 22362);
             }
-
-            // the maximum number of objects to allow in the stream at a given time.
-            _capacity = capacity;
-
-            // event is not signaled since there is no data to read
-            _readHandle = new AutoResetEvent(false);
-
-            // event is signaled since there is available buffer space
-            _writeHandle = new AutoResetEvent(true);
-
-            // event is not signaled since the thread is still readable
-            _readClosedHandle = new ManualResetEvent(false);
-
-            // event is signaled since the thread is still writeable
-            _writeClosedHandle = new ManualResetEvent(false);
-
-            // the FIFO set of objects in the stream
-            _objects = new List<object>();
-
-            // Is the stream open?
-            _isOpen = true;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 21308, 22362);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 21308, 22362);
+            }
         }
 
-        #endregion Ctor
-
-        #region internal properties
-
-        /// <summary>
-        /// Get the capacity of the stream.
-        /// </summary>
-        /// <value>
-        /// The capacity of the stream.
-        /// </value>
-        /// <remarks>
-        /// The capacity is the number of objects the stream may contain at one time.  Once this
-        /// limit is reached, attempts to write into the stream block until buffer space
-        /// becomes available.
-        /// MaxCapacity cannot change, so we can skip the lock.
-        /// </remarks>
         internal override int MaxCapacity
         {
             get
             {
-                return _capacity;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 23006, 23074);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 23042, 23059);
+
+                    return _capacity;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 23006, 23074);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 22948, 23085);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 22948, 23085);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Waitable handle for callers to wait on until data ready to read.
-        /// </summary>
-        /// <remarks>
-        /// The handle is set when data becomes available to read or
-        /// when a partial read has completed.  If multiple readers
-        /// are used, setting the handle does not guarantee that
-        /// a read operation will return data. If using multiple
-        /// reader threads, <see cref="NonBlockingRead"/> for
-        /// performing non-blocking reads.
-        /// </remarks>
         internal override WaitHandle ReadHandle
         {
             get
             {
-                WaitHandle handle = null;
-
-                lock (_monitorObject)
+                try
                 {
-                    if (_readWaitHandle == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 23711, 24587);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 23747, 23772);
+
+                    WaitHandle
+                    handle = null
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 23798, 23812);
+
+                    lock (_monitorObject)
                     {
-                        // Create the handle signaled if there are objects in the stream
-                        // or the stream has been closed.  The closed scenario addresses
-                        // Pipeline readers that execute asynchronously.  Since the pipeline
-                        // may complete with zero objects before the caller objects this
-                        // handle, it will block indefinitely unless it is set.
-                        _readWaitHandle = new ManualResetEvent(_objects.Count > 0 || !_isOpen);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 23854, 24470) || true) && (_readWaitHandle == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 23854, 24470);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 24376, 24447);
+
+                            _readWaitHandle = f_1027_24394_24446(f_1027_24415_24429(_objects) > 0 || (DynAbs.Tracing.TraceSender.Expression_False(1027, 24415, 24445) || !_isOpen));
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 23854, 24470);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 24494, 24519);
+
+                        handle = _readWaitHandle;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 24558, 24572);
+
+                    return handle;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 23711, 24587);
+
+                    int
+                    f_1027_24415_24429(System.Collections.Generic.List<object>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 24415, 24429);
+                        return return_v;
                     }
 
-                    handle = _readWaitHandle;
-                }
 
-                return handle;
+                    System.Threading.ManualResetEvent
+                    f_1027_24394_24446(bool
+                    initialState)
+                    {
+                        var return_v = new System.Threading.ManualResetEvent(initialState);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 24394, 24446);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 23647, 24598);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 23647, 24598);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Waitable handle for callers to block until buffer space becomes available.
-        /// </summary>
-        /// <remarks>
-        /// The handle is set when space becomes available for writing. For multiple
-        /// writer threads writing to a bounded stream, the writer may still block
-        /// if another thread fills the stream to capacity.
-        /// </remarks>
         internal override WaitHandle WriteHandle
         {
             get
             {
-                WaitHandle handle = null;
-
-                lock (_monitorObject)
+                try
                 {
-                    if (_writeWaitHandle == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 25088, 25530);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25124, 25149);
+
+                    WaitHandle
+                    handle = null
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25175, 25189);
+
+                    lock (_monitorObject)
                     {
-                        _writeWaitHandle = new ManualResetEvent(_objects.Count < _capacity || !_isOpen);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25231, 25412) || true) && (_writeWaitHandle == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 25231, 25412);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25309, 25389);
+
+                            _writeWaitHandle = f_1027_25328_25388(f_1027_25349_25363(_objects) < _capacity || (DynAbs.Tracing.TraceSender.Expression_False(1027, 25349, 25387) || !_isOpen));
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 25231, 25412);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25436, 25462);
+
+                        handle = _writeWaitHandle;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25501, 25515);
+
+                    return handle;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 25088, 25530);
+
+                    int
+                    f_1027_25349_25363(System.Collections.Generic.List<object>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 25349, 25363);
+                        return return_v;
                     }
 
-                    handle = _writeWaitHandle;
-                }
 
-                return handle;
+                    System.Threading.ManualResetEvent
+                    f_1027_25328_25388(bool
+                    initialState)
+                    {
+                        var return_v = new System.Threading.ManualResetEvent(initialState);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 25328, 25388);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 25023, 25541);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 25023, 25541);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Return a PipelineReader(object) for this stream.
-        /// </summary>
         internal override PipelineReader<object> ObjectReader
         {
             get
             {
-                PipelineReader<object> reader = null;
-
-                lock (_monitorObject)
+                try
                 {
-                    if (_reader == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 25740, 26721);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25776, 25813);
+
+                    PipelineReader<object>
+                    reader = null
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25839, 25853);
+
+                    lock (_monitorObject)
                     {
-                        // Always return an object reader, even if the stream
-                        // is closed. This is to address requesting the object reader
-                        // after calling Pipeline.Execute(). NOTE: If Execute completes
-                        // without writing data to the output queue, the
-                        // stream will be in the EndOfPipeline state because the
-                        // stream is closed and has zero data.  Since this is a valid
-                        // and expected execution path, we don't want to throw an exception.
-                        _reader = new ObjectReader(this);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 25895, 26612) || true) && (_reader == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 25895, 26612);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 26556, 26589);
+
+                            _reader = f_1027_26566_26588(this);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 25895, 26612);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 26636, 26653);
+
+                        reader = _reader;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 26692, 26706);
+
+                    return reader;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 25740, 26721);
+
+                    System.Management.Automation.Internal.ObjectReader
+                    f_1027_26566_26588(System.Management.Automation.Internal.ObjectStream
+                    stream)
+                    {
+                        var return_v = new System.Management.Automation.Internal.ObjectReader(stream);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 26566, 26588);
+                        return return_v;
                     }
 
-                    reader = _reader;
                 }
-
-                return reader;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 25662, 26732);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 25662, 26732);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Return a PipelineReader(PSObject) for this stream.
-        /// </summary>
         internal override PipelineReader<PSObject> PSObjectReader
         {
             get
             {
-                PipelineReader<PSObject> reader = null;
-
-                lock (_monitorObject)
+                try
                 {
-                    if (_mshreader == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 26937, 27931);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 26973, 27012);
+
+                    PipelineReader<PSObject>
+                    reader = null
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 27038, 27052);
+
+                    lock (_monitorObject)
                     {
-                        // Always return an object reader, even if the stream
-                        // is closed. This is to address requesting the object reader
-                        // after calling Pipeline.Execute(). NOTE: If Execute completes
-                        // without writing data to the output queue, the
-                        // stream will be in the EndOfPipeline state because the
-                        // stream is closed and has zero data.  Since this is a valid
-                        // and expected execution path, we don't want to throw an exception.
-                        _mshreader = new PSObjectReader(this);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 27094, 27819) || true) && (_mshreader == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 27094, 27819);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 27758, 27796);
+
+                            _mshreader = f_1027_27771_27795(this);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 27094, 27819);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 27843, 27863);
+
+                        reader = _mshreader;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 27902, 27916);
+
+                    return reader;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 26937, 27931);
+
+                    System.Management.Automation.Internal.PSObjectReader
+                    f_1027_27771_27795(System.Management.Automation.Internal.ObjectStream
+                    stream)
+                    {
+                        var return_v = new System.Management.Automation.Internal.PSObjectReader(stream);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 27771, 27795);
+                        return return_v;
                     }
 
-                    reader = _mshreader;
                 }
-
-                return reader;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 26855, 27942);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 26855, 27942);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        // 913921-2005/07/08 ObjectWriter can be retrieved on a closed stream
-        /// <summary>
-        /// Return an PipelineWriter for this stream.
-        /// </summary>
         internal override PipelineWriter ObjectWriter
         {
             get
             {
-                PipelineWriter writer = null;
-
-                lock (_monitorObject)
+                try
                 {
-                    if (_writer == null)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 28205, 28604);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 28241, 28270);
+
+                    PipelineWriter
+                    writer = null
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 28296, 28310);
+
+                    lock (_monitorObject)
                     {
-                        _writer = new ObjectWriter(this) as PipelineWriter;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 28352, 28495) || true) && (_writer == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 28352, 28495);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 28421, 28472);
+
+                            _writer = f_1027_28431_28453(this) as PipelineWriter;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 28352, 28495);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 28519, 28536);
+
+                        writer = _writer;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 28575, 28589);
+
+                    return writer;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 28205, 28604);
+
+                    System.Management.Automation.Internal.ObjectWriter
+                    f_1027_28431_28453(System.Management.Automation.Internal.ObjectStream
+                    stream)
+                    {
+                        var return_v = new System.Management.Automation.Internal.ObjectWriter((System.Management.Automation.Internal.ObjectStreamBase)stream);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 28431, 28453);
+                        return return_v;
                     }
 
-                    writer = _writer;
                 }
-
-                return writer;
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 28135, 28615);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 28135, 28615);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Determine if we are at the end of the stream.
-        /// </summary>
-        /// <remarks>
-        /// EndOfPipeline is defined as the stream being closed and containing
-        /// zero objects.  Readers check this to determine if any objects
-        /// are in the stream.  Writers should check <see cref="IsOpen"/> to determine
-        /// if the stream can be written to.
-        /// </remarks>
         internal override bool EndOfPipeline
         {
             get
             {
-                bool endOfStream = true;
-
-                lock (_monitorObject)
+                try
                 {
-                    endOfStream = (_objects.Count == 0 && _isOpen == false);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 29130, 29401);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 29166, 29190);
 
-                return endOfStream;
+                    bool
+                    endOfStream = true
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 29216, 29230);
+
+                    lock (_monitorObject)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 29272, 29328);
+
+                        endOfStream = (f_1027_29287_29301(_objects) == 0 && (DynAbs.Tracing.TraceSender.Expression_True(1027, 29287, 29326) && _isOpen == false));
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 29367, 29386);
+
+                    return endOfStream;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 29130, 29401);
+
+                    int
+                    f_1027_29287_29301(System.Collections.Generic.List<object>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 29287, 29301);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 29069, 29412);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 29069, 29412);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Check if the stream is open for further writes.
-        /// </summary>
-        /// <returns>True if the stream is open, false if not.</returns>
-        /// <remarks>
-        /// IsOpen returns true until the first call to Close(). Writers should
-        /// check IsOpen to determine if a write operation can be made.  Note that
-        /// writers need to catch <see cref="PipelineClosedException"/>.
-        /// <seealso cref="EndOfPipeline"/>
-        /// </remarks>
         internal override bool IsOpen
         {
             get
             {
-                bool isOpen = true;
-                // 2003/09/02-JonN Hitesh says that the access
-                // of a bool variable is atomic so there is no need
-                // for the lock.
-                lock (_monitorObject)
+                try
                 {
-                    isOpen = _isOpen;
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 29991, 30378);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30027, 30046);
 
-                return isOpen;
+                    bool
+                    isOpen = true
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30237, 30251);
+                    // 2003/09/02-JonN Hitesh says that the access
+                    // of a bool variable is atomic so there is no need
+                    // for the lock.
+                    lock (_monitorObject)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30293, 30310);
+
+                        isOpen = _isOpen;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30349, 30363);
+
+                    return isOpen;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 29991, 30378);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 29937, 30389);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 29937, 30389);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Returns the number of objects in the stream.
-        /// </summary>
         internal override int Count
         {
             get
             {
-                int count = 0;
-
-                lock (_monitorObject)
-                {
-                    count = _objects.Count;
-                }
-
-                return count;
-            }
-        }
-
-        #endregion internal properties
-
-        #region private locking code
-
-        /// <summary>
-        /// Wait for data to be readable.
-        /// </summary>
-        /// <returns>True if EndOfPipeline is not reached.</returns>
-        /// <remarks>
-        /// WaitRead does not guarantee that data is present in the stream,
-        /// only that data was added when the event was signaled.  Since there may be
-        /// multiple readers, data may be removed from the stream
-        /// before the caller has a chance to read the data.
-        /// This method should never be called within a lock(_monitorObject).
-        /// </remarks>
-        private bool WaitRead()
-        {
-            if (EndOfPipeline == false)
-            {
                 try
                 {
-                    WaitHandle[] ha = { _readHandle, _readClosedHandle };
-                    WaitHandle.WaitAny(ha); // ignore return value
-                }
-                catch (ObjectDisposedException)
-                {
-                    // Since the _readHandle must be acquired outside
-                    // a lock there's a chance that it was
-                    // disposed after checking EndOfPipeline
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 30558, 30780);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30594, 30608);
 
-            return EndOfPipeline == false;
-        }
+                    int
+                    count = 0
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30634, 30648);
 
-        /// <summary>
-        /// Wait for data to be writeable.
-        /// </summary>
-        /// <returns>True if the stream is writeable, otherwise; false.</returns>
-        /// <remarks>
-        /// WaitWrite does not guarantee that buffer space will be available in the stream
-        /// when the caller attempts to write, only that buffer space was available
-        /// when the event was signaled.
-        /// This method should never be called within a lock(_monitorObject).
-        /// </remarks>
-        private bool WaitWrite()
-        {
-            if (IsOpen)
-            {
-                try
-                {
-                    WaitHandle[] ha = { _writeHandle, _writeClosedHandle };
-                    WaitHandle.WaitAny(ha); // ignore return value
-                }
-                catch (ObjectDisposedException)
-                {
-                    // Since the _writeHandle must be acquired outside
-                    // a lock there's a chance that it was
-                    // disposed after checking IsOpen
-                }
-            }
-
-            return IsOpen;
-        }
-
-        /// <summary>
-        /// Utility method to signal handles and raise events
-        /// in the consistent order.
-        /// NOTE: Release the lock before raising events; otherwise,
-        /// there is a possible deadlock during the readable event.
-        /// </summary>
-        /// <remarks>
-        /// RaiseEvents is fairly idempotent, although it will signal
-        /// DataReady every time.
-        /// </remarks>
-        private void RaiseEvents()
-        {
-            bool unblockReaders = true;
-            bool unblockWriters = true;
-            bool endOfStream = false;
-            try
-            {
-                lock (_monitorObject)
-                {
-                    // External readers block only for open streams
-                    // with no stored objects.  External writers block
-                    // only for open streams with no free buffer space.
-                    unblockReaders = (!_isOpen || (_objects.Count > 0));
-                    unblockWriters = (!_isOpen || (_objects.Count < _capacity));
-                    endOfStream = (!_isOpen && (_objects.Count == 0));
-
-                    // I would prefer to set the ManualResetEvents outside
-                    // of the lock, so that the unblocked thread would not
-                    // immediately be re-blocked.  However, I am not
-                    // confident that multiple sets/resets might not get
-                    // out of order and leave the handle in the wrong state.
-                    if (_readWaitHandle != null)
-                    {
-                        try
-                        {
-                            if (unblockReaders)
-                            {
-                                _readWaitHandle.Set();
-                            }
-                            else
-                            {
-                                _readWaitHandle.Reset();
-                            }
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
-                    }
-
-                    if (_writeWaitHandle != null)
-                    {
-                        try
-                        {
-                            if (unblockWriters)
-                            {
-                                _writeWaitHandle.Set();
-                            }
-                            else
-                            {
-                                _writeWaitHandle.Reset();
-                            }
-                        }
-                        catch (ObjectDisposedException)
-                        {
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                // We prefer to set the AutoResetEvents outside of the lock,
-                // so that the unblocked thread will not immediately be
-                // re-blocked.  This works because setting the handle
-                // is idempotent.
-                if (unblockReaders)
-                {
-                    try
-                    {
-                        _readHandle.Set();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                    }
-                }
-
-                if (unblockWriters)
-                {
-                    try
-                    {
-                        _writeHandle.Set();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                    }
-                }
-
-                if (endOfStream)
-                {
-                    try
-                    {
-                        _readClosedHandle.Set();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                    }
-                }
-            }
-
-            // This causes a synchronous call to the
-            // client-provided handler.
-            if (unblockReaders)
-            {
-                FireDataReadyEvent(this, EventArgs.Empty);
-            }
-#if (false)
-            //
-            // NOTE: Event delegates are called only after the internal
-            // AutoResetEvents are set to ensure that an exception in an
-            // event delegate does not leave the reset events in a bad
-            // state.
-            if (unblockWriters && WriteReady != null)
-            {
-                WriteReady (this, new EventArgs ());
-            }
-#endif
-        }
-
-        #endregion private locking code
-
-        #region internal methods
-
-        /// <summary>
-        /// Flush the data from the stream.  Closed streams may be flushed.
-        /// </summary>
-        internal override void Flush()
-        {
-            bool raiseEvents = false;
-
-            try
-            {
-                lock (_monitorObject)
-                {
-                    if (_objects.Count > 0)
-                    {
-                        raiseEvents = true;
-                        _objects.Clear();
-                    }
-                }
-            }
-            finally
-            {
-                if (raiseEvents)
-                {
-                    RaiseEvents();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Close the stream.
-        /// </summary>
-        /// <remarks>
-        /// Causes subsequent calls to IsOpen to return false and calls to
-        /// a write operation to throw PipelineClosedException.
-        /// All calls to Close() after the first call are silently ignored.
-        /// </remarks>
-        internal override void Close()
-        {
-            bool raiseEvents = false;
-
-            try
-            {
-                lock (_monitorObject)
-                {
-                    // if we transition from open to closed,
-                    // signal any blocking readers or writers
-                    // to ensure the close is seen.
-                    if (_isOpen)
-                    {
-                        raiseEvents = true;
-                        _isOpen = false;
-                    }
-                }
-            }
-            finally
-            {
-                if (raiseEvents)
-                {
-                    // RaiseEvents does not manage _writeClosedHandle
-                    try
-                    {
-                        _writeClosedHandle.Set();
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                    }
-
-                    RaiseEvents();
-                }
-            }
-        }
-
-        #endregion internal methods
-
-        #region Read Methods
-
-        /// <summary>
-        /// Read a single object from the stream.
-        /// </summary>
-        /// <returns>The next object in the stream or AutomationNull if EndOfPipeline is reached.</returns>
-        /// <remarks>This method blocks if the stream is empty</remarks>
-        internal override object Read()
-        {
-            Collection<object> result = Read(1);
-            if (result.Count == 1)
-            {
-                return result[0];
-            }
-
-            Diagnostics.Assert(result.Count == 0, "Invalid number of objects returned");
-
-            return AutomationNull.Value;
-        }
-
-        /// <summary>
-        /// Read at most <paramref name="count"/> objects.
-        /// </summary>
-        /// <param name="count">The maximum number of objects to read.</param>
-        /// <returns>The objects read.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="count"/> is less than 0
-        /// </exception>
-        /// <remarks>
-        /// This method blocks if the number of objects in the stream is less than <paramref name="count"/>
-        /// and the stream is not closed.
-        ///
-        /// If there are multiple reader threads, the objects returned
-        /// to blocking reads Read(int count) and ReadToEnd()
-        /// are not necessarily single blocks of objects added to the
-        /// stream in that order.  For example, if ABCDEF are added to the
-        /// stream, one reader may get ABDE and the other may get CF.
-        /// Each reader reads items from the stream as they become available.
-        /// Otherwise, if a maximum _capacity has been imposed, the writer
-        /// and reader could become mutually deadlocked.
-        ///
-        /// When there are multiple blocked readers, any of the readers
-        /// may get the next object(s) added.
-        /// </remarks>
-        internal override Collection<object> Read(int count)
-        {
-            if (count < 0)
-            {
-                throw PSTraceSource.NewArgumentOutOfRangeException("count", count);
-            }
-
-            if (count == 0)
-            {
-                return new Collection<object>();
-            }
-
-            Collection<object> results = new Collection<object>();
-
-            bool raiseEvents = false;
-            while ((count > 0) && WaitRead())
-            {
-                try
-                {
                     lock (_monitorObject)
                     {
-                        // double check to ensure data is ready
-                        if (_objects.Count == 0)
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30690, 30713);
+
+                        count = f_1027_30698_30712(_objects);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 30752, 30765);
+
+                    return count;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 30558, 30780);
+
+                    int
+                    f_1027_30698_30712(System.Collections.Generic.List<object>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 30698, 30712);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 30506, 30791);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 30506, 30791);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
+        }
+
+        private bool WaitRead()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 31464, 32108);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 31512, 32051) || true) && (f_1027_31516_31529() == false)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 31512, 32051);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 31616, 31669);
+
+                        WaitHandle[]
+                        ha = { _readHandle, _readClosedHandle }
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 31691, 31714);
+
+                        f_1027_31691_31713(ha);
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 31774, 32036);
+                        DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 31774, 32036);
+                        // Since the _readHandle must be acquired outside
+                        // a lock there's a chance that it was
+                        // disposed after checking EndOfPipeline
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 31512, 32051);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 32067, 32097);
+
+                return f_1027_32074_32087() == false;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 31464, 32108);
+
+                bool
+                f_1027_31516_31529()
+                {
+                    var return_v = EndOfPipeline;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 31516, 31529);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_31691_31713(System.Threading.WaitHandle[]
+                waitHandles)
+                {
+                    var return_v = WaitHandle.WaitAny(waitHandles);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 31691, 31713);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_32074_32087()
+                {
+                    var return_v = EndOfPipeline;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 32074, 32087);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 31464, 32108);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 31464, 32108);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        private bool WaitWrite()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 32639, 33248);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 32688, 33207) || true) && (f_1027_32692_32698())
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 32688, 33207);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 32776, 32831);
+
+                        WaitHandle[]
+                        ha = { _writeHandle, _writeClosedHandle }
+                        ;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 32853, 32876);
+
+                        f_1027_32853_32875(ha);
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 32936, 33192);
+                        DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 32936, 33192);
+                        // Since the _writeHandle must be acquired outside
+                        // a lock there's a chance that it was
+                        // disposed after checking IsOpen
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 32688, 33207);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 33223, 33237);
+
+                return f_1027_33230_33236();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 32639, 33248);
+
+                bool
+                f_1027_32692_32698()
+                {
+                    var return_v = IsOpen;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 32692, 32698);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_32853_32875(System.Threading.WaitHandle[]
+                waitHandles)
+                {
+                    var return_v = WaitHandle.WaitAny(waitHandles);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 32853, 32875);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_33230_33236()
+                {
+                    var return_v = IsOpen;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 33230, 33236);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 32639, 33248);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 32639, 33248);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        private void RaiseEvents()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 33700, 37859);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 33751, 33778);
+
+                bool
+                unblockReaders = true
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 33792, 33819);
+
+                bool
+                unblockWriters = true
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 33833, 33858);
+
+                bool
+                endOfStream = false
+                ;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 33914, 33928);
+                    lock (_monitorObject)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 34184, 34236);
+
+                        unblockReaders = (!_isOpen || (DynAbs.Tracing.TraceSender.Expression_False(1027, 34202, 34234) || (f_1027_34215_34229(_objects) > 0)));
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 34258, 34318);
+
+                        unblockWriters = (!_isOpen || (DynAbs.Tracing.TraceSender.Expression_False(1027, 34276, 34316) || (f_1027_34289_34303(_objects) < _capacity)));
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 34340, 34390);
+
+                        endOfStream = (!_isOpen && (DynAbs.Tracing.TraceSender.Expression_True(1027, 34355, 34388) && (f_1027_34368_34382(_objects) == 0)));
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 34788, 35377) || true) && (_readWaitHandle != null)
+                        )
+
                         {
-                            continue;    // wait some more
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 34788, 35377);
+                            try
+                            {
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 34925, 35216) || true) && (unblockReaders)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 34925, 35216);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 35009, 35031);
+
+                                    f_1027_35009_35030(_readWaitHandle);
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 34925, 35216);
+                                }
+
+                                else
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 34925, 35216);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 35161, 35185);
+
+                                    f_1027_35161_35184(_readWaitHandle);
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 34925, 35216);
+                                }
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 35269, 35354);
+                                DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 35269, 35354);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 34788, 35377);
                         }
 
-                        raiseEvents = true;
-                        // NTRAID#Windows Out Of Band Releases-925566-2005/12/07-JonN
-                        int objectsAdded = 0;
-                        foreach (object o in _objects)
-                        {
-                            results.Add(o);
-                            objectsAdded++;
-                            if (--count <= 0)
-                                break;
-                        }
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 35401, 35993) || true) && (_writeWaitHandle != null)
+                        )
 
-                        _objects.RemoveRange(0, objectsAdded);
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 35401, 35993);
+                            try
+                            {
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 35539, 35832) || true) && (unblockWriters)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 35539, 35832);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 35623, 35646);
+
+                                    f_1027_35623_35645(_writeWaitHandle);
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 35539, 35832);
+                                }
+
+                                else
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 35539, 35832);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 35776, 35801);
+
+                                    f_1027_35776_35800(_writeWaitHandle);
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 35539, 35832);
+                                }
+                            }
+                            catch (ObjectDisposedException)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 35885, 35970);
+                                DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 35885, 35970);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 35401, 35993);
+                        }
                     }
                 }
                 finally
                 {
-                    // Raise the appropriate read/write events outside the lock. This is
-                    // inside the while loop to ensure writers can have a chance to
-                    // write otherwise the reader will starve.
-                    // NOTE: This must occur in the finally block to ensure
-                    // the AutoResetEvents are left in the appropriate state, even
-                    // for error paths.
-                    if (raiseEvents)
+                    DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 36041, 37210);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 36338, 36609) || true) && (unblockReaders)
+                    )
+
                     {
-                        RaiseEvents();
-                    }
-                }
-            }
-
-            return results;
-        }
-
-        /// <summary>
-        /// Blocks until the pipeline closes and reads all objects.
-        /// </summary>
-        /// <returns>A collection of zero or more objects.</returns>
-        /// <remarks>
-        /// If the stream is empty, a collection of size zero is returned.
-        ///
-        /// If there are multiple reader threads, the objects returned
-        /// to blocking reads Read(int count) and ReadToEnd()
-        /// are not necessarily single blocks of objects added to the
-        /// stream in that order.  For example, if ABCDEF are added to the
-        /// stream, one reader may get ABDE and the other may get CF.
-        /// Each reader reads items from the stream as they become available.
-        /// Otherwise, if a maximum _capacity has been imposed, the writer
-        /// and reader could become mutually deadlocked.
-        ///
-        /// When there are multiple blocked readers, any of the readers
-        /// may get the next object(s) added.
-        /// </remarks>
-        internal override Collection<object> ReadToEnd()
-        {
-            // NTRAID#Windows Out Of Band Releases-925566-2005/12/07-JonN
-            return Read(Int32.MaxValue);
-        }
-
-        /// <summary>
-        /// Reads objects currently in the stream, but does not block.
-        /// </summary>
-        /// <returns>An array of zero or more objects.</returns>
-        /// <remarks>
-        /// This method performs a read of objects currently in the
-        /// stream. The method will block until exclusive access to the
-        /// stream is acquired.  If there are no objects in the stream,
-        /// an empty array is returned.
-        /// </remarks>
-        /// <param name="maxRequested">
-        /// Return no more than maxRequested objects.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="maxRequested"/> is less than 0
-        /// </exception>
-        internal override Collection<object> NonBlockingRead(int maxRequested)
-        {
-            Collection<object> results = null;
-            bool raiseEvents = false;
-
-            if (maxRequested == 0)
-            {
-                return new Collection<object>();
-            }
-
-            if (maxRequested < 0)
-            {
-                throw PSTraceSource.NewArgumentOutOfRangeException("maxRequested", maxRequested);
-            }
-
-            try
-            {
-                lock (_monitorObject)
-                {
-                    int readCount = _objects.Count;
-                    if (readCount > maxRequested)
-                    {
-                        // 2004/06/30-JonN Safe cast since 0 < maxRequested < readCount
-                        readCount = (int)maxRequested;
-                    }
-
-                    if (readCount > 0)
-                    {
-                        results = new Collection<object>();
-                        for (int i = 0; i < readCount; i++)
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 36338, 36609);
+                        try
                         {
-                            results.Add(_objects[i]);
-                        }
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 36450, 36468);
 
-                        raiseEvents = true;
-                        _objects.RemoveRange(0, readCount);
+                            f_1027_36450_36467(_readHandle);
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 36513, 36590);
+                            DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 36513, 36590);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 36338, 36609);
                     }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 36629, 36901) || true) && (unblockWriters)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 36629, 36901);
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 36741, 36760);
+
+                            f_1027_36741_36759(_writeHandle);
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 36805, 36882);
+                            DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 36805, 36882);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 36629, 36901);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 36921, 37195) || true) && (endOfStream)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 36921, 37195);
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 37030, 37054);
+
+                            f_1027_37030_37053(_readClosedHandle);
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 37099, 37176);
+                            DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 37099, 37176);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 36921, 37195);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 36041, 37210);
                 }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 37321, 37430) || true) && (unblockReaders)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 37321, 37430);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 37373, 37415);
+
+                    f_1027_37373_37414(this, this, EventArgs.Empty);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 37321, 37430);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 33700, 37859);
+
+                int
+                f_1027_34215_34229(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 34215, 34229);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_34289_34303(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 34289, 34303);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_34368_34382(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 34368, 34382);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_35009_35030(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 35009, 35030);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_35161_35184(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Reset();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 35161, 35184);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_35623_35645(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 35623, 35645);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_35776_35800(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Reset();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 35776, 35800);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_36450_36467(System.Threading.AutoResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 36450, 36467);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_36741_36759(System.Threading.AutoResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 36741, 36759);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_37030_37053(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 37030, 37053);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_37373_37414(System.Management.Automation.Internal.ObjectStream
+                this_param, System.Management.Automation.Internal.ObjectStream
+                source, System.EventArgs
+                args)
+                {
+                    this_param.FireDataReadyEvent((object)source, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 37373, 37414);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 33700, 37859);
+                throw;
             }
             finally
             {
-                if (raiseEvents)
-                {
-                    RaiseEvents();
-                }
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 33700, 37859);
             }
-
-            return results ?? new Collection<object>();
         }
 
-        /// <summary>
-        /// Peek the next object.
-        /// </summary>
-        /// <returns>
-        /// The next object in the stream or AutomationNull.Value if the stream is empty
-        /// </returns>
-        /// <exception cref="PipelineClosedException">The ObjectStream is closed.</exception>
-        internal override object Peek()
+        internal override void Flush()
         {
-            object result = null;
-
-            lock (_monitorObject)
+            try
             {
-                if (EndOfPipeline || _objects.Count == 0)
-                {
-                    result = AutomationNull.Value;
-                }
-                else
-                {
-                    result = _objects[0];
-                }
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 38074, 38629);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38129, 38154);
 
-            return result;
-        }
-
-        #endregion Read Methods
-
-        #region Write Methods
-
-        /// <summary>
-        /// Write objects to the underlying stream.
-        /// </summary>
-        /// <param name="obj">Object or enumeration to read from.</param>
-        /// <param name="enumerateCollection">
-        /// If enumerateCollection is true, and <paramref name="obj"/>
-        /// is an enumeration according to LanguagePrimitives.GetEnumerable,
-        /// the objects in the enumeration will be unrolled and
-        /// written separately.  Otherwise, <paramref name="obj"/>
-        /// will be written as a single object.
-        /// </param>
-        /// <returns>The number of objects written.</returns>
-        /// <exception cref="PipelineClosedException">
-        /// The underlying stream is closed
-        /// </exception>
-        /// <remarks>
-        /// If the enumeration contains elements equal to
-        /// AutomationNull.Value, they are are ignored.
-        /// This can cause the return value to be less than the size of
-        /// the collection.
-        /// </remarks>
-        internal override int Write(object obj, bool enumerateCollection)
-        {
-            // it is permitted to write null objects
-
-            if (obj == AutomationNull.Value)
-            {
-                // NTRAID#Windows Out Of Band Releases-926213-2005/12/16-JonN
-                // We no longer break on AutomationNull.Value,
-                // we just ignore it
-                return 0;
-            }
-
-            if (!IsOpen)
-            {
-                // NTRAID#Windows Out Of Band Releases-925742-2005/12/07-JonN
-                string message = PipelineStrings.WriteToClosedPipeline;
-                Exception e = new PipelineClosedException(message);
-                throw e;
-            }
-
-            // We want to write the objects as one block, not individually
-            // We do not want to hold the stream locked during the enumeration
-            List<object> a = new List<object>();
-
-            IEnumerable enumerable = null;
-            if (enumerateCollection)
-            {
-                enumerable = LanguagePrimitives.GetEnumerable(obj);
-            }
-
-            if (enumerable == null)
-                a.Add(obj);
-            else
-            {
-                foreach (object o in enumerable)
-                {
-                    // 879023-2003/10/28-JonN
-                    //  Outputting stops when receiving a AutomationNull.Value
-                    // 2003/10/28-JonN There is a window where another
-                    //  thread could modify the array to contain
-                    //  AutomationNull.Value, but I'm not going to deal with it.
-                    if (AutomationNull.Value == o)
-                    {
-                        // NTRAID#Windows Out Of Band Releases-926213-2005/12/16-JonN
-                        // We no longer break on AutomationNull.Value,
-                        // we just ignore it
-                        continue;
-                    }
-
-                    a.Add(o);
-                }
-            }
-
-            int objectsWritten = 0;
-            int objectsToWrite = a.Count;
-
-            while (objectsToWrite > 0)
-            {
-                bool raiseEvents = false;
-
-                // wait for buffer available
-                // false indicates EndOfPipeline
-                if (WaitWrite() == false)
-                {
-                    break;
-                }
+                bool
+                raiseEvents = false
+                ;
 
                 try
                 {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38212, 38226);
                     lock (_monitorObject)
                     {
-                        if (!IsOpen)
-                        {
-                            // NOTE: lock is released in finally
-                            break;
-                        }
 
-                        // determine the maximum number of objects that
-                        // can be written to the stream. Note: performing
-                        // subtraction to ensure we don't have an
-                        // overflow exception
-                        int freeSpace = _capacity - _objects.Count;
-                        if (0 >= freeSpace)
-                        {
-                            // NOTE: lock is released in finally
-                            continue;
-                        }
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38268, 38425) || true) && (f_1027_38272_38286(_objects) > 0)
+                        )
 
-                        int writeCount = objectsToWrite;
-                        if (writeCount > freeSpace)
                         {
-                            // Note that we have already established that
-                            // 0 < freeSpace < writeCount,
-                            // so the cast is safe.
-                            writeCount = freeSpace;
-                        }
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 38268, 38425);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38340, 38359);
 
+                            raiseEvents = true;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38385, 38402);
+
+                            f_1027_38385_38401(_objects);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 38268, 38425);
+                        }
+                    }
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 38473, 38618);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38513, 38603) || true) && (raiseEvents)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 38513, 38603);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 38570, 38584);
+
+                        f_1027_38570_38583(this);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 38513, 38603);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 38473, 38618);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 38074, 38629);
+
+                int
+                f_1027_38272_38286(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 38272, 38286);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_38385_38401(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    this_param.Clear();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 38385, 38401);
+                    return 0;
+                }
+
+
+                int
+                f_1027_38570_38583(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    this_param.RaiseEvents();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 38570, 38583);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 38074, 38629);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 38074, 38629);
+            }
+        }
+
+        internal override void Close()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 38984, 39999);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39039, 39064);
+
+                bool
+                raiseEvents = false
+                ;
+
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39122, 39136);
+                    lock (_monitorObject)
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39356, 39501) || true) && (_isOpen)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 39356, 39501);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39417, 39436);
+
+                            raiseEvents = true;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39462, 39478);
+
+                            _isOpen = false;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 39356, 39501);
+                        }
+                    }
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 39549, 39988);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39589, 39973) || true) && (raiseEvents)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 39589, 39973);
+                        // RaiseEvents does not manage _writeClosedHandle
                         try
                         {
-                            // determine if we can write to the stream in
-                            // a single call.
-                            if (writeCount == a.Count)
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39769, 39794);
+
+                            f_1027_39769_39793(_writeClosedHandle);
+                        }
+                        catch (ObjectDisposedException)
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCatch(1027, 39839, 39916);
+                            DynAbs.Tracing.TraceSender.TraceExitCatch(1027, 39839, 39916);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 39940, 39954);
+
+                        f_1027_39940_39953(this);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 39589, 39973);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 39549, 39988);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 38984, 39999);
+
+                bool
+                f_1027_39769_39793(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 39769, 39793);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_39940_39953(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    this_param.RaiseEvents();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 39940, 39953);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 38984, 39999);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 38984, 39999);
+            }
+        }
+
+        internal override object Read()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 40363, 40703);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 40419, 40455);
+
+                Collection<object>
+                result = f_1027_40447_40454(this, 1)
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 40469, 40556) || true) && (f_1027_40473_40485(result) == 1)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 40469, 40556);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 40524, 40541);
+
+                    return f_1027_40531_40540(result, 0);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 40469, 40556);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 40572, 40648);
+
+                f_1027_40572_40647(f_1027_40591_40603(result) == 0, "Invalid number of objects returned");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 40664, 40692);
+
+                return f_1027_40671_40691();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 40363, 40703);
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_40447_40454(System.Management.Automation.Internal.ObjectStream
+                this_param, int
+                count)
+                {
+                    var return_v = this_param.Read(count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 40447, 40454);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_40473_40485(System.Collections.ObjectModel.Collection<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 40473, 40485);
+                    return return_v;
+                }
+
+
+                object
+                f_1027_40531_40540(System.Collections.ObjectModel.Collection<object>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 40531, 40540);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_40591_40603(System.Collections.ObjectModel.Collection<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 40591, 40603);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_40572_40647(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 40572, 40647);
+                    return 0;
+                }
+
+
+                System.Management.Automation.PSObject
+                f_1027_40671_40691()
+                {
+                    var return_v = AutomationNull.Value;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 40671, 40691);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 40363, 40703);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 40363, 40703);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        internal override Collection<object> Read(int count)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 42002, 44088);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42079, 42208) || true) && (count < 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 42079, 42208);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42126, 42193);
+
+                    throw f_1027_42132_42192("count", count);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 42079, 42208);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42224, 42319) || true) && (count == 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 42224, 42319);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42272, 42304);
+
+                    return f_1027_42279_42303();
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 42224, 42319);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42335, 42389);
+
+                Collection<object>
+                results = f_1027_42364_42388()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42405, 42430);
+
+                bool
+                raiseEvents = false
+                ;
+                try
+                {
+                    while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42444, 44046) || true) && ((count > 0) && (DynAbs.Tracing.TraceSender.Expression_True(1027, 42451, 42476) && f_1027_42466_42476(this)))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 42444, 44046);
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42560, 42574);
+                            lock (_monitorObject)
                             {
-                                System.Management.Automation.Diagnostics.Assert
-                                    (objectsWritten == 0, "objectsWritten == 0");
-                                _objects.AddRange(a);
-                                objectsWritten += writeCount;
-                                objectsToWrite -= writeCount;
-                                System.Management.Automation.Diagnostics.Assert
-                                    (objectsToWrite == 0, "objectsToWrite == 0");
-                            }
-                            else
-                            {
-                                System.Management.Automation.Diagnostics.Assert
-                                    (writeCount > 0, "writeCount > 0");
-                                List<object> a2 = a.GetRange(objectsWritten, writeCount);
-                                _objects.AddRange(a2);
-                                objectsWritten += writeCount;
-                                objectsToWrite -= writeCount;
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42689, 42827) || true) && (f_1027_42693_42707(_objects) == 0)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 42689, 42827);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42770, 42779);
+
+                                    continue;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 42689, 42827);
+                                }
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42855, 42874);
+
+                                raiseEvents = true;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 42987, 43008);
+
+                                int
+                                objectsAdded = 0
+                                ;
+                                try
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43034, 43295);
+                                    foreach (object o in f_1027_43055_43063_I(_objects))
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 43034, 43295);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43121, 43136);
+
+                                        f_1027_43121_43135(results, o);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43166, 43181);
+
+                                        objectsAdded++;
+
+                                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43211, 43268) || true) && (--count <= 0)
+                                        )
+
+                                        {
+                                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 43211, 43268);
+                                            DynAbs.Tracing.TraceSender.TraceBreak(1027, 43262, 43268);
+
+                                            break;
+                                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 43211, 43268);
+                                        }
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 43034, 43295);
+                                    }
+                                }
+                                catch (System.Exception)
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1027, 1, 262);
+                                    throw;
+                                }
+                                finally
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceExitLoop(1027, 1, 262);
+                                }
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43323, 43361);
+
+                                f_1027_43323_43360(
+                                                        _objects, 0, objectsAdded);
                             }
                         }
                         finally
                         {
+                            DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 43421, 44031);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43910, 44012) || true) && (raiseEvents)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 43910, 44012);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 43975, 43989);
+
+                                f_1027_43975_43988(this);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 43910, 44012);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 43421, 44031);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 42444, 44046);
+                    }
+                }
+                catch (System.Exception)
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1027, 42444, 44046);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoop(1027, 42444, 44046);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 44062, 44077);
+
+                return results;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 42002, 44088);
+
+                System.Management.Automation.PSArgumentOutOfRangeException
+                f_1027_42132_42192(string
+                paramName, int
+                actualValue)
+                {
+                    var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 42132, 42192);
+                    return return_v;
+                }
+
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_42279_42303()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 42279, 42303);
+                    return return_v;
+                }
+
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_42364_42388()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 42364, 42388);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_42466_42476(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    var return_v = this_param.WaitRead();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 42466, 42476);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_42693_42707(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 42693, 42707);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_43121_43135(System.Collections.ObjectModel.Collection<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 43121, 43135);
+                    return 0;
+                }
+
+
+                System.Collections.Generic.List<object>
+                f_1027_43055_43063_I(System.Collections.Generic.List<object>
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 43055, 43063);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_43323_43360(System.Collections.Generic.List<object>
+                this_param, int
+                index, int
+                count)
+                {
+                    this_param.RemoveRange(index, count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 43323, 43360);
+                    return 0;
+                }
+
+
+                int
+                f_1027_43975_43988(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    this_param.RaiseEvents();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 43975, 43988);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 42002, 44088);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 42002, 44088);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        internal override Collection<object> ReadToEnd()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 45121, 45308);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 45269, 45297);
+
+                return f_1027_45276_45296(this, Int32.MaxValue);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 45121, 45308);
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_45276_45296(System.Management.Automation.Internal.ObjectStream
+                this_param, int
+                count)
+                {
+                    var return_v = this_param.Read(count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 45276, 45296);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 45121, 45308);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 45121, 45308);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        internal override Collection<object> NonBlockingRead(int maxRequested)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 46072, 47601);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46167, 46201);
+
+                Collection<object>
+                results = null
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46215, 46240);
+
+                bool
+                raiseEvents = false
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46256, 46358) || true) && (maxRequested == 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 46256, 46358);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46311, 46343);
+
+                    return f_1027_46318_46342();
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 46256, 46358);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46374, 46524) || true) && (maxRequested < 0)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 46374, 46524);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46428, 46509);
+
+                    throw f_1027_46434_46508("maxRequested", maxRequested);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 46374, 46524);
+                }
+
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46582, 46596);
+                    lock (_monitorObject)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46638, 46669);
+
+                        int
+                        readCount = f_1027_46654_46668(_objects)
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46691, 46911) || true) && (readCount > maxRequested)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 46691, 46911);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46858, 46888);
+
+                            readCount = (int)maxRequested;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 46691, 46911);
+                        }
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 46935, 47338) || true) && (readCount > 0)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 46935, 47338);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47002, 47037);
+
+                            results = f_1027_47012_47036();
+                            try
+                            {
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47072, 47077);
+                                for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47063, 47207) || true) && (i < readCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47094, 47097)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 47063, 47207))
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 47063, 47207);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47155, 47180);
+
+                                    f_1027_47155_47179(results, f_1027_47167_47178(_objects, i));
+                                }
+                            }
+                            catch (System.Exception)
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoopByException(1027, 1, 145);
+                                throw;
+                            }
+                            finally
+                            {
+                                DynAbs.Tracing.TraceSender.TraceExitLoop(1027, 1, 145);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47235, 47254);
+
                             raiseEvents = true;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47280, 47315);
+
+                            f_1027_47280_47314(_objects, 0, readCount);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 46935, 47338);
                         }
                     }
                 }
                 finally
                 {
-                    if (raiseEvents)
-                    {
-                        RaiseEvents();
-                    }
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 47386, 47531);
 
-            return objectsWritten;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47426, 47516) || true) && (raiseEvents)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 47426, 47516);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47483, 47497);
+
+                        f_1027_47483_47496(this);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 47426, 47516);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 47386, 47531);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47547, 47590);
+
+                return results ?? (DynAbs.Tracing.TraceSender.Expression_Null<System.Collections.ObjectModel.Collection<object>>(1027, 47554, 47589) ?? f_1027_47565_47589());
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 46072, 47601);
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_46318_46342()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 46318, 46342);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentOutOfRangeException
+                f_1027_46434_46508(string
+                paramName, int
+                actualValue)
+                {
+                    var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 46434, 46508);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_46654_46668(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 46654, 46668);
+                    return return_v;
+                }
+
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_47012_47036()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 47012, 47036);
+                    return return_v;
+                }
+
+
+                object
+                f_1027_47167_47178(System.Collections.Generic.List<object>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 47167, 47178);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_47155_47179(System.Collections.ObjectModel.Collection<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 47155, 47179);
+                    return 0;
+                }
+
+
+                int
+                f_1027_47280_47314(System.Collections.Generic.List<object>
+                this_param, int
+                index, int
+                count)
+                {
+                    this_param.RemoveRange(index, count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 47280, 47314);
+                    return 0;
+                }
+
+
+                int
+                f_1027_47483_47496(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    this_param.RaiseEvents();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 47483, 47496);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<object>
+                f_1027_47565_47589()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 47565, 47589);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 46072, 47601);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 46072, 47601);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion Write Methods
+        internal override object Peek()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 47927, 48364);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 47983, 48004);
 
-        // 905990-2005/05/10-JonN Removed IDisposable
+                object
+                result = null
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 48026, 48040);
 
-        #region Design For Testability
-        /// <summary>
-        /// These methods are necessary to provide the ObjectStreamTest BVT
-        /// access to the internal handler DataReady.  The EventInfo
-        /// reflection class does not give access to internal events.
-        /// </summary>
-        /// <param name="eventHandler"></param>
+                lock (_monitorObject)
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 48074, 48308) || true) && (f_1027_48078_48091() || (DynAbs.Tracing.TraceSender.Expression_False(1027, 48078, 48114) || f_1027_48095_48109(_objects) == 0))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 48074, 48308);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 48156, 48186);
+
+                        result = f_1027_48165_48185();
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 48074, 48308);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 48074, 48308);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 48268, 48289);
+
+                        result = f_1027_48277_48288(_objects, 0);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 48074, 48308);
+                    }
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 48339, 48353);
+
+                return result;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 47927, 48364);
+
+                bool
+                f_1027_48078_48091()
+                {
+                    var return_v = EndOfPipeline;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 48078, 48091);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_48095_48109(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 48095, 48109);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSObject
+                f_1027_48165_48185()
+                {
+                    var return_v = AutomationNull.Value;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 48165, 48185);
+                    return return_v;
+                }
+
+
+                object
+                f_1027_48277_48288(System.Collections.Generic.List<object>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 48277, 48288);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 47927, 48364);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 47927, 48364);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        internal override int Write(object obj, bool enumerateCollection)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 49476, 54932);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 49622, 49892) || true) && (obj == f_1027_49633_49653())
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 49622, 49892);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 49868, 49877);
+
+                    return 0;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 49622, 49892);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 49908, 50197) || true) && (f_1027_49912_49919_M(!IsOpen))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 49908, 50197);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50032, 50087);
+
+                    string
+                    message = f_1027_50049_50086()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50105, 50156);
+
+                    Exception
+                    e = f_1027_50119_50155(message)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50174, 50182);
+
+                    throw e;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 49908, 50197);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50369, 50405);
+
+                List<object>
+                a = f_1027_50386_50404()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50421, 50451);
+
+                IEnumerable
+                enumerable = null
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50465, 50588) || true) && (enumerateCollection)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 50465, 50588);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50522, 50573);
+
+                    enumerable = f_1027_50535_50572(obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 50465, 50588);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50604, 51510) || true) && (enumerable == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 50604, 51510);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50645, 50656);
+
+                    f_1027_50645_50655(a, obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 50604, 51510);
+                }
+
+                else
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 50604, 51510);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 50707, 51495);
+                        foreach (object o in f_1027_50728_50738_I(enumerable))
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 50707, 51495);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51127, 51443) || true) && (f_1027_51131_51151() == o)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 51127, 51443);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51411, 51420);
+
+                                continue;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 51127, 51443);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51467, 51476);
+
+                            f_1027_51467_51475(
+                                                a, o);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 50707, 51495);
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1027, 1, 789);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1027, 1, 789);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 50604, 51510);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51526, 51549);
+
+                int
+                objectsWritten = 0
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51563, 51592);
+
+                int
+                objectsToWrite = f_1027_51584_51591(a)
+                ;
+                try
+                {
+                    while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51608, 54883) || true) && (objectsToWrite > 0)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 51608, 54883);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51667, 51692);
+
+                        bool
+                        raiseEvents = false
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51808, 51899) || true) && (f_1027_51812_51823(this) == false)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 51808, 51899);
+                            DynAbs.Tracing.TraceSender.TraceBreak(1027, 51874, 51880);
+
+                            break;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 51808, 51899);
+                        }
+
+                        try
+                        {
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 51969, 51983);
+                            lock (_monitorObject)
+                            {
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 52033, 52201) || true) && (f_1027_52037_52044_M(!IsOpen))
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 52033, 52201);
+                                    DynAbs.Tracing.TraceSender.TraceBreak(1027, 52168, 52174);
+
+                                    break;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 52033, 52201);
+                                }
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 52491, 52534);
+
+                                int
+                                freeSpace = _capacity - f_1027_52519_52533(_objects)
+                                ;
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 52560, 52738) || true) && (0 >= freeSpace)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 52560, 52738);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 52702, 52711);
+
+                                    continue;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 52560, 52738);
+                                }
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 52766, 52798);
+
+                                int
+                                writeCount = objectsToWrite
+                                ;
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 52824, 53146) || true) && (writeCount > freeSpace)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 52824, 53146);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53096, 53119);
+
+                                    writeCount = freeSpace;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 52824, 53146);
+                                }
+
+                                try
+                                {
+
+                                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53356, 54476) || true) && (writeCount == f_1027_53374_53381(a))
+                                    )
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 53356, 54476);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53447, 53577);
+
+                                        f_1027_53447_53576(objectsWritten == 0, "objectsWritten == 0");
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53611, 53632);
+
+                                        f_1027_53611_53631(_objects, a);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53666, 53695);
+
+                                        objectsWritten += writeCount;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53729, 53758);
+
+                                        objectsToWrite -= writeCount;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 53792, 53922);
+
+                                        f_1027_53792_53921(objectsToWrite == 0, "objectsToWrite == 0");
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 53356, 54476);
+                                    }
+
+                                    else
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 53356, 54476);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54052, 54172);
+
+                                        f_1027_54052_54171(writeCount > 0, "writeCount > 0");
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54206, 54263);
+
+                                        List<object>
+                                        a2 = f_1027_54224_54262(a, objectsWritten, writeCount)
+                                        ;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54297, 54319);
+
+                                        f_1027_54297_54318(_objects, a2);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54353, 54382);
+
+                                        objectsWritten += writeCount;
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54416, 54445);
+
+                                        objectsToWrite -= writeCount;
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 53356, 54476);
+                                    }
+                                }
+                                finally
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 54529, 54639);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54593, 54612);
+
+                                    raiseEvents = true;
+                                    DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 54529, 54639);
+                                }
+                            }
+                        }
+                        finally
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterFinally(1027, 54699, 54868);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54747, 54849) || true) && (raiseEvents)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 54747, 54849);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54812, 54826);
+
+                                f_1027_54812_54825(this);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 54747, 54849);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitFinally(1027, 54699, 54868);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 51608, 54883);
+                    }
+                }
+                catch (System.Exception)
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1027, 51608, 54883);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoop(1027, 51608, 54883);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 54899, 54921);
+
+                return objectsWritten;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 49476, 54932);
+
+                System.Management.Automation.PSObject
+                f_1027_49633_49653()
+                {
+                    var return_v = AutomationNull.Value;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 49633, 49653);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_49912_49919_M(bool
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 49912, 49919);
+                    return return_v;
+                }
+
+
+                string
+                f_1027_50049_50086()
+                {
+                    var return_v = PipelineStrings.WriteToClosedPipeline;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 50049, 50086);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PipelineClosedException
+                f_1027_50119_50155(string
+                message)
+                {
+                    var return_v = new System.Management.Automation.PipelineClosedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 50119, 50155);
+                    return return_v;
+                }
+
+
+                System.Collections.Generic.List<object>
+                f_1027_50386_50404()
+                {
+                    var return_v = new System.Collections.Generic.List<object>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 50386, 50404);
+                    return return_v;
+                }
+
+
+                System.Collections.IEnumerable
+                f_1027_50535_50572(object
+                obj)
+                {
+                    var return_v = LanguagePrimitives.GetEnumerable(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 50535, 50572);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_50645_50655(System.Collections.Generic.List<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 50645, 50655);
+                    return 0;
+                }
+
+
+                System.Management.Automation.PSObject
+                f_1027_51131_51151()
+                {
+                    var return_v = AutomationNull.Value;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 51131, 51151);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_51467_51475(System.Collections.Generic.List<object>
+                this_param, object
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 51467, 51475);
+                    return 0;
+                }
+
+
+                System.Collections.IEnumerable
+                f_1027_50728_50738_I(System.Collections.IEnumerable
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 50728, 50738);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_51584_51591(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 51584, 51591);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_51812_51823(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    var return_v = this_param.WaitWrite();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 51812, 51823);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_52037_52044_M(bool
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 52037, 52044);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_52519_52533(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 52519, 52533);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_53374_53381(System.Collections.Generic.List<object>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 53374, 53381);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_53447_53576(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    System.Management.Automation.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 53447, 53576);
+                    return 0;
+                }
+
+
+                int
+                f_1027_53611_53631(System.Collections.Generic.List<object>
+                this_param, System.Collections.Generic.List<object>
+                collection)
+                {
+                    this_param.AddRange((System.Collections.Generic.IEnumerable<object>)collection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 53611, 53631);
+                    return 0;
+                }
+
+
+                int
+                f_1027_53792_53921(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    System.Management.Automation.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 53792, 53921);
+                    return 0;
+                }
+
+
+                int
+                f_1027_54052_54171(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    System.Management.Automation.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 54052, 54171);
+                    return 0;
+                }
+
+
+                System.Collections.Generic.List<object>
+                f_1027_54224_54262(System.Collections.Generic.List<object>
+                this_param, int
+                index, int
+                count)
+                {
+                    var return_v = this_param.GetRange(index, count);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 54224, 54262);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_54297_54318(System.Collections.Generic.List<object>
+                this_param, System.Collections.Generic.List<object>
+                collection)
+                {
+                    this_param.AddRange((System.Collections.Generic.IEnumerable<object>)collection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 54297, 54318);
+                    return 0;
+                }
+
+
+                int
+                f_1027_54812_54825(System.Management.Automation.Internal.ObjectStream
+                this_param)
+                {
+                    this_param.RaiseEvents();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 54812, 54825);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 49476, 54932);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 49476, 54932);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         private void DFT_AddHandler_OnDataReady(EventHandler eventHandler)
         {
-            DataReady += eventHandler;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 55391, 55519);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 55482, 55508);
+
+                DataReady += eventHandler;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 55391, 55519);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 55391, 55519);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 55391, 55519);
+            }
         }
 
         private void DFT_RemoveHandler_OnDataReady(EventHandler eventHandler)
         {
-            DataReady -= eventHandler;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 55531, 55662);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 55625, 55651);
+
+                DataReady -= eventHandler;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 55531, 55662);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 55531, 55662);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 55531, 55662);
+            }
         }
-        #endregion Design For Testability
 
-        #region IDisposable
-
-        /// <summary>
-        /// Release all resources.
-        /// </summary>
-        /// <param name="disposing">If true, release all managed resources.</param>
         protected override void Dispose(bool disposing)
         {
-            if (_disposed)
+            try
             {
-                return;
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 55916, 57109);
 
-            lock (_monitorObject)
-            {
-                if (_disposed)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 55988, 56057) || true) && (_disposed)
+                )
+
                 {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 55988, 56057);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56035, 56042);
+
                     return;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 55988, 56057);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56079, 56093);
+
+                lock (_monitorObject)
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56127, 56208) || true) && (_disposed)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 56127, 56208);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56182, 56189);
+
+                        return;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 56127, 56208);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56228, 56245);
+
+                    _disposed = true;
                 }
 
-                _disposed = true;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56276, 57098) || true) && (disposing)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 56276, 57098);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56323, 56345);
+
+                    f_1027_56323_56344(_readHandle);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56363, 56386);
+
+                    f_1027_56363_56385(_writeHandle);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56404, 56433);
+
+                    f_1027_56404_56432(_writeClosedHandle);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56451, 56479);
+
+                    f_1027_56451_56478(_readClosedHandle);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56499, 56613) || true) && (_readWaitHandle != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 56499, 56613);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56568, 56594);
+
+                        f_1027_56568_56593(_readWaitHandle);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 56499, 56613);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56633, 56749) || true) && (_writeWaitHandle != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 56633, 56749);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56703, 56730);
+
+                        f_1027_56703_56729(_writeWaitHandle);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 56633, 56749);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56769, 56916) || true) && (_reader != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 56769, 56916);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56830, 56846);
+
+                        f_1027_56830_56845(_reader);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56868, 56897);
+
+                        f_1027_56868_56896(f_1027_56868_56886(_reader));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 56769, 56916);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56936, 57083) || true) && (_writer != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 56936, 57083);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 56997, 57013);
+
+                        f_1027_56997_57012(_writer);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57035, 57064);
+
+                        f_1027_57035_57063(f_1027_57035_57053(_writer));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 56936, 57083);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 56276, 57098);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 55916, 57109);
+
+                int
+                f_1027_56323_56344(System.Threading.AutoResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56323, 56344);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56363_56385(System.Threading.AutoResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56363, 56385);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56404_56432(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56404, 56432);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56451_56478(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56451, 56478);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56568_56593(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56568, 56593);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56703_56729(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56703, 56729);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56830_56845(System.Management.Automation.Runspaces.PipelineReader<object>
+                this_param)
+                {
+                    this_param.Close();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56830, 56845);
+                    return 0;
+                }
+
+
+                System.Threading.WaitHandle
+                f_1027_56868_56886(System.Management.Automation.Runspaces.PipelineReader<object>
+                this_param)
+                {
+                    var return_v = this_param.WaitHandle;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 56868, 56886);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_56868_56896(System.Threading.WaitHandle
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56868, 56896);
+                    return 0;
+                }
+
+
+                int
+                f_1027_56997_57012(System.Management.Automation.Runspaces.PipelineWriter
+                this_param)
+                {
+                    this_param.Close();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 56997, 57012);
+                    return 0;
+                }
+
+
+                System.Threading.WaitHandle
+                f_1027_57035_57053(System.Management.Automation.Runspaces.PipelineWriter
+                this_param)
+                {
+                    var return_v = this_param.WaitHandle;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 57035, 57053);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_57035_57063(System.Threading.WaitHandle
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 57035, 57063);
+                    return 0;
+                }
+
             }
-
-            if (disposing)
+            catch
             {
-                _readHandle.Dispose();
-                _writeHandle.Dispose();
-                _writeClosedHandle.Dispose();
-                _readClosedHandle.Dispose();
-
-                if (_readWaitHandle != null)
-                {
-                    _readWaitHandle.Dispose();
-                }
-
-                if (_writeWaitHandle != null)
-                {
-                    _writeWaitHandle.Dispose();
-                }
-
-                if (_reader != null)
-                {
-                    _reader.Close();
-                    _reader.WaitHandle.Dispose();
-                }
-
-                if (_writer != null)
-                {
-                    _writer.Close();
-                    _writer.WaitHandle.Dispose();
-                }
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 55916, 57109);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 55916, 57109);
             }
         }
 
-        #endregion IDisposable
-    }
+        static ObjectStream()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1027, 15678, 57150);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1027, 15678, 57150);
 
-    /// <summary>
-    /// An object stream using a PSDataCollection as the object store.
-    /// This stream lets user to supply a custom PSDataCollection instance
-    /// to use as the stream's object store.
-    ///
-    /// This stream is designed to be used with the user supplied
-    /// PSDataBuffers. For internal only purposes use ObjectStream.
-    /// </summary>
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 15678, 57150);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1027, 15678, 57150);
+
+        object
+        f_1027_20175_20187()
+        {
+            var return_v = new object();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 20175, 20187);
+            return return_v;
+        }
+
+
+        static int
+        f_1027_20654_20668_C(int
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1027, 20610, 20691);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentOutOfRangeException
+        f_1027_21454_21520(string
+        paramName, int
+        actualValue)
+        {
+            var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 21454, 21520);
+            return return_v;
+        }
+
+
+        System.Threading.AutoResetEvent
+        f_1027_21758_21783(bool
+        initialState)
+        {
+            var return_v = new System.Threading.AutoResetEvent(initialState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 21758, 21783);
+            return return_v;
+        }
+
+
+        System.Threading.AutoResetEvent
+        f_1027_21887_21911(bool
+        initialState)
+        {
+            var return_v = new System.Threading.AutoResetEvent(initialState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 21887, 21911);
+            return return_v;
+        }
+
+
+        System.Threading.ManualResetEvent
+        f_1027_22021_22048(bool
+        initialState)
+        {
+            var return_v = new System.Threading.ManualResetEvent(initialState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 22021, 22048);
+            return return_v;
+        }
+
+
+        System.Threading.ManualResetEvent
+        f_1027_22156_22183(bool
+        initialState)
+        {
+            var return_v = new System.Threading.ManualResetEvent(initialState);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 22156, 22183);
+            return return_v;
+        }
+
+
+        System.Collections.Generic.List<object>
+        f_1027_22265_22283()
+        {
+            var return_v = new System.Collections.Generic.List<object>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 22265, 22283);
+            return return_v;
+        }
+
+    }
     internal sealed class PSDataCollectionStream<T> : ObjectStreamBase
     {
-        #region Private Fields
-
         private PSDataCollection<T> _objects;
+
         private Guid _psInstanceId;
+
         private bool _isOpen;
+
         private PipelineWriter _writer;
+
         private PipelineReader<object> _objectReader;
+
         private PipelineReader<PSObject> _psobjectReader;
+
         private PipelineReader<object> _objectReaderForPipeline;
+
         private PipelineReader<PSObject> _psobjectReaderForPipeline;
-        private object _syncObject = new object();
-        private bool _disposed = false;
 
-        #endregion
+        private object _syncObject;
 
-        #region Constructors
+        private bool _disposed;
 
-        /// <summary>
-        /// Creates the stream and uses the supplied <paramref name="storeToUse"/>
-        /// as the object store.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// Guid of Powershell instance creating this stream.
-        /// </param>
-        /// <param name="storeToUse">
-        /// A PSDataCollection instance.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// 1. storeToUse is null
-        /// </exception>
         internal PSDataCollectionStream(Guid psInstanceId, PSDataCollection<T> storeToUse)
         {
-            if (storeToUse == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("storeToUse");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1027, 58717, 59329);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57681, 57689);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57750, 57757);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57791, 57798);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57840, 57853);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57897, 57912);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 57954, 57978);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 58022, 58048);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 58074, 58100);
+                this._syncObject = f_1027_58088_58100();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 58124, 58141);
+                this._disposed = false;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 58824, 58954) || true) && (storeToUse == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 58824, 58954);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 58880, 58939);
+
+                    throw f_1027_58886_58938("storeToUse");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 58824, 58954);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 58970, 58992);
+
+                _objects = storeToUse;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59006, 59035);
+
+                _psInstanceId = psInstanceId;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59049, 59064);
+
+                _isOpen = true;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59191, 59211);
+
+                f_1027_59191_59210(            // increment ref count for the store. PowerShell engine
+                                               // is about to use this store.
+                            storeToUse);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59227, 59267);
+
+                storeToUse.DataAdded += HandleDataAdded;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59281, 59318);
+
+                storeToUse.Completed += HandleClosed;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1027, 58717, 59329);
             }
-
-            _objects = storeToUse;
-            _psInstanceId = psInstanceId;
-            _isOpen = true;
-            // increment ref count for the store. PowerShell engine
-            // is about to use this store.
-            storeToUse.AddRef();
-
-            storeToUse.DataAdded += HandleDataAdded;
-            storeToUse.Completed += HandleClosed;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 58717, 59329);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 58717, 59329);
+            }
         }
 
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the PSDataCollection used to store data for this stream.
-        /// </summary>
         internal PSDataCollection<T> ObjectStore
         {
             get
             {
-                return _objects;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 59580, 59647);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59616, 59632);
+
+                    return _objects;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 59580, 59647);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 59515, 59658);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 59515, 59658);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        #endregion
-
-        #region Virtual Implementation
-
-        /// <summary>
-        /// Returns the number of objects in the stream.
-        /// </summary>
         internal override int Count
         {
             get
             {
-                return _objects.Count;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 59891, 59964);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 59927, 59949);
+
+                    return f_1027_59934_59948(_objects);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 59891, 59964);
+
+                    int
+                    f_1027_59934_59948(System.Management.Automation.PSDataCollection<T>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 59934, 59948);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 59839, 59975);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 59839, 59975);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// This is not supported.
-        /// </summary>
         internal override bool EndOfPipeline
         {
             get
             {
-                bool endOfStream = true;
-
-                lock (_syncObject)
+                try
                 {
-                    endOfStream = (_objects.Count == 0 && !_isOpen);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 60131, 60391);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 60167, 60191);
 
-                return endOfStream;
+                    bool
+                    endOfStream = true
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 60217, 60228);
+
+                    lock (_syncObject)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 60270, 60318);
+
+                        endOfStream = (f_1027_60285_60299(_objects) == 0 && (DynAbs.Tracing.TraceSender.Expression_True(1027, 60285, 60316) && !_isOpen));
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 60357, 60376);
+
+                    return endOfStream;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 60131, 60391);
+
+                    int
+                    f_1027_60285_60299(System.Management.Automation.PSDataCollection<T>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 60285, 60299);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 60070, 60402);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 60070, 60402);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Check if the stream is open for further writes.
-        /// </summary>
-        /// <returns>True if the stream is open, false if not.</returns>
-        /// <remarks>
-        /// IsOpen returns true until the first call to Close(). Writers should
-        /// check IsOpen to determine if a write operation can be made.
-        /// </remarks>
         internal override bool IsOpen
         {
             get
             {
-                // check both the current stream and the object store.
-                return _isOpen && _objects.IsOpen;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 60851, 61008);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 60959, 60993);
+
+                    return _isOpen && (DynAbs.Tracing.TraceSender.Expression_True(1027, 60966, 60992) && f_1027_60977_60992(_objects));
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 60851, 61008);
+
+                    bool
+                    f_1027_60977_60992(System.Management.Automation.PSDataCollection<T>
+                    this_param)
+                    {
+                        var return_v = this_param.IsOpen;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 60977, 60992);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 60797, 61019);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 60797, 61019);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// This is not supported.
-        /// </summary>
         internal override int MaxCapacity
         {
             get
             {
-#pragma warning disable 56503
-                throw PSTraceSource.NewNotSupportedException();
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 61172, 61332);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 61239, 61286);
+
+                    throw f_1027_61245_61285();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 61172, 61332);
+
+                    System.Management.Automation.PSNotSupportedException
+                    f_1027_61245_61285()
+                    {
+                        var return_v = PSTraceSource.NewNotSupportedException();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 61245, 61285);
+                        return return_v;
+                    }
+
 #pragma warning restore 56503
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 61114, 61343);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 61114, 61343);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Return a PipelineReader(object) for this stream.
-        /// </summary>
         internal override PipelineReader<object> ObjectReader
         {
             get
             {
-                if (_objectReader == null)
+                try
                 {
-                    lock (_syncObject)
-                    {
-                        if (_objectReader == null)
-                        {
-                            _objectReader = new PSDataCollectionReader<T, object>(this);
-                        }
-                    }
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 61542, 61980);
 
-                return _objectReader;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 61578, 61924) || true) && (_objectReader == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 61578, 61924);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 61651, 61662);
+                        lock (_syncObject)
+                        {
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 61712, 61882) || true) && (_objectReader == null)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 61712, 61882);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 61795, 61855);
+
+                                _objectReader = f_1027_61811_61854(this);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 61712, 61882);
+                            }
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 61578, 61924);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 61944, 61965);
+
+                    return _objectReader;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 61542, 61980);
+
+                    System.Management.Automation.Internal.PSDataCollectionReader<T, object>
+                    f_1027_61811_61854(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                    stream)
+                    {
+                        var return_v = new System.Management.Automation.Internal.PSDataCollectionReader<T, object>(stream);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 61811, 61854);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 61464, 61991);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 61464, 61991);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Creates an Object Reader for the pipeline.
-        /// </summary>
-        /// <param name="computerName">Computer name that the pipeline specifies.</param>
-        /// <param name="runspaceId">Runspace id that the pipeline specifies.</param>
-        /// <remarks>the computer name and runspace id are associated with the
-        /// reader so as to enable cmdlets to identify which computer name runspace does
-        /// the object that this stream writes belongs to</remarks>
         internal PipelineReader<object> GetObjectReaderForPipeline(string computerName, Guid runspaceId)
         {
-            if (_objectReaderForPipeline == null)
+            try
             {
-                lock (_syncObject)
-                {
-                    if (_objectReaderForPipeline == null)
-                    {
-                        _objectReaderForPipeline =
-                            new PSDataCollectionPipelineReader<T, object>(this, computerName, runspaceId);
-                    }
-                }
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 62523, 63109);
 
-            return _objectReaderForPipeline;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 62644, 63050) || true) && (_objectReaderForPipeline == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 62644, 63050);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 62720, 62731);
+                    lock (_syncObject)
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 62773, 63016) || true) && (_objectReaderForPipeline == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 62773, 63016);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 62859, 62993);
+
+                            _objectReaderForPipeline =
+                            f_1027_62915_62992(this, computerName, runspaceId);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 62773, 63016);
+                        }
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 62644, 63050);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 63066, 63098);
+
+                return _objectReaderForPipeline;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 62523, 63109);
+
+                System.Management.Automation.Internal.PSDataCollectionPipelineReader<T, object>
+                f_1027_62915_62992(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                stream, string
+                computerName, System.Guid
+                runspaceId)
+                {
+                    var return_v = new System.Management.Automation.Internal.PSDataCollectionPipelineReader<T, object>(stream, computerName, runspaceId);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 62915, 62992);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 62523, 63109);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 62523, 63109);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Return a PipelineReader(PSObject) for this stream.
-        /// </summary>
         internal override PipelineReader<PSObject> PSObjectReader
         {
             get
             {
-                if (_psobjectReader == null)
+                try
                 {
-                    lock (_syncObject)
-                    {
-                        if (_psobjectReader == null)
-                        {
-                            _psobjectReader = new PSDataCollectionReader<T, PSObject>(this);
-                        }
-                    }
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 63314, 63762);
 
-                return _psobjectReader;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 63350, 63704) || true) && (_psobjectReader == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 63350, 63704);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 63425, 63436);
+                        lock (_syncObject)
+                        {
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 63486, 63662) || true) && (_psobjectReader == null)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 63486, 63662);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 63571, 63635);
+
+                                _psobjectReader = f_1027_63589_63634(this);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 63486, 63662);
+                            }
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 63350, 63704);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 63724, 63747);
+
+                    return _psobjectReader;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 63314, 63762);
+
+                    System.Management.Automation.Internal.PSDataCollectionReader<T, System.Management.Automation.PSObject>
+                    f_1027_63589_63634(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                    stream)
+                    {
+                        var return_v = new System.Management.Automation.Internal.PSDataCollectionReader<T, System.Management.Automation.PSObject>(stream);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 63589, 63634);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 63232, 63773);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 63232, 63773);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Creates a PSObject Reader for this pipeline.
-        /// </summary>
-        /// <param name="computerName">Computer name that the pipeline specifies.</param>
-        /// <param name="runspaceId">Runspace id that the pipeline specifies.</param>
-        /// <remarks>the computer name and runspace id are associated with the
-        /// reader so as to enable cmdlets to identify which computer name runspace does
-        /// the object that this stream writes belongs to</remarks>
         internal PipelineReader<PSObject> GetPSObjectReaderForPipeline(string computerName, Guid runspaceId)
         {
-            if (_psobjectReaderForPipeline == null)
+            try
             {
-                lock (_syncObject)
-                {
-                    if (_psobjectReaderForPipeline == null)
-                    {
-                        _psobjectReaderForPipeline =
-                            new PSDataCollectionPipelineReader<T, PSObject>(this, computerName, runspaceId);
-                    }
-                }
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 64307, 64907);
 
-            return _psobjectReaderForPipeline;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 64432, 64846) || true) && (_psobjectReaderForPipeline == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 64432, 64846);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 64510, 64521);
+                    lock (_syncObject)
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 64563, 64812) || true) && (_psobjectReaderForPipeline == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 64563, 64812);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 64651, 64789);
+
+                            _psobjectReaderForPipeline =
+                            f_1027_64709_64788(this, computerName, runspaceId);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 64563, 64812);
+                        }
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 64432, 64846);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 64862, 64896);
+
+                return _psobjectReaderForPipeline;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 64307, 64907);
+
+                System.Management.Automation.Internal.PSDataCollectionPipelineReader<T, System.Management.Automation.PSObject>
+                f_1027_64709_64788(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                stream, string
+                computerName, System.Guid
+                runspaceId)
+                {
+                    var return_v = new System.Management.Automation.Internal.PSDataCollectionPipelineReader<T, System.Management.Automation.PSObject>(stream, computerName, runspaceId);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 64709, 64788);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 64307, 64907);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 64307, 64907);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// The object writer for this stream.
-        /// </summary>
-        /// <remarks>
-        /// This field is allocated on first demand and
-        /// returned on subsequent calls.
-        /// </remarks>
         internal override PipelineWriter ObjectWriter
         {
             get
             {
-                if (_writer == null)
+                try
                 {
-                    lock (_syncObject)
-                    {
-                        if (_writer == null)
-                        {
-                            _writer = new PSDataCollectionWriter<T>(this) as PipelineWriter;
-                        }
-                    }
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 65231, 65655);
 
-                return _writer;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 65267, 65605) || true) && (_writer == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 65267, 65605);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 65334, 65345);
+                        lock (_syncObject)
+                        {
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 65395, 65563) || true) && (_writer == null)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 65395, 65563);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 65472, 65536);
+
+                                _writer = f_1027_65482_65517(this) as PipelineWriter;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 65395, 65563);
+                            }
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 65267, 65605);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 65625, 65640);
+
+                    return _writer;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 65231, 65655);
+
+                    System.Management.Automation.Internal.PSDataCollectionWriter<T>
+                    f_1027_65482_65517(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                    stream)
+                    {
+                        var return_v = new System.Management.Automation.Internal.PSDataCollectionWriter<T>(stream);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 65482, 65517);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 65161, 65666);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 65161, 65666);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Read handle associated with this stream.
-        /// </summary>
         internal override WaitHandle ReadHandle
         {
             get
             {
-                return _objects.WaitHandle;
-            }
-        }
-
-        #endregion
-
-        #region Write Abstractions
-
-        /// <summary>
-        /// Write object(s) to the databuffer.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="enumerateCollection"></param>
-        /// <returns></returns>
-        internal override int Write(object obj, bool enumerateCollection)
-        {
-            // it is permitted to write null objects
-
-            if (obj == AutomationNull.Value)
-            {
-                // We no longer break on AutomationNull.Value,
-                // we just ignore it
-                return 0;
-            }
-
-            if (!IsOpen)
-            {
-                // NTRAID#Windows Out Of Band Releases-925742-2005/12/07-JonN
-                string message = PSDataBufferStrings.WriteToClosedBuffer;
-                Exception e = new PipelineClosedException(message);
-                throw e;
-            }
-
-            // We want to write the objects as one block, not individually
-            // We do not want to hold the stream locked during the enumeration
-            Collection<T> objectsToAdd = new Collection<T>();
-
-            IEnumerable enumerable = null;
-            if (enumerateCollection)
-            {
-                enumerable = LanguagePrimitives.GetEnumerable(obj);
-            }
-
-            if (enumerable == null)
-            {
-                objectsToAdd.Add((T)LanguagePrimitives.ConvertTo(obj,
-                    typeof(T), Globalization.CultureInfo.InvariantCulture));
-            }
-            else
-            {
-                foreach (object o in enumerable)
+                try
                 {
-                    //  Outputting stops when receiving a AutomationNull.Value
-                    //  There is a window where another thread could modify the
-                    //  array to contain AutomationNull.Value,
-                    //  but I'm not going to deal with it.
-                    if (AutomationNull.Value == o)
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 65843, 65921);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 65879, 65906);
+
+                    return f_1027_65886_65905(_objects);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 65843, 65921);
+
+                    System.Threading.WaitHandle
+                    f_1027_65886_65905(System.Management.Automation.PSDataCollection<T>
+                    this_param)
                     {
-                        // We no longer break on AutomationNull.Value,
-                        // we just ignore it
-                        continue;
+                        var return_v = this_param.WaitHandle;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 65886, 65905);
+                        return return_v;
                     }
 
-                    objectsToAdd.Add((T)LanguagePrimitives.ConvertTo(obj,
-                        typeof(T), Globalization.CultureInfo.InvariantCulture));
                 }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 65779, 65932);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 65779, 65932);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
-
-            _objects.InternalAddRange(_psInstanceId, objectsToAdd);
-
-            return objectsToAdd.Count;
         }
 
-        #endregion
+        internal override int Write(object obj, bool enumerateCollection)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 66228, 68449);
 
-        #region Virtual Method Implementation
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 66374, 66565) || true) && (obj == f_1027_66385_66405())
+                )
 
-        /// <summary>
-        /// This stream do not perform close operations on the buffer.
-        /// It is upto the user to close the buffers as and when needed.
-        /// However this method notifies the buffer by decrementing the
-        /// ref count.
-        /// </summary>
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 66374, 66565);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 66541, 66550);
+
+                    return 0;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 66374, 66565);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 66581, 66872) || true) && (f_1027_66585_66592_M(!IsOpen))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 66581, 66872);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 66705, 66762);
+
+                    string
+                    message = f_1027_66722_66761()
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 66780, 66831);
+
+                    Exception
+                    e = f_1027_66794_66830(message)
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 66849, 66857);
+
+                    throw e;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 66581, 66872);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67044, 67093);
+
+                Collection<T>
+                objectsToAdd = f_1027_67073_67092()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67109, 67139);
+
+                IEnumerable
+                enumerable = null
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67153, 67276) || true) && (enumerateCollection)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 67153, 67276);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67210, 67261);
+
+                    enumerable = f_1027_67223_67260(obj);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 67153, 67276);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67292, 68325) || true) && (enumerable == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 67292, 68325);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67348, 67479);
+
+                    f_1027_67348_67478(objectsToAdd, f_1027_67368_67477(obj, typeof(T), f_1027_67434_67476()));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 67292, 68325);
+                }
+
+                else
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 67292, 68325);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67545, 68310);
+                        foreach (object o in f_1027_67566_67576_I(enumerable))
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 67545, 68310);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 67903, 68132) || true) && (f_1027_67907_67927() == o)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 67903, 68132);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 68100, 68109);
+
+                                continue;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 67903, 68132);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 68156, 68291);
+
+                            f_1027_68156_68290(
+                                                objectsToAdd, f_1027_68176_68289(obj, typeof(T), f_1027_68246_68288()));
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 67545, 68310);
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1027, 1, 766);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1027, 1, 766);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 67292, 68325);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 68341, 68396);
+
+                f_1027_68341_68395(
+                            _objects, _psInstanceId, objectsToAdd);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 68412, 68438);
+
+                return f_1027_68419_68437(objectsToAdd);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 66228, 68449);
+
+                System.Management.Automation.PSObject
+                f_1027_66385_66405()
+                {
+                    var return_v = AutomationNull.Value;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 66385, 66405);
+                    return return_v;
+                }
+
+
+                bool
+                f_1027_66585_66592_M(bool
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 66585, 66592);
+                    return return_v;
+                }
+
+
+                string
+                f_1027_66722_66761()
+                {
+                    var return_v = PSDataBufferStrings.WriteToClosedBuffer;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 66722, 66761);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PipelineClosedException
+                f_1027_66794_66830(string
+                message)
+                {
+                    var return_v = new System.Management.Automation.PipelineClosedException(message);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 66794, 66830);
+                    return return_v;
+                }
+
+
+                System.Collections.ObjectModel.Collection<T>
+                f_1027_67073_67092()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<T>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 67073, 67092);
+                    return return_v;
+                }
+
+
+                System.Collections.IEnumerable
+                f_1027_67223_67260(object
+                obj)
+                {
+                    var return_v = LanguagePrimitives.GetEnumerable(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 67223, 67260);
+                    return return_v;
+                }
+
+
+                System.Globalization.CultureInfo
+                f_1027_67434_67476()
+                {
+                    var return_v = Globalization.CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 67434, 67476);
+                    return return_v;
+                }
+
+
+                object
+                f_1027_67368_67477(object
+                valueToConvert, System.Type
+                resultType, System.Globalization.CultureInfo
+                formatProvider)
+                {
+                    var return_v = LanguagePrimitives.ConvertTo(valueToConvert, resultType, (System.IFormatProvider)formatProvider);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 67368, 67477);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_67348_67478(System.Collections.ObjectModel.Collection<T>
+                this_param, object
+                item)
+                {
+                    this_param.Add((T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 67348, 67478);
+                    return 0;
+                }
+
+
+                System.Management.Automation.PSObject
+                f_1027_67907_67927()
+                {
+                    var return_v = AutomationNull.Value;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 67907, 67927);
+                    return return_v;
+                }
+
+
+                System.Globalization.CultureInfo
+                f_1027_68246_68288()
+                {
+                    var return_v = Globalization.CultureInfo.InvariantCulture;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 68246, 68288);
+                    return return_v;
+                }
+
+
+                object
+                f_1027_68176_68289(object
+                valueToConvert, System.Type
+                resultType, System.Globalization.CultureInfo
+                formatProvider)
+                {
+                    var return_v = LanguagePrimitives.ConvertTo(valueToConvert, resultType, (System.IFormatProvider)formatProvider);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 68176, 68289);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_68156_68290(System.Collections.ObjectModel.Collection<T>
+                this_param, object
+                item)
+                {
+                    this_param.Add((T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 68156, 68290);
+                    return 0;
+                }
+
+
+                System.Collections.IEnumerable
+                f_1027_67566_67576_I(System.Collections.IEnumerable
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 67566, 67576);
+                    return return_v;
+                }
+
+
+                int
+                f_1027_68341_68395(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, System.Collections.ObjectModel.Collection<T>
+                collection)
+                {
+                    this_param.InternalAddRange(psInstanceId, (System.Collections.ICollection)collection);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 68341, 68395);
+                    return 0;
+                }
+
+
+                int
+                f_1027_68419_68437(System.Collections.ObjectModel.Collection<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1027, 68419, 68437);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 66228, 68449);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 66228, 68449);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         internal override void Close()
         {
-            bool raiseEvents = false;
-            lock (_syncObject)
+            try
             {
-                // Make sure decrementref is called only once. if this
-                // stream is already closed..no need to decrement again.
-                // isOpen controls if this current stream is open or not.
-                if (_isOpen)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 68822, 69784);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 68877, 68902);
+
+                bool
+                raiseEvents = false
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 68922, 68933);
+                lock (_syncObject)
                 {
-                    // Decrement ref count (and other event handlers) for the store.
-                    // PowerShell engine is done using this store.
-                    _objects.DecrementRef();
-                    _objects.DataAdded -= HandleDataAdded;
-                    _objects.Completed -= HandleClosed;
 
-                    raiseEvents = true;
-                    _isOpen = false;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69188, 69636) || true) && (_isOpen)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 69188, 69636);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69395, 69419);
+
+                        f_1027_69395_69418(                    // Decrement ref count (and other event handlers) for the store.
+                                                               // PowerShell engine is done using this store.
+                                            _objects);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69441, 69479);
+
+                        _objects.DataAdded -= HandleDataAdded;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69501, 69536);
+
+                        _objects.Completed -= HandleClosed;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69560, 69579);
+
+                        raiseEvents = true;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69601, 69617);
+
+                        _isOpen = false;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 69188, 69636);
+                    }
                 }
-            }
 
-            if (raiseEvents)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69667, 69773) || true) && (raiseEvents)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 69667, 69773);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 69716, 69758);
+
+                    f_1027_69716_69757(this, this, EventArgs.Empty);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 69667, 69773);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 68822, 69784);
+
+                int
+                f_1027_69395_69418(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.DecrementRef();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 69395, 69418);
+                    return 0;
+                }
+
+
+                int
+                f_1027_69716_69757(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                this_param, System.Management.Automation.Internal.PSDataCollectionStream<T>
+                source, System.EventArgs
+                args)
+                {
+                    this_param.FireDataReadyEvent((object)source, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 69716, 69757);
+                    return 0;
+                }
+
+            }
+            catch
             {
-                FireDataReadyEvent(this, EventArgs.Empty);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 68822, 69784);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 68822, 69784);
             }
         }
 
-        #endregion
-
-        #region Event Handlers
-
-        /// <summary>
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void HandleClosed(object sender, EventArgs e)
         {
-            Close();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 69980, 70077);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70058, 70066);
+
+                f_1027_70058_70065(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 69980, 70077);
+
+                int
+                f_1027_70058_70065(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                this_param)
+                {
+                    this_param.Close();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 70058, 70065);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 69980, 70077);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 69980, 70077);
+            }
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void HandleDataAdded(object sender, DataAddedEventArgs e)
         {
-            FireDataReadyEvent(this, EventArgs.Empty);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 70217, 70360);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70307, 70349);
+
+                f_1027_70307_70348(this, this, EventArgs.Empty);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 70217, 70360);
+
+                int
+                f_1027_70307_70348(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                this_param, System.Management.Automation.Internal.PSDataCollectionStream<T>
+                source, System.EventArgs
+                args)
+                {
+                    this_param.FireDataReadyEvent((object)source, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 70307, 70348);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 70217, 70360);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 70217, 70360);
+            }
         }
 
-        #endregion Event Handlers
-
-        #region IDisposable
-
-        /// <summary>
-        /// Release all resources.
-        /// </summary>
-        /// <param name="disposing">If true, release all resources.</param>
         protected override void Dispose(bool disposing)
         {
-            if (_disposed)
+            try
             {
-                return;
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1027, 70600, 71477);
 
-            lock (_syncObject)
-            {
-                if (_disposed)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70672, 70741) || true) && (_disposed)
+                )
+
                 {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 70672, 70741);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70719, 70726);
+
                     return;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 70672, 70741);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70763, 70774);
+
+                lock (_syncObject)
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70808, 70889) || true) && (_disposed)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 70808, 70889);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70863, 70870);
+
+                        return;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 70808, 70889);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70909, 70926);
+
+                    _disposed = true;
                 }
 
-                _disposed = true;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 70957, 71466) || true) && (disposing)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 70957, 71466);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 71004, 71023);
+
+                    f_1027_71004_71022(_objects);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 71043, 71051);
+
+                    f_1027_71043_71050(this);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 71071, 71248) || true) && (_objectReaderForPipeline != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 71071, 71248);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 71149, 71229);
+
+                        f_1027_71149_71228(((PSDataCollectionPipelineReader<T, object>)_objectReaderForPipeline));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 71071, 71248);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 71268, 71451) || true) && (_psobjectReaderForPipeline != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1027, 71268, 71451);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1027, 71348, 71432);
+
+                        f_1027_71348_71431(((PSDataCollectionPipelineReader<T, PSObject>)_psobjectReaderForPipeline));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 71268, 71451);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1027, 70957, 71466);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1027, 70600, 71477);
+
+                int
+                f_1027_71004_71022(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 71004, 71022);
+                    return 0;
+                }
+
+
+                int
+                f_1027_71043_71050(System.Management.Automation.Internal.PSDataCollectionStream<T>
+                this_param)
+                {
+                    this_param.Close();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 71043, 71050);
+                    return 0;
+                }
+
+
+                int
+                f_1027_71149_71228(System.Management.Automation.Internal.PSDataCollectionPipelineReader<T, object>
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 71149, 71228);
+                    return 0;
+                }
+
+
+                int
+                f_1027_71348_71431(System.Management.Automation.Internal.PSDataCollectionPipelineReader<T, System.Management.Automation.PSObject>
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 71348, 71431);
+                    return 0;
+                }
+
             }
-
-            if (disposing)
+            catch
             {
-                _objects.Dispose();
-
-                Close();
-
-                if (_objectReaderForPipeline != null)
-                {
-                    ((PSDataCollectionPipelineReader<T, object>)_objectReaderForPipeline).Dispose();
-                }
-
-                if (_psobjectReaderForPipeline != null)
-                {
-                    ((PSDataCollectionPipelineReader<T, PSObject>)_psobjectReaderForPipeline).Dispose();
-                }
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1027, 70600, 71477);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 70600, 71477);
             }
         }
-        #endregion IDisposable
+
+        static PSDataCollectionStream()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1027, 57536, 71516);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1027, 57536, 71516);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1027, 57536, 71516);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1027, 57536, 71516);
+
+        object
+        f_1027_58088_58100()
+        {
+            var return_v = new object();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 58088, 58100);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1027_58886_58938(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 58886, 58938);
+            return return_v;
+        }
+
+
+        int
+        f_1027_59191_59210(System.Management.Automation.PSDataCollection<T>
+        this_param)
+        {
+            this_param.AddRef();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1027, 59191, 59210);
+            return 0;
+        }
+
     }
 }
 

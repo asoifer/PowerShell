@@ -8,588 +8,762 @@ using Dbg = System.Management.Automation;
 
 namespace System.Management.Automation
 {
-    /// <summary>
-    /// Exposes the Content nouns to the Cmdlet Providers to the Cmdlet base class. The methods of this class
-    /// use the providers to perform operations.
-    /// </summary>
     public sealed class ContentCmdletProviderIntrinsics
     {
-        #region Constructors
-
-        /// <summary>
-        /// Hide the default constructor since we always require an instance of SessionState.
-        /// </summary>
         private ContentCmdletProviderIntrinsics()
         {
-            Dbg.Diagnostics.Assert(
-                false,
-                "This constructor should never be called. Only the constructor that takes an instance of SessionState should be called.");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1257, 721, 985);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24649, 24656);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24696, 24709);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 787, 974);
+
+                f_1257_787_973(false, "This constructor should never be called. Only the constructor that takes an instance of SessionState should be called.");
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1257, 721, 985);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 721, 985);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 721, 985);
+            }
         }
 
-        /// <summary>
-        /// Constructs a facade over the "real" session state API.
-        /// </summary>
-        /// <param name="cmdlet">
-        /// An instance of the cmdlet.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="cmdlet"/> is null.
-        /// </exception>
         internal ContentCmdletProviderIntrinsics(Cmdlet cmdlet)
         {
-            if (cmdlet == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("cmdlet");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1257, 1340, 1650);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24649, 24656);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24696, 24709);
 
-            _cmdlet = cmdlet;
-            _sessionState = cmdlet.Context.EngineSessionState;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 1420, 1542) || true) && (cmdlet == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1257, 1420, 1542);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 1472, 1527);
+
+                    throw f_1257_1478_1526("cmdlet");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1257, 1420, 1542);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 1558, 1575);
+
+                _cmdlet = cmdlet;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 1589, 1639);
+
+                _sessionState = f_1257_1605_1638(f_1257_1605_1619(cmdlet));
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1257, 1340, 1650);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 1340, 1650);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 1340, 1650);
+            }
         }
 
-        /// <summary>
-        /// Constructs a facade over the "real" session state API.
-        /// </summary>
-        /// <param name="sessionState">
-        /// An instance of the sessionState.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="sessionState"/> is null.
-        /// </exception>
         internal ContentCmdletProviderIntrinsics(SessionStateInternal sessionState)
         {
-            if (sessionState == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("sessionState");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1257, 2023, 2313);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24649, 24656);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24696, 24709);
 
-            _sessionState = sessionState;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 2123, 2257) || true) && (sessionState == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1257, 2123, 2257);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 2181, 2242);
+
+                    throw f_1257_2187_2241("sessionState");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1257, 2123, 2257);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 2273, 2302);
+
+                _sessionState = sessionState;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1257, 2023, 2313);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 2023, 2313);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 2023, 2313);
+            }
         }
 
-        #endregion Constructors
-
-        #region Public methods
-
-        #region GetContentReader
-
-        /// <summary>
-        /// Gets the content reader for the item at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item to get the content reader for.
-        /// </param>
-        /// <returns>
-        /// The IContentReader for the item(s) at the specified path.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         public Collection<IContentReader> GetReader(string path)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 3782, 4201);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 3863, 4024);
 
-            // Parameter validation is done in the session state object
+                f_1257_3863_4023(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 4115, 4190);
 
-            return _sessionState.GetContentReader(new string[] { path }, false, false);
+                return f_1257_4122_4189(_sessionState, new string[] { path }, false, false);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 3782, 4201);
+
+                int
+                f_1257_3863_4023(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 3863, 4023);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.Provider.IContentReader>
+                f_1257_4122_4189(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, bool
+                force, bool
+                literalPath)
+                {
+                    var return_v = this_param.GetContentReader(paths, force, literalPath);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 4122, 4189);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 3782, 4201);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 3782, 4201);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Gets the content reader for the item at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path(s) to the item(s) to get the content reader for.
-        /// </param>
-        /// <param name="force">
-        /// Passed on to providers to force operations.
-        /// </param>
-        /// <param name="literalPath">
-        /// If true, globbing is not done on paths.
-        /// </param>
-        /// <returns>
-        /// The IContentReader for the item(s) at the specified path.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         public Collection<IContentReader> GetReader(string[] path, bool force, bool literalPath)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 5799, 6239);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 5912, 6073);
 
-            // Parameter validation is done in the session state object
+                f_1257_5912_6072(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 6164, 6228);
 
-            return _sessionState.GetContentReader(path, force, literalPath);
+                return f_1257_6171_6227(_sessionState, path, force, literalPath);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 5799, 6239);
+
+                int
+                f_1257_5912_6072(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 5912, 6072);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.Provider.IContentReader>
+                f_1257_6171_6227(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, bool
+                force, bool
+                literalPath)
+                {
+                    var return_v = this_param.GetContentReader(paths, force, literalPath);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 6171, 6227);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 5799, 6239);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 5799, 6239);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="path">
-        /// </param>
-        /// <param name="context">
-        /// </param>
-        /// <returns>
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         internal Collection<IContentReader> GetReader(
-            string path,
-            CmdletProviderContext context)
+                    string path,
+                    CmdletProviderContext context)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 7452, 7926);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 7593, 7754);
 
-            // Parameter validation is done in the session state object
+                f_1257_7593_7753(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 7845, 7915);
 
-            return _sessionState.GetContentReader(new string[] { path }, context);
+                return f_1257_7852_7914(_sessionState, new string[] { path }, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 7452, 7926);
+
+                int
+                f_1257_7593_7753(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 7593, 7753);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.Provider.IContentReader>
+                f_1257_7852_7914(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, System.Management.Automation.CmdletProviderContext
+                context)
+                {
+                    var return_v = this_param.GetContentReader(paths, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 7852, 7914);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 7452, 7926);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 7452, 7926);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Gets the dynamic parameters for the get-content cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item if it was specified on the command line.
-        /// </param>
-        /// <param name="context">
-        /// The context which the core command is running.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         internal object GetContentReaderDynamicParameters(
-            string path,
-            CmdletProviderContext context)
+                    string path,
+                    CmdletProviderContext context)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 9342, 9820);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 9487, 9648);
 
-            // Parameter validation is done in the session state object
+                f_1257_9487_9647(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 9739, 9809);
 
-            return _sessionState.GetContentReaderDynamicParameters(path, context);
+                return f_1257_9746_9808(_sessionState, path, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 9342, 9820);
+
+                int
+                f_1257_9487_9647(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 9487, 9647);
+                    return 0;
+                }
+
+
+                object
+                f_1257_9746_9808(System.Management.Automation.SessionStateInternal
+                this_param, string
+                path, System.Management.Automation.CmdletProviderContext
+                context)
+                {
+                    var return_v = this_param.GetContentReaderDynamicParameters(path, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 9746, 9808);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 9342, 9820);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 9342, 9820);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion GetContentReader
-
-        #region GetContentWriter
-
-        /// <summary>
-        /// Gets the content writer for the item(s) at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item(s) to get the content writer for.
-        /// </param>
-        /// <returns>
-        /// The IContentWriter for the item(s) at the specified path.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         public Collection<IContentWriter> GetWriter(string path)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 11265, 11684);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 11346, 11507);
 
-            // Parameter validation is done in the session state object
+                f_1257_11346_11506(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 11598, 11673);
 
-            return _sessionState.GetContentWriter(new string[] { path }, false, false);
+                return f_1257_11605_11672(_sessionState, new string[] { path }, false, false);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 11265, 11684);
+
+                int
+                f_1257_11346_11506(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 11346, 11506);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.Provider.IContentWriter>
+                f_1257_11605_11672(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, bool
+                force, bool
+                literalPath)
+                {
+                    var return_v = this_param.GetContentWriter(paths, force, literalPath);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 11605, 11672);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 11265, 11684);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 11265, 11684);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Gets the content writer for the item(s) at the specified path.
-        /// </summary>
-        /// <param name="path">
-        /// The path(s) to the item(s) to get the content writer for.
-        /// </param>
-        /// <param name="force">
-        /// Passed on to providers to force operations.
-        /// </param>
-        /// <param name="literalPath">
-        /// If true, globbing is not done on paths.
-        /// </param>
-        /// <returns>
-        /// The IContentWriter for the item(s) at the specified path.
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         public Collection<IContentWriter> GetWriter(string[] path, bool force, bool literalPath)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 13285, 13725);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 13398, 13559);
 
-            // Parameter validation is done in the session state object
+                f_1257_13398_13558(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 13650, 13714);
 
-            return _sessionState.GetContentWriter(path, force, literalPath);
+                return f_1257_13657_13713(_sessionState, path, force, literalPath);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 13285, 13725);
+
+                int
+                f_1257_13398_13558(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 13398, 13558);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.Provider.IContentWriter>
+                f_1257_13657_13713(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, bool
+                force, bool
+                literalPath)
+                {
+                    var return_v = this_param.GetContentWriter(paths, force, literalPath);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 13657, 13713);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 13285, 13725);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 13285, 13725);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// </summary>
-        /// <param name="path">
-        /// </param>
-        /// <param name="context">
-        /// </param>
-        /// <returns>
-        /// </returns>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         internal Collection<IContentWriter> GetWriter(
-            string path,
-            CmdletProviderContext context)
+                    string path,
+                    CmdletProviderContext context)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 14938, 15412);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 15079, 15240);
 
-            // Parameter validation is done in the session state object
+                f_1257_15079_15239(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 15331, 15401);
 
-            return _sessionState.GetContentWriter(new string[] { path }, context);
+                return f_1257_15338_15400(_sessionState, new string[] { path }, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 14938, 15412);
+
+                int
+                f_1257_15079_15239(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 15079, 15239);
+                    return 0;
+                }
+
+
+                System.Collections.ObjectModel.Collection<System.Management.Automation.Provider.IContentWriter>
+                f_1257_15338_15400(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, System.Management.Automation.CmdletProviderContext
+                context)
+                {
+                    var return_v = this_param.GetContentWriter(paths, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 15338, 15400);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 14938, 15412);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 14938, 15412);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Gets the dynamic parameters for the set-content and add-content cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item if it was specified on the command line.
-        /// </param>
-        /// <param name="context">
-        /// The context which the core command is running.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         internal object GetContentWriterDynamicParameters(
-            string path,
-            CmdletProviderContext context)
+                    string path,
+                    CmdletProviderContext context)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 16844, 17322);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 16989, 17150);
 
-            // Parameter validation is done in the session state object
+                f_1257_16989_17149(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 17241, 17311);
 
-            return _sessionState.GetContentWriterDynamicParameters(path, context);
+                return f_1257_17248_17310(_sessionState, path, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 16844, 17322);
+
+                int
+                f_1257_16989_17149(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 16989, 17149);
+                    return 0;
+                }
+
+
+                object
+                f_1257_17248_17310(System.Management.Automation.SessionStateInternal
+                this_param, string
+                path, System.Management.Automation.CmdletProviderContext
+                context)
+                {
+                    var return_v = this_param.GetContentWriterDynamicParameters(path, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 17248, 17310);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 16844, 17322);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 16844, 17322);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion GetContentWriter
-
-        #region ClearContent
-
-        /// <summary>
-        /// Clears the content from the item(s) specified by the path.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item(s) to clear the content from.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         public void Clear(string path)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 18637, 19019);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 18692, 18853);
 
-            // Parameter validation is done in the session state object
+                f_1257_18692_18852(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 18944, 19008);
 
-            _sessionState.ClearContent(new string[] { path }, false, false);
+                f_1257_18944_19007(
+                            // Parameter validation is done in the session state object
+
+                            _sessionState, new string[] { path }, false, false);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 18637, 19019);
+
+                int
+                f_1257_18692_18852(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 18692, 18852);
+                    return 0;
+                }
+
+
+                int
+                f_1257_18944_19007(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, bool
+                force, bool
+                literalPath)
+                {
+                    this_param.ClearContent(paths, force, literalPath);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 18944, 19007);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 18637, 19019);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 18637, 19019);
+            }
         }
 
-        /// <summary>
-        /// Clears the content from the item(s) specified by the path.
-        /// </summary>
-        /// <param name="path">
-        /// The path(s) to the item(s) to clear the content from.
-        /// </param>
-        /// <param name="force">
-        /// Passed on to providers to force operations.
-        /// </param>
-        /// <param name="literalPath">
-        /// If true, globbing is not done on paths.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         public void Clear(string[] path, bool force, bool literalPath)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 20494, 20897);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 20581, 20742);
 
-            // Parameter validation is done in the session state object
+                f_1257_20581_20741(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 20833, 20886);
 
-            _sessionState.ClearContent(path, force, literalPath);
+                f_1257_20833_20885(
+                            // Parameter validation is done in the session state object
+
+                            _sessionState, path, force, literalPath);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 20494, 20897);
+
+                int
+                f_1257_20581_20741(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 20581, 20741);
+                    return 0;
+                }
+
+
+                int
+                f_1257_20833_20885(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, bool
+                force, bool
+                literalPath)
+                {
+                    this_param.ClearContent(paths, force, literalPath);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 20833, 20885);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 20494, 20897);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 20494, 20897);
+            }
         }
 
-        /// <summary>
-        /// Clears the content from the specified item(s)
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item(s) to clear the content from.
-        /// </param>
-        /// <param name="context">
-        /// The context under which the command is running.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// If <paramref name="path"/> is null.
-        /// </exception>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         internal void Clear(string path, CmdletProviderContext context)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 22247, 22657);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 22335, 22496);
 
-            // Parameter validation is done in the session state object
+                f_1257_22335_22495(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 22587, 22646);
 
-            _sessionState.ClearContent(new string[] { path }, context);
+                f_1257_22587_22645(
+                            // Parameter validation is done in the session state object
+
+                            _sessionState, new string[] { path }, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 22247, 22657);
+
+                int
+                f_1257_22335_22495(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 22335, 22495);
+                    return 0;
+                }
+
+
+                int
+                f_1257_22587_22645(System.Management.Automation.SessionStateInternal
+                this_param, string[]
+                paths, System.Management.Automation.CmdletProviderContext
+                context)
+                {
+                    this_param.ClearContent(paths, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 22587, 22645);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 22247, 22657);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 22247, 22657);
+            }
         }
 
-        /// <summary>
-        /// Gets the dynamic parameters for the clear-content cmdlet.
-        /// </summary>
-        /// <param name="path">
-        /// The path to the item if it was specified on the command line.
-        /// </param>
-        /// <param name="context">
-        /// The context which the core command is running.
-        /// </param>
-        /// <returns>
-        /// An object that has properties and fields decorated with
-        /// parsing attributes similar to a cmdlet class.
-        /// </returns>
-        /// <exception cref="ProviderNotFoundException">
-        /// If the <paramref name="path"/> refers to a provider that could not be found.
-        /// </exception>
-        /// <exception cref="DriveNotFoundException">
-        /// If the <paramref name="path"/> refers to a drive that could not be found.
-        /// </exception>
-        /// <exception cref="ItemNotFoundException">
-        /// If <paramref name="path"/> does not contain glob characters and
-        /// could not be found.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// If the provider that the <paramref name="path"/> refers to does
-        /// not support this operation.
-        /// </exception>
-        /// <exception cref="ProviderInvocationException">
-        /// If the provider threw an exception.
-        /// </exception>
         internal object ClearContentDynamicParameters(string path, CmdletProviderContext context)
         {
-            Dbg.Diagnostics.Assert(
-                _sessionState != null,
-                "The only constructor for this class should always set the sessionState field");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1257, 24075, 24518);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24189, 24350);
 
-            // Parameter validation is done in the session state object
+                f_1257_24189_24349(_sessionState != null, "The only constructor for this class should always set the sessionState field");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1257, 24441, 24507);
 
-            return _sessionState.ClearContentDynamicParameters(path, context);
+                return f_1257_24448_24506(_sessionState, path, context);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1257, 24075, 24518);
+
+                int
+                f_1257_24189_24349(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 24189, 24349);
+                    return 0;
+                }
+
+
+                object
+                f_1257_24448_24506(System.Management.Automation.SessionStateInternal
+                this_param, string
+                path, System.Management.Automation.CmdletProviderContext
+                context)
+                {
+                    var return_v = this_param.ClearContentDynamicParameters(path, context);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 24448, 24506);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1257, 24075, 24518);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 24075, 24518);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion ClearContent
-
-        #endregion Public methods
-
-        #region private data
-
         private Cmdlet _cmdlet;
+
         private SessionStateInternal _sessionState;
 
-        #endregion private data
+        static ContentCmdletProviderIntrinsics()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1257, 479, 24752);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1257, 479, 24752);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1257, 479, 24752);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1257, 479, 24752);
+
+        int
+        f_1257_787_973(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Diagnostics.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 787, 973);
+            return 0;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1257_1478_1526(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 1478, 1526);
+            return return_v;
+        }
+
+
+        System.Management.Automation.ExecutionContext
+        f_1257_1605_1619(System.Management.Automation.Cmdlet
+        this_param)
+        {
+            var return_v = this_param.Context;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1257, 1605, 1619);
+            return return_v;
+        }
+
+
+        System.Management.Automation.SessionStateInternal
+        f_1257_1605_1638(System.Management.Automation.ExecutionContext
+        this_param)
+        {
+            var return_v = this_param.EngineSessionState;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1257, 1605, 1638);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1257_2187_2241(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1257, 2187, 2241);
+            return return_v;
+        }
+
     }
 }
 

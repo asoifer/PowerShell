@@ -40,95 +40,205 @@ namespace Microsoft.PowerShell.Cmdletization
         /// </summary>
         SilentlyContinue,
     }
-
-    /// <summary>
-    /// QueryBuilder supports building of object model queries in an object-model-agnostic way.
-    /// </summary>
     public abstract class QueryBuilder
     {
-        /// <summary>
-        /// Modifies the query, so that it only returns objects with a given property value.
-        /// </summary>
-        /// <param name="propertyName">Property name to query on.</param>
-        /// <param name="allowedPropertyValues">Property values to accept in the query.</param>
-        /// <param name="wildcardsEnabled">
-        /// <c>true</c> if <paramref name="allowedPropertyValues"/> should be treated as a <see cref="System.String"/> containing a wildcard pattern;
-        /// <c>false otherwise</c>
-        /// </param>
-        /// <param name="behaviorOnNoMatch">
-        /// Describes how to handle filters that didn't match any objects
-        /// </param>
         public virtual void FilterByProperty(string propertyName, IEnumerable allowedPropertyValues, bool wildcardsEnabled, BehaviorOnNoMatch behaviorOnNoMatch)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1066, 2803, 3027);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1066, 2980, 3016);
+
+                throw f_1066_2986_3015();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1066, 2803, 3027);
+
+                System.NotImplementedException
+                f_1066_2986_3015()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1066, 2986, 3015);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1066, 2803, 3027);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 2803, 3027);
+            }
         }
 
-        /// <summary>
-        /// Modifies the query, so that it does not return objects with a given property value.
-        /// </summary>
-        /// <param name="propertyName">Property name to query on.</param>
-        /// <param name="excludedPropertyValues">Property values to reject in the query.</param>
-        /// <param name="wildcardsEnabled">
-        /// <c>true</c> if <paramref name="excludedPropertyValues"/> should be treated as a <see cref="System.String"/> containing a wildcard pattern;
-        /// <c>false otherwise</c>
-        /// </param>
-        /// <param name="behaviorOnNoMatch">
-        /// Describes how to handle filters that didn't match any objects
-        /// </param>
         public virtual void ExcludeByProperty(string propertyName, IEnumerable excludedPropertyValues, bool wildcardsEnabled, BehaviorOnNoMatch behaviorOnNoMatch)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1066, 3754, 3980);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1066, 3933, 3969);
+
+                throw f_1066_3939_3968();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1066, 3754, 3980);
+
+                System.NotImplementedException
+                f_1066_3939_3968()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1066, 3939, 3968);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1066, 3754, 3980);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 3754, 3980);
+            }
         }
 
-        /// <summary>
-        /// Modifies the query, so that it returns only objects that have a property value greater than or equal to a <paramref name="minPropertyValue"/> threshold.
-        /// </summary>
-        /// <param name="propertyName">Property name to query on.</param>
-        /// <param name="minPropertyValue">Minimum property value.</param>
-        /// <param name="behaviorOnNoMatch">
-        /// Describes how to handle filters that didn't match any objects
-        /// </param>
         public virtual void FilterByMinPropertyValue(string propertyName, object minPropertyValue, BehaviorOnNoMatch behaviorOnNoMatch)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1066, 4499, 4698);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1066, 4651, 4687);
+
+                throw f_1066_4657_4686();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1066, 4499, 4698);
+
+                System.NotImplementedException
+                f_1066_4657_4686()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1066, 4657, 4686);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1066, 4499, 4698);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 4499, 4698);
+            }
         }
 
-        /// <summary>
-        /// Modifies the query, so that it returns only objects that have a property value less than or equal to a <paramref name="maxPropertyValue"/> threshold.
-        /// </summary>
-        /// <param name="propertyName">Property name to query on.</param>
-        /// <param name="maxPropertyValue">Maximum property value.</param>
-        /// <param name="behaviorOnNoMatch">
-        /// Describes how to handle filters that didn't match any objects
-        /// </param>
         public virtual void FilterByMaxPropertyValue(string propertyName, object maxPropertyValue, BehaviorOnNoMatch behaviorOnNoMatch)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1066, 5214, 5413);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1066, 5366, 5402);
+
+                throw f_1066_5372_5401();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1066, 5214, 5413);
+
+                System.NotImplementedException
+                f_1066_5372_5401()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1066, 5372, 5401);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1066, 5214, 5413);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 5214, 5413);
+            }
         }
 
-        /// <summary>
-        /// Modifies the query, so that it returns only objects associated with <paramref name="associatedInstance"/>
-        /// </summary>
-        /// <param name="associatedInstance">Object that query results have to be associated with.</param>
-        /// <param name="associationName">Name of the association.</param>
-        /// <param name="resultRole">Name of the role that <paramref name="associatedInstance"/> has in the association.</param>
-        /// <param name="sourceRole">Name of the role that query results have in the association.</param>
-        /// <param name="behaviorOnNoMatch">
-        /// Describes how to handle filters that didn't match any objects
-        /// </param>
         public virtual void FilterByAssociatedInstance(object associatedInstance, string associationName, string sourceRole, string resultRole, BehaviorOnNoMatch behaviorOnNoMatch)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1066, 6155, 6399);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1066, 6352, 6388);
+
+                throw f_1066_6358_6387();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1066, 6155, 6399);
+
+                System.NotImplementedException
+                f_1066_6358_6387()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1066, 6358, 6387);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1066, 6155, 6399);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 6155, 6399);
+            }
         }
 
-        /// <summary>
-        /// Sets a query option.
-        /// </summary>
-        /// <param name="optionName"></param>
-        /// <param name="optionValue"></param>
         public virtual void AddQueryOption(string optionName, object optionValue)
         {
-            throw new NotImplementedException();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1066, 6587, 6732);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1066, 6685, 6721);
+
+                throw f_1066_6691_6720();
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1066, 6587, 6732);
+
+                System.NotImplementedException
+                f_1066_6691_6720()
+                {
+                    var return_v = new System.NotImplementedException();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1066, 6691, 6720);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1066, 6587, 6732);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 6587, 6732);
+            }
         }
+
+        public QueryBuilder()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterConstructor(1066, 2042, 6739);
+            DynAbs.Tracing.TraceSender.TraceExitConstructor(1066, 2042, 6739);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 2042, 6739);
+        }
+
+
+        static QueryBuilder()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1066, 2042, 6739);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1066, 2042, 6739);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1066, 2042, 6739);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1066, 2042, 6739);
     }
 }

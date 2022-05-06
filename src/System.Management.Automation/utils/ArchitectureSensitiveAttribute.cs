@@ -3,22 +3,35 @@
 
 namespace System.Management.Automation.Internal
 {
-    /// <summary>
-    /// This attribute is used for Design For Testability.
-    /// It should be placed on any method containing code
-    /// which is likely to be sensitive to X86/X64/IA64 issues,
-    /// primarily code which calls DllImports or otherwise uses
-    /// NativeMethods.  This allows us to generate code coverage
-    /// data specific to architecture sensitive code.
-    /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     internal class ArchitectureSensitiveAttribute : Attribute
     {
-        /// <summary>
-        /// Constructor for the ArchitectureSensitiveAttribute class.
-        /// </summary>
         internal ArchitectureSensitiveAttribute()
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1000, 827, 890);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1000, 827, 890);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1000, 827, 890);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1000, 827, 890);
+            }
         }
+
+        static ArchitectureSensitiveAttribute()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1000, 565, 897);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1000, 565, 897);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1000, 565, 897);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1000, 565, 897);
     }
 }

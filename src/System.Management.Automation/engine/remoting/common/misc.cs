@@ -9,91 +9,174 @@ namespace System.Management.Automation
 {
     internal sealed class RemoteSessionNegotiationEventArgs : EventArgs
     {
-        #region Constructors
-
         internal RemoteSessionNegotiationEventArgs(RemoteSessionCapability remoteSessionCapability)
         {
-            Dbg.Assert(remoteSessionCapability != null, "caller should validate the parameter");
-
-            if (remoteSessionCapability == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("remoteSessionCapability");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 368, 817);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 985, 1050);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 1161, 1221);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 484, 568);
 
-            RemoteSessionCapability = remoteSessionCapability;
+                f_1620_484_567(remoteSessionCapability != null, "caller should validate the parameter");
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 584, 740) || true) && (remoteSessionCapability == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1620, 584, 740);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 653, 725);
+
+                    throw f_1620_659_724("remoteSessionCapability");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1620, 584, 740);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 756, 806);
+
+                RemoteSessionCapability = remoteSessionCapability;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 368, 817);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 368, 817);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 368, 817);
+            }
         }
 
-        #endregion Constructors
-
-        /// <summary>
-        /// Data from network converted to type RemoteSessionCapability.
-        /// </summary>
         internal RemoteSessionCapability RemoteSessionCapability { get; }
 
-        /// <summary>
-        /// Actual data received from the network.
-        /// </summary>
         internal RemoteDataObject<PSObject> RemoteData { get; set; }
-    }
 
-    /// <summary>
-    /// This event arg is designed to contain generic data received from the other side of the connection.
-    /// It can be used for both the client side and for the server side.
-    /// </summary>
-    internal sealed class RemoteDataEventArgs : EventArgs
-    {
-        #region Constructors
-
-        internal RemoteDataEventArgs(RemoteDataObject<PSObject> receivedData)
+        static RemoteSessionNegotiationEventArgs()
         {
-            Dbg.Assert(receivedData != null, "caller should validate the parameter");
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1620, 252, 1228);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1620, 252, 1228);
 
-            if (receivedData == null)
-            {
-                throw PSTraceSource.NewArgumentNullException("receivedData");
-            }
-
-            ReceivedData = receivedData;
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 252, 1228);
         }
 
-        #endregion Constructors
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1620, 252, 1228);
 
-        /// <summary>
-        /// Received data.
-        /// </summary>
-        public RemoteDataObject<PSObject> ReceivedData { get; }
+        int
+        f_1620_484_567(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1620, 484, 567);
+            return 0;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1620_659_724(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1620, 659, 724);
+            return return_v;
+        }
+
     }
+    internal sealed class RemoteDataEventArgs : EventArgs
+    {
+        internal RemoteDataEventArgs(RemoteDataObject<PSObject> receivedData)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 1559, 1931);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 2053, 2108);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 1653, 1726);
 
-    /// <summary>
-    /// This event arg contains data received and is used to pass information
-    /// from a data structure handler to its object.
-    /// </summary>
-    /// <typeparam name="T">type of data that's associated</typeparam>
+                f_1620_1653_1725(receivedData != null, "caller should validate the parameter");
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 1742, 1876) || true) && (receivedData == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1620, 1742, 1876);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 1800, 1861);
+
+                    throw f_1620_1806_1860("receivedData");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1620, 1742, 1876);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 1892, 1920);
+
+                ReceivedData = receivedData;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 1559, 1931);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 1559, 1931);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 1559, 1931);
+            }
+        }
+
+        public RemoteDataObject<PSObject> ReceivedData { get; }
+
+        static RemoteDataEventArgs()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1620, 1457, 2115);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1620, 1457, 2115);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 1457, 2115);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1620, 1457, 2115);
+
+        int
+        f_1620_1653_1725(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1620, 1653, 1725);
+            return 0;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1620_1806_1860(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1620, 1806, 1860);
+            return return_v;
+        }
+
+    }
     internal sealed class RemoteDataEventArgs<T> : EventArgs
     {
-        #region Private Members
-
-        #endregion Private Members
-
-        #region Properties
-
-        /// <summary>
-        /// The data contained within this event.
-        /// </summary>
         internal T Data { get; }
-
-        #endregion Properties
-
-        #region Constructor
 
         internal RemoteDataEventArgs(object data)
         {
-            // Dbg.Assert(data != null, "data passed should not be null");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 2741, 2911);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 2641, 2665);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 2885, 2900);
 
-            Data = (T)data;
+                Data = (T)data;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 2741, 2911);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 2741, 2911);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 2741, 2911);
+            }
         }
-
-        #endregion Constructor
     }
 
     /// <summary>
@@ -259,95 +342,242 @@ namespace System.Management.Automation
         RCDisconnectStarted = 31,
         MaxEvent = 32
     }
-
-    /// <summary>
-    /// This is a wrapper class for RemoteSessionState.
-    /// </summary>
     internal class RemoteSessionStateInfo
     {
-        #region Constructors
-
         internal RemoteSessionStateInfo(RemoteSessionState state)
-            : this(state, null)
+        : this(f_1620_8315_8320_C(state), null)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 8237, 8349);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 8237, 8349);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 8237, 8349);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 8237, 8349);
+            }
         }
 
         internal RemoteSessionStateInfo(RemoteSessionState state, Exception reason)
         {
-            State = state;
-            Reason = reason;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 8361, 8516);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 8883, 8925);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9068, 9102);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 8461, 8475);
+
+                State = state;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 8489, 8505);
+
+                Reason = reason;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 8361, 8516);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 8361, 8516);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 8361, 8516);
+            }
         }
 
         internal RemoteSessionStateInfo(RemoteSessionStateInfo sessionStateInfo)
         {
-            State = sessionStateInfo.State;
-            Reason = sessionStateInfo.Reason;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 8528, 8714);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 8883, 8925);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9068, 9102);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 8625, 8656);
+
+                State = f_1620_8633_8655(sessionStateInfo);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 8670, 8703);
+
+                Reason = f_1620_8679_8702(sessionStateInfo);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 8528, 8714);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 8528, 8714);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 8528, 8714);
+            }
         }
 
-        #endregion Constructors
-
-        #region Public_Properties
-
-        /// <summary>
-        /// State of the connection.
-        /// </summary>
         internal RemoteSessionState State { get; }
 
-        /// <summary>
-        /// If the connection is closed, this provides reason why it had happened.
-        /// </summary>
         internal Exception Reason { get; }
 
-        #endregion Public_Properties
-    }
-
-    /// <summary>
-    /// This is the event arg that contains the state information.
-    /// </summary>
-    internal class RemoteSessionStateEventArgs : EventArgs
-    {
-        #region Constructors
-
-        internal RemoteSessionStateEventArgs(RemoteSessionStateInfo remoteSessionStateInfo)
+        static RemoteSessionStateInfo()
         {
-            Dbg.Assert(remoteSessionStateInfo != null, "caller should validate the parameter");
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1620, 8151, 9149);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1620, 8151, 9149);
 
-            if (remoteSessionStateInfo == null)
-            {
-                PSTraceSource.NewArgumentNullException("remoteSessionStateInfo");
-            }
-
-            SessionStateInfo = remoteSessionStateInfo;
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 8151, 9149);
         }
 
-        #endregion Constructors
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1620, 8151, 9149);
 
-        #region Public_Properties
+        static System.Management.Automation.RemoteSessionState
+        f_1620_8315_8320_C(System.Management.Automation.RemoteSessionState
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1620, 8237, 8349);
+            return return_v;
+        }
 
-        /// <summary>
-        /// State information about the connection.
-        /// </summary>
+
+        System.Management.Automation.RemoteSessionState
+        f_1620_8633_8655(System.Management.Automation.RemoteSessionStateInfo
+        this_param)
+        {
+            var return_v = this_param.State;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1620, 8633, 8655);
+            return return_v;
+        }
+
+
+        System.Exception
+        f_1620_8679_8702(System.Management.Automation.RemoteSessionStateInfo
+        this_param)
+        {
+            var return_v = this_param.Reason;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1620, 8679, 8702);
+            return return_v;
+        }
+
+    }
+    internal class RemoteSessionStateEventArgs : EventArgs
+    {
+        internal RemoteSessionStateEventArgs(RemoteSessionStateInfo remoteSessionStateInfo)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 9367, 9791);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9975, 10030);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9475, 9558);
+
+                f_1620_9475_9557(remoteSessionStateInfo != null, "caller should validate the parameter");
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9574, 9722) || true) && (remoteSessionStateInfo == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1620, 9574, 9722);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9642, 9707);
+
+                    f_1620_9642_9706("remoteSessionStateInfo");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1620, 9574, 9722);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 9738, 9780);
+
+                SessionStateInfo = remoteSessionStateInfo;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 9367, 9791);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 9367, 9791);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 9367, 9791);
+            }
+        }
+
         public RemoteSessionStateInfo SessionStateInfo { get; }
 
-        #endregion Public_Properties
-    }
+        static RemoteSessionStateEventArgs()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1620, 9264, 10077);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1620, 9264, 10077);
 
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 9264, 10077);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1620, 9264, 10077);
+
+        int
+        f_1620_9475_9557(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1620, 9475, 9557);
+            return 0;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1620_9642_9706(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1620, 9642, 9706);
+            return return_v;
+        }
+
+    }
     internal class RemoteSessionStateMachineEventArgs : EventArgs
     {
-        #region Constructors
-
         internal RemoteSessionStateMachineEventArgs(RemoteSessionEvent stateEvent)
-            : this(stateEvent, null)
+        : this(f_1620_10290_10300_C(stateEvent), null)
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 10195, 10329);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 10195, 10329);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 10195, 10329);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 10195, 10329);
+            }
         }
 
         internal RemoteSessionStateMachineEventArgs(RemoteSessionEvent stateEvent, Exception reason)
         {
-            StateEvent = stateEvent;
-            Reason = reason;
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1620, 10341, 10523);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 10570, 10617);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 10629, 10663);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 10675, 10745);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 10757, 10817);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 10458, 10482);
 
-        #endregion Constructors
+                StateEvent = stateEvent;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1620, 10496, 10512);
+
+                Reason = reason;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1620, 10341, 10523);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1620, 10341, 10523);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 10341, 10523);
+            }
+        }
 
         internal RemoteSessionEvent StateEvent { get; }
 
@@ -356,6 +586,26 @@ namespace System.Management.Automation
         internal RemoteSessionCapability RemoteSessionCapability { get; set; }
 
         internal RemoteDataObject<PSObject> RemoteData { get; set; }
+
+        static RemoteSessionStateMachineEventArgs()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1620, 10085, 10824);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1620, 10085, 10824);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1620, 10085, 10824);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1620, 10085, 10824);
+
+        static System.Management.Automation.RemoteSessionEvent
+        f_1620_10290_10300_C(System.Management.Automation.RemoteSessionEvent
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1620, 10195, 10329);
+            return return_v;
+        }
+
     }
 
     /// <summary>

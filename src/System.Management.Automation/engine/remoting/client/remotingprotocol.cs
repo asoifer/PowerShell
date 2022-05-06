@@ -7,49 +7,89 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation.Remoting
 {
-    internal abstract class BaseSessionDataStructureHandler
-    {
-        internal abstract void RaiseKeyExchangeMessageReceived(RemoteDataObject<PSObject> receivedData);
-    }
+internal abstract class BaseSessionDataStructureHandler
+{
+internal abstract void RaiseKeyExchangeMessageReceived(RemoteDataObject<PSObject> receivedData);
 
-    internal abstract class ClientRemoteSessionDataStructureHandler : BaseSessionDataStructureHandler
-    {
-        #region Abstract_API
+public BaseSessionDataStructureHandler()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1583,268,443);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1583,268,443);
 
-        internal abstract void CreateAsync();
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1583,268,443);
+}
 
-        internal abstract event EventHandler<RemoteSessionStateEventArgs> ConnectionStateChanged;
 
-        internal abstract void SendNegotiationAsync(RemoteSessionState sessionState);
+static BaseSessionDataStructureHandler()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1583,268,443);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1583,268,443);
 
-        internal abstract event EventHandler<RemoteSessionNegotiationEventArgs> NegotiationReceived;
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1583,268,443);
+}
 
-        internal abstract void CloseConnectionAsync();
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1583,268,443);
+}
+internal abstract class ClientRemoteSessionDataStructureHandler : BaseSessionDataStructureHandler
+{
+internal abstract void CreateAsync();
 
-        internal abstract void DisconnectAsync();
+        internal abstract event EventHandler<RemoteSessionStateEventArgs> 
+ConnectionStateChanged
+;
 
-        internal abstract void ReconnectAsync();
+internal abstract void SendNegotiationAsync(RemoteSessionState sessionState);
 
-        internal abstract ClientRemoteSessionDSHandlerStateMachine StateMachine
-        {
-            get;
-        }
+        internal abstract event EventHandler<RemoteSessionNegotiationEventArgs> 
+NegotiationReceived
+;
 
-        internal abstract BaseClientSessionTransportManager TransportManager { get; }
+internal abstract void CloseConnectionAsync();
 
-        internal abstract BaseClientCommandTransportManager CreateClientCommandTransportManager(
+internal abstract void DisconnectAsync();
+
+internal abstract void ReconnectAsync();
+
+internal abstract ClientRemoteSessionDSHandlerStateMachine StateMachine
+{            get;
+}
+
+internal abstract BaseClientSessionTransportManager TransportManager {get; }
+
+internal abstract BaseClientCommandTransportManager CreateClientCommandTransportManager(
             System.Management.Automation.Runspaces.Internal.ClientRemotePowerShell cmd,
             bool noInput);
 
         // TODO: If this is not used, remove this.
         // internal abstract event EventHandler<RemoteDataEventArgs> DataReceived;
 
-        internal abstract event EventHandler<RemoteDataEventArgs<string>> EncryptedSessionKeyReceived;
+        internal abstract event EventHandler<RemoteDataEventArgs<string>> 
+EncryptedSessionKeyReceived
+;
 
-        internal abstract event EventHandler<RemoteDataEventArgs<string>> PublicKeyRequestReceived;
+        internal abstract event EventHandler<RemoteDataEventArgs<string>> 
+PublicKeyRequestReceived
+;
 
-        internal abstract void SendPublicKeyAsync(string localPublicKey);
+internal abstract void SendPublicKeyAsync(string localPublicKey);
 
-        #endregion Abstract_API
-    }
+public ClientRemoteSessionDataStructureHandler()
+{
+DynAbs.Tracing.TraceSender.TraceEnterConstructor(1583,451,1986);
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1583,451,1986);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1583,451,1986);
+}
+
+
+static ClientRemoteSessionDataStructureHandler()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1583,451,1986);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1583,451,1986);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1583,451,1986);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1583,451,1986);
+}
 }

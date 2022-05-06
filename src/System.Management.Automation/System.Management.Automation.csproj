@@ -2,11 +2,12 @@
   <Import Project="..\..\PowerShell.Common.props" />
   <PropertyGroup>
     <Description>PowerShell's System.Management.Automation project</Description>
-    <NoWarn>$(NoWarn);CS1570;CS1734</NoWarn>
+    <NoWarn>1701;1702;CS1570;CS1734;CS1591;CS0162;CS8632;CS0618;CS8321;CS8669</NoWarn>
     <AssemblyName>System.Management.Automation</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(IsWindows)' == 'true' ">
+	<ProjectReference Include="..\..\..\tracer\DynAbs.Tracing.FileTraceClient\DynAbs.Tracing.FileTraceClient.csproj" />
     <ProjectReference Include="..\Microsoft.PowerShell.CoreCLR.Eventing\Microsoft.PowerShell.CoreCLR.Eventing.csproj" />
   </ItemGroup>
 

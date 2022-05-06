@@ -5,30 +5,46 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation.Remoting
 {
-    /// <summary>
-    /// Class that encapsulates the information carried by the RunspaceInitInfo PSRP message.
-    /// </summary>
     internal class RunspacePoolInitInfo
     {
-        /// <summary>
-        /// Min Runspaces setting on the server runspace pool.
-        /// </summary>
         internal int MinRunspaces { get; }
 
-        /// <summary>
-        /// Max Runspaces setting on the server runspace pool.
-        /// </summary>
         internal int MaxRunspaces { get; }
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="minRS"></param>
-        /// <param name="maxRS"></param>
         internal RunspacePoolInitInfo(int minRS, int maxRS)
         {
-            MinRunspaces = minRS;
-            MaxRunspaces = maxRS;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1630, 870, 1013);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1630, 510, 544);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1630, 667, 701);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1630, 946, 967);
+
+                MinRunspaces = minRS;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1630, 981, 1002);
+
+                MaxRunspaces = maxRS;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1630, 870, 1013);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1630, 870, 1013);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1630, 870, 1013);
+            }
         }
+
+        static RunspacePoolInitInfo()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1630, 347, 1020);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1630, 347, 1020);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1630, 347, 1020);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1630, 347, 1020);
     }
 }

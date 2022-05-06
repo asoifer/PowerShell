@@ -13,187 +13,176 @@ using Dbg = System.Management.Automation.Diagnostics;
 
 namespace System.Management.Automation
 {
-    #region DataAddedEventArgs
-
-    /// <summary>
-    /// Event arguments passed to PSDataCollection DataAdded handlers.
-    /// </summary>
     public sealed class DataAddedEventArgs : EventArgs
     {
-        #region Private Data
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// PowerShell InstanceId which added this data.
-        /// Guid.Empty, if the data is not added by a PowerShell
-        /// instance.
-        /// </param>
-        /// <param name="index">
-        /// Index at which the data is added.
-        /// </param>
         internal DataAddedEventArgs(Guid psInstanceId, int index)
         {
-            PowerShellInstanceId = psInstanceId;
-            Index = index;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 1131, 1288);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 1446, 1471);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 1213, 1249);
+
+                PowerShellInstanceId = psInstanceId;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 1263, 1277);
+
+                Index = index;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 1131, 1288);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 1131, 1288);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 1131, 1288);
+            }
         }
 
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Index at which the data is added.
-        /// </summary>
         public int Index { get; }
 
-        /// <summary>
-        /// PowerShell InstanceId which added this data.
-        /// Guid.Empty, if the data is not added by a PowerShell
-        /// instance.
-        /// </summary>
         public Guid PowerShellInstanceId { get; }
 
-        #endregion
-    }
-
-    #endregion
-
-    /// <summary>
-    /// Event arguments passed to PSDataCollection DataAdding handlers.
-    /// </summary>
-    public sealed class DataAddingEventArgs : EventArgs
-    {
-        #region Private Data
-
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// PowerShell InstanceId which added this data.
-        /// Guid.Empty, if the data is not added by a PowerShell
-        /// instance.
-        /// </param>
-        /// <param name="itemAdded">
-        /// The actual item about to be added.
-        /// </param>
-        internal DataAddingEventArgs(Guid psInstanceId, object itemAdded)
+        static DataAddedEventArgs()
         {
-            PowerShellInstanceId = psInstanceId;
-            ItemAdded = itemAdded;
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1480, 593, 1747);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1480, 593, 1747);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 593, 1747);
         }
 
-        #endregion
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1480, 593, 1747);
+    }
+    public sealed class DataAddingEventArgs : EventArgs
+    {
+        internal DataAddingEventArgs(Guid psInstanceId, object itemAdded)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 2429, 2602);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 2754, 2786);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 2519, 2555);
 
-        #region Properties
+                PowerShellInstanceId = psInstanceId;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 2569, 2591);
 
-        /// <summary>
-        /// The item about to be added.
-        /// </summary>
+                ItemAdded = itemAdded;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 2429, 2602);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 2429, 2602);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 2429, 2602);
+            }
+        }
+
         public object ItemAdded { get; }
 
-        /// <summary>
-        /// PowerShell InstanceId which added this data.
-        /// Guid.Empty, if the data is not added by a PowerShell
-        /// instance.
-        /// </summary>
         public Guid PowerShellInstanceId { get; }
 
-        #endregion
+        static DataAddingEventArgs()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1480, 1885, 3062);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1480, 1885, 3062);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 1885, 3062);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1480, 1885, 3062);
     }
-
-    #region PSDataCollection
-
-    /// <summary>build
-    /// Thread Safe buffer used with PowerShell Hosting interfaces.
-    /// </summary>
     [Serializable]
     public class PSDataCollection<T> : IList<T>, ICollection<T>, IEnumerable<T>, IList, ICollection, IEnumerable, IDisposable, ISerializable
     {
-        #region Private Data
-
         private IList<T> _data;
+
         private ManualResetEvent _readWaitHandle;
-        private bool _isOpen = true;
+
+        private bool _isOpen;
+
         private bool _releaseOnEnumeration;
+
         private bool _isEnumerated;
-        // a counter to keep track of active PowerShell instances
-        // using this buffer.
+
         private int _refCount;
 
-        private bool _isDisposed = false;
+        private bool _isDisposed;
 
-        /// <summary>
-        /// Whether the enumerator needs to be blocking
-        /// by default.
-        /// </summary>
-        private bool _blockingEnumerator = false;
+        private bool _blockingEnumerator;
 
-        /// <summary>
-        /// Whether the ref count was incremented when
-        /// BlockingEnumerator was updated.
-        /// </summary>
-        private bool _refCountIncrementedForBlockingEnumerator = false;
+        private bool _refCountIncrementedForBlockingEnumerator;
 
-        private int _countNewData = 0;
-        private int _dataAddedFrequency = 1;
-        private Guid _sourceGuid = Guid.Empty;
+        private int _countNewData;
 
-        #endregion
+        private int _dataAddedFrequency;
 
-        #region Public Constructors
+        private Guid _sourceGuid;
 
-        /// <summary>
-        /// Default Constructor.
-        /// </summary>
-        public PSDataCollection() : this(new List<T>())
+        public PSDataCollection() :
+            // LAFHIS : IMPROVE BASE CALLS
+            //this(f_1480_4517_4530_C(f_1480_4517_4530()))
+            this(f_1480_4517_4530())
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 4484, 4553);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 4484, 4553);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 4484, 4553);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 4484, 4553);
+            }
         }
 
-        /// <summary>
-        /// Creates a PSDataCollection that includes all the items in the IEnumerable and invokes Complete().
-        /// </summary>
-        /// <param name="items">
-        /// Items used to initialize the collection
-        /// </param>
-        /// <remarks>
-        /// This constructor is useful when the user wants to use an IEnumerable as an input to one of the PowerShell.BeginInvoke overloads.
-        /// The invocation doesn't complete until Complete() is called on the PSDataCollection; this constructor does the Complete() on
-        /// behalf of the user.
-        /// </remarks>
-        public PSDataCollection(IEnumerable<T> items) : this(new List<T>(items))
+        public PSDataCollection(IEnumerable<T> items) : this(f_1480_5244_5262_C(f_1480_5244_5262(items)))
         {
-            this.Complete();
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 5191, 5315);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 5288, 5304);
+
+                f_1480_5288_5303(this);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 5191, 5315);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 5191, 5315);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 5191, 5315);
+            }
         }
 
-        /// <summary>
-        /// Initializes a new instance with the specified capacity
-        /// <paramref name="capacity"/>
-        /// </summary>
-        /// <param name="capacity">
-        /// The number of elements that the new buffer can initially
-        /// store.
-        /// </param>
-        /// <remarks>
-        /// Capacity is the number of elements that the PSDataCollection can
-        /// store before resizing is required.
-        /// </remarks>
-        public PSDataCollection(int capacity) : this(new List<T>(capacity))
+        public PSDataCollection(int capacity) : this(f_1480_5850_5871_C(f_1480_5850_5871(capacity)))
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 5805, 5894);
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 5805, 5894);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 5805, 5894);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 5805, 5894);
+            }
         }
 
-        #endregion
 
-        #region type converters
 
         /// <summary>
         /// Wrap the argument in a PSDataCollection.
@@ -204,9 +193,34 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(bool valueToConvert)
         {
-            return CreateAndInitializeFromExplicitValue(valueToConvert);
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 6213, 6614);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 6543, 6603);
 
+                return f_1480_6550_6602(valueToConvert);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 6213, 6614);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_6550_6602(bool
+                valueToConvert)
+                {
+                    var return_v = CreateAndInitializeFromExplicitValue((object)valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 6550, 6602);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 6213, 6614);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 6213, 6614);
+            }
+        }
         /// <summary>
         /// Wrap the argument in a PSDataCollection.
         /// </summary>
@@ -216,9 +230,34 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(string valueToConvert)
         {
-            return CreateAndInitializeFromExplicitValue(valueToConvert);
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 6876, 7279);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 7208, 7268);
 
+                return f_1480_7215_7267(valueToConvert);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 6876, 7279);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_7215_7267(string
+                valueToConvert)
+                {
+                    var return_v = CreateAndInitializeFromExplicitValue((object)valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 7215, 7267);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 6876, 7279);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 6876, 7279);
+            }
+        }
         /// <summary>
         /// Wrap the argument in a PSDataCollection.
         /// </summary>
@@ -228,9 +267,34 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(int valueToConvert)
         {
-            return CreateAndInitializeFromExplicitValue(valueToConvert);
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 7541, 7941);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 7870, 7930);
 
+                return f_1480_7877_7929(valueToConvert);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 7541, 7941);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_7877_7929(int
+                valueToConvert)
+                {
+                    var return_v = CreateAndInitializeFromExplicitValue((object)valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 7877, 7929);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 7541, 7941);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 7541, 7941);
+            }
+        }
         /// <summary>
         /// Wrap the argument in a PSDataCollection.
         /// </summary>
@@ -240,15 +304,105 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(byte valueToConvert)
         {
-            return CreateAndInitializeFromExplicitValue(valueToConvert);
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 8203, 8604);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 8533, 8593);
 
+                return f_1480_8540_8592(valueToConvert);
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 8203, 8604);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_8540_8592(byte
+                valueToConvert)
+                {
+                    var return_v = CreateAndInitializeFromExplicitValue((object)valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 8540, 8592);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 8203, 8604);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 8203, 8604);
+            }
+        }
         private static PSDataCollection<T> CreateAndInitializeFromExplicitValue(object valueToConvert)
         {
-            PSDataCollection<T> psdc = new PSDataCollection<T>();
-            psdc.Add(LanguagePrimitives.ConvertTo<T>(valueToConvert));
-            psdc.Complete();
-            return psdc;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 8616, 8927);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 8735, 8788);
+
+                PSDataCollection<T>
+                psdc = f_1480_8762_8787()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 8802, 8860);
+
+                f_1480_8802_8859(psdc, f_1480_8811_8858(valueToConvert));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 8874, 8890);
+
+                f_1480_8874_8889(psdc);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 8904, 8916);
+
+                return psdc;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 8616, 8927);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_8762_8787()
+                {
+                    var return_v = new System.Management.Automation.PSDataCollection<T>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 8762, 8787);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_8811_8858(object
+                valueToConvert)
+                {
+                    var return_v = LanguagePrimitives.ConvertTo<T>(valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 8811, 8858);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_8802_8859(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 8802, 8859);
+                    return 0;
+                }
+
+
+                int
+                f_1480_8874_8889(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.Complete();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 8874, 8889);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 8616, 8927);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 8616, 8927);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         /// <summary>
@@ -260,12 +414,75 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(Hashtable valueToConvert)
         {
-            PSDataCollection<T> psdc = new PSDataCollection<T>();
-            psdc.Add(LanguagePrimitives.ConvertTo<T>(valueToConvert));
-            psdc.Complete();
-            return psdc;
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 9189, 9716);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 9524, 9577);
 
+                PSDataCollection<T>
+                psdc = f_1480_9551_9576()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 9591, 9649);
+
+                f_1480_9591_9648(psdc, f_1480_9600_9647(valueToConvert));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 9663, 9679);
+
+                f_1480_9663_9678(psdc);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 9693, 9705);
+
+                return psdc;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 9189, 9716);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_9551_9576()
+                {
+                    var return_v = new System.Management.Automation.PSDataCollection<T>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 9551, 9576);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_9600_9647(System.Collections.Hashtable
+                valueToConvert)
+                {
+                    var return_v = LanguagePrimitives.ConvertTo<T>((object)valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 9600, 9647);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_9591_9648(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 9591, 9648);
+                    return 0;
+                }
+
+
+                int
+                f_1480_9663_9678(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.Complete();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 9663, 9678);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 9189, 9716);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 9189, 9716);
+            }
+        }
         /// <summary>
         /// Wrap the argument in a PSDataCollection.
         /// </summary>
@@ -275,12 +492,75 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(T valueToConvert)
         {
-            PSDataCollection<T> psdc = new PSDataCollection<T>();
-            psdc.Add(LanguagePrimitives.ConvertTo<T>(valueToConvert));
-            psdc.Complete();
-            return psdc;
-        }
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 9978, 10497);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 10305, 10358);
 
+                PSDataCollection<T>
+                psdc = f_1480_10332_10357()
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 10372, 10430);
+
+                f_1480_10372_10429(psdc, f_1480_10381_10428(valueToConvert));
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 10444, 10460);
+
+                f_1480_10444_10459(psdc);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 10474, 10486);
+
+                return psdc;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 9978, 10497);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_10332_10357()
+                {
+                    var return_v = new System.Management.Automation.PSDataCollection<T>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 10332, 10357);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_10381_10428(T
+                valueToConvert)
+                {
+                    var return_v = LanguagePrimitives.ConvertTo<T>((object)valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 10381, 10428);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_10372_10429(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 10372, 10429);
+                    return 0;
+                }
+
+
+                int
+                f_1480_10444_10459(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.Complete();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 10444, 10459);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 9978, 10497);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 9978, 10497);
+            }
+        }
         /// <summary>
         /// Wrap the argument in a PSDataCollection.
         /// </summary>
@@ -290,347 +570,1018 @@ namespace System.Management.Automation
             Justification = "There are already alternates to the implicit casts, ToXXX and FromXXX methods are unnecessary and redundant")]
         public static implicit operator PSDataCollection<T>(object[] arrayToConvert)
         {
-            PSDataCollection<T> psdc = new PSDataCollection<T>();
-            if (arrayToConvert != null)
+            try
             {
-                foreach (var ae in arrayToConvert)
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 10759, 11444);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 11093, 11146);
+
+                PSDataCollection<T>
+                psdc = f_1480_11120_11145()
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 11160, 11375) || true) && (arrayToConvert != null)
+                )
+
                 {
-                    psdc.Add(LanguagePrimitives.ConvertTo<T>(ae));
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 11160, 11375);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 11220, 11360);
+                        foreach (var ae in f_1480_11239_11253_I(arrayToConvert))
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 11220, 11360);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 11295, 11341);
+
+                            f_1480_11295_11340(psdc, f_1480_11304_11339(ae));
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 11220, 11360);
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1480, 1, 141);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1480, 1, 141);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 11160, 11375);
                 }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 11391, 11407);
+
+                f_1480_11391_11406(
+                            psdc);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 11421, 11433);
+
+                return psdc;
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 10759, 11444);
+
+                System.Management.Automation.PSDataCollection<T>
+                f_1480_11120_11145()
+                {
+                    var return_v = new System.Management.Automation.PSDataCollection<T>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 11120, 11145);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_11304_11339(object
+                valueToConvert)
+                {
+                    var return_v = LanguagePrimitives.ConvertTo<T>(valueToConvert);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 11304, 11339);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_11295_11340(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 11295, 11340);
+                    return 0;
+                }
+
+
+                object[]
+                f_1480_11239_11253_I(object[]
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 11239, 11253);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_11391_11406(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.Complete();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 11391, 11406);
+                    return 0;
+                }
+
             }
-
-            psdc.Complete();
-            return psdc;
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 10759, 11444);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 10759, 11444);
+            }
         }
-
-        #endregion
-
-        #region Internal Constructor
-
-        /// <summary>
-        /// Construct the DataBuffer using the supplied <paramref name="listToUse"/>
-        /// as the data buffer.
-        /// </summary>
-        /// <param name="listToUse">
-        /// buffer where the elements are stored
-        /// </param>
-        /// <remarks>
-        /// Using this constructor will make the data buffer a wrapper on
-        /// top of the <paramref name="listToUse"/>, which provides synchronized
-        /// access.
-        /// </remarks>
         internal PSDataCollection(IList<T> listToUse)
         {
-            _data = listToUse;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 12019, 12118);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3437, 3442);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3478, 3493);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3517, 3531);
+                this._isOpen = true;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3555, 3576);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3600, 3613);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3734, 3743);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3769, 3788);
+                this._isDisposed = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3943, 3970);
+                this._blockingEnumerator = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4144, 4193);
+                this._refCountIncrementedForBlockingEnumerator = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4218, 4235);
+                this._countNewData = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4258, 4281);
+                this._dataAddedFrequency = 1;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4305, 4329);
+                this._sourceGuid = Guid.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16022, 16045);
+                this._serializeInput = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16369, 16441);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 22000, 22047);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47734, 47744);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58311, 58362);
+                this.SyncObject = f_1480_58349_58361();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12089, 12107);
+
+                _data = listToUse;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 12019, 12118);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 12019, 12118);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 12019, 12118);
+            }
         }
 
-        /// <summary>
-        /// Creates a PSDataCollection from an ISerializable context.
-        /// </summary>
-        /// <param name="info">Serialization information for this instance.</param>
-        /// <param name="context">The streaming context for this instance.</param>
         protected PSDataCollection(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("info");
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 12417, 13182);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3437, 3442);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3478, 3493);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3517, 3531);
+                this._isOpen = true;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3555, 3576);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3600, 3613);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3734, 3743);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3769, 3788);
+                this._isDisposed = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 3943, 3970);
+                this._blockingEnumerator = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4144, 4193);
+                this._refCountIncrementedForBlockingEnumerator = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4218, 4235);
+                this._countNewData = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4258, 4281);
+                this._dataAddedFrequency = 1;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 4305, 4329);
+                this._sourceGuid = Guid.Empty;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16022, 16045);
+                this._serializeInput = false;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16369, 16441);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 22000, 22047);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47734, 47744);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58311, 58362);
+                this.SyncObject = f_1480_58349_58361();
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12518, 12636) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 12518, 12636);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12568, 12621);
+
+                    throw f_1480_12574_12620("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 12518, 12636);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12652, 12725);
+
+                IList<T>
+                listToUse = f_1480_12673_12712(info, "Data", typeof(IList<T>)) as IList<T>
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12741, 12864) || true) && (listToUse == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 12741, 12864);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12796, 12849);
+
+                    throw f_1480_12802_12848("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 12741, 12864);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12880, 12898);
+
+                _data = listToUse;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12914, 12974);
+
+                _blockingEnumerator = f_1480_12936_12973(info, "BlockingEnumerator");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 12988, 13042);
+
+                _dataAddedFrequency = f_1480_13010_13041(info, "DataAddedCount");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 13056, 13121);
+
+                EnumeratorNeverBlocks = f_1480_13080_13120(info, "EnumeratorNeverBlocks");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 13135, 13171);
+
+                _isOpen = f_1480_13145_13170(info, "IsOpen");
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 12417, 13182);
             }
-
-            IList<T> listToUse = info.GetValue("Data", typeof(IList<T>)) as IList<T>;
-
-            if (listToUse == null)
+            catch
             {
-                throw PSTraceSource.NewArgumentNullException("info");
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 12417, 13182);
+                throw;
             }
-
-            _data = listToUse;
-
-            _blockingEnumerator = info.GetBoolean("BlockingEnumerator");
-            _dataAddedFrequency = info.GetInt32("DataAddedCount");
-            EnumeratorNeverBlocks = info.GetBoolean("EnumeratorNeverBlocks");
-            _isOpen = info.GetBoolean("IsOpen");
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 12417, 13182);
+            }
         }
 
-        #endregion
 
-        #region PSDataCollection Specific Public Methods / Properties
 
         /// <summary>
         /// Event fired when objects are being added to the underlying buffer.
         /// </summary>
-        public event EventHandler<DataAddingEventArgs> DataAdding;
+        public event EventHandler<DataAddingEventArgs>
+DataAdding
+;
 
         /// <summary>
         /// Event fired when objects are done being added to the underlying buffer.
         /// </summary>
-        public event EventHandler<DataAddedEventArgs> DataAdded;
+        public event EventHandler<DataAddedEventArgs>
+DataAdded
+;
 
         /// <summary>
         /// Event fired when the buffer is completed.
         /// </summary>
-        public event EventHandler Completed;
+        public event EventHandler
+Completed
+;
 
-        /// <summary>
-        /// A boolean which determines if the buffer is open.
-        /// </summary>
         public bool IsOpen
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _isOpen;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 13989, 14132);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14031, 14041);
+                    lock (f_1480_14031_14041())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14083, 14098);
+
+                        return _isOpen;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 13989, 14132);
+
+                    object
+                    f_1480_14031_14041()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 14031, 14041);
+                        return return_v;
+                    }
+
                 }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 13946, 14143);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 13946, 14143);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// An int that tells the frequency of Data Added events fired.
-        /// Raises the DataAdded event only when data has been added a multiple of this many times,
-        /// or when collection can receive no more data, if further data is added past the last event
-        /// prior to completion.
-        /// </summary>
         public int DataAddedCount
         {
-            get { return _dataAddedFrequency; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 14563, 14598);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14569, 14596);
 
+                    return _dataAddedFrequency;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 14563, 14598);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 14513, 15312);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 14513, 15312);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                bool raiseDataAdded = false;
-                lock (SyncObject)
+                try
                 {
-                    _dataAddedFrequency = value;
-                    if (_countNewData >= _dataAddedFrequency)
-                    {
-                        raiseDataAdded = true;
-                        _countNewData = 0;
-                    }
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 14614, 15301);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14650, 14678);
 
-                if (raiseDataAdded)
+                    bool
+                    raiseDataAdded = false
+                    ;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14702, 14712);
+                    lock (f_1480_14702_14712())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14754, 14782);
+
+                        _dataAddedFrequency = value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14804, 14983) || true) && (_countNewData >= _dataAddedFrequency)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 14804, 14983);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14894, 14916);
+
+                            raiseDataAdded = true;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 14942, 14960);
+
+                            _countNewData = 0;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 14804, 14983);
+                        }
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 15022, 15286) || true) && (raiseDataAdded)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 15022, 15286);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 15216, 15267);
+
+                        f_1480_15216_15266(this, _lastPsInstanceId, _lastIndex);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 15022, 15286);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 14614, 15301);
+
+                    object
+                    f_1480_14702_14712()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 14702, 14712);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1480_15216_15266(System.Management.Automation.PSDataCollection<T>
+                    this_param, System.Guid
+                    psInstanceId, int
+                    index)
+                    {
+                        this_param.RaiseDataAddedEvent(psInstanceId, index);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 15216, 15266);
+                        return 0;
+                    }
+
+                }
+                catch
                 {
-                    // We should raise the event outside of the lock
-                    // as the call is made into 3rd party code
-                    RaiseDataAddedEvent(_lastPsInstanceId, _lastIndex);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 14513, 15312);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 14513, 15312);
                 }
             }
         }
 
-        /// <summary>
-        /// Serializes all input by default.
-        /// This is supported only for PSDataCollections of PSObject.
-        /// </summary>
         public bool SerializeInput
         {
             get
             {
-                return _serializeInput;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 15539, 15613);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 15575, 15598);
 
+                    return _serializeInput;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 15539, 15613);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 15488, 15997);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 15488, 15997);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                if (typeof(T) != typeof(PSObject))
+                try
                 {
-                    // If you drop this constraint, GetSerializedInput must be updated.
-                    throw new NotSupportedException(PSDataBufferStrings.SerializationNotSupported);
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 15629, 15986);
 
-                _serializeInput = value;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 15665, 15927) || true) && (typeof(T) != typeof(PSObject))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 15665, 15927);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 15829, 15908);
+
+                        throw f_1480_15835_15907(f_1480_15861_15906());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 15665, 15927);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 15947, 15971);
+
+                    _serializeInput = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 15629, 15986);
+
+                    string
+                    f_1480_15861_15906()
+                    {
+                        var return_v = PSDataBufferStrings.SerializationNotSupported;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 15861, 15906);
+                        return return_v;
+                    }
+
+
+                    System.NotSupportedException
+                    f_1480_15835_15907(string
+                    message)
+                    {
+                        var return_v = new System.NotSupportedException(message);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 15835, 15907);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 15488, 15997);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 15488, 15997);
+                }
             }
         }
 
-        private bool _serializeInput = false;
+        private bool _serializeInput;
 
-        /// <summary>
-        /// Determines whether this PSDataCollection was created implicitly in support of
-        /// data collection (for example, a workflow that wants to capture output but hasn't
-        /// provided an instance of the PSDataCollection to capture it with.)
-        /// </summary>
         public bool IsAutoGenerated
         {
             get; set;
         }
 
-        /// <summary>
-        /// Internal tag for indicating a source object identifier for this collection.
-        /// </summary>
         internal Guid SourceId
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _sourceGuid;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 16636, 16783);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16678, 16688);
+                    lock (f_1480_16678_16688())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16730, 16749);
 
+                        return _sourceGuid;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 16636, 16783);
+
+                    object
+                    f_1480_16678_16688()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 16678, 16688);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 16589, 16958);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 16589, 16958);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    _sourceGuid = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 16799, 16947);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16841, 16851);
+                    lock (f_1480_16841_16851())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 16893, 16913);
+
+                        _sourceGuid = value;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 16799, 16947);
+
+                    object
+                    f_1480_16841_16851()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 16841, 16851);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 16589, 16958);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 16589, 16958);
                 }
             }
         }
 
-        /// <summary>
-        /// If this flag is set to true, the items in the collection will be set to null when it is
-        /// traversed using a PSDataCollectionEnumerator.
-        /// </summary>
         internal bool ReleaseOnEnumeration
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _releaseOnEnumeration;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 17236, 17393);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 17278, 17288);
+                    lock (f_1480_17278_17288())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 17330, 17359);
 
+                        return _releaseOnEnumeration;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 17236, 17393);
+
+                    object
+                    f_1480_17278_17288()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 17278, 17288);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 17177, 17578);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 17177, 17578);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    _releaseOnEnumeration = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 17409, 17567);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 17451, 17461);
+                    lock (f_1480_17451_17461())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 17503, 17533);
+
+                        _releaseOnEnumeration = value;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 17409, 17567);
+
+                    object
+                    f_1480_17451_17461()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 17451, 17461);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 17177, 17578);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 17177, 17578);
                 }
             }
         }
 
-        /// <summary>
-        /// This flag is true when the collection has been enumerated at least once by a PSDataCollectionEnumerator.
-        /// </summary>
         internal bool IsEnumerated
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _isEnumerated;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 17806, 17955);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 17848, 17858);
+                    lock (f_1480_17848_17858())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 17900, 17921);
 
+                        return _isEnumerated;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 17806, 17955);
+
+                    object
+                    f_1480_17848_17858()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 17848, 17858);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 17755, 18132);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 17755, 18132);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    _isEnumerated = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 17971, 18121);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18013, 18023);
+                    lock (f_1480_18013_18023())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18065, 18087);
+
+                        _isEnumerated = value;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 17971, 18121);
+
+                    object
+                    f_1480_18013_18023()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 18013, 18023);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 17755, 18132);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 17755, 18132);
                 }
             }
         }
 
-        /// <summary>
-        /// Completes insertions to the buffer.
-        /// Subsequent Inserts to the buffer will result in an InvalidOperationException.
-        /// </summary>
         public void Complete()
         {
-            bool raiseEvents = false;
-            bool raiseDataAdded = false;
             try
             {
-                // Close the buffer
-                lock (SyncObject)
-                {
-                    if (_isOpen)
-                    {
-                        _isOpen = false;
-                        raiseEvents = true;
-                        // release any threads to notify an event. Enumerator
-                        // blocks on this syncObject.
-                        Monitor.PulseAll(SyncObject);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 18331, 20086);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18378, 18403);
 
-                        if (_countNewData > 0)
+                bool
+                raiseEvents = false
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18417, 18445);
+
+                bool
+                raiseDataAdded = false
+                ;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18538, 18548);
+                    // Close the buffer
+                    lock (f_1480_18538_18548())
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18590, 19128) || true) && (_isOpen)
+                        )
+
                         {
-                            raiseDataAdded = true;
-                            _countNewData = 0;
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 18590, 19128);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18651, 18667);
+
+                            _isOpen = false;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18693, 18712);
+
+                            raiseEvents = true;
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18872, 18901);
+
+                            f_1480_18872_18900(f_1480_18889_18899());
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 18929, 19105) || true) && (_countNewData > 0)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 18929, 19105);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19008, 19030);
+
+                                raiseDataAdded = true;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19060, 19078);
+
+                                _countNewData = 0;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 18929, 19105);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 18590, 19128);
                         }
                     }
                 }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinally(1480, 19176, 20075);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19274, 19910) || true) && (raiseEvents)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 19274, 19910);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19331, 19523) || true) && (_readWaitHandle != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 19331, 19523);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19478, 19500);
+
+                            f_1480_19478_19499(                        // unblock any readers waiting on the handle
+                                                    _readWaitHandle);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 19331, 19523);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19695, 19734);
+
+                        EventHandler
+                        tempCompleted = Completed
+                        ;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19756, 19891) || true) && (tempCompleted != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 19756, 19891);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19831, 19868);
+
+                            f_1480_19831_19867(tempCompleted, this, EventArgs.Empty);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 19756, 19891);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 19274, 19910);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19930, 20060) || true) && (raiseDataAdded)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 19930, 20060);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 19990, 20041);
+
+                        f_1480_19990_20040(this, _lastPsInstanceId, _lastIndex);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 19930, 20060);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitFinally(1480, 19176, 20075);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 18331, 20086);
+
+                object
+                f_1480_18538_18548()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 18538, 18548);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_18889_18899()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 18889, 18899);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_18872_18900(object
+                obj)
+                {
+                    Monitor.PulseAll(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 18872, 18900);
+                    return 0;
+                }
+
+
+                bool
+                f_1480_19478_19499(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 19478, 19499);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_19831_19867(System.EventHandler
+                this_param, System.Management.Automation.PSDataCollection<T>
+                sender, System.EventArgs
+                e)
+                {
+                    this_param.Invoke((object)sender, e);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 19831, 19867);
+                    return 0;
+                }
+
+
+                int
+                f_1480_19990_20040(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index)
+                {
+                    this_param.RaiseDataAddedEvent(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 19990, 20040);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 18331, 20086);
+                throw;
             }
             finally
             {
-                // raise the events outside of the lock.
-                if (raiseEvents)
-                {
-                    if (_readWaitHandle != null)
-                    {
-                        // unblock any readers waiting on the handle
-                        _readWaitHandle.Set();
-                    }
-
-                    // A temporary variable is used as the Completed may
-                    // reach null (because of -='s) after the null check
-                    EventHandler tempCompleted = Completed;
-                    if (tempCompleted != null)
-                    {
-                        tempCompleted(this, EventArgs.Empty);
-                    }
-                }
-
-                if (raiseDataAdded)
-                {
-                    RaiseDataAddedEvent(_lastPsInstanceId, _lastIndex);
-                }
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 18331, 20086);
             }
         }
 
-        /// <summary>
-        /// Indicates whether the data collection should
-        /// have a blocking enumerator by default. Currently
-        /// only when a PowerShell object is associated with
-        /// the data collection, a reference count is added
-        /// which causes the enumerator to be blocking. This
-        /// prevents the use of PSDataCollection without a
-        /// PowerShell object. This property fixes the same.
-        /// </summary>
         public bool BlockingEnumerator
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _blockingEnumerator;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 20627, 20782);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 20669, 20679);
+                    lock (f_1480_20669_20679())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 20721, 20748);
 
+                        return _blockingEnumerator;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 20627, 20782);
+
+                    object
+                    f_1480_20669_20679()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 20669, 20679);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 20572, 21823);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 20572, 21823);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    _blockingEnumerator = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 20798, 21812);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 20840, 20850);
+                    lock (f_1480_20840_20850())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 20892, 20920);
 
-                    if (_blockingEnumerator)
-                    {
-                        if (!_refCountIncrementedForBlockingEnumerator)
+                        _blockingEnumerator = value;
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 20944, 21778) || true) && (_blockingEnumerator)
+                        )
+
                         {
-                            _refCountIncrementedForBlockingEnumerator = true;
-                            AddRef();
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 20944, 21778);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 21017, 21236) || true) && (!_refCountIncrementedForBlockingEnumerator)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 21017, 21236);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 21121, 21170);
+
+                                _refCountIncrementedForBlockingEnumerator = true;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 21200, 21209);
+
+                                f_1480_21200_21208(this);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 21017, 21236);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 20944, 21778);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 20944, 21778);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 21530, 21755) || true) && (_refCountIncrementedForBlockingEnumerator)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 21530, 21755);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 21633, 21683);
+
+                                _refCountIncrementedForBlockingEnumerator = false;
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 21713, 21728);
+
+                                f_1480_21713_21727(this);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 21530, 21755);
+                            }
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 20944, 21778);
                         }
                     }
-                    else
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 20798, 21812);
+
+                    object
+                    f_1480_20840_20850()
                     {
-                        // TODO: false doesn't always leading to non-blocking
-                        // behavior in an intuitive way. Need to follow up
-                        // and fix this
-                        if (_refCountIncrementedForBlockingEnumerator)
-                        {
-                            _refCountIncrementedForBlockingEnumerator = false;
-                            DecrementRef();
-                        }
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 20840, 20850);
+                        return return_v;
                     }
+
+
+                    int
+                    f_1480_21200_21208(System.Management.Automation.PSDataCollection<T>
+                    this_param)
+                    {
+                        this_param.AddRef();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 21200, 21208);
+                        return 0;
+                    }
+
+
+                    int
+                    f_1480_21713_21727(System.Management.Automation.PSDataCollection<T>
+                    this_param)
+                    {
+                        this_param.DecrementRef();
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 21713, 21727);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 20572, 21823);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 20572, 21823);
                 }
             }
         }
 
-        /// <summary>
-        /// If this is set to true, then the enumerator returned from
-        /// GetEnumerator() will never block.
-        /// </summary>
         public bool EnumeratorNeverBlocks { get; set; }
 
-        #endregion
 
-        #region IList Generic Overrides
 
         /// <summary>
         /// Gets or sets the element at the specified index.
@@ -650,394 +1601,1087 @@ namespace System.Management.Automation
         /// </exception>
         public T this[int index]
         {
+
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    return _data[index];
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 22833, 22981);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 22875, 22885);
+                    lock (f_1480_22875_22885())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 22927, 22947);
+
+                        return f_1480_22934_22946(_data, index);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 22833, 22981);
+
+                    object
+                    f_1480_22875_22885()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 22875, 22885);
+                        return return_v;
+                    }
+
+
+                    T
+                    f_1480_22934_22946(System.Collections.Generic.IList<T>
+                    this_param, int
+                    i0)
+                    {
+                        var return_v = this_param[i0];
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 22934, 22946);
+                        return return_v;
+                    }
+
                 }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 22833, 22981);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 22833, 22981);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    if ((index < 0) || (index >= _data.Count))
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 22997, 23599);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 23039, 23049);
+                    lock (f_1480_23039_23049())
                     {
-                        throw PSTraceSource.NewArgumentOutOfRangeException("index", index,
-                            PSDataBufferStrings.IndexOutOfRange, 0, _data.Count - 1);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 23091, 23358) || true) && ((index < 0) || (DynAbs.Tracing.TraceSender.Expression_False(1480, 23095, 23132) || (index >= f_1480_23120_23131(_data))))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 23091, 23358);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 23182, 23335);
+
+                            throw f_1480_23188_23334("index", index, f_1480_23278_23313(), 0, f_1480_23318_23329(_data) - 1);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 23091, 23358);
+                        }
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 23382, 23520) || true) && (_serializeInput)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 23382, 23520);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 23451, 23497);
+
+                            value = (T)(object)f_1480_23470_23496(this, value);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 23382, 23520);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 23544, 23565);
+
+                        _data[index] = value;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 22997, 23599);
+
+                    object
+                    f_1480_23039_23049()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 23039, 23049);
+                        return return_v;
                     }
 
-                    if (_serializeInput)
+
+                    int
+                    f_1480_23120_23131(System.Collections.Generic.IList<T>
+                    this_param)
                     {
-                        value = (T)(object)GetSerializedObject(value);
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 23120, 23131);
+                        return return_v;
                     }
 
-                    _data[index] = value;
+
+                    string
+                    f_1480_23278_23313()
+                    {
+                        var return_v = PSDataBufferStrings.IndexOutOfRange;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 23278, 23313);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1480_23318_23329(System.Collections.Generic.IList<T>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 23318, 23329);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.PSArgumentOutOfRangeException
+                    f_1480_23188_23334(string
+                    paramName, int
+                    actualValue, string
+                    resourceString, params object[]
+                    args)
+                    {
+                        var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue, resourceString, args);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 23188, 23334);
+                        return return_v;
+                    }
+
+
+                    System.Management.Automation.PSObject
+                    f_1480_23470_23496(System.Management.Automation.PSDataCollection<T>
+                    this_param, T
+                    value)
+                    {
+                        var return_v = this_param.GetSerializedObject((object)value);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 23470, 23496);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 22997, 23599);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 22997, 23599);
                 }
             }
         }
 
-        /// <summary>
-        /// Determines the index of a specific item in the buffer.
-        /// </summary>
-        /// <param name="item">
-        /// The object to locate in the buffer.
-        /// </param>
-        /// <returns>
-        /// The index of item if found in the buffer; otherwise, -1.
-        /// </returns>
         public int IndexOf(T item)
         {
-            lock (SyncObject)
+            try
             {
-                return InternalIndexOf(item);
-            }
-        }
-
-        /// <summary>
-        /// Inserts an item to the buffer at the specified index.
-        /// </summary>
-        /// <param name="index">
-        /// The zero-based index at which item should be inserted.
-        /// </param>
-        /// <param name="item">
-        /// The object to insert into the buffer.
-        /// </param>
-        /// <exception cref="InvalidOperationException">
-        /// Objects cannot be added to a closed buffer.
-        /// Make sure the buffer is open for Add and Insert
-        /// operations to succeed.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// The index specified is less than zero or greater
-        /// than Count.
-        /// </exception>
-        public void Insert(int index, T item)
-        {
-            lock (SyncObject)
-            {
-                InternalInsertItem(Guid.Empty, index, item);
-            }
-
-            RaiseEvents(Guid.Empty, index);
-        }
-
-        /// <summary>
-        /// Removes the item at the specified index.
-        /// </summary>
-        /// <param name="index">
-        /// The zero-based index of the item to remove.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// index is not a valid index in the buffer.
-        /// </exception>
-        public void RemoveAt(int index)
-        {
-            lock (SyncObject)
-            {
-                if ((index < 0) || (index >= _data.Count))
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 23958, 24114);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 24015, 24025);
+                lock (f_1480_24015_24025())
                 {
-                    throw PSTraceSource.NewArgumentOutOfRangeException("index", index,
-                        PSDataBufferStrings.IndexOutOfRange, 0, _data.Count - 1);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 24059, 24088);
+
+                    return f_1480_24066_24087(this, item);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 23958, 24114);
+
+                object
+                f_1480_24015_24025()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 24015, 24025);
+                    return return_v;
                 }
 
-                RemoveItem(index);
+
+                int
+                f_1480_24066_24087(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                item)
+                {
+                    var return_v = this_param.InternalIndexOf(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 24066, 24087);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 23958, 24114);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 23958, 24114);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public void Insert(int index, T item)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 24881, 25110);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 24949, 24959);
+                lock (f_1480_24949_24959())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 24993, 25037);
+
+                    f_1480_24993_25036(this, Guid.Empty, index, item);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 25068, 25099);
+
+                f_1480_25068_25098(this, Guid.Empty, index);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 24881, 25110);
+
+                object
+                f_1480_24949_24959()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 24949, 24959);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_24993_25036(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index, T
+                item)
+                {
+                    this_param.InternalInsertItem(psInstanceId, index, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 24993, 25036);
+                    return 0;
+                }
+
+
+                int
+                f_1480_25068_25098(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index)
+                {
+                    this_param.RaiseEvents(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 25068, 25098);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 24881, 25110);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 24881, 25110);
             }
         }
 
-        #endregion
+        public void RemoveAt(int index)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 25477, 25898);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 25539, 25549);
+                lock (f_1480_25539_25549())
+                {
 
-        #region ICollection Generic Overrides
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 25583, 25834) || true) && ((index < 0) || (DynAbs.Tracing.TraceSender.Expression_False(1480, 25587, 25624) || (index >= f_1480_25612_25623(_data))))
+                    )
 
-        /// <summary>
-        /// Gets the number of elements contained in the buffer.
-        /// </summary>
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 25583, 25834);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 25666, 25815);
+
+                        throw f_1480_25672_25814("index", index, f_1480_25758_25793(), 0, f_1480_25798_25809(_data) - 1);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 25583, 25834);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 25854, 25872);
+
+                    f_1480_25854_25871(this, index);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 25477, 25898);
+
+                object
+                f_1480_25539_25549()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 25539, 25549);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_25612_25623(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 25612, 25623);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_25758_25793()
+                {
+                    var return_v = PSDataBufferStrings.IndexOutOfRange;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 25758, 25793);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_25798_25809(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 25798, 25809);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentOutOfRangeException
+                f_1480_25672_25814(string
+                paramName, int
+                actualValue, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentOutOfRangeException(paramName, (object)actualValue, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 25672, 25814);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_25854_25871(System.Management.Automation.PSDataCollection<T>
+                this_param, int
+                index)
+                {
+                    this_param.RemoveItem(index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 25854, 25871);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 25477, 25898);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 25477, 25898);
+            }
+        }
+
         public int Count
         {
             get
             {
-                lock (SyncObject)
+                try
                 {
-                    if (_data == null)
-                        return 0;
-                    else
-                        return _data.Count;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 26135, 26387);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 26177, 26187);
+                    lock (f_1480_26177_26187())
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 26229, 26353) || true) && (_data == null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 26229, 26353);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 26273, 26282);
+
+                            return 0;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 26229, 26353);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 26229, 26353);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 26334, 26353);
+
+                            return f_1480_26341_26352(_data);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 26229, 26353);
+                        }
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 26135, 26387);
+
+                    object
+                    f_1480_26177_26187()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 26177, 26187);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1480_26341_26352(System.Collections.Generic.IList<T>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 26341, 26352);
+                        return return_v;
+                    }
+
                 }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 26094, 26398);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 26094, 26398);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets a value indicating whether the buffer is read-only.
-        /// </summary>
         public bool IsReadOnly
         {
             get
             {
-                return false;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 26574, 26638);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 26610, 26623);
+
+                    return false;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 26574, 26638);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 26527, 26649);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 26527, 26649);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Adds an item to the thread-safe buffer.
-        /// </summary>
-        /// <param name="item">
-        /// item to add
-        /// </param>
-        /// <exception cref="InvalidOperationException">
-        /// Objects cannot be added to a closed buffer.
-        /// Make sure the buffer is open for Add and Insert
-        /// operations to succeed.
-        /// </exception>
         public void Add(T item)
         {
-            InternalAdd(Guid.Empty, item);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 27079, 27168);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 27127, 27157);
+
+                f_1480_27127_27156(this, Guid.Empty, item);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 27079, 27168);
+
+                int
+                f_1480_27127_27156(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, T
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 27127, 27156);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 27079, 27168);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 27079, 27168);
+            }
         }
 
-        /// <summary>
-        /// Removes all items from the buffer.
-        /// </summary>
         public void Clear()
         {
-            lock (SyncObject)
+            try
             {
-                if (_data != null)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 27275, 27487);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 27325, 27335);
+                lock (f_1480_27325_27335())
                 {
-                    _data.Clear();
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 27369, 27461) || true) && (_data != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 27369, 27461);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 27428, 27442);
+
+                        f_1480_27428_27441(_data);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 27369, 27461);
+                    }
                 }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 27275, 27487);
+
+                object
+                f_1480_27325_27335()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 27325, 27335);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_27428_27441(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    this_param.Clear();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 27428, 27441);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 27275, 27487);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 27275, 27487);
             }
         }
 
-        /// <summary>
-        /// Determines whether the buffer contains an element with a specific value.
-        /// </summary>
-        /// <param name="item">
-        /// The object to locate in the buffer.
-        /// </param>
-        /// <returns>
-        /// true if the element value is found in the buffer; otherwise false.
-        /// </returns>
         public bool Contains(T item)
         {
-            lock (SyncObject)
+            try
             {
-                if (_serializeInput)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 27863, 28164);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 27922, 27932);
+                lock (f_1480_27922_27932())
                 {
-                    item = (T)(object)GetSerializedObject(item);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 27966, 28090) || true) && (_serializeInput)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 27966, 28090);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 28027, 28071);
+
+                        item = (T)(object)f_1480_28045_28070(this, item);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 27966, 28090);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 28110, 28138);
+
+                    return f_1480_28117_28137(_data, item);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 27863, 28164);
+
+                object
+                f_1480_27922_27932()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 27922, 27932);
+                    return return_v;
                 }
 
-                return _data.Contains(item);
+
+                System.Management.Automation.PSObject
+                f_1480_28045_28070(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                value)
+                {
+                    var return_v = this_param.GetSerializedObject((object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 28045, 28070);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_28117_28137(System.Collections.Generic.IList<T>
+                this_param, T
+                item)
+                {
+                    var return_v = this_param.Contains(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 28117, 28137);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 27863, 28164);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 27863, 28164);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Copies the elements of the buffer to a specified array, starting at a particular index.
-        /// </summary>
-        /// <param name="array">
-        /// The destination Array for the elements of type T copied from the buffer.
-        /// </param>
-        /// <param name="arrayIndex">
-        /// The zero-based index in the array at which copying begins.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// array is multidimensional.
-        /// (or)
-        /// arrayIndex is equal to or greater than the length of array.
-        /// (or)
-        /// The number of elements in the source buffer is greater than the
-        /// available space from arrayIndex to the end of the destination array.
-        /// (or)
-        /// Type T cannot be cast automatically to the type of the destination array.
-        /// </exception>
-        /// <exception cref="ArgumentNullException">
-        /// array is a null reference
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// arrayIndex is less than 0.
-        /// </exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
-            lock (SyncObject)
+            try
             {
-                _data.CopyTo(array, arrayIndex);
-            }
-        }
-
-        /// <summary>
-        /// Removes the first occurrence of a specified item from the buffer.
-        /// </summary>
-        /// <param name="item">
-        /// The object to remove from the buffer.
-        /// </param>
-        /// <returns>
-        /// true if item was successfully removed from the buffer; otherwise, false.
-        /// </returns>
-        public bool Remove(T item)
-        {
-            lock (SyncObject)
-            {
-                int index = InternalIndexOf(item);
-                if (index < 0)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 29333, 29511);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 29409, 29419);
+                lock (f_1480_29409_29419())
                 {
-                    return false;
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 29453, 29485);
+
+                    f_1480_29453_29484(_data, array, arrayIndex);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 29333, 29511);
+
+                object
+                f_1480_29409_29419()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 29409, 29419);
+                    return return_v;
                 }
 
-                RemoveItem(index);
-                return true;
+
+                int
+                f_1480_29453_29484(System.Collections.Generic.IList<T>
+                this_param, T[]
+                array, int
+                arrayIndex)
+                {
+                    this_param.CopyTo(array, arrayIndex);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 29453, 29484);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 29333, 29511);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 29333, 29511);
             }
         }
 
-        #endregion
+        public bool Remove(T item)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 29888, 30222);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 29945, 29955);
+                lock (f_1480_29945_29955())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 29989, 30023);
 
-        #region IEnumerable Generic Overrides
+                    int
+                    index = f_1480_30001_30022(this, item)
+                    ;
 
-        /// <summary>
-        /// Returns an enumerator that iterates through the
-        /// elements of the buffer.
-        /// </summary>
-        /// <returns>
-        /// An IEnumerator for objects of the type stored in the buffer.
-        /// </returns>
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 30041, 30128) || true) && (index < 0)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 30041, 30128);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 30096, 30109);
+
+                        return false;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 30041, 30128);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 30148, 30166);
+
+                    f_1480_30148_30165(this, index);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 30184, 30196);
+
+                    return true;
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 29888, 30222);
+
+                object
+                f_1480_29945_29955()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 29945, 29955);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_30001_30022(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                item)
+                {
+                    var return_v = this_param.InternalIndexOf(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 30001, 30022);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_30148_30165(System.Management.Automation.PSDataCollection<T>
+                this_param, int
+                index)
+                {
+                    this_param.RemoveItem(index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 30148, 30165);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 29888, 30222);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 29888, 30222);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
-            return new PSDataCollectionEnumerator<T>(this, EnumeratorNeverBlocks);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 30571, 30714);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 30633, 30703);
+
+                return f_1480_30640_30702(this, f_1480_30680_30701());
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 30571, 30714);
+
+                bool
+                f_1480_30680_30701()
+                {
+                    var return_v = EnumeratorNeverBlocks;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 30680, 30701);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSDataCollectionEnumerator<T>
+                f_1480_30640_30702(System.Management.Automation.PSDataCollection<T>
+                collection, bool
+                neverBlock)
+                {
+                    var return_v = new System.Management.Automation.PSDataCollectionEnumerator<T>(collection, neverBlock);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 30640, 30702);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 30571, 30714);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 30571, 30714);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region IList Overrides
-
-        /// <summary>
-        /// Adds an element to the buffer.
-        /// </summary>
-        /// <param name="value">
-        /// The object to add to the buffer.
-        /// </param>
-        /// <returns>
-        /// The position into which the new element was inserted.
-        /// </returns>
-        /// <exception cref="InvalidOperationException">
-        /// Objects cannot be added to a closed buffer.
-        /// Make sure the buffer is open for Add and Insert
-        /// operations to succeed.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// value reference is null.
-        /// (or)
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         int IList.Add(object value)
         {
-            PSDataCollection<T>.VerifyValueType(value);
-            int index = _data.Count;
-            InternalAdd(Guid.Empty, (T)value);
-            RaiseEvents(Guid.Empty, index);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 31532, 31798);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 31584, 31627);
 
-            return index;
+                f_1480_31584_31626(value);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 31641, 31665);
+
+                int
+                index = f_1480_31653_31664(_data)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 31679, 31713);
+
+                f_1480_31679_31712(this, Guid.Empty, value);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 31727, 31758);
+
+                f_1480_31727_31757(this, Guid.Empty, index);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 31774, 31787);
+
+                return index;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 31532, 31798);
+
+                int
+                f_1480_31584_31626(object
+                value)
+                {
+                    PSDataCollection<T>.VerifyValueType(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 31584, 31626);
+                    return 0;
+                }
+
+
+                int
+                f_1480_31653_31664(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 31653, 31664);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_31679_31712(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, object
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, (T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 31679, 31712);
+                    return 0;
+                }
+
+
+                int
+                f_1480_31727_31757(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index)
+                {
+                    this_param.RaiseEvents(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 31727, 31757);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 31532, 31798);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 31532, 31798);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Determines whether the collection contains an
-        /// element with a specific value.
-        /// </summary>
-        /// <param name="value">
-        /// The object to locate in the collection
-        /// </param>
-        /// <returns>
-        /// true if the element value is found in the collection;
-        /// otherwise false.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value reference is null.
-        /// (or)
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         bool IList.Contains(object value)
         {
-            PSDataCollection<T>.VerifyValueType(value);
-            return Contains((T)value);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 32416, 32568);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 32474, 32517);
+
+                f_1480_32474_32516(value);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 32531, 32557);
+
+                return f_1480_32538_32556(this, value);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 32416, 32568);
+
+                int
+                f_1480_32474_32516(object
+                value)
+                {
+                    PSDataCollection<T>.VerifyValueType(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 32474, 32516);
+                    return 0;
+                }
+
+
+                bool
+                f_1480_32538_32556(System.Management.Automation.PSDataCollection<T>
+                this_param, object
+                item)
+                {
+                    var return_v = this_param.Contains((T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 32538, 32556);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 32416, 32568);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 32416, 32568);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Determines the zero-based index of an element in the buffer.
-        /// </summary>
-        /// <param name="value">
-        /// The element in the buffer whose index is being determined.
-        /// </param>
-        /// <returns>
-        /// The index of the value if found in the buffer; otherwise, -1.
-        /// </returns>
-        /// <exception cref="ArgumentException">
-        /// value reference is null.
-        /// (or)
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         int IList.IndexOf(object value)
         {
-            PSDataCollection<T>.VerifyValueType(value);
-            return IndexOf((T)value);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 33155, 33304);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 33211, 33254);
+
+                f_1480_33211_33253(value);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 33268, 33293);
+
+                return f_1480_33275_33292(this, value);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 33155, 33304);
+
+                int
+                f_1480_33211_33253(object
+                value)
+                {
+                    PSDataCollection<T>.VerifyValueType(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 33211, 33253);
+                    return 0;
+                }
+
+
+                int
+                f_1480_33275_33292(System.Management.Automation.PSDataCollection<T>
+                this_param, object
+                item)
+                {
+                    var return_v = this_param.IndexOf((T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 33275, 33292);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 33155, 33304);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 33155, 33304);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Inserts an object into the buffer at a specified index.
-        /// </summary>
-        /// <param name="index">
-        /// The zero-based index at which value is to be inserted.
-        /// </param>
-        /// <param name="value">
-        /// The object to insert into the buffer.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// index is not a valid index in the buffer.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// value reference is null.
-        /// (or)
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         void IList.Insert(int index, object value)
         {
-            PSDataCollection<T>.VerifyValueType(value);
-            Insert(index, (T)value);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 34008, 34167);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 34075, 34118);
+
+                f_1480_34075_34117(value);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 34132, 34156);
+
+                f_1480_34132_34155(this, index, value);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 34008, 34167);
+
+                int
+                f_1480_34075_34117(object
+                value)
+                {
+                    PSDataCollection<T>.VerifyValueType(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 34075, 34117);
+                    return 0;
+                }
+
+
+                int
+                f_1480_34132_34155(System.Management.Automation.PSDataCollection<T>
+                this_param, int
+                index, object
+                item)
+                {
+                    this_param.Insert(index, (T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 34132, 34155);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 34008, 34167);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 34008, 34167);
+            }
         }
 
-        /// <summary>
-        /// Removes the first occurrence of a specified object
-        /// as an element from the buffer.
-        /// </summary>
-        /// <param name="value">
-        /// The object to be removed from the buffer.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// value reference is null.
-        /// (or)
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         void IList.Remove(object value)
         {
-            PSDataCollection<T>.VerifyValueType(value);
-            Remove((T)value);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 34649, 34790);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 34705, 34748);
+
+                f_1480_34705_34747(value);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 34762, 34779);
+
+                f_1480_34762_34778(this, value);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 34649, 34790);
+
+                int
+                f_1480_34705_34747(object
+                value)
+                {
+                    PSDataCollection<T>.VerifyValueType(value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 34705, 34747);
+                    return 0;
+                }
+
+
+                bool
+                f_1480_34762_34778(System.Management.Automation.PSDataCollection<T>
+                this_param, object
+                item)
+                {
+                    var return_v = this_param.Remove((T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 34762, 34778);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 34649, 34790);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 34649, 34790);
+            }
         }
 
-        /// <summary>
-        /// Gets a value that indicates whether the buffer is fixed in size.
-        /// </summary>
         bool IList.IsFixedSize
         {
             get
             {
-                return false;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 34974, 35038);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 35010, 35023);
+
+                    return false;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 34974, 35038);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 34927, 35049);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 34927, 35049);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets a value that indicates whether the buffer is read-only.
-        /// </summary>
         bool IList.IsReadOnly
         {
             get
             {
-                return false;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 35228, 35292);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 35264, 35277);
+
+                    return false;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 35228, 35292);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 35182, 35303);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 35182, 35303);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
@@ -1059,764 +2703,2677 @@ namespace System.Management.Automation
         /// </exception>
         object IList.this[int index]
         {
+
             get
             {
-                return this[index];
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 35991, 36061);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 36027, 36046);
+
+                    return f_1480_36034_36045(this, index);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 35991, 36061);
+
+                    T
+                    f_1480_36034_36045(System.Management.Automation.PSDataCollection<T>
+                    this_param, int
+                    i0)
+                    {
+                        var return_v = this_param[i0];
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 36034, 36045);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 35991, 36061);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 35991, 36061);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
 
             set
             {
-                PSDataCollection<T>.VerifyValueType(value);
-                this[index] = (T)value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 36077, 36212);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 36113, 36156);
+
+                    f_1480_36113_36155(value);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 36174, 36197);
+
+                    this[index] = (T)value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 36077, 36212);
+
+                    int
+                    f_1480_36113_36155(object
+                    value)
+                    {
+                        PSDataCollection<T>.VerifyValueType(value);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 36113, 36155);
+                        return 0;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 36077, 36212);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 36077, 36212);
+                }
             }
         }
 
-        #endregion
-
-        #region ICollection Overrides
-
-        /// <summary>
-        /// Gets a value that indicates whether the buffer is synchronized.
-        /// </summary>
         bool ICollection.IsSynchronized
         {
             get
             {
-                return true;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 36478, 36541);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 36514, 36526);
+
+                    return true;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 36478, 36541);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 36422, 36552);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 36422, 36552);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the object used to synchronize access to the thread-safe buffer.
-        /// </summary>
         object ICollection.SyncRoot
         {
             get
             {
-                return SyncObject;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 36746, 36815);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 36782, 36800);
+
+                    return f_1480_36789_36799();
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 36746, 36815);
+
+                    object
+                    f_1480_36789_36799()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 36789, 36799);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 36694, 36826);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 36694, 36826);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Copies the elements of the collection to a specified array,
-        /// starting at a particular index.
-        /// </summary>
-        /// <param name="array">
-        /// The destination Array for the elements of type T copied
-        /// from the buffer.
-        /// </param>
-        /// <param name="index">
-        /// The zero-based index in the array at which copying begins.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// array is multidimensional.
-        /// (or)
-        /// arrayIndex is equal to or greater than the length of array.
-        /// (or)
-        /// The number of elements in the source buffer is greater than the
-        /// available space from arrayIndex to the end of the destination array.
-        /// </exception>
-        /// <exception cref="ArgumentNullException">
-        /// array is a null reference
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// arrayIndex is less than 0.
-        /// </exception>
         void ICollection.CopyTo(Array array, int index)
         {
-            lock (SyncObject)
+            try
             {
-                _data.CopyTo((T[])array, index);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 37915, 38095);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 37993, 38003);
+                lock (f_1480_37993_38003())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 38037, 38069);
+
+                    f_1480_38037_38068(_data, array, index);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 37915, 38095);
+
+                object
+                f_1480_37993_38003()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 37993, 38003);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_38037_38068(System.Collections.Generic.IList<T>
+                this_param, System.Array
+                array, int
+                arrayIndex)
+                {
+                    this_param.CopyTo((T[])array, arrayIndex);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 38037, 38068);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 37915, 38095);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 37915, 38095);
             }
         }
 
-        #endregion
-
-        #region IEnumerable Overrides
-
-        /// <summary>
-        /// Returns an enumerator that iterates through the buffer.
-        /// </summary>
-        /// <returns>
-        /// An IEnumerator for objects of the type stored in the buffer.
-        /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return new PSDataCollectionEnumerator<T>(this, EnumeratorNeverBlocks);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 38407, 38552);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 38471, 38541);
+
+                return f_1480_38478_38540(this, f_1480_38518_38539());
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 38407, 38552);
+
+                bool
+                f_1480_38518_38539()
+                {
+                    var return_v = EnumeratorNeverBlocks;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 38518, 38539);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSDataCollectionEnumerator<T>
+                f_1480_38478_38540(System.Management.Automation.PSDataCollection<T>
+                collection, bool
+                neverBlock)
+                {
+                    var return_v = new System.Management.Automation.PSDataCollectionEnumerator<T>(collection, neverBlock);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 38478, 38540);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 38407, 38552);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 38407, 38552);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Streaming Behavior
-
-        /// <summary>
-        /// Makes a shallow copy of all the elements currently in this collection
-        /// and clears them from this collection. This will not result in a blocking call.
-        ///
-        /// Calling this method might have side effects on the enumerator. When this
-        /// method is called, the behavior of the enumerator is not defined.
-        /// </summary>
-        /// <returns>
-        /// A new collection with a copy of all the elements in the current collection.
-        /// </returns>
         public Collection<T> ReadAll()
         {
-            return ReadAndRemove(0);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 39159, 39249);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 39214, 39238);
+
+                return f_1480_39221_39237(this, 0);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 39159, 39249);
+
+                System.Collections.ObjectModel.Collection<T>
+                f_1480_39221_39237(System.Management.Automation.PSDataCollection<T>
+                this_param, int
+                readCount)
+                {
+                    var return_v = this_param.ReadAndRemove(readCount);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 39221, 39237);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 39159, 39249);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 39159, 39249);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Makes a shallow copy of all the elements currently in this collection
-        /// and clears them from this collection. This will not result in a blocking call.
-        ///
-        /// Calling this method might have side effects on the enumerator. When this
-        /// method is called, the behavior of the enumerator is not defined.
-        /// </summary>
-        /// <returns>
-        /// A new collection with a copy of all the elements in the current collection.
-        /// </returns>
-        /// <param name="readCount">Maximum number of elements to read.</param>
         internal Collection<T> ReadAndRemove(int readCount)
         {
-            Dbg.Assert(_data != null, "Collection cannot be null");
-
-            Dbg.Assert(readCount >= 0, "ReadCount cannot be negative");
-
-            int resolvedReadCount = (readCount > 0 ? readCount : Int32.MaxValue);
-
-            lock (SyncObject)
+            try
             {
-                // Copy the elements into a new collection
-                // and clear.
-                Collection<T> result = new Collection<T>();
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 39877, 41336);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 39953, 40008);
 
-                for (int i = 0; i < resolvedReadCount; i++)
+                f_1480_39953_40007(_data != null, "Collection cannot be null");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40024, 40083);
+
+                f_1480_40024_40082(readCount >= 0, "ReadCount cannot be negative");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40099, 40168);
+
+                int
+                resolvedReadCount = ((DynAbs.Tracing.TraceSender.Conditional_F1(1480, 40124, 40137) || ((readCount > 0 && DynAbs.Tracing.TraceSender.Conditional_F2(1480, 40140, 40149)) || DynAbs.Tracing.TraceSender.Conditional_F3(1480, 40152, 40166))) ? readCount : Int32.MaxValue)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40190, 40200);
+
+                lock (f_1480_40190_40200())
                 {
-                    if (_data.Count > 0)
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40325, 40368);
+
+                    Collection<T>
+                    result = f_1480_40348_40367()
+                    ;
+                    try
                     {
-                        result.Add(_data[0]);
-                        _data.RemoveAt(0);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40397, 40402);
+
+                        for (int
+        i = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40388, 40752) || true) && (i < resolvedReadCount)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40427, 40430)
+        , i++, DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 40388, 40752))
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 40388, 40752);
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40472, 40733) || true) && (f_1480_40476_40487(_data) > 0)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 40472, 40733);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40541, 40562);
+
+                                f_1480_40541_40561(result, f_1480_40552_40560(_data, 0));
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40588, 40606);
+
+                                f_1480_40588_40605(_data, 0);
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 40472, 40733);
+                            }
+
+                            else
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 40472, 40733);
+                                DynAbs.Tracing.TraceSender.TraceBreak(1480, 40704, 40710);
+
+                                break;
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 40472, 40733);
+                            }
+                        }
                     }
-                    else
+                    catch (System.Exception)
                     {
-                        break;
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1480, 1, 365);
+                        throw;
                     }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1480, 1, 365);
+                    }
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40772, 41276) || true) && (_readWaitHandle != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 40772, 41276);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40841, 41257) || true) && (f_1480_40845_40856(_data) > 0 || (DynAbs.Tracing.TraceSender.Expression_False(1480, 40845, 40872) || !_isOpen))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 40841, 41257);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 40983, 41005);
+
+                            f_1480_40983_41004(                        // release all the waiting threads.
+                                                    _readWaitHandle);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 40841, 41257);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 40841, 41257);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41210, 41234);
+
+                            f_1480_41210_41233(                        // reset the handle so that future
+                                                                       // threads will block
+                                                    _readWaitHandle);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 40841, 41257);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 40772, 41276);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41296, 41310);
+
+                    return result;
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 39877, 41336);
+
+                int
+                f_1480_39953_40007(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 39953, 40007);
+                    return 0;
                 }
 
-                if (_readWaitHandle != null)
+
+                int
+                f_1480_40024_40082(bool
+                condition, string
+                whyThisShouldNeverHappen)
                 {
-                    if (_data.Count > 0 || !_isOpen)
-                    {
-                        // release all the waiting threads.
-                        _readWaitHandle.Set();
-                    }
-                    else
-                    {
-                        // reset the handle so that future
-                        // threads will block
-                        _readWaitHandle.Reset();
-                    }
+                    Dbg.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 40024, 40082);
+                    return 0;
                 }
 
-                return result;
+
+                object
+                f_1480_40190_40200()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 40190, 40200);
+                    return return_v;
+                }
+
+
+                System.Collections.ObjectModel.Collection<T>
+                f_1480_40348_40367()
+                {
+                    var return_v = new System.Collections.ObjectModel.Collection<T>();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 40348, 40367);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_40476_40487(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 40476, 40487);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_40552_40560(System.Collections.Generic.IList<T>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 40552, 40560);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_40541_40561(System.Collections.ObjectModel.Collection<T>
+                this_param, T
+                item)
+                {
+                    this_param.Add(item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 40541, 40561);
+                    return 0;
+                }
+
+
+                int
+                f_1480_40588_40605(System.Collections.Generic.IList<T>
+                this_param, int
+                index)
+                {
+                    this_param.RemoveAt(index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 40588, 40605);
+                    return 0;
+                }
+
+
+                int
+                f_1480_40845_40856(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 40845, 40856);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_40983_41004(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 40983, 41004);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_41210_41233(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Reset();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 41210, 41233);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 39877, 41336);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 39877, 41336);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         internal T ReadAndRemoveAt0()
         {
-            T value = default(T);
-
-            lock (SyncObject)
+            try
             {
-                if (_data != null && _data.Count > 0)
-                {
-                    value = _data[0];
-                    _data.RemoveAt(0);
-                }
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 41348, 41698);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41402, 41423);
 
-            return value;
+                T
+                value = default(T)
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41445, 41455);
+
+                lock (f_1480_41445_41455())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41489, 41643) || true) && (_data != null && (DynAbs.Tracing.TraceSender.Expression_True(1480, 41493, 41525) && f_1480_41510_41521(_data) > 0))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 41489, 41643);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41567, 41584);
+
+                        value = f_1480_41575_41583(_data, 0);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41606, 41624);
+
+                        f_1480_41606_41623(_data, 0);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 41489, 41643);
+                    }
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 41674, 41687);
+
+                return value;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 41348, 41698);
+
+                object
+                f_1480_41445_41455()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 41445, 41455);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_41510_41521(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 41510, 41521);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_41575_41583(System.Collections.Generic.IList<T>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 41575, 41583);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_41606_41623(System.Collections.Generic.IList<T>
+                this_param, int
+                index)
+                {
+                    this_param.RemoveAt(index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 41606, 41623);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 41348, 41698);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 41348, 41698);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        #endregion
-
-        #region Protected Virtual Methods
-
-        /// <summary>
-        /// Inserts an item into the buffer at a specified index.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// InstanceId of PowerShell instance adding this data.
-        /// Guid.Empty if not initiated by a PowerShell instance.
-        /// </param>
-        /// <param name="index">
-        /// The zero-based index of the buffer where the object is to be inserted
-        /// </param>
-        /// <param name="item">
-        /// The object to be inserted into the buffer.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// The index specified is less than zero or greater
-        /// than Count.
-        /// </exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "ps", Justification = "PS signifies PowerShell and is used at many places in the product.")]
         protected virtual void InsertItem(Guid psInstanceId, int index, T item)
         {
-            RaiseDataAddingEvent(psInstanceId, item);
-
-            if (_serializeInput)
+            try
             {
-                item = (T)(object)GetSerializedObject(item);
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 42509, 43024);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 42802, 42843);
 
-            _data.Insert(index, item);
+                f_1480_42802_42842(this, psInstanceId, item);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 42859, 42971) || true) && (_serializeInput)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 42859, 42971);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 42912, 42956);
+
+                    item = (T)(object)f_1480_42930_42955(this, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 42859, 42971);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 42987, 43013);
+
+                f_1480_42987_43012(
+                            _data, index, item);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 42509, 43024);
+
+                int
+                f_1480_42802_42842(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, T
+                itemAdded)
+                {
+                    this_param.RaiseDataAddingEvent(psInstanceId, (object)itemAdded);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 42802, 42842);
+                    return 0;
+                }
+
+
+                System.Management.Automation.PSObject
+                f_1480_42930_42955(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                value)
+                {
+                    var return_v = this_param.GetSerializedObject((object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 42930, 42955);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_42987_43012(System.Collections.Generic.IList<T>
+                this_param, int
+                index, T
+                item)
+                {
+                    this_param.Insert(index, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 42987, 43012);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 42509, 43024);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 42509, 43024);
+            }
         }
 
-        /// <summary>
-        /// Removes the item at a specified index.
-        /// </summary>
-        /// <param name="index">
-        /// The zero-based index of the buffer where the object is to be removed.
-        /// </param>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// The index specified is less than zero or greater
-        /// than the number of items in the buffer.
-        /// </exception>
         protected virtual void RemoveItem(int index)
         {
-            _data.RemoveAt(index);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 43475, 43577);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 43544, 43566);
+
+                f_1480_43544_43565(_data, index);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 43475, 43577);
+
+                int
+                f_1480_43544_43565(System.Collections.Generic.IList<T>
+                this_param, int
+                index)
+                {
+                    this_param.RemoveAt(index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 43544, 43565);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 43475, 43577);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 43475, 43577);
+            }
         }
 
-        #endregion
-
-        #region Serializable
-
-        /// <summary>
-        /// Implements the ISerializable contract for serializing a PSDataCollection.
-        /// </summary>
-        /// <param name="info">Serialization information for this instance.</param>
-        /// <param name="context">The streaming context for this instance.</param>
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("info");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 43946, 44489);
 
-            info.AddValue("Data", _data);
-            info.AddValue("BlockingEnumerator", _blockingEnumerator);
-            info.AddValue("DataAddedCount", _dataAddedFrequency);
-            info.AddValue("EnumeratorNeverBlocks", EnumeratorNeverBlocks);
-            info.AddValue("IsOpen", _isOpen);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44054, 44172) || true) && (info == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 44054, 44172);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44104, 44157);
+
+                    throw f_1480_44110_44156("info");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 44054, 44172);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44188, 44217);
+
+                f_1480_44188_44216(
+                            info, "Data", _data);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44231, 44288);
+
+                f_1480_44231_44287(info, "BlockingEnumerator", _blockingEnumerator);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44302, 44355);
+
+                f_1480_44302_44354(info, "DataAddedCount", _dataAddedFrequency);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44369, 44431);
+
+                f_1480_44369_44430(info, "EnumeratorNeverBlocks", f_1480_44408_44429());
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44445, 44478);
+
+                f_1480_44445_44477(info, "IsOpen", _isOpen);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 43946, 44489);
+
+                System.Management.Automation.PSArgumentNullException
+                f_1480_44110_44156(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 44110, 44156);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_44188_44216(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, System.Collections.Generic.IList<T>
+                value)
+                {
+                    this_param.AddValue(name, (object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 44188, 44216);
+                    return 0;
+                }
+
+
+                int
+                f_1480_44231_44287(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, bool
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 44231, 44287);
+                    return 0;
+                }
+
+
+                int
+                f_1480_44302_44354(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, int
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 44302, 44354);
+                    return 0;
+                }
+
+
+                bool
+                f_1480_44408_44429()
+                {
+                    var return_v = EnumeratorNeverBlocks;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 44408, 44429);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_44369_44430(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, bool
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 44369, 44430);
+                    return 0;
+                }
+
+
+                int
+                f_1480_44445_44477(System.Runtime.Serialization.SerializationInfo
+                this_param, string
+                name, bool
+                value)
+                {
+                    this_param.AddValue(name, value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 44445, 44477);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 43946, 44489);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 43946, 44489);
+            }
         }
 
-        #endregion
-
-        #region Internal/Private Methods and Properties
-
-        /// <summary>
-        /// Waitable handle for caller's to block until new data
-        /// is added to the underlying buffer.
-        /// </summary>
         internal WaitHandle WaitHandle
         {
             get
             {
-                if (_readWaitHandle == null)
+                try
                 {
-                    lock (SyncObject)
-                    {
-                        if (_readWaitHandle == null)
-                        {
-                            // Create the handle signaled if there are objects in the buffer
-                            // or the buffer has been closed.
-                            _readWaitHandle = new ManualResetEvent(_data.Count > 0 || !_isOpen);
-                        }
-                    }
-                }
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 44798, 45406);
 
-                return _readWaitHandle;
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44834, 45348) || true) && (_readWaitHandle == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 44834, 45348);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44909, 44919);
+                        lock (f_1480_44909_44919())
+                        {
+
+                            if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 44969, 45306) || true) && (_readWaitHandle == null)
+                            )
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 44969, 45306);
+                                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 45211, 45279);
+
+                                _readWaitHandle = f_1480_45229_45278(f_1480_45250_45261(_data) > 0 || (DynAbs.Tracing.TraceSender.Expression_False(1480, 45250, 45277) || !_isOpen));
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 44969, 45306);
+                            }
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 44834, 45348);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 45368, 45391);
+
+                    return _readWaitHandle;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 44798, 45406);
+
+                    object
+                    f_1480_44909_44919()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 44909, 44919);
+                        return return_v;
+                    }
+
+
+                    int
+                    f_1480_45250_45261(System.Collections.Generic.IList<T>
+                    this_param)
+                    {
+                        var return_v = this_param.Count;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 45250, 45261);
+                        return return_v;
+                    }
+
+
+                    System.Threading.ManualResetEvent
+                    f_1480_45229_45278(bool
+                    initialState)
+                    {
+                        var return_v = new System.Threading.ManualResetEvent(initialState);
+                        DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 45229, 45278);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 44743, 45417);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 44743, 45417);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Utility method to signal handles and raise events
-        /// in the consistent order.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// PowerShell InstanceId which added this data.
-        /// Guid.Empty, if the data is not added by a PowerShell
-        /// instance.
-        /// </param>
-        /// <param name="index">
-        /// Index at which the data is added.
-        /// </param>
         private void RaiseEvents(Guid psInstanceId, int index)
         {
-            bool raiseDataAdded = false;
-            lock (SyncObject)
+            try
             {
-                if (_readWaitHandle != null)
-                {
-                    // TODO: Should ObjectDisposedException be caught.
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 45890, 47669);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 45969, 45997);
 
-                    if (_data.Count > 0 || !_isOpen)
+                bool
+                raiseDataAdded = false
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46017, 46027);
+                lock (f_1480_46017_46027())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46061, 46639) || true) && (_readWaitHandle != null)
+                    )
+
                     {
-                        // release all the waiting threads.
-                        _readWaitHandle.Set();
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 46061, 46639);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46204, 46620) || true) && (f_1480_46208_46219(_data) > 0 || (DynAbs.Tracing.TraceSender.Expression_False(1480, 46208, 46235) || !_isOpen))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 46204, 46620);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46346, 46368);
+
+                            f_1480_46346_46367(                        // release all the waiting threads.
+                                                    _readWaitHandle);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 46204, 46620);
+                        }
+
+                        else
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 46204, 46620);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46573, 46597);
+
+                            f_1480_46573_46596(                        // reset the handle so that future
+                                                                       // threads will block
+                                                    _readWaitHandle);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 46204, 46620);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 46061, 46639);
                     }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46775, 46804);
+
+                    f_1480_46775_46803(f_1480_46792_46802());
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46824, 46840);
+
+                    _countNewData++;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46858, 47392) || true) && (_countNewData >= _dataAddedFrequency || (DynAbs.Tracing.TraceSender.Expression_False(1480, 46862, 46933) || (_countNewData > 0 && (DynAbs.Tracing.TraceSender.Expression_True(1480, 46903, 46932) && !_isOpen))))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 46858, 47392);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 46975, 46997);
+
+                        raiseDataAdded = true;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47019, 47037);
+
+                        _countNewData = 0;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 46858, 47392);
+                    }
+
                     else
+
                     {
-                        // reset the handle so that future
-                        // threads will block
-                        _readWaitHandle.Reset();
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 46858, 47392);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47299, 47332);
+
+                        _lastPsInstanceId = psInstanceId;
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47354, 47373);
+
+                        _lastIndex = index;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 46858, 47392);
                     }
                 }
-                // release any threads to notify an event. Enumerator
-                // blocks on this syncObject.
-                Monitor.PulseAll(SyncObject);
 
-                _countNewData++;
-                if (_countNewData >= _dataAddedFrequency || (_countNewData > 0 && !_isOpen))
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47423, 47658) || true) && (raiseDataAdded)
+                )
+
                 {
-                    raiseDataAdded = true;
-                    _countNewData = 0;
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 47423, 47658);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47602, 47643);
+
+                    f_1480_47602_47642(this, psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 47423, 47658);
                 }
-                else
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 45890, 47669);
+
+                object
+                f_1480_46017_46027()
                 {
-                    // store information in case _dataAddedFrequency is updated or collection completes
-                    // so that event may be raised using last added data.
-                    _lastPsInstanceId = psInstanceId;
-                    _lastIndex = index;
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 46017, 46027);
+                    return return_v;
                 }
+
+
+                int
+                f_1480_46208_46219(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 46208, 46219);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_46346_46367(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 46346, 46367);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_46573_46596(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Reset();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 46573, 46596);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_46792_46802()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 46792, 46802);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_46775_46803(object
+                obj)
+                {
+                    Monitor.PulseAll(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 46775, 46803);
+                    return 0;
+                }
+
+
+                int
+                f_1480_47602_47642(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index)
+                {
+                    this_param.RaiseDataAddedEvent(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 47602, 47642);
+                    return 0;
+                }
+
             }
-
-            if (raiseDataAdded)
+            catch
             {
-                // We should raise the event outside of the lock
-                // as the call is made into 3rd party code.
-                RaiseDataAddedEvent(psInstanceId, index);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 45890, 47669);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 45890, 47669);
             }
         }
 
         private Guid _lastPsInstanceId;
+
         private int _lastIndex;
 
         private void RaiseDataAddingEvent(Guid psInstanceId, object itemAdded)
         {
-            // A temporary variable is used as the DataAdding may
-            // reach null (because of -='s) after the null check
-            EventHandler<DataAddingEventArgs> tempDataAdding = DataAdding;
-            if (tempDataAdding != null)
+            try
             {
-                tempDataAdding(this, new DataAddingEventArgs(psInstanceId, itemAdded));
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 47757, 48218);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 47985, 48047);
+
+                EventHandler<DataAddingEventArgs>
+                tempDataAdding = DataAdding
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 48061, 48207) || true) && (tempDataAdding != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 48061, 48207);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 48121, 48192);
+
+                    f_1480_48121_48191(tempDataAdding, this, f_1480_48142_48190(psInstanceId, itemAdded));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 48061, 48207);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 47757, 48218);
+
+                System.Management.Automation.DataAddingEventArgs
+                f_1480_48142_48190(System.Guid
+                psInstanceId, object
+                itemAdded)
+                {
+                    var return_v = new System.Management.Automation.DataAddingEventArgs(psInstanceId, itemAdded);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 48142, 48190);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_48121_48191(System.EventHandler<System.Management.Automation.DataAddingEventArgs>
+                this_param, System.Management.Automation.PSDataCollection<T>
+                sender, System.Management.Automation.DataAddingEventArgs
+                e)
+                {
+                    this_param.Invoke((object)sender, e);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 48121, 48191);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 47757, 48218);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 47757, 48218);
             }
         }
 
         private void RaiseDataAddedEvent(Guid psInstanceId, int index)
         {
-            // A temporary variable is used as the DataAdded may
-            // reach null (because of -='s) after the null check
-            EventHandler<DataAddedEventArgs> tempDataAdded = DataAdded;
-            if (tempDataAdded != null)
+            try
             {
-                tempDataAdded(this, new DataAddedEventArgs(psInstanceId, index));
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 48230, 48672);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 48449, 48508);
+
+                EventHandler<DataAddedEventArgs>
+                tempDataAdded = DataAdded
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 48522, 48661) || true) && (tempDataAdded != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 48522, 48661);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 48581, 48646);
+
+                    f_1480_48581_48645(tempDataAdded, this, f_1480_48601_48644(psInstanceId, index));
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 48522, 48661);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 48230, 48672);
+
+                System.Management.Automation.DataAddedEventArgs
+                f_1480_48601_48644(System.Guid
+                psInstanceId, int
+                index)
+                {
+                    var return_v = new System.Management.Automation.DataAddedEventArgs(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 48601, 48644);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_48581_48645(System.EventHandler<System.Management.Automation.DataAddedEventArgs>
+                this_param, System.Management.Automation.PSDataCollection<T>
+                sender, System.Management.Automation.DataAddedEventArgs
+                e)
+                {
+                    this_param.Invoke((object)sender, e);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 48581, 48645);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 48230, 48672);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 48230, 48672);
             }
         }
 
-        /// <summary>
-        /// Inserts an item into the buffer at a specified index.
-        /// The caller should make sure the method call is
-        /// synchronized.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// InstanceId of PowerShell instance adding this data.
-        /// Guid.Empty if this is not initiated by a PowerShell instance.
-        /// </param>
-        /// <param name="index">
-        /// The zero-based index of the buffer where the object is
-        /// to be inserted.
-        /// </param>
-        /// <param name="item">
-        /// The object to be inserted into the buffer.
-        /// </param>
-        /// <exception cref="InvalidOperationException">
-        /// Objects cannot be added to a closed buffer.
-        /// Make sure the buffer is open for Add and Insert
-        /// operations to succeed.
-        /// </exception>
-        /// <exception cref="ArgumentOutOfRangeException">
-        /// The index specified is less than zero or greater
-        /// than Count.
-        /// </exception>
         private void InternalInsertItem(Guid psInstanceId, int index, T item)
         {
-            if (!_isOpen)
+            try
             {
-                throw PSTraceSource.NewInvalidOperationException(PSDataBufferStrings.WriteToClosedBuffer);
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 49763, 50073);
 
-            InsertItem(psInstanceId, index, item);
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 49857, 50008) || true) && (!_isOpen)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 49857, 50008);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 49903, 49993);
+
+                    throw f_1480_49909_49992(f_1480_49952_49991());
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 49857, 50008);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 50024, 50062);
+
+                f_1480_50024_50061(this, psInstanceId, index, item);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 49763, 50073);
+
+                string
+                f_1480_49952_49991()
+                {
+                    var return_v = PSDataBufferStrings.WriteToClosedBuffer;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 49952, 49991);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSInvalidOperationException
+                f_1480_49909_49992(string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewInvalidOperationException(resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 49909, 49992);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_50024_50061(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index, T
+                item)
+                {
+                    this_param.InsertItem(psInstanceId, index, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 50024, 50061);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 49763, 50073);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 49763, 50073);
+            }
         }
 
-        /// <summary>
-        /// Adds an item to the thread-safe buffer.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// InstanceId of PowerShell instance adding this data.
-        /// Guid.Empty if this is not initiated by a PowerShell instance.
-        /// </param>
-        /// <param name="item">
-        /// item to add
-        /// </param>
-        /// <exception cref="InvalidOperationException">
-        /// Objects cannot be added to a closed buffer.
-        /// Make sure the buffer is open for Add and Insert
-        /// operations to succeed.
-        /// </exception>
         internal void InternalAdd(Guid psInstanceId, T item)
         {
-            // should not rely on data.Count in "finally"
-            // as another thread might add data
-            int index = -1;
-
-            lock (SyncObject)
+            try
             {
-                // Add the item and set to raise events
-                // so that events are raised outside of
-                // lock.
-                index = _data.Count;
-                InternalInsertItem(psInstanceId, index, item);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 50706, 51334);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 50891, 50906);
+
+                int
+                index = -1
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 50928, 50938);
+
+                lock (f_1480_50928_50938())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 51112, 51132);
+
+                    index = f_1480_51120_51131(_data);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 51150, 51196);
+
+                    f_1480_51150_51195(this, psInstanceId, index, item);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 51227, 51323) || true) && (index > -1)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 51227, 51323);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 51275, 51308);
+
+                    f_1480_51275_51307(this, psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 51227, 51323);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 50706, 51334);
+
+                object
+                f_1480_50928_50938()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 50928, 50938);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_51120_51131(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 51120, 51131);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_51150_51195(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index, T
+                item)
+                {
+                    this_param.InternalInsertItem(psInstanceId, index, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 51150, 51195);
+                    return 0;
+                }
+
+
+                int
+                f_1480_51275_51307(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index)
+                {
+                    this_param.RaiseEvents(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 51275, 51307);
+                    return 0;
+                }
+
             }
-
-            if (index > -1)
+            catch
             {
-                RaiseEvents(psInstanceId, index);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 50706, 51334);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 50706, 51334);
             }
         }
 
-        /// <summary>
-        /// Adds the elements of an ICollection to the end of the buffer.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// InstanceId of PowerShell instance adding this data.
-        /// </param>
-        /// <param name="collection">
-        /// The ICollection whose elements should be added to the end of
-        /// the buffer.
-        /// </param>
-        /// <exception cref="ArgumentNullException">
-        /// <paramref name="collection"/> is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         internal void InternalAddRange(Guid psInstanceId, ICollection collection)
         {
-            if (collection == null)
+            try
             {
-                throw PSTraceSource.NewArgumentNullException("collection");
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 52036, 53036);
 
-            int index = -1;
-            bool raiseEvents = false;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52134, 52264) || true) && (collection == null)
+                )
 
-            lock (SyncObject)
-            {
-                if (!_isOpen)
                 {
-                    throw PSTraceSource.NewInvalidOperationException(PSDataBufferStrings.WriteToClosedBuffer);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 52134, 52264);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52190, 52249);
+
+                    throw f_1480_52196_52248("collection");
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 52134, 52264);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52280, 52295);
+
+                int
+                index = -1
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52309, 52334);
+
+                bool
+                raiseEvents = false
+                ;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52356, 52366);
+
+                lock (f_1480_52356_52366())
+                {
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52400, 52563) || true) && (!_isOpen)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 52400, 52563);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52454, 52544);
+
+                        throw f_1480_52460_52543(f_1480_52503_52542());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 52400, 52563);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52583, 52603);
+
+                    index = f_1480_52591_52602(_data);
+                    try
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52623, 52897);
+                        foreach (object o in f_1480_52644_52654_I(collection))
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 52623, 52897);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52696, 52740);
+
+                            f_1480_52696_52739(this, psInstanceId, f_1480_52721_52732(_data), o);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52859, 52878);
+
+                            raiseEvents = true;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 52623, 52897);
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoopByException(1480, 1, 275);
+                        throw;
+                    }
+                    finally
+                    {
+                        DynAbs.Tracing.TraceSender.TraceExitLoop(1480, 1, 275);
+                    }
                 }
 
-                index = _data.Count;
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52928, 53025) || true) && (raiseEvents)
+                )
 
-                foreach (object o in collection)
                 {
-                    InsertItem(psInstanceId, _data.Count, (T)o);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 52928, 53025);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 52977, 53010);
 
-                    // set raise events if atleast one item is
-                    // added.
-                    raiseEvents = true;
+                    f_1480_52977_53009(this, psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 52928, 53025);
                 }
-            }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 52036, 53036);
 
-            if (raiseEvents)
+                System.Management.Automation.PSArgumentNullException
+                f_1480_52196_52248(string
+                paramName)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 52196, 52248);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_52356_52366()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 52356, 52366);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_52503_52542()
+                {
+                    var return_v = PSDataBufferStrings.WriteToClosedBuffer;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 52503, 52542);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSInvalidOperationException
+                f_1480_52460_52543(string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewInvalidOperationException(resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 52460, 52543);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_52591_52602(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 52591, 52602);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_52721_52732(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 52721, 52732);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_52696_52739(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index, object
+                item)
+                {
+                    this_param.InsertItem(psInstanceId, index, (T)item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 52696, 52739);
+                    return 0;
+                }
+
+
+                System.Collections.ICollection
+                f_1480_52644_52654_I(System.Collections.ICollection
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 52644, 52654);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_52977_53009(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Guid
+                psInstanceId, int
+                index)
+                {
+                    this_param.RaiseEvents(psInstanceId, index);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 52977, 53009);
+                    return 0;
+                }
+
+            }
+            catch
             {
-                RaiseEvents(psInstanceId, index);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 52036, 53036);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 52036, 53036);
             }
         }
 
-        /// <summary>
-        /// Increment counter to keep track of active PowerShell instances
-        /// using this buffer. This is used only internally.
-        /// </summary>
         internal void AddRef()
         {
-            lock (SyncObject)
+            try
             {
-                _refCount++;
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 53233, 53368);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53286, 53296);
+                lock (f_1480_53286_53296())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53330, 53342);
+
+                    _refCount++;
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 53233, 53368);
+
+                object
+                f_1480_53286_53296()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 53286, 53296);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 53233, 53368);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 53233, 53368);
             }
         }
 
-        /// <summary>
-        /// Decrement counter to keep track of active PowerShell instances
-        /// using this buffer. This is used only internally.
-        /// </summary>
         internal void DecrementRef()
         {
-            lock (SyncObject)
+            try
             {
-                Dbg.Assert(_refCount > 0, "RefCount cannot be <= 0");
-
-                _refCount--;
-                if (_refCount != 0 && (!_blockingEnumerator || _refCount != 1)) return;
-
-                // release threads blocked on waithandle
-                if (_readWaitHandle != null)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 53565, 54301);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53624, 53634);
+                lock (f_1480_53624_53634())
                 {
-                    _readWaitHandle.Set();
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53668, 53721);
+
+                    f_1480_53668_53720(_refCount > 0, "RefCount cannot be <= 0");
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53741, 53753);
+
+                    _refCount--;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53771, 53842) || true) && (_refCount != 0 && (DynAbs.Tracing.TraceSender.Expression_True(1480, 53775, 53833) && (!_blockingEnumerator || (DynAbs.Tracing.TraceSender.Expression_False(1480, 53794, 53832) || _refCount != 1))))
+                    )
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 53771, 53842);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53835, 53842);
+
+                        return;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 53771, 53842);
+                    }
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53920, 54030) || true) && (_readWaitHandle != null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 53920, 54030);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 53989, 54011);
+
+                        f_1480_53989_54010(_readWaitHandle);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 53920, 54030);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54246, 54275);
+
+                    f_1480_54246_54274(f_1480_54263_54273());
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 53565, 54301);
+
+                object
+                f_1480_53624_53634()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 53624, 53634);
+                    return return_v;
                 }
 
-                // release any threads to notify refCount is 0. Enumerator
-                // blocks on this syncObject and it needs to be notified
-                // when the count becomes 0.
-                Monitor.PulseAll(SyncObject);
+
+                int
+                f_1480_53668_53720(bool
+                condition, string
+                whyThisShouldNeverHappen)
+                {
+                    Dbg.Assert(condition, whyThisShouldNeverHappen);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 53668, 53720);
+                    return 0;
+                }
+
+
+                bool
+                f_1480_53989_54010(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    var return_v = this_param.Set();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 53989, 54010);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_54263_54273()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 54263, 54273);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_54246_54274(object
+                obj)
+                {
+                    Monitor.PulseAll(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 54246, 54274);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 53565, 54301);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 53565, 54301);
             }
         }
 
-        /// <summary>
-        /// Returns the index of first occurrence of <paramref name="item"/>
-        /// in the buffer.
-        /// This method is not thread safe.
-        /// </summary>
-        /// <param name="item">
-        /// The object to locate in the buffer.
-        /// </param>
-        /// <returns>
-        /// 0 based index of item if found,
-        /// -1 otherwise.
-        /// </returns>
         private int InternalIndexOf(T item)
         {
-            if (_serializeInput)
+            try
             {
-                item = (T)(object)GetSerializedObject(item);
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 54734, 55199);
 
-            int count = _data.Count;
-            for (int index = 0; index < count; index++)
-            {
-                if (object.Equals(_data[index], item))
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54794, 54906) || true) && (_serializeInput)
+                )
+
                 {
-                    return index;
-                }
-            }
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 54794, 54906);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54847, 54891);
 
-            return -1;
+                    item = (T)(object)f_1480_54865_54890(this, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 54794, 54906);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54922, 54946);
+
+                int
+                count = f_1480_54934_54945(_data)
+                ;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54969, 54978);
+                    for (int
+        index = 0
+        ; (DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54960, 55162) || true) && (index < count)
+        ; DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 54995, 55002)
+        , index++, DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 54960, 55162))
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 54960, 55162);
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55036, 55147) || true) && (f_1480_55040_55073(f_1480_55054_55066(_data, index), item))
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 55036, 55147);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55115, 55128);
+
+                            return index;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 55036, 55147);
+                        }
+                    }
+                }
+                catch (System.Exception)
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoopByException(1480, 1, 203);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceExitLoop(1480, 1, 203);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55178, 55188);
+
+                return -1;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 54734, 55199);
+
+                System.Management.Automation.PSObject
+                f_1480_54865_54890(System.Management.Automation.PSDataCollection<T>
+                this_param, T
+                value)
+                {
+                    var return_v = this_param.GetSerializedObject((object)value);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 54865, 54890);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_54934_54945(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 54934, 54945);
+                    return return_v;
+                }
+
+
+                T
+                f_1480_55054_55066(System.Collections.Generic.IList<T>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 55054, 55066);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_55040_55073(T
+                objA, T
+                objB)
+                {
+                    var return_v = object.Equals((object)objA, (object)objB);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 55040, 55073);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 54734, 55199);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 54734, 55199);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Checks if the <paramref name="value"/> is of type T.
-        /// </summary>
-        /// <param name="value">
-        /// Value to verify.
-        /// </param>
-        /// <exception cref="ArgumentException">
-        /// value reference is null.
-        /// (or)
-        /// value is not of the correct generic type T for the buffer.
-        /// </exception>
         private static void VerifyValueType(object value)
         {
-            if (value == null)
+            try
             {
-                if (typeof(T).IsValueType)
+                DynAbs.Tracing.TraceSender.TraceEnterStaticMethod(1480, 55614, 56290);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55688, 56279) || true) && (value == null)
+                )
+
                 {
-                    throw PSTraceSource.NewArgumentNullException("value", PSDataBufferStrings.ValueNullReference);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 55688, 56279);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55739, 55919) || true) && (f_1480_55743_55764(typeof(T)))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 55739, 55919);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55806, 55900);
+
+                        throw f_1480_55812_55899("value", f_1480_55860_55898());
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 55739, 55919);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 55688, 56279);
                 }
+
+                else
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 55688, 56279);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 55953, 56279) || true) && (!(value is T))
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 55953, 56279);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 56004, 56264);
+
+                        throw f_1480_56010_56263("value", f_1480_56054_56100(), f_1480_56160_56184(f_1480_56160_56175(value)), f_1480_56244_56262(typeof(T)));
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 55953, 56279);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 55688, 56279);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitStaticMethod(1480, 55614, 56290);
+
+                bool
+                f_1480_55743_55764(System.Type
+                this_param)
+                {
+                    var return_v = this_param.IsValueType;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 55743, 55764);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_55860_55898()
+                {
+                    var return_v = PSDataBufferStrings.ValueNullReference;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 55860, 55898);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentNullException
+                f_1480_55812_55899(string
+                paramName, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentNullException(paramName, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 55812, 55899);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_56054_56100()
+                {
+                    var return_v = PSDataBufferStrings.CannotConvertToGenericType;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 56054, 56100);
+                    return return_v;
+                }
+
+
+                System.Type
+                f_1480_56160_56175(object
+                this_param)
+                {
+                    var return_v = this_param.GetType();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 56160, 56175);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_56160_56184(System.Type
+                this_param)
+                {
+                    var return_v = this_param.FullName;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 56160, 56184);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_56244_56262(System.Type
+                this_param)
+                {
+                    var return_v = this_param.FullName;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 56244, 56262);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSArgumentException
+                f_1480_56010_56263(string
+                paramName, string
+                resourceString, params object[]
+                args)
+                {
+                    var return_v = PSTraceSource.NewArgumentException(paramName, resourceString, args);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 56010, 56263);
+                    return return_v;
+                }
+
             }
-            else if (!(value is T))
+            catch
             {
-                throw PSTraceSource.NewArgumentException("value", PSDataBufferStrings.CannotConvertToGenericType,
-                                                         value.GetType().FullName,
-                                                         typeof(T).FullName);
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 55614, 56290);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 55614, 56290);
             }
         }
 
-        // Serializes an object, as long as it's not serialized.
         private PSObject GetSerializedObject(object value)
         {
-            // This is a safe cast, as this method is only called with "SerializeInput" is set,
-            // and that method throws if the collection type is not PSObject.
-            PSObject result = value as PSObject;
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 56368, 57228);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 56619, 56655);
 
-            // Check if serialization would be idempotent
-            if (SerializationWouldHaveNoEffect(result))
-            {
-                return result;
-            }
-            else
-            {
-                object deserialized = PSSerializer.Deserialize(PSSerializer.Serialize(value));
-                if (deserialized == null)
+                PSObject
+                result = value as PSObject
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 56730, 57217) || true) && (f_1480_56734_56772(this, result))
+                )
+
                 {
-                    return null;
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 56730, 57217);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 56806, 56820);
+
+                    return result;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 56730, 57217);
                 }
+
                 else
+
                 {
-                    return PSObject.AsPSObject(deserialized);
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 56730, 57217);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 56886, 56964);
+
+                    object
+                    deserialized = f_1480_56908_56963(f_1480_56933_56962(value))
+                    ;
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 56982, 57202) || true) && (deserialized == null)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 56982, 57202);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57048, 57060);
+
+                        return null;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 56982, 57202);
+                    }
+
+                    else
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 56982, 57202);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57142, 57183);
+
+                        return f_1480_57149_57182(deserialized);
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 56982, 57202);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 56730, 57217);
                 }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 56368, 57228);
+
+                bool
+                f_1480_56734_56772(System.Management.Automation.PSDataCollection<T>
+                this_param, System.Management.Automation.PSObject
+                result)
+                {
+                    var return_v = this_param.SerializationWouldHaveNoEffect(result);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 56734, 56772);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_56933_56962(object
+                source)
+                {
+                    var return_v = PSSerializer.Serialize(source);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 56933, 56962);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_56908_56963(string
+                source)
+                {
+                    var return_v = PSSerializer.Deserialize(source);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 56908, 56963);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSObject
+                f_1480_57149_57182(object
+                obj)
+                {
+                    var return_v = PSObject.AsPSObject(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 57149, 57182);
+                    return return_v;
+                }
+
             }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 56368, 57228);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 56368, 57228);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
         private bool SerializationWouldHaveNoEffect(PSObject result)
         {
-            if (result == null)
+            try
             {
-                return true;
-            }
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 57240, 58206);
 
-            object baseObject = PSObject.Base(result);
-            if (baseObject == null)
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57325, 57404) || true) && (result == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 57325, 57404);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57377, 57389);
+
+                    return true;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 57325, 57404);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57420, 57462);
+
+                object
+                baseObject = f_1480_57440_57461(result)
+                ;
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57476, 57559) || true) && (baseObject == null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 57476, 57559);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57532, 57544);
+
+                    return true;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 57476, 57559);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57628, 57754) || true) && (f_1480_57632_57693(f_1480_57672_57692(baseObject)))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 57628, 57754);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57727, 57739);
+
+                    return true;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 57628, 57754);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57811, 57937) || true) && (baseObject is Microsoft.Management.Infrastructure.CimInstance)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 57811, 57937);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 57910, 57922);
+
+                    return true;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 57811, 57937);
+                }
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58019, 58166) || true) && (f_1480_58023_58105(f_1480_58023_58042(f_1480_58023_58039(result), 0), "Deserialized", StringComparison.OrdinalIgnoreCase))
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 58019, 58166);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58139, 58151);
+
+                    return true;
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 58019, 58166);
+                }
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58182, 58195);
+
+                return false;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 57240, 58206);
+
+                object
+                f_1480_57440_57461(System.Management.Automation.PSObject
+                obj)
+                {
+                    var return_v = PSObject.Base((object)obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 57440, 57461);
+                    return return_v;
+                }
+
+
+                System.Type
+                f_1480_57672_57692(object
+                this_param)
+                {
+                    var return_v = this_param.GetType();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 57672, 57692);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_57632_57693(System.Type
+                input)
+                {
+                    var return_v = InternalSerializer.IsPrimitiveKnownType(input);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 57632, 57693);
+                    return return_v;
+                }
+
+
+                System.Collections.ObjectModel.Collection<string>
+                f_1480_58023_58039(System.Management.Automation.PSObject
+                this_param)
+                {
+                    var return_v = this_param.TypeNames;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 58023, 58039);
+                    return return_v;
+                }
+
+
+                string
+                f_1480_58023_58042(System.Collections.ObjectModel.Collection<string>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 58023, 58042);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_58023_58105(string
+                this_param, string
+                value, System.StringComparison
+                comparisonType)
+                {
+                    var return_v = this_param.StartsWith(value, comparisonType);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 58023, 58105);
+                    return return_v;
+                }
+
+            }
+            catch
             {
-                return true;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 57240, 58206);
+                throw;
             }
-
-            // Check if it's a primitive known type
-            if (InternalSerializer.IsPrimitiveKnownType(baseObject.GetType()))
+            finally
             {
-                return true;
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 57240, 58206);
             }
-
-            // Check if it's a CIM type
-            if (baseObject is Microsoft.Management.Infrastructure.CimInstance)
-            {
-                return true;
-            }
-
-            // Check if it's got "Deserialized" in its type name
-            if (result.TypeNames[0].StartsWith("Deserialized", StringComparison.OrdinalIgnoreCase))
-            {
-                return true;
-            }
-
-            return false;
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Sync object for this collection.
-        /// </summary>
-        internal object SyncObject { get; } = new object();
+        internal object SyncObject { get; }
 
-        /// <summary>
-        /// Reference count variable.
-        /// </summary>
         internal int RefCount
         {
             get
             {
-                return _refCount;
-            }
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 58506, 58574);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58542, 58559);
 
+                    return _refCount;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 58506, 58574);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 58460, 58747);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 58460, 58747);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                lock (SyncObject)
+                try
                 {
-                    _refCount = value;
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 58590, 58736);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58632, 58642);
+                    lock (f_1480_58632_58642())
+                    {
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58684, 58702);
+
+                        _refCount = value;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 58590, 58736);
+
+                    object
+                    f_1480_58632_58642()
+                    {
+                        var return_v = SyncObject;
+                        DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 58632, 58642);
+                        return return_v;
+                    }
+
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 58460, 58747);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 58460, 58747);
                 }
             }
         }
 
-        #endregion
-
-        #region Idle event
-
-        /// <summary>
-        /// Indicates whether or not the collection should pulse idle events.
-        /// </summary>
         internal bool PulseIdleEvent
         {
-            get { return (IdleEvent != null); }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 58990, 59025);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 58996, 59023);
+
+                    return (IdleEvent != null);
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 58990, 59025);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 58937, 59036);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 58937, 59036);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
         }
 
-        internal event EventHandler<EventArgs> IdleEvent;
+        internal event EventHandler<EventArgs>
+IdleEvent
+;
 
-        /// <summary>
-        /// Fires an idle event.
-        /// </summary>
         internal void FireIdleEvent()
         {
-            IdleEvent.SafeInvoke(this, null);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 59190, 59288);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 59244, 59277);
+
+                f_1480_59244_59276(IdleEvent, this, null);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 59190, 59288);
+
+                int
+                f_1480_59244_59276(System.EventHandler<System.EventArgs>
+                eventHandler, System.Management.Automation.PSDataCollection<T>
+                sender, System.EventArgs
+                eventArgs)
+                {
+                    eventHandler.SafeInvoke<System.EventArgs>((object)sender, eventArgs);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 59244, 59276);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 59190, 59288);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 59190, 59288);
+            }
         }
 
-        /// <summary>
-        /// Pulses the collection.
-        /// </summary>
         internal void Pulse()
         {
-            lock (SyncObject)
+            try
             {
-                Monitor.PulseAll(SyncObject);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 59383, 59534);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 59435, 59445);
+                lock (f_1480_59435_59445())
+                {
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 59479, 59508);
+
+                    f_1480_59479_59507(f_1480_59496_59506());
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 59383, 59534);
+
+                object
+                f_1480_59435_59445()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 59435, 59445);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_59496_59506()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 59496, 59506);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_59479_59507(object
+                obj)
+                {
+                    Monitor.PulseAll(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 59479, 59507);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 59383, 59534);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 59383, 59534);
             }
         }
 
-        #endregion
-
-        #region IDisposable Overrides
-
-        /// <summary>
-        /// Public dispose method.
-        /// </summary>
         public void Dispose()
         {
-            Dispose(true);
-
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
-        /// Release all the resources.
-        /// </summary>
-        /// <param name="disposing">If true, release all managed resources.</param>
-        protected void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
-                if (_isDisposed)
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 59692, 59805);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 59738, 59752);
+
+                f_1480_59738_59751(this, true);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 59768, 59794);
+
+                f_1480_59768_59793(this);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 59692, 59805);
+
+                int
+                f_1480_59738_59751(System.Management.Automation.PSDataCollection<T>
+                this_param, bool
+                disposing)
                 {
-                    return;
+                    this_param.Dispose(disposing);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 59738, 59751);
+                    return 0;
                 }
 
-                lock (SyncObject)
-                {
-                    if (_isDisposed)
-                    {
-                        return;
-                    }
 
-                    _isDisposed = true;
+                int
+                f_1480_59768_59793(System.Management.Automation.PSDataCollection<T>
+                obj)
+                {
+                    GC.SuppressFinalize((object)obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 59768, 59793);
+                    return 0;
                 }
 
-                Complete();
-
-                lock (SyncObject)
-                {
-                    if (_readWaitHandle != null)
-                    {
-                        _readWaitHandle.Dispose();
-                        _readWaitHandle = null;
-                    }
-
-                    if (_data != null)
-                    {
-                        _data.Clear();
-                    }
-                }
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 59692, 59805);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 59692, 59805);
             }
         }
-        #endregion IDisposable Overrides
+
+        protected void Dispose(bool disposing)
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 59989, 60874);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60052, 60863) || true) && (disposing)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 60052, 60863);
+
+                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60099, 60182) || true) && (_isDisposed)
+                    )
+
+                    {
+                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 60099, 60182);
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60156, 60163);
+
+                        return;
+                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 60099, 60182);
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60208, 60218);
+
+                    lock (f_1480_60208_60218())
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60260, 60355) || true) && (_isDisposed)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 60260, 60355);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60325, 60332);
+
+                            return;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 60260, 60355);
+                        }
+                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60379, 60398);
+
+                        _isDisposed = true;
+                    }
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60437, 60448);
+
+                    f_1480_60437_60447(this);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60474, 60484);
+
+                    lock (f_1480_60474_60484())
+                    {
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60526, 60701) || true) && (_readWaitHandle != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 60526, 60701);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60603, 60629);
+
+                            f_1480_60603_60628(_readWaitHandle);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60655, 60678);
+
+                            _readWaitHandle = null;
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 60526, 60701);
+                        }
+
+                        if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60725, 60829) || true) && (_data != null)
+                        )
+
+                        {
+                            DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 60725, 60829);
+                            DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 60792, 60806);
+
+                            f_1480_60792_60805(_data);
+                            DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 60725, 60829);
+                        }
+                    }
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 60052, 60863);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 59989, 60874);
+
+                object
+                f_1480_60208_60218()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 60208, 60218);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_60437_60447(System.Management.Automation.PSDataCollection<T>
+                this_param)
+                {
+                    this_param.Complete();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 60437, 60447);
+                    return 0;
+                }
+
+
+                object
+                f_1480_60474_60484()
+                {
+                    var return_v = SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 60474, 60484);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_60603_60628(System.Threading.ManualResetEvent
+                this_param)
+                {
+                    this_param.Dispose();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 60603, 60628);
+                    return 0;
+                }
+
+
+                int
+                f_1480_60792_60805(System.Collections.Generic.IList<T>
+                this_param)
+                {
+                    this_param.Clear();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 60792, 60805);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 59989, 60874);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 59989, 60874);
+            }
+        }
+
+        static PSDataCollection()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1480, 3215, 60923);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1480, 3215, 60923);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 3215, 60923);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1480, 3215, 60923);
+
+        static System.Collections.Generic.List<T>
+        f_1480_4517_4530()
+        {
+            // LAFHIS
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1480, 4484, 4553);
+
+            var return_v = new System.Collections.Generic.List<T>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 4517, 4530);
+            return return_v;
+        }
+
+
+        static System.Collections.Generic.IList<T>
+        f_1480_4517_4530_C(System.Collections.Generic.IList<T>
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1480, 4484, 4553);
+            return return_v;
+        }
+
+
+        static System.Collections.Generic.List<T>
+        f_1480_5244_5262(System.Collections.Generic.IEnumerable<T>
+        collection)
+        {
+            var return_v = new System.Collections.Generic.List<T>(collection);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 5244, 5262);
+            return return_v;
+        }
+
+
+        int
+        f_1480_5288_5303(System.Management.Automation.PSDataCollection<T>
+        this_param)
+        {
+            this_param.Complete();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 5288, 5303);
+            return 0;
+        }
+
+
+        static System.Collections.Generic.IList<T>
+        f_1480_5244_5262_C(System.Collections.Generic.IList<T>
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1480, 5191, 5315);
+            return return_v;
+        }
+
+
+        static System.Collections.Generic.List<T>
+        f_1480_5850_5871(int
+        capacity)
+        {
+            var return_v = new System.Collections.Generic.List<T>(capacity);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 5850, 5871);
+            return return_v;
+        }
+
+
+        static System.Collections.Generic.IList<T>
+        f_1480_5850_5871_C(System.Collections.Generic.IList<T>
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceBaseCall(1480, 5805, 5894);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1480_12574_12620(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 12574, 12620);
+            return return_v;
+        }
+
+
+        object?
+        f_1480_12673_12712(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name, System.Type
+        type)
+        {
+            var return_v = this_param.GetValue(name, type);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 12673, 12712);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSArgumentNullException
+        f_1480_12802_12848(string
+        paramName)
+        {
+            var return_v = PSTraceSource.NewArgumentNullException(paramName);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 12802, 12848);
+            return return_v;
+        }
+
+
+        bool
+        f_1480_12936_12973(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetBoolean(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 12936, 12973);
+            return return_v;
+        }
+
+
+        int
+        f_1480_13010_13041(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetInt32(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 13010, 13041);
+            return return_v;
+        }
+
+
+        bool
+        f_1480_13080_13120(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetBoolean(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 13080, 13120);
+            return return_v;
+        }
+
+
+        bool
+        f_1480_13145_13170(System.Runtime.Serialization.SerializationInfo
+        this_param, string
+        name)
+        {
+            var return_v = this_param.GetBoolean(name);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 13145, 13170);
+            return return_v;
+        }
+
+
+        object
+        f_1480_58349_58361()
+        {
+            var return_v = new object();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 58349, 58361);
+            return return_v;
+        }
+
     }
 
-    #endregion
 
     /// <summary>
     /// Interface to support PSDataCollectionEnumerator.
@@ -1826,341 +5383,984 @@ namespace System.Management.Automation
     /// <typeparam name="W"></typeparam>
     internal interface IBlockingEnumerator<out W> : IEnumerator<W>
     {
+
         bool MoveNext(bool block);
     }
-
-    #region PSDataCollectionEnumerator
-
-    /// <summary>
-    /// Enumerator for PSDataCollection. This enumerator blocks until
-    /// either all the PowerShell operations are completed or the
-    /// PSDataCollection is closed.
-    /// </summary>
-    /// <typeparam name="W"></typeparam>
     internal sealed class PSDataCollectionEnumerator<W> : IBlockingEnumerator<W>
     {
-        #region Private Data
-
         private W _currentElement;
+
         private int _index;
+
         private PSDataCollection<W> _collToEnumerate;
+
         private bool _neverBlock;
 
-        #endregion
-
-        #region Constructor
-
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="collection">
-        /// PSDataCollection to enumerate.
-        /// </param>
-        /// <param name="neverBlock">
-        /// Controls if the enumerator is blocking by default or not.
-        /// </param>
         internal PSDataCollectionEnumerator(PSDataCollection<W> collection, bool neverBlock)
         {
-            Dbg.Assert(collection != null,
-                "Collection cannot be null");
-            Dbg.Assert(!collection.ReleaseOnEnumeration || !collection.IsEnumerated,
-                "shouldn't enumerate more than once if ReleaseOnEnumeration is true");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 62245, 62820);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 61735, 61750);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 61773, 61779);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 61818, 61834);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 61858, 61869);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62354, 62431);
 
-            _collToEnumerate = collection;
-            _index = 0;
-            _currentElement = default(W);
-            _collToEnumerate.IsEnumerated = true;
-            _neverBlock = neverBlock;
+                f_1480_62354_62430(collection != null, "Collection cannot be null");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62445, 62605);
+
+                f_1480_62445_62604(f_1480_62456_62488_M(!collection.ReleaseOnEnumeration) || (DynAbs.Tracing.TraceSender.Expression_False(1480, 62456, 62516) || f_1480_62492_62516_M(!collection.IsEnumerated)), "shouldn't enumerate more than once if ReleaseOnEnumeration is true");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62621, 62651);
+
+                _collToEnumerate = collection;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62665, 62676);
+
+                _index = 0;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62690, 62719);
+
+                _currentElement = default(W);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62733, 62770);
+
+                _collToEnumerate.IsEnumerated = true;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 62784, 62809);
+
+                _neverBlock = neverBlock;
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 62245, 62820);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 62245, 62820);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 62245, 62820);
+            }
         }
 
-        #endregion
-
-        #region IEnumerator Overrides
-
-        /// <summary>
-        /// Gets the element in the collection at the current position
-        /// of the enumerator.
-        /// </summary>
-        /// <remarks>
-        /// For better performance, this property does not throw an exception
-        /// if the enumerator is positioned before the first element or after
-        /// the last element; the value of the property is undefined.
-        /// </remarks>
         W IEnumerator<W>.Current
         {
             get
             {
-                return _currentElement;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 63371, 63445);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 63407, 63430);
+
+                    return _currentElement;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 63371, 63445);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 63322, 63456);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 63322, 63456);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Gets the element in the collection at the current position
-        /// of the enumerator.
-        /// </summary>
-        /// <remarks>
-        /// For better performance, this property does not throw an exception
-        /// if the enumerator is positioned before the first element or after
-        /// the last element; the value of the property is undefined.
-        /// </remarks>
         public object Current
         {
             get
             {
-                return _currentElement;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 63941, 64015);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 63977, 64000);
+
+                    return _currentElement;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 63941, 64015);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 63895, 64026);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 63895, 64026);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
             }
         }
 
-        /// <summary>
-        /// Advances the enumerator to the next element in the collection.
-        /// </summary>
-        /// <returns>
-        /// true if the enumerator successfully advanced to the next element;
-        /// otherwise, false.
-        /// </returns>
-        /// <remarks>
-        /// This will block if the original collection is attached to any
-        /// active PowerShell instances and the original collection is not
-        /// closed.
-        /// </remarks>
         public bool MoveNext()
         {
-            return MoveNext(_neverBlock == false);
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 64537, 64633);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 64584, 64622);
+
+                return f_1480_64591_64621(this, _neverBlock == false);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 64537, 64633);
+
+                bool
+                f_1480_64591_64621(System.Management.Automation.PSDataCollectionEnumerator<W>
+                this_param, bool
+                block)
+                {
+                    var return_v = this_param.MoveNext(block);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 64591, 64621);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 64537, 64633);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 64537, 64633);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
         }
 
-        /// <summary>
-        /// Advances the enumerator to the next element in the collection.
-        /// </summary>
-        /// <returns>
-        /// true if the enumerator successfully advanced to the next element;
-        /// otherwise, false.
-        /// </returns>
-        /// <param name="block">True - to block when no elements are available.</param>
         public bool MoveNext(bool block)
         {
-            lock (_collToEnumerate.SyncObject)
+            try
             {
-                do
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 65014, 66771);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65077, 65104);
+                lock (f_1480_65077_65104(_collToEnumerate))
                 {
-                    if (_index < _collToEnumerate.Count)
                     {
-                        _currentElement = _collToEnumerate[_index];
-                        if (_collToEnumerate.ReleaseOnEnumeration)
+                        try
                         {
-                            _collToEnumerate[_index] = default(W);
+                            do
+
+                            {
+                                DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 65138, 66745);
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65181, 65597) || true) && (_index < f_1480_65194_65216(_collToEnumerate))
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 65181, 65597);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65266, 65309);
+
+                                    _currentElement = f_1480_65284_65308(_collToEnumerate, _index);
+
+                                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65335, 65499) || true) && (f_1480_65339_65376(_collToEnumerate))
+                                    )
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 65335, 65499);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65434, 65472);
+
+                                        _collToEnumerate[_index] = default(W);
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 65335, 65499);
+                                    }
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65527, 65536);
+
+                                    _index++;
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65562, 65574);
+
+                                    return true;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 65181, 65597);
+                                }
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65783, 65935) || true) && ((0 == f_1480_65793_65818(_collToEnumerate)) || (DynAbs.Tracing.TraceSender.Expression_False(1480, 65787, 65849) || (f_1480_65824_65848_M(!_collToEnumerate.IsOpen))))
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 65783, 65935);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65899, 65912);
+
+                                    return false;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 65783, 65935);
+                                }
+
+                                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65959, 66712) || true) && (block)
+                                )
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 65959, 66712);
+
+                                    if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 66018, 66578) || true) && (f_1480_66022_66053(_collToEnumerate))
+                                    )
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 66018, 66578);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 66111, 66144);
+
+                                        f_1480_66111_66143(_collToEnumerate);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 66174, 66216);
+
+                                        f_1480_66174_66215(f_1480_66187_66214(_collToEnumerate));
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 66018, 66578);
+                                    }
+
+                                    else
+
+                                    {
+                                        DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 66018, 66578);
+                                        DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 66509, 66551);
+
+                                        f_1480_66509_66550(f_1480_66522_66549(_collToEnumerate));
+                                        DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 66018, 66578);
+                                    }
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 65959, 66712);
+                                }
+
+                                else
+
+                                {
+                                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 65959, 66712);
+                                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 66676, 66689);
+
+                                    return false;
+                                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 65959, 66712);
+                                }
+                                DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 65138, 66745);
+                            }
+                            while ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 65138, 66745) || true) && (true)
+                            );
                         }
-
-                        _index++;
-                        return true;
-                    }
-
-                    // we have reached the end if either the collection is closed
-                    // or no powershell instance is bound to this collection.
-                    if ((0 == _collToEnumerate.RefCount) || (!_collToEnumerate.IsOpen))
-                    {
-                        return false;
-                    }
-
-                    if (block)
-                    {
-                        if (_collToEnumerate.PulseIdleEvent)
+                        catch (System.Exception)
                         {
-                            _collToEnumerate.FireIdleEvent();
-                            Monitor.Wait(_collToEnumerate.SyncObject);
+                            DynAbs.Tracing.TraceSender.TraceExitLoopByException(1480, 65138, 66745);
+                            throw;
                         }
-                        else
+                        finally
                         {
-                            // using light-weight monitor to block the current thread instead
-                            // of AutoResetEvent. This saves using Kernel objects.
-                            Monitor.Wait(_collToEnumerate.SyncObject);
+                            DynAbs.Tracing.TraceSender.TraceExitLoop(1480, 65138, 66745);
                         }
                     }
-                    else
-                    {
-                        return false;
-                    }
-                } while (true);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 65014, 66771);
+
+                object
+                f_1480_65077_65104(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 65077, 65104);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_65194_65216(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.Count;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 65194, 65216);
+                    return return_v;
+                }
+
+
+                W
+                f_1480_65284_65308(System.Management.Automation.PSDataCollection<W>
+                this_param, int
+                i0)
+                {
+                    var return_v = this_param[i0];
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 65284, 65308);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_65339_65376(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.ReleaseOnEnumeration;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 65339, 65376);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_65793_65818(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.RefCount;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 65793, 65818);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_65824_65848_M(bool
+                i)
+                {
+                    var return_v = i;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 65824, 65848);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_66022_66053(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.PulseIdleEvent;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 66022, 66053);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_66111_66143(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    this_param.FireIdleEvent();
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 66111, 66143);
+                    return 0;
+                }
+
+
+                object
+                f_1480_66187_66214(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 66187, 66214);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_66174_66215(object
+                obj)
+                {
+                    var return_v = Monitor.Wait(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 66174, 66215);
+                    return return_v;
+                }
+
+
+                object
+                f_1480_66522_66549(System.Management.Automation.PSDataCollection<W>
+                this_param)
+                {
+                    var return_v = this_param.SyncObject;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 66522, 66549);
+                    return return_v;
+                }
+
+
+                bool
+                f_1480_66509_66550(object
+                obj)
+                {
+                    var return_v = Monitor.Wait(obj);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 66509, 66550);
+                    return return_v;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 65014, 66771);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 65014, 66771);
+            }
+            throw new System.Exception("Slicer error: unreachable code");
+        }
+
+        public void Reset()
+        {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 66956, 67065);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 67000, 67029);
+
+                _currentElement = default(W);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 67043, 67054);
+
+                _index = 0;
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 66956, 67065);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 66956, 67065);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 66956, 67065);
             }
         }
 
-        /// <summary>
-        /// Resets the enumerator to its initial position,
-        /// which is before the first element in the collection.
-        /// </summary>
-        public void Reset()
-        {
-            _currentElement = default(W);
-            _index = 0;
-        }
-
-        /// <summary>
-        /// </summary>
         void IDisposable.Dispose()
         {
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 67124, 67172);
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 67124, 67172);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 67124, 67172);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 67124, 67172);
+            }
         }
 
-        #endregion
+        static PSDataCollectionEnumerator()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1480, 61600, 67201);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1480, 61600, 67201);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 61600, 67201);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1480, 61600, 67201);
+
+        int
+        f_1480_62354_62430(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 62354, 62430);
+            return 0;
+        }
+
+
+        bool
+        f_1480_62456_62488_M(bool
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 62456, 62488);
+            return return_v;
+        }
+
+
+        bool
+        f_1480_62492_62516_M(bool
+        i)
+        {
+            var return_v = i;
+            DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 62492, 62516);
+            return return_v;
+        }
+
+
+        int
+        f_1480_62445_62604(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 62445, 62604);
+            return 0;
+        }
+
     }
-
-    #endregion
-
-    /// <summary>
-    /// Class that represents various informational buffers like
-    /// verbose, debug, warning, progress, information used with command invocation.
-    /// </summary>
     internal sealed class PSInformationalBuffers
     {
         private Guid _psInstanceId;
 
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        /// <param name="psInstanceId">
-        /// Guid of Powershell instance creating this buffers.
-        /// Whenever an item is added to one of the buffers, this id is
-        /// used to notify the buffer about the PowerShell instance adding
-        /// this data.
-        /// </param>
         internal PSInformationalBuffers(Guid psInstanceId)
         {
-            Dbg.Assert(psInstanceId != Guid.Empty,
-                "PowerShell instance id cannot be Guid.Empty");
+            try
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterConstructor(1480, 67899, 68449);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68926, 68934);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69350, 69357);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69761, 69766);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69939, 70001);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 70177, 70247);
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 67974, 68077);
 
-            _psInstanceId = psInstanceId;
-            progress = new PSDataCollection<ProgressRecord>();
-            verbose = new PSDataCollection<VerboseRecord>();
-            debug = new PSDataCollection<DebugRecord>();
-            Warning = new PSDataCollection<WarningRecord>();
-            Information = new PSDataCollection<InformationRecord>();
+                f_1480_67974_68076(psInstanceId != Guid.Empty, "PowerShell instance id cannot be Guid.Empty");
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68093, 68122);
+
+                _psInstanceId = psInstanceId;
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68136, 68186);
+
+                progress = f_1480_68147_68185();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68200, 68248);
+
+                verbose = f_1480_68210_68247();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68262, 68306);
+
+                debug = f_1480_68270_68305();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68320, 68368);
+
+                Warning = f_1480_68330_68367();
+                DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68382, 68438);
+
+                Information = f_1480_68396_68437();
+                DynAbs.Tracing.TraceSender.TraceExitConstructor(1480, 67899, 68449);
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 67899, 68449);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 67899, 68449);
+            }
         }
 
-        #region Internal Methods / Properties
-
-        /// <summary>
-        /// A buffer representing Progress record objects of a PowerShell command invocation.
-        /// Can be null.
-        /// </summary>
         internal PSDataCollection<ProgressRecord> Progress
         {
-            get { return progress; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 68753, 68777);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68759, 68775);
 
+                    return progress;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 68753, 68777);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 68678, 68872);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 68678, 68872);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                progress = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 68793, 68861);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 68829, 68846);
+
+                    progress = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 68793, 68861);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 68678, 68872);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 68678, 68872);
+                }
             }
         }
 
         internal PSDataCollection<ProgressRecord> progress;
 
-        /// <summary>
-        /// A buffer representing Verbose objects of a PowerShell command invocation.
-        /// Can be null.
-        /// </summary>
         internal PSDataCollection<VerboseRecord> Verbose
         {
-            get { return verbose; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 69180, 69203);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69186, 69201);
 
+                    return verbose;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 69180, 69203);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 69107, 69297);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 69107, 69297);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                verbose = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 69219, 69286);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69255, 69271);
+
+                    verbose = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 69219, 69286);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 69107, 69297);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 69107, 69297);
+                }
             }
         }
 
         internal PSDataCollection<VerboseRecord> verbose;
 
-        /// <summary>
-        /// A buffer representing Debug objects of a PowerShell command invocation.
-        /// Can be null.
-        /// </summary>
         internal PSDataCollection<DebugRecord> Debug
         {
-            get { return debug; }
+            get
+            {
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 69597, 69618);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69603, 69616);
 
+                    return debug;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 69597, 69618);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 69528, 69710);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 69528, 69710);
+                }
+                throw new System.Exception("Slicer error: unreachable code");
+            }
             set
             {
-                debug = value;
+                try
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 69634, 69699);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 69670, 69684);
+
+                    debug = value;
+                    DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 69634, 69699);
+                }
+                catch
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 69528, 69710);
+                    throw;
+                }
+                finally
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 69528, 69710);
+                }
             }
         }
 
         internal PSDataCollection<DebugRecord> debug;
 
-        /// <summary>
-        /// A buffer representing Warning objects of a PowerShell command invocation.
-        /// Can be null.
-        /// </summary>
         internal PSDataCollection<WarningRecord> Warning { get; set; }
 
-        /// <summary>
-        /// A buffer representing Information objects of a PowerShell command invocation.
-        /// Can be null.
-        /// </summary>
         internal PSDataCollection<InformationRecord> Information { get; set; }
 
-        /// <summary>
-        /// Adds item to the progress buffer.
-        /// The item is added to the buffer along with PowerShell InstanceId.
-        /// </summary>
-        /// <param name="item"></param>
         internal void AddProgress(ProgressRecord item)
         {
-            if (progress != null)
+            try
             {
-                progress.InternalAdd(_psInstanceId, item);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 70473, 70666);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 70544, 70655) || true) && (progress != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 70544, 70655);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 70598, 70640);
+
+                    f_1480_70598_70639(progress, _psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 70544, 70655);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 70473, 70666);
+
+                int
+                f_1480_70598_70639(System.Management.Automation.PSDataCollection<System.Management.Automation.ProgressRecord>
+                this_param, System.Guid
+                psInstanceId, System.Management.Automation.ProgressRecord
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 70598, 70639);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 70473, 70666);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 70473, 70666);
             }
         }
 
-        /// <summary>
-        /// Adds item to the verbose buffer.
-        /// The item is added to the buffer along with PowerShell InstanceId.
-        /// </summary>
-        /// <param name="item"></param>
         internal void AddVerbose(VerboseRecord item)
         {
-            if (verbose != null)
+            try
             {
-                verbose.InternalAdd(_psInstanceId, item);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 70891, 71080);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 70960, 71069) || true) && (verbose != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 70960, 71069);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 71013, 71054);
+
+                    f_1480_71013_71053(verbose, _psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 70960, 71069);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 70891, 71080);
+
+                int
+                f_1480_71013_71053(System.Management.Automation.PSDataCollection<System.Management.Automation.VerboseRecord>
+                this_param, System.Guid
+                psInstanceId, System.Management.Automation.VerboseRecord
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 71013, 71053);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 70891, 71080);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 70891, 71080);
             }
         }
 
-        /// <summary>
-        /// Adds item to the debug buffer.
-        /// The item is added to the buffer along with PowerShell InstanceId.
-        /// </summary>
-        /// <param name="item"></param>
         internal void AddDebug(DebugRecord item)
         {
-            if (debug != null)
+            try
             {
-                debug.InternalAdd(_psInstanceId, item);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 71303, 71484);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 71368, 71473) || true) && (debug != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 71368, 71473);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 71419, 71458);
+
+                    f_1480_71419_71457(debug, _psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 71368, 71473);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 71303, 71484);
+
+                int
+                f_1480_71419_71457(System.Management.Automation.PSDataCollection<System.Management.Automation.DebugRecord>
+                this_param, System.Guid
+                psInstanceId, System.Management.Automation.DebugRecord
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 71419, 71457);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 71303, 71484);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 71303, 71484);
             }
         }
 
-        /// <summary>
-        /// Adds item to the warning buffer.
-        /// The item is added to the buffer along with PowerShell InstanceId.
-        /// </summary>
-        /// <param name="item"></param>
         internal void AddWarning(WarningRecord item)
         {
-            if (Warning != null)
+            try
             {
-                Warning.InternalAdd(_psInstanceId, item);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 71709, 71898);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 71778, 71887) || true) && (f_1480_71782_71789() != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 71778, 71887);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 71831, 71872);
+
+                    f_1480_71831_71871(f_1480_71831_71838(), _psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 71778, 71887);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 71709, 71898);
+
+                System.Management.Automation.PSDataCollection<System.Management.Automation.WarningRecord>
+                f_1480_71782_71789()
+                {
+                    var return_v = Warning;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 71782, 71789);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSDataCollection<System.Management.Automation.WarningRecord>
+                f_1480_71831_71838()
+                {
+                    var return_v = Warning;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 71831, 71838);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_71831_71871(System.Management.Automation.PSDataCollection<System.Management.Automation.WarningRecord>
+                this_param, System.Guid
+                psInstanceId, System.Management.Automation.WarningRecord
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 71831, 71871);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 71709, 71898);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 71709, 71898);
             }
         }
 
-        /// <summary>
-        /// Adds item to the information buffer.
-        /// The item is added to the buffer along with PowerShell InstanceId.
-        /// </summary>
-        /// <param name="item"></param>
         internal void AddInformation(InformationRecord item)
         {
-            if (Information != null)
+            try
             {
-                Information.InternalAdd(_psInstanceId, item);
+                DynAbs.Tracing.TraceSender.TraceEnterMethod(1480, 72127, 72332);
+
+                if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 72204, 72321) || true) && (f_1480_72208_72219() != null)
+                )
+
+                {
+                    DynAbs.Tracing.TraceSender.TraceEnterCondition(1480, 72204, 72321);
+                    DynAbs.Tracing.TraceSender.TraceSimpleStatement(1480, 72261, 72306);
+
+                    f_1480_72261_72305(f_1480_72261_72272(), _psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceExitCondition(1480, 72204, 72321);
+                }
+                DynAbs.Tracing.TraceSender.TraceExitMethod(1480, 72127, 72332);
+
+                System.Management.Automation.PSDataCollection<System.Management.Automation.InformationRecord>
+                f_1480_72208_72219()
+                {
+                    var return_v = Information;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 72208, 72219);
+                    return return_v;
+                }
+
+
+                System.Management.Automation.PSDataCollection<System.Management.Automation.InformationRecord>
+                f_1480_72261_72272()
+                {
+                    var return_v = Information;
+                    DynAbs.Tracing.TraceSender.TraceEndMemberAccess(1480, 72261, 72272);
+                    return return_v;
+                }
+
+
+                int
+                f_1480_72261_72305(System.Management.Automation.PSDataCollection<System.Management.Automation.InformationRecord>
+                this_param, System.Guid
+                psInstanceId, System.Management.Automation.InformationRecord
+                item)
+                {
+                    this_param.InternalAdd(psInstanceId, item);
+                    DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 72261, 72305);
+                    return 0;
+                }
+
+            }
+            catch
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1480, 72127, 72332);
+                throw;
+            }
+            finally
+            {
+                DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 72127, 72332);
             }
         }
 
-        #endregion
+        static PSInformationalBuffers()
+        {
+            DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1480, 67418, 72361);
+            DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1480, 67418, 72361);
+
+            DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1480, 67418, 72361);
+        }
+
+        int ___ignore_me___ = DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1480, 67418, 72361);
+
+        int
+        f_1480_67974_68076(bool
+        condition, string
+        whyThisShouldNeverHappen)
+        {
+            Dbg.Assert(condition, whyThisShouldNeverHappen);
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 67974, 68076);
+            return 0;
+        }
+
+
+        System.Management.Automation.PSDataCollection<System.Management.Automation.ProgressRecord>
+        f_1480_68147_68185()
+        {
+            var return_v = new System.Management.Automation.PSDataCollection<System.Management.Automation.ProgressRecord>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 68147, 68185);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSDataCollection<System.Management.Automation.VerboseRecord>
+        f_1480_68210_68247()
+        {
+            var return_v = new System.Management.Automation.PSDataCollection<System.Management.Automation.VerboseRecord>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 68210, 68247);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSDataCollection<System.Management.Automation.DebugRecord>
+        f_1480_68270_68305()
+        {
+            var return_v = new System.Management.Automation.PSDataCollection<System.Management.Automation.DebugRecord>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 68270, 68305);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSDataCollection<System.Management.Automation.WarningRecord>
+        f_1480_68330_68367()
+        {
+            var return_v = new System.Management.Automation.PSDataCollection<System.Management.Automation.WarningRecord>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 68330, 68367);
+            return return_v;
+        }
+
+
+        System.Management.Automation.PSDataCollection<System.Management.Automation.InformationRecord>
+        f_1480_68396_68437()
+        {
+            var return_v = new System.Management.Automation.PSDataCollection<System.Management.Automation.InformationRecord>();
+            DynAbs.Tracing.TraceSender.TraceEndInvocation(1480, 68396, 68437);
+            return return_v;
+        }
+
     }
 }

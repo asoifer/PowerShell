@@ -1,6 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-#if !UNIX
 
 namespace System.Management.Automation.Tracing
 {
@@ -15,46 +14,126 @@ namespace System.Management.Automation.Tracing
     public interface IEtwActivityReverter :
         IDisposable
     {
-        /// <summary>
-        ///     Reverts the ETW activity ID of the current thread to its original value.
-        /// </summary>
-        /// <remarks>
-        ///     <para>Calling <see cref="IDisposable.Dispose" /> has the same effect as
-        ///         calling this method and is useful in the C# "using" syntax.</para>
-        /// </remarks>
-        void RevertCurrentActivityId();
-    }
 
-    internal class EtwActivityReverter :
+void RevertCurrentActivityId();
+    }
+internal class EtwActivityReverter :
         IEtwActivityReverter
-    {
-        private readonly IEtwEventCorrelator _correlator;
-        private readonly Guid _oldActivityId;
+{
+private readonly IEtwEventCorrelator _correlator;
 
-        private bool _isDisposed;
+private readonly Guid _oldActivityId;
 
-        public EtwActivityReverter(IEtwEventCorrelator correlator, Guid oldActivityId)
+private bool _isDisposed;
+
+public EtwActivityReverter(IEtwEventCorrelator correlator, Guid oldActivityId)
+		{
+			try
+{DynAbs.Tracing.TraceSender.TraceEnterConstructor(1051,1351,1535);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1243,1254);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1327,1338);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1454,1479);
+
+_correlator = correlator;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1493,1524);
+
+_oldActivityId = oldActivityId;
+DynAbs.Tracing.TraceSender.TraceExitConstructor(1051,1351,1535);
+}catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1051,1351,1535);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1051,1351,1535);
+}
+		}
+
+public void RevertCurrentActivityId()
+		{
+			try
         {
-            _correlator = correlator;
-            _oldActivityId = oldActivityId;
-        }
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1051,1547,1630);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1609,1619);
 
-        public void RevertCurrentActivityId()
-        {
-            Dispose();
-        }
+f_1051_1609_1618(this);
+DynAbs.Tracing.TraceSender.TraceExitMethod(1051,1547,1630);
 
-        public void Dispose()
-        {
-            if (!_isDisposed)
-            {
-                _correlator.CurrentActivityId = _oldActivityId;
-                _isDisposed = true;
-
-                GC.SuppressFinalize(this);
-            }
-        }
-    }
+int
+f_1051_1609_1618(System.Management.Automation.Tracing.EtwActivityReverter
+this_param)
+{
+this_param.Dispose();
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1051, 1609, 1618);
+return 0;
 }
 
-#endif
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1051,1547,1630);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1051,1547,1630);
+}
+		}
+
+public void Dispose()
+		{
+			try
+        {
+DynAbs.Tracing.TraceSender.TraceEnterMethod(1051,1642,1894);
+
+if ((DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1688,1883) || true) && (!_isDisposed)
+)
+
+{DynAbs.Tracing.TraceSender.TraceEnterCondition(1051,1688,1883);
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1738,1785);
+
+_correlator.CurrentActivityId = _oldActivityId;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1803,1822);
+
+_isDisposed = true;
+DynAbs.Tracing.TraceSender.TraceSimpleStatement(1051,1842,1868);
+
+f_1051_1842_1867(this);
+DynAbs.Tracing.TraceSender.TraceExitCondition(1051,1688,1883);
+}
+DynAbs.Tracing.TraceSender.TraceExitMethod(1051,1642,1894);
+
+int
+f_1051_1842_1867(System.Management.Automation.Tracing.EtwActivityReverter
+obj)
+{
+GC.SuppressFinalize( (object)obj);
+DynAbs.Tracing.TraceSender.TraceEndInvocation(1051, 1842, 1867);
+return 0;
+}
+
+        }
+catch
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1051,1642,1894);
+throw;
+}
+finally
+{
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1051,1642,1894);
+}
+		}
+
+static EtwActivityReverter()
+{
+DynAbs.Tracing.TraceSender.TraceEnterStaticConstructor(1051,1123,1901);
+DynAbs.Tracing.TraceSender.TraceExitStaticConstructor(1051,1123,1901);
+
+DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1051,1123,1901);
+}
+
+		int ___ignore_me___=DynAbs.Tracing.TraceSender.TraceBeforeConstructor(1051,1123,1901);
+}
+}
+
