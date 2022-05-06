@@ -125,12 +125,12 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.EnableScripts, b.EnableScripts);
-                Assert.Equal(a.ExecutionPolicy, b.ExecutionPolicy);
+                CustomAssert.Equal(a.EnableScripts, b.EnableScripts);
+                CustomAssert.Equal(a.ExecutionPolicy, b.ExecutionPolicy);
             }
         }
 
@@ -138,12 +138,12 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.EnableScriptBlockInvocationLogging, b.EnableScriptBlockInvocationLogging);
-                Assert.Equal(a.EnableScriptBlockLogging, b.EnableScriptBlockLogging);
+                CustomAssert.Equal(a.EnableScriptBlockInvocationLogging, b.EnableScriptBlockInvocationLogging);
+                CustomAssert.Equal(a.EnableScriptBlockLogging, b.EnableScriptBlockLogging);
             }
         }
 
@@ -151,21 +151,21 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.EnableModuleLogging, b.EnableModuleLogging);
+                CustomAssert.Equal(a.EnableModuleLogging, b.EnableModuleLogging);
                 if (a.ModuleNames == null)
                 {
-                    Assert.Null(b.ModuleNames);
+                    CustomAssert.Null(b.ModuleNames);
                 }
                 else
                 {
-                    Assert.Equal(a.ModuleNames.Length, b.ModuleNames.Length);
+                    CustomAssert.Equal(a.ModuleNames.Length, b.ModuleNames.Length);
                     for (int i = 0; i < a.ModuleNames.Length; i++)
                     {
-                        Assert.Equal(a.ModuleNames[i], b.ModuleNames[i]);
+                        CustomAssert.Equal(a.ModuleNames[i], b.ModuleNames[i]);
                     }
                 }
             }
@@ -175,21 +175,21 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.EnableProtectedEventLogging, b.EnableProtectedEventLogging);
+                CustomAssert.Equal(a.EnableProtectedEventLogging, b.EnableProtectedEventLogging);
                 if (a.EncryptionCertificate == null)
                 {
-                    Assert.Null(b.EncryptionCertificate);
+                    CustomAssert.Null(b.EncryptionCertificate);
                 }
                 else
                 {
-                    Assert.Equal(a.EncryptionCertificate.Length, b.EncryptionCertificate.Length);
+                    CustomAssert.Equal(a.EncryptionCertificate.Length, b.EncryptionCertificate.Length);
                     for (int i = 0; i < a.EncryptionCertificate.Length; i++)
                     {
-                        Assert.Equal(a.EncryptionCertificate[i], b.EncryptionCertificate[i]);
+                        CustomAssert.Equal(a.EncryptionCertificate[i], b.EncryptionCertificate[i]);
                     }
                 }
             }
@@ -199,13 +199,13 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.EnableTranscripting, b.EnableTranscripting);
-                Assert.Equal(a.EnableInvocationHeader, b.EnableInvocationHeader);
-                Assert.Equal(a.OutputDirectory, b.OutputDirectory);
+                CustomAssert.Equal(a.EnableTranscripting, b.EnableTranscripting);
+                CustomAssert.Equal(a.EnableInvocationHeader, b.EnableInvocationHeader);
+                CustomAssert.Equal(a.OutputDirectory, b.OutputDirectory);
             }
         }
 
@@ -213,11 +213,11 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.DefaultSourcePath, b.DefaultSourcePath);
+                CustomAssert.Equal(a.DefaultSourcePath, b.DefaultSourcePath);
             }
         }
 
@@ -225,12 +225,12 @@ namespace PSTests.Sequential
         {
             if (a == null)
             {
-                Assert.Null(b);
+                CustomAssert.Null(b);
             }
             else
             {
-                Assert.Equal(a.EnableConsoleSessionConfiguration, b.EnableConsoleSessionConfiguration);
-                Assert.Equal(a.ConsoleSessionConfigurationName, b.ConsoleSessionConfigurationName);
+                CustomAssert.Equal(a.EnableConsoleSessionConfiguration, b.EnableConsoleSessionConfiguration);
+                CustomAssert.Equal(a.ConsoleSessionConfigurationName, b.ConsoleSessionConfigurationName);
             }
         }
 
@@ -390,8 +390,8 @@ namespace PSTests.Sequential
             var sysPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.AllUsers);
             var userPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.CurrentUser);
 
-            Assert.NotNull(sysPolicies);
-            Assert.NotNull(userPolicies);
+            CustomAssert.NotNull(sysPolicies);
+            CustomAssert.NotNull(userPolicies);
 
             fixture.CompareTwoPolicies(sysPolicies, fixture.SystemWidePolicies);
             fixture.CompareTwoPolicies(userPolicies, fixture.CurrentUserPolicies);
@@ -406,8 +406,8 @@ namespace PSTests.Sequential
             var sysPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.AllUsers);
             var userPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.CurrentUser);
 
-            Assert.NotNull(sysPolicies);
-            Assert.Null(userPolicies);
+            CustomAssert.NotNull(sysPolicies);
+            CustomAssert.Null(userPolicies);
 
             fixture.CompareTwoPolicies(sysPolicies, fixture.SystemWidePolicies);
         }
@@ -421,8 +421,8 @@ namespace PSTests.Sequential
             var sysPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.AllUsers);
             var userPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.CurrentUser);
 
-            Assert.Null(sysPolicies);
-            Assert.NotNull(userPolicies);
+            CustomAssert.Null(sysPolicies);
+            CustomAssert.NotNull(userPolicies);
 
             fixture.CompareTwoPolicies(userPolicies, fixture.CurrentUserPolicies);
         }
@@ -436,8 +436,8 @@ namespace PSTests.Sequential
             var sysPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.AllUsers);
             var userPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.CurrentUser);
 
-            Assert.Null(sysPolicies);
-            Assert.Null(userPolicies);
+            CustomAssert.Null(sysPolicies);
+            CustomAssert.Null(userPolicies);
         }
 
         [Fact, TestPriority(5)]
@@ -449,8 +449,8 @@ namespace PSTests.Sequential
             var sysPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.AllUsers);
             var userPolicies = PowerShellConfig.Instance.GetPowerShellPolicies(ConfigScope.CurrentUser);
 
-            Assert.Null(sysPolicies);
-            Assert.Null(userPolicies);
+            CustomAssert.Null(sysPolicies);
+            CustomAssert.Null(userPolicies);
         }
 
         [Fact, TestPriority(6)]

@@ -13,7 +13,7 @@ namespace PSTests.Parallel
         public static void TestIsStaticTypePossiblyEnumerable()
         {
             // It just needs an arbitrary type
-            Assert.False(PSEnumerableBinder.IsStaticTypePossiblyEnumerable(42.GetType()));
+            CustomAssert.False(PSEnumerableBinder.IsStaticTypePossiblyEnumerable(42.GetType()));
         }
     }
 }

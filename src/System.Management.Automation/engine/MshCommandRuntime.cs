@@ -419,7 +419,12 @@ namespace System.Management.Automation
                 // Break into the debugger if requested
                 if (preference == ActionPreference.Break)
                 {
-                    CBhost?.Runspace?.Debugger?.Break(progressRecord);
+                    // LAFHIS
+                    //CBhost?.Runspace?.Debugger?.Break(progressRecord);
+                    if (CBhost != null &&
+                        CBhost.Runspace != null &&
+                        CBhost.Runspace.Debugger != null)
+                        CBhost.Runspace.Debugger.Break(progressRecord);
                 }
 
                 ui.WriteProgress(sourceId, progressRecord);
@@ -490,7 +495,12 @@ namespace System.Management.Automation
                 // Break into the debugger if requested
                 if (preference == ActionPreference.Break)
                 {
-                    CBhost?.Runspace?.Debugger?.Break(record);
+                    // LAFHIS
+                    //CBhost?.Runspace?.Debugger?.Break(record);
+                    if (CBhost != null &&
+                        CBhost.Runspace != null &&
+                        CBhost.Runspace.Debugger != null)
+                        CBhost.Runspace.Debugger.Break(record);
                 }
 
                 if (DebugOutputPipe != null)
@@ -584,7 +594,12 @@ namespace System.Management.Automation
                 // Break into the debugger if requested
                 if (preference == ActionPreference.Break)
                 {
-                    CBhost?.Runspace?.Debugger?.Break(record);
+                    // LAFHIS
+                    //CBhost?.Runspace?.Debugger?.Break(record);
+                    if (CBhost != null &&
+                        CBhost.Runspace != null &&
+                        CBhost.Runspace.Debugger != null)
+                        CBhost.Runspace.Debugger.Break(record);
                 }
 
                 if (VerboseOutputPipe != null)
@@ -678,7 +693,12 @@ namespace System.Management.Automation
                 // Break into the debugger if requested
                 if (preference == ActionPreference.Break)
                 {
-                    CBhost?.Runspace?.Debugger?.Break(record);
+                    // LAFHIS
+                    //CBhost?.Runspace?.Debugger?.Break(record);
+                    if (CBhost != null &&
+                        CBhost.Runspace != null &&
+                        CBhost.Runspace.Debugger != null)
+                        CBhost.Runspace.Debugger.Break(record);
                 }
 
                 if (WarningOutputPipe != null)
@@ -744,7 +764,12 @@ namespace System.Management.Automation
             // Break into the debugger if requested
             if (preference == ActionPreference.Break)
             {
-                CBhost?.Runspace?.Debugger?.Break(record);
+                // LAFHIS
+                //CBhost?.Runspace?.Debugger?.Break(record);
+                if (CBhost != null &&
+                    CBhost.Runspace != null &&
+                    CBhost.Runspace.Debugger != null)
+                    CBhost.Runspace.Debugger.Break(record);
             }
 
             if (preference != ActionPreference.Ignore)
@@ -2717,7 +2742,12 @@ namespace System.Management.Automation
             // Break into the debugger if requested
             if (preference == ActionPreference.Break)
             {
-                CBhost?.Runspace?.Debugger?.Break(errorRecord);
+                // LAFHIS
+                //CBhost?.Runspace?.Debugger?.Break(errorRecord);
+                if (CBhost != null &&
+                    CBhost.Runspace != null &&
+                    CBhost.Runspace.Debugger != null)
+                    CBhost.Runspace.Debugger.Break(errorRecord);
             }
 
 #if CORECLR
@@ -3773,7 +3803,10 @@ namespace System.Management.Automation
                 this.OutputPipe.RemovePipelineVariable();
                 // '_state' could be null when a 'DynamicParam' block runs because the 'DynamicParam' block runs in 'DoPrepare',
                 // before 'PipelineProcessor.SetupParameterVariables' is called, where '_state' is initialized.
-                _state?.PSVariable.Remove(this.PipelineVariable);
+                
+                // LAFHIS
+                if (_state != null)
+                    _state.PSVariable.Remove(this.PipelineVariable);
             }
         }
     }

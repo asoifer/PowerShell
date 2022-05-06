@@ -42,8 +42,9 @@ namespace Microsoft.PowerShell
 
             // add "Administrator: " prefix into the window title, but don't wait for it to finish
             //   (we may load resources which can take some time)
-            Task.Run(() =>
-            {
+            // LAFHIS
+            //Task.Run(() =>
+            //{
                 WindowsIdentity identity = WindowsIdentity.GetCurrent();
                 WindowsPrincipal principal = new WindowsPrincipal(identity);
                 if (principal.IsInRole(WindowsBuiltInRole.Administrator))
@@ -63,7 +64,7 @@ namespace Microsoft.PowerShell
                             this.WindowTitle);
                     }
                 }
-            });
+            //});
         }
 
         /// <summary>

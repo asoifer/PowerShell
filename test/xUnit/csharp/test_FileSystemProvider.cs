@@ -71,11 +71,11 @@ namespace PSTests.Parallel
         {
             if (!Platform.IsWindows)
             {
-                Assert.False(InternalSymbolicLinkLinkCodeMethods.CreateJunction(string.Empty, string.Empty));
+                CustomAssert.False(InternalSymbolicLinkLinkCodeMethods.CreateJunction(string.Empty, string.Empty));
             }
             else
             {
-                Assert.Throws<System.ArgumentNullException>(delegate { InternalSymbolicLinkLinkCodeMethods.CreateJunction(string.Empty, string.Empty); });
+                CustomAssert.Throws<System.ArgumentNullException>(delegate { InternalSymbolicLinkLinkCodeMethods.CreateJunction(string.Empty, string.Empty); });
             }
         }
 
@@ -83,15 +83,15 @@ namespace PSTests.Parallel
         public void TestGetHelpMaml()
         {
             FileSystemProvider fileSystemProvider = new FileSystemProvider();
-            Assert.Equal(fileSystemProvider.GetHelpMaml(string.Empty, string.Empty), string.Empty);
-            Assert.Equal(fileSystemProvider.GetHelpMaml("helpItemName", string.Empty), string.Empty);
-            Assert.Equal(fileSystemProvider.GetHelpMaml(string.Empty, "path"), string.Empty);
+            CustomAssert.Equal(fileSystemProvider.GetHelpMaml(string.Empty, string.Empty), string.Empty);
+            CustomAssert.Equal(fileSystemProvider.GetHelpMaml("helpItemName", string.Empty), string.Empty);
+            CustomAssert.Equal(fileSystemProvider.GetHelpMaml(string.Empty, "path"), string.Empty);
         }
 
         [Fact]
         public void TestMode()
         {
-            Assert.Equal(FileSystemProvider.Mode(null), string.Empty);
+            CustomAssert.Equal(FileSystemProvider.Mode(null), string.Empty);
             FileSystemInfo directoryObject = null;
             FileSystemInfo fileObject = null;
             FileSystemInfo executableObject = null;
@@ -109,9 +109,9 @@ namespace PSTests.Parallel
                 executableObject = new FileInfo(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             }
 
-            Assert.Equal("d----", FileSystemProvider.Mode(PSObject.AsPSObject(directoryObject)).Replace("r", "-"));
-            Assert.Equal("-----", FileSystemProvider.Mode(PSObject.AsPSObject(fileObject)).Replace("r", "-").Replace("a", "-"));
-            Assert.Equal("-----", FileSystemProvider.Mode(PSObject.AsPSObject(executableObject)).Replace("r", "-").Replace("a", "-"));
+            CustomAssert.Equal("d----", FileSystemProvider.Mode(PSObject.AsPSObject(directoryObject)).Replace("r", "-"));
+            CustomAssert.Equal("-----", FileSystemProvider.Mode(PSObject.AsPSObject(fileObject)).Replace("r", "-").Replace("a", "-"));
+            CustomAssert.Equal("-----", FileSystemProvider.Mode(PSObject.AsPSObject(executableObject)).Replace("r", "-").Replace("a", "-"));
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace PSTests.Parallel
             FileInfo fileSystemObject1 = new FileInfo(testPath);
             PSObject psobject1 = PSObject.AsPSObject(fileSystemObject1);
             PSPropertyInfo property = psobject1.Properties["IsReadOnly"];
-            Assert.False((bool)property.Value);
+            CustomAssert.False((bool)property.Value);
         }
 
         [Fact]
@@ -143,7 +143,7 @@ namespace PSTests.Parallel
             PSObject psobject1 = PSObject.AsPSObject(fileSystemObject1);
             PSPropertyInfo property = psobject1.Properties["FullName"];
 
-            Assert.Equal(testPath, property.Value);
+            CustomAssert.Equal(testPath, property.Value);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ namespace PSTests.Parallel
             fileSystemProvider.Context = new CmdletProviderContext(GetExecutionContext());
 
             IContentReader contentReader = fileSystemProvider.GetContentReader(testPath);
-            Assert.Equal(contentReader.Read(1)[0], testContent);
+            CustomAssert.Equal(contentReader.Read(1)[0], testContent);
             contentReader.Close();
         }
 
@@ -180,7 +180,7 @@ namespace PSTests.Parallel
             IContentWriter contentWriter = fileSystemProvider.GetContentWriter(testPath);
             contentWriter.Write(new List<string>(){ "contentWriterTestContent" });
             contentWriter.Close();
-            Assert.Equal(File.ReadAllText(testPath), testContent + @"contentWriterTestContent" + System.Environment.NewLine);
+            CustomAssert.Equal(File.ReadAllText(testPath), testContent + @"contentWriterTestContent" + System.Environment.NewLine);
         }
 
         [Fact]
@@ -191,7 +191,7 @@ namespace PSTests.Parallel
             fileSystemProvider.SetProviderInformation(providerInfoToSet);
             fileSystemProvider.Context = new CmdletProviderContext(GetExecutionContext());
             fileSystemProvider.ClearContent(testPath);
-            Assert.Empty(File.ReadAllText(testPath));
+            CustomAssert.Empty(File.ReadAllText(testPath));
         }
     }
 }

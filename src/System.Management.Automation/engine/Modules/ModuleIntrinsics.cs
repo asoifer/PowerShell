@@ -1414,7 +1414,12 @@ namespace System.Management.Automation
         /// <param name="module">Parent module.</param>
         internal static void RemoveNestedModuleFunctions(PSModuleInfo module)
         {
-            var input = module.SessionState?.Internal?.ExportedFunctions;
+            // LAFHIS
+            //var input = module.SessionState?.Internal?.ExportedFunctions;
+            List<FunctionInfo> input = null;
+            if (module.SessionState != null &&
+                module.SessionState.Internal != null)
+                input = module.SessionState.Internal.ExportedFunctions;
             if ((input == null) || (input.Count == 0))
             { return; }
 

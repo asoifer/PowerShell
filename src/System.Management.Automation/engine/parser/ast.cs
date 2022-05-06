@@ -5435,7 +5435,8 @@ namespace System.Management.Automation.Language
 
         internal override object Accept(ICustomAstVisitor visitor)
         {
-            return (visitor as ICustomAstVisitor2)?.VisitPipelineChain(this);
+            // LAFHIS
+            return (visitor is ICustomAstVisitor2) ? ((ICustomAstVisitor2)visitor).VisitPipelineChain(this) : null;
         }
 
         internal override AstVisitAction InternalVisit(AstVisitor visitor)

@@ -4151,7 +4151,11 @@ namespace System.Management.Automation.Language
             // G      class-member-list   class-member
 
             // PowerShell classes are not supported in ConstrainedLanguage
-            if (Runspace.DefaultRunspace?.ExecutionContext?.LanguageMode == PSLanguageMode.ConstrainedLanguage)
+            // LAFHIS
+            //if (Runspace.DefaultRunspace?.ExecutionContext?.LanguageMode == PSLanguageMode.ConstrainedLanguage)
+            if (Runspace.DefaultRunspace != null &&
+                Runspace.DefaultRunspace.ExecutionContext != null &&
+                Runspace.DefaultRunspace.ExecutionContext.LanguageMode == PSLanguageMode.ConstrainedLanguage)
             {
                 ReportError(classToken.Extent,
                             nameof(ParserStrings.ClassesNotAllowedInConstrainedLanguage),
@@ -5989,10 +5993,12 @@ namespace System.Management.Automation.Language
                     }
 
                     var exprExtent = lastRedirection != null ? ExtentOf(expr, lastRedirection) : expr.Extent;
+                    // LAFHIS
+                    var temp = redirections != null ? redirections.Where(r => r != null) : null;
                     commandAst = new CommandExpressionAst(
                         exprExtent,
                         expr,
-                        redirections?.Where(r => r != null));
+                        temp);
                 }
                 else
                 {

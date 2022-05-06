@@ -19,41 +19,41 @@ namespace PSTests.Parallel
         public static void TestIsWinPEHost()
         {
             Skip.IfNot(Platform.IsWindows);
-            Assert.False(Utils.IsWinPEHost());
+            CustomAssert.False(Utils.IsWinPEHost());
         }
 
         [Fact]
         public static void TestHistoryStack()
         {
             var historyStack = new HistoryStack<string>(20);
-            Assert.Equal(0, historyStack.UndoCount);
-            Assert.Equal(0, historyStack.RedoCount);
+            CustomAssert.Equal(0, historyStack.UndoCount);
+            CustomAssert.Equal(0, historyStack.RedoCount);
 
             historyStack.Push("first item");
             historyStack.Push("second item");
-            Assert.Equal(2, historyStack.UndoCount);
-            Assert.Equal(0, historyStack.RedoCount);
+            CustomAssert.Equal(2, historyStack.UndoCount);
+            CustomAssert.Equal(0, historyStack.RedoCount);
 
-            Assert.Equal("second item", historyStack.Undo("second item"));
-            Assert.Equal("first item", historyStack.Undo("first item"));
-            Assert.Equal(0, historyStack.UndoCount);
-            Assert.Equal(2, historyStack.RedoCount);
+            CustomAssert.Equal("second item", historyStack.Undo("second item"));
+            CustomAssert.Equal("first item", historyStack.Undo("first item"));
+            CustomAssert.Equal(0, historyStack.UndoCount);
+            CustomAssert.Equal(2, historyStack.RedoCount);
 
-            Assert.Equal("first item", historyStack.Redo("first item"));
-            Assert.Equal(1, historyStack.UndoCount);
-            Assert.Equal(1, historyStack.RedoCount);
+            CustomAssert.Equal("first item", historyStack.Redo("first item"));
+            CustomAssert.Equal(1, historyStack.UndoCount);
+            CustomAssert.Equal(1, historyStack.RedoCount);
 
             // Pushing a new item should invalidate the RedoCount
             historyStack.Push("third item");
-            Assert.Equal(2, historyStack.UndoCount);
-            Assert.Equal(0, historyStack.RedoCount);
+            CustomAssert.Equal(2, historyStack.UndoCount);
+            CustomAssert.Equal(0, historyStack.RedoCount);
 
             // Check for the correct exception when the Redo/Undo stack is empty.
-            Assert.Throws<InvalidOperationException>(() => historyStack.Redo("bar"));
+            CustomAssert.Throws<InvalidOperationException>(() => historyStack.Redo("bar"));
             historyStack.Undo("third item");
             historyStack.Undo("first item");
-            Assert.Equal(0, historyStack.UndoCount);
-            Assert.Throws<InvalidOperationException>(() => historyStack.Undo("foo"));
+            CustomAssert.Equal(0, historyStack.UndoCount);
+            CustomAssert.Throws<InvalidOperationException>(() => historyStack.Undo("foo"));
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace PSTests.Parallel
         {
             uint capacity = 20;
             var boundedStack = new BoundedStack<string>(capacity);
-            Assert.Throws<InvalidOperationException>(() => boundedStack.Pop());
+            CustomAssert.Throws<InvalidOperationException>(() => boundedStack.Pop());
 
             for (int i = 0; i < capacity; i++)
             {
@@ -71,10 +71,10 @@ namespace PSTests.Parallel
             for (int i = 0; i < capacity; i++)
             {
                 var poppedItem = boundedStack.Pop();
-                Assert.Equal($"{20 - 1 - i}", poppedItem);
+                CustomAssert.Equal($"{20 - 1 - i}", poppedItem);
             }
 
-            Assert.Throws<InvalidOperationException>(() => boundedStack.Pop());
+            CustomAssert.Throws<InvalidOperationException>(() => boundedStack.Pop());
         }
 
         [Fact]
@@ -87,12 +87,12 @@ namespace PSTests.Parallel
                 {"type", "http"}
             };
             string json = JsonObject.ConvertToJson(hash, in context);
-            Assert.Equal(expected, json);
+            CustomAssert.Equal(expected, json);
 
             hash.Add("self", hash);
             json = JsonObject.ConvertToJson(hash, context);
             expected = "{\"name\":\"req\",\"type\":\"http\",\"self\":{\"name\":\"req\",\"type\":\"http\",\"self\":\"System.Collections.Specialized.OrderedDictionary\"}}";
-            Assert.Equal(expected, json);
+            CustomAssert.Equal(expected, json);
         }
 
         [Fact]
@@ -104,12 +104,12 @@ namespace PSTests.Parallel
                 {"type", CommandTypes.Alias}
             };
             string json = JsonObject.ConvertToJson(hash, in context);
-            Assert.Equal(expected, json);
+            CustomAssert.Equal(expected, json);
 
             context = new JsonObject.ConvertToJsonContext(maxDepth: 1, enumsAsStrings: true, compressOutput: true);
             json = JsonObject.ConvertToJson(hash, in context);
             expected = "{\"type\":\"Alias\"}";
-            Assert.Equal(expected, json);
+            CustomAssert.Equal(expected, json);
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace PSTests.Parallel
                 {"type", CommandTypes.Alias}
             };
             string json = JsonObject.ConvertToJson(hash, in context);
-            Assert.Equal(expected, json);
+            CustomAssert.Equal(expected, json);
         }
 
         [Fact]
@@ -144,7 +144,7 @@ namespace PSTests.Parallel
             };
 
             string json = JsonObject.ConvertToJson(hash, in context);
-            Assert.Null(json);
+            CustomAssert.Null(json);
         }
     }
 }

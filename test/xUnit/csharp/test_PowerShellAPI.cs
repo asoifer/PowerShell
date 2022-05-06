@@ -15,9 +15,9 @@ namespace PSTests.Sequential
             using (var ps = PowerShell.Create())
             {
                 ps.AddCommand("Start-Job").AddParameter("ScriptBlock", ScriptBlock.Create("1+1"));
-                var ex = Assert.Throws<CmdletInvocationException>(() => ps.Invoke());
-                Assert.IsType<PSNotSupportedException>(ex.InnerException);
-                Assert.Equal("IPCPwshExecutableNotFound,Microsoft.PowerShell.Commands.StartJobCommand", ex.ErrorRecord.FullyQualifiedErrorId);
+                var ex = CustomAssert.Throws<CmdletInvocationException>(() => ps.Invoke());
+                CustomAssert.IsType<PSNotSupportedException>(ex.InnerException);
+                CustomAssert.Equal("IPCPwshExecutableNotFound,Microsoft.PowerShell.Commands.StartJobCommand", ex.ErrorRecord.FullyQualifiedErrorId);
             }
         }
     }

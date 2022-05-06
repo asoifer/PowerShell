@@ -14,7 +14,7 @@ namespace PSTests.Parallel
         [Fact]
         public static void TestIsCoreCLR()
         {
-            Assert.True(Platform.IsCoreCLR);
+            CustomAssert.True(Platform.IsCoreCLR);
         }
 
 #if Unix
@@ -35,8 +35,8 @@ namespace PSTests.Parallel
                 process.WaitForExit();
 
                 // The process should return an exit code of 0 on success
-                Assert.Equal(0, process.ExitCode);
-                Assert.Equal(username, Environment.UserName);
+                CustomAssert.Equal(0, process.ExitCode);
+                CustomAssert.Equal(username, Environment.UserName);
             }
         }
 
@@ -57,9 +57,9 @@ namespace PSTests.Parallel
                 process.WaitForExit();
 
                 // The process should return an exit code of 0 on success
-                Assert.Equal(0, process.ExitCode);
+                CustomAssert.Equal(0, process.ExitCode);
                 // It should be the same as what our platform code returns
-                Assert.Equal(hostname, Environment.MachineName);
+                CustomAssert.Equal(hostname, Environment.MachineName);
             }
         }
 
@@ -80,28 +80,28 @@ namespace PSTests.Parallel
                 process.WaitForExit();
 
                 // The process should return an exit code of 0 on success
-                Assert.Equal(0, process.ExitCode);
+                CustomAssert.Equal(0, process.ExitCode);
                 // It should be the same as what our platform code returns
-                Assert.Equal(hostname, Platform.NonWindowsGetHostName());
+                CustomAssert.Equal(hostname, Platform.NonWindowsGetHostName());
             }
         }
 
         [Fact]
         public static void TestIsExecutable()
         {
-            Assert.True(Platform.NonWindowsIsExecutable("/bin/ls"));
+            CustomAssert.True(Platform.NonWindowsIsExecutable("/bin/ls"));
         }
 
         [Fact]
         public static void TestIsNotExecutable()
         {
-            Assert.False(Platform.NonWindowsIsExecutable("/etc/hosts"));
+            CustomAssert.False(Platform.NonWindowsIsExecutable("/etc/hosts"));
         }
 
         [Fact]
         public static void TestDirectoryIsNotExecutable()
         {
-            Assert.False(Platform.NonWindowsIsExecutable("/etc"));
+            CustomAssert.False(Platform.NonWindowsIsExecutable("/etc"));
         }
 
         [Fact]
@@ -119,7 +119,7 @@ namespace PSTests.Parallel
 
             // Since this is the only reference to the file, it is not considered a
             // hardlink by our API (though all files are hardlinks on Linux)
-            Assert.False(Platform.NonWindowsIsHardLink(fd));
+            CustomAssert.False(Platform.NonWindowsIsHardLink(fd));
 
             File.Delete(path);
         }
@@ -153,16 +153,16 @@ namespace PSTests.Parallel
             using (Process process = Process.Start(startInfo))
             {
                 process.WaitForExit();
-                Assert.Equal(0, process.ExitCode);
+                CustomAssert.Equal(0, process.ExitCode);
             }
 
             // Since there are now two references to the file, both are considered
             // hardlinks by our API (though all files are hardlinks on Linux)
             FileSystemInfo fd = new FileInfo(path);
-            Assert.True(Platform.NonWindowsIsHardLink(fd));
+            CustomAssert.True(Platform.NonWindowsIsHardLink(fd));
 
             fd = new FileInfo(link);
-            Assert.True(Platform.NonWindowsIsHardLink(fd));
+            CustomAssert.True(Platform.NonWindowsIsHardLink(fd));
 
             File.Delete(path);
             File.Delete(link);
@@ -175,7 +175,7 @@ namespace PSTests.Parallel
 
             FileSystemInfo fd = new FileInfo(path);
 
-            Assert.False(Platform.NonWindowsIsHardLink(fd));
+            CustomAssert.False(Platform.NonWindowsIsHardLink(fd));
         }
 
         [Fact]
@@ -185,11 +185,11 @@ namespace PSTests.Parallel
             string path = @"/tmp/ThisFileShouldNotExistOnTestMachines";
 
             // If the file exists, then there's a larger issue that needs to be looked at
-            Assert.False(File.Exists(path));
+            CustomAssert.False(File.Exists(path));
 
             // Convert `path` string to FileSystemInfo data type. And now, it should return true
             FileSystemInfo fd = new FileInfo(path);
-            Assert.False(Platform.NonWindowsIsHardLink(fd));
+            CustomAssert.False(Platform.NonWindowsIsHardLink(fd));
         }
 
         [Fact]
@@ -221,14 +221,14 @@ namespace PSTests.Parallel
             using (Process process = Process.Start(startInfo))
             {
                 process.WaitForExit();
-                Assert.Equal(0, process.ExitCode);
+                CustomAssert.Equal(0, process.ExitCode);
             }
 
             FileSystemInfo fd = new FileInfo(path);
-            Assert.False(Platform.NonWindowsIsSymLink(fd));
+            CustomAssert.False(Platform.NonWindowsIsSymLink(fd));
 
             fd = new FileInfo(link);
-            Assert.True(Platform.NonWindowsIsSymLink(fd));
+            CustomAssert.True(Platform.NonWindowsIsSymLink(fd));
 
             File.Delete(path);
             File.Delete(link);

@@ -133,7 +133,8 @@ namespace Microsoft.PowerShell
         internal static async Task CheckForUpdates()
         {
             // Delay the update check for 3 seconds so that it has the minimal impact on startup.
-            await Task.Delay(3000);
+            // LAFHIS
+            //await Task.Delay(3000);
 
             // A self-built pwsh for development purpose has the SHA1 commit hash baked in 'GitCommitId',
             // which is 40 characters long. So we can quickly check the length of 'GitCommitId' to tell

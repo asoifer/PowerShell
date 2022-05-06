@@ -12,52 +12,98 @@ namespace PSTests.Parallel
         [Fact]
         public void TestEscape_Null()
         {
-            Assert.Throws<System.Management.Automation.PSArgumentNullException>(delegate { WildcardPattern.Escape(null); });
+            CustomAssert.Throws<System.Management.Automation.PSArgumentNullException>(delegate { WildcardPattern.Escape(null); });
         }
 
         [Fact]
         public void TestEscape_Empty()
         {
-            Assert.Equal(WildcardPattern.Escape(string.Empty), string.Empty);
+            CustomAssert.Equal(WildcardPattern.Escape(string.Empty), string.Empty);
         }
 
-        [Theory]
-        [InlineData("a", "a")]
-        [InlineData("a*", "a`*")]
-        [InlineData("*?[]", "`*`?`[`]")]
-        public void TestEscape_String(string source, string expected)
+        // LAFHIS: we expand the theories for keeping these tests separated
+        [Fact]
+        public void TestEscape_String_A()
         {
-            Assert.Equal(WildcardPattern.Escape(source), expected);
+            string source = "a";
+            string expected = "a";
+            CustomAssert.Equal(WildcardPattern.Escape(source), expected);
         }
 
-        [Theory]
-        [InlineData("a", "a")]
-        [InlineData("a*", "a*")]
-        [InlineData("*?[]", "*?[]")]
-        public void TestEscape_String_NotEscape(string source, string expected)
+        [Fact]
+        public void TestEscape_String_B()
         {
-            Assert.Equal(WildcardPattern.Escape(source, new[] { '*', '?', '[', ']' }), expected);
+            string source = "a*";
+            string expected = "a`*";
+            CustomAssert.Equal(WildcardPattern.Escape(source), expected);
+        }
+
+        [Fact]
+        public void TestEscape_String_C()
+        {
+            string source = "*?[]";
+            string expected = "`*`?`[`]";
+            CustomAssert.Equal(WildcardPattern.Escape(source), expected);
+        }
+
+        [Fact]
+        public void TestEscape_String_NotEscape_A()
+        {
+            string source = "a";
+            string expected = "a";
+            CustomAssert.Equal(WildcardPattern.Escape(source, new[] { '*', '?', '[', ']' }), expected);
+        }
+
+        [Fact]
+        public void TestEscape_String_NotEscape_B()
+        {
+            string source = "a*";
+            string expected = "a*";
+            CustomAssert.Equal(WildcardPattern.Escape(source, new[] { '*', '?', '[', ']' }), expected);
+        }
+
+        [Fact]
+        public void TestEscape_String_NotEscape_C()
+        {
+            string source = "*?[]";
+            string expected = "*?[]";
+            CustomAssert.Equal(WildcardPattern.Escape(source, new[] { '*', '?', '[', ']' }), expected);
         }
 
         [Fact]
         public void TestUnescape_Null()
         {
-            Assert.Throws<System.Management.Automation.PSArgumentNullException>(delegate { WildcardPattern.Unescape(null); });
+            CustomAssert.Throws<System.Management.Automation.PSArgumentNullException>(delegate { WildcardPattern.Unescape(null); });
         }
 
         [Fact]
         public void TestUnescape_Empty()
         {
-            Assert.Equal(WildcardPattern.Unescape(string.Empty), string.Empty);
+            CustomAssert.Equal(WildcardPattern.Unescape(string.Empty), string.Empty);
         }
 
-        [Theory]
-        [InlineData("a", "a")]
-        [InlineData("a`*", "a*")]
-        [InlineData("`*`?`[`]", "*?[]")]
-        public void TestUnescape_String(string source, string expected)
+        [Fact]
+        public void TestUnescape_String_A()
         {
-            Assert.Equal(WildcardPattern.Unescape(source), expected);
+            string source = "a";
+            string expected = "a";
+            CustomAssert.Equal(WildcardPattern.Unescape(source), expected);
+        }
+
+        [Fact]
+        public void TestUnescape_String_B()
+        {
+            string source = "a`*";
+            string expected = "a*";
+            CustomAssert.Equal(WildcardPattern.Unescape(source), expected);
+        }
+
+        [Fact]
+        public void TestUnescape_String_C()
+        {
+            string source = "`*`?`[`]";
+            string expected = "*?[]";
+            CustomAssert.Equal(WildcardPattern.Unescape(source), expected);
         }
     }
 }

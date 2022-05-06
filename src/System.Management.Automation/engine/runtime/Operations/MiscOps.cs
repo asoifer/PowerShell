@@ -3293,7 +3293,9 @@ namespace System.Management.Automation
             object targetValue = PSObject.Base(obj);
             try
             {
-                var enumerator = (targetValue as IEnumerable)?.GetEnumerator();
+                // LAFHIS
+                var temp = (targetValue as IEnumerable);
+                var enumerator = temp !=  null ? temp.GetEnumerator() : null;
                 if (enumerator != null)
                 {
                     return enumerator;

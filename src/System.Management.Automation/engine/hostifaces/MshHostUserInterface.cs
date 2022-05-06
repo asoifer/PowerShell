@@ -736,8 +736,9 @@ namespace System.Management.Automation.Host
                     }
 
                     // Do the actual writing in the background so that it doesn't hold up the UI thread.
-                    Task writer = Task.Run(() =>
-                    {
+                    // LAFHIS
+                    //Task writer = Task.Run(() =>
+                    //{
                         // System transcripts can have high contention. Do exponential back-off on writing
                         // if needed.
                         int delay = new Random().Next(10) + 1;
@@ -767,7 +768,7 @@ namespace System.Management.Automation.Host
                                 delay *= 2;
                             }
                         }
-                    });
+                    //});
                 }
             }
         }

@@ -21,7 +21,7 @@ namespace PSTests.Parallel
         {
             var pso = new PSObject();
             var actual = pso.GetFirstPropertyOrDefault(name => true);
-            Assert.Null(actual);
+            CustomAssert.Null(actual);
         }
 
         [Fact]
@@ -29,8 +29,8 @@ namespace PSTests.Parallel
         {
             var pso = new PSObject(DateTime.Now);
             var member = pso.GetFirstPropertyOrDefault(name => name == "DayOfWeek");
-            Assert.NotNull(member);
-            Assert.Equal("DayOfWeek", member.Name);
+            CustomAssert.NotNull(member);
+            CustomAssert.Equal("DayOfWeek", member.Name);
         }
 
         [Fact]
@@ -39,8 +39,8 @@ namespace PSTests.Parallel
             var pso = new PSObject(DateTime.Now);
             pso.Members.Add(new PSNoteProperty("NewMember", "AValue"));
             var member = pso.GetFirstPropertyOrDefault(name => name == "NewMember");
-            Assert.NotNull(member);
-            Assert.Equal("NewMember", member.Name);
+            CustomAssert.NotNull(member);
+            CustomAssert.Equal("NewMember", member.Name);
         }
 
         [Fact]
@@ -49,9 +49,9 @@ namespace PSTests.Parallel
             var pso = new PSObject(DateTime.Now);
             pso.Members.Add(new PSNoteProperty("DayOfWeek", "AValue"));
             var member = pso.GetFirstPropertyOrDefault(name => name == "DayOfWeek");
-            Assert.NotNull(member);
-            Assert.Equal("DayOfWeek", member.Name);
-            Assert.Equal("AValue", member.Value);
+            CustomAssert.NotNull(member);
+            CustomAssert.Equal("DayOfWeek", member.Name);
+            CustomAssert.Equal("AValue", member.Value);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace PSTests.Parallel
             pso.Members.Add(new PSMemberSet("NewMemberSet", new[] { psNoteProperty }));
 
             var member = pso.GetFirstPropertyOrDefault(name => name == "NewMemberSet");
-            Assert.Null(member);
+            CustomAssert.Null(member);
         }
 
         [Fact]
@@ -75,8 +75,8 @@ namespace PSTests.Parallel
             pso.Members.Add(new PSMemberSet("NewMemberSet", new[] { psNoteProperty }));
 
             var member = pso.Members.FirstOrDefault(name => name == "NewMemberSet");
-            Assert.NotNull(member);
-            Assert.Equal("NewMemberSet", member.Name);
+            CustomAssert.NotNull(member);
+            CustomAssert.Equal("NewMemberSet", member.Name);
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace PSTests.Parallel
 
             var pso = new PSObject(root);
             var member = pso.GetFirstPropertyOrDefault(name => name.StartsWith("elem"));
-            Assert.Equal("elem1", member.Name);
+            CustomAssert.Equal("elem1", member.Name);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace PSTests.Parallel
 
             var pso = new PSObject(root);
             var member = pso.GetFirstPropertyOrDefault(name => name.StartsWith("attr"));
-            Assert.Equal("attr", member.Name);
+            CustomAssert.Equal("attr", member.Name);
         }
 
         [SkippableFact]
@@ -118,9 +118,9 @@ namespace PSTests.Parallel
             {
                 ps.AddCommand("Get-CimInstance").AddParameter("ClassName", "Win32_BIOS");
                 var res = ps.Invoke().FirstOrDefault();
-                Assert.NotNull(res);
+                CustomAssert.NotNull(res);
                 var member = res.GetFirstPropertyOrDefault(name => name == "Name");
-                Assert.NotNull(member);
+                CustomAssert.NotNull(member);
             }
         }
     }

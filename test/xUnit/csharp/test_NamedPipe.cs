@@ -18,14 +18,14 @@ namespace PSTests.Parallel
             string pipeNameForSecondCall = Path.GetRandomFileName();
 
             RemoteSessionNamedPipeServer.CreateCustomNamedPipeServer(pipeNameForFirstCall);
-            Assert.True(File.Exists(GetPipePath(pipeNameForFirstCall)));
+            CustomAssert.True(File.Exists(GetPipePath(pipeNameForFirstCall)));
 
             // The second call to this method would override the first named pipe.
             RemoteSessionNamedPipeServer.CreateCustomNamedPipeServer(pipeNameForSecondCall);
-            Assert.True(File.Exists(GetPipePath(pipeNameForSecondCall)));
+            CustomAssert.True(File.Exists(GetPipePath(pipeNameForSecondCall)));
 
             // Previous pipe should have been cleaned up.
-            Assert.False(File.Exists(GetPipePath(pipeNameForFirstCall)));
+            CustomAssert.False(File.Exists(GetPipePath(pipeNameForFirstCall)));
         }
 
         [Fact]
@@ -35,13 +35,13 @@ namespace PSTests.Parallel
 
             if (!Platform.IsWindows)
             {
-                Assert.Throws<InvalidOperationException>(() => 
+                CustomAssert.Throws<InvalidOperationException>(() => 
                     RemoteSessionNamedPipeServer.CreateCustomNamedPipeServer(longPipeName));
             }
             else
             {
                 RemoteSessionNamedPipeServer.CreateCustomNamedPipeServer(longPipeName);
-                Assert.True(File.Exists(GetPipePath(longPipeName)));
+                CustomAssert.True(File.Exists(GetPipePath(longPipeName)));
             }
         }
 

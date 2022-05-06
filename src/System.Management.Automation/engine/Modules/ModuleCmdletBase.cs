@@ -4846,7 +4846,8 @@ namespace Microsoft.PowerShell.Commands
                 var compatSession = GetWindowsPowerShellCompatRemotingSession();
                 if (compatSession != null)
                 {
-                    if (sessionState?.InvokeCommand.LocationChangedAction != null)
+                    // LAFHIS
+                    if (sessionState != null && sessionState.InvokeCommand.LocationChangedAction != null)
                     {
                         sessionState.InvokeCommand.LocationChangedAction -= SyncCurrentLocationDelegate;
                     }
@@ -4863,7 +4864,8 @@ namespace Microsoft.PowerShell.Commands
         internal static void SyncCurrentLocationHandler(object sender, LocationChangedEventArgs args)
         {
             PSSession compatSession = GetWindowsPowerShellCompatRemotingSession();
-            if (compatSession?.Runspace.RunspaceStateInfo.State == RunspaceState.Opened)
+            // LAFHIS
+            if (compatSession != null && compatSession.Runspace.RunspaceStateInfo.State == RunspaceState.Opened)
             {
                 using var ps = System.Management.Automation.PowerShell.Create(RunspaceMode.CurrentRunspace);
                 ps.AddCommand(new CmdletInfo("Invoke-Command", typeof(InvokeCommandCommand)));

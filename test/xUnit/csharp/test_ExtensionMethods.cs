@@ -12,7 +12,7 @@ namespace PSTests.Parallel
         [Fact]
         public static void TestIsNumeric()
         {
-            Assert.True(PSTypeExtensions.IsNumeric(42.GetType()));
+            CustomAssert.True(PSTypeExtensions.IsNumeric(42.GetType()));
         }
     }
 }

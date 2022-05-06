@@ -14,7 +14,7 @@ namespace PSTests.Parallel
         {
             // test that a non-null version table is returned, and
             // that it does not throw
-            Assert.NotNull(PSVersionInfo.GetPSVersionTable());
+            CustomAssert.NotNull(PSVersionInfo.GetPSVersionTable());
         }
     }
 }

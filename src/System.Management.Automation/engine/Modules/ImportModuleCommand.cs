@@ -2002,7 +2002,9 @@ namespace Microsoft.PowerShell.Commands
             List<ModuleSpecification> filteredModuleFullyQualifiedNames = FilterModuleCollection(moduleFullyQualifiedNames);
 
             // do not setup WinCompat resources if we have no modules to import
-            if ((filteredModuleNames?.Any() != true) && (filteredModuleFullyQualifiedNames?.Any() != true))
+            // LAFHIS
+            //if ((filteredModuleNames?.Any() != true) && (filteredModuleFullyQualifiedNames?.Any() != true))
+            if ((filteredModuleNames == null || filteredModuleNames.Any() != true) && (filteredModuleFullyQualifiedNames == null || filteredModuleFullyQualifiedNames.Any() != true))
             {
                 return moduleProxyList;
             }
@@ -2053,10 +2055,16 @@ namespace Microsoft.PowerShell.Commands
             if (moduleProxyList.Count > 0)
             {
                 // make sure that we add registration only once to a multicast delegate
-                SyncCurrentLocationDelegate ??= SyncCurrentLocationHandler;
-                var alreadyregistered = this.SessionState.InvokeCommand.LocationChangedAction?.GetInvocationList().Contains(SyncCurrentLocationDelegate);
+                // LAFHIS
+                if (SyncCurrentLocationDelegate == null)
+                    SyncCurrentLocationDelegate = SyncCurrentLocationHandler;
 
-                if (!alreadyregistered ?? true)
+                // LAFHIS
+                var temp = this.SessionState.InvokeCommand.LocationChangedAction;
+                var alreadyregistered = temp != null && temp.GetInvocationList().Contains(SyncCurrentLocationDelegate);
+
+                //if (!alreadyregistered ?? true)
+                if (temp == null || !alreadyregistered)
                 {
                     this.SessionState.InvokeCommand.LocationChangedAction += SyncCurrentLocationDelegate;
 

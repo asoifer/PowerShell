@@ -45,15 +45,17 @@ namespace System.Management.Automation.Runspaces
             // We shouldn't create too many tasks.
 #if !UNIX
             // Amsi initialize can be a little slow
-            Task.Run(() =>
-            {
+            // LAFHIS
+            //Task.Run(() =>
+            //{
                 AmsiUtils.WinScanContent(content: string.Empty, sourceMetadata: string.Empty, warmUp: true);
-            });
+            //});
 #endif
 
             // One other task for other stuff that's faster, but still a little slow.
-            Task.Run(() =>
-            {
+            // LAFHIS
+            //Task.Run(() =>
+            //{
                 // Loading the resources for System.Management.Automation can be expensive, so force that to
                 // happen early on a background thread.
                 _ = RunspaceInit.OutputEncodingDescription;
@@ -63,7 +65,7 @@ namespace System.Management.Automation.Runspaces
 
                 // This will init some tables and could load some assemblies.
                 LanguagePrimitives.GetEnumerator(null);
-            });
+            //});
         }
     }
 

@@ -1129,7 +1129,9 @@ namespace System.Management.Automation
 
                 foreach (var t in InferTypes(previousPipelineElement))
                 {
-                    var memberName = (((AstPair)argument).Argument as StringConstantExpressionAst)?.Value;
+                    // LAFHIS
+                    var temp = (((AstPair)argument).Argument as StringConstantExpressionAst);
+                    var memberName = temp != null ? temp.Value : null;
 
                     if (memberName != null)
                     {
@@ -1379,7 +1381,9 @@ namespace System.Management.Automation
             {
                 foreach (var t in InferTypes(previousPipelineElement))
                 {
-                    var memberName = (((AstPair)expandedPropertyArgument).Argument as StringConstantExpressionAst)?.Value;
+                    // LAFHIS
+                    var temp = (((AstPair)expandedPropertyArgument).Argument as StringConstantExpressionAst);
+                    var memberName = temp != null ? temp.Value : null;
 
                     if (memberName != null)
                     {

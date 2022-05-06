@@ -28,7 +28,7 @@ namespace PSTests.Parallel
             ExecutionContext executionContext = new ExecutionContext(engine, hostInterface, iss);
             SessionStateInternal sessionState = new SessionStateInternal(executionContext);
             Collection<PSDriveInfo> drives = sessionState.Drives(null);
-            Assert.NotNull(drives);
+            CustomAssert.NotNull(drives);
         }
     }
 }

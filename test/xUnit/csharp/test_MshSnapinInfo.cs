@@ -26,7 +26,7 @@ namespace PSTests.Parallel
         {
             Skip.IfNot(Platform.IsWindows);
             PSSnapInInfo pSSnapInInfo = PSSnapInReader.ReadCoreEngineSnapIn();
-            Assert.Contains("PublicKeyToken=31bf3856ad364e35", pSSnapInInfo.AssemblyName);
+            CustomAssert.Contains("PublicKeyToken=31bf3856ad364e35", pSSnapInInfo.AssemblyName);
         }
     }
 }

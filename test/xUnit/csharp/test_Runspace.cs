@@ -29,10 +29,10 @@ namespace PSTests.Sequential
                     foreach (var result in pipeline.Invoke())
                     {
                         ++objCount;
-                        Assert.NotNull(result);
+                        CustomAssert.NotNull(result);
                     }
 
-                    Assert.Equal(count, objCount);
+                    CustomAssert.Equal(count, objCount);
                 }
 
                 runspace.Close();
@@ -56,10 +56,10 @@ namespace PSTests.Sequential
                     foreach (var result in powerShell.Invoke())
                     {
                         ++objCount;
-                        Assert.NotNull(result);
+                        CustomAssert.NotNull(result);
                     }
 
-                    Assert.Equal(count, objCount);
+                    CustomAssert.Equal(count, objCount);
                 }
 
                 runspace.Close();
@@ -92,41 +92,41 @@ namespace PSTests.Sequential
                         // this is how an object would be captured here and looked at,
                         // each result is a PSObject with the data from the pipeline
                         ++objCount;
-                        Assert.NotNull(result);
+                        CustomAssert.NotNull(result);
                     }
 
-                    Assert.Equal(count, objCount);
+                    CustomAssert.Equal(count, objCount);
                 }
 
                 runspace.Close();
             }
         }
 
-        [SkippableFact]
-        public void TestAppDomainProcessExitEvenHandlerNotLeaking()
-        {
-            // Skip this flaky test for now.
-            Skip.IfNot(false);
+        //[SkippableFact]
+        //public void TestAppDomainProcessExitEvenHandlerNotLeaking()
+        //{
+        //    // Skip this flaky test for now.
+        //    Skip.IfNot(false);
 
-            Skip.IfNot(Platform.IsWindows);
+        //    Skip.IfNot(Platform.IsWindows);
 
-            EventHandler eventHandler;
-            Delegate[] delegates;
-            FieldInfo field = typeof(AppContext).GetField("ProcessExit", BindingFlags.NonPublic | BindingFlags.Static);
+        //    EventHandler eventHandler;
+        //    Delegate[] delegates;
+        //    FieldInfo field = typeof(AppContext).GetField("ProcessExit", BindingFlags.NonPublic | BindingFlags.Static);
 
-            // Open runspace and invoke script.
-            using (var ps = PowerShell.Create())
-            {
-                ps.AddScript("1").Invoke();
-                eventHandler = (EventHandler)field.GetValue(null);
-                delegates = eventHandler.GetInvocationList();
-                Assert.Contains(delegates, d => d.Method.Name == "CurrentDomain_ProcessExit");
-            }
+        //    // Open runspace and invoke script.
+        //    using (var ps = PowerShell.Create())
+        //    {
+        //        ps.AddScript("1").Invoke();
+        //        eventHandler = (EventHandler)field.GetValue(null);
+        //        delegates = eventHandler.GetInvocationList();
+        //        Assert.Contains(delegates, d => d.Method.Name == "CurrentDomain_ProcessExit");
+        //    }
 
-            // Handler registered by PowerShell should be unregistered.
-            eventHandler = (EventHandler)field.GetValue(null);
-            delegates = eventHandler.GetInvocationList();
-            Assert.DoesNotContain(delegates, d => d.Method.Name == "CurrentDomain_ProcessExit");
-        }
+        //    // Handler registered by PowerShell should be unregistered.
+        //    eventHandler = (EventHandler)field.GetValue(null);
+        //    delegates = eventHandler.GetInvocationList();
+        //    Assert.DoesNotContain(delegates, d => d.Method.Name == "CurrentDomain_ProcessExit");
+        //}
     }
 }
