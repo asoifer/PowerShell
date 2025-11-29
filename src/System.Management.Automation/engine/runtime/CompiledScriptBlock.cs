@@ -10979,12 +10979,12 @@ namespace System.Management.Automation
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1562, 89660, 89712);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1562, 89681, 89709);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1562, 89660, 89712);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1562, 89681, 89709);
                 }
                 throw new System.Exception("Slicer error: unreachable code");
             }
