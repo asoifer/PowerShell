@@ -55,7 +55,7 @@ dotnet-uninstall-debian-packages.sh
 /nuget-artifacts
 
 # resgen output
-gen
+#gen
 
 # Per repo profile
 .profile.ps1
