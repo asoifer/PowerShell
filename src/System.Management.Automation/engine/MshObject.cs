@@ -10471,12 +10471,12 @@ DynAbs.Tracing.TraceSender.TraceInitializationWrapper(() => f_1293_13683_14127(P
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97195, 97607);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97252, 97299);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97195, 97607);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97252, 97299);
                 }
                 throw new System.Exception("Slicer error: unreachable code");
             }
@@ -10510,12 +10510,12 @@ DynAbs.Tracing.TraceSender.TraceInitializationWrapper(() => f_1293_13683_14127(P
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97195, 97607);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97252, 97299);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97195, 97607);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97252, 97299);
                 }
             }
         }
@@ -10533,12 +10533,12 @@ DynAbs.Tracing.TraceSender.TraceInitializationWrapper(() => f_1293_13683_14127(P
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97619, 98126);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97699, 97770);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97619, 98126);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97699, 97770);
                 }
                 throw new System.Exception("Slicer error: unreachable code");
             }
@@ -10572,12 +10572,12 @@ DynAbs.Tracing.TraceSender.TraceInitializationWrapper(() => f_1293_13683_14127(P
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97619, 98126);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 97699, 97770);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97619, 98126);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 97699, 97770);
                 }
             }
         }
@@ -10719,12 +10719,12 @@ DynAbs.Tracing.TraceSender.TraceInitializationWrapper(() => f_1293_13683_14127(P
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 99030, 99490);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 99099, 99158);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 99030, 99490);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 99099, 99158);
                 }
                 throw new System.Exception("Slicer error: unreachable code");
             }
@@ -10758,12 +10758,12 @@ DynAbs.Tracing.TraceSender.TraceInitializationWrapper(() => f_1293_13683_14127(P
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 99030, 99490);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1293, 99099, 99158);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 99030, 99490);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1293, 99099, 99158);
                 }
             }
         }

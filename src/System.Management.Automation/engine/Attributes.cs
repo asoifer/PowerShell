@@ -1179,12 +1179,12 @@ namespace System.Management.Automation
                 }
                 catch
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1236, 22948, 23007);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalCatch(1236, 22986, 23004);
                     throw;
                 }
                 finally
                 {
-                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1236, 22948, 23007);
+                    DynAbs.Tracing.TraceSender.TraceEnterFinalFinally(1236, 22986, 23004);
                 }
                 throw new System.Exception("Slicer error: unreachable code");
             }
